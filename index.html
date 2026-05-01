@@ -1,0 +1,1647 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JGS Group — Developer Perumahan Yogyakarta</title>
+  <meta name="description" content="Jogja Graha Selaras — Developer perumahan terpercaya di Yogyakarta sejak 2000. Membangun hunian berkualitas di lokasi strategis Yogyakarta.">
+  <meta property="og:title" content="JGS Group — Developer Perumahan Yogyakarta">
+  <meta property="og:description" content="Membangun Rumah, Menjaga Kepercayaan. Developer perumahan premium Yogyakarta.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap">
+  <style>
+
+    /* ══════════════════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════════════════ */
+    .hero__grid {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: 1fr 1.05fr;
+      gap: 60px; align-items: center;
+    }
+    .hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em;
+      color: var(--navy); margin-bottom: 24px; text-transform: uppercase;
+    }
+    .hero__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 12px var(--orange); }
+    .hero__title {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(44px, 6vw, 88px);
+      line-height: .98; letter-spacing: -.02em;
+      margin: 0 0 28px; color: var(--navy);
+    }
+    .hero-title { margin: 0 0 28px; font-family: var(--font-display); font-weight: 400; line-height: 1.15; letter-spacing: -.02em; color: var(--navy); }
+    .hero-title-small  { font-size: 2.5rem; color: var(--navy); margin-bottom: 4px; }
+    .hero-title-main   { font-size: 5rem; line-height: 1.3; margin-bottom: 4px; }
+    .hero-title-medium { font-size: 3.5rem; color: var(--navy); }
+    .highlight {
+      display: inline;
+      background-color: #c8860a;
+      color: #ffffff;
+      font-style: italic;
+      padding: 0 8px;
+      line-height: 1.3;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+    .hero__slab  { display: inline-block; background: var(--orange); color: #fff; padding: 2px 16px 8px; font-style: italic; font-weight: 400; border-radius: 2px; }
+    .hero__sub   { font-size: 17px; line-height: 1.55; color: var(--muted); max-width: 480px; margin: 0 0 36px; text-wrap: pretty; }
+    .hero__ctas  { display: flex; gap: 12px; margin-bottom: 56px; flex-wrap: wrap; }
+    .hero__stats { display: flex; align-items: flex-start; gap: 28px; }
+    .hero__divider { width: 1px; align-self: stretch; background: var(--line); }
+    .stat__num   { font-family: var(--font-display); font-weight: 500; font-size: 42px; line-height: 1; color: var(--navy); letter-spacing: -.02em; }
+    .stat__label { font-size: 12px; color: var(--muted); margin-top: 6px; letter-spacing: .02em; }
+    .hero__visual { position: relative; aspect-ratio: 1/1.05; max-width: 580px; margin-left: auto; margin-top: -50px; }
+    .hero__glow {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+      width: 110%; height: 110%;
+      background: radial-gradient(circle, rgba(255,205,120,.55) 0%, rgba(219,127,46,.25) 25%, rgba(90,130,240,.15) 55%, transparent 72%);
+      filter: blur(40px); will-change: transform; z-index: 0;
+    }
+    .hero__frame {
+      position: relative; width: 100%; height: 100%;
+      border-radius: 240px 240px 24px 24px; overflow: hidden;
+      box-shadow: 0 30px 80px -20px rgba(27,42,100,.35);
+      z-index: 1; background: #ccc;
+    }
+    .hero__img { width: 100%; height: 100%; object-fit: cover; will-change: transform; transition: transform 0.1s ease-out; }
+    .hero__badge {
+      position: absolute; left: -30px; top: 40px;
+      background: #fff; border-radius: 50%; width: 130px; height: 130px;
+      display: grid; place-items: center;
+      box-shadow: 0 10px 30px -10px rgba(27,42,100,.35);
+      z-index: 2; text-align: center; border: 6px solid var(--bg);
+    }
+    .hero__badge-num  { font-family: var(--font-display); font-size: 52px; line-height: 1; color: var(--orange); font-weight: 600; }
+    .hero__badge-text { font-size: 8px; letter-spacing: .16em; color: var(--navy); margin-top: 1px; text-transform: uppercase; font-weight: 600; line-height: 1.4; }
+    .hero__tag {
+      position: absolute; right: -10px; bottom: 60px;
+      background: var(--navy); color: #fff;
+      padding: 12px 18px; border-radius: var(--r-pill);
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 13px; box-shadow: 0 10px 30px -10px rgba(0,0,0,.4); z-index: 2;
+    }
+    .hero__tag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); animation: pulse 2s infinite; }
+
+    /* ══════════════════════════════════════════════════════════
+       PENGHARGAAN — cream section
+    ══════════════════════════════════════════════════════════ */
+    .award-section { background: transparent; padding: 96px 0; }
+    .award-section__inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+    .award-section__head { text-align: center; margin-bottom: 56px; }
+    .award-section__eyebrow {
+      display: inline-block;
+      font-size: 11px; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: #c8860a; margin-bottom: 12px;
+    }
+    .award-section__title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(32px, 4vw, 52px); font-weight: 600; font-style: normal;
+      color: #1b2a64; line-height: 1.1; letter-spacing: -.02em;
+      margin: 0 0 14px;
+    }
+    .award-section__subtitle {
+      font-size: 15px; color: var(--muted);
+      max-width: 480px; margin: 0 auto; line-height: 1.55;
+    }
+    .award-section__grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    }
+    .aw2-card {
+      background: #ffffff;
+      border: 1px solid rgba(27,42,100,.1);
+      border-radius: 12px; padding: 24px;
+      box-shadow: 0 4px 16px rgba(27,42,100,.06);
+      transition: box-shadow var(--t-mid), transform var(--t-mid);
+    }
+    .aw2-card:hover {
+      box-shadow: 0 8px 28px rgba(27,42,100,.12);
+      transform: translateY(-3px);
+    }
+    .aw2-card__icon { font-size: 32px; margin-bottom: 12px; line-height: 1; }
+    .aw2-card__year {
+      font-size: 11px; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: #c8860a; margin-bottom: 8px;
+    }
+    .aw2-card__name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px; font-weight: 600; color: #1b2a64;
+      line-height: 1.25; margin-bottom: 8px;
+    }
+    .aw2-card__giver { font-size: 12px; color: var(--muted); }
+
+    /* ══════════════════════════════════════════════════════════
+       TENTANG KAMI
+    ══════════════════════════════════════════════════════════ */
+    .about { position: relative; padding: 140px 0; overflow: hidden; }
+    .about__inner { max-width: 1000px; margin: 0 auto; padding: 0 var(--pad-x); text-align: center; }
+    .about__title {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.05; letter-spacing: -.02em; color: var(--navy); margin: 0 0 24px;
+    }
+    .about__lead { max-width: 620px; margin: 0 auto 64px; font-size: 17px; line-height: 1.6; color: var(--muted); text-wrap: pretty; }
+    .about__counters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 820px; margin: 0 auto; }
+    .about__counter { padding: 36px 20px; }
+
+    /* ══════════════════════════════════════════════════════════
+       CARD PROYEK — visual cards
+    ══════════════════════════════════════════════════════════ */
+    .projects { padding: 100px 0 120px; position: relative; }
+    .projects__head {
+      max-width: var(--max-w); margin: 0 auto var(--sp-16); padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end;
+    }
+
+    /* Featured: 2 big cards */
+    .projects__featured {
+      max-width: var(--max-w); margin: 0 auto var(--sp-5); padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .pcard {
+      position: relative; border-radius: var(--r-lg);
+      overflow: hidden; display: flex; flex-direction: column;
+      text-decoration: none; color: inherit;
+      transition: transform .4s var(--ease), box-shadow .3s;
+    }
+    .pcard:hover { transform: translateY(-4px); box-shadow: 0 32px 64px -20px rgba(27,42,100,.4); }
+    .pcard--featured { aspect-ratio: 4/3; }
+    .pcard--small    { aspect-ratio: 16/9; }
+    .pcard__img {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform .6s var(--ease);
+    }
+    .pcard:hover .pcard__img { transform: scale(1.05); }
+    .pcard__shade {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(15,20,48,.1) 0%, rgba(15,20,48,.0) 35%, rgba(15,20,48,.85) 100%);
+    }
+    .pcard__top {
+      position: relative; z-index: 2;
+      padding: 22px 22px 0;
+      display: flex; justify-content: space-between; align-items: flex-start;
+    }
+    .pcard__badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border-radius: var(--r-pill);
+      font-size: 11px; font-weight: 600; letter-spacing: .04em;
+      backdrop-filter: blur(8px);
+    }
+    .pcard__badge--on  { background: rgba(219,127,46,.9); color: #fff; }
+    .pcard__badge--off { background: rgba(15,20,48,.5); color: rgba(255,255,255,.7); }
+    .pcard__num { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,.5); letter-spacing: .1em; }
+    .pcard__body {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      z-index: 2; padding: 24px;
+    }
+    .pcard__loc  { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: rgba(255,255,255,.65); margin-bottom: 6px; font-family: var(--font-mono); letter-spacing: .06em; }
+    .pcard__name { font-family: var(--font-display); font-weight: 500; font-size: 32px; line-height: 1; color: #fff; margin: 0 0 4px; }
+    .pcard__type { font-size: 13px; color: rgba(255,255,255,.65); margin-bottom: 14px; }
+    .pcard__meta {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 14px; border-top: 1px solid rgba(255,255,255,.15);
+    }
+    .pcard__price { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: #fff; }
+    .pcard__price span { font-size: 14px; font-style: italic; opacity: .75; }
+    .pcard__cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--orange); font-weight: 600; letter-spacing: .04em;
+    }
+
+    /* Mini: 3 smaller cards */
+    .projects__mini {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .pcard--small .pcard__name { font-size: 22px; }
+    .pcard--small .pcard__price { font-size: 18px; }
+    .pcard--small .pcard__shade {
+      background: linear-gradient(to bottom, rgba(15,20,48,.25) 0%, rgba(15,20,48,.88) 100%);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       MENGAPA JGS
+    ══════════════════════════════════════════════════════════ */
+    .why { padding: 120px 0; position: relative; }
+    .why__grid {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+      border: 1px solid var(--line); border-radius: var(--r-xl); overflow: hidden;
+    }
+    .why__item {
+      padding: 48px 44px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      transition: background var(--t-mid);
+    }
+    .why__item:hover { background: rgba(27,42,100,.025); }
+    .why__item:nth-child(2n) { border-right: none; }
+    .why__item:nth-child(3), .why__item:nth-child(4) { border-bottom: none; }
+    .why__num {
+      font-family: var(--font-display); font-size: 64px; font-weight: 300;
+      line-height: 1; letter-spacing: -.04em;
+      color: rgba(27,42,100,.1); margin-bottom: 20px;
+      transition: color var(--t-mid);
+    }
+    .why__item:hover .why__num { color: rgba(219,127,46,.25); }
+    .why__title { font-family: var(--font-display); font-size: 24px; font-weight: 500; color: var(--navy); margin: 0 0 10px; line-height: 1.2; }
+    .why__body  { font-size: 15px; color: var(--muted); line-height: 1.6; margin: 0 0 20px; text-wrap: pretty; }
+    .why__link  {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500; color: var(--orange);
+      border-bottom: 1px solid rgba(219,127,46,.35); padding-bottom: 2px;
+      transition: gap var(--t-fast), border-color var(--t-fast);
+    }
+    .why__link:hover { gap: 10px; border-color: var(--orange); }
+
+    /* ══════════════════════════════════════════════════════════
+       PROMO AKTIF
+    ══════════════════════════════════════════════════════════ */
+    .promo { padding: 60px var(--pad-x); max-width: var(--max-w); margin: 0 auto; }
+    .promo__inner {
+      position: relative; border-radius: var(--r-xl); overflow: hidden;
+      background: linear-gradient(135deg, #141d3e 0%, var(--navy) 55%, #2c3e8c 100%);
+      display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center;
+      padding: 64px 56px;
+    }
+    .promo__glow {
+      position: absolute; right: -100px; top: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(219,127,46,.3) 0%, transparent 65%);
+      filter: blur(60px); pointer-events: none;
+    }
+    .promo__label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 16px;
+    }
+    .promo__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); animation: pulse 2s infinite; }
+    .promo__title {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(28px, 3.5vw, 48px); line-height: 1.05;
+      letter-spacing: -.02em; color: #fff; margin: 0 0 28px;
+    }
+    .promo__list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; position: relative; }
+    .promo__item { display: flex; align-items: flex-start; gap: 12px; }
+    .promo__check {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(219,127,46,.2); border: 1px solid rgba(219,127,46,.5);
+      display: grid; place-items: center; flex-shrink: 0; margin-top: 1px;
+      color: var(--orange);
+    }
+    .promo__item-text { font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.5; }
+    .promo__item-text strong { color: #fff; }
+    .promo__right { position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .promo__savings {
+      background: rgba(219,127,46,.15); border: 1px solid rgba(219,127,46,.3);
+      border-radius: var(--r-lg); padding: 28px 36px; text-align: center; white-space: nowrap;
+    }
+    .promo__savings-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; color: rgba(255,255,255,.6); text-transform: uppercase; margin-bottom: 8px; }
+    .promo__savings-val   { font-family: var(--font-display); font-size: 42px; font-weight: 500; color: var(--orange); letter-spacing: -.02em; line-height: 1; }
+    .promo__savings-sub   { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 6px; }
+    .promo__cta  { width: 100%; background: var(--orange); color: #fff; justify-content: center; }
+    .promo__cta:hover { background: var(--orange-2); }
+    .promo__fine { font-size: 11px; color: rgba(255,255,255,.4); text-align: center; }
+
+    /* ══════════════════════════════════════════════════════════
+       KALKULATOR CICILAN
+    ══════════════════════════════════════════════════════════ */
+    .calc { padding: 100px 0; }
+    .calc__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: start;
+    }
+    .calc__sticky { position: sticky; top: 100px; }
+    .calc__title {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(34px, 4vw, 54px); line-height: 1.05;
+      letter-spacing: -.02em; color: var(--navy); margin: 0 0 18px;
+    }
+    .calc__body  { font-size: 16px; color: var(--muted); line-height: 1.55; margin: 0 0 32px; }
+    .calc__panel { background: #fff; border-radius: var(--r-xl); box-shadow: 0 24px 60px -20px rgba(27,42,100,.2); border: 1px solid var(--line); overflow: hidden; }
+    .calc__form  { padding: 36px 36px 0; }
+    .calc__row   { margin-bottom: 28px; }
+    .calc__head  { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+    .calc__lbl   { font-size: 13px; font-weight: 500; color: var(--navy); }
+    .calc__val   { font-family: var(--font-display); font-size: 17px; font-weight: 500; color: var(--navy); }
+
+    input[type="range"].slider {
+      width: 100%; -webkit-appearance: none; appearance: none;
+      height: 4px; background: rgba(27,42,100,.12); border-radius: var(--r-pill); outline: none;
+      cursor: pointer;
+    }
+    input[type="range"].slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--navy); cursor: pointer;
+      box-shadow: 0 2px 8px rgba(27,42,100,.35);
+      transition: background var(--t-fast), transform var(--t-fast);
+    }
+    input[type="range"].slider::-webkit-slider-thumb:hover { background: var(--orange); transform: scale(1.1); }
+    input[type="range"].slider::-moz-range-thumb {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--navy); border: none; cursor: pointer;
+    }
+
+    .calc__tenor-row { display: flex; gap: 8px; }
+    .calc__tenor-btn {
+      flex: 1; padding: 9px 6px; border-radius: var(--r-md);
+      border: 1.5px solid rgba(27,42,100,.15); background: transparent;
+      font-size: 13px; font-weight: 500; color: var(--muted);
+      cursor: pointer; transition: all var(--t-fast);
+      text-align: center;
+    }
+    .calc__tenor-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .calc__tenor-btn--on  { border-color: var(--navy); background: var(--navy); color: #fff; }
+
+    .calc__result {
+      background: linear-gradient(135deg, #141d3e, var(--navy));
+      padding: 28px 36px 32px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: end;
+    }
+    .calc__out-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 6px; }
+    .calc__out-val   { font-family: var(--font-display); font-size: 38px; font-weight: 500; letter-spacing: -.02em; color: #fff; line-height: 1; }
+    .calc__out-sub   { font-size: 11px; color: rgba(255,255,255,.4); margin-top: 5px; line-height: 1.4; }
+    .calc__result-cta { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+
+    /* ══════════════════════════════════════════════════════════
+       TESTIMONI
+    ══════════════════════════════════════════════════════════ */
+    .ts { padding: 100px 0; }
+    .ts__grid {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .ts__card { padding: 32px 28px; position: relative; }
+    .ts__stars { display: flex; gap: 3px; margin-bottom: 18px; color: var(--orange); font-size: 16px; }
+    .ts__body  { font-family: var(--font-display); font-style: italic; font-size: 18px; line-height: 1.55; color: var(--navy); margin: 0 0 24px; text-wrap: pretty; }
+    .ts__foot  { display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .ts__av    { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 16px; font-weight: 600; flex-shrink: 0; }
+    .ts__name  { font-size: 14px; font-weight: 600; color: var(--navy); }
+    .ts__unit  { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .ts__quote {
+      position: absolute; right: 22px; top: 22px;
+      font-family: var(--font-display); font-size: 72px; line-height: 1;
+      color: var(--orange); opacity: .1; font-style: italic; pointer-events: none;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       FAQ
+    ══════════════════════════════════════════════════════════ */
+    .faq { padding: 80px 0 100px; }
+    .faq__list { max-width: 860px; margin: 0 auto; padding: 0 var(--pad-x); display: flex; flex-direction: column; gap: 10px; }
+
+    /* ══════════════════════════════════════════════════════════
+       RESPONSIVE — tablet → mobile → compact
+    ══════════════════════════════════════════════════════════ */
+
+    /* ── Tablet 1024px ───────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .award-section__grid { grid-template-columns: repeat(2, 1fr); }
+      .projects__mini { grid-template-columns: repeat(3, 1fr); }
+      .why__grid { grid-template-columns: 1fr 1fr; }
+      .calc__inner { gap: 48px; }
+    }
+
+    /* ── Mobile 760px — primary breakpoint ──────────────── */
+    @media (max-width: 760px) {
+
+      /* Hero — stacked: copy top, image card below */
+      .hero {
+        padding: 88px 0 0;
+        min-height: auto;
+      }
+      .hero__grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 0 20px;
+      }
+      .hero__copy { order: 1; }
+      .hero__eyebrow { font-size: 10px; margin-bottom: 14px; }
+      .hero__title {
+        font-size: clamp(36px, 10vw, 52px);
+        margin-bottom: 16px;
+      }
+      .hero__sub {
+        font-size: 15px;
+        margin-bottom: 24px;
+        max-width: none;
+      }
+      .hero__ctas {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 32px;
+      }
+      .hero__ctas .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 16px 20px;
+        font-size: 15px;
+      }
+      .hero__stats {
+        gap: 0;
+        justify-content: space-between;
+        padding-bottom: 32px;
+      }
+      .hero__divider { display: none; }
+      .stat__num  { font-size: 28px; }
+      .stat__label { font-size: 11px; }
+
+      /* Hero visual — standalone card below */
+      .hero__visual {
+        order: 2;
+        aspect-ratio: 4 / 5;
+        max-width: none;
+        margin: 0 -20px; /* bleed to edges */
+        width: calc(100% + 40px);
+      }
+      .hero__frame {
+        border-radius: 0; /* full bleed on mobile */
+        box-shadow: none;
+      }
+      .hero__glow { opacity: .5; }
+      .hero__badge {
+        left: 16px; top: 20px;
+        width: 80px; height: 80px;
+        border-width: 4px;
+      }
+      .hero__badge-num  { font-size: 26px; }
+      .hero__badge-text { font-size: 8px; }
+      .hero__tag {
+        right: 16px; bottom: 24px; left: auto; top: auto;
+        font-size: 11px; padding: 8px 14px;
+      }
+      .hero__scrollcue { display: none; }
+
+      /* Award section */
+      .award-section { padding: 72px 0; }
+      .award-section__inner { padding: 0 20px; }
+      .award-section__head  { margin-bottom: 36px; }
+      .award-section__grid  { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .aw2-card { padding: 20px; }
+      .aw2-card__icon { font-size: 28px; }
+      .aw2-card__name { font-size: 16px; }
+
+      /* About */
+      .about { padding: 72px 0; }
+      .about__inner { padding: 0 20px; }
+      .about__lead  { font-size: 15px; margin-bottom: 40px; }
+      .about__counters {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        max-width: none;
+      }
+      .about__counter { padding: 20px 12px; }
+      .counter__num   { font-size: 40px; }
+      .counter__unit  { font-size: 13px; }
+      .counter__tag   { font-size: 10px; }
+
+      /* Projects */
+      .projects { padding: 72px 0 80px; }
+      .projects__head {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0 20px;
+        margin-bottom: 24px;
+      }
+      .projects__head .btn { width: fit-content; }
+      .projects__featured {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+      .pcard--featured { aspect-ratio: 3/2; }
+      .pcard__name    { font-size: 26px; }
+      .pcard__type    { font-size: 12px; }
+      .pcard__price   { font-size: 18px; }
+      .pcard__body    { padding: 18px; }
+      .pcard__top     { padding: 16px 16px 0; }
+      .projects__mini {
+        grid-template-columns: 1fr 1fr;
+        padding: 0 20px;
+        gap: 12px;
+      }
+      .pcard--small { aspect-ratio: 4/3; }
+      .pcard--small .pcard__name  { font-size: 16px; }
+      .pcard--small .pcard__price { font-size: 14px; }
+      .pcard--small .pcard__loc   { font-size: 10px; }
+      .pcard--small .pcard__body  { padding: 12px; }
+      .pcard--small .pcard__top   { padding: 10px 10px 0; }
+
+      /* Why */
+      .why { padding: 72px 0; }
+      .why__grid {
+        grid-template-columns: 1fr;
+        border: none; gap: 0;
+        padding: 0 20px;
+      }
+      .why__item {
+        border-right: none !important;
+        border-bottom: 1px solid var(--line) !important;
+        padding: 36px 0;
+      }
+      .why__item:last-child { border-bottom: none !important; }
+      .why__num   { font-size: 48px; margin-bottom: 14px; }
+      .why__title { font-size: 20px; }
+      .why__body  { font-size: 14px; }
+      .why__link  { min-height: 44px; align-items: center; display: inline-flex; }
+
+      /* Promo */
+      .promo { padding: 24px 20px; }
+      .promo__inner {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 36px 24px;
+        border-radius: var(--r-lg);
+      }
+      .promo__title { font-size: clamp(22px, 7vw, 36px); margin-bottom: 20px; }
+      .promo__list  { gap: 12px; margin-bottom: 24px; }
+      .promo__item-text { font-size: 14px; }
+      .promo__right { align-items: stretch; gap: 14px; }
+      .promo__savings {
+        padding: 20px 24px;
+        display: flex; align-items: center; justify-content: space-between;
+      }
+      .promo__savings-label { margin-bottom: 0; margin-right: 16px; }
+      .promo__savings-val   { font-size: 36px; }
+      .promo__cta   { justify-content: center; }
+
+      /* Calculator */
+      .calc { padding: 72px 0; }
+      .calc__inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 0 20px;
+      }
+      .calc__sticky { position: static; }
+      .calc__title  { font-size: clamp(28px, 8vw, 44px); }
+      .calc__body   { font-size: 15px; margin-bottom: 24px; }
+      .calc__panel  { border-radius: var(--r-lg); }
+      .calc__form   { padding: 24px 22px 0; }
+      .calc__row    { margin-bottom: 22px; }
+      .calc__lbl    { font-size: 13px; }
+      .calc__val    { font-size: 16px; }
+      .calc__tenor-row { flex-wrap: wrap; gap: 8px; }
+      .calc__tenor-btn {
+        flex: 1 1 calc(33.33% - 8px);
+        min-width: 0;
+        padding: 10px 6px;
+        font-size: 12px;
+        min-height: 42px;
+      }
+      .calc__result { padding: 22px 22px 26px; grid-template-columns: 1fr; gap: 16px; }
+      .calc__out-val { font-size: 32px; }
+      .calc__result-cta { align-items: stretch; }
+      .calc__result-cta .btn { justify-content: center; }
+
+      /* Testimoni */
+      .ts { padding: 72px 0; }
+      .ts__grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+        gap: 14px;
+      }
+      .ts__card  { padding: 26px 22px; }
+      .ts__body  { font-size: 16px; }
+      .ts__quote { font-size: 56px; }
+
+      /* FAQ */
+      .faq { padding: 64px 0 80px; }
+      .faq__list { padding: 0 20px; gap: 8px; }
+      .faq__row  { padding: 18px 18px; }
+      .faq__qrow { gap: 12px; }
+      .faq__q    { font-size: 14px; }
+      .faq__plus { font-size: 24px; min-width: 24px; }
+      .faq__a    { font-size: 13px; }
+
+      /* CTA section */
+      .cta-section { margin: 32px 16px; padding: 64px 24px; border-radius: var(--r-lg); }
+      .cta-section__quote { font-size: 90px; }
+      .cta-section__ctas  { flex-direction: column; gap: 10px; }
+      .cta-section__ctas .btn { justify-content: center; }
+
+      /* Section heads */
+      .section__head { padding: 0 20px; margin-bottom: 32px; }
+      .section-title { font-size: clamp(28px, 8vw, 44px); }
+    }
+
+    /* ── Compact phones 480px ───────────────────────────── */
+    @media (max-width: 480px) {
+      .hero__title { font-size: clamp(32px, 9.5vw, 44px); }
+      .hero__visual { aspect-ratio: 3/4; }
+
+      .award-section__inner { padding: 0 16px; }
+      .award-section__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+      .about__counters { grid-template-columns: 1fr; gap: 10px; max-width: 320px; margin: 0 auto; }
+      .about__counter {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: 16px;
+        align-items: center;
+        padding: 18px 20px;
+        text-align: left;
+      }
+      .counter__num  { grid-row: span 2; font-size: 44px; }
+      .counter__unit { font-size: 14px; margin-top: 0; }
+      .counter__tag  { grid-column: 2; font-size: 11px; }
+
+      .projects__featured { padding: 0 16px; }
+      .projects__mini     { grid-template-columns: 1fr; padding: 0 16px; }
+      .pcard--featured { aspect-ratio: 3/2; }
+      .pcard--small    { aspect-ratio: 16/9; }
+
+      .why__grid { padding: 0 16px; }
+
+      .promo { padding: 20px 16px; }
+      .promo__inner { padding: 28px 20px; }
+
+      .calc__inner  { padding: 0 16px; }
+      .calc__form   { padding: 20px 18px 0; }
+      .calc__result { padding: 18px 18px 22px; }
+      .calc__tenor-btn { flex: 1 1 calc(50% - 6px); }
+
+      .ts__grid  { padding: 0 16px; }
+      .faq__list { padding: 0 16px; }
+
+      .section__head { padding: 0 16px; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       UNIT POPULER CAROUSEL
+    ══════════════════════════════════════════════════════════ */
+    .popular { position: relative; padding: 100px 0 120px; }
+
+    /* Subtle blueprint grid in background (mirroring reference) */
+    .popular::before {
+      content: '';
+      position: absolute; left: 50%; top: 200px;
+      transform: translateX(-50%);
+      width: min(1280px, 92%); height: calc(100% - 280px);
+      background-image:
+        linear-gradient(to right, rgba(27,42,100,.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(27,42,100,.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 40%, transparent 100%);
+      border-radius: 32px; z-index: 0; pointer-events: none;
+    }
+
+    .popular__head {
+      position: relative; z-index: 1;
+      text-align: center;
+      max-width: 720px; margin: 0 auto 64px;
+      padding: 0 32px;
+    }
+    .popular__eyebrow {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 12px; letter-spacing: .18em;
+      color: #c8860a; margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .popular__title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1.05; letter-spacing: -.02em;
+      color: var(--navy); margin: 0 0 16px; font-style: normal;
+    }
+    .popular__subtitle { font-size: 16px; color: var(--muted); margin: 0; line-height: 1.5; }
+
+    /* Carousel outer — holds arrows + track */
+    .pop__carousel-outer {
+      position: relative; z-index: 1;
+    }
+    .popular__wrap { overflow: hidden; }
+    .pop__track {
+      display: flex; gap: 20px;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      padding: 16px 5% 48px;
+      scroll-padding-left: 5%;
+    }
+    .pop__track::-webkit-scrollbar { display: none; }
+
+    /* Arrows — floating left / right of the carousel */
+    .pop__arrow {
+      position: absolute; top: 50%; transform: translateY(-65%);
+      z-index: 10;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,.95);
+      border: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,.18);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--navy);
+      transition: background .2s, box-shadow .2s;
+    }
+    .pop__arrow:hover { background: #fff; box-shadow: 0 8px 28px rgba(0,0,0,.28); }
+    .pop__arrow:disabled { opacity: .3; cursor: default; }
+    .pop__arrow--prev { left: 14px; }
+    .pop__arrow--next { right: 14px; }
+
+    /* Card — full-image overlay, portrait aspect ratio */
+    .pop-card {
+      flex: 0 0 calc((100vw * 0.9 - 3 * 20px) / 4);
+      max-width: 295px;
+      position: relative;
+      aspect-ratio: 0.52;
+      border-radius: 24px; overflow: hidden;
+      cursor: pointer;
+      scroll-snap-align: start;
+      transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .3s;
+      box-shadow: 0 20px 40px -20px rgba(27,42,100,.3);
+      will-change: transform;
+    }
+    .pop-card:hover { box-shadow: 0 30px 60px -20px rgba(27,42,100,.5); }
+    .pop-card__img {
+      position: absolute; inset: 0;
+      background-color: #1b2a64; /* placeholder */
+      background-size: cover; background-position: center;
+      transition: transform .6s cubic-bezier(.2,.8,.2,1);
+    }
+    .pop-card:hover .pop-card__img { transform: scale(1.05); }
+    .pop-card__shade {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,.55) 0%,
+        rgba(0,0,0,0)   40%,
+        rgba(0,0,0,0)   55%,
+        rgba(0,0,0,.85) 100%);
+    }
+    /* Badge — top-left pill */
+    .pop-card__badge {
+      position: absolute; top: 20px; left: 20px;
+      color: #fff; padding: 4px 14px; border-radius: 999px;
+      font-size: 12px; font-weight: 500; letter-spacing: .02em;
+      z-index: 2;
+    }
+    /* Head — top text block */
+    .pop-card__head {
+      position: relative; z-index: 2;
+      padding: 70px 20px 0; color: #fff;
+    }
+    .pop-card__name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500; font-size: 28px; line-height: 1;
+    }
+    .pop-card__type {
+      font-size: 13px; color: rgba(255,255,255,.8); margin-top: 4px;
+    }
+    .pop-card__loc {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; margin-top: 8px; opacity: .9;
+    }
+    /* Body — bottom text block */
+    .pop-card__body {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      z-index: 2; padding: 20px; color: #fff;
+    }
+    .pop-card__price {
+      display: flex; align-items: baseline; gap: 4px; margin-bottom: 12px;
+    }
+    .pop-card__rp   { font-size: 13px; opacity: .75; }
+    .pop-card__val  {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 34px; font-weight: 500; line-height: 1;
+    }
+    .pop-card__unit { font-size: 13px; opacity: .75; }
+    .pop-card__meta {
+      display: flex; gap: 16px;
+      font-size: 13px; margin-bottom: 6px; opacity: .92;
+    }
+    .pop-card__meta-item {
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pop-card__meta-item svg { width: 13px; height: 13px; flex-shrink: 0; }
+    .pop-card__cta {
+      margin-top: 14px;
+      display: inline-flex; align-items: center; gap: 8px;
+      color: #fff; font-style: italic; font-size: 14px;
+      border-bottom: 1px solid rgba(255,255,255,.6);
+      padding-bottom: 2px;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .pop-card__cta:hover { opacity: .75; }
+
+    /* Dots */
+    .pop__dots {
+      display: flex; justify-content: center; gap: 8px;
+      margin-top: 32px; position: relative; z-index: 1;
+    }
+    .pop__dot {
+      width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0;
+      background: rgba(27,42,100,.2);
+      cursor: pointer; transition: all .25s ease;
+    }
+    .pop__dot--on { background: var(--orange); width: 28px; border-radius: 999px; }
+
+    @media (max-width: 1024px) {
+      .pop-card {
+        flex: 0 0 calc((100vw * 0.9 - 2 * 20px) / 3);
+        max-width: 280px;
+      }
+    }
+    @media (max-width: 768px) {
+      .popular { padding: 70px 0 90px; }
+      .popular__head { margin-bottom: 36px; padding: 0 22px; }
+      .popular__title { font-size: clamp(32px, 8vw, 48px); }
+      .pop__arrow { display: none; }
+      .pop__track { padding: 8px 22px 32px; scroll-padding-left: 22px; }
+      .pop-card {
+        flex: 0 0 calc((100vw - 22px) / 1.5);
+        max-width: none;
+      }
+    }
+    @media (max-width: 480px) {
+      .popular__head { padding: 0 20px; }
+      .pop__track { padding: 8px 20px 28px; scroll-padding-left: 20px; }
+      .pop-card { flex: 0 0 calc((100vw - 16px) / 1.4); }
+    }
+
+    /* ── Very small 375px (iPhone SE) ───────────────────── */
+    @media (max-width: 375px) {
+      .hero__grid { padding: 0 16px; }
+      .hero__title { font-size: 32px; }
+      .hero__stats { gap: 0; }
+      .stat__num { font-size: 24px; }
+      .hero__badge { width: 68px; height: 68px; left: 10px; }
+      .hero__badge-num { font-size: 20px; }
+      .award-section__inner { padding: 0 12px; }
+      .promo__savings { flex-direction: column; text-align: center; gap: 8px; }
+      .promo__savings-label { margin-right: 0; margin-bottom: 4px; }
+      .calc__tenor-btn { flex: 1 1 calc(50% - 6px); font-size: 11px; }
+      .cta-section { margin: 24px 12px; padding: 52px 20px; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       BLOG PREVIEW
+    ══════════════════════════════════════════════════════════ */
+    .blog { padding: 96px 0 72px; }
+    .blog__grid {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+    }
+    .blog__card {
+      background: #fff;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column;
+      box-shadow: 0 6px 24px rgba(0,0,0,.06);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .blog__card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,.10); }
+    .blog__media {
+      aspect-ratio: 16/9;
+      background: #ebe0c4;
+    }
+    .blog__body {
+      padding: 22px 24px 22px;
+      display: flex; flex-direction: column; gap: 12px;
+      flex: 1;
+    }
+    .blog__cat {
+      align-self: flex-start;
+      background: var(--orange); color: #fff;
+      font-family: var(--font-mono);
+      font-size: 11px; font-weight: 700; letter-spacing: .06em;
+      padding: 5px 14px; border-radius: var(--r-pill);
+      text-transform: uppercase;
+    }
+    .blog__title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 600;
+      font-size: 22px; line-height: 1.25;
+      color: var(--navy); margin: 0;
+      letter-spacing: -.01em;
+    }
+    .blog__excerpt {
+      font-size: 14px; line-height: 1.55; color: var(--muted);
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden; margin: 0;
+    }
+    .blog__foot {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 14px; margin-top: auto;
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+    }
+    .blog__date { color: var(--muted); font-family: var(--font-mono); letter-spacing: .03em; }
+    .blog__more { color: var(--orange); font-weight: 500; }
+    .blog__cta { text-align: center; margin-top: 36px; padding: 0 var(--pad-x); }
+
+    /* ══════════════════════════════════════════════════════════
+       INSTAGRAM FEED
+    ══════════════════════════════════════════════════════════ */
+    .ig { padding: 80px 0 96px; }
+    .ig__user {
+      display: inline-block; margin-top: 12px;
+      font-family: var(--font-mono);
+      font-size: 14px; color: var(--orange);
+      text-decoration: none; letter-spacing: .04em;
+      transition: opacity .2s;
+    }
+    .ig__user:hover { opacity: .75; }
+    .ig__grid {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    }
+    .ig__tile {
+      position: relative; display: block;
+      aspect-ratio: 1/1;
+      background: #1b2a64;
+      border-radius: 12px; overflow: hidden;
+      color: rgba(255,255,255,.55);
+    }
+    .ig__tile-icon {
+      position: absolute; inset: 0;
+      display: grid; place-items: center;
+      transition: opacity .25s ease;
+    }
+    .ig__tile-icon svg { width: 38px; height: 38px; }
+    .ig__tile-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.45);
+      opacity: 0;
+      display: grid; place-items: center;
+      color: #fff;
+      transition: opacity .25s ease;
+    }
+    .ig__tile-overlay svg { width: 42px; height: 42px; }
+    .ig__tile:hover .ig__tile-overlay { opacity: 1; }
+    .ig__tile:hover .ig__tile-icon { opacity: 0; }
+    .ig__cta { text-align: center; margin-top: 36px; padding: 0 var(--pad-x); }
+    .ig__cta .btn { gap: 10px; }
+    .ig__cta .btn svg { width: 16px; height: 16px; }
+
+    @media (max-width: 768px) {
+      .blog { padding: 64px 0 48px; }
+      .blog__grid { grid-template-columns: 1fr; padding: 0 20px; gap: 18px; }
+      .blog__cta { margin-top: 28px; }
+      .blog__title { font-size: 20px; }
+
+      .ig { padding: 56px 0 72px; }
+      .ig__grid { padding: 0 20px; gap: 8px; }
+      .ig__tile-icon svg { width: 30px; height: 30px; }
+      .ig__tile-overlay svg { width: 34px; height: 34px; }
+      .ig__cta { margin-top: 28px; }
+    }
+    @media (max-width: 480px) {
+      .blog__grid { padding: 0 16px; }
+      .ig__grid { padding: 0 16px; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Parallax background -->
+<div class="bg-root">
+  <div class="reb">
+    <div class="reb__wash reb__wash--a"></div>
+    <div class="reb__wash reb__wash--b"></div>
+    <div class="reb__wash reb__wash--c"></div>
+    <div class="reb__blueprint"></div>
+    <div class="reb__vignette"></div>
+    <div class="grain"></div>
+  </div>
+</div>
+
+<div id="navbar-placeholder"></div>
+
+<main>
+
+  <!-- ══ HERO ══════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <div class="hero__eyebrow">
+          <span class="hero__dot"></span>
+          Developer Perumahan · Yogyakarta
+        </div>
+        <h1 class="hero-title">
+          <div class="hero-title-small">Untuk kamu yang ingin menjadi</div>
+          <div class="hero-title-main"><span class="highlight">bagian dari Jogja.</span></div>
+        </h1>
+        <p class="hero__sub">
+          Lebih dari 300 keluarga sudah mempercayakan rumah mereka
+          kepada kami. Sejak 2013, kami membangun bukan hanya rumah
+          — tapi <strong>kepercayaan</strong>.
+        </p>
+        <div class="hero__ctas">
+          <a href="#produk" class="btn btn--primary btn--lg">Lihat Produk Kami</a>
+          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="btn btn--ghost btn--lg">Tanya via WhatsApp</a>
+        </div>
+        <div class="hero__stats">
+          <div>
+            <div class="stat__num"><span data-count="5">0</span></div>
+            <div class="stat__label">Kawasan</div>
+          </div>
+          <div class="hero__divider"></div>
+          <div>
+            <div class="stat__num"><span data-count="300">0</span><span style="font-size:.55em">+</span></div>
+            <div class="stat__label">Telah Serah Terima</div>
+          </div>
+          <div class="hero__divider"></div>
+          <div>
+            <div class="stat__num"><span data-count="7">0</span></div>
+            <div class="stat__label">Penghargaan</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__visual reveal">
+        <div class="hero__glow"></div>
+        <div class="hero__frame">
+          <img
+            src="assets/img/tentrem jiwo.webp"
+            alt="Perumahan JGS Group Yogyakarta"
+            class="hero__img"
+            loading="eager"
+            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)'"
+          >
+        </div>
+        <div class="hero__badge">
+          <div class="hero__badge-num">13+</div>
+          <div class="hero__badge-text">TAHUN<br>TERPERCAYA</div>
+        </div>
+        <div class="hero__tag">
+          <span class="hero__tag-dot"></span>
+          Proyek Aktif
+        </div>
+      </div>
+    </div>
+    <div class="hero__scrollcue">
+      <span>scroll</span>
+      <div class="hero__scrollline"></div>
+    </div>
+  </section>
+
+  <!-- ══ UNIT POPULER ══════════════════════════════════════════ -->
+  <section class="popular" id="popular">
+    <div class="popular__head reveal">
+      <span class="popular__eyebrow">→ PROYEK UNGGULAN</span>
+      <h2 class="popular__title">Unit Populer Kami</h2>
+      <p class="popular__subtitle">Enam tipe pilihan, satu komitmen terhadap kualitas hunian.</p>
+    </div>
+    <div class="pop__carousel-outer">
+      <button class="pop__arrow pop__arrow--prev" id="popPrev" aria-label="Sebelumnya">&#8592;</button>
+      <div class="popular__wrap">
+        <div class="pop__track" id="popTrack"></div>
+      </div>
+      <button class="pop__arrow pop__arrow--next" id="popNext" aria-label="Selanjutnya">&#8594;</button>
+    </div>
+    <div class="pop__dots" id="popDots"></div>
+  </section>
+
+  <!-- ══ PENGHARGAAN ═══════════════════════════════════════════ -->
+  <section class="award-section" id="penghargaan">
+    <div class="award-section__inner">
+      <div class="award-section__head reveal">
+        <span class="award-section__eyebrow">→ PENGHARGAAN</span>
+        <h2 class="award-section__title">Diakui &amp; Dipercaya</h2>
+        <p class="award-section__subtitle">Pengakuan nyata dari lembaga keuangan nasional.</p>
+      </div>
+      <div class="award-section__grid" id="awardGrid"></div>
+    </div>
+  </section>
+
+  <!-- ══ TENTANG KAMI ══════════════════════════════════════════ -->
+  <section class="about" id="tentang">
+    <div class="about__inner">
+      <span class="eyebrow">Tentang Kami</span>
+      <h2 class="about__title reveal">
+        Developer perumahan<br>yang <em>tumbuh bersama</em><br>Jogja.
+      </h2>
+      <p class="about__lead reveal reveal--delay-1">
+        Sejak tahun 2013, Jogja Graha Selaras telah membangun lebih dari 300 unit hunian
+        di Yogyakarta. Kami percaya bahwa rumah bukan sekadar properti — ia adalah
+        tempat tumbuh keluarga, tempat cerita bermula.
+      </p>
+      <div class="about__counters">
+        <div class="about__counter glass reveal">
+          <div class="counter__num"><span data-count="13">0</span><span style="font-size:.5em">+</span></div>
+          <div class="counter__unit">Tahun</div>
+          <div class="counter__tag">Berpengalaman</div>
+        </div>
+        <div class="about__counter glass reveal reveal--delay-1">
+          <div class="counter__num"><span data-count="300">0</span><span style="font-size:.5em">+</span></div>
+          <div class="counter__unit">Unit</div>
+          <div class="counter__tag">Telah Serah Terima</div>
+        </div>
+        <div class="about__counter glass reveal reveal--delay-2">
+          <div class="counter__num"><span data-count="7">0</span></div>
+          <div class="counter__unit">Penghargaan</div>
+          <div class="counter__tag">Diraih</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CARD PROYEK ════════════════════════════════════════════ -->
+  <section class="projects" id="produk">
+    <div class="projects__head container">
+      <div>
+        <span class="eyebrow">Produk Kami</span>
+        <h2 class="section-title reveal">Kawasan<br>pilihan kami.</h2>
+      </div>
+      <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="btn btn--primary">Tanya Ketersediaan</a>
+    </div>
+
+    <!-- Featured: Kawa Living + Tentrem Bhumi -->
+    <div class="projects__featured">
+      <a href="/kawa-living/" class="pcard pcard--featured reveal">
+        <div class="pcard__img" style="background-image: url('kawa-living/img/tipe okina.webp'); background-size: cover; background-position: center;"></div>
+        <div class="pcard__shade"></div>
+        <div class="pcard__top">
+          <span class="pcard__badge pcard__badge--on">● Tersedia</span>
+          <span class="pcard__num">01</span>
+        </div>
+        <div class="pcard__body">
+          <div class="pcard__loc">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            SEDAYU, BANTUL
+          </div>
+          <div class="pcard__name">Kawa Living</div>
+          <div class="pcard__type">Rumah tapak · Tipe 36, 45, 60</div>
+          <div class="pcard__meta">
+            <div class="pcard__price">Mulai Rp <span>450 Jt</span></div>
+            <div class="pcard__cta">Lihat Detail →</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="/tentrem-bhumi/" class="pcard pcard--featured reveal reveal--delay-1">
+        <div class="pcard__img" style="background-image: url('assets/img/Unit Kami/Tentrem Bhumi/andrawina.webp'); background-size: cover; background-position: center 60%;"></div>
+        <div class="pcard__shade"></div>
+        <div class="pcard__top">
+          <span class="pcard__badge pcard__badge--on">● Tersedia</span>
+          <span class="pcard__num">02</span>
+        </div>
+        <div class="pcard__body">
+          <div class="pcard__loc">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            NGAGLIK, SLEMAN
+          </div>
+          <div class="pcard__name">Tentrem Bhumi</div>
+          <div class="pcard__type">Rumah tapak · Tipe 36, 45</div>
+          <div class="pcard__meta">
+            <div class="pcard__price">Mulai Rp <span>420 Jt</span></div>
+            <div class="pcard__cta">Lihat Detail →</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Mini: 3 upcoming -->
+    <div class="projects__mini">
+      <div class="pcard pcard--small reveal" style="cursor:default;">
+        <div class="pcard__img" style="background-image: url('assets/img/tentrem-jiwo-card.webp'); background-size: cover; background-position: center;"></div>
+        <div class="pcard__shade"></div>
+        <div class="pcard__top">
+          <span class="pcard__badge pcard__badge--off">Segera</span>
+          <span class="pcard__num">03</span>
+        </div>
+        <div class="pcard__body">
+          <div class="pcard__loc">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            DEPOK, SLEMAN
+          </div>
+          <div class="pcard__name">Tentrem Jiwo</div>
+          <div class="pcard__meta">
+            <div class="pcard__price">Harga <span>TBA</span></div>
+            <a href="https://wa.me/6281234567890" class="pcard__cta">Daftar Info →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pcard pcard--small reveal reveal--delay-1" style="cursor:default;">
+        <div class="pcard__img" style="background-image: url('assets/img/kawa-village-card.webp'); background-size: cover; background-position: center;"></div>
+        <div class="pcard__shade"></div>
+        <div class="pcard__top">
+          <span class="pcard__badge pcard__badge--off">Segera</span>
+          <span class="pcard__num">04</span>
+        </div>
+        <div class="pcard__body">
+          <div class="pcard__loc">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            SEDAYU, BANTUL
+          </div>
+          <div class="pcard__name">Kawa Village</div>
+          <div class="pcard__meta">
+            <div class="pcard__price">Harga <span>TBA</span></div>
+            <a href="https://wa.me/6281234567890" class="pcard__cta">Daftar Info →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pcard pcard--small reveal reveal--delay-2" style="cursor:default;">
+        <div class="pcard__img" style="background-image: url('assets/img/royal-mansion-card.webp'); background-size: cover; background-position: center;"></div>
+        <div class="pcard__shade"></div>
+        <div class="pcard__top">
+          <span class="pcard__badge pcard__badge--off">Segera</span>
+          <span class="pcard__num">05</span>
+        </div>
+        <div class="pcard__body">
+          <div class="pcard__loc">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            YOGYAKARTA
+          </div>
+          <div class="pcard__name">Royal Mansion</div>
+          <div class="pcard__meta">
+            <div class="pcard__price">Harga <span>TBA</span></div>
+            <a href="https://wa.me/6281234567890" class="pcard__cta">Daftar Info →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MENGAPA JGS ════════════════════════════════════════════ -->
+  <section class="why section" id="mengapa">
+    <div class="section__head container">
+      <span class="eyebrow">Mengapa JGS Group</span>
+      <h2 class="section-title reveal">Empat alasan<br>keluarga memilih kami.</h2>
+    </div>
+    <div class="why__grid container">
+      <div class="why__item reveal">
+        <div class="why__num">01</div>
+        <h3 class="why__title">Lokasi yang Dipilih dengan Cermat</h3>
+        <p class="why__body">Setiap kawasan JGS Group dipilih karena aksesibilitas, keamanan lingkungan, dan potensi nilai jangka panjang — bukan sekadar lahan yang tersedia.</p>
+        <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="why__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="why__item reveal reveal--delay-1">
+        <div class="why__num">02</div>
+        <h3 class="why__title">Proses Transparan, Tanpa Kejutan</h3>
+        <p class="why__body">Semua biaya, jadwal, dan progress pembangunan dikomunikasikan secara terbuka. Tidak ada biaya tersembunyi, tidak ada janji yang tidak ditepati.</p>
+        <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="why__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="why__item reveal">
+        <div class="why__num">03</div>
+        <h3 class="why__title">KPR Dibantu Penuh</h3>
+        <p class="why__body">Tim kami bekerjasama dengan 5 bank nasional dan menangani seluruh proses pengajuan KPR — dari dokumen awal hingga akad kredit selesai.</p>
+        <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="why__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="why__item reveal reveal--delay-1">
+        <div class="why__num">04</div>
+        <h3 class="why__title">Garansi & After-Sales Nyata</h3>
+        <p class="why__body">Garansi struktur 10 tahun bukan sekadar janji di brosur. Tim after-sales kami aktif merespons — rata-rata penanganan dalam 48 jam kerja.</p>
+        <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="why__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROMO AKTIF ════════════════════════════════════════════ -->
+  <div class="promo" id="promo">
+    <div class="promo__inner reveal">
+      <div class="promo__glow"></div>
+      <div>
+        <div class="promo__label">
+          <span class="promo__dot"></span>
+          Promo Aktif · Terbatas
+        </div>
+        <h2 class="promo__title">Hemat lebih banyak<br>dengan promo bulan ini.</h2>
+        <ul class="promo__list">
+          <li class="promo__item">
+            <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <span class="promo__item-text"><strong>Free biaya KPR</strong> — semua bank rekanan (senilai ±Rp 8 Juta)</span>
+          </li>
+          <li class="promo__item">
+            <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <span class="promo__item-text"><strong>Cashback Rp 25 Juta</strong> untuk pembelian bulan ini</span>
+          </li>
+          <li class="promo__item">
+            <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <span class="promo__item-text"><strong>Subsidi DP</strong> untuk pembeli KPR pertama kali (FLPP)</span>
+          </li>
+          <li class="promo__item">
+            <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <span class="promo__item-text"><strong>Free canopy + kitchen set</strong> untuk Tipe 45 & 60</span>
+          </li>
+        </ul>
+      </div>
+      <div class="promo__right">
+        <div class="promo__savings">
+          <div class="promo__savings-label">Total Hemat</div>
+          <div class="promo__savings-val">±Rp 33 Jt</div>
+          <div class="promo__savings-sub">per unit · s/d akhir bulan</div>
+        </div>
+        <a href="https://wa.me/6281234567890?text=Halo%2C+saya+ingin+tahu+detail+promo+JGS+Group" target="_blank" rel="noopener" class="btn btn--lg promo__cta">Klaim Promo Sekarang</a>
+        <span class="promo__fine">*Syarat & ketentuan berlaku · Terbatas 10 unit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ KALKULATOR CICILAN ═════════════════════════════════════ -->
+  <section class="calc" id="kalkulator">
+    <div class="calc__inner">
+      <div class="calc__sticky">
+        <span class="eyebrow">Kalkulator Cicilan</span>
+        <h2 class="calc__title reveal">Hitung cicilan<br>dalam <em>10 detik</em>.</h2>
+        <p class="calc__body reveal reveal--delay-1">
+          Geser slider untuk simulasi cicilan KPR sesuai kemampuan keuanganmu.
+          Hasilnya langsung terlihat — konsultasi lanjut gratis bersama tim kami.
+        </p>
+        <a href="https://wa.me/6281234567890?text=Halo%2C+saya+ingin+konsultasi+KPR" target="_blank" rel="noopener" class="btn btn--primary reveal reveal--delay-2">Konsultasi KPR Gratis</a>
+      </div>
+
+      <div class="calc__panel reveal">
+        <div class="calc__form">
+          <!-- Harga -->
+          <div class="calc__row">
+            <div class="calc__head">
+              <span class="calc__lbl">Harga Rumah</span>
+              <span class="calc__val" id="cHarga">Rp 450 Juta</span>
+            </div>
+            <input type="range" id="slHarga" class="slider" min="400" max="1000" step="50" value="450">
+          </div>
+          <!-- DP -->
+          <div class="calc__row">
+            <div class="calc__head">
+              <span class="calc__lbl">Uang Muka (DP)</span>
+              <span class="calc__val" id="cDp">20% · Rp 90 Juta</span>
+            </div>
+            <input type="range" id="slDp" class="slider" min="10" max="60" step="5" value="20">
+          </div>
+          <!-- Bunga -->
+          <div class="calc__row">
+            <div class="calc__head">
+              <span class="calc__lbl">Suku Bunga / Tahun</span>
+              <span class="calc__val" id="cBunga">10.5 %</span>
+            </div>
+            <input type="range" id="slBunga" class="slider" min="7" max="14" step="0.5" value="10.5">
+          </div>
+          <!-- Tenor -->
+          <div class="calc__row">
+            <div class="calc__head">
+              <span class="calc__lbl">Tenor</span>
+              <span class="calc__val" id="cTenor">15 Tahun</span>
+            </div>
+            <div class="calc__tenor-row">
+              <button class="calc__tenor-btn" data-t="10">10 Thn</button>
+              <button class="calc__tenor-btn calc__tenor-btn--on" data-t="15">15 Thn</button>
+              <button class="calc__tenor-btn" data-t="20">20 Thn</button>
+              <button class="calc__tenor-btn" data-t="25">25 Thn</button>
+              <button class="calc__tenor-btn" data-t="30">30 Thn</button>
+            </div>
+          </div>
+        </div>
+        <!-- Result -->
+        <div class="calc__result">
+          <div>
+            <div class="calc__out-label">Estimasi Cicilan / Bulan</div>
+            <div class="calc__out-val" id="cResult">Rp —</div>
+            <div class="calc__out-sub">*Simulasi. Angka aktual tergantung bank & profil kredit Anda.</div>
+          </div>
+          <div class="calc__result-cta">
+            <a href="https://wa.me/6281234567890?text=Halo%2C+saya+ingin+simulasi+KPR+detail" target="_blank" rel="noopener" class="btn btn--orange">Ajukan KPR</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TESTIMONI ══════════════════════════════════════════════ -->
+  <section class="ts section" id="testimoni">
+    <div class="section__head container">
+      <span class="eyebrow">Testimoni</span>
+      <h2 class="section-title reveal">Suara mereka yang<br>sudah <em>pulang</em> ke JGS.</h2>
+    </div>
+    <div class="ts__grid">
+      <div class="ts__card glass reveal">
+        <div class="ts__quote">"</div>
+        <div class="ts__stars">★★★★★</div>
+        <p class="ts__body">"Prosesnya sangat transparan, tidak ada biaya tersembunyi. Tim JGS benar-benar membantu dari awal KPR sampai serah terima kunci."</p>
+        <div class="ts__foot">
+          <div class="ts__av">A</div>
+          <div>
+            <div class="ts__name">Andi Prasetyo</div>
+            <div class="ts__unit">Kawa Living · Tipe 45</div>
+          </div>
+        </div>
+      </div>
+      <div class="ts__card glass reveal reveal--delay-1">
+        <div class="ts__quote">"</div>
+        <div class="ts__stars">★★★★★</div>
+        <p class="ts__body">"Lokasi Tentrem Bhumi sangat strategis. Anak-anak bisa ke sekolah sendiri, ke mall juga dekat. Lingkungannya tenang dan keamanannya terjaga."</p>
+        <div class="ts__foot">
+          <div class="ts__av">S</div>
+          <div>
+            <div class="ts__name">Sri Wahyuni</div>
+            <div class="ts__unit">Tentrem Bhumi · Tipe 36</div>
+          </div>
+        </div>
+      </div>
+      <div class="ts__card glass reveal reveal--delay-2">
+        <div class="ts__quote">"</div>
+        <div class="ts__stars">★★★★★</div>
+        <p class="ts__body">"Kualitas bangunan memuaskan. Sudah setahun tinggal, belum ada masalah struktural. Komunitas perumahannya juga bagus dan aktif."</p>
+        <div class="ts__foot">
+          <div class="ts__av">R</div>
+          <div>
+            <div class="ts__name">Rizky Firmansyah</div>
+            <div class="ts__unit">Kawa Living · Tipe 60</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FAQ ════════════════════════════════════════════════════ -->
+  <section class="faq section--sm" id="faq">
+    <div class="section__head container">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="section-title reveal">Pertanyaan yang<br>sering ditanyakan.</h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Tidak menemukan jawaban?
+        <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" style="color:var(--orange);border-bottom:1px solid rgba(219,127,46,.4);">Chat langsung dengan tim kami →</a>
+      </p>
+    </div>
+    <div class="faq__list">
+      <div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">01</span>
+          <span class="faq__q">Apa perbedaan Kawa Living dan Tentrem Bhumi?</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">Kawa Living berlokasi di Sedayu, Bantul — fokus pada keluarga muda dengan harga lebih terjangkau dan tipe yang beragam (36–60). Tentrem Bhumi di Ngaglik, Sleman — lebih dekat dengan pusat kota Yogyakarta, cocok untuk yang ingin akses cepat ke kawasan Utara Jogja.</div>
+      </div>
+      <div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">02</span>
+          <span class="faq__q">Apakah tersedia pembelian tunai dan KPR?</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">Ya, tersedia keduanya. Pembelian tunai keras mendapat diskon khusus. Untuk KPR, kami bekerjasama dengan BCA, BRI, BTN, Mandiri, dan BNI. Seluruh proses pengajuan dibantu oleh tim kami.</div>
+      </div>
+      <div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">03</span>
+          <span class="faq__q">Berapa DP minimal yang dibutuhkan?</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">DP minimal 10% dari harga unit. Untuk Tipe 36 Kawa Living berarti mulai Rp 45 Juta. Program promo saat ini memberikan cashback Rp 25 Juta yang bisa digunakan untuk menutup sebagian biaya DP.</div>
+      </div>
+      <div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">04</span>
+          <span class="faq__q">Berapa lama proses KPR hingga serah terima kunci?</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">Dari pengajuan KPR hingga akad kredit rata-rata 14–30 hari kerja tergantung bank. Untuk unit ready stock, serah terima kunci dilakukan segera setelah akad. Unit inden mengikuti jadwal konstruksi yang kami informasikan di awal.</div>
+      </div>
+      <div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">05</span>
+          <span class="faq__q">Apakah ada fasilitas di dalam kawasan?</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">Ya. Semua kawasan JGS Group dilengkapi jalan aspal dalam perumahan, taman bermain, tempat ibadah, keamanan 24 jam dengan CCTV, sistem drainase baik, dan akses air bersih. Fasilitas umum seperti sekolah, RS, dan minimarket tersedia dalam radius dekat.</div>
+      </div>
+      <div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">06</span>
+          <span class="faq__q">Apakah ada garansi bangunan?</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">Semua unit JGS Group mendapat garansi struktur 10 tahun dan garansi finishing 1 tahun. Tim after-sales kami responsif — rata-rata penanganan klaim dalam 48 jam kerja.</div>
+      </div>
+      <div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">07</span>
+          <span class="faq__q">Bagaimana cara melihat langsung lokasi dan unit?</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">Hubungi tim kami via WhatsApp di nomor 0812-3456-7890 untuk menjadwalkan kunjungan. Survei lokasi gratis, tanpa kewajiban beli. Tim marketing kami akan menemani dan menjawab semua pertanyaan di lokasi.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ BLOG PREVIEW ═══════════════════════════════════════════ -->
+  <section class="blog section--sm" id="blog">
+    <div class="section__head container">
+      <span class="eyebrow">Insights</span>
+      <h2 class="section-title reveal">Artikel &amp; <em>Tips</em> Properti</h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;" data-blog-subtitle></p>
+    </div>
+    <div class="blog__grid" id="blogGrid"></div>
+    <div class="blog__cta reveal">
+      <a href="/blog" class="btn btn--ghost btn--lg">Lihat Semua Artikel →</a>
+    </div>
+  </section>
+
+  <!-- ══ INSTAGRAM FEED ═════════════════════════════════════════ -->
+  <!-- TODO: Ganti placeholder dengan foto Instagram asli setelah aset tersedia -->
+  <section class="ig section--sm" id="instagram">
+    <div class="section__head container">
+      <span class="eyebrow">Social</span>
+      <h2 class="section-title reveal">Ikuti Kami di <em>Instagram</em></h2>
+      <a class="ig__user reveal reveal--delay-1" href="https://www.instagram.com/jogjagrahaselaras" target="_blank" rel="noopener" data-ig-handle></a>
+    </div>
+    <div class="ig__grid" id="igGrid"></div>
+    <div class="ig__cta reveal">
+      <a href="https://www.instagram.com/jogjagrahaselaras" target="_blank" rel="noopener" class="btn btn--ghost btn--lg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
+        Lihat Feed Lengkap
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ CTA ════════════════════════════════════════════════════ -->
+  <div class="cta-section" id="kontak">
+    <div class="cta-section__glow"></div>
+    <div class="cta-section__inner">
+      <div class="cta-section__quote">"</div>
+      <h2 class="cta-section__title reveal">
+        Temukan rumah yang tepat<br>bersama tim kami — tanpa tekanan.
+      </h2>
+      <div class="cta-section__ctas">
+        <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="btn btn--orange btn--lg">Chat WhatsApp Sekarang</a>
+        <a href="/kawa-living/" class="btn btn--outline-white btn--lg">Lihat Kawa Living</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/konten.js"></script>
+<script>
+  /* Kalkulator Cicilan — homepage */
+  (function () {
+    var slH = document.getElementById('slHarga');
+    var slD = document.getElementById('slDp');
+    var slB = document.getElementById('slBunga');
+    var cH  = document.getElementById('cHarga');
+    var cD  = document.getElementById('cDp');
+    var cB  = document.getElementById('cBunga');
+    var cT  = document.getElementById('cTenor');
+    var cR  = document.getElementById('cResult');
+    var tenor = 15;
+
+    function fmt(n) {
+      if (n >= 1e9) return (n / 1e9).toFixed(2).replace(/\.?0+$/, '') + ' M';
+      if (n >= 1e6) return Math.round(n / 1e6) + ' Jt';
+      return n.toLocaleString('id-ID');
+    }
+
+    function calc() {
+      var harga   = parseInt(slH.value) * 1e6;
+      var dpPct   = parseInt(slD.value);
+      var bunga   = parseFloat(slB.value) / 100 / 12;
+      var bulan   = tenor * 12;
+      var pinjaman = harga * (1 - dpPct / 100);
+      var cicilan  = bulan > 0 && bunga > 0
+        ? (pinjaman * bunga * Math.pow(1 + bunga, bulan)) / (Math.pow(1 + bunga, bulan) - 1)
+        : pinjaman / bulan;
+
+      cH.textContent = 'Rp ' + fmt(harga);
+      cD.textContent = dpPct + '% · Rp ' + fmt(harga * dpPct / 100);
+      cB.textContent = parseFloat(slB.value).toFixed(1) + ' %';
+      cT.textContent = tenor + ' Tahun';
+      cR.textContent = 'Rp ' + fmt(Math.round(cicilan)) + '/bln';
+    }
+
+    [slH, slD, slB].forEach(function (el) { el && el.addEventListener('input', calc); });
+
+    document.querySelectorAll('.calc__tenor-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.calc__tenor-btn').forEach(function (b) { b.classList.remove('calc__tenor-btn--on'); });
+        btn.classList.add('calc__tenor-btn--on');
+        tenor = parseInt(btn.dataset.t);
+        calc();
+      });
+    });
+
+    calc();
+  })();
+</script>
+
+<script>
+  (function () {
+    const heroImg = document.querySelector('.hero__img');
+    if (!heroImg) return;
+    window.addEventListener('scroll', function () {
+      const scale = Math.min(1 + window.scrollY * 0.0003, 1.15);
+      heroImg.style.transform = 'scale(' + scale + ')';
+    }, { passive: true });
+  })();
+</script>
+</body>
+</html>

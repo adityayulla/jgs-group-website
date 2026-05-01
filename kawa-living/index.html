@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kawa Living Sedayu — Perumahan Premium Bantul, Yogyakarta</title>
+  <meta name="description" content="Kawa Living Sedayu — hunian modern di kawasan strategis Bantul, Yogyakarta. Mulai Rp 450 Juta. Bebas biaya KPR + cashback 25 juta.">
+  <meta property="og:title" content="Kawa Living Sedayu — JGS Group">
+  <meta property="og:description" content="Hunian modern di Sedayu, Bantul. Mulai Rp 450 Juta.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <style>
+    /* ── Kawa Living page styles ─────────────────────────── */
+
+    /* Hero */
+    .hero__grid {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: 1fr 1.05fr;
+      gap: 60px; align-items: center;
+    }
+    .hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: .18em; color: var(--navy);
+      margin-bottom: 24px; text-transform: uppercase;
+    }
+    .hero__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 12px var(--orange); }
+    .hero__title {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(44px, 6vw, 88px);
+      line-height: .98; letter-spacing: -.02em; margin: 0 0 28px; color: var(--navy);
+    }
+    .hero__line  { display: block; }
+    .hero__slab  { display: inline-block; background: var(--orange); color: #fff; padding: 2px 16px 8px; font-style: italic; border-radius: 2px; }
+    .hero__sub   { font-size: 17px; line-height: 1.55; color: var(--muted); max-width: 480px; margin: 0 0 36px; text-wrap: pretty; }
+    .hero__ctas  { display: flex; gap: 12px; margin-bottom: 56px; flex-wrap: wrap; }
+    .hero__stats { display: flex; align-items: flex-start; gap: 28px; }
+    .hero__divider { width: 1px; align-self: stretch; background: var(--line); }
+    .stat__num   { font-family: var(--font-display); font-weight: 500; font-size: 42px; line-height: 1; color: var(--navy); letter-spacing: -.02em; }
+    .stat__label { font-size: 12px; color: var(--muted); margin-top: 6px; letter-spacing: .02em; }
+    .hero__visual {
+      position: relative; aspect-ratio: 1 / 1.05;
+      max-width: 580px; margin-left: auto;
+    }
+    .hero__glow {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+      width: 110%; height: 110%;
+      background: radial-gradient(circle, rgba(255,205,120,.55) 0%, rgba(219,127,46,.25) 25%, rgba(90,130,240,.15) 55%, transparent 72%);
+      filter: blur(40px); z-index: 0;
+    }
+    .hero__frame {
+      position: relative; width: 100%; height: 100%;
+      border-radius: 240px 240px 24px 24px; overflow: hidden;
+      box-shadow: 0 30px 80px -20px rgba(27,42,100,.35); z-index: 1;
+    }
+    .hero__img { width: 100%; height: 100%; object-fit: cover; }
+    .hero__badge {
+      position: absolute; left: -30px; top: 40px;
+      background: #fff; border-radius: 50%;
+      width: 130px; height: 130px;
+      display: grid; place-items: center;
+      box-shadow: 0 10px 30px -10px rgba(27,42,100,.35);
+      z-index: 2; text-align: center; border: 6px solid var(--bg);
+    }
+    .hero__badge-num  { font-family: var(--font-display); font-size: 38px; line-height: 1; color: var(--orange); font-weight: 600; }
+    .hero__badge-text { font-size: 9px; letter-spacing: .14em; color: var(--navy); margin-top: 4px; text-transform: uppercase; font-weight: 600; }
+    .hero__tag {
+      position: absolute; right: -10px; bottom: 60px;
+      background: var(--navy); color: #fff;
+      padding: 12px 18px; border-radius: var(--r-pill);
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 13px; box-shadow: 0 10px 30px -10px rgba(0,0,0,.4); z-index: 2;
+    }
+    .hero__tag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); animation: pulse 2s infinite; }
+
+    /* Values / Mengapa Kawa Living */
+    .val { position: relative; padding: 120px 0; }
+    .val__grid {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    }
+    .val__card {
+      position: relative; padding: 32px 24px 64px;
+      background: linear-gradient(160deg, #1b2a64, #2c3e8c);
+      color: #fff; border-radius: 20px; min-height: 260px;
+      overflow: hidden;
+      transition: transform .3s var(--ease);
+    }
+    .val__card:hover { transform: translateY(-6px); }
+    .val__card::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 80% 10%, rgba(219,127,46,.25), transparent 50%);
+      pointer-events: none;
+    }
+    .val__num       { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; opacity: .7; margin-bottom: 20px; position: relative; }
+    .val__title     { font-family: var(--font-display); font-size: 24px; font-weight: 500; margin-bottom: 10px; line-height: 1.15; position: relative; }
+    .val__body      { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,.75); position: relative; }
+    .val__arr       { position: absolute; right: 24px; bottom: 24px; color: var(--orange); }
+
+    /* Popular */
+    .pop { position: relative; padding: 80px 0 120px; }
+    .pop__rail {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .pop__card { aspect-ratio: 0.55; }
+
+    /* Video Tour */
+    .vt { position: relative; padding: 80px 0 120px; }
+    .vt__frame {
+      position: relative; max-width: 1200px; margin: 0 auto;
+      aspect-ratio: 16/9; border-radius: 28px; overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 40px 80px -30px rgba(27,42,100,.5);
+    }
+    .vt__thumb {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .vt__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.55) 100%); }
+    .vt__play {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 84px; height: 84px; border-radius: 50%;
+      background: var(--orange); color: #fff;
+      display: grid; place-items: center;
+      transition: transform .3s, background .3s;
+      box-shadow: 0 0 0 0 rgba(219,127,46,.6);
+      animation: pulse 2.4s infinite;
+    }
+    .vt__play:hover { transform: translate(-50%,-50%) scale(1.08); background: var(--orange-2); }
+    .vt__caption { position: absolute; left: 40px; bottom: 32px; color: #fff; z-index: 2; }
+    .vt__cap-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; opacity: .85; margin-bottom: 4px; }
+    .vt__cap-name  { font-family: var(--font-display); font-size: 36px; font-weight: 500; line-height: 1; }
+    .vt__cap-meta  { font-size: 13px; opacity: .8; margin-top: 4px; }
+    .vt__modal {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.85);
+      display: none; place-items: center;
+    }
+    .vt__modal--on { display: grid; }
+    .vt__modal-inner { position: relative; width: min(900px, 90vw); aspect-ratio: 16/9; }
+    .vt__modal-inner iframe { width: 100%; height: 100%; border: none; border-radius: 12px; }
+    .vt__modal-close {
+      position: absolute; top: -44px; right: 0;
+      background: rgba(255,255,255,.15); border: none; color: #fff;
+      width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+      display: grid; place-items: center; font-size: 20px;
+    }
+
+    /* Testimonials */
+    .ts { position: relative; padding: 80px 0; }
+    .ts__grid {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .ts__card { padding: 36px 28px 28px; }
+    .ts__quote-icon { position: absolute; right: 24px; top: 20px; width: 40px; height: 40px; color: var(--orange); opacity: .2; }
+    .ts__body { font-family: var(--font-display); font-weight: 400; font-size: 18px; line-height: 1.55; color: var(--navy); margin: 0 0 28px; font-style: italic; text-wrap: pretty; }
+    .ts__foot { display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .ts__av   { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 16px; font-weight: 600; flex-shrink: 0; }
+    .ts__name { font-size: 14px; font-weight: 600; color: var(--navy); }
+    .ts__unit { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* Promo */
+    .pm { padding: 40px var(--pad-x); max-width: var(--max-w); margin: 0 auto; }
+    .pm__inner {
+      position: relative; display: grid;
+      grid-template-columns: 1.6fr 1fr; gap: 40px; align-items: center;
+      padding: 56px 48px;
+      background: linear-gradient(135deg, #db7f2e, #e8923f);
+      border-radius: 28px; color: #fff; overflow: hidden;
+    }
+    .pm__dots {
+      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+      background-image: radial-gradient(rgba(255,255,255,.18) 1.5px, transparent 1.5px);
+      background-size: 22px 22px;
+    }
+    .pm__tag   { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; background: rgba(0,0,0,.15); padding: 6px 14px; border-radius: var(--r-pill); margin-bottom: 16px; position: relative; }
+    .pm__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; letter-spacing: -.02em; margin: 0 0 14px; position: relative; }
+    .pm__body  { font-size: 15px; line-height: 1.5; margin: 0; opacity: .9; position: relative; }
+    .pm__right { position: relative; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+    .pm__right .btn { background: #fff; color: var(--navy); }
+    .pm__right .btn:hover { background: var(--navy); color: #fff; }
+    .pm__fine  { font-size: 11px; opacity: .8; }
+
+    /* Calculator */
+    .calc { padding: 100px 0; }
+    .calc__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: center;
+    }
+    .calc__title  { font-family: var(--font-display); font-weight: 400; font-size: clamp(34px, 4vw, 54px); line-height: 1.05; letter-spacing: -.02em; color: var(--navy); margin: 0 0 18px; }
+    .calc__body   { font-size: 16px; color: var(--muted); line-height: 1.55; margin: 0 0 28px; max-width: 420px; }
+    .calc__panel  { padding: 36px; background: #fff; border-radius: var(--r-lg); box-shadow: 0 30px 60px -30px rgba(27,42,100,.3); border: 1px solid var(--line); }
+    .calc__row    { margin-bottom: 24px; }
+    .calc__head   { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; color: var(--muted); }
+    .calc__val    { font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--navy); }
+    .calc__row input[type=range] {
+      width: 100%; -webkit-appearance: none; appearance: none;
+      height: 4px; background: rgba(27,42,100,.15); border-radius: var(--r-pill); outline: none;
+    }
+    .calc__row input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--orange); cursor: pointer; box-shadow: 0 2px 6px rgba(219,127,46,.5);
+    }
+    .calc__row input[type=range]::-moz-range-thumb {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--orange); cursor: pointer; border: none;
+    }
+    .calc__result { margin-top: 28px; padding: 24px; border-radius: var(--r-md); background: linear-gradient(135deg, #1b2a64, #2c3e8c); color: #fff; }
+    .calc__rlabel { font-size: 12px; opacity: .8; letter-spacing: .04em; }
+    .calc__rval   { font-family: var(--font-display); font-size: 36px; font-weight: 500; letter-spacing: -.02em; margin-top: 4px; line-height: 1; }
+    .calc__rmeta  { font-size: 12px; opacity: .7; margin-top: 6px; }
+
+    /* Units detail */
+    .un { padding: 120px 0; }
+    .un__list  { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); display: flex; flex-direction: column; gap: 40px; }
+    .un__row   { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 24px; border-radius: var(--r-lg); }
+    .un__row--alt { direction: rtl; }
+    .un__row--alt > * { direction: ltr; }
+    .un__img   { aspect-ratio: 4/3; border-radius: var(--r-md); overflow: hidden; position: relative; }
+    .un__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+    .un__row:hover .un__img img { transform: scale(1.04); }
+    .un__copy  { padding: 20px; }
+    .un__tagrow { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .un__tag   { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; padding: 4px 10px; border-radius: var(--r-pill); background: rgba(219,127,46,.12); color: var(--orange); text-transform: uppercase; }
+    .un__name  { font-family: var(--font-display); font-weight: 500; font-size: 40px; line-height: 1; letter-spacing: -.02em; color: var(--navy); margin: 0; }
+    .un__loc   { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); margin: 10px 0 16px; }
+    .un__desc  { font-size: 15px; line-height: 1.55; color: var(--muted); margin: 0 0 20px; text-wrap: pretty; }
+    .un__specs { display: flex; gap: 20px; font-size: 13px; color: var(--navy); padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 20px; flex-wrap: wrap; }
+    .un__specs > div { display: inline-flex; align-items: center; gap: 6px; }
+    .un__footer { display: flex; justify-content: space-between; align-items: center; }
+    .un__price  { display: flex; flex-direction: column; font-size: 12px; color: var(--muted); }
+    .un__price strong { font-family: var(--font-display); font-weight: 500; font-size: 26px; color: var(--navy); letter-spacing: -.01em; margin-top: 2px; }
+
+    /* FAQ */
+    .faq { padding: 80px 0; }
+    .faq__list { max-width: 860px; margin: 0 auto; padding: 0 var(--pad-x); display: flex; flex-direction: column; gap: 12px; }
+
+    /* Instagram */
+    .ig { padding: 80px 0 100px; }
+    .ig__head {
+      max-width: var(--max-w); margin: 0 auto var(--sp-10); padding: 0 var(--pad-x);
+      display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap;
+    }
+    .ig__grid {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .ig__post { position: relative; aspect-ratio: 1; border-radius: var(--r-md); overflow: hidden; display: block; }
+    .ig__post img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .ig__post:hover img { transform: scale(1.08); }
+    .ig__over {
+      position: absolute; inset: 0; padding: 16px;
+      display: flex; flex-direction: column; justify-content: flex-end; gap: 4px;
+      color: #fff;
+      background: linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 50%);
+      opacity: 0; transition: opacity .3s;
+    }
+    .ig__post:hover .ig__over { opacity: 1; }
+    .ig__cap   { font-size: 12px; line-height: 1.4; }
+    .ig__likes { font-size: 11px; opacity: .85; }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .val__grid { grid-template-columns: repeat(2, 1fr); }
+      .ig__grid  { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 900px) {
+      .hero__grid { grid-template-columns: 1fr; }
+      .hero__visual { max-width: 100%; margin: 0; }
+      .hero__badge  { left: -14px; width: 90px; height: 90px; }
+      .hero__badge-num { font-size: 28px; }
+      .pop__rail { grid-template-columns: 1fr; }
+      .ts__grid  { grid-template-columns: 1fr; }
+      .calc__inner { grid-template-columns: 1fr; gap: 36px; }
+      .un__row   { grid-template-columns: 1fr; direction: ltr !important; }
+      .un__row--alt > * { direction: ltr; }
+      .pm__inner { grid-template-columns: 1fr; }
+      .pm__right { align-items: stretch; }
+      .pm__right .btn { justify-content: center; }
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 100px 0 60px; }
+      .hero__title { font-size: clamp(38px, 11vw, 52px); }
+      .hero__sub  { font-size: 15px; }
+      .hero__stats { gap: 16px; }
+      .stat__num  { font-size: 32px; }
+      .val__grid  { grid-template-columns: 1fr; }
+      .ig__grid   { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .ig__over   { opacity: 1; }
+      .pm__inner  { padding: 36px 24px; border-radius: var(--r-md); }
+      .vt__frame  { border-radius: 20px; aspect-ratio: 4/5; }
+      .vt__play   { width: 64px; height: 64px; }
+      .vt__caption { left: 20px; bottom: 20px; }
+      .vt__cap-name { font-size: 24px; }
+      .un__name   { font-size: 30px; }
+      .calc__panel { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Parallax background -->
+<div class="bg-root">
+  <div class="reb">
+    <div class="reb__wash reb__wash--a"></div>
+    <div class="reb__wash reb__wash--b"></div>
+    <div class="reb__wash reb__wash--c"></div>
+    <div class="reb__blueprint"></div>
+    <div class="reb__vignette"></div>
+    <div class="grain"></div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<div id="navbar-placeholder"></div>
+
+<main>
+
+  <!-- ══ HERO ══════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <div class="hero__eyebrow">
+          <span class="hero__dot"></span>
+          Sedayu, Bantul · Yogyakarta
+        </div>
+        <h1 class="hero__title">
+          <span class="hero__line">Kawa</span>
+          <span class="hero__line"><span class="hero__slab">Living</span></span>
+          <span class="hero__line">Sedayu.</span>
+        </h1>
+        <p class="hero__sub">
+          Hunian modern dengan konsep terbuka di kawasan tenang Sedayu, Bantul.
+          Akses mudah ke ring road, dekat fasilitas lengkap — harga mulai Rp 450 Juta.
+        </p>
+        <div class="hero__ctas">
+          <a href="https://wa.me/6281234567890?text=Halo%2C+saya+tertarik+dengan+Kawa+Living+Sedayu" target="_blank" rel="noopener" class="btn btn--primary btn--lg">Tanya Sekarang</a>
+          <a href="#unit" class="btn btn--ghost btn--lg">Lihat Unit</a>
+        </div>
+        <div class="hero__stats">
+          <div>
+            <div class="stat__num">Rp <span data-count="450">0</span> <span style="font-size:.55em;font-style:italic;">Jt</span></div>
+            <div class="stat__label">Mulai dari</div>
+          </div>
+          <div class="hero__divider"></div>
+          <div>
+            <div class="stat__num"><span data-count="48">0</span><span style="font-size:.55em">+</span></div>
+            <div class="stat__label">Unit Tersedia</div>
+          </div>
+          <div class="hero__divider"></div>
+          <div>
+            <div class="stat__num"><span data-count="2">0</span>–<span data-count="4">0</span></div>
+            <div class="stat__label">Tipe Kamar</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__visual reveal">
+        <div class="hero__glow"></div>
+        <div class="hero__frame">
+          <img
+            src="../assets/img/kawa-living/hero.webp"
+            alt="Kawa Living Sedayu"
+            class="hero__img"
+            loading="eager"
+            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)'"
+          >
+        </div>
+        <div class="hero__badge">
+          <div class="hero__badge-num">Free</div>
+          <div class="hero__badge-text">Biaya KPR</div>
+        </div>
+        <div class="hero__tag">
+          <span class="hero__tag-dot"></span>
+          Unit Tersedia
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__scrollcue">
+      <span>scroll</span>
+      <div class="hero__scrollline"></div>
+    </div>
+  </section>
+
+  <!-- ══ MENGAPA KAWA LIVING ════════════════════════════════════ -->
+  <section class="val section" id="mengapa">
+    <div class="section__head container">
+      <span class="eyebrow">Mengapa Kawa Living</span>
+      <h2 class="section-title reveal">Didesain untuk<br>hidup yang <em>tenang</em>.</h2>
+    </div>
+    <div class="val__grid container">
+      <div class="val__card reveal">
+        <div class="val__num">01</div>
+        <div class="val__title">Lokasi Strategis</div>
+        <div class="val__body">Hanya 10 menit dari Ring Road Selatan. Dekat dengan sekolah, rumah sakit, dan pusat perbelanjaan Bantul.</div>
+        <svg class="val__arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <div class="val__card reveal reveal--delay-1">
+        <div class="val__num">02</div>
+        <div class="val__title">Desain Modern Terbuka</div>
+        <div class="val__body">Tata ruang yang lapang dengan pencahayaan alami maksimal. Setiap unit memiliki taman kecil pribadi.</div>
+        <svg class="val__arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <div class="val__card reveal reveal--delay-2">
+        <div class="val__num">03</div>
+        <div class="val__title">KPR Mudah & Cepat</div>
+        <div class="val__body">Kerjasama dengan 5 bank nasional. Proses pengajuan KPR dibantu penuh — selesai dalam 7 hari kerja.</div>
+        <svg class="val__arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <div class="val__card reveal reveal--delay-3">
+        <div class="val__num">04</div>
+        <div class="val__title">Garansi Bangunan</div>
+        <div class="val__body">Jaminan kualitas struktur 10 tahun. Tim after-sales siap membantu selama masa garansi berlaku.</div>
+        <svg class="val__arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RUMAH POPULER ══════════════════════════════════════════ -->
+  <section class="pop section" id="populer">
+    <div class="section__head container">
+      <span class="eyebrow">Pilihan Populer</span>
+      <h2 class="section-title reveal">Unit yang<br>paling diminati.</h2>
+    </div>
+    <div class="pop__rail">
+      <div class="prop-card pop__card reveal">
+        <div class="prop-card__img" style="background: linear-gradient(135deg, #2c3e8c, #1b2a64);"></div>
+        <div class="prop-card__shade"></div>
+        <span class="prop-card__badge">Terlaris</span>
+        <div class="prop-card__body">
+          <div class="prop-card__name">Tipe 36/72</div>
+          <div class="prop-card__loc">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Sedayu, Bantul
+          </div>
+          <div class="prop-card__price">
+            <span class="prop-card__rp">Rp</span>
+            <span class="prop-card__val">450</span>
+            <span class="prop-card__unit">Juta</span>
+          </div>
+          <div class="prop-card__cta">
+            Lihat Detail
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="prop-card pop__card reveal reveal--delay-1">
+        <div class="prop-card__img" style="background: linear-gradient(135deg, #1b2a64, #0f1430);"></div>
+        <div class="prop-card__shade"></div>
+        <span class="prop-card__badge">Favorit</span>
+        <div class="prop-card__body">
+          <div class="prop-card__name">Tipe 45/90</div>
+          <div class="prop-card__loc">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Sedayu, Bantul
+          </div>
+          <div class="prop-card__price">
+            <span class="prop-card__rp">Rp</span>
+            <span class="prop-card__val">595</span>
+            <span class="prop-card__unit">Juta</span>
+          </div>
+          <div class="prop-card__cta">
+            Lihat Detail
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="prop-card pop__card reveal reveal--delay-2">
+        <div class="prop-card__img" style="background: linear-gradient(135deg, #2c3e8c, #db7f2e22);"></div>
+        <div class="prop-card__shade"></div>
+        <span class="prop-card__badge">Premium</span>
+        <div class="prop-card__body">
+          <div class="prop-card__name">Tipe 60/120</div>
+          <div class="prop-card__loc">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Sedayu, Bantul
+          </div>
+          <div class="prop-card__price">
+            <span class="prop-card__rp">Rp</span>
+            <span class="prop-card__val">780</span>
+            <span class="prop-card__unit">Juta</span>
+          </div>
+          <div class="prop-card__cta">
+            Lihat Detail
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ VIDEO TOUR ══════════════════════════════════════════════ -->
+  <section class="vt section--sm" id="video">
+    <div class="section__head container">
+      <span class="eyebrow">Video Tour</span>
+      <h2 class="section-title reveal">Lihat langsung<br>kawasannya.</h2>
+    </div>
+    <div class="vt__frame container reveal" id="vtFrame">
+      <img
+        src="../assets/img/kawa-living/video-thumb.webp"
+        alt="Video tour Kawa Living"
+        class="vt__thumb"
+        onerror="this.style.background='#1b2a64';this.style.display='block'"
+      >
+      <div class="vt__shade"></div>
+      <button class="vt__play" id="vtPlay" aria-label="Play video">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="vt__caption">
+        <div class="vt__cap-label">VIRTUAL TOUR</div>
+        <div class="vt__cap-name">Kawa Living Sedayu</div>
+        <div class="vt__cap-meta">Sedayu, Bantul · 2024</div>
+      </div>
+    </div>
+
+    <!-- Video modal -->
+    <div class="vt__modal" id="vtModal">
+      <div class="vt__modal-inner">
+        <button class="vt__modal-close" id="vtClose">×</button>
+        <iframe id="vtIframe" src="" allow="autoplay; fullscreen" allowfullscreen title="Video Tour Kawa Living"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TESTIMONI ══════════════════════════════════════════════ -->
+  <section class="ts section" id="testimoni">
+    <div class="section__head container">
+      <span class="eyebrow">Testimoni</span>
+      <h2 class="section-title reveal">Suara mereka yang<br>sudah <em>pulang</em> ke Kawa.</h2>
+    </div>
+    <div class="ts__grid">
+      <div class="ts__card glass reveal">
+        <p class="ts__body">
+          "Prosesnya sangat transparan, tidak ada biaya tersembunyi.
+          Tim JGS benar-benar membantu dari awal KPR sampai serah terima kunci."
+        </p>
+        <div class="ts__foot">
+          <div class="ts__av">A</div>
+          <div>
+            <div class="ts__name">Andi Prasetyo</div>
+            <div class="ts__unit">Tipe 45 · Unit B-12</div>
+          </div>
+        </div>
+      </div>
+      <div class="ts__card glass reveal reveal--delay-1">
+        <p class="ts__body">
+          "Lokasi Kawa Living sangat strategis. Anak-anak bisa ke sekolah sendiri,
+          ke mall juga dekat. Lingkungannya tenang dan keamanannya terjaga."
+        </p>
+        <div class="ts__foot">
+          <div class="ts__av">S</div>
+          <div>
+            <div class="ts__name">Sri Wahyuni</div>
+            <div class="ts__unit">Tipe 36 · Unit A-07</div>
+          </div>
+        </div>
+      </div>
+      <div class="ts__card glass reveal reveal--delay-2">
+        <p class="ts__body">
+          "Kualitas bangunan memuaskan. Sudah setahun tinggal, belum ada masalah
+          struktural apapun. Tetangga-tetangga juga ramah, komunitas yang bagus."
+        </p>
+        <div class="ts__foot">
+          <div class="ts__av">R</div>
+          <div>
+            <div class="ts__name">Rizky Firmansyah</div>
+            <div class="ts__unit">Tipe 60 · Unit C-03</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROMO ══════════════════════════════════════════════════ -->
+  <div class="pm reveal">
+    <div class="pm__inner">
+      <div class="pm__dots"></div>
+      <div>
+        <span class="pm__tag">PROMO TERBATAS</span>
+        <h2 class="pm__title">Free Biaya KPR<br>+ Cashback 25 Juta.</h2>
+        <p class="pm__body">Berlaku untuk 10 unit pertama yang akad bulan ini. Syarat & ketentuan berlaku.</p>
+      </div>
+      <div class="pm__right">
+        <a href="https://wa.me/6281234567890?text=Halo%2C+saya+ingin+info+promo+Kawa+Living" target="_blank" rel="noopener" class="btn btn--lg">Klaim Promo Sekarang</a>
+        <span class="pm__fine">Terbatas untuk 10 unit · Berlaku s/d 31 Mei 2025</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ KALKULATOR KPR ══════════════════════════════════════════ -->
+  <section class="calc section" id="kpr">
+    <div class="calc__inner">
+      <div>
+        <span class="eyebrow">Kalkulator KPR</span>
+        <h2 class="calc__title reveal">Hitung cicilan,<br>dalam <em>10 detik</em>.</h2>
+        <p class="calc__body reveal reveal--delay-1">
+          Geser slider untuk simulasi cicilan KPR sesuai kemampuan keuangan kamu.
+          Kami siap bantu proses pengajuan dari awal hingga selesai.
+        </p>
+        <a href="https://wa.me/6281234567890?text=Halo%2C+saya+ingin+konsultasi+KPR+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary reveal reveal--delay-2">Konsultasi KPR Gratis</a>
+      </div>
+
+      <div class="calc__panel reveal">
+        <form id="kprCalc">
+          <div class="calc__row">
+            <div class="calc__head">
+              <span>Harga Rumah</span>
+              <span class="calc__val" id="dispHarga">Rp 450 Jt</span>
+            </div>
+            <input type="range" id="calcHarga" min="450" max="900" step="10" value="450">
+          </div>
+          <div class="calc__row">
+            <div class="calc__head">
+              <span>Uang Muka (DP)</span>
+              <span class="calc__val" id="dispDp">20%</span>
+            </div>
+            <input type="range" id="calcDp" min="10" max="50" step="5" value="20">
+          </div>
+          <div class="calc__row">
+            <div class="calc__head">
+              <span>Tenor</span>
+              <span class="calc__val" id="dispTenor">15 tahun</span>
+            </div>
+            <input type="range" id="calcTenor" min="5" max="30" step="5" value="15">
+          </div>
+          <div class="calc__result">
+            <div class="calc__rlabel">ESTIMASI CICILAN / BULAN</div>
+            <div class="calc__rval" id="calcResult">Rp —</div>
+            <div class="calc__rmeta">*Simulasi dengan bunga 10,5% p.a. Angka aktual tergantung bank & profil.</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ DETAIL UNIT ════════════════════════════════════════════ -->
+  <section class="un section" id="unit">
+    <div class="section__head container">
+      <span class="eyebrow">Detail Unit</span>
+      <h2 class="section-title reveal">Pilih tipe yang<br>paling cocok.</h2>
+    </div>
+    <div class="un__list">
+
+      <!-- Tipe 36 -->
+      <div class="un__row glass reveal">
+        <div class="un__img">
+          <img src="../assets/img/kawa-living/tipe36.webp" alt="Kawa Living Tipe 36" loading="lazy"
+            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
+        </div>
+        <div class="un__copy">
+          <div class="un__tagrow">
+            <span class="un__tag">Terlaris</span>
+            <span class="un__tag">KPR Tersedia</span>
+          </div>
+          <h3 class="un__name">Tipe 36/72</h3>
+          <div class="un__loc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Sedayu, Bantul
+          </div>
+          <p class="un__desc">Tipe starter ideal untuk keluarga muda. Ruang tamu lega, 2 kamar tidur, dapur terbuka, dan taman kecil di depan.</p>
+          <div class="un__specs">
+            <div>🛏 2 Kamar Tidur</div>
+            <div>🚿 1 Kamar Mandi</div>
+            <div>📐 LT 72 m²</div>
+            <div>🏠 LB 36 m²</div>
+          </div>
+          <div class="un__footer">
+            <div class="un__price">
+              <span>Mulai dari</span>
+              <strong>Rp 450 Juta</strong>
+            </div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C+saya+tertarik+Tipe+36+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipe 45 -->
+      <div class="un__row un__row--alt glass reveal">
+        <div class="un__img">
+          <img src="../assets/img/kawa-living/tipe45.webp" alt="Kawa Living Tipe 45" loading="lazy"
+            onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
+        </div>
+        <div class="un__copy">
+          <div class="un__tagrow">
+            <span class="un__tag">Favorit</span>
+            <span class="un__tag">KPR Tersedia</span>
+          </div>
+          <h3 class="un__name">Tipe 45/90</h3>
+          <div class="un__loc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Sedayu, Bantul
+          </div>
+          <p class="un__desc">Tipe keluarga dengan ruang keluarga terpisah, 3 kamar tidur, dapur semi-outdoor, dan carport untuk 2 kendaraan.</p>
+          <div class="un__specs">
+            <div>🛏 3 Kamar Tidur</div>
+            <div>🚿 2 Kamar Mandi</div>
+            <div>📐 LT 90 m²</div>
+            <div>🏠 LB 45 m²</div>
+          </div>
+          <div class="un__footer">
+            <div class="un__price">
+              <span>Mulai dari</span>
+              <strong>Rp 595 Juta</strong>
+            </div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C+saya+tertarik+Tipe+45+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipe 60 -->
+      <div class="un__row glass reveal">
+        <div class="un__img">
+          <img src="../assets/img/kawa-living/tipe60.webp" alt="Kawa Living Tipe 60" loading="lazy"
+            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#db7f2e33)';this.style.display='block'">
+        </div>
+        <div class="un__copy">
+          <div class="un__tagrow">
+            <span class="un__tag">Premium</span>
+            <span class="un__tag">Stok Terbatas</span>
+          </div>
+          <h3 class="un__name">Tipe 60/120</h3>
+          <div class="un__loc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Sedayu, Bantul
+          </div>
+          <p class="un__desc">Unit premium dengan konsep semi-lantai 2. Ruang luas, 4 kamar tidur, 2 kamar mandi, halaman belakang, dan carport ganda.</p>
+          <div class="un__specs">
+            <div>🛏 4 Kamar Tidur</div>
+            <div>🚿 2 Kamar Mandi</div>
+            <div>📐 LT 120 m²</div>
+            <div>🏠 LB 60 m²</div>
+          </div>
+          <div class="un__footer">
+            <div class="un__price">
+              <span>Mulai dari</span>
+              <strong>Rp 780 Juta</strong>
+            </div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C+saya+tertarik+Tipe+60+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ FAQ ════════════════════════════════════════════════════ -->
+  <section class="faq section" id="faq">
+    <div class="section__head container">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="section-title reveal">Pertanyaan yang<br>sering ditanyakan.</h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:16px;">Tidak menemukan jawaban? Chat langsung dengan tim kami.</p>
+    </div>
+    <div class="faq__list">
+      <div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">01</span>
+          <span class="faq__q">Apakah tersedia pembelian tunai dan KPR?</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">Ya, tersedia keduanya. Untuk tunai keras mendapat diskon khusus. Untuk KPR, kami bekerjasama dengan BCA, BRI, BTN, Mandiri, dan BNI. Proses pengajuan kami bantu penuh.</div>
+      </div>
+      <div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">02</span>
+          <span class="faq__q">Berapa DP minimal yang dibutuhkan?</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">DP minimal 10% dari harga unit. Untuk Tipe 36 berarti mulai Rp 45 Juta. Program promo saat ini memberikan cashback Rp 25 Juta yang bisa digunakan untuk menutup sebagian biaya DP.</div>
+      </div>
+      <div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">03</span>
+          <span class="faq__q">Berapa lama proses KPR sampai serah terima kunci?</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">Dari pengajuan KPR hingga akad kredit biasanya 14–30 hari kerja tergantung bank. Setelah akad, serah terima kunci dilakukan segera untuk unit ready stock, atau mengikuti jadwal konstruksi untuk unit inden.</div>
+      </div>
+      <div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">04</span>
+          <span class="faq__q">Apakah kawasan sudah ada fasilitas lengkap?</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">Ya. Kawasan Kawa Living sudah dilengkapi jalan aspal dalam perumahan, taman bermain, tempat ibadah, keamanan 24 jam, CCTV, dan sistem drainase. Sekolah, rumah sakit, dan minimarket tersedia dalam radius 2 km.</div>
+      </div>
+      <div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">05</span>
+          <span class="faq__q">Apakah ada garansi bangunan?</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">Semua unit Kawa Living mendapat garansi struktur 10 tahun dan garansi finishing 1 tahun. Tim after-sales kami siap dihubungi untuk klaim garansi selama masa berlaku.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ INSTAGRAM ══════════════════════════════════════════════ -->
+  <section class="ig section--sm" id="instagram">
+    <div class="ig__head">
+      <div>
+        <span class="eyebrow">Instagram</span>
+        <h2 class="section-title" style="font-size:clamp(28px,4vw,48px);">Follow Us<br>@jgsgroup</h2>
+      </div>
+      <a href="https://instagram.com/jgsgroup" target="_blank" rel="noopener" class="btn btn--ghost">Buka Instagram</a>
+    </div>
+    <div class="ig__grid">
+      <a href="https://instagram.com/jgsgroup" target="_blank" rel="noopener" class="ig__post reveal">
+        <img src="../assets/img/kawa-living/ig-1.webp" alt="Instagram JGS Group" loading="lazy"
+          onerror="this.style.background='#1b2a64';this.style.display='block'">
+        <div class="ig__over">
+          <div class="ig__cap">Kawa Living — suasana sore hari</div>
+          <div class="ig__likes">♥ 142</div>
+        </div>
+      </a>
+      <a href="https://instagram.com/jgsgroup" target="_blank" rel="noopener" class="ig__post reveal reveal--delay-1">
+        <img src="../assets/img/kawa-living/ig-2.webp" alt="Instagram JGS Group" loading="lazy"
+          onerror="this.style.background='#2c3e8c';this.style.display='block'">
+        <div class="ig__over">
+          <div class="ig__cap">Interior Tipe 45 — ruang keluarga</div>
+          <div class="ig__likes">♥ 98</div>
+        </div>
+      </a>
+      <a href="https://instagram.com/jgsgroup" target="_blank" rel="noopener" class="ig__post reveal reveal--delay-2">
+        <img src="../assets/img/kawa-living/ig-3.webp" alt="Instagram JGS Group" loading="lazy"
+          onerror="this.style.background='#db7f2e44';this.style.display='block'">
+        <div class="ig__over">
+          <div class="ig__cap">Serah terima kunci unit C-08</div>
+          <div class="ig__likes">♥ 217</div>
+        </div>
+      </a>
+      <a href="https://instagram.com/jgsgroup" target="_blank" rel="noopener" class="ig__post reveal reveal--delay-3">
+        <img src="../assets/img/kawa-living/ig-4.webp" alt="Instagram JGS Group" loading="lazy"
+          onerror="this.style.background='#0f1430';this.style.display='block'">
+        <div class="ig__over">
+          <div class="ig__cap">Taman bermain kawasan Kawa</div>
+          <div class="ig__likes">♥ 76</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ CTA ════════════════════════════════════════════════════ -->
+  <div class="cta-section" id="kontak">
+    <div class="cta-section__glow"></div>
+    <div class="cta-section__inner">
+      <div class="cta-section__quote">"</div>
+      <h2 class="cta-section__title reveal">
+        Siap punya rumah di Kawa Living?<br>Tim kami siap membantu — gratis konsultasi.
+      </h2>
+      <div class="cta-section__ctas">
+        <a href="https://wa.me/6281234567890?text=Halo%2C+saya+ingin+konsultasi+Kawa+Living+Sedayu" target="_blank" rel="noopener" class="btn btn--orange btn--lg">Chat WhatsApp Sekarang</a>
+        <a href="tel:+6281234567890" class="btn btn--outline-white btn--lg">Telepon Kami</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  // Video modal
+  document.getElementById('vtPlay').addEventListener('click', function () {
+    document.getElementById('vtModal').classList.add('vt__modal--on');
+    // Replace with actual YouTube embed URL when available
+    document.getElementById('vtIframe').src = 'about:blank';
+  });
+  document.getElementById('vtClose').addEventListener('click', function () {
+    document.getElementById('vtModal').classList.remove('vt__modal--on');
+    document.getElementById('vtIframe').src = 'about:blank';
+  });
+  document.getElementById('vtModal').addEventListener('click', function (e) {
+    if (e.target === this) {
+      this.classList.remove('vt__modal--on');
+      document.getElementById('vtIframe').src = 'about:blank';
+    }
+  });
+</script>
+</body>
+</html>

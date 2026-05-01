@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Claude Code settings
+.claude/
+
+# Large reference / design files
+JGS Living Landing (standalone).html
+"JGS Living Landing (standalone).html"
+
+# PDF mockups (optional — remove these lines if you want PDFs tracked)
+*.pdf
+
+# Node (if ever used)
+node_modules/
