@@ -30,17 +30,17 @@
       project: 'Tentrem Bhumi', type: 'Tipe Andrawina',
       location: 'Kaliurang KM 12,5, Ngaglik',
       price: 960, kt: 3, km: 3, lb: 68, lt: 127,
-      href: '/tentrem-bhumi', img: TENTREM_IMG },
+      href: '/tentrem-bhumi', img: '/assets/img/Proyek-Kami/Tentrem-Bhumi/andrawina(1).webp' },
     { badge: 'Terlaris',   badgeColor: 'orange',
       project: 'Tentrem Bhumi', type: 'Tipe Bhama',
       location: 'Kaliurang KM 12,5, Ngaglik',
       price: 620, kt: 2, km: 2, lb: 40, lt: 90,
-      href: '/tentrem-bhumi', img: TENTREM_IMG },
+      href: '/tentrem-bhumi', img: '/assets/img/Proyek-Kami/Tentrem-Bhumi/tipe-bhama.webp' },
     { badge: 'New',        badgeColor: 'green',
       project: 'Tentrem Bhumi', type: 'Tipe Cantya',
       location: 'Kaliurang KM 12,5, Ngaglik',
       price: 690, kt: 3, km: 2, lb: 48, lt: 125,
-      href: '/tentrem-bhumi', img: TENTREM_IMG },
+      href: '/tentrem-bhumi', img: '/assets/img/Proyek-Kami/Tentrem-Bhumi/tipe-cantya.webp' },
   ];
 
   /* ============================================================
