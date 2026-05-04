@@ -113,7 +113,16 @@
       max-width: 480px; margin: 0 auto; line-height: 1.55;
     }
     .award-section__grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .award-section__grid .aw2-card {
+      flex: 0 0 calc(33.333% - 14px);
+      max-width: calc(33.333% - 14px);
     }
     .aw2-card {
       background: #ffffff;
@@ -407,7 +416,10 @@
 
     /* ── Tablet 1024px ───────────────────────────────────── */
     @media (max-width: 1024px) {
-      .award-section__grid { grid-template-columns: repeat(2, 1fr); }
+      .award-section__grid .aw2-card {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+      }
       .projects__mini { grid-template-columns: repeat(3, 1fr); }
       .why__grid { grid-template-columns: 1fr 1fr; }
       .calc__inner { gap: 48px; }
@@ -487,7 +499,11 @@
       .award-section { padding: 72px 0; }
       .award-section__inner { padding: 0 20px; }
       .award-section__head  { margin-bottom: 36px; }
-      .award-section__grid  { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .award-section__grid  { gap: 14px; }
+      .award-section__grid .aw2-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
       .aw2-card { padding: 20px; }
       .aw2-card__icon { font-size: 28px; }
       .aw2-card__name { font-size: 16px; }
@@ -642,7 +658,7 @@
       .hero__visual { aspect-ratio: 3/4; }
 
       .award-section__inner { padding: 0 16px; }
-      .award-section__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .award-section__grid { gap: 10px; }
 
       .about__counters { grid-template-columns: 1fr; gap: 10px; max-width: 320px; margin: 0 auto; }
       .about__counter {
