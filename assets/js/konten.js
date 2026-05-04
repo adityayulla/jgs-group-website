@@ -5,8 +5,6 @@
 (function () {
   'use strict';
 
-  const TENTREM_IMG = 'https://jogjagrahaselaras.com/tentrem-bhumi/photos/cantya/cantya%20berjejer%202.webp';
-
   /* ============================================================
      UNIT POPULER — 6 cards
      ============================================================ */
@@ -21,7 +19,6 @@
       location: 'Jalan Wates KM 10, Sedayu',
       price: 680, kt: 3, km: 2, lb: 61, lt: 90,
       href: '/kawa-living', img: '/assets/img/unit-unggulan/okina-10.webp' },
-
     { badge: 'Premium',    badgeColor: 'gold',
       project: 'Tentrem Bhumi', type: 'Tipe Andrawina',
       location: 'Kaliurang KM 12,5, Ngaglik',
