@@ -21,11 +21,7 @@
       location: 'Jalan Wates KM 10, Sedayu',
       price: 680, kt: 3, km: 2, lb: 61, lt: 90,
       href: '/kawa-living', img: '/assets/img/unit-unggulan/okina-10.webp' },
-    { badge: 'Best Value', badgeColor: 'blue',
-      project: 'Kawa Living',   type: 'Tipe Yuri',
-      location: 'Jalan Wates KM 10, Sedayu',
-      price: 490, kt: 2, km: 2, lb: 40, lt: 80,
-      href: '/kawa-living', img: '/assets/img/unit-unggulan/yuri-12.webp' },
+
     { badge: 'Premium',    badgeColor: 'gold',
       project: 'Tentrem Bhumi', type: 'Tipe Andrawina',
       location: 'Kaliurang KM 12,5, Ngaglik',
@@ -41,6 +37,11 @@
       location: 'Kaliurang KM 12,5, Ngaglik',
       price: 690, kt: 3, km: 2, lb: 48, lt: 125,
       href: '/tentrem-bhumi', img: '/assets/img/Proyek-Kami/Tentrem-Bhumi/tipe-cantya.webp' },
+    { badge: 'Best Value', badgeColor: 'blue',
+      project: 'Kawa Living',   type: 'Tipe Yuri',
+      location: 'Jalan Wates KM 10, Sedayu',
+      price: 490, kt: 2, km: 2, lb: 40, lt: 80,
+      href: '/kawa-living', img: '/assets/img/unit-unggulan/yuri-12.webp' },
   ];
 
   /* ============================================================
