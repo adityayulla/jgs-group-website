@@ -44,13 +44,14 @@
   ];
 
   /* ============================================================
-     PENGHARGAAN — 4 cards
+     PENGHARGAAN — 5 cards
      ============================================================ */
   const awardCards = [
     { icon: '🏆', year: '2021', name: 'Juara 1 Penyumbang KPR Terbanyak', giver: 'Bank Mandiri' },
     { icon: '🥇', year: '2022', name: 'Juara 1 Penyumbang KPR Terbanyak', giver: 'Bank Mandiri' },
     { icon: '🏗',  year: '2023', name: 'Developer Pembangunan Terbaik',    giver: 'Bank BTN Syariah' },
     { icon: '🥇', year: '2023', name: 'Juara 1 Penyumbang KPR Terbanyak', giver: 'Bank Mandiri' },
+    { icon: '🏆', year: '2023', name: 'Developer Kualitas Pembiayaan Terbaik', giver: 'Bank BTN Syariah' },
   ];
 
   /* ── SVG icons ─────────────────────────────────────────── */

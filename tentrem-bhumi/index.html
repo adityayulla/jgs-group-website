@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tentrem Bhumi — Rumah di Sleman, Yogyakarta</title>
+<meta name="description" content="Perumahan Tentrem Bhumi Ngaglik Sleman — kolam renang, basket court, playground. 3 tipe unit mulai 630 juta. Developer JGS Group sejak 2013."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<!-- ✏️ SEMUA KONTEN (teks, gambar, harga, WA) ada di file konten.js -->
+<script src="konten.js"></script>
+<style>
+/* ─────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', 'FreeSans', Helvetica, Arial, sans-serif;
+  background-color: #dde0d8;
+  background-image:
+    linear-gradient(rgba(45,74,43,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,74,43,0.03) 1px, transparent 1px);
+  background-size: 52px 52px;
+  color: #1a1a1a;
+}
+img { display: block; }
+
+/* ─────────────────────────────────────────
+   WRAPPER
+───────────────────────────────────────── */
+.lp { max-width: 390px; margin: 0 auto; background: transparent; position: relative; z-index: 1; }
+
+/* ─────────────────────────────────────────
+   PARALLAX DAUN SVG
+───────────────────────────────────────── */
+.parallax-leaf {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform, top;
+}
+.leaf-1 { top: 80px;  right: -18px; opacity: 0.28; animation: sway-1 6s ease-in-out infinite; }
+.leaf-2 { top: 58vh;  left:  -12px; opacity: 0.20; animation: sway-2 8s ease-in-out infinite; }
+.leaf-3 { top: 32vh;  right:  -8px; opacity: 0.16; animation: sway-3 5s ease-in-out infinite; }
+.leaf-4 { top: 18vh;  left:  -10px; opacity: 0.22; animation: sway-4 7s ease-in-out infinite; }
+
+/* Sway — transform murni, scroll parallax via JS update `top` (tidak konflik) */
+@keyframes sway-1 {
+  0%   { transform: rotate(-20deg) translateX(  0px) translateY(  0px); }
+  30%  { transform: rotate(-13deg) translateX(  4px) translateY(-10px); }
+  60%  { transform: rotate(-25deg) translateX( -2px) translateY( -5px); }
+  100% { transform: rotate(-20deg) translateX(  0px) translateY(  0px); }
+}
+@keyframes sway-2 {
+  0%   { transform: rotate(140deg) translateX(  0px) translateY(  0px); }
+  40%  { transform: rotate(149deg) translateX(  3px) translateY(-12px); }
+  70%  { transform: rotate(134deg) translateX( -3px) translateY( -6px); }
+  100% { transform: rotate(140deg) translateX(  0px) translateY(  0px); }
+}
+@keyframes sway-3 {
+  0%   { transform: rotate(30deg) translateY(  0px); }
+  50%  { transform: rotate(39deg) translateY( -9px); }
+  100% { transform: rotate(30deg) translateY(  0px); }
+}
+@keyframes sway-4 {
+  0%   { transform: rotate(-35deg) translateX(  0px) translateY(  0px); }
+  35%  { transform: rotate(-26deg) translateX(  3px) translateY(-11px); }
+  100% { transform: rotate(-35deg) translateX(  0px) translateY(  0px); }
+}
+
+/* ─────────────────────────────────────────
+   DESKTOP NAV (hidden on mobile)
+───────────────────────────────────────── */
+.desktop-nav { display: none; }
+
+/* ─────────────────────────────────────────
+   STICKY WA BUTTON
+───────────────────────────────────────── */
+.wa-sticky {
+  position: fixed; bottom: 20px; right: 18px; z-index: 999;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  text-decoration: none;
+}
+.wa-circle {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: #25D366; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 18px rgba(37,211,102,.55);
+  animation: pulse-wa 2.2s infinite;
+}
+.wa-circle svg { width: 34px; height: 34px; fill: #fff; flex-shrink: 0; }
+.wa-label {
+  font-size: 11px; font-weight: 700; color: #fff;
+  background: #1da851; border-radius: 10px;
+  padding: 3px 9px; white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(37,211,102,.35);
+}
+@keyframes pulse-wa {
+  0%   { box-shadow: 0 0 0 0   rgba(37,211,102,.65); }
+  60%  { box-shadow: 0 0 0 16px rgba(37,211,102,0);  }
+  100% { box-shadow: 0 0 0 0   rgba(37,211,102,0);   }
+}
+
+.btn-wa {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: #25D366; color: #fff; border: none; border-radius: 12px;
+  padding: 15px 20px; font-size: 15px; font-weight: 700; text-decoration: none;
+  box-shadow: 0 6px 28px rgba(37,211,102,.55), 0 2px 8px rgba(37,211,102,.3);
+  letter-spacing: .01em; flex: 1; white-space: nowrap;
+  transition: box-shadow .2s, transform .18s;
+}
+.btn-wa:hover { box-shadow: 0 10px 36px rgba(37,211,102,.65), 0 4px 12px rgba(37,211,102,.35); transform: translateY(-1px); }
+/* ─────────────────────────────────────────
+   TRUST BAR
+───────────────────────────────────────── */
+.trust {
+  display: flex;
+  background: #f0f1ec;
+  border-radius: 14px;
+  margin: 0 6px 12px 6px;
+  border: 0.5px solid rgba(0,0,0,0.06);
+}
+.trust-item { flex: 1; padding: 14px 6px; text-align: center; border-right: 1px solid #f0f0f0; }
+.trust-item:last-child { border-right: none; }
+.trust-num { font-size: 20px; font-weight: 700; color: #2d4a2b; }
+.trust-label { font-size: 10px; color: #888; margin-top: 3px; line-height: 1.35; }
+.stars { color: #EF9F27; font-size: 16px; }
+
+/* ─────────────────────────────────────────
+   SECTIONS
+───────────────────────────────────────── */
+.section {
+  padding: 28px 20px;
+  background: #fff;
+  border-radius: 14px;
+  margin: 0 6px 12px 6px;
+  border: 0.5px solid rgba(0,0,0,0.06);
+}
+.footer {
+  background: #fff;
+  margin: 0 6px 12px 6px;
+  border: 0.5px solid rgba(0,0,0,0.06);
+  /* tidak pakai border-radius — tetap persegi */
+}
+.section-tag {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  color: #2d4a2b; margin-bottom: 5px; text-transform: uppercase;
+  border-left: 3px solid #2d4a2b; padding-left: 9px;
+}
+.section-title { font-size: 19px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; line-height: 1.3; font-family: 'Lora', 'FreeSerif', Georgia, serif; }
+.section-sub { font-size: 14px; color: #666; margin-bottom: 18px; line-height: 1.58; }
+
+/* ─────────────────────────────────────────
+   SCROLL ENTRANCE ANIMATION
+───────────────────────────────────────── */
+.section, .trust, .cta-final {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+.section.visible, .trust.visible, .cta-final.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────
+   FOTO SCROLL (mobile: horizontal)
+───────────────────────────────────────── */
+.photo-scroll {
+  display: flex; gap: 10px; overflow-x: auto;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px; margin-top: 16px;
+}
+.photo-scroll::-webkit-scrollbar { display: none; }
+.photo-scroll img {
+  width: 268px; height: 180px; object-fit: cover;
+  border-radius: 12px; flex-shrink: 0; scroll-snap-align: start;
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+/* ─────────────────────────────────────────
+   FASILITAS GRID
+───────────────────────────────────────── */
+.fас-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-bottom: 0; }
+.fас-card {
+  background: #e5e9d8; border-radius: 12px; padding: 14px 12px;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 2px 10px rgba(45,74,43,.11);
+  transition: box-shadow .2s, transform .2s;
+}
+.fас-card:hover { box-shadow: 0 6px 18px rgba(45,74,43,.18); transform: translateY(-2px); }
+.fас-icon {
+  width: 38px; height: 38px; border-radius: 9px; background: #b8c09a;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 19px;
+}
+.fас-name { font-size: 13px; font-weight: 600; color: #3d5c3a; line-height: 1.3; }
+.fас-full { grid-column: span 2; }
+
+/* ─────────────────────────────────────────
+   UNIT TABS
+───────────────────────────────────────── */
+.unit-tabs { display: flex; gap: 6px; margin-bottom: 16px; }
+.unit-tab {
+  flex: 1; padding: 9px 4px; text-align: center;
+  font-size: 13px; font-weight: 600;
+  border: 1.5px solid #ddd; border-radius: 10px;
+  background: #f6f6f6; color: #999; cursor: pointer; transition: all .18s;
+}
+.unit-tab.active { background: #2d4a2b; color: #fff; border-color: #2d4a2b; }
+
+/* Unit card */
+.unit-card { border: 1px solid #e4e4e4; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.09); }
+.units-grid > .unit-card + .unit-card { margin-top: 0; }
+
+/* Unit image slides */
+.unit-slides {
+  display: flex; overflow-x: auto;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+}
+.unit-slides::-webkit-scrollbar { display: none; }
+.unit-slides img {
+  width: 100%; min-width: 100%; height: 210px; object-fit: cover;
+  flex-shrink: 0; scroll-snap-align: start;
+}
+
+/* Unit body */
+.unit-body { padding: 16px; }
+.unit-name { font-size: 17px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+.unit-specs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.unit-spec {
+  font-size: 12px; background: #e5e9d8; border-radius: 6px;
+  padding: 4px 10px; color: #2d4a2b; font-weight: 500;
+}
+.unit-price-box {
+  background: #e5e9d8; border-radius: 10px; padding: 13px 15px; margin-bottom: 12px;
+}
+.unit-price-type { font-size: 11px; color: #555; margin-bottom: 3px; }
+.unit-price { font-size: 21px; font-weight: 700; color: #2d4a2b; }
+.unit-price-kpr { font-size: 12px; color: #888; margin-top: 3px; }
+.unit-footer-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.sold-tag {
+  display: inline-block; background: #fef2f2; color: #ef4444;
+  font-size: 11px; font-weight: 600; border-radius: 6px; padding: 4px 9px;
+}
+.btn-info {
+  font-size: 13px; color: #2d4a2b; text-decoration: none;
+  border: 1.5px solid #2d4a2b; border-radius: 10px; padding: 9px 16px; font-weight: 600;
+}
+
+/* Denah wrapper */
+.unit-denah { padding: 0 16px 16px; }
+
+/* Denah */
+.denah-label {
+  font-size: 11px; font-weight: 600; color: #999;
+  text-transform: uppercase; letter-spacing: .06em; margin: 16px 0 8px;
+}
+.denah-img { width: 100%; border-radius: 9px; border: 1px solid #eee; }
+
+/* ─────────────────────────────────────────
+   INTERIOR STRIP
+───────────────────────────────────────── */
+.interior-strip {
+  display: flex; gap: 9px; overflow-x: auto;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px;
+}
+.interior-strip::-webkit-scrollbar { display: none; }
+.interior-item { flex-shrink: 0; scroll-snap-align: start; text-align: center; }
+.interior-item img {
+  width: 148px; height: 148px; object-fit: cover;
+  border-radius: 10px; border: 1px solid rgba(0,0,0,.06);
+}
+.interior-label { font-size: 11px; color: #666; margin-top: 5px; }
+
+/* ─────────────────────────────────────────
+   SPESIFIKASI
+───────────────────────────────────────── */
+.spec-cols { display: flex; flex-direction: column; gap: 0; }
+.spec-table { width: 100%; border-collapse: collapse; overflow: hidden; }
+.spec-table tr:nth-child(odd)  td { background: #fff; }
+.spec-table tr:nth-child(even) td { background: #e5e9d8; }
+.spec-table td {
+  padding: 11px 13px; font-size: 13px; color: #333;
+  border-bottom: 1px solid rgba(0,0,0,.04); vertical-align: top; line-height: 1.45;
+}
+.spec-table td:first-child { font-weight: 600; color: #3d5c3a; width: 44%; }
+.spec-table tr:last-child td { border-bottom: none; }
+
+/* ─────────────────────────────────────────
+   LOKASI
+───────────────────────────────────────── */
+.lokasi-flex { display: flex; flex-direction: column; gap: 0; }
+.lokasi-left { flex: 1; }
+.lokasi-right { flex: 1; }
+.akses-list { display: flex; flex-direction: column; gap: 8px; }
+.akses-item {
+  display: flex; align-items: center; gap: 12px;
+  background: #e5e9d8; border-radius: 10px; padding: 12px 14px;
+}
+.akses-time { font-size: 14px; font-weight: 700; color: #2d4a2b; min-width: 54px; }
+.akses-place { font-size: 13px; color: #3d5c3a; line-height: 1.4; }
+.maps-wrap { margin-top: 18px; border-radius: 12px; overflow: hidden; border: 1px solid #eee; }
+.maps-wrap iframe { display: block; width: 100%; height: 220px; border: 0; }
+.maps-link {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  margin-top: 10px; padding: 12px;
+  border: 1.5px solid #2d4a2b; border-radius: 10px;
+  font-size: 13px; color: #2d4a2b; text-decoration: none; font-weight: 600;
+}
+
+/* ─────────────────────────────────────────
+   SITEPLAN
+───────────────────────────────────────── */
+.siteplan-img { width: 100%; border-radius: 11px; border: 1px solid #eee; }
+
+/* ─────────────────────────────────────────
+   SOCIAL PROOF
+───────────────────────────────────────── */
+.sold-banner {
+  background: #e5e9d8; border-radius: 11px; padding: 18px;
+  display: flex; align-items: center; gap: 16px; margin-bottom: 14px;
+}
+.sold-num { font-size: 34px; font-weight: 700; color: #2d4a2b; }
+.sold-text { font-size: 13px; color: #3d5c3a; line-height: 1.5; }
+.rating-row { display: flex; align-items: center; gap: 8px; }
+.rating-stars { color: #EF9F27; font-size: 18px; }
+.rating-text { font-size: 13px; color: #555; }
+
+/* ─────────────────────────────────────────
+   CTA FINAL
+───────────────────────────────────────── */
+.cta-final {
+  padding: 30px 20px;
+  background: linear-gradient(160deg, #1e3320 0%, #2d4a2b 50%, #243d22 100%);
+  position: relative;
+  overflow: hidden;
+}
+.cta-final::after {
+  content: '';
+  position: absolute;
+  bottom: -20px; right: -20px;
+  width: 160px; height: 160px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Cpath d='M20 72 C18 45, 30 20, 62 12 C58 40, 45 62, 20 72Z' fill='%23ffffff' opacity='0.06'/%3E%3C/svg%3E");
+  background-size: contain; background-repeat: no-repeat;
+  pointer-events: none;
+}
+.cta-final h2 { font-size: 21px; font-weight: 700; color: #fff; margin-bottom: 8px; font-family: 'Lora', 'FreeSerif', Georgia, serif; }
+.cta-final p { font-size: 14px; color: rgba(255,255,255,.78); margin-bottom: 22px; line-height: 1.6; }
+.cta-inner { max-width: 500px; }
+.contact-info { text-align: center; margin-top: 12px; }
+.contact-main { font-size: 13px; color: rgba(255,255,255,.75); margin-top: 16px; letter-spacing: .01em; }
+.contact-other { font-size: 12px; color: rgba(255,255,255,.35); margin-top: 6px; line-height: 1.7; }
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+.footer { padding: 20px 20px 32px; border-top: 1px solid #eee; text-align: center; }
+.footer-logo { font-size: 14px; font-weight: 700; color: #2d4a2b; margin-bottom: 4px; }
+.footer-copy { font-size: 11px; color: #bbb; }
+.footer-links { display: flex; justify-content: center; gap: 20px; margin-top: 10px; flex-wrap: wrap; }
+.footer-links a { font-size: 12px; color: #2d4a2b; text-decoration: none; }
+
+/* ─────────────────────────────────────────
+   ALTERNATING SECTION BACKGROUNDS
+───────────────────────────────────────── */
+/* Children of .lp: 1=hero, 2=trust, 3=fasilitas, 4=unit, 5=interior,
+   6=spesifikasi, 7=lokasi, 8=siteplan, 9=social, 10=cta, 11=footer */
+.lp > div:nth-child(4),
+.lp > div:nth-child(6),
+.lp > div:nth-child(8) { background: #f0f1ec; }
+
+/* ─────────────────────────────────────────
+   FADE-IN ANIMATION (hero new elements)
+───────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-est     { animation: fadeInUp .55s cubic-bezier(.22,.61,.36,1) both; animation-delay: .1s; }
+.hero-h1      { animation: fadeInUp .65s cubic-bezier(.22,.61,.36,1) both; animation-delay: .25s; }
+.hero-desc    { animation: fadeInUp .6s  cubic-bezier(.22,.61,.36,1) both; animation-delay: .42s; }
+.hero-btns    { animation: fadeInUp .6s  cubic-bezier(.22,.61,.36,1) both; animation-delay: .56s; }
+.hero-right   { animation: fadeInUp .7s  cubic-bezier(.22,.61,.36,1) both; animation-delay: .2s; }
+
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — TABLET (≥ 768px)
+═══════════════════════════════════════════════════════════ */
+@media (min-width: 768px) {
+  .lp { max-width: 768px; }
+  .section, .trust, .cta-final, .footer { margin: 0 8px 16px 8px; }
+
+  .section { padding: 40px 40px; }
+  .section-title { font-size: 22px; }
+
+  /* Fasilitas: 3 columns */
+  .fас-grid { grid-template-columns: repeat(3, 1fr); }
+  .fас-full { grid-column: span 3; }
+
+  /* Unit: photo left + body right, denah below */
+  .unit-card { display: flex; flex-wrap: wrap; }
+  .unit-slides { width: 45%; flex-shrink: 0; }
+  .unit-slides img { width: 100%; min-width: 100%; height: 100%; min-height: 260px; object-fit: cover; }
+  .unit-body { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+  .unit-denah { flex: 0 0 100%; }
+
+  /* Interior: 4-col grid */
+  .interior-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    overflow: visible; flex-wrap: unset;
+  }
+  .interior-item { flex-shrink: unset; scroll-snap-align: unset; }
+  .interior-item img { width: 100%; height: 140px; }
+
+  /* Denah side by side for Cantya */
+  .denah-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .denah-pair .denah-label { margin-top: 0; }
+
+  /* Maps taller */
+  .maps-wrap iframe { height: 280px; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — DESKTOP (≥ 1024px)
+═══════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+
+  /* ── Wrapper ── */
+  .lp { max-width: 1200px; }
+
+  /* ── Card margins lebih besar di desktop ── */
+  .section, .trust, .cta-final, .footer { margin: 0 8px 20px 8px; }
+
+  /* ── Desktop Nav ── */
+  .desktop-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 56px; height: 64px;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid rgba(0,0,0,0.08);
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,.04);
+  }
+  .nav-logo {
+    font-size: 17px; font-weight: 700; color: #2d4a2b; letter-spacing: -.01em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: #1a2e19; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a {
+    font-size: 13px; color: #444; text-decoration: none; font-weight: 500;
+    transition: color .15s;
+  }
+  .nav-links a:hover { color: #2d4a2b; }
+  .nav-cta {
+    background: #2d4a2b; color: #fff !important; border-radius: 8px;
+    padding: 8px 18px !important; font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: #3d5c3a; color: #fff !important; }
+
+  /* ── Trust bar ── */
+  .trust { justify-content: center; }
+  .trust-item { flex: 0 0 180px; padding: 20px 16px; }
+  .trust-num { font-size: 26px; }
+  .trust-label { font-size: 12px; }
+
+  /* ── Sections ── */
+  .section { padding: 64px 56px; }
+  .section-title { font-size: 26px; }
+  .section-sub { font-size: 15px; }
+
+  /* ── Fasilitas ── */
+  .fас-grid { grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .fас-full { grid-column: span 5; }
+  .fас-card { flex-direction: column; align-items: flex-start; padding: 18px 16px; gap: 8px; }
+  .fас-icon { width: 44px; height: 44px; font-size: 22px; }
+  .fас-name { font-size: 13px; }
+
+  /* Photo scroll → 3-col grid */
+  .photo-scroll {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    overflow: visible; scroll-snap-type: none;
+    gap: 12px; margin-top: 20px;
+  }
+  .photo-scroll img {
+    width: 100%; height: 200px; flex-shrink: unset; scroll-snap-align: unset;
+  }
+
+  /* ── Unit section ── */
+  .unit-tabs { display: none; }
+  .units-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    align-items: start; /* kartu tidak diregangkan — tiap kartu setinggi kontennya */
+  }
+  .units-grid > .unit-card { display: flex !important; flex-direction: column; flex-wrap: nowrap; }
+  .unit-slides { width: 100%; }
+  .unit-slides img { height: 200px; min-height: 200px; }
+  /* Batalkan flex:1 dari breakpoint 768px — body hanya setinggi kontennya */
+  .unit-body { flex: 0 0 auto; display: flex; flex-direction: column; justify-content: flex-start; }
+  .unit-denah { flex: none; padding: 0 16px 16px; }
+  .denah-pair { grid-template-columns: 1fr; }
+
+  /* ── Interior ── */
+  .interior-strip { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .interior-item img { height: 170px; }
+
+  /* ── Spesifikasi: 2 columns ── */
+  .spec-cols { flex-direction: row; gap: 1px; background: rgba(0,0,0,.04); border-radius: 10px; overflow: hidden; }
+  .spec-cols .spec-table { flex: 1; }
+
+  /* ── Lokasi: 2 columns ── */
+  .lokasi-flex { flex-direction: row; gap: 40px; align-items: flex-start; }
+  .lokasi-left { flex: 1; }
+  .lokasi-right { flex: 1.1; }
+  .lokasi-right .maps-wrap { margin-top: 0; }
+  .lokasi-right .maps-wrap iframe { height: 340px; }
+
+  /* ── Siteplan ── */
+  .siteplan-img { max-width: 800px; margin: 0 auto; }
+
+  /* ── Social proof: 2 cols ── */
+  .social-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .social-left .sold-banner { margin-bottom: 16px; }
+  .sold-num { font-size: 48px; }
+
+  /* ── CTA ── */
+  .cta-final { padding: 72px 56px; }
+  .cta-inner { max-width: 600px; }
+  .cta-final h2 { font-size: 30px; margin-bottom: 12px; }
+  .cta-final p { font-size: 16px; margin-bottom: 28px; }
+  .cta-final .btn-wa { max-width: 380px; font-size: 16px; padding: 17px 24px; }
+  .contact-info { text-align: left; }
+
+  /* ── Footer ── */
+  .footer { padding: 28px 56px; display: flex; align-items: center; justify-content: space-between; text-align: left; }
+  .footer-left .footer-logo { margin-bottom: 2px; }
+  .footer-links { margin-top: 0; }
+
+  /* ── Sticky WA desktop ── */
+  .wa-circle { width: 64px; height: 64px; }
+  .wa-circle svg { width: 52px; height: 52px; }
+  .wa-label { font-size: 12px; }
+}
+
+/* ─────────────────────────────────────────
+   PRICELIST MODAL — LEAD GENERATION (BARU)
+───────────────────────────────────────── */
+#pricelist-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(3px);
+}
+#pricelist-modal {
+  background: #fff;
+  border-radius: 18px;
+  padding: 28px 24px 24px;
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  animation: modalIn 0.3s ease-out;
+}
+#pricelist-close {
+  position: absolute;
+  top: 14px; right: 16px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #999;
+  cursor: pointer;
+  line-height: 1;
+}
+.pm-icon { font-size: 32px; margin-bottom: 8px; }
+.pm-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+.pm-sub {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+#pricelist-form input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+#pricelist-form input:focus {
+  border-color: #2d4a2b;
+}
+.pm-privacy {
+  font-size: 11.5px;
+  color: #aaa;
+  margin-bottom: 14px;
+  margin-top: 2px;
+}
+#pl-submit {
+  width: 100%;
+  background: #2d4a2b;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+#pl-submit:hover { background: #1e3320; }
+#pl-submit:active { transform: scale(0.98); }
+#pl-submit:disabled { background: #aaa; cursor: not-allowed; }
+#pricelist-loading {
+  text-align: center;
+  padding: 20px 0;
+  color: #888;
+  font-size: 14px;
+}
+.pl-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #2d4a2b;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto 12px;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─────────────────────────────────────────
+   TOMBOL DOWNLOAD PRICELIST
+───────────────────────────────────────── */
+.btn-pricelist-trigger {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: rgba(255,255,255,.15); color: #fff;
+  border: 1.5px solid rgba(255,255,255,.55);
+  border-radius: 12px; padding: 15px 20px; font-size: 14px; font-weight: 600;
+  backdrop-filter: blur(4px); white-space: nowrap; cursor: pointer;
+  font-family: inherit; transition: background .18s;
+}
+.btn-pricelist-trigger:hover { background: rgba(255,255,255,.25); }
+
+.btn-pricelist-cta {
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  background: rgba(255,255,255,.08); color: #fff;
+  border: 1.5px solid rgba(255,255,255,.30); border-radius: 14px;
+  padding: 15px 20px; font-size: 14px; font-weight: 600; cursor: pointer;
+  font-family: inherit; margin-top: 12px; width: 100%; max-width: 380px;
+  backdrop-filter: blur(4px); transition: background .18s;
+}
+.btn-pricelist-cta:hover { background: rgba(255,255,255,.15); }
+
+.cta-final .btn-wa {
+  background: #4a7c47;
+  box-shadow: 0 4px 20px rgba(74,124,71,.35);
+  border-radius: 14px;
+  font-size: 15px;
+  padding: 16px 20px;
+}
+.cta-final .btn-wa:hover {
+  background: #3d6b3a;
+  box-shadow: 0 6px 28px rgba(74,124,71,.45);
+  transform: translateY(-1px);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   HERO — NEW TEMPLATE (2-column split)
+═══════════════════════════════════════════════════════════ */
+.hero-new {
+  padding: 24px 20px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Head (est + h1) & Body (desc + btns) ── */
+.hero-head { display: flex; flex-direction: column; }
+.hero-body { display: flex; flex-direction: column; }
+
+.hero-est {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: #888; margin-bottom: 10px;
+}
+.hero-est-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #C07A3A; flex-shrink: 0;
+}
+
+.hero-h1 {
+  font-family: 'Lora', 'FreeSerif', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.15;
+  color: #1a2e19; margin-bottom: 0;
+}
+.hero-h1 em { font-style: italic; }
+
+/* Highlight box — amber/terracotta block */
+.hero-hl {
+  display: inline-block;
+  background: #1e3320; color: #ffffff;
+  font-style: italic; border-radius: 7px;
+  font-size: 40px; line-height: 1.15;
+  padding: 8px 18px 11px;
+  margin-top: 4px;
+}
+
+.hero-desc {
+  font-size: 15px; color: #555; line-height: 1.72;
+  margin-bottom: 30px; max-width: 500px;
+}
+
+.hero-btns { display: flex; gap: 10px; flex-wrap: nowrap; align-items: center; }
+
+.btn-hero-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #1a2e19; color: #fff; border: none;
+  border-radius: 50px; padding: 13px 22px;
+  font-size: 14px; font-weight: 700;
+  text-decoration: none; cursor: pointer; font-family: inherit;
+  transition: background .18s, transform .18s; white-space: nowrap;
+}
+.btn-hero-primary:hover { background: #2d4a2b; transform: translateY(-1px); }
+
+.btn-hero-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: #1a2e19;
+  border: 1.8px solid #1a2e19; border-radius: 50px;
+  padding: 13px 22px; font-size: 14px; font-weight: 600;
+  cursor: pointer; font-family: inherit;
+  transition: all .18s; text-decoration: none; white-space: nowrap;
+}
+.btn-hero-outline:hover { background: #1a2e19; color: #fff; }
+
+/* ── Right column ── */
+.hero-right { position: relative; } /* urutan DOM: head → image → body */
+
+.hero-img-bg {
+  position: absolute;
+  top: 0; right: 0;
+  width: 88%; height: 88%;
+  background: #a8cce0;
+  border-radius: 200px 200px 16px 16px;
+  z-index: 0;
+}
+
+.hero-arch-wrap {
+  position: relative; z-index: 1;
+  width: 88%; margin-left: auto;
+  border-radius: 200px 200px 14px 14px;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0,0,0,.18);
+}
+.hero-arch-img {
+  width: 100%; aspect-ratio: 3/4;
+  object-fit: cover; display: block;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Trust badge circle */
+.hero-trust-badge {
+  position: absolute; z-index: 2;
+  left: 4px; top: 28%;
+  width: 108px; height: 108px; border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(0,0,0,.15);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; gap: 2px;
+}
+.htb-num {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 36px; font-weight: 700;
+  color: #C07A3A; line-height: 1;
+}
+.htb-label {
+  font-size: 8px; font-weight: 700;
+  color: #999; text-transform: uppercase;
+  letter-spacing: .08em; line-height: 1.4;
+}
+
+/* Hot deals pill */
+.hero-hot-pill {
+  position: absolute; z-index: 2;
+  bottom: 22px; right: 0;
+  background: #1a2e19; color: #fff;
+  border-radius: 50px; padding: 10px 18px 10px 12px;
+  font-size: 13px; font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 18px rgba(0,0,0,.22);
+  white-space: nowrap;
+}
+.hhp-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #C07A3A; flex-shrink: 0;
+}
+
+/* ── Nav logo badge ── */
+.nav-logo-wrap { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-badge {
+  width: 40px; height: 40px; border-radius: 8px;
+  background: #1a2e19; color: #fff;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; letter-spacing: -.01em;
+  flex-shrink: 0; line-height: 1;
+}
+.nav-logo-badge small { font-size: 7px; font-weight: 600; letter-spacing: .06em; margin-top: 1px; }
+.nav-logo-text-wrap { display: flex; flex-direction: column; }
+.nav-logo-name { font-size: 14px; font-weight: 800; color: #1a2e19; letter-spacing: .01em; line-height: 1.1; }
+.nav-logo-sub-txt { font-size: 10px; color: #999; font-weight: 500; letter-spacing: .04em; }
+
+/* ── Responsive hero ── */
+@media (min-width: 640px) {
+  .hero-h1 { font-size: 52px; }
+}
+
+@media (min-width: 768px) {
+  .hero-new {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    grid-template-rows: auto 1fr;
+    padding: 56px 40px; gap: 0 48px;
+  }
+  .hero-head { grid-column: 1; grid-row: 1; align-self: end; padding-bottom: 24px; }
+  .hero-body { grid-column: 1; grid-row: 2; align-self: start; }
+  .hero-right { grid-column: 2; grid-row: 1 / 3; }
+  .hero-h1 { font-size: 48px; }
+  .hero-trust-badge { width: 120px; height: 120px; left: -10px; }
+  .htb-num { font-size: 42px; }
+  .htb-label { font-size: 9px; }
+}
+
+/* ─────────────────────────────────────────
+   DESKTOP NAV — SCROLL EFFECT
+───────────────────────────────────────── */
+.desktop-nav {
+  background: transparent;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+}
+.desktop-nav.scrolled {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.07);
+}
+
+@media (min-width: 1024px) {
+  .hero-new { padding: 80px 56px; gap: 64px; min-height: 600px; align-items: center; }
+  .hero-h1 { font-size: 58px; margin-bottom: 28px; }
+  .hero-desc { font-size: 16px; margin-bottom: 36px; }
+  .hero-arch-img { aspect-ratio: 4/5; }
+  .hero-trust-badge { width: 130px; height: 130px; left: -16px; top: 30%; }
+  .htb-num { font-size: 46px; }
+  .htb-label { font-size: 9.5px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     PARALLAX DAUN SVG
+══════════════════════════════════════════ -->
+<!-- Daun 1 — kanan atas, besar (teardrop) -->
+<svg class="parallax-leaf leaf-1" width="100" height="100" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M20 72 C18 45, 30 20, 62 12 C58 40, 45 62, 20 72Z" fill="#3d6b38"/>
+  <line x1="20" y1="72" x2="62" y2="12" stroke="#c2e0b4" stroke-width="1"/>
+  <line x1="50" y1="28" x2="38" y2="22" stroke="#c2e0b4" stroke-width="0.7"/>
+  <line x1="46" y1="38" x2="32" y2="32" stroke="#c2e0b4" stroke-width="0.7"/>
+  <line x1="40" y1="50" x2="26" y2="46" stroke="#c2e0b4" stroke-width="0.7"/>
+  <line x1="32" y1="60" x2="22" y2="58" stroke="#c2e0b4" stroke-width="0.7"/>
+</svg>
+<!-- Daun 2 — kiri bawah, sedang (miring asimetris) -->
+<svg class="parallax-leaf leaf-2" width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M20 72 C18 45, 30 20, 62 12 C58 40, 45 62, 20 72Z" fill="#3d6b38"/>
+  <line x1="20" y1="72" x2="62" y2="12" stroke="#c2e0b4" stroke-width="1"/>
+  <line x1="44" y1="38" x2="30" y2="34" stroke="#c2e0b4" stroke-width="0.7"/>
+  <line x1="38" y1="50" x2="24" y2="48" stroke="#c2e0b4" stroke-width="0.7"/>
+  <line x1="50" y1="28" x2="40" y2="22" stroke="#c2e0b4" stroke-width="0.7"/>
+</svg>
+<!-- Daun 3 — kanan tengah, kecil -->
+<svg class="parallax-leaf leaf-3" width="60" height="60" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M20 72 C18 45, 30 20, 62 12 C58 40, 45 62, 20 72Z" fill="#3d6b38"/>
+  <line x1="20" y1="72" x2="62" y2="12" stroke="#c2e0b4" stroke-width="1"/>
+</svg>
+<!-- Daun 4 — kiri atas, kecil (oval simetris) -->
+<svg class="parallax-leaf leaf-4" width="65" height="65" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M40 70 C10 55, 5 25, 40 10 C75 25, 70 55, 40 70Z" fill="#3d6b38"/>
+  <line x1="40" y1="10" x2="40" y2="70" stroke="#c2e0b4" stroke-width="1"/>
+  <line x1="40" y1="30" x2="25" y2="42" stroke="#c2e0b4" stroke-width="0.7"/>
+  <line x1="40" y1="42" x2="22" y2="50" stroke="#c2e0b4" stroke-width="0.7"/>
+  <line x1="40" y1="30" x2="55" y2="42" stroke="#c2e0b4" stroke-width="0.7"/>
+  <line x1="40" y1="42" x2="58" y2="50" stroke="#c2e0b4" stroke-width="0.7"/>
+</svg>
+
+<!-- ══════════════════════════════════════════
+     STICKY WA BUTTON
+══════════════════════════════════════════ -->
+<a class="wa-sticky"
+   href="https://api.whatsapp.com/send?phone=6289506888328&text=Halo%20Fira%2C%20saya%20tertarik%20dengan%20Tentrem%20Bhumi"
+   target="_blank" rel="noopener" aria-label="Chat WhatsApp Fira">
+  <div class="wa-circle">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </div>
+  <span class="wa-label">Chat Fira</span>
+</a>
+
+<!-- ══════════════════════════════════════════
+     DESKTOP NAV
+══════════════════════════════════════════ -->
+<nav class="desktop-nav">
+  <a class="nav-logo-wrap" href="#">
+    <div class="nav-logo-badge">JGS<small>GROUP</small></div>
+    <div class="nav-logo-text-wrap">
+      <div class="nav-logo-name">TENTREM BHUMI</div>
+      <div class="nav-logo-sub-txt">PT Sasmita Griya Buana</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#fasilitas">Fasilitas</a>
+    <a href="#unit">Tipe Unit</a>
+    <a href="#interior">Interior</a>
+    <a href="#lokasi">Lokasi</a>
+    <a href="#" class="nav-cta" id="nav-wa-btn">Hubungi Kami</a>
+  </div>
+</nav>
+
+<div class="lp">
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<div class="hero-new">
+
+  <!-- ── Head: EST + Headline (tampil 1st, di atas gambar) ── -->
+  <div class="hero-head">
+    <div class="hero-est">
+      <span class="hero-est-dot"></span>
+      <span id="k-hero-est">EST. 2013 · SLEMAN, YOGYAKARTA</span>
+    </div>
+    <h1 class="hero-h1" id="k-hero-h1">
+      Hunian Tentrem<br>
+      di <em>Sleman</em>, Untuk<br>
+      <span class="hero-hl" id="k-hero-hl">Generasi<br>Berikutnya</span>
+    </h1>
+  </div>
+
+  <!-- ── Gambar (tampil 2nd, di antara headline dan deskripsi) ── -->
+  <div class="hero-right">
+    <div class="hero-img-bg"></div>
+    <div class="hero-arch-wrap">
+      <img class="hero-arch-img" id="k-hero-arch-img"
+           src="photos/cantya/cantya%20berjejer%202.webp"
+           alt="Tentrem Bhumi — Perumahan Sleman"/>
+    </div>
+    <div class="hero-trust-badge">
+      <div class="htb-num" id="k-trust-num">12+</div>
+      <div class="htb-label" id="k-trust-label">TAHUN<br>TERPERCAYA</div>
+    </div>
+    <div class="hero-hot-pill">
+      <span class="hhp-dot"></span>
+      <span id="k-hero-hot">Hot Deals — Tentrem Bhumi</span>
+    </div>
+  </div>
+
+  <!-- ── Body: Deskripsi + Tombol (tampil 3rd, di bawah gambar) ── -->
+  <div class="hero-body">
+    <p class="hero-desc" id="k-hero-desc">Kawasan perumahan eksklusif bergaya kontemporer — dirancang untuk keluarga yang menghargai ketenangan, nilai, dan waktu.</p>
+    <div class="hero-btns">
+      <a class="btn-hero-primary" href="#unit" id="k-hero-btn1">Lihat Tipe Unit →</a>
+      <button class="btn-hero-outline" onclick="openPricelistModal()" id="k-hero-btn2">Download Pricelist</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     TRUST BAR
+══════════════════════════════════════════ -->
+<div class="trust" id="k-trust-bar"><!-- diisi JS dari KONTEN.trustBar --></div>
+
+<!-- ══════════════════════════════════════════
+     FASILITAS
+══════════════════════════════════════════ -->
+<div class="section" id="fasilitas">
+  <div class="section-tag">Fasilitas Umum</div>
+  <div class="section-title">Lebih dari sekadar rumah</div>
+  <p class="section-sub">Fasilitas lengkap untuk keluarga tumbuh dan berkembang</p>
+
+  <div class="fас-grid" id="k-fasilitas-grid"><!-- diisi JS dari KONTEN.fasilitas --></div>
+  <div class="photo-scroll" id="k-foto-fasilitas"><!-- diisi JS dari KONTEN.fotoFasilitas --></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TIPE UNIT
+══════════════════════════════════════════ -->
+<div class="section" id="unit">
+  <div class="section-tag">Tipe Unit</div>
+  <div class="section-title">Pilih yang paling sesuai</div>
+  <p class="section-sub">3 tipe tersedia — semua dengan spesifikasi premium</p>
+
+  <div class="unit-tabs" id="k-unit-tabs"><!-- diisi JS dari KONTEN.unit --></div>
+  <div class="units-grid" id="k-units-grid"><!-- diisi JS dari KONTEN.unit --></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     INTERIOR
+══════════════════════════════════════════ -->
+<div class="section" id="interior">
+  <div class="section-tag">Interior</div>
+  <div class="section-title">Nyaman di setiap sudut</div>
+  <p class="section-sub">Visualisasi interior — desain modern fungsional untuk keluarga Indonesia</p>
+  <div class="interior-strip" id="k-interior"><!-- diisi JS dari KONTEN.interior --></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SPESIFIKASI BANGUNAN
+══════════════════════════════════════════ -->
+<div class="section" id="spesifikasi">
+  <div class="section-tag">Spesifikasi</div>
+  <div class="section-title">Bangunan berkualitas premium</div>
+  <p class="section-sub">Setiap unit dibangun dengan material pilihan dan standar konstruksi tinggi</p>
+  <div class="spec-cols" id="k-spesifikasi"><!-- diisi JS dari KONTEN.spesifikasi --></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     LOKASI & AKSES
+══════════════════════════════════════════ -->
+<div class="section" id="lokasi">
+  <div class="section-tag">Lokasi</div>
+  <div class="section-title">Mudah dijangkau dari mana saja</div>
+  <p class="section-sub">Jl. Besi Jangkang, Tanjungsari, Ngaglik, Sleman</p>
+
+  <div class="lokasi-flex">
+    <div class="lokasi-left">
+      <div class="akses-list" id="k-akses"><!-- diisi JS dari KONTEN.akses --></div>
+    </div>
+    <div class="lokasi-right">
+      <div class="maps-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.86238093926!2d110.4306170749189!3d-7.697914492319535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5d2781b7f58b%3A0x5b1fa95f2222dc20!2sPerumahan%20Tentrem%20Bhumi!5e0!3m2!1sen!2sid!4v1777038476472!5m2!1sen!2sid"
+          width="100%" height="220" style="border:0;display:block;"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <a class="maps-link"
+         href="https://maps.google.com/?q=Perumahan+Tentrem+Bhumi+Ngaglik+Sleman"
+         target="_blank" rel="noopener">
+        📍 Buka di Google Maps
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SITEPLAN
+══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-tag">Siteplan</div>
+  <div class="section-title">Tata letak kawasan</div>
+  <p class="section-sub">35 unit tertata rapi — fasilitas berada di pusat kawasan</p>
+  <img class="siteplan-img" id="k-siteplan" src="photos/kawasan/Siteplan%20Tentrem%20Bhumi%20Berwarna_page-0001.webp" alt="Siteplan Tentrem Bhumi"/>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SOCIAL PROOF
+══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-tag">Kepercayaan</div>
+  <div class="section-title">Sudah dipercaya banyak keluarga</div>
+  <p class="section-sub">Unit terus terjual sejak grand opening Oktober 2024</p>
+  <div class="social-cols">
+    <div class="social-left">
+      <div class="sold-banner">
+        <div class="sold-num" id="k-unit-terjual">6+</div>
+        <div class="sold-text">
+          <span id="k-label-terjual">Unit sudah terjual</span><br>
+          <span id="k-label-total">dari 35 unit tersedia</span><br>
+          <strong id="k-label-stok" style="font-size:12px;">Stok terbatas!</strong>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-stars">★★★★★</span>
+        <span class="rating-text" id="k-label-rating">Rating Google — 5 bintang</span>
+      </div>
+    </div>
+    <div class="social-right">
+      <p id="k-sosial-cerita" style="font-size:14px;color:#555;line-height:1.7;"></p>
+      <p id="k-sosial-dev"    style="font-size:13px;color:#888;margin-top:14px;line-height:1.6;"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CTA FINAL
+══════════════════════════════════════════ -->
+<div class="cta-final">
+  <div class="cta-inner">
+    <h2 id="k-cta-judul">Siap melihat langsung?</h2>
+    <p id="k-cta-sub">Konsultasi gratis, tanpa komitmen.</p>
+    <a class="btn-wa" id="cta-wa-btn" href="#" target="_blank" rel="noopener" id="k-cta-wa-btn"></a>
+    <button class="btn-pricelist-cta" onclick="openPricelistModal()" id="k-cta-pricelist-btn"></button>
+    <div class="contact-info">
+      <div class="contact-main" id="k-cta-kontak1"></div>
+      <div class="contact-other" id="k-cta-kontak2"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<div class="footer">
+  <div class="footer-left">
+    <div class="footer-logo" id="k-footer-nama"></div>
+    <div class="footer-copy"  id="k-footer-copy"></div>
+  </div>
+  <div class="footer-links" id="k-footer-links"><!-- diisi JS dari KONTEN.footer --></div>
+</div>
+
+</div><!-- /.lp -->
+
+<!-- ══════════════════════════════════════════
+     MODAL PRICELIST — LEAD GENERATION (BARU)
+══════════════════════════════════════════ -->
+<div id="pricelist-overlay" style="display:none;" onclick="if(event.target===this)closePricelistModal()">
+  <div id="pricelist-modal">
+    <button id="pricelist-close" onclick="closePricelistModal()">✕</button>
+    <div id="pricelist-modal-body">
+      <div class="pm-icon">📄</div>
+      <h3 class="pm-title">Download Pricelist</h3>
+      <p class="pm-sub">Isi data berikut untuk mendapatkan pricelist lengkap Tentrem Bhumi</p>
+      <div id="pricelist-form">
+        <input id="pl-nama" type="text" placeholder="Nama lengkap" autocomplete="name">
+        <input id="pl-hp" type="tel" placeholder="Nomor WhatsApp" autocomplete="tel">
+        <input id="pl-email" type="email" placeholder="Alamat email" autocomplete="email">
+        <p class="pm-privacy">🔒 Data Anda aman dan tidak akan disebarkan</p>
+        <button id="pl-submit" onclick="submitPricelist()">Kirim &amp; Download →</button>
+      </div>
+      <div id="pricelist-loading" style="display:none;">
+        <div class="pl-spinner"></div>
+        <p>Sedang memproses...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Semua konten dimuat dari konten.js — lihat file tersebut untuk edit */
+
+/* Helper: buat WA URL */
+function waUrl(agen, pesan) {
+  return 'https://api.whatsapp.com/send?phone=' + agen.nomor
+         + '&text=' + encodeURIComponent(pesan);
+}
+
+/* Helper: set text */
+function setText(id, val) { var el = document.getElementById(id); if (el && val !== undefined) el.textContent = val; }
+/* Helper: set innerHTML */
+function setHtml(id, val) { var el = document.getElementById(id); if (el && val !== undefined) el.innerHTML   = val; }
+
+(function applyKonten() {
+  var K = KONTEN; var fira = K.wa.fira;
+
+  /* STICKY WA */
+  var sticky = document.querySelector('.wa-sticky');
+  if (sticky) sticky.href = waUrl(fira, K.pesanWA.hero);
+
+  /* NAV */
+  var navCta = document.getElementById('nav-wa-btn') || document.querySelector('.nav-cta');
+  if (navCta) navCta.href = waUrl(fira, K.pesanWA.hero);
+
+  /* HERO — new 2-column template */
+  setText('k-hero-est',    K.hero.est);
+  setText('k-hero-hl',     K.hero.highlight);
+  setHtml('k-hero-desc',   K.hero.desc);
+  setText('k-trust-num',   K.hero.trustNum);
+  var trustLabelEl = document.getElementById('k-trust-label');
+  if (trustLabelEl) trustLabelEl.innerHTML = K.hero.trustLabel.replace(/\n/g,'<br>');
+  setText('k-hero-hot',    K.hero.hotDeals);
+  var archImg = document.getElementById('k-hero-arch-img');
+  if (archImg) { archImg.src = K.hero.archImage; archImg.alt = K.hero.archAlt; }
+  var btn1 = document.getElementById('k-hero-btn1');
+  if (btn1) btn1.textContent = K.hero.btn1Label;
+  var btn2 = document.getElementById('k-hero-btn2');
+  if (btn2) btn2.textContent = K.hero.btn2Label;
+  /* Set h1 — keep structure with em and hero-hl span */
+  var h1El = document.getElementById('k-hero-h1');
+  if (h1El && K.hero.judul) {
+    h1El.innerHTML = K.hero.judul + '<br><span class="hero-hl" id="k-hero-hl">' + K.hero.highlight + '</span>';
+  }
+
+  /* TRUST BAR */
+  setHtml('k-trust-bar', K.trustBar.map(function(t) {
+    return '<div class="trust-item"><div class="trust-num' + (t.bintang ? ' stars' : '') + '">'
+         + t.nilai + '</div><div class="trust-label">' + t.label + '</div></div>';
+  }).join(''));
+
+  /* FASILITAS */
+  setHtml('k-fasilitas-grid', K.fasilitas.map(function(f) {
+    return '<div class="fас-card' + (f.full ? ' fас-full' : '') + '">'
+         + '<div class="fас-icon">' + f.ikon + '</div>'
+         + '<div class="fас-name">' + f.nama + '</div></div>';
+  }).join(''));
+
+  setHtml('k-foto-fasilitas', K.fotoFasilitas.map(function(f) {
+    return '<img src="' + f.src + '" alt="' + f.alt + '" loading="lazy"/>';
+  }).join(''));
+
+  /* UNIT TABS & CARDS */
+  var tabsEl = document.getElementById('k-unit-tabs');
+  var gridEl = document.getElementById('k-units-grid');
+  if (tabsEl && gridEl) {
+    var tabsHtml = '', cardsHtml = '';
+    K.unit.forEach(function(u, i) {
+      tabsHtml += '<div class="unit-tab' + (i===0?' active':'') + '" onclick="showUnit(\'' + u.id + '\',this)">' + u.nama + '</div>';
+      var denahHtml = '';
+      if (u.denah.length === 1) {
+        denahHtml = '<div class="denah-label">' + u.denah[0].label + '</div>'
+                  + '<img class="denah-img" src="' + u.denah[0].src + '" alt="' + u.denah[0].alt + '" loading="lazy"/>';
+      } else {
+        denahHtml = '<div class="denah-pair">' + u.denah.map(function(d) {
+          return '<div><div class="denah-label">' + d.label + '</div>'
+               + '<img class="denah-img" src="' + d.src + '" alt="' + d.alt + '" loading="lazy"/></div>';
+        }).join('') + '</div>';
+      }
+      cardsHtml += '<div id="unit-' + u.id + '" class="unit-card"' + (i>0?' style="display:none;"':'') + '>'
+        + '<div class="unit-slides">' + u.foto.map(function(f) {
+            return '<img src="' + f.src + '" alt="' + f.alt + '" loading="lazy"/>';
+          }).join('') + '</div>'
+        + '<div class="unit-body"><div>'
+        + '<div class="unit-name">' + u.nama + '</div>'
+        + '<div class="unit-specs">' + u.spek.map(function(s){ return '<span class="unit-spec">'+s+'</span>'; }).join('') + '</div>'
+        + '<div class="unit-price-box">'
+        + '<div class="unit-price-type">' + u.hargaJenis + '</div>'
+        + '<div class="unit-price">' + u.hargaPokok + '</div>'
+        + '<div class="unit-price-kpr">' + u.hargaKPR + '</div></div></div>'
+        + '<div class="unit-footer-row">'
+        + (u.terjual ? '<div class="sold-tag">' + u.terjual + '</div>' : '<div></div>')
+        + '<a class="btn-info" href="' + waUrl(fira, u.pesanWA) + '" target="_blank" rel="noopener">Info harga</a>'
+        + '</div></div>'
+        + '<div class="unit-denah">' + denahHtml + '</div></div>';
+    });
+    tabsEl.innerHTML = tabsHtml;
+    gridEl.innerHTML = cardsHtml;
+  }
+
+  /* INTERIOR */
+  setHtml('k-interior', K.interior.map(function(item) {
+    return '<div class="interior-item"><img src="' + item.src + '" alt="' + item.alt + '" loading="lazy"/>'
+         + '<div class="interior-label">' + item.label + '</div></div>';
+  }).join(''));
+
+  /* SPESIFIKASI */
+  setHtml('k-spesifikasi', K.spesifikasi.map(function(kolom) {
+    return '<table class="spec-table"><tbody>' + kolom.map(function(r) {
+      return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>';
+    }).join('') + '</tbody></table>';
+  }).join(''));
+
+  /* AKSES */
+  setHtml('k-akses', K.akses.map(function(a) {
+    return '<div class="akses-item"><div class="akses-time">' + a.waktu + '</div>'
+         + '<div class="akses-place">' + a.tujuan + '</div></div>';
+  }).join(''));
+
+  /* MAPS */
+  var mapsIframe = document.querySelector('.maps-wrap iframe');
+  if (mapsIframe && K.mapsEmbed) mapsIframe.src = K.mapsEmbed;
+  var mapsLink = document.querySelector('.maps-link');
+  if (mapsLink && K.mapsLink) mapsLink.href = K.mapsLink;
+
+  /* SITEPLAN */
+  var spImg = document.getElementById('k-siteplan');
+  if (spImg) { spImg.src = K.siteplan.gambar; spImg.alt = K.siteplan.alt; }
+
+  /* SOCIAL PROOF */
+  setText('k-unit-terjual',  K.sosial.unitTerjual);
+  setText('k-label-terjual', K.sosial.labelTerjual);
+  setText('k-label-total',   K.sosial.labelTotal);
+  setText('k-label-stok',    K.sosial.labelStok);
+  setText('k-label-rating',  K.sosial.labelRating);
+  setHtml('k-sosial-cerita', K.sosial.cerita);
+  setHtml('k-sosial-dev',    K.sosial.devInfo);
+
+  /* CTA */
+  setText('k-cta-judul', K.cta.judul);
+  setText('k-cta-sub',   K.cta.sub);
+  var ctaWa = document.getElementById('cta-wa-btn');
+  if (ctaWa) { ctaWa.href = waUrl(fira, K.pesanWA.cta); ctaWa.textContent = K.cta.btnLabel; }
+  setText('k-cta-pricelist-btn', K.cta.btnPricelist);
+  setText('k-cta-kontak1', fira.nama + ' · ' + fira.tampil);
+  setHtml('k-cta-kontak2', K.wa.okky.nama + ' · ' + K.wa.okky.tampil + ' &nbsp;|&nbsp; ' + K.wa.dwi.nama + ' · ' + K.wa.dwi.tampil);
+
+  /* FOOTER */
+  setText('k-footer-nama', K.footer.nama);
+  setText('k-footer-copy', K.footer.copyright);
+  setHtml('k-footer-links',
+    '<a href="' + K.footer.igUrl   + '" target="_blank" rel="noopener">' + K.footer.igLabel   + '</a>' +
+    '<a href="' + K.footer.telpUrl + '">'                                 + K.footer.telpLabel + '</a>');
+
+})();
+
+/* UNIT TABS */
+function showUnit(name, el) {
+  /* On desktop (units-grid), all cards visible — skip tab logic */
+  if (window.innerWidth >= 1024) return;
+  ['andrawina','bhama','cantya'].forEach(function(u) {
+    document.getElementById('unit-' + u).style.display = (u === name) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.unit-tab').forEach(function(t) {
+    t.classList.remove('active');
+  });
+  el.classList.add('active');
+}
+
+/* On desktop, ensure all unit cards visible */
+function syncUnitsDisplay() {
+  var isDesktop = window.innerWidth >= 1024;
+  ['andrawina','bhama','cantya'].forEach(function(u) {
+    var el = document.getElementById('unit-' + u);
+    if (isDesktop) {
+      el.style.display = 'block';
+    } else {
+      /* restore tab-controlled visibility */
+      var activeTab = document.querySelector('.unit-tab.active');
+      if (activeTab) {
+        var activeName = activeTab.getAttribute('onclick').match(/'(\w+)'/)[1];
+        el.style.display = (u === activeName) ? 'block' : 'none';
+      }
+    }
+  });
+}
+
+window.addEventListener('resize', syncUnitsDisplay);
+syncUnitsDisplay();
+
+/* ── Scroll: arch zoom + parallax daun ── */
+(function () {
+  var ticking = false;
+  var arch = document.querySelector('.hero-arch-img');
+
+  /* base dalam px (vh dikonversi saat init) */
+  var vh = window.innerHeight / 100;
+  var leafData = [
+    { el: document.querySelector('.leaf-1'), speed: 0.07, base: 80          },
+    { el: document.querySelector('.leaf-2'), speed: 0.04, base: 58 * vh     },
+    { el: document.querySelector('.leaf-3'), speed: 0.10, base: 32 * vh     },
+    { el: document.querySelector('.leaf-4'), speed: 0.05, base: 18 * vh     },
+  ];
+
+  function update() {
+    var sy = window.pageYOffset;
+
+    /* Zoom gambar arch */
+    if (arch) {
+      arch.style.transform = 'scale(' + (1 + Math.min(sy * 0.0004, 0.2)) + ')';
+    }
+
+    /* Geser `top` setiap daun — transform bebas untuk animasi sway */
+    leafData.forEach(function (d) {
+      if (!d.el) return;
+      d.el.style.top = (d.base + sy * d.speed) + 'px';
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+})();
+
+/* ── Scroll entrance: IntersectionObserver ── */
+(function () {
+  var targets = document.querySelectorAll('.section, .trust, .cta-final');
+
+  /* Delay bertingkat agar tidak semua masuk serentak */
+  targets.forEach(function (el, i) {
+    el.style.transitionDelay = (i * 0.04) + 's';
+  });
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); /* animasi hanya sekali */
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  targets.forEach(function (el) {
+    /* Section yang sudah visible saat load — langsung tampilkan tanpa delay */
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) {
+      el.style.transitionDelay = '0s';
+      el.classList.add('visible');
+    } else {
+      observer.observe(el);
+    }
+  });
+})();
+
+
+/* ── Pricelist Lead Generation Modal (Baru) ── */
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbznJXL_2a_hhRdYmB7Es44sGH_Dc9E96fcgch40mfrPlq-heaV2ewkSSDmxgVpu7qq6Lg/exec';
+var REDIRECT_URL    = 'pricelist-tentrem-bhumi.pdf';
+
+function openPricelistModal() {
+  document.getElementById('pricelist-overlay').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  document.getElementById('pricelist-form').style.display = 'block';
+  document.getElementById('pricelist-loading').style.display = 'none';
+  document.getElementById('pl-nama').value = '';
+  document.getElementById('pl-hp').value = '';
+  document.getElementById('pl-email').value = '';
+}
+
+function closePricelistModal() {
+  document.getElementById('pricelist-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function submitPricelist() {
+  var nama  = document.getElementById('pl-nama').value.trim();
+  var hp    = document.getElementById('pl-hp').value.trim();
+  var email = document.getElementById('pl-email').value.trim();
+
+  if (!nama || !hp || !email) {
+    alert('Mohon isi semua data terlebih dahulu.');
+    return;
+  }
+
+  var payload = {
+    date:      new Date().toLocaleDateString('id-ID'),
+    time:      new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}),
+    Nama:      nama,
+    Handphone: hp,
+    Email:     email
+  };
+
+  console.log('Payload dikirim:', JSON.stringify(payload));
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', APPS_SCRIPT_URL, true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+  var encoded = 'data=' + encodeURIComponent(JSON.stringify(payload));
+  xhr.send(encoded);
+
+  /* Buka PDF via anchor click — lebih reliable dari window.open,
+     tidak diblokir popup-blocker */
+  var a = document.createElement('a');
+  a.href = REDIRECT_URL;
+  a.target = '_blank';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  closePricelistModal();
+}
+
+/* Hubungkan semua tombol "Download Pricelist" ke modal baru */
+document.addEventListener('DOMContentLoaded', function() {
+  var btns = document.querySelectorAll('.btn-pricelist, .btn-pricelist-cta, .btn-hero-outline, [data-action="pricelist"]');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      openPricelistModal();
+    });
+  });
+});
+
+/* ── Desktop nav scroll effect ── */
+(function() {
+  var header = document.querySelector('.desktop-nav');
+  if (!header) return;
+  window.addEventListener('scroll', function() {
+    if (window.pageYOffset > 60) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
