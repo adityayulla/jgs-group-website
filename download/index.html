@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Download Pricelist — JGS Group</title>
+  <meta name="description" content="Unduh pricelist lengkap proyek JGS Group: Kawa Living, Tentrem Bhumi, dan Tentrem Jiwo.">
+  <meta property="og:title" content="Download Pricelist — JGS Group">
+  <meta property="og:description" content="Pilih proyek dan unduh pricelist lengkapnya.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap">
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <style>
+    /* ── Page: Download Pricelist ─────────────────────────────── */
+    .download { padding: 140px 0 100px; position: relative; }
+    .download__head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 56px;
+      padding: 0 var(--pad-x);
+    }
+    .download__eyebrow {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 12px; letter-spacing: .18em;
+      color: #c8860a; margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .download__title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1.05; letter-spacing: -.02em;
+      color: var(--navy); margin: 0 0 16px; font-style: normal;
+    }
+    .download__title em { font-style: italic; color: var(--orange); font-family: inherit; }
+    .download__subtitle {
+      font-size: 16px; color: var(--muted);
+      margin: 0; line-height: 1.55;
+    }
+
+    .download__grid {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .dl-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 32px 28px;
+      box-shadow: 0 6px 24px rgba(27,42,100,.06);
+      display: flex; flex-direction: column; gap: 12px;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .dl-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(27,42,100,.14);
+    }
+    .dl-card__name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 1.1;
+      letter-spacing: -.01em;
+      color: var(--navy);
+      margin: 0;
+    }
+    .dl-card__loc {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+    .dl-card__btn {
+      align-self: flex-start;
+      margin-top: 18px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1024px) {
+      .download__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 760px) {
+      .download { padding: 110px 0 80px; }
+      .download__head { margin-bottom: 36px; }
+      .download__grid { grid-template-columns: 1fr; gap: 14px; padding: 0 20px; }
+      .dl-card { padding: 26px 22px; }
+      .dl-card__name { font-size: 24px; }
+    }
+    @media (max-width: 480px) {
+      .download__grid { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Parallax background (sama dengan homepage) -->
+<div class="bg-root">
+  <div class="reb">
+    <div class="reb__wash reb__wash--a"></div>
+    <div class="reb__wash reb__wash--b"></div>
+    <div class="reb__wash reb__wash--c"></div>
+    <div class="reb__blueprint"></div>
+    <div class="reb__vignette"></div>
+    <div class="grain"></div>
+  </div>
+</div>
+
+<div id="navbar-placeholder"></div>
+
+<main>
+  <section class="download" id="download">
+    <div class="download__head reveal">
+      <span class="download__eyebrow">→ DOKUMEN</span>
+      <h1 class="download__title">Download <em>Pricelist</em></h1>
+      <p class="download__subtitle">Pilih proyek yang Anda minati untuk mengunduh pricelist lengkap.</p>
+    </div>
+
+    <div class="download__grid">
+      <article class="dl-card reveal">
+        <h2 class="dl-card__name">Kawa Living</h2>
+        <span class="dl-card__loc">Jalan Wates KM 10, Sedayu</span>
+        <button class="btn btn--primary dl-card__btn"
+                onclick="downloadPricelist('kawa-living', 'Kawa-Living')">
+          Download Pricelist →
+        </button>
+      </article>
+
+      <article class="dl-card reveal reveal--delay-1">
+        <h2 class="dl-card__name">Tentrem Bhumi</h2>
+        <span class="dl-card__loc">Kaliurang KM 12,5, Ngaglik</span>
+        <button class="btn btn--primary dl-card__btn"
+                onclick="downloadPricelist('tentrem-bhumi', 'Tentrem-Bhumi')">
+          Download Pricelist →
+        </button>
+      </article>
+
+      <article class="dl-card reveal reveal--delay-2">
+        <h2 class="dl-card__name">Tentrem Jiwo</h2>
+        <span class="dl-card__loc">Purwomartani, Kalasan</span>
+        <button class="btn btn--primary dl-card__btn"
+                onclick="downloadPricelist('tentrem-jiwo', 'Tentrem-Jiwo')">
+          Download Pricelist →
+        </button>
+      </article>
+    </div>
+  </section>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  /* Trigger download PDF langsung — pengunjung sudah submit form di homepage */
+  function downloadPricelist(slug, title) {
+    var a = document.createElement('a');
+    a.href = '/assets/pdf/' + slug + '.pdf';
+    a.download = 'Pricelist-' + title + '-JGS-Group.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+</script>
+</body>
+</html>
