@@ -727,7 +727,7 @@ main > section { position: relative; z-index: 1; }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
-  padding: 0;
+  padding: 0 5%;
   overflow-x: unset;
   scroll-snap-type: unset;
   max-width: var(--max-w);
@@ -797,12 +797,7 @@ main > section { position: relative; z-index: 1; }
 
 .aw-arrow { display: none; }
 
-.aw-dots {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 20px;
-}
+.aw-dots { display: none; }
 
 .aw__dot {
   width: 6px;
