@@ -301,21 +301,19 @@
   /* ── Lift Scroll Indicator ───────────────────────────────── */
   function initLiftNav() {
     const sections = [
-      { id: 'hero',      floor: 1 },
-      { id: 'produk',    floor: 2 },
-      { id: 'kawasan',   floor: 3 },
+      { id: 'hero',      floor: 7 },
+      { id: 'unit',      floor: 6 },
+      { id: 'produk',    floor: 5 },
       { id: 'promo',     floor: 4 },
-      { id: 'testimoni', floor: 5 },
-      { id: 'faq',       floor: 6 },
-      { id: 'cta',       floor: 7 },
+      { id: 'testimoni', floor: 3 },
+      { id: 'faq',       floor: 2 },
+      { id: 'jgs',       floor: 1 },
     ];
 
-    const display = document.getElementById('liftDisplay');
     const buttons = document.querySelectorAll('.lift-btn');
-    if (!display || !buttons.length) return;
+    if (!buttons.length) return;
 
     function setActive(floor) {
-      display.textContent = 'L' + floor;
       buttons.forEach(btn => {
         const isActive = parseInt(btn.dataset.floor) === floor;
         btn.classList.toggle('lift-btn--active', isActive);

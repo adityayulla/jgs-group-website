@@ -237,7 +237,7 @@ main { position: relative; z-index: 1; }
 .blueprint-img {
   position: absolute;
   bottom: -5%;
-  right: -5%;
+  left: -5%;
   width: 65%;
   max-width: 900px;
   opacity: 0.18;
@@ -618,23 +618,6 @@ main > section { position: relative; z-index: 1; }
   padding: 8px 4px;
   box-shadow: 0 4px 20px rgba(27,42,100,0.12);
   width: 52px;
-}
-
-.lift-display {
-  background: #1b2a64;
-  color: #c8860a;
-  font-family: monospace;
-  font-size: 13px;
-  font-weight: 700;
-  text-align: center;
-  width: 40px;
-  height: 28px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 6px;
-  letter-spacing: 1px;
 }
 
 .lift-buttons {
