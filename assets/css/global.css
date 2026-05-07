@@ -225,7 +225,7 @@ main { position: relative; z-index: 1; }
 /* ── Blueprint background ───────────────────────────────────── */
 .blueprint-bg {
   position: fixed;
-  top: 0;
+  top: 100vh;
   left: 0;
   width: 100%;
   height: 100%;
