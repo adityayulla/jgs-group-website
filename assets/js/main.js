@@ -302,12 +302,12 @@
   function initLiftNav() {
     const sections = [
       { id: 'hero',      floor: 7 },
-      { id: 'unit',      floor: 6 },
+      { id: 'tentang',   floor: 6 },
       { id: 'produk',    floor: 5 },
       { id: 'promo',     floor: 4 },
       { id: 'testimoni', floor: 3 },
       { id: 'faq',       floor: 2 },
-      { id: 'jgs',       floor: 1 },
+      { id: 'footer',    floor: 1 },
     ];
 
     const buttons = document.querySelectorAll('.lift-btn');
