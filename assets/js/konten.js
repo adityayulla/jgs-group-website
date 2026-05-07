@@ -49,31 +49,31 @@
       year: '2021',
       name: '1st Contribution of Mandiri KPR',
       giver: 'Bank Mandiri',
-      img: '/assets/img/penghargaan/mandiri-2021.webp'
+      img: '/assets/img/penghargaan/Mandiri-2021.webp'
     },
     {
       year: '2021',
       name: 'Penyelesaian Bangunan Terbaik',
       giver: 'Bank BTN Syariah',
-      img: '/assets/img/penghargaan/btn-2021.webp'
+      img: '/assets/img/penghargaan/BTN-2021.webp'
     },
     {
       year: '2022',
       name: '1st Contribution of Mandiri KPR',
       giver: 'Bank Mandiri',
-      img: '/assets/img/penghargaan/mandiri-2022.webp'
+      img: '/assets/img/penghargaan/Mandiri-2022.webp'
     },
     {
       year: '2023',
       name: '1st Contribution of Mandiri KPR',
       giver: 'Bank Mandiri',
-      img: '/assets/img/penghargaan/mandiri-2023.webp'
+      img: '/assets/img/penghargaan/Mandiri-2023.webp'
     },
     {
       year: '2023',
       name: 'Developer Kualitas Pembiayaan Terbaik',
       giver: 'Bank BTN Syariah',
-      img: '/assets/img/penghargaan/btn-2023.webp'
+      img: '/assets/img/penghargaan/BTN-2023.webp'
     },
   ];
 
@@ -190,42 +190,11 @@
     }
   }
 
-  /* ── Init: awards carousel ──────────────────────────────── */
+  /* ── Init: awards grid ──────────────────────────────────── */
   function initAwards() {
-    const track = document.getElementById('awardTrack');
-    const prev  = document.getElementById('awardPrev');
-    const next  = document.getElementById('awardNext');
-    const dots  = document.getElementById('awardDots');
-    if (!track) return;
-
-    track.innerHTML = awardCards.map(renderAwardCard).join('');
-    const cards = Array.from(track.children);
-
-    const dotBtns = awardCards.map((_, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'aw__dot' + (i === 0 ? ' aw__dot--on' : '');
-      btn.addEventListener('click', () => {
-        track.scrollTo({ left: cards[i].offsetLeft, behavior: 'smooth' });
-      });
-      dots && dots.appendChild(btn);
-      return btn;
-    });
-
-    cards.forEach(c => {
-      new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting && e.intersectionRatio >= 0.5) {
-            const idx = cards.indexOf(e.target);
-            dotBtns.forEach((b,i) => b.classList.toggle('aw__dot--on', i===idx));
-          }
-        });
-      }, { root: track, threshold: 0.5 }).observe(c);
-    });
-
-    if (prev && next) {
-      prev.addEventListener('click', () => track.scrollBy({ left: -400, behavior: 'smooth' }));
-      next.addEventListener('click', () => track.scrollBy({ left:  400, behavior: 'smooth' }));
-    }
+    const grid = document.getElementById('awardTrack');
+    if (!grid) { console.error('awardTrack not found'); return; }
+    grid.innerHTML = awardCards.map(renderAwardCard).join('');
   }
 
   /* ============================================================
