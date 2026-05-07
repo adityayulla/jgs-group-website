@@ -45,11 +45,36 @@
      PENGHARGAAN — 5 cards
      ============================================================ */
   const awardCards = [
-    { icon: '🏆', year: '2021', name: 'Juara 1 Penyumbang KPR Terbanyak', giver: 'Bank Mandiri' },
-    { icon: '🥇', year: '2022', name: 'Juara 1 Penyumbang KPR Terbanyak', giver: 'Bank Mandiri' },
-    { icon: '🏗',  year: '2023', name: 'Developer Pembangunan Terbaik',    giver: 'Bank BTN Syariah' },
-    { icon: '🥇', year: '2023', name: 'Juara 1 Penyumbang KPR Terbanyak', giver: 'Bank Mandiri' },
-    { icon: '🏆', year: '2023', name: 'Developer Kualitas Pembiayaan Terbaik', giver: 'Bank BTN Syariah' },
+    {
+      year: '2021',
+      name: '1st Contribution of Mandiri KPR',
+      giver: 'Bank Mandiri',
+      img: '/assets/img/penghargaan/mandiri-2021.webp'
+    },
+    {
+      year: '2021',
+      name: 'Penyelesaian Bangunan Terbaik',
+      giver: 'Bank BTN Syariah',
+      img: '/assets/img/penghargaan/btn-2021.webp'
+    },
+    {
+      year: '2022',
+      name: '1st Contribution of Mandiri KPR',
+      giver: 'Bank Mandiri',
+      img: '/assets/img/penghargaan/mandiri-2022.webp'
+    },
+    {
+      year: '2023',
+      name: '1st Contribution of Mandiri KPR',
+      giver: 'Bank Mandiri',
+      img: '/assets/img/penghargaan/mandiri-2023.webp'
+    },
+    {
+      year: '2023',
+      name: 'Developer Kualitas Pembiayaan Terbaik',
+      giver: 'Bank BTN Syariah',
+      img: '/assets/img/penghargaan/btn-2023.webp'
+    },
   ];
 
   /* ── SVG icons ─────────────────────────────────────────── */
@@ -99,14 +124,18 @@
   }
 
   /* ── Render: award card ─────────────────────────────────── */
-  function renderAwardCard(d, i) {
-    const delayCls = i === 0 ? '' : ' reveal--delay-' + Math.min(i, 3);
-    return `<div class="aw2-card reveal${delayCls}">
-  <div class="aw2-card__icon">${d.icon}</div>
-  <div class="aw2-card__year">${d.year}</div>
-  <div class="aw2-card__name">${d.name}</div>
-  <div class="aw2-card__giver">${d.giver}</div>
-</div>`;
+  function renderAwardCard(d) {
+    return `<div class="aw-card">
+    <div class="aw-card__img-wrap">
+      <img src="${d.img}" alt="${d.name} ${d.year}"
+           class="aw-card__img" loading="lazy">
+    </div>
+    <div class="aw-card__body">
+      <span class="aw-card__year">${d.year}</span>
+      <h3 class="aw-card__name">${d.name}</h3>
+      <p class="aw-card__giver">${d.giver}</p>
+    </div>
+  </div>`;
   }
 
   /* ── Init: popular carousel ─────────────────────────────── */
@@ -161,11 +190,42 @@
     }
   }
 
-  /* ── Init: awards grid ──────────────────────────────────── */
+  /* ── Init: awards carousel ──────────────────────────────── */
   function initAwards() {
-    const grid = document.getElementById('awardGrid');
-    if (!grid) return;
-    grid.innerHTML = awardCards.map(renderAwardCard).join('');
+    const track = document.getElementById('awardTrack');
+    const prev  = document.getElementById('awardPrev');
+    const next  = document.getElementById('awardNext');
+    const dots  = document.getElementById('awardDots');
+    if (!track) return;
+
+    track.innerHTML = awardCards.map(renderAwardCard).join('');
+    const cards = Array.from(track.children);
+
+    const dotBtns = awardCards.map((_, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'aw__dot' + (i === 0 ? ' aw__dot--on' : '');
+      btn.addEventListener('click', () => {
+        track.scrollTo({ left: cards[i].offsetLeft, behavior: 'smooth' });
+      });
+      dots && dots.appendChild(btn);
+      return btn;
+    });
+
+    cards.forEach(c => {
+      new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting && e.intersectionRatio >= 0.5) {
+            const idx = cards.indexOf(e.target);
+            dotBtns.forEach((b,i) => b.classList.toggle('aw__dot--on', i===idx));
+          }
+        });
+      }, { root: track, threshold: 0.5 }).observe(c);
+    });
+
+    if (prev && next) {
+      prev.addEventListener('click', () => track.scrollBy({ left: -400, behavior: 'smooth' }));
+      next.addEventListener('click', () => track.scrollBy({ left:  400, behavior: 'smooth' }));
+    }
   }
 
   /* ============================================================

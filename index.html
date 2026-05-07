@@ -89,65 +89,6 @@
     .hero__tag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); animation: pulse 2s infinite; }
 
     /* ══════════════════════════════════════════════════════════
-       PENGHARGAAN — cream section
-    ══════════════════════════════════════════════════════════ */
-    .award-section { background: transparent; padding: 96px 0; }
-    .award-section__inner {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 0 var(--pad-x);
-    }
-    .award-section__head { text-align: center; margin-bottom: 56px; }
-    .award-section__eyebrow {
-      display: inline-block;
-      font-size: 11px; font-weight: 600; letter-spacing: .18em;
-      text-transform: uppercase; color: #c8860a; margin-bottom: 12px;
-    }
-    .award-section__title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(32px, 4vw, 52px); font-weight: 600; font-style: normal;
-      color: #1b2a64; line-height: 1.1; letter-spacing: -.02em;
-      margin: 0 0 14px;
-    }
-    .award-section__subtitle {
-      font-size: 15px; color: var(--muted);
-      max-width: 480px; margin: 0 auto; line-height: 1.55;
-    }
-    .award-section__grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    .award-section__grid .aw2-card {
-      flex: 0 0 calc(33.333% - 14px);
-      max-width: calc(33.333% - 14px);
-    }
-    .aw2-card {
-      background: #ffffff;
-      border: 1px solid rgba(27,42,100,.1);
-      border-radius: 12px; padding: 24px;
-      box-shadow: 0 4px 16px rgba(27,42,100,.06);
-      transition: box-shadow var(--t-mid), transform var(--t-mid);
-    }
-    .aw2-card:hover {
-      box-shadow: 0 8px 28px rgba(27,42,100,.12);
-      transform: translateY(-3px);
-    }
-    .aw2-card__icon { font-size: 32px; margin-bottom: 12px; line-height: 1; }
-    .aw2-card__year {
-      font-size: 11px; font-weight: 600; letter-spacing: .14em;
-      text-transform: uppercase; color: #c8860a; margin-bottom: 8px;
-    }
-    .aw2-card__name {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 18px; font-weight: 600; color: #1b2a64;
-      line-height: 1.25; margin-bottom: 8px;
-    }
-    .aw2-card__giver { font-size: 12px; color: var(--muted); }
-
-    /* ══════════════════════════════════════════════════════════
        TENTANG KAMI
     ══════════════════════════════════════════════════════════ */
     .about { position: relative; padding: 140px 0; overflow: hidden; }
@@ -416,10 +357,6 @@
 
     /* ── Tablet 1024px ───────────────────────────────────── */
     @media (max-width: 1024px) {
-      .award-section__grid .aw2-card {
-        flex: 0 0 calc(50% - 10px);
-        max-width: calc(50% - 10px);
-      }
       .projects__mini { grid-template-columns: repeat(3, 1fr); }
       .why__grid { grid-template-columns: 1fr 1fr; }
       .calc__inner { gap: 48px; }
@@ -495,18 +432,6 @@
       }
       .hero__scrollcue { display: none; }
 
-      /* Award section */
-      .award-section { padding: 72px 0; }
-      .award-section__inner { padding: 0 20px; }
-      .award-section__head  { margin-bottom: 36px; }
-      .award-section__grid  { gap: 14px; }
-      .award-section__grid .aw2-card {
-        flex: 0 0 100%;
-        max-width: 100%;
-      }
-      .aw2-card { padding: 20px; }
-      .aw2-card__icon { font-size: 28px; }
-      .aw2-card__name { font-size: 16px; }
 
       /* About */
       .about { padding: 72px 0; }
@@ -1132,15 +1057,18 @@
   </section>
 
   <!-- ══ PENGHARGAAN ═══════════════════════════════════════════ -->
-  <section class="award-section" id="penghargaan">
-    <div class="award-section__inner">
-      <div class="award-section__head reveal">
-        <span class="award-section__eyebrow">→ PENGHARGAAN</span>
-        <h2 class="award-section__title">Diakui &amp; Dipercaya</h2>
-        <p class="award-section__subtitle">Pengakuan nyata dari lembaga keuangan nasional.</p>
-      </div>
-      <div class="award-section__grid" id="awardGrid"></div>
+  <section id="penghargaan" class="section-awards">
+    <div class="section-inner">
+      <span class="section-kicker">→ PENGHARGAAN</span>
+      <h2 class="section-title">Diakui &amp; <em>Dipercaya</em></h2>
+      <p class="section-sub">Pengakuan nyata dari lembaga keuangan nasional.</p>
     </div>
+    <div class="aw-carousel">
+      <button class="aw-arrow aw-arrow--prev" id="awardPrev">←</button>
+      <div class="aw-track" id="awardTrack"></div>
+      <button class="aw-arrow aw-arrow--next" id="awardNext">→</button>
+    </div>
+    <div class="aw-dots" id="awardDots"></div>
   </section>
 
   <!-- ══ TENTANG KAMI ══════════════════════════════════════════ -->
