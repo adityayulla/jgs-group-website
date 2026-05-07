@@ -289,13 +289,25 @@
 
   /* ── Blueprint cursor parallax ───────────────────────────── */
   function initBlueprintParallax() {
+    const blueprintBg  = document.getElementById('blueprintBg');
     const blueprintImg = document.getElementById('blueprintImg');
     if (!blueprintImg) return;
+
     document.addEventListener('mousemove', (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 20;
       const y = (e.clientY / window.innerHeight - 0.5) * 20;
       blueprintImg.style.transform = `translate(${x}px, ${y}px)`;
     });
+
+    if (blueprintBg) {
+      const hero = document.getElementById('hero');
+      const onScroll = () => {
+        const threshold = hero ? hero.offsetHeight * 0.8 : window.innerHeight * 0.8;
+        blueprintBg.classList.toggle('is-visible', window.scrollY >= threshold);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
   }
 
   /* ── Lift Scroll Indicator ───────────────────────────────── */
