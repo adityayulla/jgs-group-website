@@ -298,6 +298,52 @@
     });
   }
 
+  /* ── Lift Scroll Indicator ───────────────────────────────── */
+  function initLiftNav() {
+    const sections = [
+      { id: 'hero',      floor: 1 },
+      { id: 'produk',    floor: 2 },
+      { id: 'kawasan',   floor: 3 },
+      { id: 'promo',     floor: 4 },
+      { id: 'testimoni', floor: 5 },
+      { id: 'faq',       floor: 6 },
+      { id: 'cta',       floor: 7 },
+    ];
+
+    const display = document.getElementById('liftDisplay');
+    const buttons = document.querySelectorAll('.lift-btn');
+    if (!display || !buttons.length) return;
+
+    function setActive(floor) {
+      display.textContent = 'L' + floor;
+      buttons.forEach(btn => {
+        const isActive = parseInt(btn.dataset.floor) === floor;
+        btn.classList.toggle('lift-btn--active', isActive);
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const found = sections.find(s => s.id === entry.target.id);
+          if (found) setActive(found.floor);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    sections.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = document.getElementById(btn.dataset.target);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  }
+
   /* ── Init ────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
     injectAll().then(() => {
@@ -310,6 +356,7 @@
       initScrollParallax();
       initProductRows();
       initBlueprintParallax();
+      initLiftNav();
     });
   });
 

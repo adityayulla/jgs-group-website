@@ -240,7 +240,7 @@ main { position: relative; z-index: 1; }
   right: -5%;
   width: 65%;
   max-width: 900px;
-  opacity: 0.07;
+  opacity: 0.18;
   transition: transform 0.15s ease-out;
   transform-origin: center center;
 }
@@ -599,4 +599,106 @@ main > section { position: relative; z-index: 1; }
 
 @media (max-width: 420px) {
   .footer__cols { grid-template-columns: 1fr; }
+}
+
+/* ── Lift Scroll Indicator ──────────────────────────────────── */
+.lift-nav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  background: #f7f4ee;
+  border: 1px solid #1b2a64;
+  border-radius: 8px;
+  padding: 8px 4px;
+  box-shadow: 0 4px 20px rgba(27,42,100,0.12);
+  width: 52px;
+}
+
+.lift-display {
+  background: #1b2a64;
+  color: #c8860a;
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  width: 40px;
+  height: 28px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.lift-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+}
+
+.lift-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 40px;
+  border: 1px solid rgba(27,42,100,0.2);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+  gap: 1px;
+}
+
+.lift-btn:hover {
+  background: rgba(27,42,100,0.08);
+  border-color: #1b2a64;
+}
+
+.lift-btn--active {
+  background: #c8860a;
+  border-color: #c8860a;
+}
+
+.lift-btn--active .lift-floor,
+.lift-btn--active .lift-name {
+  color: #ffffff;
+}
+
+.lift-floor {
+  font-size: 10px;
+  font-weight: 700;
+  color: #1b2a64;
+  font-family: monospace;
+  letter-spacing: 0.5px;
+}
+
+.lift-name {
+  font-size: 8px;
+  color: #6b6b6b;
+  letter-spacing: 0.3px;
+  font-family: sans-serif;
+}
+
+.lift-brand {
+  margin-top: 6px;
+  font-size: 8px;
+  color: #1b2a64;
+  opacity: 0.4;
+  letter-spacing: 2px;
+  font-family: monospace;
+}
+
+@media (max-width: 768px) {
+  .lift-nav { display: none; }
 }
