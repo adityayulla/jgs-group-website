@@ -265,6 +265,22 @@ main { position: relative; z-index: 1; }
 .nav__links a { opacity: .75; transition: opacity var(--t-fast); }
 .nav__links a:hover { opacity: 1; color: var(--navy); }
 .nav__cta-desktop { /* shown only on desktop */ }
+
+/* Nav pricelist trigger (desktop) */
+.nav__pricelist {
+  font-size: 13px;
+  padding: 8px 18px;
+  border: 1px solid var(--navy);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--navy);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  transition: background .2s, color .2s;
+}
+.nav__pricelist:hover { background: var(--navy); color: #fff; }
+
 .nav__burger {
   display: none;
   flex-direction: column; gap: 5px;
@@ -530,7 +546,7 @@ main { position: relative; z-index: 1; }
 
 @media (max-width: 759px) {
   .nav__inner { padding: 0 18px; }
-  .nav__links, .nav__cta-desktop { display: none; }
+  .nav__links, .nav__cta-desktop, .nav__pricelist { display: none; }
   .nav__burger { display: flex; }
   .footer__top { grid-template-columns: 1fr; gap: 32px; }
   .footer__cols { grid-template-columns: 1fr 1fr; gap: 26px; }

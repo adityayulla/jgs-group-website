@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../assets/css/global.css"/>
 <!-- ✏️ SEMUA KONTEN (teks, gambar, harga, WA) ada di file konten.js -->
 <script src="konten.js"></script>
 <style>
@@ -546,107 +547,7 @@ img { display: block; }
 }
 
 /* ─────────────────────────────────────────
-   PRICELIST MODAL — LEAD GENERATION (BARU)
-───────────────────────────────────────── */
-#pricelist-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  backdrop-filter: blur(3px);
-}
-#pricelist-modal {
-  background: #fff;
-  border-radius: 18px;
-  padding: 28px 24px 24px;
-  width: 100%;
-  max-width: 380px;
-  position: relative;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-  animation: modalIn 0.3s ease-out;
-}
-#pricelist-close {
-  position: absolute;
-  top: 14px; right: 16px;
-  background: none;
-  border: none;
-  font-size: 18px;
-  color: #999;
-  cursor: pointer;
-  line-height: 1;
-}
-.pm-icon { font-size: 32px; margin-bottom: 8px; }
-.pm-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 6px;
-}
-.pm-sub {
-  font-size: 13px;
-  color: #888;
-  line-height: 1.55;
-  margin-bottom: 18px;
-}
-#pricelist-form input {
-  width: 100%;
-  padding: 13px 14px;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 10px;
-  font-size: 14px;
-  margin-bottom: 10px;
-  outline: none;
-  box-sizing: border-box;
-  transition: border-color 0.2s;
-}
-#pricelist-form input:focus {
-  border-color: #2d4a2b;
-}
-.pm-privacy {
-  font-size: 11.5px;
-  color: #aaa;
-  margin-bottom: 14px;
-  margin-top: 2px;
-}
-#pl-submit {
-  width: 100%;
-  background: #2d4a2b;
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  padding: 14px;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
-}
-#pl-submit:hover { background: #1e3320; }
-#pl-submit:active { transform: scale(0.98); }
-#pl-submit:disabled { background: #aaa; cursor: not-allowed; }
-#pricelist-loading {
-  text-align: center;
-  padding: 20px 0;
-  color: #888;
-  font-size: 14px;
-}
-.pl-spinner {
-  width: 36px; height: 36px;
-  border: 3px solid #e0e0e0;
-  border-top-color: #2d4a2b;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-  margin: 0 auto 12px;
-}
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ─────────────────────────────────────────
-   TOMBOL DOWNLOAD PRICELIST
+   TOMBOL DOWNLOAD PRICELIST (trigger styling page-level)
 ───────────────────────────────────────── */
 .btn-pricelist-trigger {
   display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -875,6 +776,25 @@ img { display: block; }
   .htb-num { font-size: 46px; }
   .htb-label { font-size: 9.5px; }
 }
+
+/* ─────────────────────────────────────────
+   THEME OVERRIDE — Tentrem Bhumi (hijau)
+   Override navbar/footer/btn dari global.css
+───────────────────────────────────────── */
+.nav { --navy: #2d4a2b; --orange: #c8860a; }
+.nav .nav__logo { background: #2d4a2b; }
+.nav .btn--primary { background: #2d4a2b; color: #fff; }
+.nav .btn--primary:hover { background: #1e3320; }
+.nav__pricelist { border-color: #2d4a2b; color: #2d4a2b; }
+.nav__pricelist:hover { background: #2d4a2b; color: #fff; }
+.nav__brandline, .nav__links a:hover { color: #2d4a2b; }
+
+.navdr .btn--primary { background: #2d4a2b; color: #fff; }
+.navdr .btn--primary:hover { background: #1e3320; }
+.navdr__links li:hover { color: #c8860a; }
+
+.footer__brand, .footer__colh { color: #2d4a2b; }
+.footer__coll:hover { color: #2d4a2b; }
 </style>
 </head>
 <body>
@@ -931,22 +851,7 @@ img { display: block; }
 <!-- ══════════════════════════════════════════
      DESKTOP NAV
 ══════════════════════════════════════════ -->
-<nav class="desktop-nav">
-  <a class="nav-logo-wrap" href="#">
-    <div class="nav-logo-badge">JGS<small>GROUP</small></div>
-    <div class="nav-logo-text-wrap">
-      <div class="nav-logo-name">TENTREM BHUMI</div>
-      <div class="nav-logo-sub-txt">PT Sasmita Griya Buana</div>
-    </div>
-  </a>
-  <div class="nav-links">
-    <a href="#fasilitas">Fasilitas</a>
-    <a href="#unit">Tipe Unit</a>
-    <a href="#interior">Interior</a>
-    <a href="#lokasi">Lokasi</a>
-    <a href="#" class="nav-cta" id="nav-wa-btn">Hubungi Kami</a>
-  </div>
-</nav>
+<div id="navbar-placeholder"></div>
 
 <div class="lp">
 
@@ -1131,43 +1036,9 @@ img { display: block; }
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════ -->
-<div class="footer">
-  <div class="footer-left">
-    <div class="footer-logo" id="k-footer-nama"></div>
-    <div class="footer-copy"  id="k-footer-copy"></div>
-  </div>
-  <div class="footer-links" id="k-footer-links"><!-- diisi JS dari KONTEN.footer --></div>
-</div>
-
 </div><!-- /.lp -->
 
-<!-- ══════════════════════════════════════════
-     MODAL PRICELIST — LEAD GENERATION (BARU)
-══════════════════════════════════════════ -->
-<div id="pricelist-overlay" style="display:none;" onclick="if(event.target===this)closePricelistModal()">
-  <div id="pricelist-modal">
-    <button id="pricelist-close" onclick="closePricelistModal()">✕</button>
-    <div id="pricelist-modal-body">
-      <div class="pm-icon">📄</div>
-      <h3 class="pm-title">Download Pricelist</h3>
-      <p class="pm-sub">Isi data berikut untuk mendapatkan pricelist lengkap Tentrem Bhumi</p>
-      <div id="pricelist-form">
-        <input id="pl-nama" type="text" placeholder="Nama lengkap" autocomplete="name">
-        <input id="pl-hp" type="tel" placeholder="Nomor WhatsApp" autocomplete="tel">
-        <input id="pl-email" type="email" placeholder="Alamat email" autocomplete="email">
-        <p class="pm-privacy">🔒 Data Anda aman dan tidak akan disebarkan</p>
-        <button id="pl-submit" onclick="submitPricelist()">Kirim &amp; Download →</button>
-      </div>
-      <div id="pricelist-loading" style="display:none;">
-        <div class="pl-spinner"></div>
-        <p>Sedang memproses...</p>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="footer-placeholder"></div>
 
 <script>
 /* Semua konten dimuat dari konten.js — lihat file tersebut untuk edit */
@@ -1426,71 +1297,15 @@ syncUnitsDisplay();
 })();
 
 
-/* ── Pricelist Lead Generation Modal (Baru) ── */
-var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbznJXL_2a_hhRdYmB7Es44sGH_Dc9E96fcgch40mfrPlq-heaV2ewkSSDmxgVpu7qq6Lg/exec';
-var REDIRECT_URL    = 'pricelist-tentrem-bhumi.pdf';
+/* Pricelist modal logic dipindah ke /assets/js/pricelist-modal.js */
 
-function openPricelistModal() {
-  document.getElementById('pricelist-overlay').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-  document.getElementById('pricelist-form').style.display = 'block';
-  document.getElementById('pricelist-loading').style.display = 'none';
-  document.getElementById('pl-nama').value = '';
-  document.getElementById('pl-hp').value = '';
-  document.getElementById('pl-email').value = '';
-}
-
-function closePricelistModal() {
-  document.getElementById('pricelist-overlay').style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-function submitPricelist() {
-  var nama  = document.getElementById('pl-nama').value.trim();
-  var hp    = document.getElementById('pl-hp').value.trim();
-  var email = document.getElementById('pl-email').value.trim();
-
-  if (!nama || !hp || !email) {
-    alert('Mohon isi semua data terlebih dahulu.');
-    return;
-  }
-
-  var payload = {
-    date:      new Date().toLocaleDateString('id-ID'),
-    time:      new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}),
-    Nama:      nama,
-    Handphone: hp,
-    Email:     email
-  };
-
-  console.log('Payload dikirim:', JSON.stringify(payload));
-
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', APPS_SCRIPT_URL, true);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-  var encoded = 'data=' + encodeURIComponent(JSON.stringify(payload));
-  xhr.send(encoded);
-
-  /* Buka PDF via anchor click — lebih reliable dari window.open,
-     tidak diblokir popup-blocker */
-  var a = document.createElement('a');
-  a.href = REDIRECT_URL;
-  a.target = '_blank';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
-  closePricelistModal();
-}
-
-/* Hubungkan semua tombol "Download Pricelist" ke modal baru */
+/* Auto-bind tombol legacy di halaman ini ke modal global */
 document.addEventListener('DOMContentLoaded', function() {
-  var btns = document.querySelectorAll('.btn-pricelist, .btn-pricelist-cta, .btn-hero-outline, [data-action="pricelist"]');
+  var btns = document.querySelectorAll('.btn-hero-outline');
   btns.forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
-      openPricelistModal();
+      if (window.openPricelistModal) window.openPricelistModal();
     });
   });
 });
@@ -1508,5 +1323,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, { passive: true });
 })();
 </script>
+<script src="../assets/js/main.js"></script>
+<script src="/assets/js/pricelist-modal.js"></script>
 </body>
 </html>
