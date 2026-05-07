@@ -264,7 +264,7 @@ main { position: relative; z-index: 1; }
 }
 .nav__links a { opacity: .75; transition: opacity var(--t-fast); }
 .nav__links a:hover { opacity: 1; color: var(--navy); }
-.nav__cta-desktop { /* shown only on desktop */ }
+.nav__cta-desktop { /* shown only on desktop */ margin-left: -24px; }
 
 /* Nav pricelist trigger (desktop) */
 .nav__pricelist {
