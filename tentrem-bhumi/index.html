@@ -795,6 +795,64 @@ img { display: block; }
 
 .footer__brand, .footer__colh { color: #2d4a2b; }
 .footer__coll:hover { color: #2d4a2b; }
+
+/* ── Footer khusus Tentrem Bhumi (dark green) ───────────── */
+.footer--tb {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  background: #1a3320;
+  color: rgba(255,255,255,0.6);
+  padding: 60px 0 40px;
+}
+.footer--tb .footer__top,
+.footer--tb .footer__bot {
+  max-width: var(--max-w);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+}
+.footer--tb .footer__top {
+  border-bottom-color: rgba(255,255,255,0.1);
+}
+.footer--tb .footer__brand { color: #ffffff; }
+.footer--tb .footer__tag   { color: rgba(255,255,255,0.7); }
+.footer--tb .footer__addr  {
+  font-size: 13px;
+  margin-top: 18px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.55);
+}
+.footer--tb .footer__addr a         { color: #ffffff; font-weight: 500; }
+.footer--tb .footer__addr a:hover   { color: #c8860a; }
+.footer--tb .footer__colh           { color: #c2e0b4; }
+.footer--tb .footer__coll           { color: rgba(255,255,255,0.65); }
+.footer--tb .footer__coll:hover     { color: #c8860a; }
+.footer--tb .footer__coll--info     {
+  display: flex; align-items: center; gap: 8px;
+  cursor: default;
+  color: rgba(255,255,255,0.45);
+}
+.footer--tb .footer__badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.footer--tb .footer__badge--loc  { background: rgba(194,224,180,0.18); color: #c2e0b4; }
+.footer--tb .footer__badge--warn { background: #c8860a; color: #ffffff; }
+.footer--tb .footer__badge--out  { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.55); }
+.footer--tb .footer__bot {
+  margin-top: 20px;
+  color: rgba(255,255,255,0.4);
+}
 </style>
 </head>
 <body>
@@ -1024,7 +1082,53 @@ img { display: block; }
 
 </div><!-- /.lp -->
 
-<div id="footer-placeholder"></div>
+<footer id="footer" class="footer footer--tb">
+  <div class="footer__top">
+    <div>
+      <div class="footer__brand">JGS Group</div>
+      <p class="footer__tag">Jogja Graha Selaras — Membangun Rumah, Menjaga Kepercayaan</p>
+      <p class="footer__addr">
+        Kaliurang KM 12,5, Ngaglik<br>
+        Sleman, Yogyakarta<br><br>
+        <a href="tel:+6289506888328">0895-0688-8328</a><br>
+        <a href="mailto:jogjagrahadigital@gmail.com">jogjagrahadigital@gmail.com</a>
+      </p>
+    </div>
+
+    <div class="footer__cols">
+      <div>
+        <div class="footer__colh">Navigasi</div>
+        <a href="/"             class="footer__coll">Beranda</a>
+        <a href="/#produk"      class="footer__coll">Produk</a>
+        <a href="/#tentang"     class="footer__coll">Tentang Kami</a>
+        <a href="/#penghargaan" class="footer__coll">Penghargaan</a>
+        <a href="/blog/"        class="footer__coll">Blog</a>
+        <a href="/#kontak"      class="footer__coll">Kontak</a>
+      </div>
+      <div>
+        <div class="footer__colh">Proyek Kami</div>
+        <a href="/kawa-living/"   class="footer__coll">Kawa Living <span class="footer__badge footer__badge--loc">Sedayu</span></a>
+        <a href="/tentrem-bhumi/" class="footer__coll">Tentrem Bhumi <span class="footer__badge footer__badge--loc">Ngaglik</span></a>
+        <span class="footer__coll footer__coll--info">Tentrem Jiwo <span class="footer__badge footer__badge--warn">Sisa 1</span></span>
+        <span class="footer__coll footer__coll--info">Kawa Village <span class="footer__badge footer__badge--out">Sold Out</span></span>
+        <span class="footer__coll footer__coll--info">Royal Mansion <span class="footer__badge footer__badge--out">Sold Out</span></span>
+      </div>
+      <div>
+        <div class="footer__colh">Ikuti Kami</div>
+        <a href="https://www.instagram.com/jogjagrahaselaras" target="_blank" rel="noopener" class="footer__coll">Instagram</a>
+        <a href="" class="footer__coll">Facebook</a>
+        <a href="" class="footer__coll">YouTube</a>
+        <a href="" class="footer__coll">TikTok</a>
+        <a href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="footer__coll">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__bot">
+    <span>© 2026 JGS Group · Jogja Graha Selaras. All rights reserved.</span>
+    <span>DEVELOPER PERUMAHAN YOGYAKARTA</span>
+  </div>
+</footer>
 
 <script>
 /* Semua konten dimuat dari konten.js — lihat file tersebut untuk edit */
