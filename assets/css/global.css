@@ -769,3 +769,98 @@ main > section { position: relative; z-index: 1; }
 @media (max-width: 600px) {
   .aw-card { flex: 0 0 100%; }
 }
+
+/* ── Mengapa JGS — 5P grid ──────────────────────────────────── */
+.why { padding: 120px 0; position: relative; }
+
+.why-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 40px auto 0;
+  padding: 0 var(--pad-x);
+}
+
+.why-card {
+  flex: 0 0 calc(33.333% - 16px);
+  max-width: calc(33.333% - 16px);
+  background: #ffffff;
+  border: 1px solid rgba(27,42,100,0.1);
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 16px rgba(27,42,100,0.06);
+  transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.why-card.is-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.why-card:hover {
+  border-color: #c8860a;
+  box-shadow: 0 0 0 2px rgba(200,134,10,0.15), 0 8px 32px rgba(27,42,100,0.12);
+  transform: translateY(-4px);
+}
+
+.why-card.is-in:hover { transform: translateY(-4px); }
+
+.why-card__num {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 500;
+  color: rgba(27,42,100,0.08);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.why-card__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1b2a64;
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
+.why-card__desc {
+  font-size: 13px;
+  color: #6b6b6b;
+  line-height: 1.7;
+  margin: 0 0 16px;
+  text-wrap: pretty;
+}
+
+.why-card__link {
+  font-size: 12px;
+  color: #c8860a;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.2s;
+}
+.why-card__link:hover { gap: 8px; }
+
+@media (max-width: 900px) {
+  .why-card {
+    flex: 0 0 calc(50% - 12px);
+    max-width: calc(50% - 12px);
+  }
+}
+
+@media (max-width: 600px) {
+  .why { padding: 72px 0; }
+  .why-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 28px 24px;
+  }
+}

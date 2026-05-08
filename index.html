@@ -179,42 +179,6 @@
     }
 
     /* ══════════════════════════════════════════════════════════
-       MENGAPA JGS
-    ══════════════════════════════════════════════════════════ */
-    .why { padding: 120px 0; position: relative; }
-    .why__grid {
-      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
-      border: 1px solid var(--line); border-radius: var(--r-xl); overflow: hidden;
-    }
-    .why__item {
-      padding: 48px 44px;
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      position: relative;
-      transition: background var(--t-mid);
-    }
-    .why__item:hover { background: rgba(27,42,100,.025); }
-    .why__item:nth-child(2n) { border-right: none; }
-    .why__item:nth-child(3), .why__item:nth-child(4) { border-bottom: none; }
-    .why__num {
-      font-family: var(--font-display); font-size: 64px; font-weight: 300;
-      line-height: 1; letter-spacing: -.04em;
-      color: rgba(27,42,100,.1); margin-bottom: 20px;
-      transition: color var(--t-mid);
-    }
-    .why__item:hover .why__num { color: rgba(219,127,46,.25); }
-    .why__title { font-family: var(--font-display); font-size: 24px; font-weight: 500; color: var(--navy); margin: 0 0 10px; line-height: 1.2; }
-    .why__body  { font-size: 15px; color: var(--muted); line-height: 1.6; margin: 0 0 20px; text-wrap: pretty; }
-    .why__link  {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 13px; font-weight: 500; color: var(--orange);
-      border-bottom: 1px solid rgba(219,127,46,.35); padding-bottom: 2px;
-      transition: gap var(--t-fast), border-color var(--t-fast);
-    }
-    .why__link:hover { gap: 10px; border-color: var(--orange); }
-
-    /* ══════════════════════════════════════════════════════════
        PROMO AKTIF
     ══════════════════════════════════════════════════════════ */
     .promo { padding: 60px var(--pad-x); max-width: var(--max-w); margin: 0 auto; }
@@ -358,7 +322,6 @@
     /* ── Tablet 1024px ───────────────────────────────────── */
     @media (max-width: 1024px) {
       .projects__mini { grid-template-columns: repeat(3, 1fr); }
-      .why__grid { grid-template-columns: 1fr 1fr; }
       .calc__inner { gap: 48px; }
     }
 
@@ -480,24 +443,6 @@
       .pcard--small .pcard__body  { padding: 12px; }
       .pcard--small .pcard__top   { padding: 10px 10px 0; }
 
-      /* Why */
-      .why { padding: 72px 0; }
-      .why__grid {
-        grid-template-columns: 1fr;
-        border: none; gap: 0;
-        padding: 0 20px;
-      }
-      .why__item {
-        border-right: none !important;
-        border-bottom: 1px solid var(--line) !important;
-        padding: 36px 0;
-      }
-      .why__item:last-child { border-bottom: none !important; }
-      .why__num   { font-size: 48px; margin-bottom: 14px; }
-      .why__title { font-size: 20px; }
-      .why__body  { font-size: 14px; }
-      .why__link  { min-height: 44px; align-items: center; display: inline-flex; }
-
       /* Promo */
       .promo { padding: 24px 20px; }
       .promo__inner {
@@ -602,8 +547,6 @@
       .projects__mini     { grid-template-columns: 1fr; padding: 0 16px; }
       .pcard--featured { aspect-ratio: 3/2; }
       .pcard--small    { aspect-ratio: 16/9; }
-
-      .why__grid { padding: 0 16px; }
 
       .promo { padding: 20px 16px; }
       .promo__inner { padding: 28px 20px; }
@@ -1224,37 +1167,37 @@
       <h2 class="section-title reveal">di JGS Group,<br>
 Kami pegang komitmen <b><h1>5P </h1></b>:</h2>
     </div>
-    <div class="why__grid container">
-      <div class="why__item reveal">
-        <div class="why__num">01</div>
-        <h3 class="why__title">Pasti Balik Nama Sertifikat</h3>
-        <p class="why__body">Sertifikat atas nama Anda dan sampai ke tangan anda. Kami urus prosesnya. </p>
-        <a href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="why__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-card__num">01</div>
+        <h3 class="why-card__title">Pasti Balik Nama Sertifikat</h3>
+        <p class="why-card__desc">Sertifikat atas nama Anda dan sampai ke tangan anda. Kami urus prosesnya. </p>
+        <a href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="why-card__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
-      <div class="why__item reveal reveal--delay-1">
-        <div class="why__num">02</div>
-        <h3 class="why__title">Pasti Dibangun</h3>
-        <p class="why__body">Tidak ada unit fiktif. Setiap kavling yang Anda beli, kami bangun sampai selesai dan serah terima.</p>
-        <a href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="why__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <div class="why-card">
+        <div class="why-card__num">02</div>
+        <h3 class="why-card__title">Pasti Dibangun</h3>
+        <p class="why-card__desc">Tidak ada unit fiktif. Setiap kavling yang Anda beli, kami bangun sampai selesai dan serah terima.</p>
+        <a href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="why-card__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
-      <div class="why__item reveal">
-        <div class="why__num">03</div>
-        <h3 class="why__title">Pasti Tidak Diagunkan ke Bank</h3>
-        <p class="why__body">Tanah Anda bukan jaminan utang kami. Aman dari risiko sita bank manapun.</p>
-        <a href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="why__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <div class="why-card">
+        <div class="why-card__num">03</div>
+        <h3 class="why-card__title">Pasti Tidak Diagunkan ke Bank</h3>
+        <p class="why-card__desc">Tanah Anda bukan jaminan utang kami. Aman dari risiko sita bank manapun.</p>
+        <a href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="why-card__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
-      <div class="why__item reveal reveal--delay-1">
-        <div class="why__num">04</div>
-        <h3 class="why__title">Pasti Bisa SHM</h3>
-        <p class="why__body">Berasal dari tanah SHM, bukan tanah kesultanan, bukan tanah negara, bukan tanah sewa(leasehold).
+      <div class="why-card">
+        <div class="why-card__num">04</div>
+        <h3 class="why-card__title">Pasti Bisa SHM</h3>
+        <p class="why-card__desc">Berasal dari tanah SHM, bukan tanah kesultanan, bukan tanah negara, bukan tanah sewa(leasehold).
 Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan bank rekanan.</p>
-        <a href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="why__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="why-card__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
-        <div class="why__item reveal reveal--delay-1">
-        <div class="why__num">05</div>
-        <h3 class="why__title">Pasti Sesuai Spesifikasi</h3>
-        <p class="why__body">Perjanjian, spek, dan gambar disepakati diawal. Kami komitmen spesifikasi sesuai dan amanah.</p>
-        <a href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="why__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <div class="why-card">
+        <div class="why-card__num">05</div>
+        <h3 class="why-card__title">Pasti Sesuai Spesifikasi</h3>
+        <p class="why-card__desc">Perjanjian, spek, dan gambar disepakati diawal. Kami komitmen spesifikasi sesuai dan amanah.</p>
+        <a href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="why-card__link">Tanya lebih lanjut <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
   </section>

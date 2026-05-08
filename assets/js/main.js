@@ -146,6 +146,23 @@
     els.forEach(el => obs.observe(el));
   }
 
+  /* ── Why cards — staggered fade-in ───────────────────────── */
+  function initWhyCards() {
+    const cards = document.querySelectorAll('.why-card');
+    if (!cards.length) return;
+
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const idx = Array.from(cards).indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('is-in'), idx * 120);
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach(c => obs.observe(c));
+  }
+
   /* ── Counter animation ───────────────────────────────────── */
   function initCounters() {
     const counters = document.querySelectorAll('[data-count]');
@@ -359,6 +376,7 @@
     injectAll().then(() => {
       initBackground();
       initReveal();
+      initWhyCards();
       initCounters();
       initFAQ();
       initCalc();
