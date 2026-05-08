@@ -294,20 +294,94 @@
     .ts { padding: 100px 0; }
     .ts__grid {
       max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+      display: grid; grid-template-columns: 1fr; gap: 24px;
     }
-    .ts__card { padding: 32px 28px; position: relative; }
-    .ts__stars { display: flex; gap: 3px; margin-bottom: 18px; color: var(--orange); font-size: 16px; }
-    .ts__body  { font-family: var(--font-display); font-style: italic; font-size: 18px; line-height: 1.55; color: var(--navy); margin: 0 0 24px; text-wrap: pretty; }
-    .ts__foot  { display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid var(--line); }
-    .ts__av    { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 16px; font-weight: 600; flex-shrink: 0; }
-    .ts__name  { font-size: 14px; font-weight: 600; color: var(--navy); }
-    .ts__unit  { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .ts__card {
+      position: relative; overflow: hidden;
+      display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 0; padding: 0; border-radius: var(--r-md);
+    }
+    .ts__media {
+      position: relative; min-height: 100%; aspect-ratio: 4/3;
+      background: var(--cream-2); overflow: hidden;
+    }
+    .ts__media img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .8s var(--ease);
+    }
+    .ts__card:hover .ts__media img { transform: scale(1.04); }
+    .ts__media-tag {
+      position: absolute; left: 16px; bottom: 16px;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 999px;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(6px);
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--navy); font-weight: 600;
+    }
+    .ts__media-tag::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--orange);
+    }
+    .ts__content {
+      padding: 40px 40px 36px; display: flex; flex-direction: column;
+      justify-content: space-between; gap: 24px;
+    }
+    .ts__source {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .ts__source-g {
+      width: 18px; height: 18px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: #fff; border: 1px solid var(--line);
+      font-family: var(--font-display); font-weight: 700; font-size: 11px;
+      color: #4285F4; line-height: 1;
+    }
+    .ts__stars { display: flex; gap: 3px; margin: 14px 0 16px; color: #FBBC04; font-size: 18px; }
+    .ts__body  {
+      font-family: var(--font-display); font-style: italic;
+      font-size: 17px; line-height: 1.6; color: var(--navy);
+      margin: 0 0 22px; text-wrap: pretty;
+    }
+    .ts__body::before { content: "\201C"; color: var(--orange); margin-right: 4px; font-weight: 700; }
+    .ts__body::after  { content: "\201D"; color: var(--orange); margin-left: 4px; font-weight: 700; }
+    .ts__foot  { display: flex; align-items: center; gap: 14px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .ts__av    {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--navy); color: #fff;
+      display: grid; place-items: center;
+      font-family: var(--font-display); font-size: 17px; font-weight: 600;
+      flex-shrink: 0;
+    }
+    .ts__name  { font-size: 15px; font-weight: 600; color: var(--navy); letter-spacing: -.01em; }
+    .ts__unit  { font-size: 12px; color: var(--muted); margin-top: 3px; }
     .ts__quote {
-      position: absolute; right: 22px; top: 22px;
-      font-family: var(--font-display); font-size: 72px; line-height: 1;
-      color: var(--orange); opacity: .1; font-style: italic; pointer-events: none;
+      position: absolute; right: 28px; top: 18px;
+      font-family: var(--font-display); font-size: 96px; line-height: 1;
+      color: var(--orange); opacity: .08; font-style: italic; font-weight: 600;
+      pointer-events: none;
     }
+    .ts__card:nth-child(even) { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
+    .ts__card:nth-child(even) .ts__media { order: 2; }
+    .ts__card:nth-child(even) .ts__content { order: 1; }
+    .ts__card:nth-child(even) .ts__quote { right: auto; left: 28px; }
+
+    .ts__footer {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+      margin-top: 48px; padding: 28px 32px;
+      border: 1px solid var(--line); border-radius: var(--r-md);
+      background: linear-gradient(180deg, #fff 0%, var(--cream-2) 100%);
+    }
+    .ts__rating { display: flex; align-items: center; gap: 18px; }
+    .ts__rating-num {
+      font-family: var(--font-display); font-size: 56px; font-weight: 600;
+      line-height: 1; letter-spacing: -.03em; color: var(--navy);
+    }
+    .ts__rating-meta { display: flex; flex-direction: column; gap: 4px; }
+    .ts__rating-meta .ts__stars { margin: 0; }
+    .ts__rating-label { font-size: 13px; color: var(--muted); letter-spacing: -.005em; }
 
     /* ══════════════════════════════════════════════════════════
        FAQ
@@ -496,11 +570,22 @@
       .ts__grid {
         grid-template-columns: 1fr;
         padding: 0 20px;
-        gap: 14px;
+        gap: 18px;
       }
-      .ts__card  { padding: 26px 22px; }
-      .ts__body  { font-size: 16px; }
-      .ts__quote { font-size: 56px; }
+      .ts__card,
+      .ts__card:nth-child(even) { grid-template-columns: 1fr; }
+      .ts__card:nth-child(even) .ts__media { order: 0; }
+      .ts__card:nth-child(even) .ts__content { order: 0; }
+      .ts__media { aspect-ratio: 16/10; }
+      .ts__content { padding: 28px 24px 26px; gap: 18px; }
+      .ts__body  { font-size: 15.5px; line-height: 1.55; margin-bottom: 18px; }
+      .ts__quote { font-size: 64px; right: 18px; top: 12px; }
+      .ts__card:nth-child(even) .ts__quote { left: 18px; }
+
+      .ts__footer { margin: 36px 20px 0; padding: 22px 22px; flex-direction: column; align-items: flex-start; gap: 18px; }
+      .ts__footer .btn { width: 100%; justify-content: center; }
+      .ts__rating-num { font-size: 44px; }
+      .ts__rating { gap: 14px; }
 
       /* FAQ */
       .faq { padding: 64px 0 80px; }
@@ -1357,44 +1442,111 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
     <div class="section__head container">
       <span class="eyebrow">Testimoni</span>
       <h2 class="section-title reveal">Suara mereka yang<br>sudah <em>pulang</em> ke JGS.</h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Review asli dari pelanggan kami di Google. Setiap foto adalah momen serah terima kunci — diabadikan langsung di hari kebahagiaan mereka.</p>
     </div>
+
     <div class="ts__grid">
-      <div class="ts__card glass reveal">
-        <div class="ts__quote">"</div>
-        <div class="ts__stars">★★★★★</div>
-        <p class="ts__body">"Prosesnya sangat transparan, tidak ada biaya tersembunyi. Tim JGS benar-benar membantu dari awal KPR sampai serah terima kunci."</p>
-        <div class="ts__foot">
-          <div class="ts__av">A</div>
+      <article class="ts__card glass reveal">
+        <div class="ts__media">
+          <img src="assets/img/testimoni/yama-20-foto.webp" alt="Serah terima kunci keluarga Dhaka Galih Pratama — Kawa Village" loading="lazy">
+          <span class="ts__media-tag">Serah Terima Kunci</span>
+        </div>
+        <div class="ts__content">
+          <div class="ts__quote">"</div>
           <div>
-            <div class="ts__name">Andi Prasetyo</div>
-            <div class="ts__unit">Kawa Living · Tipe 45</div>
+            <span class="ts__source"><span class="ts__source-g">G</span>Google Review · 5.0</span>
+            <div class="ts__stars" aria-label="5 bintang">★★★★★</div>
+            <p class="ts__body">HUNIAN KEREN!!! Model Jepang + Scandinavian, design bagus banget, lokasi strategis dekat ringroad. Di dalamnya ada masjid, lapangan basket, playground anak hingga kolam renang — paket komplit! Tim sangat ramah, fast response, dan progress pembangunan bisa dipantau lewat IG. Dijamin tidak akan kecewa dan betah tinggal di sini.</p>
+          </div>
+          <div class="ts__foot">
+            <div class="ts__av">D</div>
+            <div>
+              <div class="ts__name">Dhaka Galih Pratama</div>
+              <div class="ts__unit">Kawa Village · Local Guide · 60 reviews · 18 photos</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="ts__card glass reveal reveal--delay-1">
-        <div class="ts__quote">"</div>
-        <div class="ts__stars">★★★★★</div>
-        <p class="ts__body">"Lokasi Tentrem Bhumi sangat strategis. Anak-anak bisa ke sekolah sendiri, ke mall juga dekat. Lingkungannya tenang dan keamanannya terjaga."</p>
-        <div class="ts__foot">
-          <div class="ts__av">S</div>
+      </article>
+
+      <article class="ts__card glass reveal">
+        <div class="ts__media">
+          <img src="assets/img/testimoni/kumo-1-2-foto.webp" alt="Serah terima kunci Jonathan Ruben — Kawa Village" loading="lazy">
+          <span class="ts__media-tag">Serah Terima Kunci</span>
+        </div>
+        <div class="ts__content">
+          <div class="ts__quote">"</div>
           <div>
-            <div class="ts__name">Sri Wahyuni</div>
-            <div class="ts__unit">Tentrem Bhumi · Tipe 36</div>
+            <span class="ts__source"><span class="ts__source-g">G</span>Google Review · 5.0</span>
+            <div class="ts__stars" aria-label="5 bintang">★★★★★</div>
+            <p class="ts__body">Pertama datang ke Jogja langsung jatuh cinta sama kotanya. Saat survey ternyata lokasinya dekat dengan pusat kota. Salesnya sat-set, akhirnya memutuskan meminang hunian di Kawa Village. Saat pengecekan progress sangat dibantu tim JGS. Puas dan ga sabar liat hasil final rumahnya nanti 😊</p>
+          </div>
+          <div class="ts__foot">
+            <div class="ts__av">J</div>
+            <div>
+              <div class="ts__name">Jonathan Ruben</div>
+              <div class="ts__unit">Kawa Village · Local Guide · 30 reviews · 8 photos</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="ts__card glass reveal reveal--delay-2">
-        <div class="ts__quote">"</div>
-        <div class="ts__stars">★★★★★</div>
-        <p class="ts__body">"Kualitas bangunan memuaskan. Sudah setahun tinggal, belum ada masalah struktural. Komunitas perumahannya juga bagus dan aktif."</p>
-        <div class="ts__foot">
-          <div class="ts__av">R</div>
+      </article>
+
+      <article class="ts__card glass reveal">
+        <div class="ts__media">
+          <img src="assets/img/testimoni/mizu-16-foto.webp" alt="Serah terima kunci keluarga Pak Jo — Kawa Village" loading="lazy">
+          <span class="ts__media-tag">Serah Terima Kunci</span>
+        </div>
+        <div class="ts__content">
+          <div class="ts__quote">"</div>
           <div>
-            <div class="ts__name">Rizky Firmansyah</div>
-            <div class="ts__unit">Kawa Living · Tipe 60</div>
+            <span class="ts__source"><span class="ts__source-g">G</span>Google Review · 5.0</span>
+            <div class="ts__stars" aria-label="5 bintang">★★★★★</div>
+            <p class="ts__body">Sangat suka design japandi yang sangat kekinian. Lokasi sudah pasti suka — segala kebutuhan sehari-hari tersedia di Jl. Pleret: kuliner, SPBU, RS, sekolah, pasar, hingga waterpark. Akses ke Malioboro juga cukup dekat. Dari beberapa lokasi pembanding, Kawa Village bisa jadi pilihan terbaik.</p>
+          </div>
+          <div class="ts__foot">
+            <div class="ts__av">P</div>
+            <div>
+              <div class="ts__name">Pak Jo</div>
+              <div class="ts__unit">Kawa Village · Local Guide · 17 reviews · 8 photos</div>
+            </div>
           </div>
         </div>
+      </article>
+
+      <article class="ts__card glass reveal">
+        <div class="ts__media">
+          <img src="assets/img/testimoni/mizu-6-foto.webp" alt="Serah terima kunci Maha Rini — Kawa Village" loading="lazy">
+          <span class="ts__media-tag">Serah Terima Kunci</span>
+        </div>
+        <div class="ts__content">
+          <div class="ts__quote">"</div>
+          <div>
+            <span class="ts__source"><span class="ts__source-g">G</span>Google Review · 5.0</span>
+            <div class="ts__stars" aria-label="5 bintang">★★★★★</div>
+            <p class="ts__body">MasyaAllah setahun lebih nyari rumah model scandinavian di Jogja, baru nemu ini yang benar-benar mantap di hati. Fasilitas lengkap, dekat pusat kota, akses mudah ke bandara YIA dan stasiun. Desain arsitekturnya minimalis modern — dari warna, tata letak interior, sampai kualitas bangunan keren abis. Terima kasih JGS! ❤️</p>
+          </div>
+          <div class="ts__foot">
+            <div class="ts__av">M</div>
+            <div>
+              <div class="ts__name">Maha Rini</div>
+              <div class="ts__unit">Kawa Village · 5 reviews · 9 photos</div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="ts__footer container reveal">
+      <div class="ts__rating">
+        <span class="ts__rating-num">5.0</span>
+        <div class="ts__rating-meta">
+          <div class="ts__stars" aria-label="rating 5 dari 5">★★★★★</div>
+          <span class="ts__rating-label">Berdasarkan review pelanggan di Google</span>
+        </div>
       </div>
+      <a class="btn btn--ghost" href="https://www.google.com/search?q=Kawa+Village+Jogja+Graha+Selaras+reviews" target="_blank" rel="noopener">
+        Lihat semua review di Google
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 
