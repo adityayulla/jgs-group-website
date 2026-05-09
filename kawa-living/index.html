@@ -246,6 +246,15 @@
 
     /* Instagram */
     .ig { padding: 80px 0 100px; }
+    .ig__user {
+      display: inline-block; margin-top: 12px;
+      font-family: var(--font-mono); font-size: 14px; color: var(--orange);
+      text-decoration: none; letter-spacing: .04em; transition: opacity .2s;
+    }
+    .ig__user:hover { opacity: .75; }
+    .ig__cta { text-align: center; margin-top: 36px; padding: 0 var(--pad-x); }
+    .ig__cta .btn { gap: 10px; }
+    .ig__cta .btn svg { width: 16px; height: 16px; }
     .ig__head {
       max-width: var(--max-w); margin: 0 auto var(--sp-10); padding: 0 var(--pad-x);
       display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap;
@@ -370,8 +379,8 @@
         <div class="hero__glow"></div>
         <div class="hero__frame">
           <img
-            src="img/gate.webp"
-            alt="Kawa Living Sedayu — Gerbang Utama"
+            src="img/Kawa%20Living%20tipe%20Okina.webp"
+            alt="Kawa Living Sedayu — Tipe Okina"
             class="hero__img"
             loading="eager"
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)'"
@@ -842,41 +851,18 @@
 
   <!-- ══ INSTAGRAM ══════════════════════════════════════════════ -->
   <section class="ig section--sm" id="instagram">
-    <div class="ig__head">
-      <div>
-        <span class="eyebrow">Instagram</span>
-        <h2 class="section-title" style="font-size:clamp(28px,4vw,48px);">Follow Us<br>@jgsgroup</h2>
-      </div>
-      <a href="https://instagram.com/jgsgroup" target="_blank" rel="noopener" class="btn btn--ghost">Buka Instagram</a>
+    <div class="section__head container">
+      <span class="eyebrow">Social</span>
+      <h2 class="section-title reveal">Ikuti Kami di <em>Instagram</em></h2>
+      <a class="ig__user reveal reveal--delay-1" href="https://www.instagram.com/jogjagrahaselaras" target="_blank" rel="noopener">@jogjagrahaselaras</a>
     </div>
-    <div class="ig__grid">
-      <a href="https://www.instagram.com/jogjagrahaselaras" target="_blank" rel="noopener" class="ig__post reveal">
-        <img src="img/interior%20keluarga%202.webp" alt="Interior Ruang Keluarga Kawa Living" loading="lazy">
-        <div class="ig__over">
-          <div class="ig__cap">Interior ruang keluarga — Tipe Okina Himawari</div>
-          <div class="ig__likes">♥ 142</div>
-        </div>
-      </a>
-      <a href="https://www.instagram.com/jogjagrahaselaras" target="_blank" rel="noopener" class="ig__post reveal reveal--delay-1">
-        <img src="img/interior%20kamar%202.webp" alt="Interior Kamar Tidur Kawa Living" loading="lazy">
-        <div class="ig__over">
-          <div class="ig__cap">Interior kamar tidur — nuansa Japandi modern</div>
-          <div class="ig__likes">♥ 98</div>
-        </div>
-      </a>
-      <a href="https://www.instagram.com/jogjagrahaselaras" target="_blank" rel="noopener" class="ig__post reveal reveal--delay-2">
-        <img src="img/interior%20dapur.webp" alt="Interior Dapur Kawa Living" loading="lazy">
-        <div class="ig__over">
-          <div class="ig__cap">Inspirasi dapur — bersih & fungsional</div>
-          <div class="ig__likes">♥ 175</div>
-        </div>
-      </a>
-      <a href="https://www.instagram.com/jogjagrahaselaras" target="_blank" rel="noopener" class="ig__post reveal reveal--delay-3">
-        <img src="img/mini%20soccer.webp" alt="Lapangan Mini Soccer Kawa Living" loading="lazy">
-        <div class="ig__over">
-          <div class="ig__cap">Lapangan mini soccer kawasan Kawa Living</div>
-          <div class="ig__likes">♥ 76</div>
-        </div>
+    <!-- Elfsight Instagram Feed | Jgs-group-ig -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+    <div class="elfsight-app-5b520ce4-55ab-4aa5-800c-8d700ec939c7" data-elfsight-app-lazy></div>
+    <div class="ig__cta reveal">
+      <a href="https://www.instagram.com/jogjagrahaselaras" target="_blank" rel="noopener" class="btn btn--ghost btn--lg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
+        Lihat Feed Lengkap
       </a>
     </div>
   </section>
