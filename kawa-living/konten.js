@@ -158,7 +158,7 @@ var KONTEN = {
       denah: [
         {
           label: 'Denah Tipe Okina Himawari',
-          src:   '/assets/img/bluprint-okina.png',
+          src:   '/assets/img/bluprint-okina.webp',
           alt:   'Denah Okina Himawari Kawa Living',
         },
       ],
