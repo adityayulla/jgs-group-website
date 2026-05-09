@@ -17,9 +17,9 @@ var KONTEN = {
   },
 
   pesanWA: {
-    hero:  'Halo Fira, saya tertarik dengan Kawa Living Sedayu',
-    cta:   'Halo Fira, saya mau konsultasi tentang Kawa Living',
-    modal: 'Halo Fira, saya mau minta pricelist Kawa Living',
+    hero:  'Halo Dwi, saya tertarik dengan Kawa Living Sedayu',
+    cta:   'Halo Dwi, saya mau konsultasi tentang Kawa Living',
+    modal: 'Halo Dwi, saya mau minta pricelist Kawa Living',
   },
 
   /* ══════════════════════════════════════════════════════════════════════
@@ -41,14 +41,14 @@ var KONTEN = {
     est:       'Sedayu, Bantul · Jln. Wates KM 10',
     judul:     'Hunian Modern<br>di',
     highlight: 'Sedayu',
-    desc:      'Konsep terbuka, desain Japandi modern — dekat Ring Road Selatan, fasilitas lengkap, mulai Rp 441 Juta.',
+    desc:      'Konsep Japandi modern di kawasan tenang Sedayu — lapangan futsal, basket, playground & masjid. Mulai Rp 479 Juta.',
     btn1Label: 'Lihat Tipe Unit →',
     btn2Label: 'Download Pricelist',
     archImage: 'img/Kawa%20Living%20tipe%20Okina.webp',
     archAlt:   'Kawa Living Sedayu — Perumahan Bantul',
-    trustNum:   '13+',
+    trustNum:   '14+',
     trustLabel: 'TAHUN\nTERPERCAYA',
-    hotDeals:   'Unit Tersedia · Harga Mulai Rp 441 Juta',
+    hotDeals:   'Unit Tersedia · Harga Mulai Rp 479 Juta',
   },
 
   /* ══════════════════════════════════════════════════════════════════════
@@ -64,17 +64,19 @@ var KONTEN = {
      5. FASILITAS
   ══════════════════════════════════════════════════════════════════════ */
   fasilitas: [
-    { ikon: '⚽', nama: 'Mini Soccer'      },
-    { ikon: '🛝', nama: 'Playground'       },
-    { ikon: '🔐', nama: 'One Gate System'  },
-    { ikon: '🕌', nama: 'Musholla'         },
+    { ikon: '⚽', nama: 'Lapangan Futsal'   },
+    { ikon: '🏀', nama: 'Basket 3 on 3'     },
+    { ikon: '🛝', nama: 'Playground'        },
+    { ikon: '🕌', nama: 'Masjid'            },
+    { ikon: '🔐', nama: 'One Gate System'   },
+    { ikon: '📹', nama: 'CCTV Security'     },
   ],
 
   fotoFasilitas: [
     { src: 'img/mini%20soccer.webp',               alt: 'Lapangan Mini Soccer Kawa Living' },
-    { src: 'img/Kawa%20Living%20tipe%20Hiroi%20Yuri.webp', alt: 'Kawa Living Tipe Hiroi & Yuri' },
-    { src: 'img/Kawa%20Living%20tipe%20Okina.webp',        alt: 'Kawa Living Tipe Okina'        },
-    { src: '/assets/img/unit-unggulan/okina-10.webp',      alt: 'Okina tampak depan'            },
+    { src: 'img/Lapangan%20bola.webp',             alt: 'Lapangan Futsal Kawa Living'      },
+    { src: 'img/masjid.webp',                      alt: 'Masjid Kawa Living'               },
+    { src: 'img/gate.webp',                        alt: 'Gerbang Utama Kawa Living'        },
   ],
 
   /* ══════════════════════════════════════════════════════════════════════
@@ -82,58 +84,84 @@ var KONTEN = {
   ══════════════════════════════════════════════════════════════════════ */
   unit: [
     {
-      id:   'hiroi',
-      nama: 'Hiroi 36',
-      foto: [
-        { src: '/assets/img/unit-unggulan/hiroi-15.webp',          alt: 'Hiroi tampak depan'   },
-        { src: '/assets/img/unit-unggulan/hiroi-12.webp',           alt: 'Hiroi tampak samping' },
-        { src: 'img/Kawa%20Living%20tipe%20Hiroi%20Yuri.webp',     alt: 'Hiroi & Yuri deret'  },
-      ],
-      spek:       ['1 Lantai', '2 KT', '2 KM', 'LB 36m²', 'LT 75m²'],
-      hargaJenis: 'Cash Keras mulai',
-      hargaPokok: 'Rp 441.000.000',
-      hargaKPR:   'KPR mulai Rp 495.000.000',
-      terjual:    '',
-      pesanWA:    'Halo Fira, saya tertarik unit Hiroi di Kawa Living',
-      denah: [],
-    },
-    {
-      id:   'okina',
-      nama: 'Okina 61',
-      foto: [
-        { src: '/assets/img/unit-unggulan/okina-10.webp',    alt: 'Okina tampak depan'    },
-        { src: 'img/Kawa%20Living%20tipe%20Okina.webp',      alt: 'Okina tampak kawasan'  },
-        { src: 'img/tipe%20okina.webp',                      alt: 'Okina view 2'          },
-      ],
-      spek:       ['1 Lantai', '3 KT', '2 KM', 'LB 61m²', 'LT 90m²'],
-      hargaJenis: 'Cash Keras mulai',
-      hargaPokok: 'Rp 614.000.000',
-      hargaKPR:   'KPR mulai Rp 680.000.000',
-      terjual:    '',
-      pesanWA:    'Halo Fira, saya tertarik unit Okina di Kawa Living',
-      denah: [
-        {
-          label: 'Denah Tipe Okina',
-          src:   '/assets/img/bluprint-okina.png',
-          alt:   'Denah Okina Kawa Living',
-        },
-      ],
-    },
-    {
       id:   'yuri',
       nama: 'Yuri 40',
       foto: [
-        { src: '/assets/img/unit-unggulan/yuri-12.webp',    alt: 'Yuri tampak depan'   },
-        { src: '/assets/img/unit-unggulan/yuri-12-13.webp', alt: 'Yuri & Hiroi deret'  },
-        { src: 'img/tipe%20yuri.webp',                      alt: 'Yuri view 2'         },
+        { src: 'img/tipe%20yuri.webp',                          alt: 'Yuri tampak depan'   },
+        { src: 'img/Kawa%20Living%20tipe%20Hiroi%20Yuri.webp',  alt: 'Yuri & Hiroi deret'  },
+        { src: '/assets/img/unit-unggulan/yuri-12.webp',        alt: 'Yuri tampak depan 2' },
       ],
-      spek:       ['1 Lantai', '2 KT', '2 KM', 'LB 40m²', 'LT 80m²'],
+      spek:       ['1 Lantai', '2 KT', '1 KM', 'LB 40m²', 'LT 81m²'],
       hargaJenis: 'Cash Keras mulai',
       hargaPokok: 'Rp 479.000.000',
       hargaKPR:   'KPR mulai Rp 530.000.000',
       terjual:    '',
-      pesanWA:    'Halo Fira, saya tertarik unit Yuri di Kawa Living',
+      pesanWA:    'Halo Dwi, saya tertarik unit Yuri di Kawa Living',
+      denah: [
+        {
+          label: 'Denah Tipe Yuri',
+          src:   'img/denah%20yuri.webp',
+          alt:   'Denah Yuri Kawa Living',
+        },
+      ],
+    },
+    {
+      id:   'himawari',
+      nama: 'Himawari 51',
+      foto: [
+        { src: 'img/Kawa%20Living%20tipe%20Hiroi%20Yuri.webp',  alt: 'Himawari tampak depan'   },
+        { src: '/assets/img/unit-unggulan/hiroi-15.webp',        alt: 'Himawari tampak samping' },
+      ],
+      spek:       ['1 Lantai', '2 KT', '1 KM', 'LB 51m²', 'LT 72m²'],
+      hargaJenis: 'Cash Keras mulai',
+      hargaPokok: 'Rp 540.000.000',
+      hargaKPR:   'KPR mulai Rp 595.000.000',
+      terjual:    '',
+      pesanWA:    'Halo Dwi, saya tertarik unit Himawari di Kawa Living',
+      denah: [
+        {
+          label: 'Denah Tipe Himawari',
+          src:   'img/denah%20himawari.webp',
+          alt:   'Denah Himawari Kawa Living',
+        },
+      ],
+    },
+    {
+      id:   'mizu',
+      nama: 'Mizu 53',
+      foto: [
+        { src: 'img/yuri%20n%20hiroi.webp',                     alt: 'Mizu tampak depan'   },
+        { src: '/assets/img/unit-unggulan/hiroi-12.webp',        alt: 'Mizu tampak samping' },
+      ],
+      spek:       ['1 Lantai', '2 KT', '2 KM', 'LB 53m²', 'LT 72m²'],
+      hargaJenis: 'Cash Keras mulai',
+      hargaPokok: 'Rp 550.000.000',
+      hargaKPR:   'KPR mulai Rp 605.000.000',
+      terjual:    '',
+      pesanWA:    'Halo Dwi, saya tertarik unit Mizu di Kawa Living',
       denah: [],
+    },
+    {
+      id:   'okina',
+      nama: 'Okina Himawari 61',
+      foto: [
+        { src: '/assets/img/unit-unggulan/okina-10.webp',    alt: 'Okina Himawari tampak depan'   },
+        { src: 'img/Kawa%20Living%20tipe%20Okina.webp',      alt: 'Okina Himawari tampak kawasan' },
+        { src: 'img/tipe%20okina.webp',                      alt: 'Okina Himawari view 2'         },
+      ],
+      spek:       ['1 Lantai', '3 KT', '2 KM', 'LB 61m²', 'LT 82m²'],
+      hargaJenis: 'Cash Keras mulai',
+      hargaPokok: 'Rp 614.000.000',
+      hargaKPR:   'KPR mulai Rp 680.000.000',
+      terjual:    '',
+      pesanWA:    'Halo Dwi, saya tertarik unit Okina Himawari di Kawa Living',
+      denah: [
+        {
+          label: 'Denah Tipe Okina Himawari',
+          src:   '/assets/img/bluprint-okina.png',
+          alt:   'Denah Okina Himawari Kawa Living',
+        },
+      ],
     },
   ],
 
@@ -141,8 +169,6 @@ var KONTEN = {
      7. VIDEO TOUR
   ══════════════════════════════════════════════════════════════════════ */
   video: {
-    /* Kosongkan jika belum ada video. Isi dengan YouTube embed URL:
-       contoh: 'https://www.youtube.com/embed/xxxxx?autoplay=1' */
     youtubeEmbed: '',
     thumbAlt:     'Video Tour Kawa Living Sedayu',
   },
@@ -152,7 +178,7 @@ var KONTEN = {
   ══════════════════════════════════════════════════════════════════════ */
   maps: {
     embed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.456!2d110.2765!3d-7.8512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5b9b2a0a0a0a%3A0x0!2zS2F3YSBMaXZpbmcgU2VkYXl1!5e0!3m2!1sid!2sid!4v1',
-    label: 'Jln. Wates KM 10, Sedayu, Bantul, Yogyakarta',
+    label: 'Dusun Surobayan RT 09, Argomulyo, Sedayu, Bantul, Yogyakarta',
   },
 
   /* ══════════════════════════════════════════════════════════════════════
