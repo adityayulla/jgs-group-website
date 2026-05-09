@@ -250,35 +250,9 @@
     grid.innerHTML = blogPosts.map(renderBlogCard).join('');
   }
 
-  /* ============================================================
-     INSTAGRAM FEED
-     ============================================================ */
-  const IG_HANDLE = '@jogjagrahaselaras';
-  const IG_HREF   = 'https://www.instagram.com/jogjagrahaselaras';
-  const IG_TILES  = 6;
-  const IG_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>`;
-
-  function renderIgTile(_, i) {
-    const delayIdx = i % 3;
-    const delayCls = delayIdx === 0 ? '' : ' reveal--delay-' + delayIdx;
-    return `<a href="${IG_HREF}" target="_blank" rel="noopener" class="ig__tile reveal${delayCls}" aria-label="Instagram ${IG_HANDLE} — post ${i + 1}">
-  <div class="ig__tile-icon">${IG_ICON}</div>
-  <div class="ig__tile-overlay">${IG_ICON}</div>
-</a>`;
-  }
-
-  function initInstagram() {
-    const handle = document.querySelector('[data-ig-handle]');
-    if (handle) handle.textContent = IG_HANDLE;
-    const grid = document.getElementById('igGrid');
-    if (!grid) return;
-    grid.innerHTML = Array.from({ length: IG_TILES }, (_, i) => renderIgTile(null, i)).join('');
-  }
-
   document.addEventListener('DOMContentLoaded', () => {
     initPopular();
     initAwards();
     initBlog();
-    initInstagram();
   });
 })();
