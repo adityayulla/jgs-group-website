@@ -258,7 +258,52 @@ img { display: block; }
   font-size: 11px; font-weight: 600; color: #999;
   text-transform: uppercase; letter-spacing: .06em; margin: 16px 0 8px;
 }
-.denah-img { width: 100%; border-radius: 9px; border: 1px solid #eee; }
+.denah-img { width: 100%; border-radius: 9px; border: 1px solid #eee; cursor: zoom-in; }
+
+/* ── Denah Lightbox ── */
+.dlb {
+  display: none;
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,.88);
+  align-items: center; justify-content: center;
+}
+.dlb.dlb--open { display: flex; }
+.dlb__scroll {
+  overflow: auto;
+  max-width: 100vw; max-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 48px 16px 24px;
+  box-sizing: border-box;
+}
+.dlb__img {
+  max-width: 100%;
+  max-height: 92vh;
+  object-fit: contain;
+  border-radius: 8px;
+  cursor: zoom-in;
+  transition: transform .25s ease;
+  transform-origin: center center;
+  user-select: none;
+}
+.dlb__img.dlb--zoomed {
+  max-width: none; max-height: none;
+  cursor: zoom-out;
+  transform: scale(2);
+}
+.dlb__close {
+  position: fixed; top: 14px; right: 16px;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  border: none; color: #fff; font-size: 20px; line-height: 1;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  z-index: 10000;
+}
+.dlb__hint {
+  position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+  font-size: 12px; color: rgba(255,255,255,.45);
+  font-family: monospace; letter-spacing: .05em; pointer-events: none;
+  white-space: nowrap;
+}
 
 /* ─────────────────────────────────────────
    INTERIOR STRIP
@@ -1422,5 +1467,55 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <script src="../assets/js/main.js"></script>
 <script src="/assets/js/pricelist-modal.js"></script>
+
+<!-- Denah Lightbox -->
+<div class="dlb" id="dlb" role="dialog" aria-modal="true" aria-label="Lihat denah">
+  <button class="dlb__close" id="dlbClose" aria-label="Tutup">✕</button>
+  <div class="dlb__scroll" id="dlbScroll">
+    <img class="dlb__img" id="dlbImg" src="" alt="Denah">
+  </div>
+  <div class="dlb__hint">Klik gambar untuk zoom · Klik di luar untuk tutup</div>
+</div>
+
+<script>
+(function () {
+  var dlb      = document.getElementById('dlb');
+  var dlbImg   = document.getElementById('dlbImg');
+  var dlbClose = document.getElementById('dlbClose');
+  var dlbScroll= document.getElementById('dlbScroll');
+
+  function openLightbox(src, alt) {
+    dlbImg.src = src;
+    dlbImg.alt = alt || 'Denah';
+    dlbImg.classList.remove('dlb--zoomed');
+    dlb.classList.add('dlb--open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    dlb.classList.remove('dlb--open');
+    document.body.style.overflow = '';
+    dlbImg.classList.remove('dlb--zoomed');
+  }
+
+  // Wire up all denah images (including dynamically rendered ones)
+  document.addEventListener('click', function (e) {
+    var img = e.target.closest('.denah-img');
+    if (img) { openLightbox(img.src, img.alt); return; }
+    // Click outside image = close
+    if (e.target === dlb || e.target === dlbScroll) closeLightbox();
+  });
+
+  dlbClose.addEventListener('click', closeLightbox);
+
+  dlbImg.addEventListener('click', function (e) {
+    e.stopPropagation();
+    dlbImg.classList.toggle('dlb--zoomed');
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+})();
+</script>
 </body>
 </html>
