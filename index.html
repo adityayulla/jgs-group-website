@@ -731,7 +731,6 @@
       scroll-snap-align: start;
       transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .3s;
       box-shadow: 0 20px 40px -20px rgba(27,42,100,.3);
-      will-change: transform;
     }
     .pop-card:hover { box-shadow: 0 30px 60px -20px rgba(27,42,100,.5); }
     .pop-card__img {
@@ -739,6 +738,8 @@
       background-color: #1b2a64; /* placeholder */
       background-size: cover; background-position: center;
       transition: transform .6s cubic-bezier(.2,.8,.2,1);
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
     .pop-card:hover .pop-card__img { transform: scale(1.05); }
     .pop-card__shade {
