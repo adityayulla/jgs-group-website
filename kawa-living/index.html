@@ -3,895 +3,791 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kawa Living Sedayu — Perumahan Premium Bantul, Yogyakarta</title>
-  <meta name="description" content="Kawa Living Sedayu — hunian modern di kawasan strategis Bantul, Yogyakarta. Mulai Rp 450 Juta. Bebas biaya KPR + cashback 25 juta.">
+  <title>Kawa Living Sedayu — Perumahan Modern Bantul, Yogyakarta</title>
+  <meta name="description" content="Kawa Living Sedayu — hunian modern konsep Japandi di Jln. Wates KM 10, Bantul. Mulai Rp 441 Juta. 3 tipe unit: Hiroi, Okina, Yuri.">
   <meta property="og:title" content="Kawa Living Sedayu — JGS Group">
-  <meta property="og:description" content="Hunian modern di Sedayu, Bantul. Mulai Rp 450 Juta.">
+  <meta property="og:description" content="Hunian modern Japandi di Sedayu, Bantul. Mulai Rp 441 Juta.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/global.css">
-  <style>
-    /* ── Kawa Living page styles ─────────────────────────── */
+<!-- ✏️ SEMUA KONTEN (teks, gambar, harga, WA) ada di file konten.js -->
+<script src="konten.js"></script>
+<style>
 
-    /* Hero */
-    .hero__grid {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: 1fr 1.05fr;
-      gap: 60px; align-items: center;
-    }
-    .hero__eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--font-mono); font-size: 11px;
-      letter-spacing: .18em; color: var(--navy);
-      margin-bottom: 24px; text-transform: uppercase;
-    }
-    .hero__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 12px var(--orange); }
-    .hero__title {
-      font-family: var(--font-display); font-weight: 400;
-      font-size: clamp(44px, 6vw, 88px);
-      line-height: .98; letter-spacing: -.02em; margin: 0 0 28px; color: var(--navy);
-    }
-    .hero__line  { display: block; }
-    .hero__slab  { display: inline-block; background: var(--orange); color: #fff; padding: 2px 16px 8px; font-style: italic; border-radius: 2px; }
-    .hero__sub   { font-size: 17px; line-height: 1.55; color: var(--muted); max-width: 480px; margin: 0 0 36px; text-wrap: pretty; }
-    .hero__ctas  { display: flex; gap: 12px; margin-bottom: 56px; flex-wrap: wrap; }
-    .hero__stats { display: flex; align-items: flex-start; gap: 28px; }
-    .hero__divider { width: 1px; align-self: stretch; background: var(--line); }
-    .stat__num   { font-family: var(--font-display); font-weight: 500; font-size: 42px; line-height: 1; color: var(--navy); letter-spacing: -.02em; }
-    .stat__label { font-size: 12px; color: var(--muted); margin-top: 6px; letter-spacing: .02em; }
-    .hero__visual {
-      position: relative; aspect-ratio: 1 / 1.05;
-      max-width: 580px; margin-left: auto;
-    }
-    .hero__glow {
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
-      width: 110%; height: 110%;
-      background: radial-gradient(circle, rgba(255,205,120,.55) 0%, rgba(219,127,46,.25) 25%, rgba(90,130,240,.15) 55%, transparent 72%);
-      filter: blur(40px); z-index: 0;
-    }
-    .hero__frame {
-      position: relative; width: 100%; height: 100%;
-      border-radius: 240px 240px 24px 24px; overflow: hidden;
-      box-shadow: 0 30px 80px -20px rgba(27,42,100,.35); z-index: 1;
-    }
-    .hero__img { width: 100%; height: 100%; object-fit: cover; }
-    .hero__badge {
-      position: absolute; left: -30px; top: 40px;
-      background: #fff; border-radius: 50%;
-      width: 130px; height: 130px;
-      display: grid; place-items: center;
-      box-shadow: 0 10px 30px -10px rgba(27,42,100,.35);
-      z-index: 2; text-align: center; border: 6px solid var(--bg);
-    }
-    .hero__badge-num  { font-family: var(--font-display); font-size: 38px; line-height: 1; color: var(--orange); font-weight: 600; }
-    .hero__badge-text { font-size: 9px; letter-spacing: .14em; color: var(--navy); margin-top: 4px; text-transform: uppercase; font-weight: 600; }
-    .hero__tag {
-      position: absolute; right: -10px; bottom: 60px;
-      background: var(--navy); color: #fff;
-      padding: 12px 18px; border-radius: var(--r-pill);
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 13px; box-shadow: 0 10px 30px -10px rgba(0,0,0,.4); z-index: 2;
-    }
-    .hero__tag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); animation: pulse 2s infinite; }
+/* ═══════════════════════════════════════════════════════════
+   PAGE WRAPPER & COLORS
+═══════════════════════════════════════════════════════════ */
+:root {
+  --kl-navy:   #1b2a64;
+  --kl-navy2:  #2c3e8c;
+  --kl-orange: #E8872A;
+  --kl-bg:     #f0f2f8;
+  --kl-card:   #e8ecf5;
+  --kl-text:   #1b2a64;
+  --kl-muted:  #5a6a8a;
+  --kl-line:   rgba(27,42,100,.12);
+}
 
-    /* Values / Mengapa Kawa Living */
-    .val { position: relative; padding: 120px 0; }
-    .val__grid {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
-    }
-    .val__card {
-      position: relative; padding: 32px 24px 64px;
-      background: linear-gradient(160deg, #1b2a64, #2c3e8c);
-      color: #fff; border-radius: 20px; min-height: 260px;
-      overflow: hidden;
-      transition: transform .3s var(--ease);
-    }
-    .val__card:hover { transform: translateY(-6px); }
-    .val__card::before {
-      content: ""; position: absolute; inset: 0;
-      background: radial-gradient(circle at 80% 10%, rgba(219,127,46,.25), transparent 50%);
-      pointer-events: none;
-    }
-    .val__num       { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; opacity: .7; margin-bottom: 20px; position: relative; }
-    .val__title     { font-family: var(--font-display); font-size: 24px; font-weight: 500; margin-bottom: 10px; line-height: 1.15; position: relative; }
-    .val__body      { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,.75); position: relative; }
-    .val__arr       { position: absolute; right: 24px; bottom: 24px; color: var(--orange); }
+.lp { max-width: 390px; margin: 0 auto; background: transparent; position: relative; z-index: 1; }
 
-    /* Popular */
-    .pop { position: relative; padding: 80px 0 120px; }
-    .pop__rail {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-    }
-    .pop__card { aspect-ratio: 0.55; }
+/* ─────────────────────────────────────────
+   DESKTOP NAV (hidden on mobile)
+───────────────────────────────────────── */
+.desktop-nav { display: none; }
 
-    /* Video Tour */
-    .vt { position: relative; padding: 80px 0 120px; }
-    .vt__frame {
-      position: relative; max-width: 1200px; margin: 0 auto;
-      aspect-ratio: 16/9; border-radius: 28px; overflow: hidden;
-      cursor: pointer;
-      box-shadow: 0 40px 80px -30px rgba(27,42,100,.5);
-    }
-    .vt__thumb {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover;
-    }
-    .vt__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.55) 100%); }
-    .vt__play {
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      width: 84px; height: 84px; border-radius: 50%;
-      background: var(--orange); color: #fff;
-      display: grid; place-items: center;
-      transition: transform .3s, background .3s;
-      box-shadow: 0 0 0 0 rgba(219,127,46,.6);
-      animation: pulse 2.4s infinite;
-    }
-    .vt__play:hover { transform: translate(-50%,-50%) scale(1.08); background: var(--orange-2); }
-    .vt__caption { position: absolute; left: 40px; bottom: 32px; color: #fff; z-index: 2; }
-    .vt__cap-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; opacity: .85; margin-bottom: 4px; }
-    .vt__cap-name  { font-family: var(--font-display); font-size: 36px; font-weight: 500; line-height: 1; }
-    .vt__cap-meta  { font-size: 13px; opacity: .8; margin-top: 4px; }
-    .vt__modal {
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,.85);
-      display: none; place-items: center;
-    }
-    .vt__modal--on { display: grid; }
-    .vt__modal-inner { position: relative; width: min(900px, 90vw); aspect-ratio: 16/9; }
-    .vt__modal-inner iframe { width: 100%; height: 100%; border: none; border-radius: 12px; }
-    .vt__modal-close {
-      position: absolute; top: -44px; right: 0;
-      background: rgba(255,255,255,.15); border: none; color: #fff;
-      width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
-      display: grid; place-items: center; font-size: 20px;
-    }
+/* ─────────────────────────────────────────
+   STICKY WA BUTTON
+───────────────────────────────────────── */
+.wa-sticky {
+  position: fixed; bottom: 20px; right: 18px; z-index: 999;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  text-decoration: none;
+}
+.wa-circle {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: #25D366; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 20px rgba(37,211,102,.5);
+}
+.wa-label {
+  font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: #25D366; font-family: monospace; white-space: nowrap;
+}
 
-    /* Testimonials */
-    .ts { position: relative; padding: 80px 0; }
-    .ts__grid {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-    }
-    .ts__card { padding: 36px 28px 28px; }
-    .ts__quote-icon { position: absolute; right: 24px; top: 20px; width: 40px; height: 40px; color: var(--orange); opacity: .2; }
-    .ts__body { font-family: var(--font-display); font-weight: 400; font-size: 18px; line-height: 1.55; color: var(--navy); margin: 0 0 28px; font-style: italic; text-wrap: pretty; }
-    .ts__foot { display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid var(--line); }
-    .ts__av   { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 16px; font-weight: 600; flex-shrink: 0; }
-    .ts__name { font-size: 14px; font-weight: 600; color: var(--navy); }
-    .ts__unit { font-size: 12px; color: var(--muted); margin-top: 2px; }
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero-new {
+  padding: 90px 20px 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  position: relative; overflow: hidden;
+  background: linear-gradient(175deg, #1b2a64 0%, #2c3e8c 55%, #1b3a7a 100%);
+}
+.hero-head { display: flex; flex-direction: column; }
+.hero-body { display: flex; flex-direction: column; }
 
-    /* Promo */
-    .pm { padding: 40px var(--pad-x); max-width: var(--max-w); margin: 0 auto; }
-    .pm__inner {
-      position: relative; display: grid;
-      grid-template-columns: 1.6fr 1fr; gap: 40px; align-items: center;
-      padding: 56px 48px;
-      background: linear-gradient(135deg, #db7f2e, #e8923f);
-      border-radius: 28px; color: #fff; overflow: hidden;
-    }
-    .pm__dots {
-      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
-      background-image: radial-gradient(rgba(255,255,255,.18) 1.5px, transparent 1.5px);
-      background-size: 22px 22px;
-    }
-    .pm__tag   { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; background: rgba(0,0,0,.15); padding: 6px 14px; border-radius: var(--r-pill); margin-bottom: 16px; position: relative; }
-    .pm__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; letter-spacing: -.02em; margin: 0 0 14px; position: relative; }
-    .pm__body  { font-size: 15px; line-height: 1.5; margin: 0; opacity: .9; position: relative; }
-    .pm__right { position: relative; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-    .pm__right .btn { background: #fff; color: var(--navy); }
-    .pm__right .btn:hover { background: var(--navy); color: #fff; }
-    .pm__fine  { font-size: 11px; opacity: .8; }
+.hero-est {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 10px;
+}
+.hero-est-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--kl-orange); flex-shrink: 0; }
 
-    /* Calculator */
-    .calc { padding: 100px 0; }
-    .calc__inner {
-      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: center;
-    }
-    .calc__title  { font-family: var(--font-display); font-weight: 400; font-size: clamp(34px, 4vw, 54px); line-height: 1.05; letter-spacing: -.02em; color: var(--navy); margin: 0 0 18px; }
-    .calc__body   { font-size: 16px; color: var(--muted); line-height: 1.55; margin: 0 0 28px; max-width: 420px; }
-    .calc__panel  { padding: 36px; background: #fff; border-radius: var(--r-lg); box-shadow: 0 30px 60px -30px rgba(27,42,100,.3); border: 1px solid var(--line); }
-    .calc__row    { margin-bottom: 24px; }
-    .calc__head   { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; color: var(--muted); }
-    .calc__val    { font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--navy); }
-    .calc__row input[type=range] {
-      width: 100%; -webkit-appearance: none; appearance: none;
-      height: 4px; background: rgba(27,42,100,.15); border-radius: var(--r-pill); outline: none;
-    }
-    .calc__row input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none; appearance: none;
-      width: 20px; height: 20px; border-radius: 50%;
-      background: var(--orange); cursor: pointer; box-shadow: 0 2px 6px rgba(219,127,46,.5);
-    }
-    .calc__row input[type=range]::-moz-range-thumb {
-      width: 20px; height: 20px; border-radius: 50%;
-      background: var(--orange); cursor: pointer; border: none;
-    }
-    .calc__result { margin-top: 28px; padding: 24px; border-radius: var(--r-md); background: linear-gradient(135deg, #1b2a64, #2c3e8c); color: #fff; }
-    .calc__rlabel { font-size: 12px; opacity: .8; letter-spacing: .04em; }
-    .calc__rval   { font-family: var(--font-display); font-size: 36px; font-weight: 500; letter-spacing: -.02em; margin-top: 4px; line-height: 1; }
-    .calc__rmeta  { font-size: 12px; opacity: .7; margin-top: 6px; }
+.hero-h1 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.15;
+  color: #fff; margin-bottom: 0;
+}
+.hero-h1 em { font-style: italic; }
 
-    /* Units detail */
-    .un { padding: 120px 0; }
-    .un__list  { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); display: flex; flex-direction: column; gap: 40px; }
-    .un__row   { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 24px; border-radius: var(--r-lg); }
-    .un__row--alt { direction: rtl; }
-    .un__row--alt > * { direction: ltr; }
-    .un__img   { aspect-ratio: 4/3; border-radius: var(--r-md); overflow: hidden; position: relative; }
-    .un__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
-    .un__row:hover .un__img img { transform: scale(1.04); }
-    .un__copy  { padding: 20px; }
-    .un__tagrow { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-    .un__tag   { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; padding: 4px 10px; border-radius: var(--r-pill); background: rgba(219,127,46,.12); color: var(--orange); text-transform: uppercase; }
-    .un__name  { font-family: var(--font-display); font-weight: 500; font-size: 40px; line-height: 1; letter-spacing: -.02em; color: var(--navy); margin: 0; }
-    .un__loc   { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); margin: 10px 0 16px; }
-    .un__desc  { font-size: 15px; line-height: 1.55; color: var(--muted); margin: 0 0 20px; text-wrap: pretty; }
-    .un__specs { display: flex; gap: 20px; font-size: 13px; color: var(--navy); padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 20px; flex-wrap: wrap; }
-    .un__specs > div { display: inline-flex; align-items: center; gap: 6px; }
-    .un__footer { display: flex; justify-content: space-between; align-items: center; }
-    .un__price  { display: flex; flex-direction: column; font-size: 12px; color: var(--muted); }
-    .un__price strong { font-family: var(--font-display); font-weight: 500; font-size: 26px; color: var(--navy); letter-spacing: -.01em; margin-top: 2px; }
+.hero-hl {
+  display: inline-block;
+  background: var(--kl-orange); color: #fff;
+  padding: 4px 14px 6px; border-radius: 8px;
+  font-style: italic; font-size: 32px;
+  margin-top: 4px; line-height: 1.1;
+}
 
-    /* FAQ */
-    .faq { padding: 80px 0; }
-    .faq__list { max-width: 860px; margin: 0 auto; padding: 0 var(--pad-x); display: flex; flex-direction: column; gap: 12px; }
+.hero-right { position: relative; }
+.hero-img-bg {
+  position: absolute; inset: -20px -20px 0;
+  background: radial-gradient(circle at 60% 40%, rgba(232,135,42,.25) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-arch-wrap {
+  position: relative; width: 100%; aspect-ratio: 4/3;
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,.4);
+}
+.hero-arch-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* Instagram */
-    .ig { padding: 80px 0 100px; }
-    .ig__head {
-      max-width: var(--max-w); margin: 0 auto var(--sp-10); padding: 0 var(--pad-x);
-      display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap;
-    }
-    .ig__grid {
-      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-    }
-    .ig__post { position: relative; aspect-ratio: 1; border-radius: var(--r-md); overflow: hidden; display: block; }
-    .ig__post img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-    .ig__post:hover img { transform: scale(1.08); }
-    .ig__over {
-      position: absolute; inset: 0; padding: 16px;
-      display: flex; flex-direction: column; justify-content: flex-end; gap: 4px;
-      color: #fff;
-      background: linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 50%);
-      opacity: 0; transition: opacity .3s;
-    }
-    .ig__post:hover .ig__over { opacity: 1; }
-    .ig__cap   { font-size: 12px; line-height: 1.4; }
-    .ig__likes { font-size: 11px; opacity: .85; }
+.hero-trust-badge {
+  position: absolute; top: 12px; left: 12px;
+  background: rgba(255,255,255,.95); border-radius: 50%;
+  width: 72px; height: 72px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25); text-align: center;
+}
+.htb-num   { font-family: 'Lora', serif; font-size: 20px; font-weight: 700; color: var(--kl-orange); line-height: 1; }
+.htb-label { font-size: 7px; font-weight: 700; letter-spacing: .05em; color: var(--kl-navy); text-transform: uppercase; line-height: 1.2; margin-top: 2px; white-space: pre-line; }
 
-    /* ── Responsive ─────────────────────────────────── */
-    @media (max-width: 1024px) {
-      .val__grid { grid-template-columns: repeat(2, 1fr); }
-      .ig__grid  { grid-template-columns: repeat(3, 1fr); }
-    }
+.hero-hot-pill {
+  position: absolute; bottom: 12px; right: 0;
+  background: rgba(27,42,100,.85); backdrop-filter: blur(8px);
+  color: #fff; font-size: 11px; font-weight: 600; letter-spacing: .04em;
+  padding: 7px 14px; border-radius: 999px;
+  display: flex; align-items: center; gap: 7px;
+}
+.hhp-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--kl-orange); animation: pulse 2s infinite; flex-shrink: 0; }
 
-    @media (max-width: 900px) {
-      .hero__grid { grid-template-columns: 1fr; }
-      .hero__visual { max-width: 100%; margin: 0; }
-      .hero__badge  { left: -14px; width: 90px; height: 90px; }
-      .hero__badge-num { font-size: 28px; }
-      .pop__rail { grid-template-columns: 1fr; }
-      .ts__grid  { grid-template-columns: 1fr; }
-      .calc__inner { grid-template-columns: 1fr; gap: 36px; }
-      .un__row   { grid-template-columns: 1fr; direction: ltr !important; }
-      .un__row--alt > * { direction: ltr; }
-      .pm__inner { grid-template-columns: 1fr; }
-      .pm__right { align-items: stretch; }
-      .pm__right .btn { justify-content: center; }
-    }
+.hero-desc {
+  font-size: 14px; line-height: 1.65; color: rgba(255,255,255,.8); margin: 0;
+}
+.hero-btns { display: flex; gap: 10px; flex-wrap: nowrap; align-items: center; margin-top: 4px; }
+.btn-hero-primary {
+  flex: 1; background: var(--kl-orange); color: #fff;
+  padding: 13px 16px; border-radius: 10px; text-align: center;
+  font-size: 14px; font-weight: 700; text-decoration: none;
+  box-shadow: 0 4px 16px rgba(232,135,42,.45);
+  transition: background .2s;
+}
+.btn-hero-primary:hover { background: #d4751e; }
+.btn-hero-outline {
+  flex: 1; background: rgba(255,255,255,.12); color: #fff;
+  padding: 13px 16px; border-radius: 10px; text-align: center;
+  font-size: 14px; font-weight: 600; border: 1.5px solid rgba(255,255,255,.3);
+  cursor: pointer; transition: background .2s;
+}
+.btn-hero-outline:hover { background: rgba(255,255,255,.2); }
 
-    @media (max-width: 600px) {
-      .hero { padding: 100px 0 60px; }
-      .hero__title { font-size: clamp(38px, 11vw, 52px); }
-      .hero__sub  { font-size: 15px; }
-      .hero__stats { gap: 16px; }
-      .stat__num  { font-size: 32px; }
-      .val__grid  { grid-template-columns: 1fr; }
-      .ig__grid   { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .ig__over   { opacity: 1; }
-      .pm__inner  { padding: 36px 24px; border-radius: var(--r-md); }
-      .vt__frame  { border-radius: 20px; aspect-ratio: 4/5; }
-      .vt__play   { width: 64px; height: 64px; }
-      .vt__caption { left: 20px; bottom: 20px; }
-      .vt__cap-name { font-size: 24px; }
-      .un__name   { font-size: 30px; }
-      .calc__panel { padding: 22px; }
-    }
-  </style>
+/* ─────────────────────────────────────────
+   TRUST BAR
+───────────────────────────────────────── */
+.trust-bar {
+  display: flex; background: var(--kl-navy);
+  padding: 0; overflow: hidden;
+}
+.trust-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 14px 8px; text-align: center; position: relative;
+}
+.trust-item + .trust-item::before {
+  content: ''; position: absolute; left: 0; top: 20%; bottom: 20%;
+  width: 1px; background: rgba(255,255,255,.15);
+}
+.trust-val   { font-family: 'Lora', serif; font-size: 20px; font-weight: 700; color: var(--kl-orange); line-height: 1; }
+.trust-label { font-size: 10px; color: rgba(255,255,255,.6); margin-top: 4px; letter-spacing: .04em; }
+
+/* ─────────────────────────────────────────
+   SECTION SHARED
+───────────────────────────────────────── */
+.section-kl { padding: 36px 20px; }
+.section-kl-title {
+  font-family: 'Lora', serif; font-size: 22px; font-weight: 700;
+  color: var(--kl-navy); margin: 0 0 4px; line-height: 1.2;
+}
+.section-kl-sub { font-size: 13px; color: var(--kl-muted); margin: 0 0 20px; line-height: 1.5; }
+.section-eyebrow {
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--kl-orange); margin-bottom: 8px;
+}
+
+/* ─────────────────────────────────────────
+   FASILITAS
+───────────────────────────────────────── */
+.fас-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.fас-card {
+  background: var(--kl-card); border-radius: 14px; padding: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.fас-icon { font-size: 26px; flex-shrink: 0; }
+.fас-name { font-size: 13px; font-weight: 600; color: var(--kl-navy); }
+
+/* ─────────────────────────────────────────
+   FOTO KAWASAN (scroll strip)
+───────────────────────────────────────── */
+.kawasan-strip {
+  display: flex; gap: 10px; overflow-x: auto; padding: 0 20px 12px;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.kawasan-strip::-webkit-scrollbar { display: none; }
+.kawasan-item {
+  flex: 0 0 220px; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden;
+  scroll-snap-align: start;
+}
+.kawasan-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ─────────────────────────────────────────
+   UNIT TABS
+───────────────────────────────────────── */
+.unit-tabs {
+  display: flex; overflow-x: auto; gap: 8px; padding: 0 20px 12px;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.unit-tabs::-webkit-scrollbar { display: none; }
+.unit-tab {
+  flex: 0 0 auto; padding: 8px 20px; border-radius: 999px;
+  background: var(--kl-card); border: 2px solid transparent;
+  font-size: 13px; font-weight: 600; color: var(--kl-muted);
+  cursor: pointer; white-space: nowrap; transition: all .2s;
+}
+.unit-tab.active {
+  background: var(--kl-navy); border-color: var(--kl-navy); color: #fff;
+}
+
+/* ─────────────────────────────────────────
+   UNIT CARD
+───────────────────────────────────────── */
+.unit-card { display: none; }
+.unit-card.active { display: block; }
+
+.unit-slides {
+  position: relative; overflow: hidden;
+  display: flex; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; overflow-x: auto;
+}
+.unit-slides::-webkit-scrollbar { display: none; }
+.unit-slides img {
+  flex: 0 0 100%; width: 100%; aspect-ratio: 4/3;
+  object-fit: cover; display: block; scroll-snap-align: start;
+}
+
+.unit-body { padding: 16px 20px; }
+.unit-name {
+  font-family: 'Lora', serif; font-size: 22px; font-weight: 700;
+  color: var(--kl-navy); margin-bottom: 10px;
+}
+.unit-specs { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+.unit-spec {
+  font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;
+  background: var(--kl-card); color: var(--kl-navy);
+}
+.unit-price-box {
+  background: var(--kl-card); border-radius: 14px; padding: 16px;
+  margin-bottom: 14px;
+}
+.unit-price-type { font-size: 12px; color: var(--kl-muted); margin-bottom: 4px; }
+.unit-price {
+  font-family: 'Lora', serif; font-size: 24px; font-weight: 700; color: var(--kl-navy); line-height: 1.1;
+}
+.unit-price-kpr { font-size: 12px; color: var(--kl-muted); margin-top: 4px; }
+
+.unit-footer-row {
+  display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+  padding-top: 12px;
+}
+.btn-info {
+  display: inline-block; background: var(--kl-navy); color: #fff;
+  padding: 11px 22px; border-radius: 10px; font-size: 14px; font-weight: 600;
+  text-decoration: none; border: 1.5px solid var(--kl-navy);
+  transition: background .2s;
+}
+.btn-info:hover { background: var(--kl-navy2); }
+
+/* ─────────────────────────────────────────
+   DENAH
+───────────────────────────────────────── */
+.unit-denah { padding: 0 20px 16px; }
+.denah-label {
+  font-size: 11px; font-weight: 600; color: #999;
+  text-transform: uppercase; letter-spacing: .06em; margin: 16px 0 8px;
+}
+.denah-img { width: 100%; border-radius: 9px; border: 1px solid #dde; cursor: zoom-in; }
+
+/* ─────────────────────────────────────────
+   VIDEO TOUR
+───────────────────────────────────────── */
+.vt-section { padding: 0 20px 36px; }
+.vt-frame {
+  position: relative; border-radius: 16px; overflow: hidden;
+  aspect-ratio: 16/9; background: var(--kl-navy);
+  box-shadow: 0 12px 32px rgba(27,42,100,.35);
+  cursor: pointer;
+}
+.vt-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vt-shade { position: absolute; inset: 0; background: rgba(0,0,0,.4); }
+.vt-play {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--kl-orange); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 20px rgba(232,135,42,.6);
+  animation: pulse 2.4s infinite;
+}
+.vt-no-video {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px; color: rgba(255,255,255,.6);
+  font-size: 13px; text-align: center; padding: 20px;
+}
+.vt-modal {
+  position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,.9);
+  display: none; place-items: center;
+}
+.vt-modal.open { display: grid; }
+.vt-modal-inner { position: relative; width: min(600px, 94vw); aspect-ratio: 16/9; }
+.vt-modal-inner iframe { width: 100%; height: 100%; border: none; border-radius: 12px; }
+.vt-close {
+  position: absolute; top: -40px; right: 0;
+  background: rgba(255,255,255,.15); border: none; color: #fff;
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center; font-size: 18px;
+}
+
+/* ─────────────────────────────────────────
+   MAPS
+───────────────────────────────────────── */
+.maps-section { padding: 0 20px 36px; }
+.maps-label {
+  font-size: 12px; font-weight: 600; color: var(--kl-muted);
+  letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.maps-wrap { border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+.maps-wrap iframe { width: 100%; height: 220px; border: none; display: block; }
+
+/* ─────────────────────────────────────────
+   CTA SECTION
+───────────────────────────────────────── */
+.cta-kl {
+  margin: 0 16px 32px;
+  background: linear-gradient(135deg, #1b2a64, #2c3e8c);
+  border-radius: 20px; padding: 32px 20px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.cta-kl::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(232,135,42,.25), transparent 55%);
+  pointer-events: none;
+}
+.cta-kl-title {
+  font-family: 'Lora', serif; font-size: 22px; font-weight: 700;
+  color: #fff; margin: 0 0 8px; line-height: 1.25; position: relative;
+}
+.cta-kl-sub { font-size: 13px; color: rgba(255,255,255,.7); margin: 0 0 20px; position: relative; }
+.cta-kl-btns { display: flex; flex-direction: column; gap: 10px; position: relative; }
+.btn-cta-wa {
+  background: var(--kl-orange); color: #fff; padding: 14px;
+  border-radius: 12px; font-size: 15px; font-weight: 700;
+  text-decoration: none; display: block; text-align: center;
+  box-shadow: 0 4px 16px rgba(232,135,42,.5);
+}
+.btn-cta-outline {
+  background: transparent; color: rgba(255,255,255,.8);
+  padding: 13px; border-radius: 12px; font-size: 14px; font-weight: 600;
+  border: 1.5px solid rgba(255,255,255,.3);
+  text-decoration: none; display: block; text-align: center;
+}
+
+/* ─────────────────────────────────────────
+   FOOTER KAWA LIVING
+───────────────────────────────────────── */
+.footer-kl {
+  background: var(--kl-navy); color: rgba(255,255,255,.75);
+  padding: 28px 20px; font-size: 13px; line-height: 1.7;
+}
+.footer-kl-brand {
+  font-family: 'Lora', serif; font-size: 20px; font-weight: 700;
+  color: #fff; margin-bottom: 6px;
+}
+.footer-kl a { color: rgba(255,255,255,.6); text-decoration: none; }
+.footer-kl-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.footer-kl-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px; line-height: 1.4;
+}
+.footer-kl-badge--avail { background: rgba(144,205,130,.18); color: #90cd82; }
+.footer-kl-badge--warn  { background: var(--kl-orange); color: #fff; }
+.footer-kl-bot { margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.1); font-size: 11px; color: rgba(255,255,255,.35); }
+
+/* ─────────────────────────────────────────
+   DENAH LIGHTBOX
+───────────────────────────────────────── */
+.dlb { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.88); align-items: center; justify-content: center; }
+.dlb.dlb--open { display: flex; }
+.dlb__scroll { overflow: auto; max-width: 100vw; max-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 48px 16px 24px; box-sizing: border-box; }
+.dlb__img { max-width: 100%; max-height: 92vh; object-fit: contain; border-radius: 8px; cursor: zoom-in; transition: transform .25s ease; transform-origin: center center; user-select: none; }
+.dlb__img.dlb--zoomed { max-width: none; max-height: none; cursor: zoom-out; transform: scale(2); }
+.dlb__close { position: fixed; top: 14px; right: 16px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.15); border: none; color: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10000; }
+.dlb__hint { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); font-size: 12px; color: rgba(255,255,255,.45); font-family: monospace; letter-spacing: .05em; pointer-events: none; white-space: nowrap; }
+
+/* ─────────────────────────────────────────
+   DESKTOP (≥ 768px)
+───────────────────────────────────────── */
+@media (min-width: 768px) {
+  .lp { max-width: 100%; }
+
+  .hero-new {
+    display: grid; grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    padding: 100px 5% 60px; gap: 32px 48px;
+    align-items: center;
+  }
+  .hero-head { grid-column: 1; grid-row: 1; align-self: end; }
+  .hero-right { grid-column: 2; grid-row: 1 / span 2; }
+  .hero-body { grid-column: 1; grid-row: 2; align-self: start; }
+  .hero-h1 { font-size: 40px; }
+  .hero-hl { font-size: 44px; }
+  .hero-arch-wrap { aspect-ratio: 3/4; border-radius: 28px; }
+
+  .trust-bar { max-width: var(--max-w); margin: 0 auto; border-radius: 16px; overflow: hidden; }
+
+  .lp > .section-kl,
+  .lp > .kawasan-strip,
+  .lp > .unit-tabs,
+  .lp > .unit-cards-wrap,
+  .lp > .vt-section,
+  .lp > .maps-section,
+  .lp > .cta-kl {
+    max-width: var(--max-w); margin-left: auto; margin-right: auto;
+    padding-left: 5%; padding-right: 5%;
+  }
+  .kawasan-strip { padding-left: 5%; padding-right: 5%; }
+  .unit-tabs { padding-left: 5%; padding-right: 5%; }
+
+  .fас-grid { grid-template-columns: repeat(4, 1fr); }
+  .kawasan-item { flex: 0 0 280px; }
+
+  .unit-card { display: none !important; }
+  .unit-card.active { display: grid !important; grid-template-columns: 45% 1fr; }
+  .unit-slides { flex-direction: column; overflow-x: hidden; overflow-y: hidden; }
+  .unit-slides img { aspect-ratio: 4/3; flex: none; width: 100%; }
+  .unit-body { padding: 24px; }
+  .unit-denah { padding: 0 24px 24px; }
+  .denah-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; align-items: start; }
+  .denah-pair .denah-img { width: auto; max-width: 100%; max-height: 520px; display: block; margin: 0 auto; }
+
+  .desktop-nav {
+    display: block; position: sticky; top: 0; z-index: 100;
+    background: rgba(246,244,238,.85); backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(27,42,100,.08); padding: 14px 5%;
+  }
+  .desktop-nav nav { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo-kl { font-family: 'Lora', serif; font-size: 18px; font-weight: 700; color: var(--kl-navy); text-decoration: none; }
+  .nav-links-kl { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; }
+  .nav-links-kl a { font-size: 13px; font-weight: 600; color: var(--kl-muted); text-decoration: none; }
+  .nav-links-kl a:hover { color: var(--kl-navy); }
+  .nav-cta-kl { background: var(--kl-orange); color: #fff !important; padding: 9px 20px; border-radius: 8px; }
+
+  .cta-kl { margin: 0 0 40px; border-radius: 24px; padding: 48px 5%; }
+  .cta-kl-btns { flex-direction: row; justify-content: center; gap: 14px; }
+  .btn-cta-wa, .btn-cta-outline { width: auto; min-width: 200px; }
+
+  .vt-section { padding-left: 5%; padding-right: 5%; }
+  .maps-section { padding-left: 5%; padding-right: 5%; }
+  .maps-wrap iframe { height: 320px; }
+
+  .footer-kl { padding: 36px 5%; }
+}
+</style>
 </head>
 <body>
 
-<!-- Parallax background -->
-<div class="bg-root">
-  <div class="reb">
-    <div class="reb__wash reb__wash--a"></div>
-    <div class="reb__wash reb__wash--b"></div>
-    <div class="reb__wash reb__wash--c"></div>
-    <div class="reb__blueprint"></div>
-    <div class="reb__vignette"></div>
-    <div class="grain"></div>
+<!-- Navbar global -->
+<div id="navbar-placeholder"></div>
+
+<!-- Desktop nav (Kawa Living specific) -->
+<div class="desktop-nav">
+  <nav>
+    <a class="nav-logo-kl" href="/kawa-living/">Kawa Living</a>
+    <ul class="nav-links-kl">
+      <li><a href="#fasilitas">Fasilitas</a></li>
+      <li><a href="#unit">Unit</a></li>
+      <li><a href="#video">Video Tour</a></li>
+      <li><a href="#lokasi">Lokasi</a></li>
+      <li><a href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="nav-cta-kl">Hubungi Kami</a></li>
+    </ul>
+  </nav>
+</div>
+
+<div class="lp">
+
+<!-- ══ HERO ══════════════════════════════════════════ -->
+<div class="hero-new" id="hero">
+  <div class="hero-head">
+    <div class="hero-est">
+      <span class="hero-est-dot"></span>
+      <span id="k-hero-est">Sedayu, Bantul · Jln. Wates KM 10</span>
+    </div>
+    <h1 class="hero-h1" id="k-hero-h1">
+      Hunian Modern<br>di
+      <span class="hero-hl" id="k-hero-hl">Sedayu</span>
+    </h1>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-bg"></div>
+    <div class="hero-arch-wrap">
+      <img class="hero-arch-img" id="k-hero-arch-img"
+           src="img/Kawa Living tipe Okina.webp"
+           alt="Kawa Living Sedayu"/>
+    </div>
+    <div class="hero-trust-badge">
+      <div class="htb-num" id="k-trust-num">13+</div>
+      <div class="htb-label" id="k-trust-label">TAHUN&#10;TERPERCAYA</div>
+    </div>
+    <div class="hero-hot-pill">
+      <span class="hhp-dot"></span>
+      <span id="k-hero-hot">Unit Tersedia · Mulai Rp 441 Juta</span>
+    </div>
+  </div>
+
+  <div class="hero-body">
+    <p class="hero-desc" id="k-hero-desc">Konsep terbuka, desain Japandi modern — dekat Ring Road Selatan, fasilitas lengkap, mulai Rp 441 Juta.</p>
+    <div class="hero-btns">
+      <a class="btn-hero-primary" href="#unit" id="k-hero-btn1">Lihat Tipe Unit →</a>
+      <button class="btn-hero-outline" onclick="openPricelistModal()" id="k-hero-btn2">Download Pricelist</button>
+    </div>
   </div>
 </div>
 
-<!-- Navbar -->
-<div id="navbar-placeholder"></div>
+<!-- ══ TRUST BAR ══════════════════════════════════════ -->
+<div class="trust-bar" id="k-trust-bar">
+  <div class="trust-item"><div class="trust-val">48+</div><div class="trust-label">Total Unit</div></div>
+  <div class="trust-item"><div class="trust-val">★★★★★</div><div class="trust-label">Google Rating</div></div>
+  <div class="trust-item"><div class="trust-val">SHM</div><div class="trust-label">Legalitas Terjamin</div></div>
+</div>
 
-<main>
+<!-- ══ FASILITAS ══════════════════════════════════════ -->
+<div class="section-kl" id="fasilitas">
+  <div class="section-eyebrow">→ FASILITAS</div>
+  <h2 class="section-kl-title">Kawasan yang<br>Lengkap & Nyaman</h2>
+  <p class="section-kl-sub">Dirancang untuk mendukung gaya hidup aktif dan tenang keluarga modern.</p>
+  <div class="fас-grid" id="k-fasilitas"></div>
+</div>
 
-  <!-- ══ HERO ══════════════════════════════════════════════════ -->
-  <section class="hero">
-    <div class="hero__grid">
-      <div class="hero__copy">
-        <div class="hero__eyebrow">
-          <span class="hero__dot"></span>
-          Sedayu, Bantul · Yogyakarta
-        </div>
-        <h1 class="hero__title">
-          <span class="hero__line">Kawa</span>
-          <span class="hero__line"><span class="hero__slab">Living</span></span>
-          <span class="hero__line">Sedayu.</span>
-        </h1>
-        <p class="hero__sub">
-          Hunian modern dengan konsep terbuka di kawasan tenang Sedayu, Bantul.
-          Akses mudah ke ring road, dekat fasilitas lengkap — harga mulai Rp 450 Juta.
-        </p>
-        <div class="hero__ctas">
-          <a href="https://wa.me/6281234567890?text=Halo%2C+saya+tertarik+dengan+Kawa+Living+Sedayu" target="_blank" rel="noopener" class="btn btn--primary btn--lg">Tanya Sekarang</a>
-          <a href="#unit" class="btn btn--ghost btn--lg">Lihat Unit</a>
-        </div>
-        <div class="hero__stats">
-          <div>
-            <div class="stat__num">Rp <span data-count="450">0</span> <span style="font-size:.55em;font-style:italic;">Jt</span></div>
-            <div class="stat__label">Mulai dari</div>
-          </div>
-          <div class="hero__divider"></div>
-          <div>
-            <div class="stat__num"><span data-count="48">0</span><span style="font-size:.55em">+</span></div>
-            <div class="stat__label">Unit Tersedia</div>
-          </div>
-          <div class="hero__divider"></div>
-          <div>
-            <div class="stat__num"><span data-count="2">0</span>–<span data-count="4">0</span></div>
-            <div class="stat__label">Tipe Kamar</div>
-          </div>
-        </div>
-      </div>
+<!-- ══ FOTO KAWASAN ════════════════════════════════════ -->
+<div class="kawasan-strip" id="k-foto-kawasan"></div>
 
-      <div class="hero__visual reveal">
-        <div class="hero__glow"></div>
-        <div class="hero__frame">
-          <img
-            src="../assets/img/kawa-living/hero.webp"
-            alt="Kawa Living Sedayu"
-            class="hero__img"
-            loading="eager"
-            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)'"
-          >
-        </div>
-        <div class="hero__badge">
-          <div class="hero__badge-num">Free</div>
-          <div class="hero__badge-text">Biaya KPR</div>
-        </div>
-        <div class="hero__tag">
-          <span class="hero__tag-dot"></span>
-          Unit Tersedia
-        </div>
-      </div>
+<!-- ══ UNIT ═══════════════════════════════════════════ -->
+<div class="section-kl" id="unit" style="padding-bottom: 0;">
+  <div class="section-eyebrow">→ TIPE UNIT</div>
+  <h2 class="section-kl-title">3 Tipe Pilihan</h2>
+  <p class="section-kl-sub">Pilih yang paling sesuai dengan kebutuhan dan bujet keluargamu.</p>
+</div>
+<div class="unit-tabs" id="unitTabs"></div>
+<div class="unit-cards-wrap" id="unitCards"></div>
+
+<!-- ══ VIDEO TOUR ══════════════════════════════════════ -->
+<div class="vt-section" id="video">
+  <div class="section-eyebrow" style="padding: 0 0 8px;">→ VIDEO TOUR</div>
+  <h2 class="section-kl-title" style="margin-bottom: 4px;">Lihat Langsung<br>Kawasannya</h2>
+  <p class="section-kl-sub" style="margin-bottom: 16px;">Tur virtual Kawa Living dalam 2 menit.</p>
+  <div class="vt-frame" id="vtFrame">
+    <img class="vt-thumb" id="vtThumb" src="img/Kawa Living tipe Hiroi Yuri.webp" alt="Video Tour Kawa Living">
+    <div class="vt-shade"></div>
+    <div id="vtPlayBtn" class="vt-play">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
     </div>
-
-    <div class="hero__scrollcue">
-      <span>scroll</span>
-      <div class="hero__scrollline"></div>
-    </div>
-  </section>
-
-  <!-- ══ MENGAPA KAWA LIVING ════════════════════════════════════ -->
-  <section class="val section" id="mengapa">
-    <div class="section__head container">
-      <span class="eyebrow">Mengapa Kawa Living</span>
-      <h2 class="section-title reveal">Didesain untuk<br>hidup yang <em>tenang</em>.</h2>
-    </div>
-    <div class="val__grid container">
-      <div class="val__card reveal">
-        <div class="val__num">01</div>
-        <div class="val__title">Lokasi Strategis</div>
-        <div class="val__body">Hanya 10 menit dari Ring Road Selatan. Dekat dengan sekolah, rumah sakit, dan pusat perbelanjaan Bantul.</div>
-        <svg class="val__arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-      <div class="val__card reveal reveal--delay-1">
-        <div class="val__num">02</div>
-        <div class="val__title">Desain Modern Terbuka</div>
-        <div class="val__body">Tata ruang yang lapang dengan pencahayaan alami maksimal. Setiap unit memiliki taman kecil pribadi.</div>
-        <svg class="val__arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-      <div class="val__card reveal reveal--delay-2">
-        <div class="val__num">03</div>
-        <div class="val__title">KPR Mudah & Cepat</div>
-        <div class="val__body">Kerjasama dengan 5 bank nasional. Proses pengajuan KPR dibantu penuh — selesai dalam 7 hari kerja.</div>
-        <svg class="val__arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-      <div class="val__card reveal reveal--delay-3">
-        <div class="val__num">04</div>
-        <div class="val__title">Garansi Bangunan</div>
-        <div class="val__body">Jaminan kualitas struktur 10 tahun. Tim after-sales siap membantu selama masa garansi berlaku.</div>
-        <svg class="val__arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ RUMAH POPULER ══════════════════════════════════════════ -->
-  <section class="pop section" id="populer">
-    <div class="section__head container">
-      <span class="eyebrow">Pilihan Populer</span>
-      <h2 class="section-title reveal">Unit yang<br>paling diminati.</h2>
-    </div>
-    <div class="pop__rail">
-      <div class="prop-card pop__card reveal">
-        <div class="prop-card__img" style="background: linear-gradient(135deg, #2c3e8c, #1b2a64);"></div>
-        <div class="prop-card__shade"></div>
-        <span class="prop-card__badge">Terlaris</span>
-        <div class="prop-card__body">
-          <div class="prop-card__name">Tipe 36/72</div>
-          <div class="prop-card__loc">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            Sedayu, Bantul
-          </div>
-          <div class="prop-card__price">
-            <span class="prop-card__rp">Rp</span>
-            <span class="prop-card__val">450</span>
-            <span class="prop-card__unit">Juta</span>
-          </div>
-          <div class="prop-card__cta">
-            Lihat Detail
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="prop-card pop__card reveal reveal--delay-1">
-        <div class="prop-card__img" style="background: linear-gradient(135deg, #1b2a64, #0f1430);"></div>
-        <div class="prop-card__shade"></div>
-        <span class="prop-card__badge">Favorit</span>
-        <div class="prop-card__body">
-          <div class="prop-card__name">Tipe 45/90</div>
-          <div class="prop-card__loc">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            Sedayu, Bantul
-          </div>
-          <div class="prop-card__price">
-            <span class="prop-card__rp">Rp</span>
-            <span class="prop-card__val">595</span>
-            <span class="prop-card__unit">Juta</span>
-          </div>
-          <div class="prop-card__cta">
-            Lihat Detail
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="prop-card pop__card reveal reveal--delay-2">
-        <div class="prop-card__img" style="background: linear-gradient(135deg, #2c3e8c, #db7f2e22);"></div>
-        <div class="prop-card__shade"></div>
-        <span class="prop-card__badge">Premium</span>
-        <div class="prop-card__body">
-          <div class="prop-card__name">Tipe 60/120</div>
-          <div class="prop-card__loc">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            Sedayu, Bantul
-          </div>
-          <div class="prop-card__price">
-            <span class="prop-card__rp">Rp</span>
-            <span class="prop-card__val">780</span>
-            <span class="prop-card__unit">Juta</span>
-          </div>
-          <div class="prop-card__cta">
-            Lihat Detail
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ VIDEO TOUR ══════════════════════════════════════════════ -->
-  <section class="vt section--sm" id="video">
-    <div class="section__head container">
-      <span class="eyebrow">Video Tour</span>
-      <h2 class="section-title reveal">Lihat langsung<br>kawasannya.</h2>
-    </div>
-    <div class="vt__frame container reveal" id="vtFrame">
-      <img
-        src="../assets/img/kawa-living/video-thumb.webp"
-        alt="Video tour Kawa Living"
-        class="vt__thumb"
-        onerror="this.style.background='#1b2a64';this.style.display='block'"
-      >
-      <div class="vt__shade"></div>
-      <button class="vt__play" id="vtPlay" aria-label="Play video">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-      <div class="vt__caption">
-        <div class="vt__cap-label">VIRTUAL TOUR</div>
-        <div class="vt__cap-name">Kawa Living Sedayu</div>
-        <div class="vt__cap-meta">Sedayu, Bantul · 2024</div>
-      </div>
-    </div>
-
-    <!-- Video modal -->
-    <div class="vt__modal" id="vtModal">
-      <div class="vt__modal-inner">
-        <button class="vt__modal-close" id="vtClose">×</button>
-        <iframe id="vtIframe" src="" allow="autoplay; fullscreen" allowfullscreen title="Video Tour Kawa Living"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ TESTIMONI ══════════════════════════════════════════════ -->
-  <section class="ts section" id="testimoni">
-    <div class="section__head container">
-      <span class="eyebrow">Testimoni</span>
-      <h2 class="section-title reveal">Suara mereka yang<br>sudah <em>pulang</em> ke Kawa.</h2>
-    </div>
-    <div class="ts__grid">
-      <div class="ts__card glass reveal">
-        <p class="ts__body">
-          "Prosesnya sangat transparan, tidak ada biaya tersembunyi.
-          Tim JGS benar-benar membantu dari awal KPR sampai serah terima kunci."
-        </p>
-        <div class="ts__foot">
-          <div class="ts__av">A</div>
-          <div>
-            <div class="ts__name">Andi Prasetyo</div>
-            <div class="ts__unit">Tipe 45 · Unit B-12</div>
-          </div>
-        </div>
-      </div>
-      <div class="ts__card glass reveal reveal--delay-1">
-        <p class="ts__body">
-          "Lokasi Kawa Living sangat strategis. Anak-anak bisa ke sekolah sendiri,
-          ke mall juga dekat. Lingkungannya tenang dan keamanannya terjaga."
-        </p>
-        <div class="ts__foot">
-          <div class="ts__av">S</div>
-          <div>
-            <div class="ts__name">Sri Wahyuni</div>
-            <div class="ts__unit">Tipe 36 · Unit A-07</div>
-          </div>
-        </div>
-      </div>
-      <div class="ts__card glass reveal reveal--delay-2">
-        <p class="ts__body">
-          "Kualitas bangunan memuaskan. Sudah setahun tinggal, belum ada masalah
-          struktural apapun. Tetangga-tetangga juga ramah, komunitas yang bagus."
-        </p>
-        <div class="ts__foot">
-          <div class="ts__av">R</div>
-          <div>
-            <div class="ts__name">Rizky Firmansyah</div>
-            <div class="ts__unit">Tipe 60 · Unit C-03</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ PROMO ══════════════════════════════════════════════════ -->
-  <div class="pm reveal">
-    <div class="pm__inner">
-      <div class="pm__dots"></div>
-      <div>
-        <span class="pm__tag">PROMO TERBATAS</span>
-        <h2 class="pm__title">Free Biaya KPR<br>+ Cashback 25 Juta.</h2>
-        <p class="pm__body">Berlaku untuk 10 unit pertama yang akad bulan ini. Syarat & ketentuan berlaku.</p>
-      </div>
-      <div class="pm__right">
-        <a href="https://wa.me/6281234567890?text=Halo%2C+saya+ingin+info+promo+Kawa+Living" target="_blank" rel="noopener" class="btn btn--lg">Klaim Promo Sekarang</a>
-        <span class="pm__fine">Terbatas untuk 10 unit · Berlaku s/d 31 Mei 2025</span>
-      </div>
+    <div id="vtNoVideo" class="vt-no-video" style="display:none;">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".5"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+      <span>Video segera tersedia</span>
     </div>
   </div>
-
-  <!-- ══ KALKULATOR KPR ══════════════════════════════════════════ -->
-  <section class="calc section" id="kpr">
-    <div class="calc__inner">
-      <div>
-        <span class="eyebrow">Kalkulator KPR</span>
-        <h2 class="calc__title reveal">Hitung cicilan,<br>dalam <em>10 detik</em>.</h2>
-        <p class="calc__body reveal reveal--delay-1">
-          Geser slider untuk simulasi cicilan KPR sesuai kemampuan keuangan kamu.
-          Kami siap bantu proses pengajuan dari awal hingga selesai.
-        </p>
-        <a href="https://wa.me/6281234567890?text=Halo%2C+saya+ingin+konsultasi+KPR+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary reveal reveal--delay-2">Konsultasi KPR Gratis</a>
-      </div>
-
-      <div class="calc__panel reveal">
-        <form id="kprCalc">
-          <div class="calc__row">
-            <div class="calc__head">
-              <span>Harga Rumah</span>
-              <span class="calc__val" id="dispHarga">Rp 450 Jt</span>
-            </div>
-            <input type="range" id="calcHarga" min="450" max="900" step="10" value="450">
-          </div>
-          <div class="calc__row">
-            <div class="calc__head">
-              <span>Uang Muka (DP)</span>
-              <span class="calc__val" id="dispDp">20%</span>
-            </div>
-            <input type="range" id="calcDp" min="10" max="50" step="5" value="20">
-          </div>
-          <div class="calc__row">
-            <div class="calc__head">
-              <span>Tenor</span>
-              <span class="calc__val" id="dispTenor">15 tahun</span>
-            </div>
-            <input type="range" id="calcTenor" min="5" max="30" step="5" value="15">
-          </div>
-          <div class="calc__result">
-            <div class="calc__rlabel">ESTIMASI CICILAN / BULAN</div>
-            <div class="calc__rval" id="calcResult">Rp —</div>
-            <div class="calc__rmeta">*Simulasi dengan bunga 10,5% p.a. Angka aktual tergantung bank & profil.</div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ DETAIL UNIT ════════════════════════════════════════════ -->
-  <section class="un section" id="unit">
-    <div class="section__head container">
-      <span class="eyebrow">Detail Unit</span>
-      <h2 class="section-title reveal">Pilih tipe yang<br>paling cocok.</h2>
-    </div>
-    <div class="un__list">
-
-      <!-- Tipe 36 -->
-      <div class="un__row glass reveal">
-        <div class="un__img">
-          <img src="../assets/img/kawa-living/tipe36.webp" alt="Kawa Living Tipe 36" loading="lazy"
-            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
-        </div>
-        <div class="un__copy">
-          <div class="un__tagrow">
-            <span class="un__tag">Terlaris</span>
-            <span class="un__tag">KPR Tersedia</span>
-          </div>
-          <h3 class="un__name">Tipe 36/72</h3>
-          <div class="un__loc">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            Sedayu, Bantul
-          </div>
-          <p class="un__desc">Tipe starter ideal untuk keluarga muda. Ruang tamu lega, 2 kamar tidur, dapur terbuka, dan taman kecil di depan.</p>
-          <div class="un__specs">
-            <div>🛏 2 Kamar Tidur</div>
-            <div>🚿 1 Kamar Mandi</div>
-            <div>📐 LT 72 m²</div>
-            <div>🏠 LB 36 m²</div>
-          </div>
-          <div class="un__footer">
-            <div class="un__price">
-              <span>Mulai dari</span>
-              <strong>Rp 450 Juta</strong>
-            </div>
-            <a href="https://wa.me/6281234567890?text=Halo%2C+saya+tertarik+Tipe+36+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tipe 45 -->
-      <div class="un__row un__row--alt glass reveal">
-        <div class="un__img">
-          <img src="../assets/img/kawa-living/tipe45.webp" alt="Kawa Living Tipe 45" loading="lazy"
-            onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
-        </div>
-        <div class="un__copy">
-          <div class="un__tagrow">
-            <span class="un__tag">Favorit</span>
-            <span class="un__tag">KPR Tersedia</span>
-          </div>
-          <h3 class="un__name">Tipe 45/90</h3>
-          <div class="un__loc">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            Sedayu, Bantul
-          </div>
-          <p class="un__desc">Tipe keluarga dengan ruang keluarga terpisah, 3 kamar tidur, dapur semi-outdoor, dan carport untuk 2 kendaraan.</p>
-          <div class="un__specs">
-            <div>🛏 3 Kamar Tidur</div>
-            <div>🚿 2 Kamar Mandi</div>
-            <div>📐 LT 90 m²</div>
-            <div>🏠 LB 45 m²</div>
-          </div>
-          <div class="un__footer">
-            <div class="un__price">
-              <span>Mulai dari</span>
-              <strong>Rp 595 Juta</strong>
-            </div>
-            <a href="https://wa.me/6281234567890?text=Halo%2C+saya+tertarik+Tipe+45+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tipe 60 -->
-      <div class="un__row glass reveal">
-        <div class="un__img">
-          <img src="../assets/img/kawa-living/tipe60.webp" alt="Kawa Living Tipe 60" loading="lazy"
-            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#db7f2e33)';this.style.display='block'">
-        </div>
-        <div class="un__copy">
-          <div class="un__tagrow">
-            <span class="un__tag">Premium</span>
-            <span class="un__tag">Stok Terbatas</span>
-          </div>
-          <h3 class="un__name">Tipe 60/120</h3>
-          <div class="un__loc">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            Sedayu, Bantul
-          </div>
-          <p class="un__desc">Unit premium dengan konsep semi-lantai 2. Ruang luas, 4 kamar tidur, 2 kamar mandi, halaman belakang, dan carport ganda.</p>
-          <div class="un__specs">
-            <div>🛏 4 Kamar Tidur</div>
-            <div>🚿 2 Kamar Mandi</div>
-            <div>📐 LT 120 m²</div>
-            <div>🏠 LB 60 m²</div>
-          </div>
-          <div class="un__footer">
-            <div class="un__price">
-              <span>Mulai dari</span>
-              <strong>Rp 780 Juta</strong>
-            </div>
-            <a href="https://wa.me/6281234567890?text=Halo%2C+saya+tertarik+Tipe+60+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ══ FAQ ════════════════════════════════════════════════════ -->
-  <section class="faq section" id="faq">
-    <div class="section__head container">
-      <span class="eyebrow">FAQ</span>
-      <h2 class="section-title reveal">Pertanyaan yang<br>sering ditanyakan.</h2>
-      <p class="section-lead reveal reveal--delay-1" style="margin-top:16px;">Tidak menemukan jawaban? Chat langsung dengan tim kami.</p>
-    </div>
-    <div class="faq__list">
-      <div class="faq__row">
-        <div class="faq__qrow">
-          <span class="faq__n">01</span>
-          <span class="faq__q">Apakah tersedia pembelian tunai dan KPR?</span>
-          <span class="faq__plus">+</span>
-        </div>
-        <div class="faq__a">Ya, tersedia keduanya. Untuk tunai keras mendapat diskon khusus. Untuk KPR, kami bekerjasama dengan BCA, BRI, BTN, Mandiri, dan BNI. Proses pengajuan kami bantu penuh.</div>
-      </div>
-      <div class="faq__row">
-        <div class="faq__qrow">
-          <span class="faq__n">02</span>
-          <span class="faq__q">Berapa DP minimal yang dibutuhkan?</span>
-          <span class="faq__plus">+</span>
-        </div>
-        <div class="faq__a">DP minimal 10% dari harga unit. Untuk Tipe 36 berarti mulai Rp 45 Juta. Program promo saat ini memberikan cashback Rp 25 Juta yang bisa digunakan untuk menutup sebagian biaya DP.</div>
-      </div>
-      <div class="faq__row">
-        <div class="faq__qrow">
-          <span class="faq__n">03</span>
-          <span class="faq__q">Berapa lama proses KPR sampai serah terima kunci?</span>
-          <span class="faq__plus">+</span>
-        </div>
-        <div class="faq__a">Dari pengajuan KPR hingga akad kredit biasanya 14–30 hari kerja tergantung bank. Setelah akad, serah terima kunci dilakukan segera untuk unit ready stock, atau mengikuti jadwal konstruksi untuk unit inden.</div>
-      </div>
-      <div class="faq__row">
-        <div class="faq__qrow">
-          <span class="faq__n">04</span>
-          <span class="faq__q">Apakah kawasan sudah ada fasilitas lengkap?</span>
-          <span class="faq__plus">+</span>
-        </div>
-        <div class="faq__a">Ya. Kawasan Kawa Living sudah dilengkapi jalan aspal dalam perumahan, taman bermain, tempat ibadah, keamanan 24 jam, CCTV, dan sistem drainase. Sekolah, rumah sakit, dan minimarket tersedia dalam radius 2 km.</div>
-      </div>
-      <div class="faq__row">
-        <div class="faq__qrow">
-          <span class="faq__n">05</span>
-          <span class="faq__q">Apakah ada garansi bangunan?</span>
-          <span class="faq__plus">+</span>
-        </div>
-        <div class="faq__a">Semua unit Kawa Living mendapat garansi struktur 10 tahun dan garansi finishing 1 tahun. Tim after-sales kami siap dihubungi untuk klaim garansi selama masa berlaku.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ INSTAGRAM ══════════════════════════════════════════════ -->
-  <section class="ig section--sm" id="instagram">
-    <div class="ig__head">
-      <div>
-        <span class="eyebrow">Instagram</span>
-        <h2 class="section-title" style="font-size:clamp(28px,4vw,48px);">Follow Us<br>@jgsgroup</h2>
-      </div>
-      <a href="https://instagram.com/jgsgroup" target="_blank" rel="noopener" class="btn btn--ghost">Buka Instagram</a>
-    </div>
-    <div class="ig__grid">
-      <a href="https://instagram.com/jgsgroup" target="_blank" rel="noopener" class="ig__post reveal">
-        <img src="../assets/img/kawa-living/ig-1.webp" alt="Instagram JGS Group" loading="lazy"
-          onerror="this.style.background='#1b2a64';this.style.display='block'">
-        <div class="ig__over">
-          <div class="ig__cap">Kawa Living — suasana sore hari</div>
-          <div class="ig__likes">♥ 142</div>
-        </div>
-      </a>
-      <a href="https://instagram.com/jgsgroup" target="_blank" rel="noopener" class="ig__post reveal reveal--delay-1">
-        <img src="../assets/img/kawa-living/ig-2.webp" alt="Instagram JGS Group" loading="lazy"
-          onerror="this.style.background='#2c3e8c';this.style.display='block'">
-        <div class="ig__over">
-          <div class="ig__cap">Interior Tipe 45 — ruang keluarga</div>
-          <div class="ig__likes">♥ 98</div>
-        </div>
-      </a>
-      <a href="https://instagram.com/jgsgroup" target="_blank" rel="noopener" class="ig__post reveal reveal--delay-2">
-        <img src="../assets/img/kawa-living/ig-3.webp" alt="Instagram JGS Group" loading="lazy"
-          onerror="this.style.background='#db7f2e44';this.style.display='block'">
-        <div class="ig__over">
-          <div class="ig__cap">Serah terima kunci unit C-08</div>
-          <div class="ig__likes">♥ 217</div>
-        </div>
-      </a>
-      <a href="https://instagram.com/jgsgroup" target="_blank" rel="noopener" class="ig__post reveal reveal--delay-3">
-        <img src="../assets/img/kawa-living/ig-4.webp" alt="Instagram JGS Group" loading="lazy"
-          onerror="this.style.background='#0f1430';this.style.display='block'">
-        <div class="ig__over">
-          <div class="ig__cap">Taman bermain kawasan Kawa</div>
-          <div class="ig__likes">♥ 76</div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ══ CTA ════════════════════════════════════════════════════ -->
-  <div class="cta-section" id="kontak">
-    <div class="cta-section__glow"></div>
-    <div class="cta-section__inner">
-      <div class="cta-section__quote">"</div>
-      <h2 class="cta-section__title reveal">
-        Siap punya rumah di Kawa Living?<br>Tim kami siap membantu — gratis konsultasi.
-      </h2>
-      <div class="cta-section__ctas">
-        <a href="https://wa.me/6281234567890?text=Halo%2C+saya+ingin+konsultasi+Kawa+Living+Sedayu" target="_blank" rel="noopener" class="btn btn--orange btn--lg">Chat WhatsApp Sekarang</a>
-        <a href="tel:+6281234567890" class="btn btn--outline-white btn--lg">Telepon Kami</a>
-      </div>
+  <div class="vt-modal" id="vtModal">
+    <div class="vt-modal-inner">
+      <button class="vt-close" id="vtClose">×</button>
+      <iframe id="vtIframe" src="" allow="autoplay; fullscreen" allowfullscreen title="Video Tour Kawa Living"></iframe>
     </div>
   </div>
+</div>
 
-</main>
+<!-- ══ LOKASI / MAPS ═══════════════════════════════════ -->
+<div class="maps-section" id="lokasi">
+  <div class="maps-label">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+    <span id="k-maps-label">Jln. Wates KM 10, Sedayu, Bantul, Yogyakarta</span>
+  </div>
+  <div class="maps-wrap" id="k-maps"></div>
+</div>
 
-<!-- Footer -->
-<div id="footer-placeholder"></div>
+<!-- ══ CTA ════════════════════════════════════════════ -->
+<div class="cta-kl" id="kontak">
+  <h2 class="cta-kl-title">Siap punya rumah<br>di Kawa Living?</h2>
+  <p class="cta-kl-sub">Konsultasi gratis dengan tim kami — tanpa tekanan, tanpa biaya.</p>
+  <div class="cta-kl-btns">
+    <a id="k-btn-cta-wa" href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="btn-cta-wa">Chat WhatsApp Sekarang</a>
+    <a id="k-btn-cta-tel" href="tel:+6289506888328" class="btn-cta-outline">📞 Telepon Kami</a>
+  </div>
+</div>
+
+<!-- ══ FOOTER KAWA LIVING ══════════════════════════════ -->
+<div class="footer-kl">
+  <div class="footer-kl-brand">Kawa Living</div>
+  <div>Jln. Wates KM 10, Sedayu, Bantul<br>Yogyakarta · JGS Group</div>
+  <div style="margin-top:10px;">
+    <a href="tel:+6289506888328">0895-0688-8328</a> &nbsp;·&nbsp;
+    <a href="mailto:jogjagrahadigital@gmail.com">jogjagrahadigital@gmail.com</a>
+  </div>
+  <div class="footer-kl-badges">
+    <span class="footer-kl-badge footer-kl-badge--avail">Available</span>
+    <span class="footer-kl-badge footer-kl-badge--warn">Tipe Hiroi · Okina · Yuri</span>
+  </div>
+  <div class="footer-kl-bot">© 2025 JGS Group · Kawa Living Sedayu. All rights reserved.</div>
+</div>
+
+</div><!-- /.lp -->
+
+<!-- ══ STICKY WA ══════════════════════════════════════ -->
+<a id="wa-sticky-btn" href="https://wa.me/6289506888328" target="_blank" rel="noopener" class="wa-sticky" aria-label="Chat WhatsApp">
+  <div class="wa-circle">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </div>
+  <span class="wa-label">Chat WA</span>
+</a>
+
+<!-- Denah Lightbox -->
+<div class="dlb" id="dlb" role="dialog" aria-modal="true">
+  <button class="dlb__close" id="dlbClose">✕</button>
+  <div class="dlb__scroll" id="dlbScroll">
+    <img class="dlb__img" id="dlbImg" src="" alt="Denah">
+  </div>
+  <div class="dlb__hint">Klik gambar untuk zoom · Klik di luar untuk tutup</div>
+</div>
 
 <script src="../assets/js/main.js"></script>
-<script>
-  // Video modal
-  document.getElementById('vtPlay').addEventListener('click', function () {
-    document.getElementById('vtModal').classList.add('vt__modal--on');
-    // Replace with actual YouTube embed URL when available
-    document.getElementById('vtIframe').src = 'about:blank';
-  });
-  document.getElementById('vtClose').addEventListener('click', function () {
-    document.getElementById('vtModal').classList.remove('vt__modal--on');
-    document.getElementById('vtIframe').src = 'about:blank';
-  });
-  document.getElementById('vtModal').addEventListener('click', function (e) {
-    if (e.target === this) {
-      this.classList.remove('vt__modal--on');
-      document.getElementById('vtIframe').src = 'about:blank';
-    }
-  });
-</script>
 <script src="/assets/js/pricelist-modal.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var K   = KONTEN;
+  var fira = K.wa.fira.nomor;
+
+  function waUrl(nomor, teks) {
+    return 'https://wa.me/' + nomor + '?text=' + encodeURIComponent(teks);
+  }
+  function setText(id, val)  { var el = document.getElementById(id); if (el) el.textContent = val; }
+  function setHtml(id, val)  { var el = document.getElementById(id); if (el) el.innerHTML  = val; }
+
+  /* ── HERO ── */
+  setText('k-hero-est',      K.hero.est);
+  setHtml('k-hero-h1',       K.hero.judul + ' <span class="hero-hl" id="k-hero-hl">' + K.hero.highlight + '</span>');
+  setText('k-hero-hot',      K.hero.hotDeals);
+  setText('k-hero-desc',     K.hero.desc);
+  setText('k-hero-btn1',     K.hero.btn1Label);
+  setText('k-hero-btn2',     K.hero.btn2Label);
+  setText('k-trust-num',     K.hero.trustNum);
+  setText('k-trust-label',   K.hero.trustLabel);
+  var archImg = document.getElementById('k-hero-arch-img');
+  if (archImg) { archImg.src = K.hero.archImage; archImg.alt = K.hero.archAlt; }
+
+  /* ── TRUST BAR ── */
+  var trustBar = document.getElementById('k-trust-bar');
+  if (trustBar) {
+    trustBar.innerHTML = K.trustBar.map(function(t) {
+      return '<div class="trust-item"><div class="trust-val">' + t.nilai + '</div><div class="trust-label">' + t.label + '</div></div>';
+    }).join('');
+  }
+
+  /* ── FASILITAS ── */
+  setHtml('k-fasilitas', K.fasilitas.map(function(f) {
+    return '<div class="fас-card"><div class="fас-icon">' + f.ikon + '</div><div class="fас-name">' + f.nama + '</div></div>';
+  }).join(''));
+
+  /* ── FOTO KAWASAN ── */
+  setHtml('k-foto-kawasan', K.fotoFasilitas.map(function(f) {
+    return '<div class="kawasan-item"><img src="' + f.src + '" alt="' + f.alt + '" loading="lazy"></div>';
+  }).join(''));
+
+  /* ── MAPS ── */
+  setText('k-maps-label', K.maps.label);
+  setHtml('k-maps', '<iframe src="' + K.maps.embed + '" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>');
+
+  /* ── WA buttons ── */
+  var waSticky = document.getElementById('wa-sticky-btn');
+  if (waSticky) waSticky.href = waUrl(fira, K.pesanWA.hero);
+  var ctaWa = document.getElementById('k-btn-cta-wa');
+  if (ctaWa) ctaWa.href = waUrl(fira, K.pesanWA.cta);
+  var ctaTel = document.getElementById('k-btn-cta-tel');
+  if (ctaTel) ctaTel.href = 'tel:+' + fira;
+
+  /* ── UNIT TABS + CARDS ── */
+  var tabsEl  = document.getElementById('unitTabs');
+  var cardsEl = document.getElementById('unitCards');
+
+  var tabsHtml  = '';
+  var cardsHtml = '';
+
+  K.unit.forEach(function(u, i) {
+    tabsHtml += '<button class="unit-tab' + (i === 0 ? ' active' : '') + '" data-unit="' + u.id + '">' + u.nama + '</button>';
+
+    /* denah */
+    var denahHtml = '';
+    if (u.denah.length === 1) {
+      denahHtml = '<div class="denah-label">' + u.denah[0].label + '</div>'
+                + '<img class="denah-img" src="' + u.denah[0].src + '" alt="' + u.denah[0].alt + '" loading="lazy"/>';
+    } else if (u.denah.length > 1) {
+      denahHtml = '<div class="denah-pair">' + u.denah.map(function(d) {
+        return '<div><div class="denah-label">' + d.label + '</div>'
+             + '<img class="denah-img" src="' + d.src + '" alt="' + d.alt + '" loading="lazy"/></div>';
+      }).join('') + '</div>';
+    }
+
+    cardsHtml += '<div id="unit-' + u.id + '" class="unit-card' + (i === 0 ? ' active' : '') + '">'
+      + '<div class="unit-slides">' + u.foto.map(function(f) {
+          return '<img src="' + f.src + '" alt="' + f.alt + '" loading="lazy"/>';
+        }).join('') + '</div>'
+      + '<div class="unit-body">'
+      + '<div class="unit-name">' + u.nama + '</div>'
+      + '<div class="unit-specs">' + u.spek.map(function(s) { return '<span class="unit-spec">' + s + '</span>'; }).join('') + '</div>'
+      + '<div class="unit-price-box">'
+      + '<div class="unit-price-type">' + u.hargaJenis + '</div>'
+      + '<div class="unit-price">' + u.hargaPokok + '</div>'
+      + '<div class="unit-price-kpr">' + u.hargaKPR + '</div>'
+      + '</div>'
+      + '<div class="unit-footer-row">'
+      + '<a class="btn-info" href="' + waUrl(fira, u.pesanWA) + '" target="_blank" rel="noopener">Info harga</a>'
+      + '</div>'
+      + '</div>'
+      + (denahHtml ? '<div class="unit-denah">' + denahHtml + '</div>' : '')
+      + '</div>';
+  });
+
+  if (tabsEl)  tabsEl.innerHTML  = tabsHtml;
+  if (cardsEl) cardsEl.innerHTML = cardsHtml;
+
+  /* Tab switching */
+  if (tabsEl) {
+    tabsEl.addEventListener('click', function(e) {
+      var btn = e.target.closest('.unit-tab');
+      if (!btn) return;
+      var id = btn.dataset.unit;
+      tabsEl.querySelectorAll('.unit-tab').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      cardsEl.querySelectorAll('.unit-card').forEach(function(c) { c.classList.remove('active'); });
+      var card = document.getElementById('unit-' + id);
+      if (card) card.classList.add('active');
+    });
+  }
+
+  /* ── VIDEO TOUR ── */
+  var embed = K.video && K.video.youtubeEmbed;
+  var vtPlay = document.getElementById('vtPlayBtn');
+  var vtNoVid = document.getElementById('vtNoVideo');
+  var vtModal = document.getElementById('vtModal');
+  var vtIframe = document.getElementById('vtIframe');
+  var vtClose  = document.getElementById('vtClose');
+
+  if (!embed) {
+    if (vtPlay) vtPlay.style.display = 'none';
+    if (vtNoVid) vtNoVid.style.display = 'flex';
+  } else {
+    if (vtPlay) vtPlay.addEventListener('click', function() {
+      if (vtModal) vtModal.classList.add('open');
+      if (vtIframe) vtIframe.src = embed;
+    });
+  }
+  if (vtClose) vtClose.addEventListener('click', function() {
+    if (vtModal) vtModal.classList.remove('open');
+    if (vtIframe) vtIframe.src = '';
+  });
+  if (vtModal) vtModal.addEventListener('click', function(e) {
+    if (e.target === vtModal) { vtModal.classList.remove('open'); if (vtIframe) vtIframe.src = ''; }
+  });
+
+  /* ── DENAH LIGHTBOX ── */
+  var dlb = document.getElementById('dlb');
+  var dlbImg = document.getElementById('dlbImg');
+  var dlbClose = document.getElementById('dlbClose');
+  var dlbScroll = document.getElementById('dlbScroll');
+
+  document.addEventListener('click', function(e) {
+    var img = e.target.closest('.denah-img');
+    if (img) { dlbImg.src = img.src; dlbImg.alt = img.alt; dlbImg.classList.remove('dlb--zoomed'); dlb.classList.add('dlb--open'); document.body.style.overflow = 'hidden'; return; }
+    if (e.target === dlb || e.target === dlbScroll) { dlb.classList.remove('dlb--open'); document.body.style.overflow = ''; }
+  });
+  if (dlbClose) dlbClose.addEventListener('click', function() { dlb.classList.remove('dlb--open'); document.body.style.overflow = ''; });
+  if (dlbImg) dlbImg.addEventListener('click', function(e) { e.stopPropagation(); dlbImg.classList.toggle('dlb--zoomed'); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { dlb.classList.remove('dlb--open'); document.body.style.overflow = ''; } });
+
+})();
+</script>
 </body>
 </html>
