@@ -133,11 +133,11 @@ var KONTEN = {
 
       /* Foto-foto unit (slide kiri-kanan di mobile) */
       foto: [
-        { src: 'photos/andrawina/andrawina%20foto%20depan.webp',      alt: 'Andrawina depan'       },
+        { src: '/assets/img/Proyek-Kami/Tentrem-Bhumi/andrawina(1).webp', alt: 'Andrawina depan'   },
+        { src: '/assets/img/Proyek-Kami/Tentrem-Bhumi/andrawina.webp',    alt: 'Andrawina tampak'  },
         { src: 'photos/andrawina/andrawina%207.webp',                  alt: 'Andrawina tampak'      },
         { src: 'photos/andrawina/andrawina%20deret.webp',              alt: 'Andrawina deret'       },
         { src: 'photos/andrawina/andrawina%20sore.webp',               alt: 'Andrawina sore'        },
-        { src: 'photos/andrawina/tentrem%20bhumi%20andrawina.png',     alt: 'Andrawina render'      },
       ],
 
       /* Spesifikasi singkat — tampil sebagai chip/badge */
@@ -149,7 +149,7 @@ var KONTEN = {
       hargaKPR:   'KPR mulai Rp 1.040.500.000',
 
       /* Status unit yang sudah terjual — kosongkan ('') jika semua tersedia */
-      terjual: 'Andrawina-1 & 6: SOLD',
+      terjual: '',
 
       /* Pesan WA khusus untuk unit ini */
       pesanWA: 'Halo Fira, saya tertarik unit Andrawina di Tentrem Bhumi',
@@ -169,6 +169,7 @@ var KONTEN = {
       id:   'bhama',
       nama: 'Bhama 48',
       foto: [
+        { src: '/assets/img/Proyek-Kami/Tentrem-Bhumi/tipe-bhama.webp', alt: 'Bhama tampak depan' },
         { src: 'photos/bhama/bhama%203d%201.webp', alt: 'Bhama 3D view 1' },
         { src: 'photos/bhama/bhama%203d.webp',     alt: 'Bhama 3D view'   },
       ],
@@ -176,7 +177,7 @@ var KONTEN = {
       hargaJenis: 'Cash Keras mulai',
       hargaPokok: 'Rp 646.900.000',
       hargaKPR:   'KPR mulai Rp 721.900.000',
-      terjual:    'Bhama-1 & 6: SOLD',
+      terjual:    '',
       pesanWA:    'Halo Fira, saya tertarik unit Bhama di Tentrem Bhumi',
       denah: [
         {
@@ -192,6 +193,8 @@ var KONTEN = {
       id:   'cantya',
       nama: 'Cantya 32.5 & 48',
       foto: [
+        { src: '/assets/img/Proyek-Kami/Tentrem-Bhumi/tipe-cantya.webp',   alt: 'Cantya tampak depan' },
+        { src: '/assets/img/Proyek-Kami/Tentrem-Bhumi/tipe-cantya 2.webp', alt: 'Cantya tampak 2'     },
         { src: 'photos/cantya/cantya%20berjejer%202.webp',              alt: 'Cantya berjejer' },
         { src: 'photos/cantya/cantya%20berjejer%20miring%20sore.webp',  alt: 'Cantya sore'     },
         { src: 'photos/cantya/cantya%20berjejer%20miring%20taman.webp', alt: 'Cantya taman'    },
@@ -200,7 +203,7 @@ var KONTEN = {
       hargaJenis: 'Tipe 32.5 — Cash Keras mulai',
       hargaPokok: 'Rp 630.900.000',
       hargaKPR:   'Tipe 48 mulai Rp 695.900.000',
-      terjual:    'Cantya-3 & 5: SOLD',
+      terjual:    '',
       pesanWA:    'Halo Fira, saya tertarik unit Cantya di Tentrem Bhumi',
       denah: [
         {
