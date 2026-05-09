@@ -327,50 +327,6 @@
     }
   }
 
-  /* ── Lift Scroll Indicator ───────────────────────────────── */
-  function initLiftNav() {
-    const sections = [
-      { id: 'hero',      floor: 7 },
-      { id: 'tentang',   floor: 6 },
-      { id: 'produk',    floor: 5 },
-      { id: 'promo',     floor: 4 },
-      { id: 'testimoni', floor: 3 },
-      { id: 'faq',       floor: 2 },
-      { id: 'footer',    floor: 1 },
-    ];
-
-    const buttons = document.querySelectorAll('.lift-btn');
-    if (!buttons.length) return;
-
-    function setActive(floor) {
-      buttons.forEach(btn => {
-        const isActive = parseInt(btn.dataset.floor) === floor;
-        btn.classList.toggle('lift-btn--active', isActive);
-      });
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const found = sections.find(s => s.id === entry.target.id);
-          if (found) setActive(found.floor);
-        }
-      });
-    }, { threshold: 0.3 });
-
-    sections.forEach(s => {
-      const el = document.getElementById(s.id);
-      if (el) observer.observe(el);
-    });
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = document.getElementById(btn.dataset.target);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  }
-
   /* ── Init ────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
     injectAll().then(() => {
@@ -384,7 +340,6 @@
       initScrollParallax();
       initProductRows();
       initBlueprintParallax();
-      initLiftNav();
     });
   });
 

@@ -531,10 +531,12 @@
       .promo__right { align-items: stretch; gap: 14px; }
       .promo__savings {
         padding: 20px 24px;
-        display: flex; align-items: center; justify-content: space-between;
+        white-space: normal;
+        text-align: center;
       }
-      .promo__savings-label { margin-bottom: 0; margin-right: 16px; }
+      .promo__savings-label { margin-bottom: 6px; margin-right: 0; }
       .promo__savings-val   { font-size: 36px; }
+      .promo__savings-sub   { white-space: normal; }
       .promo__cta   { justify-content: center; }
 
       /* Calculator */
@@ -1088,7 +1090,7 @@
   <!-- ══ PENGHARGAAN ═══════════════════════════════════════════ -->
   <section id="penghargaan" class="section-awards">
     <div class="awards-header">
-      <span class="section-kicker">→ PENGHARGAAN</span>
+      <span class="eyebrow">→ PENGHARGAAN</span>
       <h2 class="section-title">Diakui &amp; <em>Dipercaya</em></h2>
       <p class="section-sub">Pengakuan nyata dari lembaga keuangan nasional.</p>
     </div>
@@ -1341,26 +1343,30 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
         <ul class="promo__list">
           <li class="promo__item">
             <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
-            <span class="promo__item-text"><strong>Free biaya KPR</strong> — semua bank rekanan (senilai ±Rp 8 Juta)</span>
+            <span class="promo__item-text"><strong>Diskon langsung Rp 15 Juta</strong> <em>— all skema pembayaran</em></span>
           </li>
           <li class="promo__item">
             <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
-            <span class="promo__item-text"><strong>Cashback Rp 25 Juta</strong> untuk pembelian bulan ini</span>
+            <span class="promo__item-text"><strong>Tambahan diskon Rp 5 Juta</strong> jika booking langsung saat survey <em>(worth total Rp 20 Juta)</em></span>
           </li>
           <li class="promo__item">
             <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
-            <span class="promo__item-text"><strong>Subsidi DP</strong> untuk pembeli KPR pertama kali (FLPP)</span>
+            <span class="promo__item-text"><strong>Free Biaya AJB Balik Nama Notaris</strong> <em>— khusus cash & tempo (senilai Rp 10 Juta)</em></span>
           </li>
           <li class="promo__item">
             <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
-            <span class="promo__item-text"><strong>Free canopy + kitchen set</strong> untuk Tipe 45 & 60</span>
+            <span class="promo__item-text"><strong>Free Biaya Provisi &amp; Admin KPR</strong> <em>(senilai ±Rp 7 Juta)</em></span>
+          </li>
+          <li class="promo__item">
+            <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <span class="promo__item-text"><strong>Free Biaya Kenaikan SHM</strong> <em>— khusus cash & tempo (senilai Rp 6 Juta)</em></span>
           </li>
         </ul>
       </div>
       <div class="promo__right">
         <div class="promo__savings">
           <div class="promo__savings-label">Total Hemat</div>
-          <div class="promo__savings-val">±Rp 33 Jt</div>
+          <div class="promo__savings-val">±Rp 43 Jt</div>
           <div class="promo__savings-sub">per unit · s/d akhir bulan</div>
         </div>
         <a href="https://wa.me/6289506888328?text=Halo%2C+saya+ingin+tahu+detail+promo+JGS+Group" target="_blank" rel="noopener" class="btn btn--lg promo__cta">Klaim Promo Sekarang</a>
@@ -1736,39 +1742,5 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
 </script>
 
 <script src="/assets/js/pricelist-modal.js"></script>
-
-<div class="lift-nav" id="liftNav">
-  <nav class="lift-buttons">
-    <button class="lift-btn lift-btn--active" data-target="hero" data-floor="7">
-      <span class="lift-floor">L7</span>
-      <span class="lift-name">Hero</span>
-    </button>
-    <button class="lift-btn" data-target="tentang" data-floor="6">
-      <span class="lift-floor">L6</span>
-      <span class="lift-name">Tentang</span>
-    </button>
-    <button class="lift-btn" data-target="produk" data-floor="5">
-      <span class="lift-floor">L5</span>
-      <span class="lift-name">Produk</span>
-    </button>
-    <button class="lift-btn" data-target="promo" data-floor="4">
-      <span class="lift-floor">L4</span>
-      <span class="lift-name">Promo</span>
-    </button>
-    <button class="lift-btn" data-target="testimoni" data-floor="3">
-      <span class="lift-floor">L3</span>
-      <span class="lift-name">Testimoni</span>
-    </button>
-    <button class="lift-btn" data-target="faq" data-floor="2">
-      <span class="lift-floor">L2</span>
-      <span class="lift-name">FAQ</span>
-    </button>
-    <button class="lift-btn" data-target="footer" data-floor="1">
-      <span class="lift-floor">L1</span>
-      <span class="lift-name">Footer</span>
-    </button>
-  </nav>
-  <div class="lift-brand">JGS</div>
-</div>
 </body>
 </html>
