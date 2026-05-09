@@ -882,6 +882,13 @@
     .blog__media {
       aspect-ratio: 16/9;
       background: #ebe0c4;
+      position: relative;
+    }
+    .blog__media::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.08) 0%, rgba(0,0,0,.22) 100%);
+      pointer-events: none;
     }
     .blog__body {
       padding: 22px 24px 22px;

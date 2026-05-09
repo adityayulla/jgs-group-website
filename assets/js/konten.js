@@ -209,6 +209,7 @@
       excerpt: 'Proses KPR tidak harus rumit. Pelajari langkah-langkah mudah dari persiapan berkas hingga akad kredit.',
       date: '20 April 2026',
       href: '/blog',
+      img: '/assets/img/unit-unggulan/hiroi-15.webp',
     },
     {
       cat: 'Info Jogja',
@@ -216,6 +217,7 @@
       excerpt: 'Kawasan Ngaglik tumbuh pesat — infrastruktur berkembang, harga masih kompetitif, dan akses semakin mudah.',
       date: '15 April 2026',
       href: '/blog',
+      img: '/assets/img/Tentrem Bhumi tipe Andrawina.webp',
     },
     {
       cat: 'Tips Properti',
@@ -223,13 +225,17 @@
       excerpt: 'Jangan sampai tergiur harga murah tanpa cek legalitas. Ini panduan lengkap yang wajib Anda tahu sebelum tanda tangan.',
       date: '10 April 2026',
       href: '/blog',
+      img: '/assets/img/unit-unggulan/okina-10.webp',
     },
   ];
 
   function renderBlogCard(d, i) {
     const delayCls = i === 0 ? '' : ' reveal--delay-' + Math.min(i, 3);
+    const mediaStyle = d.img
+      ? `style="background-image:url('${d.img}');background-size:cover;background-position:center;"`
+      : '';
     return `<a href="${d.href}" class="blog__card reveal${delayCls}">
-  <div class="blog__media" aria-hidden="true"></div>
+  <div class="blog__media" aria-hidden="true" ${mediaStyle}></div>
   <div class="blog__body">
     <span class="blog__cat">${d.cat}</span>
     <h3 class="blog__title">${d.title}</h3>
