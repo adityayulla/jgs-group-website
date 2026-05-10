@@ -57,16 +57,16 @@ var KONTEN = {
   ══════════════════════════════════════════════════════════════════════ */
   hero: {
     /* ── Teks kecil di atas judul ── */
-    est:        'Sleman · 10 mnt dari UII',
+    est:        'Jl. Kaliurang · 10 menit ke UII · Aktif',
 
     /* ── Headline utama (baris 1–2, sebelum highlight box) ── */
-    judul:      'Rumah yang<br> Membuat',
+    judul:      'Saatnya Menetap—',
 
     /* ── Teks di dalam highlight box (latar amber) ── */
-    highlight:  'Betah Pulang',
+    highlight:  'dengan Tentram.',
 
     /* ── Paragraf deskripsi ── */
-    desc:       'Udara sejuk, lingkungan tenang, fasilitas lengkap <br>10 menit dari UII, ideal untuk keluarga & investasi homestay',
+    desc:       'Keamanan 24 jam. Lingkungan eksklusif yang terjaga, bukan tempat sembarang orang lalu-lalang. Udara sejuk Jogja Utara. Tentrem Bhumi dirancang bukan hanya sebagai rumah—tapi sebagai tempat ketentraman hidup Anda, setiap hari.',
 
     /* ── Label tombol ── */
     btn1Label:  'Lihat Tipe Unit →',
