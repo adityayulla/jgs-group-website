@@ -60,7 +60,7 @@ var KONTEN = {
     est:        'Jl. Kaliurang · 10 menit ke UII · Aktif',
 
     /* ── Headline utama (baris 1–2, sebelum highlight box) ── */
-    judul:      'Saatnya Menetap—',
+    judul:      'Saatnya Menetap',
 
     /* ── Teks di dalam highlight box (latar amber) ── */
     highlight:  'dengan Tentram.',

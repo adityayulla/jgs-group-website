@@ -786,6 +786,14 @@ img { display: block; }
 .nav-logo-sub-txt { font-size: 10px; color: #999; font-weight: 500; letter-spacing: .04em; }
 
 /* ── Responsive hero ── */
+@media (max-width: 767px) {
+  .hero-head  { order: 1; }
+  .hero-body  { order: 2; }
+  .hero-right { order: 3; }
+  .hero-new   { gap: 0; }
+  .hero-head  { padding-bottom: 20px; }
+  .hero-body  { padding-top: 20px; }
+}
 @media (min-width: 640px) {
   .hero-h1 { font-size: 52px; }
 }
