@@ -325,7 +325,7 @@ var KONTEN = {
      13. PROGRESS PENJUALAN — update angka ini secara berkala
   ══════════════════════════════════════════════════════════════════════ */
   penjualan: {
-    terjual: 8,   /* ✏️  jumlah unit yang sudah terjual */
+    terjual: 13,  /* ✏️  jumlah unit yang sudah terjual */
     total:   33,  /* ✏️  total unit keseluruhan */
   },
 
