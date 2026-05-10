@@ -113,41 +113,39 @@
     }
     .pop__card { aspect-ratio: 0.55; }
 
-    /* Video Tour */
-    .vt { position: relative; padding: 80px 0 120px; }
-    .vt__frame {
-      position: relative; max-width: 1200px; margin: 0 auto;
-      aspect-ratio: 16/9; border-radius: 28px; overflow: hidden;
-      cursor: pointer;
-      box-shadow: 0 40px 80px -30px rgba(27,42,100,.5);
+    /* Lokasi & Akses */
+    .lok { position: relative; padding: 80px 0 120px; }
+    .lok__grid {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start;
     }
-    .vt__thumb {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover;
+    .lok__map {
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 24px 64px -20px rgba(27,42,100,.3);
+      aspect-ratio: 4/3;
     }
-    .vt__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.55) 100%); }
-    .vt__play {
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      width: 84px; height: 84px; border-radius: 50%;
-      background: var(--orange); color: #fff;
-      display: grid; place-items: center;
-      transition: transform .3s, background .3s;
-      box-shadow: 0 0 0 0 rgba(219,127,46,.6);
-      animation: pulse 2.4s infinite;
+    .lok__map iframe { width: 100%; height: 100%; display: block; border: 0; }
+    .lok__info { display: flex; flex-direction: column; gap: 32px; }
+    .lok__block-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; }
+    .lok__chips { display: flex; flex-direction: column; gap: 10px; }
+    .lok__chip {
+      display: flex; align-items: center; gap: 12px;
+      background: #fff; border: 1px solid var(--line);
+      border-radius: var(--r-sm); padding: 12px 16px;
+      font-size: 14px; color: var(--navy);
     }
-    .vt__play:hover { transform: translate(-50%,-50%) scale(1.08); background: var(--orange-2); }
-    .vt__caption { position: absolute; left: 40px; bottom: 32px; color: #fff; z-index: 2; }
-    .vt__cap-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; opacity: .85; margin-bottom: 4px; }
-    .vt__cap-name  { font-family: var(--font-display); font-size: 36px; font-weight: 500; line-height: 1; }
-    .vt__cap-meta  { font-size: 13px; opacity: .8; margin-top: 4px; }
-    .vt__modal {
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,.85);
-      display: none; place-items: center;
+    .lok__chip-icon { font-size: 18px; flex-shrink: 0; }
+    .lok__chip strong { font-weight: 600; }
+    .lok__fac { display: flex; flex-wrap: wrap; gap: 8px; }
+    .lok__fac-tag {
+      background: var(--navy); color: #fff;
+      font-size: 12px; font-family: var(--font-mono); letter-spacing: .06em;
+      padding: 6px 14px; border-radius: 100px;
     }
-    .vt__modal--on { display: grid; }
-    .vt__modal-inner { position: relative; width: min(900px, 90vw); aspect-ratio: 16/9; }
-    .vt__modal-inner iframe { width: 100%; height: 100%; border: none; border-radius: 12px; }
+    @media (max-width: 860px) {
+      .lok__grid { grid-template-columns: 1fr; }
+      .lok__map  { aspect-ratio: 16/9; }
+    }
     .vt__modal-close {
       position: absolute; top: -44px; right: 0;
       background: rgba(255,255,255,.15); border: none; color: #fff;
@@ -515,35 +513,42 @@
     </div>
   </section>
 
-  <!-- ══ VIDEO TOUR ══════════════════════════════════════════════ -->
-  <section class="vt section--sm" id="video">
+  <!-- ══ LOKASI & AKSES ═══════════════════════════════════════════ -->
+  <section class="lok section--sm" id="lokasi">
     <div class="section__head container">
-      <span class="eyebrow">Video Tour</span>
-      <h2 class="section-title reveal">Lihat langsung<br>kawasannya.</h2>
+      <span class="eyebrow">Lokasi &amp; Akses</span>
+      <h2 class="section-title reveal">Lokasi yang masuk akal<br>untuk hidup yang Anda jalani.</h2>
     </div>
-    <div class="vt__frame container reveal" id="vtFrame">
-      <img
-        src="../assets/img/kawa-living/video-thumb.webp"
-        alt="Video tour Kawa Living"
-        class="vt__thumb"
-        onerror="this.style.background='#1b2a64';this.style.display='block'"
-      >
-      <div class="vt__shade"></div>
-      <button class="vt__play" id="vtPlay" aria-label="Play video">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-      <div class="vt__caption">
-        <div class="vt__cap-label">VIRTUAL TOUR</div>
-        <div class="vt__cap-name">Kawa Living Sedayu</div>
-        <div class="vt__cap-meta">Sedayu, Bantul · 2024</div>
+    <div class="lok__grid reveal">
+      <!-- Peta -->
+      <div class="lok__map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.7513588630814!2d110.27713057492014!3d-7.816122692204451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7af9e34dfabb37%3A0x57cfa04f0341532f!2sKawa%20Living!5e0!3m2!1sen!2sid!4v1778404398128!5m2!1sen!2sid"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Lokasi Kawa Living Sedayu"></iframe>
       </div>
-    </div>
 
-    <!-- Video modal -->
-    <div class="vt__modal" id="vtModal">
-      <div class="vt__modal-inner">
-        <button class="vt__modal-close" id="vtClose">×</button>
-        <iframe id="vtIframe" src="" allow="autoplay; fullscreen" allowfullscreen title="Video Tour Kawa Living"></iframe>
+      <!-- Info panel -->
+      <div class="lok__info">
+        <div>
+          <div class="lok__block-title">Akses dalam radius</div>
+          <div class="lok__chips">
+            <div class="lok__chip"><span class="lok__chip-icon">🎓</span><span><strong>15 menit</strong> ke UMY</span></div>
+            <div class="lok__chip"><span class="lok__chip-icon">🏙️</span><span><strong>20 menit</strong> ke pusat kota Jogja</span></div>
+            <div class="lok__chip"><span class="lok__chip-icon">🛣️</span><span>Akses langsung <strong>Jl. Wates</strong></span></div>
+            <div class="lok__chip"><span class="lok__chip-icon">✈️</span><span><strong>30 menit</strong> ke Bandara YIA</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="lok__block-title">Fasilitas dalam 5 menit</div>
+          <div class="lok__fac">
+            <span class="lok__fac-tag">⛽ SPBU</span>
+            <span class="lok__fac-tag">🏥 Rumah Sakit</span>
+            <span class="lok__fac-tag">🏫 Sekolah</span>
+            <span class="lok__fac-tag">🍜 Kuliner</span>
+            <span class="lok__fac-tag">🛒 Pasar</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -891,24 +896,6 @@
 <div id="footer-placeholder"></div>
 
 <script src="../assets/js/main.js"></script>
-<script>
-  // Video modal
-  document.getElementById('vtPlay').addEventListener('click', function () {
-    document.getElementById('vtModal').classList.add('vt__modal--on');
-    // Replace with actual YouTube embed URL when available
-    document.getElementById('vtIframe').src = 'about:blank';
-  });
-  document.getElementById('vtClose').addEventListener('click', function () {
-    document.getElementById('vtModal').classList.remove('vt__modal--on');
-    document.getElementById('vtIframe').src = 'about:blank';
-  });
-  document.getElementById('vtModal').addEventListener('click', function (e) {
-    if (e.target === this) {
-      this.classList.remove('vt__modal--on');
-      document.getElementById('vtIframe').src = 'about:blank';
-    }
-  });
-</script>
 <script src="/assets/js/pricelist-modal.js"></script>
 </body>
 </html>
