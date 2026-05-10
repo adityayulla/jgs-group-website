@@ -377,6 +377,45 @@ img { display: block; }
 .rating-text { font-size: 13px; color: #555; }
 
 /* ─────────────────────────────────────────
+   UNTUK SIAPA SECTION
+───────────────────────────────────────── */
+.usi-headline {
+  font-family: 'Lora', 'FreeSerif', Georgia, serif;
+  font-size: 22px; font-weight: 700;
+  color: #1a1a1a; line-height: 1.25;
+  margin: 8px 0 20px;
+}
+.usi-grid {
+  display: flex; flex-direction: column; gap: 12px;
+}
+.usi-card {
+  background: #e5e9d8; border-radius: 14px;
+  padding: 20px 18px;
+  border: 1px solid rgba(45,74,43,.12);
+  transition: transform .2s, box-shadow .2s;
+}
+.usi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,74,43,.14); }
+.usi-num {
+  font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  color: #2d4a2b; text-transform: uppercase; margin-bottom: 8px;
+}
+.usi-title {
+  font-family: 'Lora', 'FreeSerif', Georgia, serif;
+  font-size: 17px; font-weight: 700;
+  color: #1a2e19; line-height: 1.3; margin-bottom: 8px;
+}
+.usi-body {
+  font-size: 14px; color: #4a5c48; line-height: 1.65;
+}
+@media (min-width: 640px) {
+  .usi-grid { flex-direction: row; flex-wrap: wrap; }
+  .usi-card { flex: 1 1 calc(50% - 6px); }
+}
+@media (min-width: 900px) {
+  .usi-card { flex: 1 1 calc(33% - 8px); }
+}
+
+/* ─────────────────────────────────────────
    CTA FINAL
 ───────────────────────────────────────── */
 .cta-final {
@@ -1011,6 +1050,31 @@ img { display: block; }
      TRUST BAR
 ══════════════════════════════════════════ -->
 <div class="trust" id="k-trust-bar"><!-- diisi JS dari KONTEN.trustBar --></div>
+
+<!-- ══════════════════════════════════════════
+     UNTUK SIAPA TENTREM BHUMI?
+══════════════════════════════════════════ -->
+<div class="section" id="untuk-siapa">
+  <div class="section-tag">Untuk Siapa Tentrem Bhumi?</div>
+  <h2 class="usi-headline">Tentrem Bhumi dibangun<br>untuk Anda yang...</h2>
+  <div class="usi-grid">
+    <div class="usi-card">
+      <div class="usi-num">01</div>
+      <div class="usi-title">Menginginkan rumah yang lebih lega untuk keluarga</div>
+      <div class="usi-body">Tipe 48–68 yang lapang, tanah yang luas, untuk Anda yang sudah cukup matang untuk tahu apa yang Anda butuhkan dari sebuah rumah.</div>
+    </div>
+    <div class="usi-card">
+      <div class="usi-num">02</div>
+      <div class="usi-title">Mengutamakan keamanan dan privasi keluarga</div>
+      <div class="usi-body">Lingkungan eksklusif dengan keamanan 24 jam—bukan kawasan terbuka yang bisa diakses sembarang orang.</div>
+    </div>
+    <div class="usi-card">
+      <div class="usi-num">03</div>
+      <div class="usi-title">Mencari hunian yang sejuk dan tenang di Jogja Utara</div>
+      <div class="usi-body">&lt;10 menit dari UII, udara sejuk khas Jakal, jauh dari hiruk-pikuk pusat kota tapi tetap dengan akses cepat.</div>
+    </div>
+  </div>
+</div>
 
 <!-- ══════════════════════════════════════════
      FASILITAS
