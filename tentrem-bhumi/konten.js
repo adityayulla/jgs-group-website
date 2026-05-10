@@ -322,7 +322,16 @@ var KONTEN = {
 
 
   /* ══════════════════════════════════════════════════════════════════════
-     13. FOOTER
+     13. PROGRESS PENJUALAN — update angka ini secara berkala
+  ══════════════════════════════════════════════════════════════════════ */
+  penjualan: {
+    terjual: 8,   /* ✏️  jumlah unit yang sudah terjual */
+    total:   33,  /* ✏️  total unit keseluruhan */
+  },
+
+
+  /* ══════════════════════════════════════════════════════════════════════
+     14. FOOTER
   ══════════════════════════════════════════════════════════════════════ */
   footer: {
     nama:      'Tentrem Bhumi · JGS Group',

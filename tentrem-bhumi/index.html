@@ -377,6 +377,46 @@ img { display: block; }
 .rating-text { font-size: 13px; color: #555; }
 
 /* ─────────────────────────────────────────
+   PROGRESS CALLOUT
+───────────────────────────────────────── */
+.prog-callout {
+  background: #fff;
+  border-radius: 14px;
+  margin: 0 6px 12px 6px;
+  border: 1px solid rgba(45,74,43,.18);
+  border-left: 4px solid #2d4a2b;
+  padding: 18px 20px 16px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .5s ease-out, transform .5s ease-out;
+}
+.prog-callout.visible { opacity: 1; transform: translateY(0); }
+.prog-callout__row {
+  display: flex; align-items: baseline; gap: 6px;
+  margin-bottom: 10px; flex-wrap: wrap;
+}
+.prog-callout__big {
+  font-family: 'Lora', 'FreeSerif', Georgia, serif;
+  font-size: 32px; font-weight: 700; color: #2d4a2b; line-height: 1;
+}
+.prog-callout__text {
+  font-size: 14px; font-weight: 600; color: #1a1a1a; line-height: 1.4;
+}
+.prog-callout__track {
+  background: #e5e9d8; border-radius: 100px; height: 8px;
+  overflow: hidden; margin-bottom: 8px;
+}
+.prog-callout__bar {
+  height: 8px; border-radius: 100px;
+  background: #2d4a2b;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(.22,.61,.36,1);
+}
+.prog-callout__meta {
+  font-size: 11px; color: #888; letter-spacing: .03em;
+}
+
+/* ─────────────────────────────────────────
    UNTUK SIAPA SECTION
 ───────────────────────────────────────── */
 .usi-headline {
@@ -1056,6 +1096,21 @@ img { display: block; }
 <div class="trust" id="k-trust-bar"><!-- diisi JS dari KONTEN.trustBar --></div>
 
 <!-- ══════════════════════════════════════════
+     PROGRESS PENJUALAN
+     ✏️  Update angka di konten.js → penjualan.terjual & penjualan.total
+══════════════════════════════════════════ -->
+<div class="prog-callout" id="prog-callout">
+  <div class="prog-callout__row">
+    <span class="prog-callout__big" id="pc-terjual">8</span>
+    <span class="prog-callout__text" id="pc-label">dari 33 unit telah dipercayakan kepada keluarga baru.</span>
+  </div>
+  <div class="prog-callout__track">
+    <div class="prog-callout__bar" id="pc-bar"></div>
+  </div>
+  <div class="prog-callout__meta" id="pc-sisa">25 unit tersisa</div>
+</div>
+
+<!-- ══════════════════════════════════════════
      UNTUK SIAPA TENTREM BHUMI?
 ══════════════════════════════════════════ -->
 <div class="section" id="untuk-siapa">
@@ -1413,6 +1468,28 @@ function setHtml(id, val) { var el = document.getElementById(id); if (el && val 
     '<a href="' + K.footer.igUrl   + '" target="_blank" rel="noopener">' + K.footer.igLabel   + '</a>' +
     '<a href="' + K.footer.telpUrl + '">'                                 + K.footer.telpLabel + '</a>');
 
+  /* PROGRESS PENJUALAN */
+  if (K.penjualan) {
+    var p = K.penjualan;
+    var sisa = p.total - p.terjual;
+    var pct  = (p.terjual / p.total * 100).toFixed(1);
+    setText('pc-terjual', p.terjual);
+    setText('pc-label',   'dari ' + p.total + ' unit telah dipercayakan kepada keluarga baru.');
+    setText('pc-sisa',    sisa + ' unit tersisa');
+    /* Animate bar on scroll into view */
+    var barEl = document.getElementById('pc-bar');
+    if (barEl) {
+      var obs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          barEl.style.width = pct + '%';
+          obs.disconnect();
+        }
+      }, { threshold: 0.4 });
+      var callout = document.getElementById('prog-callout');
+      if (callout) obs.observe(callout);
+    }
+  }
+
 })();
 
 /* UNIT TABS */
@@ -1487,7 +1564,7 @@ syncUnitsDisplay();
 
 /* ── Scroll entrance: IntersectionObserver ── */
 (function () {
-  var targets = document.querySelectorAll('.section, .trust, .cta-final');
+  var targets = document.querySelectorAll('.section, .trust, .cta-final, .prog-callout');
 
   /* Delay bertingkat agar tidak semua masuk serentak */
   targets.forEach(function (el, i) {
