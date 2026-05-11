@@ -321,6 +321,26 @@
       .un__name   { font-size: 30px; }
       .calc__panel { padding: 22px; }
     }
+
+    /* ── Lightbox ── */
+    .lb-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.88); align-items: center; justify-content: center;
+      cursor: zoom-out;
+    }
+    .lb-overlay.open { display: flex; }
+    .lb-overlay img {
+      max-width: 90vw; max-height: 90vh;
+      object-fit: contain; border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+      cursor: default;
+    }
+    .lb-close {
+      position: absolute; top: 20px; right: 24px;
+      font-size: 32px; color: #fff; cursor: pointer;
+      line-height: 1; background: none; border: none; padding: 4px;
+    }
+    .un__denah-imgs img { cursor: zoom-in; }
   </style>
 </head>
 <body>
@@ -450,7 +470,7 @@
       <!-- 1. Hiroi Yuri -->
       <div class="un__row glass reveal">
         <div class="un__img">
-          <img src="img/tipe/tipe%20hiroi.webp" alt="Kawa Living Tipe Hiroi Yuri" loading="lazy"
+          <img src="img/tipe/tipe%20yuri.webp" alt="Kawa Living Tipe Hiroi Yuri" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
         </div>
         <div class="un__copy">
@@ -472,7 +492,7 @@
           <div class="un__footer">
             <div class="un__price">
               <span>Mulai dari</span>
-              <strong>Rp 479 Juta</strong>
+              <strong>Rp 414 Juta</strong>
             </div>
             <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Hiroi+Yuri+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
           </div>
@@ -489,7 +509,7 @@
       <!-- 2. Yuri -->
       <div class="un__row un__row--alt glass reveal">
         <div class="un__img">
-          <img src="img/tipe/tipe%20yuri.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
+          <img src="img/tipe/tipe%20hiroi.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
         </div>
         <div class="un__copy">
@@ -519,7 +539,6 @@
             <span class="un__denah-lbl">Denah</span>
             <div class="un__denah-imgs">
               <img src="img/tipe/denah%20yuri%2034.webp" alt="Denah Yuri 34" loading="lazy">
-              <img src="img/tipe/denah%20yuri%2042.webp" alt="Denah Yuri 42" loading="lazy">
             </div>
           </div>
         </div>
@@ -535,22 +554,22 @@
           <div class="un__tagrow">
             <span class="un__tag">KPR Tersedia</span>
           </div>
-          <h3 class="un__name">Mizu 53/72</h3>
+          <h3 class="un__name">Mizu 36/72</h3>
           <div class="un__loc">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
             Sedayu, Bantul
           </div>
-          <p class="un__desc">Tipe keluarga dengan 2 kamar tidur dan 2 kamar mandi. Carport luas, dapur terbuka, dan ruang keluarga yang nyaman.</p>
+          <p class="un__desc">Tipe keluarga dengan 2 kamar tidur dan 1 kamar mandi. Carport luas, dapur terbuka, dan ruang keluarga yang nyaman.</p>
           <div class="un__specs">
             <div>🛏 2 Kamar Tidur</div>
-            <div>🚿 2 Kamar Mandi</div>
+            <div>🚿 1 Kamar Mandi</div>
             <div>📐 LT 72 m²</div>
-            <div>🏠 LB 53 m²</div>
+            <div>🏠 LB 36 m²</div>
           </div>
           <div class="un__footer">
             <div class="un__price">
               <span>Mulai dari</span>
-              <strong>Rp 550 Juta</strong>
+              <strong>Rp 415 Juta</strong>
             </div>
             <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Mizu+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
           </div>
@@ -886,5 +905,33 @@
 
 <script src="../assets/js/main.js"></script>
 <script src="/assets/js/pricelist-modal.js"></script>
+
+<!-- Lightbox -->
+<div class="lb-overlay" id="lb-overlay">
+  <button class="lb-close" onclick="closeLb()" aria-label="Tutup">&times;</button>
+  <img id="lb-img" src="" alt="">
+</div>
+<script>
+  function openLb(src, alt) {
+    var o = document.getElementById('lb-overlay');
+    var i = document.getElementById('lb-img');
+    i.src = src; i.alt = alt || '';
+    o.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() {
+    document.getElementById('lb-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lb-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeLb();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLb();
+  });
+  document.querySelectorAll('.un__denah-imgs img').forEach(function(img) {
+    img.addEventListener('click', function() { openLb(this.src, this.alt); });
+  });
+</script>
 </body>
 </html>
