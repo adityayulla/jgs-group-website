@@ -240,6 +240,10 @@
     .un__footer { display: flex; justify-content: space-between; align-items: center; }
     .un__price  { display: flex; flex-direction: column; font-size: 12px; color: var(--muted); }
     .un__price strong { font-family: var(--font-display); font-weight: 500; font-size: 26px; color: var(--navy); letter-spacing: -.01em; margin-top: 2px; }
+    .un__denah  { margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--line); }
+    .un__denah-lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 8px; }
+    .un__denah-imgs { display: flex; gap: 10px; }
+    .un__denah-imgs img { flex: 1; border-radius: 8px; border: 1px solid var(--line); object-fit: contain; background: #f5f5f7; max-height: 130px; }
 
     /* FAQ */
     .faq { padding: 80px 0; }
@@ -443,10 +447,10 @@
     </div>
     <div class="un__list">
 
-      <!-- Yuri -->
+      <!-- 1. Hiroi Yuri -->
       <div class="un__row glass reveal">
         <div class="un__img">
-          <img src="img/tipe%20yuri.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
+          <img src="img/tipe/tipe%20hiroi.webp" alt="Kawa Living Tipe Hiroi Yuri" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
         </div>
         <div class="un__copy">
@@ -454,17 +458,55 @@
             <span class="un__tag">Terlaris</span>
             <span class="un__tag">KPR Tersedia</span>
           </div>
-          <h3 class="un__name">Yuri 40/81</h3>
+          <h3 class="un__name">Hiroi Yuri 37 &amp; 42</h3>
           <div class="un__loc">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
             Sedayu, Bantul
           </div>
-          <p class="un__desc">Tipe starter ideal untuk keluarga muda. Ruang tamu lega, 2 kamar tidur, dan taman kecil di depan rumah.</p>
+          <p class="un__desc">Unit terlaris di Kawa Living. Desain Japandi yang compact dan efisien—cocok untuk pasangan muda yang ingin memiliki rumah sendiri tanpa mengorbankan estetika.</p>
           <div class="un__specs">
             <div>🛏 2 Kamar Tidur</div>
             <div>🚿 1 Kamar Mandi</div>
-            <div>📐 LT 81 m²</div>
-            <div>🏠 LB 40 m²</div>
+            <div>🏠 LB 37–42 m²</div>
+          </div>
+          <div class="un__footer">
+            <div class="un__price">
+              <span>Mulai dari</span>
+              <strong>Rp 479 Juta</strong>
+            </div>
+            <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Hiroi+Yuri+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
+          </div>
+          <div class="un__denah">
+            <span class="un__denah-lbl">Denah</span>
+            <div class="un__denah-imgs">
+              <img src="img/tipe/denah%20hiroi%2037.webp" alt="Denah Hiroi Yuri 37" loading="lazy">
+              <img src="img/tipe/denah%20hiroi%2042.webp" alt="Denah Hiroi Yuri 42" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Yuri -->
+      <div class="un__row un__row--alt glass reveal">
+        <div class="un__img">
+          <img src="img/tipe/tipe%20yuri.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
+            onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
+        </div>
+        <div class="un__copy">
+          <div class="un__tagrow">
+            <span class="un__tag">Terlaris #2</span>
+            <span class="un__tag">KPR Tersedia</span>
+          </div>
+          <h3 class="un__name">Yuri 34 &amp; 42</h3>
+          <div class="un__loc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Sedayu, Bantul
+          </div>
+          <p class="un__desc">Tipe starter dengan tampilan modern, halaman terbuka, dan layout yang optimal. Tersedia dua varian ukuran—fleksibel sesuai kebutuhan dan anggaran.</p>
+          <div class="un__specs">
+            <div>🛏 2 Kamar Tidur</div>
+            <div>🚿 1 Kamar Mandi</div>
+            <div>🏠 LB 34–42 m²</div>
           </div>
           <div class="un__footer">
             <div class="un__price">
@@ -473,50 +515,24 @@
             </div>
             <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Yuri+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
           </div>
-        </div>
-      </div>
-
-      <!-- Himawari -->
-      <div class="un__row un__row--alt glass reveal">
-        <div class="un__img">
-          <img src="img/Kawa%20Living%20tipe%20Hiroi%20Yuri.webp" alt="Kawa Living Tipe Himawari" loading="lazy"
-            onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
-        </div>
-        <div class="un__copy">
-          <div class="un__tagrow">
-            <span class="un__tag">KPR Tersedia</span>
-          </div>
-          <h3 class="un__name">Himawari 51/72</h3>
-          <div class="un__loc">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            Sedayu, Bantul
-          </div>
-          <p class="un__desc">Hunian nyaman dengan 2 kamar tidur luas, pencahayaan alami optimal, dan desain modern minimalis Japandi.</p>
-          <div class="un__specs">
-            <div>🛏 2 Kamar Tidur</div>
-            <div>🚿 1 Kamar Mandi</div>
-            <div>📐 LT 72 m²</div>
-            <div>🏠 LB 51 m²</div>
-          </div>
-          <div class="un__footer">
-            <div class="un__price">
-              <span>Mulai dari</span>
-              <strong>Rp 540 Juta</strong>
+          <div class="un__denah">
+            <span class="un__denah-lbl">Denah</span>
+            <div class="un__denah-imgs">
+              <img src="img/tipe/denah%20yuri%2034.webp" alt="Denah Yuri 34" loading="lazy">
+              <img src="img/tipe/denah%20yuri%2042.webp" alt="Denah Yuri 42" loading="lazy">
             </div>
-            <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Himawari+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
           </div>
         </div>
       </div>
 
-      <!-- Mizu -->
+      <!-- 3. Mizu -->
       <div class="un__row glass reveal">
         <div class="un__img">
-          <img src="img/yuri%20n%20hiroi.webp" alt="Kawa Living Tipe Mizu" loading="lazy"
+          <img src="img/tipe/tipe%20Mizu.webp" alt="Kawa Living Tipe Mizu" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
-            <span class="un__tag">Favorit</span>
             <span class="un__tag">KPR Tersedia</span>
           </div>
           <h3 class="un__name">Mizu 53/72</h3>
@@ -538,13 +554,58 @@
             </div>
             <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Mizu+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
           </div>
+          <div class="un__denah">
+            <span class="un__denah-lbl">Denah</span>
+            <div class="un__denah-imgs">
+              <img src="img/tipe/denah%20Mizu.webp" alt="Denah Mizu" loading="lazy">
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Okina Himawari -->
+      <!-- 4. Himawari -->
       <div class="un__row un__row--alt glass reveal">
         <div class="un__img">
-          <img src="img/interior%20keluarga%202.webp" alt="Interior Ruang Keluarga Okina Himawari" loading="lazy"
+          <img src="img/tipe/tipe%20himawari%20landscape.webp" alt="Kawa Living Tipe Himawari" loading="lazy"
+            onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
+        </div>
+        <div class="un__copy">
+          <div class="un__tagrow">
+            <span class="un__tag">Favorit</span>
+            <span class="un__tag">KPR Tersedia</span>
+          </div>
+          <h3 class="un__name">Himawari 51/72</h3>
+          <div class="un__loc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Sedayu, Bantul
+          </div>
+          <p class="un__desc">Hunian nyaman dengan 2 kamar tidur luas, pencahayaan alami optimal, dan desain modern minimalis Japandi.</p>
+          <div class="un__specs">
+            <div>🛏 2 Kamar Tidur</div>
+            <div>🚿 1 Kamar Mandi</div>
+            <div>📐 LT 72 m²</div>
+            <div>🏠 LB 51 m²</div>
+          </div>
+          <div class="un__footer">
+            <div class="un__price">
+              <span>Mulai dari</span>
+              <strong>Rp 540 Juta</strong>
+            </div>
+            <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Himawari+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
+          </div>
+          <div class="un__denah">
+            <span class="un__denah-lbl">Denah</span>
+            <div class="un__denah-imgs">
+              <img src="img/tipe/denah%20himawari.webp" alt="Denah Himawari" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Okina -->
+      <div class="un__row glass reveal">
+        <div class="un__img">
+          <img src="img/tipe/tipe%20Okina%20landscape.webp" alt="Kawa Living Tipe Okina" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#db7f2e33)';this.style.display='block'">
         </div>
         <div class="un__copy">
@@ -552,7 +613,7 @@
             <span class="un__tag">Premium</span>
             <span class="un__tag">KPR Tersedia</span>
           </div>
-          <h3 class="un__name">Okina Himawari 61/82</h3>
+          <h3 class="un__name">Okina 61/82</h3>
           <div class="un__loc">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
             Sedayu, Bantul
@@ -569,7 +630,13 @@
               <span>Mulai dari</span>
               <strong>Rp 614 Juta</strong>
             </div>
-            <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Okina+Himawari+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
+            <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Okina+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
+          </div>
+          <div class="un__denah">
+            <span class="un__denah-lbl">Denah</span>
+            <div class="un__denah-imgs">
+              <img src="img/tipe/denah%20okina.webp" alt="Denah Okina" loading="lazy">
+            </div>
           </div>
         </div>
       </div>
