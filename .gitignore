@@ -15,3 +15,7 @@ JGS Living Landing (standalone).html
 
 # Node (if ever used)
 node_modules/
+
+# Internal documentation (not for deployment)
+/*.md
+!/README.md

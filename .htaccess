@@ -1,0 +1,108 @@
+# ============================================================
+# JGS Group — .htaccess untuk Apache/cPanel
+# jogjagrahaselaras.com
+# ============================================================
+
+Options -Indexes
+
+# ── Gzip Compression ─────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE font/woff2
+</IfModule>
+
+# ── Rewrite Rules ─────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # 2. Non-www → www tidak berlaku. Redirect www → non-www
+  RewriteCond %{HTTP_HOST} ^www\.jogjagrahaselaras\.com [NC]
+  RewriteRule ^ https://jogjagrahaselaras.com%{REQUEST_URI} [R=301,L]
+
+  # 3. Redirect permanen: /tentrem-jiwo/ dan /tentrem-jiwo → /
+  RewriteRule ^tentrem-jiwo/?$ / [R=301,L]
+
+  # 4. Clean URL: index.html → direktori (misal /download/index.html → /download/)
+  RewriteCond %{THE_REQUEST} \s/+(.+?/)?index\.html[\s?] [NC]
+  RewriteRule ^(.*/)index\.html$ /%1 [R=301,NE,L]
+
+  # 5. Clean URL: file.html → file (misal /tentrem-bhumi/download.html → /tentrem-bhumi/download)
+  RewriteCond %{THE_REQUEST} \s/+(.*?)\.html[\s?] [NC]
+  RewriteRule ^(.+?)\.html$ /$1 [R=301,NE,L]
+
+  # 6. Serve .html file ketika URL tanpa ekstensi diminta (internal rewrite)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+</IfModule>
+
+# ── Cache Control ─────────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML: 1 jam
+  ExpiresByType text/html                 "access plus 1 hour"
+
+  # CSS & JavaScript: 1 tahun
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType text/javascript           "access plus 1 year"
+
+  # Gambar: 1 tahun
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/gif                 "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 year"
+  ExpiresByType image/x-icon              "access plus 1 year"
+
+  # Font: 1 tahun
+  ExpiresByType font/woff2                "access plus 1 year"
+  ExpiresByType font/woff                 "access plus 1 year"
+
+  # PDF: 1 minggu
+  ExpiresByType application/pdf           "access plus 1 week"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # HTML: cache 1 jam, revalidasi
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+
+  # CSS, JS, gambar, font: 1 tahun immutable
+  <FilesMatch "\.(css|js|webp|jpg|jpeg|png|gif|svg|ico|woff|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# ── Custom Error Pages ────────────────────────────────────────
+ErrorDocument 404 /404.html
+
+# ── Blokir Akses ke File Sensitif ────────────────────────────
+<FilesMatch "(^\.htaccess|^\.htpasswd|^\.env|^\.git)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Blokir akses ke file konfigurasi & dokumen non-publik
+<FilesMatch "\.(md|json|docx|pdf\.lock)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+</FilesMatch>

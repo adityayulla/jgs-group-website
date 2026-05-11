@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Blokir folder non-publik
+Disallow: /components/
+Disallow: /.git/
+Disallow: /.claude/
+
+Sitemap: https://jogjagrahaselaras.com/sitemap.xml
