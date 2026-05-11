@@ -341,6 +341,30 @@
       line-height: 1; background: none; border: none; padding: 4px;
     }
     .un__denah-imgs img { cursor: zoom-in; }
+
+    /* ── Siteplan ─────────────────────────────────────────────── */
+    .sp { padding: 80px 0; }
+    .sp__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
+    }
+    .sp__img-wrap {
+      position: relative; border-radius: var(--r-lg); overflow: hidden;
+      box-shadow: 0 12px 40px rgba(27,42,100,.12);
+      cursor: zoom-in;
+      margin-top: 40px;
+    }
+    .sp__img-wrap img {
+      width: 100%; display: block;
+      transition: transform .5s var(--ease);
+    }
+    .sp__img-wrap:hover img { transform: scale(1.02); }
+    .sp__hint {
+      position: absolute; bottom: 16px; right: 16px;
+      background: rgba(0,0,0,.55); color: #fff;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em;
+      padding: 6px 12px; border-radius: var(--r-pill);
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -699,6 +723,24 @@
             <span class="lok__fac-tag">🛒 Pasar</span>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SITEPLAN ═══════════════════════════════════════════════ -->
+  <section class="sp section" id="siteplan">
+    <div class="sp__inner">
+      <div class="section__head" style="text-align:left; max-width:none; padding:0; margin-bottom:0;">
+        <span class="eyebrow">Kawasan</span>
+        <h2 class="section-title reveal" style="text-align:left;">Siteplan <em>Kawasan</em></h2>
+        <p class="section-lead reveal reveal--delay-1" style="text-align:left; margin-top:12px;">
+          Lihat posisi tiap unit, fasilitas, dan akses kawasan Kawa Living secara lengkap.
+        </p>
+      </div>
+      <div class="sp__img-wrap reveal reveal--delay-1"
+           onclick="openLb('img/Siteplan%20Kawa%20Living.webp', 'Siteplan Kawasan Kawa Living')">
+        <img src="img/Siteplan%20Kawa%20Living.webp" alt="Siteplan Kawasan Kawa Living" loading="lazy">
+        <span class="sp__hint">Klik untuk perbesar →</span>
       </div>
     </div>
   </section>
