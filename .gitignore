@@ -19,3 +19,7 @@ node_modules/
 # Internal documentation (not for deployment)
 /*.md
 !/README.md
+
+# Design agent working files (not for deployment)
+.agents/
+**/.agents/
