@@ -1,0 +1,30 @@
+{
+  "trailingSlash": true,
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/tentrem-jiwo",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tentrem-jiwo/",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    }
+  ]
+}
