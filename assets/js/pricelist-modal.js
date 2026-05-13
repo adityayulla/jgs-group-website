@@ -192,19 +192,12 @@
 
     console.log('Payload dikirim:', JSON.stringify(payload));
 
-    /* Gunakan sendBeacon agar data terkirim meski halaman langsung redirect */
-    var body = 'data=' + encodeURIComponent(JSON.stringify(payload));
-    var sent = false;
-    if (navigator.sendBeacon) {
-      sent = navigator.sendBeacon(APPS_SCRIPT_URL, new Blob([body], {type: 'application/x-www-form-urlencoded'}));
-    }
-    if (!sent) {
-      /* Fallback XHR — beri jeda 1.5 detik agar request sempat terkirim */
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', APPS_SCRIPT_URL, true);
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.send(body);
-    }
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', APPS_SCRIPT_URL, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send('data=' + encodeURIComponent(JSON.stringify(payload)));
+
+    /* Redirect setelah 1.5 detik — beri waktu XHR terkirim */
     setTimeout(function() { window.location.href = REDIRECT_URL; }, 1500);
   };
 
