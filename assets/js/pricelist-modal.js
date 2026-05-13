@@ -192,21 +192,20 @@
 
     console.log('Payload dikirim:', JSON.stringify(payload));
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', APPS_SCRIPT_URL, true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-    /* Redirect setelah XHR selesai (atau timeout 5 detik) agar data tidak terpotong */
-    var redirected = false;
-    function doRedirect() {
-      if (!redirected) { redirected = true; window.location.href = REDIRECT_URL; }
+    /* Gunakan sendBeacon agar data terkirim meski halaman langsung redirect */
+    var body = 'data=' + encodeURIComponent(JSON.stringify(payload));
+    var sent = false;
+    if (navigator.sendBeacon) {
+      sent = navigator.sendBeacon(APPS_SCRIPT_URL, new Blob([body], {type: 'application/x-www-form-urlencoded'}));
     }
-    xhr.onload    = doRedirect;
-    xhr.onerror   = doRedirect;
-    xhr.ontimeout = doRedirect;
-    xhr.timeout   = 5000;
-
-    xhr.send('data=' + encodeURIComponent(JSON.stringify(payload)));
+    if (!sent) {
+      /* Fallback XHR — beri jeda 1.5 detik agar request sempat terkirim */
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', APPS_SCRIPT_URL, true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.send(body);
+    }
+    setTimeout(function() { window.location.href = REDIRECT_URL; }, 1500);
   };
 
   /* Auto-bind ke tombol-tombol yang punya class/data-attribute pricelist */
