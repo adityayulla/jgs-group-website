@@ -195,10 +195,18 @@
     var xhr = new XMLHttpRequest();
     xhr.open('POST', APPS_SCRIPT_URL, true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('data=' + encodeURIComponent(JSON.stringify(payload)));
 
-    /* Redirect ke halaman download — pengunjung pilih proyek di sana */
-    window.location.href = REDIRECT_URL;
+    /* Redirect setelah XHR selesai (atau timeout 5 detik) agar data tidak terpotong */
+    var redirected = false;
+    function doRedirect() {
+      if (!redirected) { redirected = true; window.location.href = REDIRECT_URL; }
+    }
+    xhr.onload    = doRedirect;
+    xhr.onerror   = doRedirect;
+    xhr.ontimeout = doRedirect;
+    xhr.timeout   = 5000;
+
+    xhr.send('data=' + encodeURIComponent(JSON.stringify(payload)));
   };
 
   /* Auto-bind ke tombol-tombol yang punya class/data-attribute pricelist */
