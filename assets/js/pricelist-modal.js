@@ -14,6 +14,48 @@
   var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbznJXL_2a_hhRdYmB7Es44sGH_Dc9E96fcgch40mfrPlq-heaV2ewkSSDmxgVpu7qq6Lg/exec';
   var REDIRECT_URL    = '/download/';
 
+  /* ── UTM / Traffic Source tracking ──────────────────────── */
+  var _utm = null;
+
+  function captureUtm() {
+    var p   = new URLSearchParams(window.location.search);
+    var src = p.get('utm_source')   || '';
+    var med = p.get('utm_medium')   || '';
+    var cam = p.get('utm_campaign') || '';
+    var con = p.get('utm_content')  || '';
+    var ref = document.referrer     || '';
+
+    // Kalau URL punya UTM params, simpan ke sessionStorage agar persist lintas halaman
+    if (src || med || cam) {
+      var fresh = { utm_source: src, utm_medium: med, utm_campaign: cam, utm_content: con, referrer: ref };
+      try { sessionStorage.setItem('jgs_utm', JSON.stringify(fresh)); } catch(e) {}
+      return fresh;
+    }
+
+    // Coba ambil yang sudah tersimpan (user navigasi dari landing page ke halaman lain)
+    try {
+      var stored = sessionStorage.getItem('jgs_utm');
+      if (stored) return JSON.parse(stored);
+    } catch(e) {}
+
+    // Fallback: deteksi dari referrer
+    if (!ref) return { utm_source: 'direct', utm_medium: '(none)', utm_campaign: '', utm_content: '', referrer: '' };
+    if (/google\.com/i.test(ref))            return { utm_source: 'google',    utm_medium: 'organic',   utm_campaign: '', utm_content: '', referrer: ref };
+    if (/facebook\.com|fb\.com/i.test(ref)) return { utm_source: 'facebook',  utm_medium: 'social',    utm_campaign: '', utm_content: '', referrer: ref };
+    if (/instagram\.com/i.test(ref))         return { utm_source: 'instagram', utm_medium: 'social',    utm_campaign: '', utm_content: '', referrer: ref };
+    if (/tiktok\.com/i.test(ref))            return { utm_source: 'tiktok',    utm_medium: 'social',    utm_campaign: '', utm_content: '', referrer: ref };
+    if (/youtube\.com/i.test(ref))           return { utm_source: 'youtube',   utm_medium: 'social',    utm_campaign: '', utm_content: '', referrer: ref };
+    if (/wa\.me|whatsapp/i.test(ref))        return { utm_source: 'whatsapp',  utm_medium: 'messaging', utm_campaign: '', utm_content: '', referrer: ref };
+    return { utm_source: ref, utm_medium: 'referral', utm_campaign: '', utm_content: '', referrer: ref };
+  }
+
+  // Capture segera saat script load supaya referrer masih tersedia
+  function getUtm() {
+    if (!_utm) _utm = captureUtm();
+    return _utm;
+  }
+  getUtm();
+
   /* ── Inject CSS ──────────────────────────────────────────── */
   var style = document.createElement('style');
   style.setAttribute('data-pricelist-modal', '');
@@ -133,13 +175,19 @@
       return;
     }
 
+    var utm = getUtm();
     var payload = {
-      date:      new Date().toLocaleDateString('id-ID'),
-      time:      new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
-      Nama:      nama,
-      Handphone: hp,
-      Email:     email,
-      Sumber:    window.location.pathname
+      date:         new Date().toLocaleDateString('id-ID'),
+      time:         new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+      Nama:         nama,
+      Handphone:    hp,
+      Email:        email,
+      Sumber:       window.location.pathname,
+      utm_source:   utm.utm_source,
+      utm_medium:   utm.utm_medium,
+      utm_campaign: utm.utm_campaign,
+      utm_content:  utm.utm_content,
+      referrer:     utm.referrer
     };
 
     console.log('Payload dikirim:', JSON.stringify(payload));
