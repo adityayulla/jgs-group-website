@@ -103,7 +103,7 @@
       box-shadow: 0 30px 80px -20px rgba(27,42,100,.35);
       z-index: 1; background: #ccc;
     }
-    .hero__img { width: 100%; height: 100%; object-fit: cover; will-change: transform; transition: transform 0.1s ease-out; }
+    .hero__img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.1s ease-out; }
     .hero__badge {
       position: absolute; left: -30px; top: 40px;
       background: #fff; border-radius: 50%; width: 130px; height: 130px;
@@ -1783,7 +1783,8 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
 <script>
   (function () {
     const heroImg = document.querySelector('.hero__img');
-    if (!heroImg) return;
+    if (!heroImg || window.innerWidth < 768) return;
+    heroImg.style.willChange = 'transform';
     window.addEventListener('scroll', function () {
       const scale = Math.min(1 + window.scrollY * 0.0003, 1.15);
       heroImg.style.transform = 'scale(' + scale + ')';
