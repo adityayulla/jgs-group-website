@@ -41,7 +41,8 @@
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="assets/img/tentrem%20jiwo.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/img/tentrem-jiwo-mobile.webp" fetchpriority="high" media="(max-width: 767px)">
+  <link rel="preload" as="image" href="assets/img/tentrem%20jiwo.webp" fetchpriority="high" media="(min-width: 768px)">
   <link rel="stylesheet" href="assets/css/global.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
@@ -103,6 +104,7 @@
       box-shadow: 0 30px 80px -20px rgba(27,42,100,.35);
       z-index: 1; background: #ccc;
     }
+    .hero__frame picture { display: block; width: 100%; height: 100%; }
     .hero__img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.1s ease-out; }
     .hero__badge {
       position: absolute; left: -30px; top: 40px;
@@ -1085,14 +1087,17 @@
       <div class="hero__visual reveal">
         <div class="hero__glow"></div>
         <div class="hero__frame">
-          <img
-            src="assets/img/tentrem jiwo.webp"
-            alt="Perumahan JGS Group Yogyakarta"
-            class="hero__img"
-            loading="eager"
-            fetchpriority="high"
-            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)'"
-          >
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/img/tentrem-jiwo-mobile.webp" type="image/webp">
+            <img
+              src="assets/img/tentrem jiwo.webp"
+              alt="Perumahan JGS Group Yogyakarta"
+              class="hero__img"
+              loading="eager"
+              fetchpriority="high"
+              onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)'"
+            >
+          </picture>
         </div>
         <div class="hero__badge">
           <div class="hero__badge-num">13+</div>
