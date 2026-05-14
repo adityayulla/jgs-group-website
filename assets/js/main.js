@@ -74,6 +74,7 @@
   function initBackground() {
     const root = document.querySelector('.bg-root');
     if (!root) return;
+    if (window.matchMedia('(hover: none)').matches) return;
 
     const washA = root.querySelector('.reb__wash--a');
     const washB = root.querySelector('.reb__wash--b');
@@ -309,6 +310,7 @@
     const blueprintBg  = document.getElementById('blueprintBg');
     const blueprintImg = document.getElementById('blueprintImg');
     if (!blueprintImg) return;
+    if (window.matchMedia('(hover: none)').matches) return;
 
     document.addEventListener('mousemove', (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 20;
