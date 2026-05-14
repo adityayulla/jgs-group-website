@@ -92,12 +92,10 @@
 
   /* ── Render: popular card (full-image overlay) ──────────── */
   function renderPopularCard(d) {
-    const imgStyle = d.img
-      ? `background-image:url('${d.img}');`
-      : '';
+    const dataBg = d.img ? ` data-bg="${d.img}"` : '';
     const badgeBg = BADGE_COLORS[d.badgeColor] || '#E8872A';
     return `<div class="pop-card">
-  <div class="pop-card__img" style="${imgStyle}"></div>
+  <div class="pop-card__img"${dataBg}></div>
   <div class="pop-card__shade"></div>
   <span class="pop-card__badge" style="background:${badgeBg}">${d.badge}</span>
   <div class="pop-card__head">
@@ -147,6 +145,18 @@
     if (!track) return;
 
     track.innerHTML = popularCards.map(renderPopularCard).join('');
+
+    // Lazy-load card background images
+    var bgObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var bg = el.getAttribute('data-bg');
+        if (bg) el.style.backgroundImage = "url('" + bg + "')";
+        bgObs.unobserve(el);
+      });
+    }, { rootMargin: '400px' });
+    track.querySelectorAll('[data-bg]').forEach(function(el) { bgObs.observe(el); });
 
     const cards = Array.from(track.children);
 
@@ -231,11 +241,9 @@
 
   function renderBlogCard(d, i) {
     const delayCls = i === 0 ? '' : ' reveal--delay-' + Math.min(i, 3);
-    const mediaStyle = d.img
-      ? `style="background-image:url('${d.img}');background-size:cover;background-position:center;"`
-      : '';
+    const dataBg = d.img ? ` data-bg="${d.img}"` : '';
     return `<a href="${d.href}" class="blog__card reveal${delayCls}">
-  <div class="blog__media" aria-hidden="true" ${mediaStyle}></div>
+  <div class="blog__media" aria-hidden="true"${dataBg}></div>
   <div class="blog__body">
     <span class="blog__cat">${d.cat}</span>
     <h3 class="blog__title">${d.title}</h3>
@@ -254,6 +262,21 @@
     const grid = document.getElementById('blogGrid');
     if (!grid) return;
     grid.innerHTML = blogPosts.map(renderBlogCard).join('');
+
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var bg = el.getAttribute('data-bg');
+        if (bg) {
+          el.style.backgroundImage = "url('" + bg + "')";
+          el.style.backgroundSize = 'cover';
+          el.style.backgroundPosition = 'center';
+        }
+        obs.unobserve(el);
+      });
+    }, { rootMargin: '400px' });
+    grid.querySelectorAll('[data-bg]').forEach(function(el) { obs.observe(el); });
   }
 
   document.addEventListener('DOMContentLoaded', () => {
