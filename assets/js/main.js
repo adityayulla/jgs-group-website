@@ -269,14 +269,18 @@
   function initScrollParallax() {
     const items = document.querySelectorAll('[data-parallax]');
     if (!items.length) return;
+    if (window.matchMedia('(hover: none)').matches) return;
 
     function update() {
-      const sy = window.scrollY;
-      items.forEach(el => {
-        const speed  = parseFloat(el.dataset.parallax) || 0.15;
-        const rect   = el.getBoundingClientRect();
-        const center = rect.top + rect.height / 2;
-        const offset = (center - window.innerHeight / 2) * speed;
+      // Batch all reads first, then all writes to avoid layout thrash
+      const vh = window.innerHeight;
+      const rects = Array.from(items).map(el => ({
+        el,
+        speed: parseFloat(el.dataset.parallax) || 0.15,
+        rect: el.getBoundingClientRect(),
+      }));
+      rects.forEach(({ el, speed, rect }) => {
+        const offset = (rect.top + rect.height / 2 - vh / 2) * speed;
         el.style.transform = `translateY(${offset}px)`;
       });
     }
