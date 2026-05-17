@@ -106,12 +106,13 @@ img { display: block; }
 ───────────────────────────────────────── */
 .trust {
   display: flex;
-  background: #f6f4ee;
-  border-radius: 14px;
-  margin: 0 6px 12px 6px;
-  border: 0.5px solid rgba(0,0,0,0.06);
+  background: transparent;
+  border-radius: 0;
+  margin: 0;
+  border: none;
+  padding: 32px 16px;
 }
-.trust-item { flex: 1; padding: 14px 6px; text-align: center; border-right: 1px solid #f0f0f0; }
+.trust-item { flex: 1; padding: 14px 6px; text-align: center; border-right: 1px solid rgba(27,42,100,.08); }
 .trust-item:last-child { border-right: none; }
 .trust-num { font-size: 20px; font-weight: 700; color: #1b2a64; }
 .trust-label { font-size: 10px; color: #888; margin-top: 3px; line-height: 1.35; }
@@ -453,11 +454,11 @@ img { display: block; }
 }
 .usi-title {
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 17px; font-weight: 700;
-  color: #0f1430; line-height: 1.3; margin-bottom: 8px;
+  font-size: clamp(20px, 1.6vw, 24px); font-weight: 700;
+  color: #0f1430; line-height: 1.25; margin-bottom: 12px;
 }
 .usi-body {
-  font-size: 14px; color: #6a7089; line-height: 1.65;
+  font-size: 15px; color: #6a7089; line-height: 1.65;
 }
 @media (min-width: 640px) {
   .usi-grid { flex-direction: row; flex-wrap: wrap; }
@@ -607,8 +608,12 @@ img { display: block; }
   .section-sub { font-size: 16px; margin-bottom: 56px; }
 
   /* ── Fasilitas ── */
-  .fас-grid { grid-template-columns: repeat(5, 1fr); gap: 12px; }
-  .fас-full { grid-column: span 5; }
+  .fас-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 220px));
+    justify-content: center;
+    gap: 14px;
+  }
+  .fас-full { grid-column: span 2; }
   .fас-card { flex-direction: column; align-items: center; text-align: center; padding: 22px 16px; gap: 12px; }
   .fас-icon { width: 44px; height: 44px; font-size: 22px; }
   .fас-name { font-size: 13px; }
