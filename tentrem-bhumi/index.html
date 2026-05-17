@@ -106,13 +106,13 @@ img { display: block; }
 ───────────────────────────────────────── */
 .trust {
   display: flex;
-  background: transparent;
-  border-radius: 0;
-  margin: 0;
-  border: none;
-  padding: 32px 16px;
+  background: #fff;
+  border-radius: 16px;
+  margin: 0 8px 12px 8px;
+  border: 1px solid rgba(27,42,100,.10);
+  box-shadow: 0 8px 28px rgba(27,42,100,.08);
 }
-.trust-item { flex: 1; padding: 14px 6px; text-align: center; border-right: 1px solid rgba(27,42,100,.08); }
+.trust-item { flex: 1; padding: 18px 6px; text-align: center; border-right: 1px solid rgba(27,42,100,.08); }
 .trust-item:last-child { border-right: none; }
 .trust-num { font-size: 20px; font-weight: 700; color: #1b2a64; }
 .trust-label { font-size: 10px; color: #888; margin-top: 3px; line-height: 1.35; }
@@ -323,25 +323,37 @@ img { display: block; }
   padding-bottom: 6px;
 }
 .interior-strip::-webkit-scrollbar { display: none; }
-.interior-item { flex-shrink: 0; scroll-snap-align: start; text-align: center; }
+.interior-item {
+  flex-shrink: 0; scroll-snap-align: start; text-align: center;
+  background: #fff;
+  border: 1px solid rgba(27,42,100,.10);
+  border-radius: 14px;
+  padding: 10px 10px 14px;
+  box-shadow: 0 6px 20px rgba(27,42,100,.06);
+}
 .interior-item img {
   width: 148px; height: 148px; object-fit: cover;
-  border-radius: 10px; border: 1px solid rgba(0,0,0,.06);
+  border-radius: 10px; border: 1px solid rgba(27,42,100,.06);
 }
-.interior-label { font-size: 11px; color: #666; margin-top: 5px; }
+.interior-label { font-size: 13px; font-weight: 600; color: #1b2a64; margin-top: 10px; }
 
 /* ─────────────────────────────────────────
    SPESIFIKASI
 ───────────────────────────────────────── */
-.spec-cols { display: flex; flex-direction: column; gap: 0; }
-.spec-table { width: 100%; border-collapse: collapse; overflow: hidden; }
-.spec-table tr:nth-child(odd)  td { background: #fff; }
-.spec-table tr:nth-child(even) td { background: #fff; }
-.spec-table td {
-  padding: 11px 13px; font-size: 13px; color: #333;
-  border-bottom: 1px solid rgba(0,0,0,.04); vertical-align: top; line-height: 1.45;
+.spec-cols {
+  display: flex; flex-direction: column; gap: 0;
+  background: #fff;
+  border: 1px solid rgba(27,42,100,.10);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(27,42,100,.08);
 }
-.spec-table td:first-child { font-weight: 600; color: #2c3e8c; width: 44%; }
+.spec-table { width: 100%; border-collapse: collapse; overflow: hidden; background: transparent; }
+.spec-table td {
+  padding: 14px 18px; font-size: 14px; color: #0f1430; font-weight: 600;
+  border-bottom: 1px solid rgba(27,42,100,.08); vertical-align: top; line-height: 1.5;
+}
+.spec-table td:first-child { font-weight: 700; color: #1b2a64; width: 44%; }
 .spec-table tr:last-child td { border-bottom: none; }
 
 /* ─────────────────────────────────────────
@@ -375,14 +387,23 @@ img { display: block; }
    SOCIAL PROOF
 ───────────────────────────────────────── */
 .sold-banner {
-  background: #fff; border-radius: 11px; padding: 18px;
+  background: #fff; border-radius: 16px; padding: 22px;
   display: flex; align-items: center; gap: 16px; margin-bottom: 14px;
+  border: 1px solid rgba(27,42,100,.10);
+  box-shadow: 0 8px 28px rgba(27,42,100,.08);
 }
 .sold-num { font-size: 34px; font-weight: 700; color: #1b2a64; }
-.sold-text { font-size: 13px; color: #2c3e8c; line-height: 1.5; }
-.rating-row { display: flex; align-items: center; gap: 8px; }
+.sold-text { font-size: 13px; color: #2c3e8c; line-height: 1.5; font-weight: 600; }
+.rating-row { display: flex; align-items: center; gap: 8px; padding: 0 6px; }
 .rating-stars { color: #FBBC04; font-size: 18px; }
-.rating-text { font-size: 13px; color: #555; }
+.rating-text { font-size: 13px; color: #1b2a64; font-weight: 600; }
+.social-right {
+  background: #fff; border-radius: 16px; padding: 24px;
+  border: 1px solid rgba(27,42,100,.10);
+  box-shadow: 0 8px 28px rgba(27,42,100,.08);
+}
+.social-right p { color: #0f1430 !important; font-size: 15px !important; font-weight: 500 !important; line-height: 1.7 !important; }
+.social-right p + p { margin-top: 14px !important; }
 
 /* ─────────────────────────────────────────
    PROGRESS CALLOUT
@@ -442,23 +463,36 @@ img { display: block; }
   display: flex; flex-direction: column; gap: 12px;
 }
 .usi-card {
-  background: #fff; border-radius: 14px;
-  padding: 20px 18px;
-  border: 1px solid rgba(27,42,100,.12);
-  transition: transform .2s, box-shadow .2s;
+  position: relative;
+  background: linear-gradient(160deg, #1b2a64, #2c3e8c);
+  color: #fff;
+  border-radius: 20px;
+  padding: 32px 24px;
+  min-height: 240px;
+  overflow: hidden;
+  transition: transform .3s var(--ease, cubic-bezier(.2,.8,.2,1));
 }
-.usi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(27,42,100,.14); }
+.usi-card::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 80% 10%, rgba(219,127,46,.25), transparent 50%);
+  pointer-events: none;
+}
+.usi-card:hover { transform: translateY(-6px); }
 .usi-num {
-  font-size: 11px; font-weight: 700; letter-spacing: .12em;
-  color: #1b2a64; text-transform: uppercase; margin-bottom: 8px;
+  position: relative;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 500; letter-spacing: .1em;
+  color: rgba(255,255,255,.7); margin-bottom: 20px;
 }
 .usi-title {
+  position: relative;
   font-family: 'Fraunces', Georgia, serif;
-  font-size: clamp(20px, 1.6vw, 24px); font-weight: 700;
-  color: #0f1430; line-height: 1.25; margin-bottom: 12px;
+  font-size: clamp(20px, 1.6vw, 26px); font-weight: 500;
+  color: #fff; line-height: 1.15; margin-bottom: 12px; letter-spacing: -.01em;
 }
 .usi-body {
-  font-size: 15px; color: #6a7089; line-height: 1.65;
+  position: relative;
+  font-size: 14px; color: rgba(255,255,255,.78); line-height: 1.55;
 }
 @media (min-width: 640px) {
   .usi-grid { flex-direction: row; flex-wrap: wrap; }
@@ -647,8 +681,9 @@ img { display: block; }
   .interior-item img { height: 170px; }
 
   /* ── Spesifikasi: 2 columns ── */
-  .spec-cols { flex-direction: row; gap: 1px; background: rgba(0,0,0,.04); border-radius: 10px; overflow: hidden; }
+  .spec-cols { flex-direction: row; gap: 0; }
   .spec-cols .spec-table { flex: 1; }
+  .spec-cols .spec-table + .spec-table { border-left: 1px solid rgba(27,42,100,.08); }
 
   /* ── Lokasi: 2 columns ── */
   .lokasi-flex { flex-direction: row; gap: 40px; align-items: flex-start; }

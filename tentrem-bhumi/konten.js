@@ -306,7 +306,7 @@ var KONTEN = {
 
     /* Teks paragraf (boleh pakai HTML tag <strong>, <em>, <br>) */
     cerita:  'JGS Group berpengalaman sejak <strong>2013</strong> dan telah membangun ratusan hunian berkualitas di Yogyakarta. Tentrem Bhumi hadir sebagai kawasan modern dengan konsep <em>tentrem</em> — tenang, aman, dan produktif untuk keluarga Indonesia.',
-    devInfo: 'Developer: <strong style="color:#2d4a2b;">PT Jogja Graha Selaras</strong> · jogjagrahaselaras.com<br>Kantor: 0274-2840726',
+    devInfo: 'Developer: <strong style="color:#1b2a64;">Sasmita Griya Buana</strong>',
   },
 
 
