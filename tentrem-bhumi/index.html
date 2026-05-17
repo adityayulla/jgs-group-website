@@ -427,11 +427,15 @@ img { display: block; }
    UNTUK SIAPA SECTION
 ───────────────────────────────────────── */
 .usi-headline {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 40px;
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 22px; font-weight: 700;
-  color: #1a1a1a; line-height: 1.25;
-  margin: 8px 0 20px;
+  font-weight: 400; font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.05; letter-spacing: -.02em;
+  color: #1b2a64;
 }
+.usi-headline em { font-style: italic; color: #db7f2e; font-weight: 400; }
 .usi-grid {
   display: flex; flex-direction: column; gap: 12px;
 }
