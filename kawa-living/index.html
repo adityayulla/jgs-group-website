@@ -188,14 +188,14 @@
     }
     .ts__card {
       position: relative; overflow: hidden;
-      display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
       gap: 0; padding: 0; border-radius: var(--r-md);
+      align-items: start;
     }
     .ts__media {
-      position: relative; aspect-ratio: 4/3;
+      position: relative; width: 100%; aspect-ratio: 4/3;
       background: var(--bg); overflow: hidden;
-      align-self: stretch;
-      max-height: 520px;
+      align-self: start;
     }
     .ts__media img {
       width: 100%; height: 100%; object-fit: cover; display: block;
@@ -256,7 +256,7 @@
       color: var(--orange); opacity: .08; font-style: italic; font-weight: 600;
       pointer-events: none;
     }
-    .ts__card:nth-child(even) { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
+    .ts__card:nth-child(even) { grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); }
     .ts__card:nth-child(even) .ts__media { order: 2; }
     .ts__card:nth-child(even) .ts__content { order: 1; }
     .ts__card:nth-child(even) .ts__quote { right: auto; left: 28px; }
