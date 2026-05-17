@@ -195,8 +195,7 @@
     .ts__media {
       position: relative; width: 100%; aspect-ratio: 4/3;
       background: var(--bg); overflow: hidden;
-      align-self: start;
-      margin-top: 88px;
+      align-self: center;
     }
     .ts__media img {
       width: 100%; height: 100%; object-fit: cover; display: block;
@@ -412,7 +411,7 @@
       .ts__card:nth-child(even) { grid-template-columns: 1fr; }
       .ts__card:nth-child(even) .ts__media { order: 0; }
       .ts__card:nth-child(even) .ts__content { order: 0; }
-      .ts__media { aspect-ratio: 16/10; margin-top: 0; }
+      .ts__media { aspect-ratio: 16/10; align-self: start; }
       .ts__content { padding: 28px 24px 26px; gap: 18px; }
       .ts__body  { font-size: 15.5px; line-height: 1.55; margin-bottom: 18px; }
       .ts__quote { font-size: 64px; right: 18px; top: 12px; }
