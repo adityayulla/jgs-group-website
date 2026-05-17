@@ -181,19 +181,98 @@
     }
 
     /* Testimonials */
-    .ts { position: relative; padding: 80px 0; }
+    .ts { position: relative; padding: 100px 0; }
     .ts__grid {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: 1fr; gap: 24px;
     }
-    .ts__card { padding: 36px 28px 28px; }
-    .ts__quote-icon { position: absolute; right: 24px; top: 20px; width: 40px; height: 40px; color: var(--orange); opacity: .2; }
-    .ts__body { font-family: var(--font-display); font-weight: 400; font-size: 18px; line-height: 1.55; color: var(--navy); margin: 0 0 28px; font-style: italic; text-wrap: pretty; }
-    .ts__foot { display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid var(--line); }
-    .ts__av   { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 16px; font-weight: 600; flex-shrink: 0; }
-    .ts__name { font-size: 14px; font-weight: 600; color: var(--navy); }
-    .ts__unit { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .ts__card {
+      position: relative; overflow: hidden;
+      display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 0; padding: 0; border-radius: var(--r-md);
+    }
+    .ts__media {
+      position: relative; min-height: 100%; aspect-ratio: 4/3;
+      background: var(--bg); overflow: hidden;
+    }
+    .ts__media img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .8s var(--ease);
+    }
+    .ts__card:hover .ts__media img { transform: scale(1.04); }
+    .ts__media-tag {
+      position: absolute; left: 16px; bottom: 16px;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 999px;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(6px);
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--navy); font-weight: 600;
+    }
+    .ts__media-tag::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--orange);
+    }
+    .ts__content {
+      padding: 40px 40px 36px; display: flex; flex-direction: column;
+      justify-content: space-between; gap: 24px;
+    }
+    .ts__source {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .ts__source-g {
+      width: 18px; height: 18px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: #fff; border: 1px solid var(--line);
+      font-family: var(--font-display); font-weight: 700; font-size: 11px;
+      color: #4285F4; line-height: 1;
+    }
+    .ts__stars { display: flex; gap: 3px; margin: 14px 0 16px; color: #FBBC04; font-size: 18px; }
+    .ts__body  {
+      font-family: var(--font-display); font-style: italic;
+      font-size: 17px; line-height: 1.6; color: var(--navy);
+      margin: 0 0 22px; text-wrap: pretty;
+    }
+    .ts__body::before { content: "\201C"; color: var(--orange); margin-right: 4px; font-weight: 700; }
+    .ts__body::after  { content: "\201D"; color: var(--orange); margin-left: 4px; font-weight: 700; }
+    .ts__foot  { display: flex; align-items: center; gap: 14px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .ts__av    {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--navy); color: #fff;
+      display: grid; place-items: center;
+      font-family: var(--font-display); font-size: 17px; font-weight: 600;
+      flex-shrink: 0;
+    }
+    .ts__name  { font-size: 15px; font-weight: 600; color: var(--navy); letter-spacing: -.01em; }
+    .ts__unit  { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .ts__quote {
+      position: absolute; right: 28px; top: 18px;
+      font-family: var(--font-display); font-size: 96px; line-height: 1;
+      color: var(--orange); opacity: .08; font-style: italic; font-weight: 600;
+      pointer-events: none;
+    }
+    .ts__card:nth-child(even) { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
+    .ts__card:nth-child(even) .ts__media { order: 2; }
+    .ts__card:nth-child(even) .ts__content { order: 1; }
+    .ts__card:nth-child(even) .ts__quote { right: auto; left: 28px; }
+
+    .ts__footer {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+      margin: 48px auto 0; max-width: var(--max-w);
+      padding: 28px 32px;
+      border: 1px solid var(--line); border-radius: var(--r-md);
+      background: linear-gradient(180deg, #fff 0%, var(--bg) 100%);
+    }
+    .ts__rating { display: flex; align-items: center; gap: 18px; }
+    .ts__rating-num {
+      font-family: var(--font-display); font-size: 56px; font-weight: 600;
+      line-height: 1; letter-spacing: -.03em; color: var(--navy);
+    }
+    .ts__rating-meta { display: flex; flex-direction: column; gap: 4px; }
+    .ts__rating-meta .ts__stars { margin: 0; }
+    .ts__rating-label { font-size: 13px; color: var(--muted); letter-spacing: -.005em; }
 
     /* Promo */
     .pm { padding: 40px var(--pad-x); max-width: var(--max-w); margin: 0 auto; }
@@ -322,7 +401,21 @@
       .hero__badge  { left: -14px; width: 90px; height: 90px; }
       .hero__badge-num { font-size: 28px; }
       .pop__rail { grid-template-columns: 1fr; }
-      .ts__grid  { grid-template-columns: 1fr; }
+      .ts { padding: 72px 0; }
+      .ts__grid  { grid-template-columns: 1fr; padding: 0 20px; gap: 18px; }
+      .ts__card,
+      .ts__card:nth-child(even) { grid-template-columns: 1fr; }
+      .ts__card:nth-child(even) .ts__media { order: 0; }
+      .ts__card:nth-child(even) .ts__content { order: 0; }
+      .ts__media { aspect-ratio: 16/10; }
+      .ts__content { padding: 28px 24px 26px; gap: 18px; }
+      .ts__body  { font-size: 15.5px; line-height: 1.55; margin-bottom: 18px; }
+      .ts__quote { font-size: 64px; right: 18px; top: 12px; }
+      .ts__card:nth-child(even) .ts__quote { left: 18px; }
+      .ts__footer { margin: 36px 20px 0; padding: 22px 22px; flex-direction: column; align-items: flex-start; gap: 18px; }
+      .ts__footer .btn { width: 100%; justify-content: center; }
+      .ts__rating-num { font-size: 44px; }
+      .ts__rating { gap: 14px; }
       .calc__inner { grid-template-columns: 1fr; gap: 36px; }
       .un__row   { grid-template-columns: 1fr; direction: ltr !important; }
       .un__row--alt > * { direction: ltr; }
@@ -782,48 +875,68 @@
   <section class="ts section" id="testimoni">
     <div class="section__head container">
       <span class="eyebrow">Testimoni</span>
-      <h2 class="section-title reveal">Kata mereka yang telah<br>memilih <em>Kawa Living</em>.</h2>
+      <h2 class="section-title reveal">Cerita dari mereka yang telah<br>memilih <em>Kawa Living</em>.</h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Review asli dari pemilik unit Kawa Living. Setiap foto adalah momen serah terima kunci — diabadikan langsung di hari kebahagiaan mereka.</p>
     </div>
+
     <div class="ts__grid">
-      <div class="ts__card glass reveal">
-        <p class="ts__body">
-          "Prosesnya sangat transparan, tidak ada biaya tersembunyi.
-          Tim JGS benar-benar membantu dari awal KPR sampai serah terima kunci."
-        </p>
-        <div class="ts__foot">
-          <div class="ts__av">A</div>
+      <article class="ts__card glass reveal">
+        <div class="ts__media">
+          <img src="/assets/img/testimoni/Yuri-12-foto.webp" alt="Serah terima kunci Vincentius Adven Brilian — Kawa Living Yuri 12" loading="lazy">
+          <span class="ts__media-tag">Serah Terima Kunci</span>
+        </div>
+        <div class="ts__content">
+          <div class="ts__quote">"</div>
           <div>
-            <div class="ts__name">Andi Prasetyo</div>
-            <div class="ts__unit">Tipe 45 · Unit B-12</div>
+            <span class="ts__source"><span class="ts__source-g">G</span>Google Review · 5.0</span>
+            <div class="ts__stars" aria-label="5 bintang">★★★★★</div>
+            <p class="ts__body">Saya salah satu pembeli unit rumah di Kawa Living dan unit rumah saya adalah yang pertama dibangun di sini. Progress pembangunannya cepat dan modifikasi denah bisa didiskusikan & diakomodir. Melihat proyek-proyek terdahulu dari developer Kawa Living, yaitu Jogja Graha Selaras, misal di Kawa Village, kualitas hasil pekerjaannya premium. Pengurusan proses dari konsul denah, tanda tangan PPJB, dan peletakan batu pertama juga cepat. Progress pembangunan juga dikabarin tiap weekend via WA karena saya posisi sering ke luar kota. Kawa Living ini salah satu komplek perumahan baru yang jaraknya ke Jalan Raya Wates cukup dekat (masuk sekitar 900 m dari jalan raya) dibandingkan komplek perumahan baru lainnya di area Sedayu yang jarak masuk dari Jl. Raya Wates cukup jauh (rata-rata > 2 km dari jalan raya). Di sekitar Kawa Living juga banyak tempat penunjang kebutuhan keluarga sehari-hari, mulai dari minimarket, toko swalayan, apotek, rumah sakit, kampus, SPBU, bengkel motor, warung makan, spot nongkrong pemandangan di atas bukit, dan restoran keluarga yang rating-nya bagus, misal Rajaklana, Kandang Ingkung, Waroeng Tedoeh, dan Jiwa Jawi.</p>
+          </div>
+          <div class="ts__foot">
+            <div class="ts__av">V</div>
+            <div>
+              <div class="ts__name">Vincentius Adven Brilian</div>
+              <div class="ts__unit">Kawa Living · Yuri 12 · 5 reviews · 1 photo</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="ts__card glass reveal reveal--delay-1">
-        <p class="ts__body">
-          "Lokasi Kawa Living sangat strategis. Anak-anak bisa ke sekolah sendiri,
-          ke mall juga dekat. Lingkungannya tenang dan keamanannya terjaga."
-        </p>
-        <div class="ts__foot">
-          <div class="ts__av">S</div>
+      </article>
+
+      <article class="ts__card glass reveal">
+        <div class="ts__media">
+          <img src="/assets/img/testimoni/Himawari-11-foto.webp" alt="Serah terima kunci keluarga Regy Kurniawan — Kawa Living Himawari 11" loading="lazy">
+          <span class="ts__media-tag">Serah Terima Kunci</span>
+        </div>
+        <div class="ts__content">
+          <div class="ts__quote">"</div>
           <div>
-            <div class="ts__name">Sri Wahyuni</div>
-            <div class="ts__unit">Tipe 36 · Unit A-07</div>
+            <span class="ts__source">Testimoni Pemilik</span>
+            <div class="ts__stars" aria-label="5 bintang">★★★★★</div>
+            <p class="ts__body">Sebenernya beli rumah di Kawa Living ini nggak sengaja, awalnya cuma lihat di internet, ada ketertarikan, akhirnya survey dan emang cocok, masih banyak ijo-ijo. Terus percaya juga kalau JGS Group komitmen membangun rumah kami dengan maksimal.</p>
+          </div>
+          <div class="ts__foot">
+            <div class="ts__av">R</div>
+            <div>
+              <div class="ts__name">Regy Kurniawan</div>
+              <div class="ts__unit">Kawa Living · Himawari 11</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="ts__card glass reveal reveal--delay-2">
-        <p class="ts__body">
-          "Kualitas bangunan memuaskan. Sudah setahun tinggal, belum ada masalah
-          struktural apapun. Tetangga-tetangga juga ramah, komunitas yang bagus."
-        </p>
-        <div class="ts__foot">
-          <div class="ts__av">R</div>
-          <div>
-            <div class="ts__name">Rizky Firmansyah</div>
-            <div class="ts__unit">Tipe 60 · Unit C-03</div>
-          </div>
+      </article>
+    </div>
+
+    <div class="ts__footer container reveal">
+      <div class="ts__rating">
+        <span class="ts__rating-num">5.0</span>
+        <div class="ts__rating-meta">
+          <div class="ts__stars" aria-label="rating 5 dari 5">★★★★★</div>
+          <span class="ts__rating-label">Berdasarkan review pemilik Kawa Living</span>
         </div>
       </div>
+      <a class="btn btn--ghost" href="https://www.google.com/search?q=Kawa+Living+Jogja+Graha+Selaras+reviews" target="_blank" rel="noopener">
+        Lihat semua review di Google
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 
