@@ -192,8 +192,10 @@
       gap: 0; padding: 0; border-radius: var(--r-md);
     }
     .ts__media {
-      position: relative; min-height: 100%; aspect-ratio: 4/3;
+      position: relative; aspect-ratio: 4/3;
       background: var(--bg); overflow: hidden;
+      align-self: stretch;
+      max-height: 520px;
     }
     .ts__media img {
       width: 100%; height: 100%; object-fit: cover; display: block;
@@ -215,7 +217,9 @@
     .ts__content {
       padding: 40px 40px 36px; display: flex; flex-direction: column;
       justify-content: space-between; gap: 24px;
+      min-width: 0;
     }
+    .ts__content > div { min-width: 0; }
     .ts__source {
       display: inline-flex; align-items: center; gap: 8px;
       font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em;
