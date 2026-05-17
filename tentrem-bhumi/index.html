@@ -121,11 +121,12 @@ img { display: block; }
    SECTIONS
 ───────────────────────────────────────── */
 .section {
-  padding: 28px 20px;
-  background: #fff;
-  border-radius: 14px;
-  margin: 0 6px 12px 6px;
-  border: 0.5px solid rgba(0,0,0,0.06);
+  position: relative;
+  padding: 64px 22px;
+  background: transparent;
+  border-radius: 0;
+  margin: 0;
+  border: none;
 }
 .footer:not(.footer--tb) {
   background: #fff;
@@ -134,19 +135,30 @@ img { display: block; }
   /* tidak pakai border-radius — tetap persegi */
 }
 .section-tag {
-  display: inline-block;
+  display: block;
+  text-align: center;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; font-weight: 600; letter-spacing: .14em;
-  color: #db7f2e; margin-bottom: 12px; text-transform: uppercase;
+  font-size: 11px; font-weight: 600; letter-spacing: .18em;
+  color: #db7f2e; margin: 0 0 16px; text-transform: uppercase;
 }
 .section-title {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 14px;
   font-family: 'Fraunces', Georgia, serif;
-  font-weight: 400; font-size: clamp(28px, 4vw, 44px);
-  line-height: 1.1; letter-spacing: -.02em;
-  color: #1b2a64; margin-bottom: 10px;
+  font-weight: 400; font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.05; letter-spacing: -.02em;
+  color: #1b2a64;
 }
 .section-title em { font-style: italic; font-family: 'Fraunces', Georgia, serif; color: #db7f2e; font-weight: 400; }
-.section-sub { font-size: 15px; color: #6a7089; margin-bottom: 22px; line-height: 1.6; text-wrap: pretty; }
+.section-sub {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 40px;
+  font-size: 16px; line-height: 1.6;
+  color: #6a7089;
+  text-wrap: pretty;
+}
 
 /* ─────────────────────────────────────────
    SCROLL ENTRANCE ANIMATION
@@ -512,9 +524,8 @@ img { display: block; }
 ═══════════════════════════════════════════════════════════ */
 @media (min-width: 768px) {
   .lp { max-width: 768px; }
-  .section, .trust, .cta-final, .footer:not(.footer--tb) { margin: 0 8px 16px 8px; }
-
-  .section { padding: 40px 40px; }
+  .trust, .cta-final, .footer:not(.footer--tb) { margin: 0 8px 16px 8px; }
+  .section { margin: 0; padding: 96px 40px; }
 
   /* Fasilitas: 3 columns */
   .fас-grid { grid-template-columns: repeat(3, 1fr); }
@@ -560,7 +571,8 @@ img { display: block; }
   .lp { max-width: 1200px; }
 
   /* ── Card margins lebih besar di desktop ── */
-  .section, .trust, .cta-final, .footer:not(.footer--tb) { margin: 0 8px 20px 8px; }
+  .trust, .cta-final, .footer:not(.footer--tb) { margin: 0 8px 20px 8px; }
+  .section { margin: 0; }
 
   /* ── Desktop Nav ── */
   .desktop-nav {
@@ -595,8 +607,8 @@ img { display: block; }
   .trust-label { font-size: 12px; }
 
   /* ── Sections ── */
-  .section { padding: 64px 56px; }
-  .section-sub { font-size: 16px; }
+  .section { padding: 120px 56px; }
+  .section-sub { font-size: 16px; margin-bottom: 56px; }
 
   /* ── Fasilitas ── */
   .fас-grid { grid-template-columns: repeat(5, 1fr); gap: 12px; }
