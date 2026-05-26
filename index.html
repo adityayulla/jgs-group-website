@@ -1792,6 +1792,33 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
 </script>
 
 <script src="/assets/js/pricelist-modal.js" defer></script>
+
+<!-- ═════════════════════════════════════════════════════════════════
+     Pricelist hash auto-trigger
+     Kalau URL load dengan #pricelist, modal pricelist otomatis terbuka.
+     ═════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  function tryOpenPricelist() {
+    if (window.location.hash !== '#pricelist') return false;
+    if (typeof openPricelistModal !== 'function') return false;
+    openPricelistModal();
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+    return true;
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(tryOpenPricelist, 100);
+    });
+  } else {
+    setTimeout(tryOpenPricelist, 100);
+  }
+
+  window.addEventListener('hashchange', tryOpenPricelist);
+})();
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
