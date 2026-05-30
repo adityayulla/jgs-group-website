@@ -336,7 +336,7 @@
     .un__row   { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 24px; border-radius: var(--r-lg); }
     .un__row--alt { direction: rtl; }
     .un__row--alt > * { direction: ltr; }
-    .un__img   { aspect-ratio: 4/3; border-radius: var(--r-md); overflow: hidden; position: relative; }
+    .un__img   { aspect-ratio: 3/4; border-radius: var(--r-md); overflow: hidden; position: relative; }
     .un__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
     .un__row:hover .un__img img { transform: scale(1.04); }
     .un__copy  { padding: 20px; }
@@ -432,6 +432,8 @@
       .hero { padding: 100px 0 60px; }
       .hero__title { font-size: clamp(26px, 8vw, 36px); }
       .hero__sub  { font-size: 15px; }
+      .hero__ctas { flex-wrap: nowrap; gap: 8px; }
+      .hero__ctas .btn { flex: 1 1 0; min-width: 0; padding: 12px 14px; font-size: 13px; white-space: nowrap; }
       .hero__stats { gap: 16px; }
       .stat__num  { font-size: 32px; }
       .val__grid  { grid-template-columns: 1fr; }
@@ -443,6 +445,10 @@
       .vt__caption { left: 20px; bottom: 20px; }
       .vt__cap-name { font-size: 24px; }
       .un__name   { font-size: 30px; }
+      .un__footer { gap: 12px; }
+      .un__price  { font-size: 11px; }
+      .un__price strong { font-size: 18px; white-space: nowrap; }
+      .un__footer .btn { padding: 10px 14px; font-size: 13px; white-space: nowrap; }
       .calc__panel { padding: 22px; }
     }
 
@@ -533,8 +539,8 @@
           Untuk anak yang sekolah di Jogja. Untuk akses kerja tanpa kemacetan ibu kota. Untuk keluarga yang ingin tinggal dekat. Kawa Living adalah 74 unit rumah yang dirancang untuk menjawab alasan Anda—dengan masjid, lapangan mini soccer dan basket, serta keamanan 24 jam yang membuat keluarga Anda hidup aman dan nyaman.
         </p>
         <div class="hero__ctas">
-          <button onclick="openPricelistModal()" class="btn btn--primary btn--lg">Lihat Tipe &amp; Harga</button>
-          <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+dengan+Kawa+Living+Sedayu" target="_blank" rel="noopener" class="btn btn--ghost btn--lg">Konsultasi via WhatsApp</a>
+          <button onclick="openPricelistModal()" class="btn btn--primary btn--lg">Download Pricelist</button>
+          <a href="#unit" class="btn btn--ghost btn--lg">Lihat Tipe &amp; Harga</a>
         </div>
         <div class="hero__stats">
           <div>
@@ -648,7 +654,7 @@
               <span>Mulai dari</span>
               <strong>Rp 414 Juta</strong>
             </div>
-            <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Hiroi+Yuri+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
+            <button onclick="openPricelistModal()" class="btn btn--primary">Download Pricelist</button>
           </div>
           <div class="un__denah">
             <span class="un__denah-lbl">Denah</span>
@@ -687,7 +693,7 @@
               <span>Mulai dari</span>
               <strong>Rp 479 Juta</strong>
             </div>
-            <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Yuri+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
+            <button onclick="openPricelistModal()" class="btn btn--primary">Download Pricelist</button>
           </div>
           <div class="un__denah">
             <span class="un__denah-lbl">Denah</span>
@@ -725,7 +731,7 @@
               <span>Mulai dari</span>
               <strong>Rp 415 Juta</strong>
             </div>
-            <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Mizu+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
+            <button onclick="openPricelistModal()" class="btn btn--primary">Download Pricelist</button>
           </div>
           <div class="un__denah">
             <span class="un__denah-lbl">Denah</span>
@@ -764,7 +770,7 @@
               <span>Mulai dari</span>
               <strong>Rp 540 Juta</strong>
             </div>
-            <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Himawari+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
+            <button onclick="openPricelistModal()" class="btn btn--primary">Download Pricelist</button>
           </div>
           <div class="un__denah">
             <span class="un__denah-lbl">Denah</span>
@@ -803,7 +809,7 @@
               <span>Mulai dari</span>
               <strong>Rp 614 Juta</strong>
             </div>
-            <a href="https://wa.me/6288902929571?text=Halo+Dwi%2C+saya+tertarik+Tipe+Okina+Kawa+Living" target="_blank" rel="noopener" class="btn btn--primary">Tanya Harga</a>
+            <button onclick="openPricelistModal()" class="btn btn--primary">Download Pricelist</button>
           </div>
           <div class="un__denah">
             <span class="un__denah-lbl">Denah</span>
@@ -1082,7 +1088,7 @@
       </h2>
       <div class="cta-section__ctas">
         <a href="https://wa.me/6288902929571?text=Halo%2C+saya+ingin+konsultasi+Kawa+Living+Sedayu" target="_blank" rel="noopener" class="btn btn--orange btn--lg">Chat WhatsApp Sekarang</a>
-        <a href="tel:+6288902929571" class="btn btn--outline-white btn--lg">Telepon Kami</a>
+        <button onclick="openPricelistModal()" class="btn btn--outline-white btn--lg">Download Pricelist</button>
       </div>
     </div>
   </div>

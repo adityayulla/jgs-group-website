@@ -255,9 +255,11 @@ img { display: block; }
   font-size: 11px; font-weight: 600; border-radius: 6px; padding: 4px 9px;
 }
 .btn-info {
-  font-size: 13px; color: #1b2a64; text-decoration: none;
+  font-size: 13px; color: #1b2a64; text-decoration: none; background: transparent;
   border: 1.5px solid #1b2a64; border-radius: 10px; padding: 9px 16px; font-weight: 600;
+  cursor: pointer; font-family: inherit; line-height: 1.2;
 }
+.btn-info:hover { background: #1b2a64; color: #fff; }
 
 /* Denah wrapper */
 .unit-denah { padding: 0 16px 16px; }
@@ -1568,7 +1570,7 @@ function setHtml(id, val) { var el = document.getElementById(id); if (el && val 
         + '<div class="unit-price-kpr">' + u.hargaKPR + '</div></div></div>'
         + '<div class="unit-footer-row">'
         + (u.terjual ? '<div class="sold-tag">' + u.terjual + '</div>' : '<div></div>')
-        + '<a class="btn-info" href="' + waUrl(fira, u.pesanWA) + '" target="_blank" rel="noopener">Info harga</a>'
+        + '<button type="button" class="btn-info" onclick="openPricelistModal()">Download Pricelist</button>'
         + '</div></div>'
         + '<div class="unit-denah">' + denahHtml + '</div></div>';
     });
