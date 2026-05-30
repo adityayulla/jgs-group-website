@@ -193,7 +193,7 @@
       align-items: start;
     }
     .ts__media {
-      position: relative; width: 100%; aspect-ratio: 4/3;
+      position: relative; width: 100%; aspect-ratio: 3/4;
       background: var(--bg); overflow: hidden;
       align-self: center;
     }
@@ -411,7 +411,7 @@
       .ts__card:nth-child(even) { grid-template-columns: 1fr; }
       .ts__card:nth-child(even) .ts__media { order: 0; }
       .ts__card:nth-child(even) .ts__content { order: 0; }
-      .ts__media { aspect-ratio: 16/10; align-self: start; }
+      .ts__media { aspect-ratio: 3/4; align-self: start; }
       .ts__content { padding: 28px 24px 26px; gap: 18px; }
       .ts__body  { font-size: 15.5px; line-height: 1.55; margin-bottom: 18px; }
       .ts__quote { font-size: 64px; right: 18px; top: 12px; }
@@ -423,6 +423,10 @@
       .calc__inner { grid-template-columns: 1fr; gap: 36px; }
       .un__row   { grid-template-columns: 1fr; direction: ltr !important; }
       .un__row--alt > * { direction: ltr; }
+      .un__footer { gap: 12px; }
+      .un__price  { font-size: 11px; }
+      .un__price strong { font-size: 18px; white-space: nowrap; }
+      .un__footer .btn { padding: 10px 14px; font-size: 13px; white-space: nowrap; }
       .pm__inner { grid-template-columns: 1fr; }
       .pm__right { align-items: stretch; }
       .pm__right .btn { justify-content: center; }
