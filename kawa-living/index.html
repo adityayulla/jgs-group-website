@@ -829,8 +829,8 @@
 
   <!-- ══ HOUSE TOUR (video) ═══════════════════════════════════════
        ✏️  Ganti / tambah video: salin satu blok <button class="ht__card">
-           lalu ubah VIDEO_ID di onclick + src thumbnail, dan caption-nya.
-           VIDEO_ID = bagian setelah /shorts/ pada link YouTube. -->
+           lalu ubah: (1) VIDEO_ID di onclick = bagian setelah /shorts/ pada
+           link YouTube, (2) src .ht__thumb = gambar webp kavling, (3) caption. -->
   <style>
     .ht__grid { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
     .ht__card { flex: 0 1 264px; max-width: 300px; position: relative; aspect-ratio: 9 / 16;
@@ -869,22 +869,22 @@
     </div>
     <div class="ht__grid container reveal">
       <button class="ht__card" type="button" onclick="openHt('I-tiiVbbyrI')" aria-label="Putar house tour Yuri">
-        <img class="ht__thumb" src="https://i.ytimg.com/vi/I-tiiVbbyrI/hqdefault.jpg" alt="House tour unit Yuri Kawa Living" loading="lazy">
+        <img class="ht__thumb" src="/assets/img/unit-unggulan/yuri-12.webp" alt="House tour unit Yuri Kawa Living" loading="lazy">
         <span class="ht__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
         <span class="ht__cap">Yuri<br><span style="font-size:13px;font-weight:400;opacity:.85;">House tour + interior</span></span>
       </button>
       <button class="ht__card" type="button" onclick="openHt('bP7gvTsf734')" aria-label="Putar house tour Hiroi Yuri">
-        <img class="ht__thumb" src="https://i.ytimg.com/vi/bP7gvTsf734/hqdefault.jpg" alt="House tour unit Hiroi Yuri Kawa Living" loading="lazy">
+        <img class="ht__thumb" src="/assets/img/unit-unggulan/hiroi-15.webp" alt="House tour unit Hiroi Yuri Kawa Living" loading="lazy">
         <span class="ht__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
         <span class="ht__cap">Hiroi Yuri<br><span style="font-size:13px;font-weight:400;opacity:.85;">House tour</span></span>
       </button>
       <button class="ht__card" type="button" onclick="openHt('8zajJKmRhns')" aria-label="Putar house tour Okina">
-        <img class="ht__thumb" src="https://i.ytimg.com/vi/8zajJKmRhns/hqdefault.jpg" alt="House tour unit Okina Kawa Living" loading="lazy">
+        <img class="ht__thumb" src="/assets/img/unit-unggulan/okina-10.webp" alt="House tour unit Okina Kawa Living" loading="lazy">
         <span class="ht__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
         <span class="ht__cap">Okina<br><span style="font-size:13px;font-weight:400;opacity:.85;">House tour</span></span>
       </button>
       <button class="ht__card" type="button" onclick="openHt('d6mZR46xqaA')" aria-label="Putar house tour Himawari">
-        <img class="ht__thumb" src="https://i.ytimg.com/vi/d6mZR46xqaA/hqdefault.jpg" alt="House tour unit Himawari Kawa Living" loading="lazy">
+        <img class="ht__thumb" src="/kawa-living/img/tipe/tipe%20himawari.webp" alt="House tour unit Himawari Kawa Living" loading="lazy">
         <span class="ht__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
         <span class="ht__cap">Himawari<br><span style="font-size:13px;font-weight:400;opacity:.85;">Pasca serah terima</span></span>
       </button>
