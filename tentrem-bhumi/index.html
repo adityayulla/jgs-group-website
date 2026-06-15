@@ -1337,6 +1337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
   function openHt(id){
     var lb=document.getElementById('htLb');
+    if(lb.parentNode!==document.body) document.body.appendChild(lb); /* lepas dari stacking context induk agar di atas navbar */
     document.getElementById('htFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1';
     lb.classList.add('open');
     document.body.style.overflow='hidden';
