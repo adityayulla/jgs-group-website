@@ -33,6 +33,22 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- Blog: daftar artikel -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Cara Memastikan Developer Jogja Terpercaya -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/cara-memastikan-developer-jogja-terpercaya/</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Kebijakan Privasi -->
   <url>
     <loc>https://jogjagrahaselaras.com/privacy.html</loc>
