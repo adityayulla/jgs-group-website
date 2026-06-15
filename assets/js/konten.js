@@ -210,32 +210,32 @@
   /* ============================================================
      BLOG PREVIEW
      ============================================================ */
-  const blogSubtitle = 'Panduan membeli rumah, investasi properti, dan kehidupan di Yogyakarta.';
+  const blogSubtitle = 'Panduan jujur membeli rumah di Yogyakarta — memilih developer, legalitas, hingga memantau progress pembangunan.';
 
   const blogPosts = [
     {
-      cat: 'Tips KPR',
-      title: 'Panduan Lengkap Ajukan KPR Rumah Pertama di Jogja',
-      excerpt: 'Proses KPR tidak harus rumit. Pelajari langkah-langkah mudah dari persiapan berkas hingga akad kredit.',
-      date: '20 April 2026',
-      href: '/blog/',
-      img: '/assets/img/unit-unggulan/hiroi-15.webp',
+      cat: 'Developer Terpercaya',
+      title: 'Cara Memastikan Developer Jogja Terpercaya (Tanpa Tertipu Rumah Inden)',
+      excerpt: 'Checklist konkret untuk memeriksa kredibilitas developer sebelum menyerahkan uang ratusan juta — plus tanda bahaya developer abal-abal.',
+      date: '15 Juni 2026',
+      href: '/blog/cara-memastikan-developer-jogja-terpercaya/',
+      img: '/assets/img/Proyek-Kami/Tentrem Jiwo/bird view.webp',
     },
     {
-      cat: 'Info Jogja',
-      title: 'Kenapa Ngaglik Sleman Jadi Incaran Pembeli Rumah 2026?',
-      excerpt: 'Kawasan Ngaglik tumbuh pesat — infrastruktur berkembang, harga masih kompetitif, dan akses semakin mudah.',
-      date: '15 April 2026',
-      href: '/blog/',
-      img: '/assets/img/Tentrem Bhumi tipe Andrawina.webp',
+      cat: 'Rumah Inden',
+      title: 'Beli Rumah Inden di Jogja: 7 Hal yang Wajib Dicek Sebelum Bayar',
+      excerpt: 'Bukan menakuti, tapi membekali. Legalitas, izin, skema pembayaran, dan perlindungan pembeli di PPJB.',
+      date: '16 Juni 2026',
+      href: '/blog/beli-rumah-inden-jogja-aman/',
+      img: '/assets/img/Proyek-Kami/Royal Mansion/tipe adiluhung.webp',
     },
     {
-      cat: 'Tips Properti',
-      title: 'Cara Cek Legalitas Rumah Sebelum Beli: SHM, PBG, dan AJB',
-      excerpt: 'Jangan sampai tergiur harga murah tanpa cek legalitas. Ini panduan lengkap yang wajib Anda tahu sebelum tanda tangan.',
-      date: '10 April 2026',
-      href: '/blog/',
-      img: '/assets/img/unit-unggulan/okina-10.webp',
+      cat: 'Transparansi Progress',
+      title: 'Kenapa Progress Rumah Harus Bisa Dipantau (dan Cara JGS Membuktikannya)',
+      excerpt: 'Setelah bayar, kabar progress sering menghilang. Beginilah seharusnya pembangunan rumah bisa dipantau.',
+      date: '16 Juni 2026',
+      href: '/blog/cara-pantau-progress-pembangunan-rumah/',
+      img: '/assets/img/Kawa Living tipe Okina.webp',
     },
   ];
 
