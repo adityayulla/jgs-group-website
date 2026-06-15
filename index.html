@@ -1134,6 +1134,47 @@
     <div class="pop__dots" id="popDots"></div>
   </section>
 
+  <!-- ══ HOUSE TOUR (video) ═══════════════════════════════════════
+       Sorotan tur terbaru lintas-proyek. Arsip lengkap ada di tiap
+       halaman proyek (/kawa-living/ & /tentrem-bhumi/).
+       Komponen (CSS .ht*, lightbox, openHt) ada di global.css & main.js.
+       ✏️  Ganti/tambah: salin satu <button class="ht__card">, ubah
+           VIDEO_ID di onclick, src .ht__thumb (gambar webp), & caption. -->
+  <section class="ht section--sm" id="house-tour">
+    <div class="section__head container">
+      <span class="eyebrow">→ HOUSE TOUR</span>
+      <h2 class="section-title reveal">Lihat langsung<br>isi rumahnya.</h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Tur unit asli yang sudah jadi &amp; diserahterimakan dari proyek-proyek kami — seperti datang langsung ke lokasi, dari mana saja.</p>
+    </div>
+    <div class="ht__grid container reveal">
+      <button class="ht__card" type="button" onclick="openHt('I-tiiVbbyrI')" aria-label="Putar house tour Yuri — Kawa Living">
+        <img class="ht__thumb" src="/assets/img/unit-unggulan/yuri-12.webp" alt="House tour unit Yuri — Kawa Living" loading="lazy">
+        <span class="ht__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="ht__cap">Yuri<small>Kawa Living</small></span>
+      </button>
+      <button class="ht__card" type="button" onclick="openHt('sEM6R9J_y1c')" aria-label="Putar house tour Andrawina — Tentrem Bhumi">
+        <img class="ht__thumb" src="/tentrem-bhumi/photos/andrawina/andrawina%20foto%20depan.webp" alt="House tour unit Andrawina — Tentrem Bhumi" loading="lazy">
+        <span class="ht__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="ht__cap">Andrawina<small>Tentrem Bhumi</small></span>
+      </button>
+      <button class="ht__card" type="button" onclick="openHt('8zajJKmRhns')" aria-label="Putar house tour Okina — Kawa Living">
+        <img class="ht__thumb" src="/assets/img/unit-unggulan/okina-10.webp" alt="House tour unit Okina — Kawa Living" loading="lazy">
+        <span class="ht__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="ht__cap">Okina<small>Kawa Living</small></span>
+      </button>
+      <button class="ht__card" type="button" onclick="openHt('EfYdPU8sdJo')" aria-label="Putar house tour Cantya — Tentrem Bhumi">
+        <img class="ht__thumb" src="/tentrem-bhumi/photos/cantya/cantya%20berjejer%20miring%20taman.webp" alt="House tour unit Cantya — Tentrem Bhumi" loading="lazy">
+        <span class="ht__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="ht__cap">Cantya<small>Tentrem Bhumi</small></span>
+      </button>
+    </div>
+    <p class="container reveal" style="text-align:center;margin-top:26px;font-size:14px;color:var(--muted);">
+      Lihat semua tur unit di
+      <a href="/kawa-living/#house-tour" style="color:var(--navy);font-weight:500;">Kawa Living</a> &amp;
+      <a href="/tentrem-bhumi/#house-tour" style="color:var(--navy);font-weight:500;">Tentrem Bhumi</a>.
+    </p>
+  </section>
+
   <!-- ══ PENGHARGAAN ═══════════════════════════════════════════ -->
   <section id="penghargaan" class="section-awards">
     <div class="awards-header">

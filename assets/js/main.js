@@ -333,6 +333,38 @@
     }
   }
 
+  /* ── House Tour video lightbox (shared) ──────────────────── */
+  function ensureHtLightbox() {
+    let lb = document.getElementById('htLb');
+    if (lb) return lb;
+    lb = document.createElement('div');
+    lb.className = 'ht-lb';
+    lb.id = 'htLb';
+    lb.innerHTML =
+      '<button class="ht-lb__close" aria-label="Tutup">&times;</button>' +
+      '<div class="ht-lb__frame"><iframe id="htFrame" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="House Tour" src=""></iframe></div>';
+    document.body.appendChild(lb); // appended to <body> so its z-index beats the fixed navbar
+    lb.addEventListener('click', e => { if (e.target === lb) closeHt(); });
+    lb.querySelector('.ht-lb__close').addEventListener('click', closeHt);
+    return lb;
+  }
+  function openHt(id) {
+    const lb = ensureHtLightbox();
+    lb.querySelector('#htFrame').src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1';
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeHt() {
+    const lb = document.getElementById('htLb');
+    if (!lb) return;
+    lb.classList.remove('open');
+    lb.querySelector('#htFrame').src = '';
+    document.body.style.overflow = '';
+  }
+  window.openHt = openHt;
+  window.closeHt = closeHt;
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeHt(); });
+
   /* ── Init ────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
     injectAll().then(() => {
