@@ -156,6 +156,14 @@
   margin-bottom: var(--sp-8);
   border-bottom: 1px solid var(--line);
 }
+.article__hero {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  margin: 0 0 var(--sp-8);
+  display: block;
+}
 .article__lead {
   font-size: 19px;
   line-height: 1.6;
