@@ -36,7 +36,7 @@
   <!-- Blog: daftar artikel -->
   <url>
     <loc>https://jogjagrahaselaras.com/blog/</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -45,6 +45,14 @@
   <url>
     <loc>https://jogjagrahaselaras.com/blog/cara-memastikan-developer-jogja-terpercaya/</loc>
     <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Beli Rumah Inden di Jogja -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/beli-rumah-inden-jogja-aman/</loc>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
