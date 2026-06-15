@@ -57,6 +57,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Blog: Cara Pantau Progress Pembangunan Rumah -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/cara-pantau-progress-pembangunan-rumah/</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Kebijakan Privasi -->
   <url>
     <loc>https://jogjagrahaselaras.com/privacy.html</loc>
