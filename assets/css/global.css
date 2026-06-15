@@ -598,9 +598,12 @@ main > section { position: relative; z-index: 1; }
   .nav__inner { padding: 0 18px; }
   .nav__links, .nav__cta-desktop, .nav__pricelist { display: none; }
   .nav__burger { display: flex; }
-  .footer__top { grid-template-columns: 1fr; gap: 32px; }
-  .footer__cols { grid-template-columns: 1fr 1fr; gap: 26px; }
-  .footer__bot  { flex-direction: column; gap: 10px; }
+  .footer { padding: 40px var(--pad-x) 28px; }
+  .footer__top { grid-template-columns: 1fr; gap: 22px; padding-bottom: 26px; }
+  .footer__brand { font-size: 22px; }
+  .footer__cols { grid-template-columns: 1fr 1fr; gap: 18px 22px; }
+  .footer__coll { padding: 2px 0; }
+  .footer__bot  { flex-direction: column; gap: 8px; margin-top: 16px; }
   .cta-section  { margin: 40px 16px; padding: 70px 28px; border-radius: var(--r-lg); }
   .cta-section__ctas { flex-direction: column; align-items: stretch; }
   .cta-section__ctas .btn { justify-content: center; }
@@ -610,7 +613,8 @@ main > section { position: relative; z-index: 1; }
 }
 
 @media (max-width: 420px) {
-  .footer__cols { grid-template-columns: 1fr; }
+  /* keep 2 columns so the link groups don't stack into one tall list */
+  .footer__cols { gap: 16px; }
 }
 
 
