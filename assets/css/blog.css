@@ -235,6 +235,13 @@
 .cta-box p { color: rgba(255,255,255,.82); font-size: 15.5px; line-height: 1.6; margin: 0 0 var(--sp-6); }
 .cta-box__row { display: flex; gap: var(--sp-3); justify-content: center; flex-wrap: wrap; }
 
+/* Buttons live inside .prose, so override .prose a coloring */
+.prose .btn { border-bottom: 0; }
+.prose .btn--orange,
+.prose .btn--primary,
+.prose .btn--outline-white { color: #fff; }
+.prose .btn--ghost { color: var(--ink); }
+
 /* Related articles */
 .related { max-width: 740px; margin: 0 auto; padding: 0 var(--pad-x) var(--sp-20); }
 .related__head {
