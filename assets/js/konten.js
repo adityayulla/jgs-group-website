@@ -239,6 +239,28 @@
     },
   ];
 
+  /* Artikel "Coming Soon" — dipakai mengisi slot kosong saat jumlah artikel
+     ganjil (layout 2 kolom di mobile). Kosongkan array ini bila belum ada
+     artikel yang akan datang; slotnya akan dibiarkan kosong. */
+  const comingSoonPosts = [
+    {
+      cat: 'Segera Hadir',
+      title: 'Artikel properti berikutnya sedang kami siapkan',
+    },
+  ];
+
+  function renderComingSoonCard(d) {
+    const dataBg = d.img ? ` data-bg="${d.img}"` : '';
+    return `<div class="blog__card blog__card--soon reveal" aria-hidden="true">
+  <div class="blog__media"${dataBg}></div>
+  <div class="blog__body">
+    <span class="blog__cat blog__cat--soon">${d.cat || 'Segera Hadir'}</span>
+    <h3 class="blog__title">${d.title}</h3>
+    <span class="blog__soon-label">Coming Soon</span>
+  </div>
+</div>`;
+  }
+
   function renderBlogCard(d, i) {
     const delayCls = i === 0 ? '' : ' reveal--delay-' + Math.min(i, 3);
     const dataBg = d.img ? ` data-bg="${d.img}"` : '';
@@ -261,7 +283,13 @@
     if (sub) sub.textContent = blogSubtitle;
     const grid = document.getElementById('blogGrid');
     if (!grid) return;
-    grid.innerHTML = blogPosts.map(renderBlogCard).join('');
+    let html = blogPosts.map(renderBlogCard).join('');
+    // Jumlah artikel ganjil → isi 1 slot kosong (mobile 2 kolom) dengan kartu
+    // coming-soon bila tersedia. Kartu ini disembunyikan di desktop via CSS.
+    if (blogPosts.length % 2 === 1 && comingSoonPosts.length) {
+      html += renderComingSoonCard(comingSoonPosts[0]);
+    }
+    grid.innerHTML = html;
 
     var obs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {

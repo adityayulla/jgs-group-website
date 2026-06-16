@@ -962,6 +962,20 @@
     .blog__more { color: var(--orange); font-weight: 500; }
     .blog__cta { text-align: center; margin-top: 36px; padding: 0 var(--pad-x); }
 
+    /* Kartu "Coming Soon" — pengisi slot ganjil, hanya tampil di mobile 2 kolom */
+    .blog__card--soon { display: none; cursor: default; box-shadow: 0 6px 24px rgba(0,0,0,.04); }
+    .blog__card--soon .blog__media { background: #ece4d3; }
+    .blog__card--soon .blog__media::after {
+      background: linear-gradient(135deg, rgba(0,0,0,.04), rgba(0,0,0,.12));
+    }
+    .blog__cat--soon { background: var(--line); color: var(--muted); }
+    .blog__card--soon .blog__title { color: var(--muted); }
+    .blog__soon-label {
+      margin-top: auto; padding-top: 14px;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--orange);
+    }
+
     /* ══════════════════════════════════════════════════════════
        INSTAGRAM FEED
     ══════════════════════════════════════════════════════════ */
@@ -1011,11 +1025,13 @@
       .blog { padding: 64px 0 48px; }
       .blog__grid { grid-template-columns: 1fr 1fr; padding: 0 20px; gap: 12px; }
       .blog__cta { margin-top: 28px; }
+      .blog__media { aspect-ratio: 4/5; }
       .blog__body { padding: 14px; }
       .blog__title { font-size: 15px; line-height: 1.3; }
       .blog__excerpt { font-size: 12px; }
       .blog__cat { font-size: 10px; }
       .blog__foot { font-size: 11px; }
+      .blog__card--soon { display: flex; }
 
       .ig { padding: 56px 0 72px; }
       .ig__grid { padding: 0 20px; gap: 8px; }
@@ -1775,7 +1791,7 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
 <div id="footer-placeholder"></div>
 
 <script src="assets/js/main.js?v=20260616" defer></script>
-<script src="assets/js/konten.js?v=2" defer></script>
+<script src="assets/js/konten.js?v=3" defer></script>
 <script>
   /* Kalkulator Cicilan — homepage */
   (function () {
