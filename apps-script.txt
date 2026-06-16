@@ -1,0 +1,73 @@
+function doPost(e) {
+  try {
+    var raw  = e.parameter.data || e.postData.contents;
+    var data = JSON.parse(raw);
+
+    // Normalisasi HP: 08xxx -> 628xxx
+    var hp = (data.Handphone || '').replace(/[^0-9]/g, '');
+    if (hp.charAt(0) === '0') { hp = '62' + hp.substring(1); }
+
+    // Simpan ke Sheet
+    var sheet = SpreadsheetApp.openById('15Vgoznfl1NHKc7f07IY4FcTCwbHUkKWTZG1i40b9gqk').getActiveSheet();
+    sheet.appendRow([
+      sheet.getLastRow(),
+      data.date         || '',
+      data.time         || '',
+      data.Nama         || '',
+      hp,
+      data.Email        || '',
+      data.Sumber       || '',
+      data.utm_source   || '',
+      data.utm_medium   || '',
+      data.utm_campaign || '',
+      data.utm_content  || '',
+      data.referrer     || ''
+    ]);
+
+    // Email notifikasi
+    var src = data.utm_source   || '-';
+    var med = data.utm_medium   || '-';
+    var cam = data.utm_campaign || '-';
+
+    MailApp.sendEmail({
+      to: 'jogjagrahadigital@gmail.com',
+      subject: 'Lead Baru - JGS Group',
+      htmlBody:
+        '<div style="font-family:Arial,sans-serif;max-width:480px;border:1px solid #e0e0e0;border-radius:12px;overflow:hidden;">' +
+        '<div style="background:#2d4a2b;padding:20px 24px;">' +
+        '<h2 style="color:#fff;margin:0;font-size:18px;">Lead Baru - JGS Group</h2>' +
+        '<p style="color:rgba(255,255,255,0.7);margin:4px 0 0;font-size:13px;">Jogja Graha Selaras</p>' +
+        '</div>' +
+        '<div style="padding:24px;">' +
+        '<table style="width:100%;border-collapse:collapse;">' +
+        '<tr><td style="padding:8px 0;color:#888;width:100px;">Nama</td><td style="padding:8px 0;font-weight:600;">' + (data.Nama || '') + '</td></tr>' +
+        '<tr style="border-top:1px solid #f0f0f0;"><td style="padding:8px 0;color:#888;">HP</td><td style="padding:8px 0;font-weight:600;">+' + hp + '</td></tr>' +
+        '<tr style="border-top:1px solid #f0f0f0;"><td style="padding:8px 0;color:#888;">Email</td><td style="padding:8px 0;">' + (data.Email || '') + '</td></tr>' +
+        '<tr style="border-top:1px solid #f0f0f0;"><td style="padding:8px 0;color:#888;">Tanggal</td><td style="padding:8px 0;">' + (data.date || '') + ' ' + (data.time || '') + '</td></tr>' +
+        '<tr style="border-top:1px solid #f0f0f0;background:#f9f9f9;"><td style="padding:8px 0;color:#888;">Source</td><td style="padding:8px 0;">' + src + ' / ' + med + '</td></tr>' +
+        '<tr style="border-top:1px solid #f0f0f0;background:#f9f9f9;"><td style="padding:8px 0;color:#888;">Campaign</td><td style="padding:8px 0;">' + cam + '</td></tr>' +
+        '</table>' +
+        '<a href="https://api.whatsapp.com/send?phone=' + hp + '" style="display:block;margin-top:16px;background:#25D366;color:#fff;text-align:center;padding:12px;border-radius:10px;text-decoration:none;font-weight:500;">Chat via WhatsApp</a>' +
+        '</div>' +
+        '<div style="background:#f7f7f3;padding:14px 24px;border-top:1px solid #e0e0e0;">' +
+        '<p style="margin:0;font-size:12px;color:#888;">Segera follow up lead ini.</p>' +
+        '</div></div>'
+    });
+
+    return ContentService
+      .createTextOutput(JSON.stringify({status:'ok'}))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch(err) {
+    Logger.log('ERROR: ' + err.toString());
+    return ContentService
+      .createTextOutput(JSON.stringify({status:'error', message:err.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function testSheet() {
+  var sheet = SpreadsheetApp.openById('15Vgoznfl1NHKc7f07IY4FcTCwbHUkKWTZG1i40b9gqk').getActiveSheet();
+  sheet.appendRow(['TEST', '13/5/2026', '16:00', 'Test Nama', '6281234567', 'test@test.com', '/test', 'google', 'cpc', 'test-campaign', '', '']);
+  Logger.log('Berhasil tulis ke sheet');
+}

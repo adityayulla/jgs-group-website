@@ -718,7 +718,12 @@ main > section { position: relative; z-index: 1; }
 }
 
 @media (max-width: 600px) {
-  .aw-card { flex: 0 0 100%; }
+  .aw-track { gap: 12px; }
+  .aw-card { flex: 0 0 calc((100% - 12px) / 2); }
+  .aw-card__body { padding: 12px; }
+  .aw-card__name { font-size: 13px; }
+  .aw-card__year { font-size: 10px; margin-bottom: 4px; }
+  .aw-card__giver { font-size: 11px; }
 }
 
 /* ── Mengapa JGS — 5P grid ──────────────────────────────────── */
