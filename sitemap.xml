@@ -65,6 +65,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Blog: Garansi Rumah Developer -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/garansi-rumah-developer-jogja/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Kebijakan Privasi -->
   <url>
     <loc>https://jogjagrahaselaras.com/privacy.html</loc>
