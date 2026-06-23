@@ -418,6 +418,42 @@
     .ts__rating-label { font-size: 13px; color: var(--muted); letter-spacing: -.005em; }
 
     /* ══════════════════════════════════════════════════════════
+       MITRA — Testimoni Bank, Supplier & Direktur
+    ══════════════════════════════════════════════════════════ */
+    .mitra { padding: 40px 0 90px; }
+    .mitra__grid {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .mitra__card {
+      position: relative; display: flex; flex-direction: column;
+      padding: 34px 32px 30px; border-radius: var(--r-md);
+      border: 1px solid var(--line); background: var(--card);
+    }
+    .mitra__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 40px; }
+    .mitra__logo { height: 38px; display: flex; align-items: center; }
+    .mitra__logo img { max-height: 38px; max-width: 140px; width: auto; object-fit: contain; }
+    .mitra__tag {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--orange); background: rgba(219,127,46,.08);
+      border: 1px solid rgba(219,127,46,.25); padding: 6px 11px; border-radius: 999px; white-space: nowrap;
+    }
+    .mitra__body {
+      font-family: var(--font-display); font-style: italic;
+      font-size: 16px; line-height: 1.62; color: var(--navy);
+      margin: 24px 0; flex: 1; text-wrap: pretty;
+    }
+    .mitra__body::before { content: "\201C"; color: var(--orange); margin-right: 3px; font-weight: 700; }
+    .mitra__body::after  { content: "\201D"; color: var(--orange); margin-left: 3px; font-weight: 700; }
+    .mitra__foot { border-top: 1px solid var(--line); padding-top: 18px; margin-top: auto; }
+    .mitra__sign { height: 42px; max-width: 150px; object-fit: contain; mix-blend-mode: multiply; display: block; margin: 0 0 14px 2px; }
+    .mitra__who { display: flex; align-items: center; gap: 13px; }
+    .mitra__av { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0; box-shadow: 0 0 0 1px var(--line); }
+    .mitra__name { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--navy); letter-spacing: -.01em; }
+    .mitra__role { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+    @media (max-width: 1024px) { .mitra__grid { grid-template-columns: 1fr; max-width: 580px; } }
+
+    /* ══════════════════════════════════════════════════════════
        FAQ
     ══════════════════════════════════════════════════════════ */
     .faq { padding: 80px 0 100px; }
@@ -606,6 +642,11 @@
       .calc__out-val { font-size: 32px; }
       .calc__result-cta { align-items: stretch; }
       .calc__result-cta .btn { justify-content: center; }
+
+      /* Mitra */
+      .mitra { padding: 24px 0 64px; }
+      .mitra__grid { padding: 0 20px; gap: 18px; }
+      .mitra__card { padding: 28px 24px 26px; }
 
       /* Testimoni */
       .ts { padding: 72px 0; }
@@ -1671,6 +1712,69 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
         Lihat semua review di Google
         <span aria-hidden="true">→</span>
       </a>
+    </div>
+  </section>
+
+  <!-- ══ MITRA — BANK, SUPPLIER & DIREKTUR ══════════════════════ -->
+  <section class="mitra section" id="mitra">
+    <div class="section__head container">
+      <span class="eyebrow">Dipercaya Mitra Resmi</span>
+      <h2 class="section-title reveal">Bukan cuma kata kami —<br><em>kata mitra kami.</em></h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Bank rekanan dan supplier material yang bekerja langsung dengan kami bersuara tentang kualitas, legalitas, dan komitmen JGS Group.</p>
+    </div>
+
+    <div class="mitra__grid">
+      <article class="mitra__card reveal">
+        <div class="mitra__head">
+          <div class="mitra__logo"><img src="assets/testimoni/logo-bsi.png" alt="Bank Syariah Indonesia" width="140" height="38" loading="lazy"></div>
+          <span class="mitra__tag">Bank Rekanan</span>
+        </div>
+        <p class="mitra__body">Kerja sama BSI dengan JGS Group telah berjalan kurang lebih dua tahun dengan perkembangan yang baik, serta kontribusi pembiayaan mencapai lebih dari Rp2 miliar per tahun. Konsumen yang direferensikan JGS Group dinilai telah tersaring dengan baik, proses pengajuannya lebih terarah, dan angsurannya berjalan lancar. Dari sisi pembangunan dan legalitas, unit JGS Group dapat diselesaikan sesuai tenggat waktu bank, dengan sertipikat yang sudah siap diproses untuk AJB dan balik nama bersamaan dengan akad KPR.</p>
+        <div class="mitra__foot">
+          <img class="mitra__sign" src="assets/testimoni/sign-arzan.png" alt="Tanda tangan Arzan" loading="lazy">
+          <div class="mitra__who">
+            <img class="mitra__av" src="assets/testimoni/avatar-arzan.jpg" alt="Arzan, BSI KC Mlati" width="50" height="50" loading="lazy">
+            <div>
+              <div class="mitra__name">Arzan</div>
+              <div class="mitra__role">Branch Manager · BSI KC Mlati</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="mitra__card reveal reveal--delay-1">
+        <div class="mitra__head">
+          <div class="mitra__logo"><img src="assets/testimoni/logo-btn.png" alt="Bank BTN" width="120" height="38" loading="lazy"></div>
+          <span class="mitra__tag">Bank Rekanan · sejak 2016</span>
+        </div>
+        <p class="mitra__body">Sejak tahun 2016, Bank BTN telah menjadi salah satu bank rekanan JGS Group dan cukup rutin melakukan kunjungan ke proyek. BTN menilai JGS Group memiliki kesiapan yang baik dalam mendukung proses KPR, baik dari sisi administrasi, legalitas, maupun komunikasi. Bagi BTN, rumah tetap menjadi aset berharga di tengah kondisi ekonomi global, karena tidak hanya memberi tempat berlindung dan kenyamanan, tetapi juga bernilai sebagai aset jangka panjang.</p>
+        <div class="mitra__foot">
+          <div class="mitra__who">
+            <img class="mitra__av" src="assets/testimoni/avatar-kurnia.jpg" alt="Kurnia Dewi, BTN Yogyakarta" width="50" height="50" loading="lazy">
+            <div>
+              <div class="mitra__name">Kurnia Dewi</div>
+              <div class="mitra__role">Consumer Loan Head · BTN Yogyakarta</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="mitra__card reveal reveal--delay-2">
+        <div class="mitra__head">
+          <div class="mitra__logo"><img src="assets/testimoni/logo-unicon.jpg" alt="Unicon Indonesia" width="90" height="38" loading="lazy"></div>
+          <span class="mitra__tag">Supplier Material · sejak 2000</span>
+        </div>
+        <p class="mitra__body">Unicon Indonesia merupakan perusahaan yang bergerak di bidang paving block dan genteng beton, serta telah berpengalaman lebih dari dua dekade sejak berdiri pada tahun 2000. Sebagai salah satu partner JGS Group, Unicon mendukung kebutuhan material pembangunan, khususnya untuk menunjang ketahanan, fungsi, dan estetika kawasan hunian. Dalam kerja sama ini, Unicon menilai JGS Group memiliki perhatian yang baik terhadap kualitas material dan koordinasi proyek.</p>
+        <div class="mitra__foot">
+          <div class="mitra__who">
+            <img class="mitra__av" src="assets/testimoni/avatar-waldera.jpg" alt="Waldera Huning, Unicon Indonesia" width="50" height="50" loading="lazy">
+            <div>
+              <div class="mitra__name">Waldera Huning</div>
+              <div class="mitra__role">Pimpinan Unicon Indonesia</div>
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 

@@ -1132,6 +1132,41 @@ img { display: block; }
   .ts-name   { font-size: 14px; }
   .ts-unit   { font-size: 12px; }
 }
+
+/* ══ Sambutan Direktur ══════════════════════════════════════ */
+.greet { padding: 40px 0 20px; }
+.greet__inner {
+  max-width: 1080px; margin: 0 auto; padding: 0;
+  display: grid; grid-template-columns: 0.82fr 1.18fr;
+  border: 1px solid var(--line); border-radius: var(--r-lg);
+  overflow: hidden; background: var(--card);
+  margin-inline: var(--pad-x, 22px);
+}
+.greet__photo { position: relative; min-height: 100%; }
+.greet__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; display: block; }
+.greet__badge {
+  position: absolute; left: 22px; bottom: 18px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: rgba(27,42,100,.88); padding: 8px 14px; border-radius: 999px;
+}
+.greet__body { padding: 52px 52px; display: flex; flex-direction: column; justify-content: center; }
+.greet__eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); margin-bottom: 18px; }
+.greet__quote {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: 22px; line-height: 1.5; color: var(--navy); margin: 0 0 30px; text-wrap: pretty;
+}
+.greet__quote::before { content: "\201C"; color: var(--orange); }
+.greet__quote::after  { content: "\201D"; color: var(--orange); }
+.greet__sign { height: 52px; max-width: 180px; object-fit: contain; mix-blend-mode: multiply; display: block; margin-bottom: 14px; }
+.greet__name { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--navy); letter-spacing: -.01em; }
+.greet__role { font-size: 13px; color: var(--muted); margin-top: 4px; }
+@media (max-width: 860px) {
+  .greet { padding: 24px 0 8px; }
+  .greet__inner { grid-template-columns: 1fr; }
+  .greet__photo { min-height: 340px; aspect-ratio: 4/3; }
+  .greet__body { padding: 34px 26px; }
+  .greet__quote { font-size: 19px; }
+}
 </style>
 </head>
 <body>
@@ -1436,6 +1471,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </article>
   </div>
 </div>
+
+<!-- ══════════════════════════════════════════
+     SAMBUTAN DIREKTUR
+══════════════════════════════════════════ -->
+<section class="greet" id="sambutan">
+  <div class="greet__inner">
+    <div class="greet__photo">
+      <img src="../assets/testimoni/dir-linsiana.jpg" alt="Linsiana — Direktur Tentrem Bhumi" loading="lazy">
+      <span class="greet__badge">Direktur Tentrem Bhumi</span>
+    </div>
+    <div class="greet__body">
+      <span class="greet__eyebrow">Sambutan Direktur</span>
+      <p class="greet__quote">Tentrem Bhumi hadir sebagai hunian yang nyaman, tenang, dan layak menjadi tempat bertumbuh bersama keluarga. Semoga setiap rumah di Tentrem Bhumi dapat menjadi ruang untuk menciptakan cerita dan kebahagiaan baru.</p>
+      <img class="greet__sign" src="../assets/testimoni/sign-linsiana.jpg" alt="Tanda tangan Linsiana" loading="lazy">
+      <div class="greet__name">Linsiana</div>
+      <div class="greet__role">Direktur Tentrem Bhumi</div>
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════════════════════════════════
      CTA FINAL
