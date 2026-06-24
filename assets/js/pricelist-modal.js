@@ -128,7 +128,6 @@
           '<div id="pricelist-form">' +
             '<input id="pl-nama" type="text" placeholder="Nama lengkap" autocomplete="name">' +
             '<input id="pl-hp" type="tel" placeholder="Nomor WhatsApp" autocomplete="tel">' +
-            '<input id="pl-email" type="email" placeholder="Alamat email" autocomplete="email">' +
             '<p class="pm-privacy">🔒 Data Anda aman dan tidak akan disebarkan</p>' +
             '<button id="pl-submit" onclick="window.submitPricelist()">Kirim &amp; Lanjutkan →</button>' +
           '</div>' +
@@ -156,7 +155,6 @@
     document.getElementById('pricelist-loading').style.display = 'none';
     document.getElementById('pl-nama').value  = '';
     document.getElementById('pl-hp').value    = '';
-    document.getElementById('pl-email').value = '';
   };
 
   window.closePricelistModal = function () {
@@ -168,10 +166,9 @@
   window.submitPricelist = function () {
     var nama  = document.getElementById('pl-nama').value.trim();
     var hp    = document.getElementById('pl-hp').value.trim();
-    var email = document.getElementById('pl-email').value.trim();
 
-    if (!nama || !hp || !email) {
-      alert('Mohon isi semua data terlebih dahulu.');
+    if (!nama || !hp) {
+      alert('Mohon isi nama dan nomor WhatsApp terlebih dahulu.');
       return;
     }
 
@@ -181,7 +178,7 @@
       time:         new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
       Nama:         nama,
       Handphone:    hp,
-      Email:        email,
+      Email:        '',
       Sumber:       window.location.pathname,
       utm_source:   utm.utm_source,
       utm_medium:   utm.utm_medium,

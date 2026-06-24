@@ -1163,8 +1163,8 @@ img { display: block; }
 @media (max-width: 860px) {
   .greet { padding: 24px 0 8px; }
   .greet__inner { grid-template-columns: 1fr; }
-  .greet__photo { min-height: 340px; aspect-ratio: 4/3; }
-  .greet__body { padding: 34px 26px; }
+  .greet__photo { min-height: 340px; width: 100%; min-width: 0; }
+  .greet__body { padding: 34px 26px; min-width: 0; }
   .greet__quote { font-size: 19px; }
 }
 </style>
@@ -1234,7 +1234,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-body">
     <p class="hero-desc" id="k-hero-desc">Kawasan perumahan eksklusif bergaya kontemporer — dirancang untuk keluarga yang menghargai ketenangan, nilai, dan waktu.</p>
     <div class="hero-btns">
-      <a class="btn-hero-primary" href="#unit" id="k-hero-btn1">Lihat Tipe Unit →</a>
+      <a class="btn-hero-primary" href="https://wa.me/6289506888328?text=Halo%20JGS%2C%20saya%20tertarik%20dengan%20Tentrem%20Bhumi%20dan%20ingin%20tanya-tanya.%20(via%20web)" target="_blank" rel="noopener">Chat WhatsApp</a>
       <button class="btn-hero-outline" onclick="openPricelistModal()" id="k-hero-btn2">Download Pricelist</button>
     </div>
   </div>
