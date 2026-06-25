@@ -1,6 +1,6 @@
 # Pricelist PDF — Sumber & Cara Update
 
-Folder ini berisi **sumber HTML** untuk pricelist PDF yang tampil di website.
+File sumber ada di folder ini: **`assets/pdf/`**.
 Edit HTML di sini, lalu render ulang ke PDF — **jangan** edit PDF-nya langsung.
 
 ## File
@@ -13,10 +13,15 @@ Edit HTML di sini, lalu render ulang ke PDF — **jangan** edit PDF-nya langsung
 
 ## PDF hasil (yang dipakai web)
 
-PDF live yang di-link dari halaman download (`/download/`) ada di folder atas:
+PDF live yang di-link dari halaman download (`/download/`) ada di folder `download/`:
 
 - `download/PriceList_Kawa_Living.pdf`
 - `download/PriceList_Tentrem_Bhumi.pdf`
+
+> PDF hasil **harus tetap di `download/`**, jangan dipindah ke `assets/`.
+> Folder `/assets/*` di-cache 1 tahun (immutable) di Vercel — kalau PDF taruh di
+> situ, update tidak akan sampai ke pengunjung lama. Yang di `assets/pdf/` cukup
+> file sumbernya (`.html`/`.css`), bukan PDF live-nya.
 
 > ⚠️ Jangan tertukar dengan `assets/pdf/kawa-living.pdf` & `tentrem-bhumi.pdf` —
 > itu **brosur/sales-kit** (dokumen berbeda), bukan pricelist.
@@ -41,17 +46,17 @@ PDF live yang di-link dari halaman download (`/download/`) ada di folder atas:
 
 ## Render HTML → PDF (macOS, pakai Google Chrome)
 
-Jalankan dari folder ini (`download/src/`):
+Jalankan dari folder ini (`assets/pdf/`). PDF hasil ditulis ke folder `download/`:
 
 ```bash
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 "$CHROME" --headless --disable-gpu --no-pdf-header-footer --allow-file-access-from-files \
-  --print-to-pdf="../PriceList_Kawa_Living.pdf" \
+  --print-to-pdf="../../download/PriceList_Kawa_Living.pdf" \
   "file://$PWD/pricelist-kawa-living.html"
 
 "$CHROME" --headless --disable-gpu --no-pdf-header-footer --allow-file-access-from-files \
-  --print-to-pdf="../PriceList_Tentrem_Bhumi.pdf" \
+  --print-to-pdf="../../download/PriceList_Tentrem_Bhumi.pdf" \
   "file://$PWD/pricelist-tentrem-bhumi.html"
 ```
 
