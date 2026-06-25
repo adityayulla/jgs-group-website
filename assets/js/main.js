@@ -365,8 +365,35 @@
   window.closeHt = closeHt;
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeHt(); });
 
+  /* ── WhatsApp click → dataLayer (GTM conversion) ─────────── */
+  // Delegated on document so it also catches WA links inside the
+  // navbar/footer injected async, the floating button, and any
+  // future <button>-style CTA. Push fires synchronously on click,
+  // before the new tab opens, so the conversion is never missed.
+  function initWaTracking() {
+    function isWA(s) {
+      return /wa\.me|api\.whatsapp\.com|web\.whatsapp\.com/i.test(s || '');
+    }
+    document.addEventListener('click', e => {
+      const el = e.target.closest('a, button');
+      if (!el) return;
+      const href = el.getAttribute('href')    || '';
+      const oc   = el.getAttribute('onclick') || '';
+      const dwa  = el.getAttribute('data-wa') || '';
+      if (!(isWA(href) || isWA(oc) || isWA(dwa))) return;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event:    'whatsapp_click',
+        wa_page:  location.pathname,
+        wa_label: (el.textContent || '').trim().slice(0, 80),
+        wa_href:  href
+      });
+    }, true);
+  }
+
   /* ── Init ────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
+    initWaTracking();
     injectAll().then(() => {
       initBackground();
       initReveal();
