@@ -251,8 +251,8 @@ main { position: relative; z-index: 1; }
   .blueprint-bg { display: none; }
   /* Mobile: background biru dengan gradasi radial JELAS (di layer .reb yg fixed, mirip wash desktop) */
   html, body { background: #bcdcf5; }
-  .reb { background: radial-gradient(135% 120% at 25% 8%, #7fb6e8 0%, #a8d0f0 42%, #e4f2ff 100%); }
-  .reb__wash { opacity: .4; }
+  .reb { background: radial-gradient(135% 120% at 25% 8%, #a9d1f0 0%, #cae3f7 45%, #ecf6ff 100%); }
+  .reb__wash { opacity: .3; }
   .reb__wash--b { display: none; }
   .reb__vignette { background: radial-gradient(ellipse 90% 70% at 50% 40%, transparent 55%, rgba(120,175,222,.4) 100%); }
 }
