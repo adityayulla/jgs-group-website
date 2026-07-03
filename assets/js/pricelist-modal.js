@@ -148,7 +148,21 @@
     '  animation: plSpin 0.7s linear infinite;' +
     '  margin: 0 auto 12px;' +
     '}' +
-    '@keyframes plSpin { to { transform: rotate(360deg); } }';
+    '@keyframes plSpin { to { transform: rotate(360deg); } }' +
+    /* Mobile: rapatkan isi supaya form muat tanpa scroll */
+    '@media (max-width: 600px) {' +
+    '  #pricelist-modal { padding: 16px 18px 16px; border-radius: 16px; }' +
+    '  .pm-icon { font-size: 22px; margin-bottom: 2px; }' +
+    '  .pm-title { font-size: 17px; margin-bottom: 3px; }' +
+    '  .pm-sub { font-size: 12px; line-height: 1.45; margin-bottom: 9px; }' +
+    '  .pm-benefits { padding: 8px 12px; margin-bottom: 10px; line-height: 1.5; font-size: 11.5px; }' +
+    '  #pricelist-form input { padding: 10px 12px; margin-bottom: 7px; font-size: 14px; }' +
+    '  .pm-nocall { font-size: 11.5px; line-height: 1.4; margin: 2px 0 5px; }' +
+    '  .pm-privacy { font-size: 11px; margin-bottom: 8px; }' +
+    '  #pl-submit { padding: 12px; }' +
+    '  .pm-divider { margin: 8px 0 6px; }' +
+    '  #pl-wa { padding: 10px; }' +
+    '}';
   document.head.appendChild(style);
 
   /* ── Inject HTML modal ──────────────────────────────────── */
