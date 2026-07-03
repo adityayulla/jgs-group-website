@@ -248,13 +248,12 @@ main { position: relative; z-index: 1; }
 }
 
 @media (max-width: 768px) {
-  .blueprint-bg { display: none; }
-  /* Mobile: background biru dengan gradasi radial JELAS (di layer .reb yg fixed, mirip wash desktop) */
-  html, body { background: #bcdcf5; }
-  .reb { background: radial-gradient(135% 120% at 25% 8%, #a9d1f0 0%, #cae3f7 45%, #ecf6ff 100%); }
-  .reb__wash { opacity: .3; }
-  .reb__wash--b { display: none; }
-  .reb__vignette { background: radial-gradient(ellipse 90% 70% at 50% 40%, transparent 55%, rgba(120,175,222,.4) 100%); }
+  /* Mobile: samakan background dengan desktop — pakai wash periwinkle & gambar blueprint yang sama.
+     Blur dikurangi + wash biru diperluas biar warnanya terlihat di layar kecil (blur besar bikin pudar). */
+  .blueprint-bg { opacity: 1; }
+  .reb__wash { filter: blur(55px); }
+  .reb__wash--a { top: -12%; left: -18%; width: 105vw; height: 105vw; }
+  .reb__wash--c { bottom: -20%; left: 5%; width: 115vw; height: 115vw; }
 }
 
 main > section { position: relative; z-index: 1; }
