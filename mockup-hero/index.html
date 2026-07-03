@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Mockup Hero Homepage JGS — Sebelum vs Sesudah</title>
+<style>
+  :root{
+    --bg:#eef0f6; --card:#ffffff; --ink:#1c2340; --muted:#5b6280;
+    --line:rgba(27,42,100,.14); --navy:#1b2a64; --orange:#db7f2e;
+    --good:#1e7d4f; --chipbg:#f4f6fb;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#121524; --card:#1b1f33; --ink:#e8eaf4; --muted:#9aa1c0; --line:rgba(160,170,220,.18); --chipbg:#232840; }
+  }
+  :root[data-theme="dark"]{ --bg:#121524; --card:#1b1f33; --ink:#e8eaf4; --muted:#9aa1c0; --line:rgba(160,170,220,.18); --chipbg:#232840; }
+  :root[data-theme="light"]{ --bg:#eef0f6; --card:#ffffff; --ink:#1c2340; --muted:#5b6280; --line:rgba(27,42,100,.14); --chipbg:#f4f6fb; }
+
+  body{ background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; line-height:1.55; margin:0; padding:32px 20px 80px; }
+  .wrap{ max-width:1060px; margin:0 auto; }
+  h1{ font-size:26px; margin:0 0 6px; text-wrap:balance; }
+  .lede{ color:var(--muted); font-size:15px; max-width:64ch; margin:0 0 20px; }
+  .hint{ display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--orange); background:rgba(219,127,46,.1); border:1px solid rgba(219,127,46,.3); border-radius:999px; padding:7px 14px; margin-bottom:34px; }
+
+  .phones{ display:flex; gap:32px; flex-wrap:wrap; justify-content:center; margin-bottom:44px; }
+  .phone-col{ display:flex; flex-direction:column; gap:12px; }
+  .phone-label{ text-align:center; font-size:12px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:var(--muted); }
+  .phone-label.after{ color:var(--orange); }
+
+  .phone{ width:352px; border-radius:38px; background:#0d0f1c; padding:10px; box-shadow:0 18px 50px rgba(15,20,50,.28); }
+  .screen{ border-radius:30px; overflow:hidden; background:#fff; color:#1b2a64; position:relative; height:660px; display:flex; flex-direction:column; }
+  .scroll{ overflow-y:auto; flex:1; scroll-behavior:smooth; }
+  .notch{ height:24px; display:flex; justify-content:center; align-items:center; background:#fff; z-index:6; }
+  .notch span{ width:110px; height:16px; background:#0d0f1c; border-radius:10px; display:block; }
+
+  /* ---- shared site styles (replika brand JGS) ---- */
+  .site{ padding:18px 20px 24px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  .eyebrow{ display:flex; align-items:center; gap:8px; font-size:10px; letter-spacing:.18em; text-transform:uppercase; font-weight:700; color:#1b2a64; margin-bottom:14px; }
+  .dot{ width:6px; height:6px; border-radius:50%; background:#db7f2e; box-shadow:0 0 10px #db7f2e; }
+  .disp{ font-family:Georgia,'Times New Roman',serif; font-weight:400; letter-spacing:-.02em; color:#1b2a64; line-height:1.18; }
+  .slab{ display:inline-block; background:#db7f2e; color:#fff; padding:1px 10px 5px; font-style:italic; border-radius:2px; }
+  .sub{ font-size:13.5px; line-height:1.55; color:#6a7089; margin:12px 0 16px; }
+  .ctas{ display:flex; gap:8px; margin-bottom:16px; }
+  .ctas.wrap2{ flex-wrap:wrap; }
+  .btn{ font-size:13px; font-weight:600; padding:11px 14px; border-radius:10px; text-decoration:none; display:inline-block; text-align:center; white-space:nowrap; }
+  .btn-p{ background:#db7f2e; color:#fff; }
+  .btn-g{ border:1.5px solid rgba(27,42,100,.35); color:#1b2a64; }
+  .ctas.oneRow .btn{ flex:1; }
+  .stats{ display:flex; gap:18px; padding-top:4px; }
+  .stat b{ font-family:Georgia,serif; font-size:22px; font-weight:500; color:#1b2a64; display:block; line-height:1; }
+  .stat span{ font-size:10px; color:#6a7089; }
+  .photo{ margin:18px 0 0; border-radius:14px; height:190px; position:relative; overflow:hidden;
+          background:linear-gradient(135deg,#1b2a64 0%,#2c3e8c 55%,#41549f 100%); }
+  .photo::after{ content:"foto perumahan"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.45); font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
+  .badge{ position:absolute; left:12px; bottom:12px; background:#fff; border-radius:12px; padding:8px 12px; box-shadow:0 6px 18px rgba(10,15,40,.25); z-index:1; }
+  .badge b{ font-family:Georgia,serif; font-size:20px; color:#db7f2e; display:block; line-height:1.1; }
+  .badge span{ font-size:7.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:#1b2a64; }
+  .filler{ padding:22px 20px 40px; }
+  .filler h3{ font-family:Georgia,serif; color:#1b2a64; font-weight:500; font-size:20px; margin:0 0 10px; }
+  .filler p{ color:#6a7089; font-size:13px; margin:0 0 14px; }
+  .filler .ph{ height:120px; border-radius:12px; background:#eef0f6; margin-bottom:14px; }
+
+  /* ---- after-only ---- */
+  .chips{ display:flex; flex-direction:column; gap:7px; margin-bottom:14px; }
+  .chip{ display:flex; justify-content:space-between; align-items:center; gap:10px; background:#f6f7fb; border:1px solid rgba(27,42,100,.12); border-radius:11px; padding:9px 12px; font-size:12.5px; color:#1b2a64; text-decoration:none; }
+  .chip b{ font-weight:700; }
+  .chip .price{ color:#db7f2e; font-weight:700; white-space:nowrap; }
+  .chip .arrow{ color:#9aa2c2; }
+  .foot{ font-size:9.5px; color:#9aa2c2; line-height:1.5; margin-top:10px; }
+
+  /* floating green WA — tetap seperti web sekarang */
+  .wa-float{ position:absolute; right:14px; bottom:16px; width:46px; height:46px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px -4px rgba(37,211,102,.55), 0 0 0 6px rgba(37,211,102,.12); z-index:7; transition:transform .3s, opacity .3s; }
+  .wa-float svg{ width:24px; height:24px; fill:#fff; }
+  .screen.scrolled .wa-float{ transform:translateY(-52px); } /* naik ke atas sticky bar saat bar muncul */
+
+  /* sticky harga bar — muncul saat scroll */
+  .sticky{ position:absolute; left:0; right:0; bottom:0; padding:10px 14px calc(10px + env(safe-area-inset-bottom,4px)); background:rgba(255,255,255,.97); border-top:1px solid rgba(27,42,100,.12); backdrop-filter:blur(8px); transform:translateY(120%); transition:transform .32s cubic-bezier(.4,0,.2,1); z-index:5; }
+  .screen.scrolled .sticky{ transform:translateY(0); }
+  .sticky .btn{ display:block; width:100%; padding:13px 0; font-size:14px; }
+  @media (prefers-reduced-motion:reduce){ .sticky,.wa-float{ transition:none; } .scroll{ scroll-behavior:auto; } }
+
+  /* callout markers */
+  .mark{ position:absolute; width:22px; height:22px; border-radius:50%; background:var(--orange); color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px rgba(219,127,46,.28); z-index:8; }
+
+  /* annotations */
+  .notes{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 28px; }
+  .notes h2{ font-size:17px; margin:0 0 18px; }
+  .note{ display:flex; gap:14px; padding:13px 0; border-top:1px solid var(--line); }
+  .note:first-of-type{ border-top:none; }
+  .note .n{ flex:none; width:24px; height:24px; border-radius:50%; background:var(--orange); color:#fff; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center; margin-top:2px; }
+  .note p{ margin:0; font-size:14.5px; }
+  .note p b{ display:block; margin-bottom:2px; }
+  .note .why{ color:var(--muted); font-size:13.5px; }
+  .kept{ margin-top:22px; padding:14px 16px; background:var(--chipbg); border-radius:12px; font-size:13.5px; color:var(--muted); }
+  .kept b{ color:var(--good); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Rombak Layar Pertama Homepage 🏠</h1>
+  <p class="lede">Mockup tampilan mobile (97% traffic). Kiri = kondisi sekarang, kanan = usulan. Desain, warna, dan foto tidak berubah — yang dioperasi hanya <b>pesan</b> di layar pertama, sesuai temuan Clarity: 57,5% pengunjung pergi tanpa scroll.</p>
+  <span class="hint">👉 Scroll layar HP kanan ke bawah — sticky bar "Lihat Harga" akan muncul otomatis</span>
+
+  <div class="phones">
+    <!-- ============ SEBELUM ============ -->
+    <div class="phone-col">
+      <div class="phone-label">Sebelum — saat ini</div>
+      <div class="phone"><div class="screen">
+        <div class="notch"><span></span></div>
+        <div class="scroll"><div class="site">
+          <div class="eyebrow"><span class="dot"></span>13 Tahun &middot; 300+ Rumah &middot; Yogyakarta</div>
+          <div class="disp" style="font-size:21px;">Setiap rumah,</div>
+          <div class="disp" style="font-size:29px; margin-bottom:6px;"><span class="slab">satu babak hidup yang berarti.</span></div>
+          <p class="sub">Sejak 2013, lebih dari 300 keluarga memulai babak baru hidupnya bersama JGS — mulai mandiri, melangkah ke rumah berikutnya, atau membangun masa depan untuk anak. Bukan sekadar rumah—tapi kepercayaan yang kami bangun bersama Anda, di setiap babak hidup.</p>
+          <div class="ctas wrap2">
+            <a class="btn btn-p">Chat WhatsApp</a>
+            <a class="btn btn-g">Download Pricelist</a>
+          </div>
+          <div class="stats">
+            <div class="stat"><b>13</b><span>Tahun Terpercaya</span></div>
+            <div class="stat"><b>300+</b><span>Telah Serah Terima</span></div>
+            <div class="stat"><b>5</b><span>Penghargaan</span></div>
+          </div>
+          <div class="photo">
+            <div class="badge"><b>13+</b><span>Tahun<br>Terpercaya</span></div>
+          </div>
+        </div></div>
+        <a class="wa-float"><svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.04c-.24.68-1.2 1.25-1.97 1.41-.53.11-1.22.2-3.54-.76-2.97-1.23-4.88-4.24-5.03-4.44-.15-.2-1.2-1.6-1.2-3.05s.76-2.16 1.03-2.46c.27-.3.59-.37.79-.37.2 0 .39.002.56.01.18.008.42-.07.66.5.24.58.82 2.01.89 2.16.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.47.12.64-.07.17-.2.73-.85.93-1.14.2-.3.4-.25.66-.15.27.1 1.7.8 1.99.95.29.15.48.22.55.35.07.12.07.7-.17 1.38z"/></svg></a>
+      </div></div>
+    </div>
+
+    <!-- ============ SESUDAH ============ -->
+    <div class="phone-col">
+      <div class="phone-label after">Sesudah — usulan (interaktif)</div>
+      <div class="phone"><div class="screen" id="afterScreen">
+        <div class="notch"><span></span></div>
+        <div class="scroll" id="afterScroll"><div class="site">
+          <div class="eyebrow"><span class="dot"></span>Perumahan di Jogja &middot; Sedayu &amp; Ngaglik</div>
+
+          <div style="position:relative;">
+            <span class="mark" style="top:-4px; right:-6px;">1</span>
+            <div class="disp" style="font-size:27px;">Rumah di Jogja</div>
+            <div class="disp" style="font-size:29px; margin-bottom:6px;"><span class="slab">mulai Rp 400 jt-an.</span></div>
+            <div class="disp" style="font-size:16px; color:#db7f2e; font-style:italic; margin-top:2px;">Angsuran KPR mulai &plusmn;Rp 3 jutaan/bulan*</div>
+          </div>
+
+          <p class="sub" style="position:relative;">
+            <span class="mark" style="top:-2px; right:-6px;">2</span>
+            13 tahun membangun, 300+ rumah serah terima — dan progress pembangunan rumah Anda bisa dipantau online, update tiap minggu.
+          </p>
+
+          <div class="ctas oneRow" id="heroCtas" style="position:relative;">
+            <span class="mark" style="top:-10px; left:-6px;">3</span>
+            <a class="btn btn-p">Chat WhatsApp</a>
+            <a class="btn btn-g">Lihat Harga</a>
+          </div>
+
+          <div class="chips" style="position:relative;">
+            <span class="mark" style="top:-10px; right:-6px;">4</span>
+            <a class="chip"><span><b>Kawa Living</b> &middot; Sedayu, Bantul</span><span class="price">mulai 400 jt-an</span><span class="arrow">&rsaquo;</span></a>
+            <a class="chip"><span><b>Tentrem Bhumi</b> &middot; Ngaglik, Sleman</span><span class="price">mulai 640 jt-an</span><span class="arrow">&rsaquo;</span></a>
+            <a class="chip"><span><b>Tentrem Jiwo</b> &middot; Kalasan, Sleman</span><span class="price">hubungi kami</span><span class="arrow">&rsaquo;</span></a>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><b>13</b><span>Tahun Terpercaya</span></div>
+            <div class="stat"><b>300+</b><span>Telah Serah Terima</span></div>
+            <div class="stat"><b>5</b><span>Penghargaan</span></div>
+          </div>
+
+          <div class="photo">
+            <span class="mark" style="top:10px; right:10px;">5</span>
+            <div class="badge"><b>Hemat &plusmn;Rp 43 Jt</b><span>Promo Bulan Ini &middot; S&amp;K</span></div>
+          </div>
+
+          <p class="foot">*Simulasi unit termurah, DP 30%, tenor 20 th, bunga 10,5% — sama dengan kalkulator KPR di halaman ini. Harga dapat berubah.</p>
+        </div>
+        <!-- konten section berikutnya (biar bisa di-scroll) -->
+        <div class="filler">
+          <h3>Unit Populer Kami</h3>
+          <p>Enam tipe pilihan, satu komitmen terhadap kualitas hunian.</p>
+          <div class="ph"></div><div class="ph"></div>
+        </div>
+        </div>
+
+        <!-- sticky bar: muncul saat scroll -->
+        <div class="sticky" id="stickyBar">
+          <span class="mark" style="top:-11px; left:50%; margin-left:-11px;">6</span>
+          <a class="btn btn-p">Lihat Harga / Pricelist</a>
+        </div>
+
+        <!-- floating WA hijau: tetap ada, seperti web sekarang -->
+        <a class="wa-float"><svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.04c-.24.68-1.2 1.25-1.97 1.41-.53.11-1.22.2-3.54-.76-2.97-1.23-4.88-4.24-5.03-4.44-.15-.2-1.2-1.6-1.2-3.05s.76-2.16 1.03-2.46c.27-.3.59-.37.79-.37.2 0 .39.002.56.01.18.008.42-.07.66.5.24.58.82 2.01.89 2.16.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.47.12.64-.07.17-.2.73-.85.93-1.14.2-.3.4-.25.66-.15.27.1 1.7.8 1.99.95.29.15.48.22.55.35.07.12.07.7-.17 1.38z"/></svg></a>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h2>Apa yang berubah &amp; kenapa</h2>
+
+    <div class="note"><div class="n">1</div>
+      <p><b>Headline: harga masuk layar pertama.</b>
+      <span class="why">"Rumah di Jogja mulai Rp 400 jt-an" + angsuran ±Rp 3 jutaan/bulan menjawab 3 pertanyaan pengunjung iklan dalam 3 detik. Angka "jt-an" dipilih (bukan presisi 414) agar tak perlu diupdate tiap unit termurah terjual — awet.</span></p>
+    </div>
+
+    <div class="note"><div class="n">2</div>
+      <p><b>Subline dipadatkan: 1 kalimat trust + diferensiator.</b>
+      <span class="why">Paragraf panjang "babak hidup" diganti 1 kalimat: 13 tahun + 300+ serah terima + pantau progress online (fitur yang kompetitor tidak punya). Cerita brand lengkap pindah ke section bawah — tidak hilang.</span></p>
+    </div>
+
+    <div class="note"><div class="n">3</div>
+      <p><b>Dua tombol hero jadi 1 baris sejajar.</b>
+      <span class="why">Label "Download Pricelist" dipendekkan jadi "Lihat Harga" supaya "Chat WhatsApp" + "Lihat Harga" muat rapi dalam satu baris di layar HP — lebih ringkas, tidak menumpuk 2 baris seperti sekarang.</span></p>
+    </div>
+
+    <div class="note"><div class="n">4</div>
+      <p><b>Chip proyek + harga "mulai dari".</b>
+      <span class="why">Hanya 14% pengunjung sampai ke section Unit Populer. Chip ini membawa proyek + harga naik ke layar pertama; sekali tap langsung ke halaman proyeknya. Tentrem Jiwo = "hubungi kami" (call), link ke halaman /tentrem-jiwo yang sudah ada.</span></p>
+    </div>
+
+    <div class="note"><div class="n">5</div>
+      <p><b>Badge foto: dari "13+ Tahun" jadi promo "Hemat ±Rp 43 Jt".</b>
+      <span class="why">Angka 13 tahun sudah ada di stats persis di atasnya (dobel). Posisi paling menonjol di foto lebih berguna untuk promo aktif — angka ±43 jt diambil dari PDF pricelist resmi.</span></p>
+    </div>
+
+    <div class="note"><div class="n">6</div>
+      <p><b>Sticky bar "Lihat Harga" — muncul HANYA setelah scroll.</b>
+      <span class="why">Saat di hero, bar ini tersembunyi (tombol harga sudah terlihat di atas). Begitu tombol hero tergulung hilang, bar meluncur naik supaya harga selalu terjangkau jempol. <b>Tombol WA hijau floating TETAP ada</b> (tidak dihapus) — jadi sticky bar cukup 1 tombol harga, tidak ada dua tombol WA yang bertabrakan. WA hijau otomatis naik sedikit saat bar muncul agar tidak menimpa.</span></p>
+    </div>
+
+    <div class="kept">
+      <b>Yang sengaja TIDAK diubah:</b> desain, warna navy/oranye, font, foto hero, stats 13/300+/5, tombol WA hijau floating, dan struktur section di bawahnya. Performa halaman sudah bagus (LCP 1,8 dtk) — operasi ini murni soal pesan, risiko rendah, dan efeknya terukur di Clarity ±1 minggu setelah live (target: no-scroll 57% → ±45%, klik WA naik).
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var scroller = document.getElementById('afterScroll');
+    var screenEl = document.getElementById('afterScreen');
+    var heroCtas = document.getElementById('heroCtas');
+    if(!scroller || !screenEl || !heroCtas) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        // saat tombol hero TIDAK terlihat lagi → tampilkan sticky bar
+        screenEl.classList.toggle('scrolled', !e.isIntersecting);
+      });
+    }, { root: scroller, threshold: 0 });
+    io.observe(heroCtas);
+  })();
+</script>
+</body>
+</html>
