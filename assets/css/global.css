@@ -249,10 +249,12 @@ main { position: relative; z-index: 1; }
 
 @media (max-width: 768px) {
   .blueprint-bg { display: none; }
-  /* Mobile: background biru langit dengan gradasi radial (mirip wash desktop) */
-  html, body { background: radial-gradient(125% 120% at 22% 12%, #a9d1f0 0%, #c4e0f5 48%, #dceffe 100%); background-attachment: fixed; }
+  /* Mobile: background biru dengan gradasi radial JELAS (di layer .reb yg fixed, mirip wash desktop) */
+  html, body { background: #bcdcf5; }
+  .reb { background: radial-gradient(135% 120% at 25% 8%, #7fb6e8 0%, #a8d0f0 42%, #e4f2ff 100%); }
+  .reb__wash { opacity: .4; }
   .reb__wash--b { display: none; }
-  .reb__vignette { background: radial-gradient(ellipse 90% 70% at 50% 40%, transparent 50%, rgba(150,195,235,.45) 100%); }
+  .reb__vignette { background: radial-gradient(ellipse 90% 70% at 50% 40%, transparent 55%, rgba(120,175,222,.4) 100%); }
 }
 
 main > section { position: relative; z-index: 1; }
