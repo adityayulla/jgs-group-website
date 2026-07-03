@@ -250,7 +250,7 @@ main { position: relative; z-index: 1; }
 @media (max-width: 768px) {
   .blueprint-bg { display: none; }
   /* Mobile: background biru langit siang (bukan krem, bukan biru samar) */
-  html, body { background: linear-gradient(180deg, #bcdcf5 0%, #d8ecfb 100%); background-attachment: fixed; }
+  html, body { background: #c4e0f5; }
   .reb__wash--b { display: none; }
   .reb__vignette { background: radial-gradient(ellipse 90% 70% at 50% 40%, transparent 50%, rgba(188,220,245,.5) 100%); }
 }
