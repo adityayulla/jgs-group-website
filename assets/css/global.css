@@ -249,6 +249,10 @@ main { position: relative; z-index: 1; }
 
 @media (max-width: 768px) {
   .blueprint-bg { display: none; }
+  /* Mobile: beri nuansa biru tipis (dominan) seperti desktop, hilangkan kesan krem */
+  html, body { background: #e8ecf4; }
+  .reb__wash--b { opacity: .4; }
+  .reb__vignette { background: radial-gradient(ellipse 90% 70% at 50% 40%, transparent 45%, rgba(232,236,244,.55) 100%); }
 }
 
 main > section { position: relative; z-index: 1; }
