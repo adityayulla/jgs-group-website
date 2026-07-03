@@ -97,6 +97,16 @@
     '}' +
     '#pricelist-form input:focus { border-color: #2d4a2b; }' +
     '.pm-privacy { font-size: 11.5px; color: #aaa; margin-bottom: 14px; margin-top: 2px; }' +
+    '.pm-nocall {' +
+    '  display: flex; align-items: flex-start; gap: 8px;' +
+    '  font-size: 12.5px; color: #666; line-height: 1.5;' +
+    '  margin: 2px 0 8px; cursor: pointer; text-align: left;' +
+    '}' +
+    /* Selector pakai #pricelist-form supaya menang dari rule "#pricelist-form input" */
+    '#pricelist-form .pm-nocall input {' +
+    '  width: auto; padding: 0; margin: 2px 0 0; flex-shrink: 0;' +
+    '  accent-color: #2d4a2b; cursor: pointer;' +
+    '}' +
     '.pm-benefits {' +
     '  background: #f4f7f4; border-radius: 10px;' +
     '  padding: 10px 14px; margin-bottom: 16px;' +
@@ -151,13 +161,14 @@
           '<h3 class="pm-title">Download Pricelist</h3>' +
           '<p class="pm-sub">Isi data berikut untuk mendapatkan pricelist lengkap proyek JGS Group</p>' +
           '<div class="pm-benefits">' +
-            '<div>Harga terbaru semua tipe &amp; unit</div>' +
-            '<div>Simulasi angsuran KPR</div>' +
-            '<div>Siteplan &amp; spesifikasi bangunan</div>' +
+            '<div>Harga terbaru per kavling — cash keras &amp; KPR</div>' +
+            '<div>Promo bulan ini — total hemat &plusmn;Rp 43 jt/unit</div>' +
+            '<div>Kontak WhatsApp marketing untuk survey gratis</div>' +
           '</div>' +
           '<div id="pricelist-form">' +
             '<input id="pl-nama" type="text" placeholder="Nama lengkap" autocomplete="name">' +
             '<input id="pl-hp" type="tel" placeholder="Nomor WhatsApp" autocomplete="tel">' +
+            '<label class="pm-nocall"><input id="pl-nocall" type="checkbox"> Jangan hubungi saya dulu — saya mau pelajari sendiri</label>' +
             '<p class="pm-privacy">🔒 Data Anda aman dan tidak akan disebarkan</p>' +
             '<button id="pl-submit" onclick="window.submitPricelist()">Kirim &amp; Lanjutkan →</button>' +
             '<div class="pm-divider">atau</div>' +
@@ -190,6 +201,8 @@
     document.getElementById('pricelist-loading').style.display = 'none';
     document.getElementById('pl-nama').value  = '';
     document.getElementById('pl-hp').value    = '';
+    var nocall = document.getElementById('pl-nocall');
+    if (nocall) nocall.checked = false;
     /* Autofocus nama — delay kecil supaya keyboard mobile muncul setelah animasi modal */
     setTimeout(function () {
       var nama = document.getElementById('pl-nama');
@@ -224,7 +237,8 @@
       utm_medium:   utm.utm_medium,
       utm_campaign: utm.utm_campaign,
       utm_content:  utm.utm_content,
-      referrer:     utm.referrer
+      referrer:     utm.referrer,
+      JanganHubungi: (document.getElementById('pl-nocall') && document.getElementById('pl-nocall').checked) ? 'YA' : ''
     };
 
     console.log('Payload dikirim:', JSON.stringify(payload));
