@@ -70,9 +70,11 @@
   .foot{ font-size:9.5px; color:#9aa2c2; line-height:1.5; margin-top:10px; }
 
   /* floating green WA — tetap seperti web sekarang */
-  .wa-float{ position:absolute; right:14px; bottom:16px; width:46px; height:46px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px -4px rgba(37,211,102,.55), 0 0 0 6px rgba(37,211,102,.12); z-index:7; transition:transform .3s, opacity .3s; }
+  .wa-float{ position:absolute; right:14px; bottom:16px; width:46px; height:46px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px -4px rgba(37,211,102,.55), 0 0 0 6px rgba(37,211,102,.12); z-index:7; transition:transform .32s cubic-bezier(.4,0,.2,1), opacity .3s, visibility .3s; }
   .wa-float svg{ width:24px; height:24px; fill:#fff; }
-  .screen.scrolled .wa-float{ transform:translateY(-52px); } /* naik ke atas sticky bar saat bar muncul */
+  /* di layar SESUDAH: WA hijau ikut sembunyi saat di hero, muncul & naik ke atas sticky bar saat scroll */
+  #afterScreen .wa-float{ opacity:0; visibility:hidden; pointer-events:none; transform:translateY(8px); }
+  #afterScreen.scrolled .wa-float{ opacity:1; visibility:visible; pointer-events:auto; transform:translateY(-52px); }
 
   /* sticky harga bar — muncul saat scroll */
   .sticky{ position:absolute; left:0; right:0; bottom:0; padding:10px 14px calc(10px + env(safe-area-inset-bottom,4px)); background:rgba(255,255,255,.97); border-top:1px solid rgba(27,42,100,.12); backdrop-filter:blur(8px); transform:translateY(120%); transition:transform .32s cubic-bezier(.4,0,.2,1); z-index:5; }
@@ -147,7 +149,7 @@
 
           <p class="sub" style="position:relative;">
             <span class="mark" style="top:-2px; right:-6px;">2</span>
-            13 tahun membangun, 300+ rumah serah terima — dan progress pembangunan rumah Anda bisa dipantau online, update tiap minggu.
+            Developer Jogja yang berani buka-bukaan — progress pembangunan rumah Anda bisa dipantau sendiri secara online, update tiap minggu. Transparan, tanpa perlu bertanya.
           </p>
 
           <div class="ctas oneRow" id="heroCtas" style="position:relative;">
@@ -205,8 +207,8 @@
     </div>
 
     <div class="note"><div class="n">2</div>
-      <p><b>Subline dipadatkan: 1 kalimat trust + diferensiator.</b>
-      <span class="why">Paragraf panjang "babak hidup" diganti 1 kalimat: 13 tahun + 300+ serah terima + pantau progress online (fitur yang kompetitor tidak punya). Cerita brand lengkap pindah ke section bawah — tidak hilang.</span></p>
+      <p><b>Subline = diferensiator, tidak mengulang angka.</b>
+      <span class="why">Angka 13 tahun &amp; 300+ sudah tampil besar di baris statistik tepat di bawahnya, jadi subline tak perlu mengulangnya (jawaban atas pertanyaan Anda: 2× itu memang mubazir). Kalimatnya dialihkan menjual keunggulan yang kompetitor tak punya: progress bisa dipantau online tiap minggu. Cerita "babak hidup" pindah ke section bawah — tidak hilang.</span></p>
     </div>
 
     <div class="note"><div class="n">3</div>
@@ -225,12 +227,12 @@
     </div>
 
     <div class="note"><div class="n">6</div>
-      <p><b>Sticky bar "Lihat Harga" — muncul HANYA setelah scroll.</b>
-      <span class="why">Saat di hero, bar ini tersembunyi (tombol harga sudah terlihat di atas). Begitu tombol hero tergulung hilang, bar meluncur naik supaya harga selalu terjangkau jempol. <b>Tombol WA hijau floating TETAP ada</b> (tidak dihapus) — jadi sticky bar cukup 1 tombol harga, tidak ada dua tombol WA yang bertabrakan. WA hijau otomatis naik sedikit saat bar muncul agar tidak menimpa.</span></p>
+      <p><b>Sticky bar "Lihat Harga" + WA hijau — muncul HANYA setelah scroll.</b>
+      <span class="why">Saat di hero, keduanya tersembunyi — tombol WA &amp; harga sudah terlihat di atas, tak perlu dobel, layar bersih. Begitu tombol hero tergulung hilang, sticky bar "Lihat Harga" meluncur naik DAN tombol WA hijau floating muncul di atasnya. Jadi saat scroll, dua jalur aksi (chat &amp; harga) selalu terjangkau jempol tanpa saling menimpa.</span></p>
     </div>
 
     <div class="kept">
-      <b>Yang sengaja TIDAK diubah:</b> desain, warna navy/oranye, font, foto hero, stats 13/300+/5, tombol WA hijau floating, dan struktur section di bawahnya. Performa halaman sudah bagus (LCP 1,8 dtk) — operasi ini murni soal pesan, risiko rendah, dan efeknya terukur di Clarity ±1 minggu setelah live (target: no-scroll 57% → ±45%, klik WA naik).
+      <b>Yang sengaja TIDAK diubah:</b> desain, warna navy/oranye, font, foto hero, stats 13/300+/5, dan struktur section di bawahnya. Performa halaman sudah bagus (LCP 1,8 dtk) — operasi ini murni soal pesan, risiko rendah, dan efeknya terukur di Clarity ±1 minggu setelah live (target: no-scroll 57% → ±45%, klik WA naik).
     </div>
   </div>
 </div>
