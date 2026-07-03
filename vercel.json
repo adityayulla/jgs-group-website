@@ -1,6 +1,14 @@
 {
   "trailingSlash": true,
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "(www\\.)?tentremjiwo\\.id" }],
+      "destination": "https://jogjagrahaselaras.com/tentrem-jiwo/",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
