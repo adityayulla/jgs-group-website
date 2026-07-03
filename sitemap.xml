@@ -81,6 +81,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Blog: Legalitas Rumah KPR di Jogja -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/legalitas-rumah-kpr-jogja/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Kebijakan Privasi -->
   <url>
     <loc>https://jogjagrahaselaras.com/privacy.html</loc>
