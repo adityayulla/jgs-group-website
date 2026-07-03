@@ -96,6 +96,37 @@
   .note .why{ color:var(--muted); font-size:13.5px; }
   .kept{ margin-top:22px; padding:14px 16px; background:var(--chipbg); border-radius:12px; font-size:13.5px; color:var(--muted); }
   .kept b{ color:var(--good); }
+
+  /* ---- addon: Villa Tentrem Jiwo jadi produk ---- */
+  .addon{ margin-top:26px; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 28px; }
+  .addon h2{ font-size:17px; margin:0 0 6px; }
+  .addon .subnote{ color:var(--muted); font-size:13.5px; margin:0 0 22px; max-width:70ch; }
+  .addon .cols{ display:flex; gap:30px; flex-wrap:wrap; align-items:flex-start; }
+  .caplbl{ font-size:11px; letter-spacing:.12em; text-transform:uppercase; font-weight:700; color:var(--muted); margin:0 0 10px; }
+  /* nav dropdown mock */
+  .navmock{ flex:1 1 250px; min-width:240px; }
+  .navmock .bar{ display:flex; align-items:center; gap:16px; background:var(--chipbg); border:1px solid var(--line); border-radius:12px; padding:12px 16px; font-size:12.5px; font-weight:600; color:var(--ink); }
+  .navmock .active{ color:var(--orange); }
+  .dd{ margin:8px 0 0 14px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:6px; width:238px; box-shadow:0 14px 30px rgba(15,20,50,.16); }
+  .dd a{ display:flex; justify-content:space-between; align-items:center; padding:9px 12px; border-radius:8px; font-size:13px; color:var(--ink); text-decoration:none; }
+  .dd a.new{ background:rgba(219,127,46,.14); color:var(--orange); font-weight:700; }
+  .dd .tagnew{ font-size:9px; letter-spacing:.08em; text-transform:uppercase; background:var(--orange); color:#fff; padding:2px 7px; border-radius:6px; }
+  /* product card (gaya pcard web asli, foto = placeholder) */
+  .pcardm{ flex:0 0 300px; width:300px; border-radius:16px; overflow:hidden; position:relative; color:#fff; aspect-ratio:3/3.5; background:linear-gradient(150deg,#20321f 0%,#3a5738 52%,#5c7d54 100%); box-shadow:0 14px 34px rgba(15,20,50,.2); }
+  .pcardm::after{ content:"foto villa"; position:absolute; top:40%; left:0; right:0; text-align:center; color:rgba(255,255,255,.32); font-size:11px; letter-spacing:.14em; text-transform:uppercase; }
+  .pcardm .shade{ position:absolute; inset:0; background:linear-gradient(to top, rgba(8,16,10,.9) 22%, rgba(8,16,10,.05) 62%); }
+  .pcardm .ctop{ position:absolute; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:14px 16px; z-index:1; }
+  .pcardm .pbadge{ font-size:11px; font-weight:600; background:rgba(219,127,46,.92); padding:5px 11px; border-radius:999px; }
+  .pcardm .pnum{ font-size:11px; color:rgba(255,255,255,.6); font-family:ui-monospace,monospace; letter-spacing:.1em; }
+  .pcardm .pbody{ position:absolute; bottom:0; left:0; right:0; padding:18px; z-index:1; }
+  .pcardm .ploc{ font-size:10.5px; letter-spacing:.08em; color:rgba(255,255,255,.72); margin-bottom:7px; }
+  .pcardm .pname{ font-family:Georgia,serif; font-weight:500; font-size:26px; margin:0 0 5px; line-height:1.05; }
+  .pcardm .ptag{ font-size:12px; font-style:italic; color:rgba(255,255,255,.9); margin:0 0 10px; line-height:1.42; }
+  .pcardm .ptype{ font-size:12px; color:rgba(255,255,255,.7); margin-bottom:14px; }
+  .pcardm .pmeta{ display:flex; justify-content:space-between; align-items:center; }
+  .pcardm .pprice{ font-family:Georgia,serif; font-size:20px; }
+  .pcardm .pprice span{ font-size:13px; font-style:italic; opacity:.8; }
+  .pcardm .pcta{ font-size:12px; font-weight:600; color:#fff; }
 </style>
 </head>
 <body>
@@ -143,7 +174,7 @@
           <div style="position:relative;">
             <span class="mark" style="top:-4px; right:-6px;">1</span>
             <div class="disp" style="font-size:27px;">Rumah di Jogja</div>
-            <div class="disp" style="font-size:29px; margin-bottom:6px;"><span class="slab">mulai Rp 400 jt-an.</span></div>
+            <div class="disp" style="font-size:29px; margin-bottom:6px;"><span class="slab">mulai Rp 410 jt-an.</span></div>
             <div class="disp" style="font-size:16px; color:#db7f2e; font-style:italic; margin-top:2px;">Angsuran KPR mulai &plusmn;Rp 3 jutaan/bulan*</div>
           </div>
 
@@ -160,9 +191,9 @@
 
           <div class="chips" style="position:relative;">
             <span class="mark" style="top:-10px; right:-6px;">4</span>
-            <a class="chip"><span><b>Kawa Living</b> &middot; Sedayu, Bantul</span><span class="price">mulai 400 jt-an</span><span class="arrow">&rsaquo;</span></a>
-            <a class="chip"><span><b>Tentrem Bhumi</b> &middot; Ngaglik, Sleman</span><span class="price">mulai 640 jt-an</span><span class="arrow">&rsaquo;</span></a>
-            <a class="chip"><span><b>Tentrem Jiwo</b> &middot; Kalasan, Sleman</span><span class="price">hubungi kami</span><span class="arrow">&rsaquo;</span></a>
+            <a class="chip"><span><b>Kawa Living</b> &middot; Sedayu, Bantul</span><span class="price">mulai 410 jt-an</span><span class="arrow">&rsaquo;</span></a>
+            <a class="chip"><span><b>Tentrem Bhumi</b> &middot; Ngaglik, Sleman</span><span class="price">mulai 660 jt-an</span><span class="arrow">&rsaquo;</span></a>
+            <a class="chip"><span><b>Villa Tentrem Jiwo</b> &middot; Kalasan, Sleman</span><span class="price">hubungi kami</span><span class="arrow">&rsaquo;</span></a>
           </div>
 
           <div class="stats">
@@ -203,7 +234,7 @@
 
     <div class="note"><div class="n">1</div>
       <p><b>Headline: harga masuk layar pertama.</b>
-      <span class="why">"Rumah di Jogja mulai Rp 400 jt-an" + angsuran ±Rp 3 jutaan/bulan menjawab 3 pertanyaan pengunjung iklan dalam 3 detik. Angka "jt-an" dipilih (bukan presisi 414) agar tak perlu diupdate tiap unit termurah terjual — awet.</span></p>
+      <span class="why">"Rumah di Jogja mulai Rp 410 jt-an" + angsuran ±Rp 3 jutaan/bulan menjawab 3 pertanyaan pengunjung iklan dalam 3 detik. Angka "jt-an" dipilih (bukan presisi 419) agar tak perlu diupdate tiap unit termurah terjual — awet. Hero &amp; chip Kawa Living kini sama-sama "410 jt-an".</span></p>
     </div>
 
     <div class="note"><div class="n">2</div>
@@ -233,6 +264,36 @@
 
     <div class="kept">
       <b>Yang sengaja TIDAK diubah:</b> desain, warna navy/oranye, font, foto hero, stats 13/300+/5, dan struktur section di bawahnya. Performa halaman sudah bagus (LCP 1,8 dtk) — operasi ini murni soal pesan, risiko rendah, dan efeknya terukur di Clarity ±1 minggu setelah live (target: no-scroll 57% → ±45%, klik WA naik).
+    </div>
+  </div>
+
+  <div class="addon">
+    <h2>Tambahan: Villa Tentrem Jiwo jadi produk 🏡</h2>
+    <p class="subnote">Temuan saat cek web asli: Villa Tentrem Jiwo <b>sudah punya kartu</b>, tapi terselip di baris "Sold Out" bersama Kawa Village &amp; Royal Mansion — padahal statusnya masih aktif ("Sisa 1 Villa"). Di menu header pun ia belum terdaftar. Usulan: <b>(1)</b> masukkan ke dropdown "Produk" di header, <b>(2)</b> angkat jadi kartu produk aktif (bukan lagi di jajaran sold-out). Beginilah tampilannya:</p>
+    <div class="cols">
+      <div class="navmock">
+        <p class="caplbl">1 &middot; Header — dropdown "Produk"</p>
+        <div class="bar"><span>JGS Group</span><span class="active">Produk &#9662;</span><span>House Tour</span><span>Blog</span></div>
+        <div class="dd">
+          <a>Kawa Living <span>&rsaquo;</span></a>
+          <a>Tentrem Bhumi <span>&rsaquo;</span></a>
+          <a class="new">Villa Tentrem Jiwo <span class="tagnew">baru</span></a>
+        </div>
+      </div>
+      <div>
+        <p class="caplbl">2 &middot; Kartu produk aktif</p>
+        <div class="pcardm">
+          <div class="shade"></div>
+          <div class="ctop"><span class="pbadge">&#9679; Sisa 1 Villa</span><span class="pnum">03</span></div>
+          <div class="pbody">
+            <div class="ploc">&#9673; KALASAN, SLEMAN</div>
+            <div class="pname">Villa Tentrem Jiwo</div>
+            <div class="ptag">Splittable villa 6 kamar + private pool — bisa disewakan, potensi cashflow.</div>
+            <div class="ptype">Villa investasi &middot; 6 kamar &middot; private pool</div>
+            <div class="pmeta"><div class="pprice">Harga <span>Call</span></div><span class="pcta">Lihat Villa →</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
