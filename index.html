@@ -66,7 +66,7 @@
       line-height: .98; letter-spacing: -.02em;
       margin: 0 0 28px; color: var(--navy);
     }
-    .hero-title { margin: 0 0 28px; font-family: var(--font-display); font-weight: 400; line-height: 1.15; letter-spacing: -.02em; color: var(--navy); }
+    .hero-title { margin: 0 0 12px; font-family: var(--font-display); font-weight: 400; line-height: 1.15; letter-spacing: -.02em; color: var(--navy); }
     .hero-title-small  { font-size: 2.5rem; color: var(--navy); margin-bottom: 4px; }
     .hero-title-main   { font-size: 3.5rem; line-height: 1.3; margin-bottom: 4px; }
     @media (max-width: 768px) { .br-desktop { display: none; } }
@@ -83,7 +83,25 @@
     }
     .hero__slab  { display: inline-block; background: var(--orange); color: #fff; padding: 2px 16px 8px; font-style: italic; font-weight: 400; border-radius: 2px; }
     .hero__sub   { font-size: 17px; line-height: 1.55; color: var(--muted); max-width: 480px; margin: 0 0 36px; text-wrap: pretty; }
-    .hero__ctas  { display: flex; gap: 12px; margin-bottom: 56px; flex-wrap: wrap; }
+    .hero__ctas  { display: flex; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+    .hero__kpr   { font-family: var(--font-display); font-style: italic; font-size: 19px; color: var(--orange); margin: 0 0 22px; }
+    .hero__chips { display: flex; flex-direction: column; gap: 8px; margin-bottom: 34px; max-width: 460px; }
+    .hchip       { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: #f6f7fb; border: 1px solid var(--line); border-radius: 12px; padding: 11px 14px; font-size: 14px; color: var(--navy); text-decoration: none; transition: border-color .2s, transform .2s; }
+    .hchip:hover { border-color: var(--orange); transform: translateX(3px); }
+    .hchip__name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hchip__price { color: var(--orange); font-weight: 700; white-space: nowrap; }
+    .hchip__arrow { color: #9aa2c2; }
+    .hero__foot  { font-size: 11px; color: var(--muted); line-height: 1.5; margin: 16px 0 0; max-width: 460px; }
+    .hero__kpr sup, .hero__foot sup { font-size: .7em; }
+    /* Sticky harga bar (mobile) + WA hijau muncul saat scroll melewati hero */
+    .hero-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 80; display: flex; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(255,255,255,.97); border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(15,20,50,.1); backdrop-filter: blur(8px); transform: translateY(140%); transition: transform .32s cubic-bezier(.4,0,.2,1); }
+    .hero-sticky .btn { flex: 1; justify-content: center; }
+    body.past-hero .hero-sticky { transform: translateY(0); }
+    @media (min-width: 901px) { .hero-sticky { display: none; } }
+    @media (max-width: 900px) {
+      body.has-hero-sticky .wa { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s, visibility .3s, transform .32s cubic-bezier(.4,0,.2,1); }
+      body.has-hero-sticky.past-hero .wa { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(-62px); }
+    }
     .hero__stats { display: flex; align-items: flex-start; gap: 28px; }
     .hero__divider { width: 1px; align-self: stretch; background: var(--line); }
     .stat__num   { font-family: var(--font-display); font-weight: 500; font-size: 42px; line-height: 1; color: var(--navy); letter-spacing: -.02em; }
@@ -502,16 +520,21 @@
         max-width: none;
       }
       .hero__ctas {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: nowrap;
         gap: 10px;
-        margin-bottom: 32px;
+        margin-bottom: 16px;
       }
       .hero__ctas .btn {
-        width: 100%;
+        flex: 1;
         justify-content: center;
-        padding: 16px 20px;
-        font-size: 15px;
+        padding: 14px 10px;
+        font-size: 14px;
       }
+      .hero__kpr   { font-size: 14px; margin-bottom: 16px; }
+      .hero__chips { max-width: none; gap: 7px; margin-bottom: 24px; }
+      .hchip       { padding: 10px 12px; font-size: 12.5px; }
+      .hero__foot  { max-width: none; font-size: 10.5px; }
       .hero__stats {
         gap: 0;
         justify-content: space-between;
@@ -1116,18 +1139,24 @@
       <div class="hero__copy">
         <div class="hero__eyebrow">
           <span class="hero__dot"></span>
-          13 Tahun · 300+ Rumah · Yogyakarta
+          Perumahan di Jogja · Sedayu &amp; Ngaglik
         </div>
         <h1 class="hero-title">
-          <div class="hero-title-small">Setiap rumah,</div>
-          <div class="hero-title-main"><span class="highlight">satu babak hidup<br class="br-desktop"> yang berarti.</span></div>
+          <div class="hero-title-small">Rumah di Jogja</div>
+          <div class="hero-title-main"><span class="highlight">mulai Rp 410 jt-an.</span></div>
         </h1>
+        <div class="hero__kpr">Angsuran KPR mulai ±Rp 3 jutaan/bulan<sup>*</sup></div>
         <p class="hero__sub">
-          Sejak 2013, lebih dari 300 keluarga memulai babak baru hidupnya bersama JGS — mulai mandiri, melangkah ke rumah berikutnya, atau membangun masa depan untuk anak. Bukan sekadar rumah—tapi kepercayaan yang kami bangun bersama Anda, di setiap babak hidup.
+          Developer Jogja yang berani buka-bukaan — progress rumah Anda bisa dipantau online tiap minggu.
         </p>
-        <div class="hero__ctas">
+        <div class="hero__ctas" id="heroCtas">
           <a href="https://wa.me/6289506888328?text=Halo%20JGS%2C%20saya%20tertarik%20dan%20ingin%20tanya-tanya%20soal%20rumah.%20(via%20web)" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Chat WhatsApp</a>
-          <button class="btn btn--ghost btn--lg" onclick="openPricelistModal()">Download Pricelist</button>
+          <button class="btn btn--ghost btn--lg" onclick="openPricelistModal()">Lihat Harga</button>
+        </div>
+        <div class="hero__chips">
+          <a href="/kawa-living/" class="hchip"><span class="hchip__name"><b>Kawa Living</b> · Sedayu</span><span class="hchip__price">mulai 410 jt-an</span><span class="hchip__arrow">›</span></a>
+          <a href="/tentrem-bhumi/" class="hchip"><span class="hchip__name"><b>Tentrem Bhumi</b> · Ngaglik</span><span class="hchip__price">mulai 660 jt-an</span><span class="hchip__arrow">›</span></a>
+          <a href="/tentrem-jiwo/" class="hchip"><span class="hchip__name"><b>Villa Tentrem Jiwo</b> · Sorogenen</span><span class="hchip__price">hubungi kami</span><span class="hchip__arrow">›</span></a>
         </div>
         <div class="hero__stats">
           <div>
@@ -1145,6 +1174,7 @@
             <div class="stat__label">Penghargaan</div>
           </div>
         </div>
+        <p class="hero__foot">*Simulasi unit termurah, DP 30%, tenor 20 th, bunga 10,5% — sama dengan kalkulator KPR di halaman ini. Harga dapat berubah.</p>
       </div>
 
       <div class="hero__visual reveal">
@@ -1178,6 +1208,10 @@
       <div class="hero__scrollline"></div>
     </div>
   </section>
+
+  <div class="hero-sticky" id="heroSticky">
+    <button class="btn btn--primary" onclick="openPricelistModal()">Lihat Harga / Pricelist</button>
+  </div>
 
   <div class="blueprint-bg" id="blueprintBg">
     <img src="/assets/img/bluprint-okina-transparent.webp"
@@ -2027,10 +2061,21 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
       },
       "telephone": "+62-895-0688-8328",
       "email": "jogjagrahadigital@gmail.com",
-      "priceRange": "Rp 414 Juta — Rp 965 Juta"
+      "priceRange": "Rp 419 Juta — Rp 965 Juta"
     }
   ]
 }
+</script>
+<script>
+  /* Sticky "Lihat Harga" bar + tombol WA hijau muncul saat CTA hero ter-scroll keluar layar (mobile). Fail-safe: kalau gagal, WA tetap tampil & sticky tetap tersembunyi. */
+  (function () {
+    var ctas = document.getElementById('heroCtas');
+    if (!ctas || !('IntersectionObserver' in window)) return;
+    document.body.classList.add('has-hero-sticky');
+    new IntersectionObserver(function (entries) {
+      document.body.classList.toggle('past-hero', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(ctas);
+  })();
 </script>
 </body>
 </html>
