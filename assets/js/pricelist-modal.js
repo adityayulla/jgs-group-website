@@ -303,4 +303,13 @@
       });
     });
   });
+
+  /* Auto-buka modal jika URL mengandung #pricelist (mis. link dari dashboard/kampanye,
+     yang juga bawa utm_source=dashboard → ter-atribusi di sheet lead) */
+  function maybeOpenFromHash() {
+    if (window.location.hash === '#pricelist') window.openPricelistModal();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', maybeOpenFromHash);
+  else maybeOpenFromHash();
+  window.addEventListener('hashchange', maybeOpenFromHash);
 })();
