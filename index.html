@@ -147,7 +147,7 @@
     /* Featured: 2 big cards */
     .projects__featured {
       max-width: var(--max-w); margin: 0 auto var(--sp-5); padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
     }
     .pcard {
       position: relative; border-radius: var(--r-lg);
@@ -203,8 +203,8 @@
 
     /* Mini: 3 smaller cards */
     .projects__mini {
-      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+      max-width: 840px; margin: 0 auto; padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
     }
     .pcard--small .pcard__name { font-size: 22px; }
     .pcard--small .pcard__price { font-size: 18px; }
@@ -467,7 +467,7 @@
 
     /* ── Tablet 1024px ───────────────────────────────────── */
     @media (max-width: 1024px) {
-      .projects__mini { grid-template-columns: repeat(3, 1fr); }
+      .projects__mini { grid-template-columns: repeat(2, 1fr); }
       .calc__inner { gap: 48px; }
     }
 
@@ -1294,7 +1294,7 @@
       <button class="btn btn--primary" onclick="openPricelistModal()">Download Pricelist</button>
     </div>
 
-    <!-- Featured: Kawa Living + Tentrem Bhumi -->
+    <!-- Aktif dijual: Kawa Living + Tentrem Bhumi + Villa Tentrem Jiwo -->
     <div class="projects__featured">
       <a href="/kawa-living/" class="pcard pcard--featured reveal">
         <div class="pcard__img" style="background-image: url('kawa-living/img/tipe/tipe okina.webp'); background-size: cover; background-position: center;"></div>
@@ -1312,7 +1312,7 @@
           <div class="pcard__tagline">Rumah yang Anda butuhkan—untuk anak, keluarga, dan akses kerja.</div>
           <div class="pcard__type">Rumah tapak · Tipe 36, 40, 42, 49, 61</div>
           <div class="pcard__meta">
-            <div class="pcard__price">Mulai Rp <span>414 Jt</span></div>
+            <div class="pcard__price">Mulai Rp <span>419 Jt</span></div>
             <div class="pcard__cta">Lihat Detail →</div>
           </div>
         </div>
@@ -1334,20 +1334,17 @@
           <div class="pcard__tagline">Saatnya tinggal dengan tentram—aman, eksklusif, dan asri.</div>
           <div class="pcard__type">Rumah tapak · Tipe 48, 48, 68</div>
           <div class="pcard__meta">
-            <div class="pcard__price">Mulai Rp <span>656 Jt</span></div>
+            <div class="pcard__price">Mulai Rp <span>665 Jt</span></div>
             <div class="pcard__cta">Lihat Detail →</div>
           </div>
         </div>
       </a>
-    </div>
 
-    <!-- Mini: 3 sold out -->
-    <div class="projects__mini">
-      <a href="/tentrem-jiwo/" class="pcard pcard--small reveal">
+      <a href="/tentrem-jiwo/" class="pcard pcard--featured reveal reveal--delay-2">
         <div class="pcard__img" style="background-image: url('assets/img/tentrem-jiwo-card.webp'); background-size: cover; background-position: center;"></div>
         <div class="pcard__shade"></div>
         <div class="pcard__top">
-          <span class="pcard__badge pcard__badge--off">Sisa 1 Villa</span>
+          <span class="pcard__badge pcard__badge--on">● Sisa 1 Villa</span>
           <span class="pcard__num">03</span>
         </div>
         <div class="pcard__body">
@@ -1355,15 +1352,19 @@
             <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             SOROGENEN, SLEMAN
           </div>
-          <div class="pcard__name">Tentrem Jiwo</div>
-          <div class="pcard__tagline">Splittable villa 6 kamar + private pool. Tersisa 1 unit.</div>
+          <div class="pcard__name">Villa Tentrem Jiwo</div>
+          <div class="pcard__tagline">Splittable villa 6 kamar + private pool—bisa disewakan, potensi cashflow.</div>
+          <div class="pcard__type">Villa investasi · 6 kamar · private pool</div>
           <div class="pcard__meta">
             <div class="pcard__price">Harga <span>Call</span></div>
-            <span class="pcard__cta">Lihat Villa →</span>
+            <div class="pcard__cta">Lihat Villa →</div>
           </div>
         </div>
       </a>
+    </div>
 
+    <!-- Track record: proyek sudah sold out -->
+    <div class="projects__mini">
       <div class="pcard pcard--small reveal reveal--delay-1" style="cursor:default;">
         <div class="pcard__img" style="background-image: url('assets/img/kawa-village-card.webp'); background-size: cover; background-position: center;"></div>
         <div class="pcard__shade"></div>
