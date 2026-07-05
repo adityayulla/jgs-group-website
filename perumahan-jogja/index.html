@@ -55,6 +55,12 @@
     .ph-hero__sub { font-size: 18px; line-height: 1.6; color: var(--muted); max-width: 620px; margin: 0 0 30px; text-wrap: pretty; }
     .ph-hero__ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
     .ph-hero__stats { display: flex; flex-wrap: wrap; gap: 14px; }
+    .ph-hero__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
+    .ph-hero__media { position: relative; }
+    .ph-hero__media img { display: block; width: 100%; height: 440px; object-fit: cover; border-radius: 18px; box-shadow: 0 30px 60px rgba(27,42,100,.18); }
+    .ph-hero__badge { position: absolute; left: 18px; bottom: 18px; background: rgba(27,42,100,.92); color: #fff; border-radius: 12px; padding: 12px 18px; }
+    .ph-hero__badge b { display: block; font-family: var(--font-display); font-size: 22px; line-height: 1.1; }
+    .ph-hero__badge span { font-size: 12px; color: rgba(255,255,255,.82); }
     .ph-chip { display: inline-flex; align-items: baseline; gap: 8px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; font-size: 13px; color: var(--ink); }
     .ph-chip b { font-family: var(--font-display); color: var(--navy); font-size: 15px; }
 
@@ -122,10 +128,28 @@
       .ph-two { grid-template-columns: 1fr; gap: 30px; }
       .ph-guide { grid-template-columns: 1fr; }
       .ph-breadcrumb { padding-top: 88px; }
+      .ph-hero__grid { grid-template-columns: 1fr; gap: 28px; }
+      .ph-hero__media { order: -1; }
+      .ph-hero__media img { height: 260px; }
     }
   </style>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNJW22Z"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+<div class="bg-root">
+  <div class="reb">
+    <div class="reb__wash reb__wash--a"></div>
+    <div class="reb__wash reb__wash--b"></div>
+    <div class="reb__wash reb__wash--c"></div>
+    <div class="reb__blueprint"></div>
+    <div class="reb__vignette"></div>
+    <div class="grain"></div>
+  </div>
+</div>
 
 <div id="navbar-placeholder"></div>
 
@@ -136,18 +160,25 @@
 <!-- HERO -->
 <header class="ph-hero">
   <div class="container reveal">
-    <span class="ph-hero__eyebrow"><span class="ph-hero__dot"></span> Perumahan · Yogyakarta</span>
-    <h1>Perumahan di Jogja, dari pengembang yang bisa Anda <span class="hl">pantau sendiri</span>.</h1>
-    <p class="ph-hero__sub">JGS Group adalah pengembang perumahan lokal Yogyakarta dengan pengalaman 13+ tahun dan 300+ keluarga. Kami punya tiga perumahan aktif di Sedayu (Bantul), Ngaglik, dan Kalasan (Sleman) — harga mulai Rp 419 jutaan, bisa KPR maupun syariah, dan progres pembangunannya bisa Anda pantau online setiap minggu.</p>
-    <div class="ph-hero__ctas">
-      <button class="btn btn--orange btn--lg btn-pricelist">Download Pricelist &amp; Harga</button>
-      <a class="btn btn--ghost btn--lg" href="https://wa.me/6288902929571?text=Halo%20JGS%2C%20saya%20ingin%20tanya%20perumahan%20di%20Jogja" target="_blank" rel="noopener">Chat WhatsApp</a>
-    </div>
-    <div class="ph-hero__stats">
-      <span class="ph-chip"><b>13+</b> tahun berpengalaman</span>
-      <span class="ph-chip"><b>300+</b> keluarga</span>
-      <span class="ph-chip"><b>3</b> perumahan aktif</span>
-      <span class="ph-chip">Mulai <b>Rp 419 Jt</b></span>
+    <div class="ph-hero__grid">
+      <div>
+        <span class="ph-hero__eyebrow"><span class="ph-hero__dot"></span> Perumahan · Yogyakarta</span>
+        <h1>Perumahan di Jogja, dari pengembang yang bisa Anda <span class="hl">pantau sendiri</span>.</h1>
+        <p class="ph-hero__sub">JGS Group adalah pengembang perumahan lokal Yogyakarta dengan pengalaman 13+ tahun dan 300+ keluarga. Kami punya tiga perumahan aktif di Sedayu (Bantul), Ngaglik, dan Kalasan (Sleman) — harga mulai Rp 419 jutaan, bisa KPR maupun syariah, dan progres pembangunannya bisa Anda pantau online setiap minggu.</p>
+        <div class="ph-hero__ctas">
+          <button class="btn btn--orange btn--lg btn-pricelist">Download Pricelist &amp; Harga</button>
+          <a class="btn btn--ghost btn--lg" href="https://wa.me/6288902929571?text=Halo%20JGS%2C%20saya%20ingin%20tanya%20perumahan%20di%20Jogja" target="_blank" rel="noopener">Chat WhatsApp</a>
+        </div>
+        <div class="ph-hero__stats">
+          <span class="ph-chip"><b>13+</b> tahun berpengalaman</span>
+          <span class="ph-chip"><b>300+</b> keluarga</span>
+          <span class="ph-chip"><b>3</b> perumahan aktif</span>
+        </div>
+      </div>
+      <div class="ph-hero__media">
+        <img src="/assets/img/Proyek-Kami/Tentrem%20Jiwo/bird%20view.webp" alt="Pemandangan udara kawasan perumahan JGS Group di Yogyakarta" width="900" height="600" fetchpriority="high">
+        <div class="ph-hero__badge"><b>Mulai Rp 419 Jt</b><span>3 perumahan aktif di Jogja</span></div>
+      </div>
     </div>
   </div>
 </header>
