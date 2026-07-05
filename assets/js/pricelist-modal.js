@@ -23,6 +23,36 @@
   var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbznJXL_2a_hhRdYmB7Es44sGH_Dc9E96fcgch40mfrPlq-heaV2ewkSSDmxgVpu7qq6Lg/exec';
   var REDIRECT_URL    = '/download/';
 
+  /* ── Enhanced Conversions for Leads (Google Ads) ──────────────
+     Normalisasi No HP ke format E.164 (+62...). Saat submit, nomor
+     disimpan ke sessionStorage; di halaman /download/ (tempat konversi
+     lead fire) nomor didorong ke dataLayer sebagai 'lead_phone' supaya
+     tag Google Ads bisa kirim user-provided data (cocok by No HP untuk
+     offline conversion import). Aman & additif — tak mengubah konversi
+     yang sudah berjalan. */
+  function normalizePhone(raw) {
+    var d = (raw || '').replace(/[^0-9]/g, '');
+    if (!d) return '';
+    if (d.charAt(0) === '0')        d = '62' + d.slice(1);
+    else if (d.slice(0, 2) !== '62') d = '62' + d;
+    return '+' + d;
+  }
+
+  (function pushLeadEnhancedData() {
+    try {
+      var raw = sessionStorage.getItem('jgs_lead_ec');
+      if (!raw) return;
+      var ec = JSON.parse(raw);
+      if (!ec || !ec.phone || (Date.now() - (ec.ts || 0)) > 600000) {
+        sessionStorage.removeItem('jgs_lead_ec');
+        return;
+      }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'lead_enhanced_data', lead_phone: ec.phone });
+      sessionStorage.removeItem('jgs_lead_ec');
+    } catch (e) {}
+  })();
+
   /* ── UTM / Traffic Source tracking ──────────────────────── */
   var _utm = null;
 
@@ -284,6 +314,12 @@
     xhr.open('POST', APPS_SCRIPT_URL, true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send('data=' + encodeURIComponent(JSON.stringify(payload)));
+
+    /* Enhanced Conversions for Leads: simpan No HP (E.164) supaya bisa
+       didorong ke dataLayer di halaman /download/ (tempat konversi fire) */
+    try {
+      sessionStorage.setItem('jgs_lead_ec', JSON.stringify({ phone: normalizePhone(hp), ts: Date.now() }));
+    } catch (e) {}
 
     /* Redirect setelah 1.5 detik — beri waktu XHR terkirim */
     setTimeout(function() { window.location.href = REDIRECT_URL; }, 1500);
