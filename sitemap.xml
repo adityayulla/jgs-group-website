@@ -97,6 +97,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Blog: Pajak Jual-Beli Rumah (BPHTB, PPh) -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/pajak-jual-beli-rumah/</loc>
+    <lastmod>2026-07-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Kebijakan Privasi -->
   <url>
     <loc>https://jogjagrahaselaras.com/privacy.html</loc>
