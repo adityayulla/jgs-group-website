@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Mockup Hero v3 — Visual-First | JGS Group</title>
+<style>
+  :root{
+    --bg:#eef0f6; --card:#ffffff; --ink:#1c2340; --muted:#5b6280;
+    --line:rgba(27,42,100,.14); --navy:#1b2a64; --orange:#db7f2e;
+    --good:#1e7d4f; --chipbg:#f4f6fb;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#121524; --card:#1b1f33; --ink:#e8eaf4; --muted:#9aa1c0; --line:rgba(160,170,220,.18); --chipbg:#232840; }
+  }
+  :root[data-theme="dark"]{ --bg:#121524; --card:#1b1f33; --ink:#e8eaf4; --muted:#9aa1c0; --line:rgba(160,170,220,.18); --chipbg:#232840; }
+  :root[data-theme="light"]{ --bg:#eef0f6; --card:#ffffff; --ink:#1c2340; --muted:#5b6280; --line:rgba(27,42,100,.14); --chipbg:#f4f6fb; }
+
+  body{ background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; line-height:1.55; margin:0; padding:32px 20px 80px; }
+  .wrap{ max-width:1060px; margin:0 auto; }
+  h1{ font-size:26px; margin:0 0 6px; text-wrap:balance; }
+  .lede{ color:var(--muted); font-size:15px; max-width:66ch; margin:0 0 14px; }
+  .lede b{ color:var(--ink); }
+  .hint{ display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--orange); background:rgba(219,127,46,.1); border:1px solid rgba(219,127,46,.3); border-radius:999px; padding:7px 14px; margin:0 8px 14px 0; }
+
+  /* pemilih foto */
+  .fotopick{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:28px; font-size:13px; color:var(--muted); }
+  .fotopick button{ font:inherit; font-size:13px; font-weight:600; color:var(--ink); background:var(--card); border:1.5px solid var(--line); border-radius:999px; padding:7px 14px; cursor:pointer; }
+  .fotopick button.on{ border-color:var(--orange); color:var(--orange); background:rgba(219,127,46,.08); }
+
+  .phones{ display:flex; gap:32px; flex-wrap:wrap; justify-content:center; margin-bottom:44px; }
+  .phone-col{ display:flex; flex-direction:column; gap:12px; }
+  .phone-label{ text-align:center; font-size:12px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:var(--muted); }
+  .phone-label.after{ color:var(--orange); }
+
+  .phone{ width:352px; border-radius:38px; background:#0d0f1c; padding:10px; box-shadow:0 18px 50px rgba(15,20,50,.28); }
+  .screen{ border-radius:30px; overflow:hidden; background:#fff; color:#1b2a64; position:relative; height:660px; display:flex; flex-direction:column; }
+  .scroll{ overflow-y:auto; flex:1; scroll-behavior:smooth; }
+  .notch{ height:24px; display:flex; justify-content:center; align-items:center; background:#fff; z-index:6; position:relative; }
+  .notch span{ width:110px; height:16px; background:#0d0f1c; border-radius:10px; display:block; }
+  .notch.overhero{ background:transparent; position:absolute; top:0; left:0; right:0; }
+
+  /* ---- replika hero LIVE sekarang (teks dulu) ---- */
+  .site{ padding:18px 20px 24px; }
+  .eyebrow{ display:flex; align-items:center; gap:8px; font-size:10px; letter-spacing:.18em; text-transform:uppercase; font-weight:700; color:#1b2a64; margin-bottom:14px; }
+  .dot{ width:6px; height:6px; border-radius:50%; background:#db7f2e; box-shadow:0 0 10px #db7f2e; }
+  .disp{ font-family:Georgia,'Times New Roman',serif; font-weight:400; letter-spacing:-.02em; color:#1b2a64; line-height:1.18; }
+  .slab{ display:inline-block; background:#db7f2e; color:#fff; padding:1px 10px 5px; font-style:italic; border-radius:2px; }
+  .sub{ font-size:13.5px; line-height:1.55; color:#6a7089; margin:12px 0 16px; }
+  .ctas{ display:flex; gap:8px; margin-bottom:16px; }
+  .btn{ font-size:13px; font-weight:600; padding:11px 14px; border-radius:10px; text-decoration:none; display:inline-block; text-align:center; white-space:nowrap; cursor:pointer; }
+  .btn-p{ background:#db7f2e; color:#fff; }
+  .btn-g{ border:1.5px solid rgba(27,42,100,.35); color:#1b2a64; }
+  .ctas.oneRow .btn{ flex:1; }
+  .chips{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .chip{ display:flex; justify-content:space-between; align-items:center; gap:10px; background:#f6f7fb; border:1px solid rgba(27,42,100,.12); border-radius:10px; padding:7px 12px; font-size:11.5px; color:#1b2a64; text-decoration:none; }
+  .chip .price{ color:#db7f2e; font-weight:700; white-space:nowrap; }
+  .chip .arrow{ color:#9aa2c2; }
+  .stats{ display:flex; gap:18px; padding-top:4px; }
+  .stat b{ font-family:Georgia,serif; font-size:22px; font-weight:500; color:#1b2a64; display:block; line-height:1; }
+  .stat span{ font-size:10px; color:#6a7089; }
+  .photo{ margin:18px 0 0; border-radius:14px; height:190px; position:relative; overflow:hidden; }
+  .photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .badge{ position:absolute; left:12px; bottom:12px; background:#fff; border-radius:12px; padding:8px 12px; box-shadow:0 6px 18px rgba(10,15,40,.25); z-index:1; }
+  .badge b{ font-family:Georgia,serif; font-size:20px; color:#db7f2e; display:block; line-height:1.1; }
+  .badge span{ font-size:7.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:#1b2a64; }
+  .foot{ font-size:9.5px; color:#9aa2c2; line-height:1.5; margin-top:10px; }
+  .filler{ padding:22px 20px 40px; }
+  .filler h3{ font-family:Georgia,serif; color:#1b2a64; font-weight:500; font-size:20px; margin:0 0 10px; }
+  .filler p{ color:#6a7089; font-size:13px; margin:0 0 14px; }
+  .filler .ph{ height:120px; border-radius:12px; background:#eef0f6; margin-bottom:14px; }
+
+  /* ---- HERO V3: visual-first ---- */
+  .v3hero{ position:relative; height:636px; color:#fff; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; }
+  .v3hero .bg{ position:absolute; inset:0; background-size:cover; background-position:center; transition:background-image .25s; }
+  .v3hero .veil{ position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(10,16,40,.52) 0%, rgba(10,16,40,.04) 34%, rgba(10,16,40,.12) 58%, rgba(8,12,32,.86) 100%); }
+  .v3hero .in{ position:relative; padding:0 18px 18px; z-index:1; }
+  .v3eyebrow{ display:flex; align-items:center; gap:7px; font-size:9px; letter-spacing:.2em; text-transform:uppercase; font-weight:700; color:#ffd9ae; margin-bottom:10px; text-shadow:0 1px 6px rgba(0,0,0,.5); }
+  .v3eyebrow .dot{ box-shadow:0 0 10px #ffb15e; background:#ffb15e; }
+  .v3h1{ font-family:Georgia,'Times New Roman',serif; line-height:1.04; text-shadow:0 2px 12px rgba(0,0,0,.55); }
+  .v3h1 .l1{ font-size:26px; font-weight:400; display:block; }
+  .v3h1 .l2{ font-size:36px; font-weight:700; display:block; letter-spacing:-.01em; }
+  .v3h1 .l2 em{ font-style:italic; color:#ffb15e; }
+  .v3kpr{ font-family:Georgia,serif; font-style:italic; font-size:14.5px; color:#ffd9ae; margin:8px 0 14px; text-shadow:0 1px 8px rgba(0,0,0,.6); }
+  .v3kpr sup{ font-size:.7em; }
+  .v3ctas{ display:flex; gap:8px; margin-bottom:12px; }
+  .v3ctas .btn-p{ flex:1.6; font-size:14px; padding:13px 10px; box-shadow:0 10px 24px -6px rgba(219,127,46,.55); }
+  .v3ctas .btn-w{ flex:1; font-size:13.5px; padding:13px 10px; border-radius:10px; text-align:center; font-weight:600;
+    color:#fff; background:rgba(255,255,255,.14); border:1.5px solid rgba(255,255,255,.55); backdrop-filter:blur(6px); cursor:pointer; }
+  .v3chips{ display:flex; gap:6px; overflow-x:auto; padding-bottom:2px; scrollbar-width:none; }
+  .v3chips::-webkit-scrollbar{ display:none; }
+  .v3chip{ flex:none; display:flex; align-items:center; gap:6px; font-size:10.5px; color:#fff; text-decoration:none;
+    background:rgba(12,18,44,.5); border:1px solid rgba(255,255,255,.28); backdrop-filter:blur(6px); border-radius:999px; padding:6px 11px; }
+  .v3chip b{ font-weight:700; }
+  .v3chip .price{ color:#ffcf9a; font-weight:700; }
+  .v3promo{ position:absolute; top:34px; right:12px; z-index:2; background:rgba(219,127,46,.94); color:#fff; border-radius:999px; padding:6px 12px; font-size:10.5px; font-weight:700; letter-spacing:.02em; box-shadow:0 8px 20px rgba(0,0,0,.3); }
+  .v3promo small{ display:block; font-size:7.5px; font-weight:600; letter-spacing:.1em; opacity:.9; }
+
+  /* band navy di bawah hero v3 (subline + stats + footnote) */
+  .v3band{ background:#1b2a64; color:#fff; padding:18px 20px 20px; }
+  .v3band .bsub{ font-size:13px; line-height:1.55; color:#dfe4f5; margin:0 0 14px; }
+  .v3band .bsub b{ color:#ffcf9a; font-weight:700; }
+  .v3band .bstats{ display:flex; gap:0; border-top:1px solid rgba(255,255,255,.16); padding-top:14px; }
+  .v3band .bstat{ flex:1; border-right:1px solid rgba(255,255,255,.14); padding-right:12px; }
+  .v3band .bstat + .bstat{ padding-left:12px; }
+  .v3band .bstat:last-child{ border-right:0; }
+  .v3band .bstat b{ font-family:Georgia,serif; font-size:21px; font-weight:500; color:#ffcf9a; display:block; line-height:1.05; }
+  .v3band .bstat span{ font-size:9px; letter-spacing:.05em; text-transform:uppercase; color:#aab4d9; }
+  .v3band .bfoot{ font-size:9px; color:#8b96c2; line-height:1.5; margin:12px 0 0; }
+
+  /* floating WA + sticky (perilaku live dipertahankan) */
+  .wa-float{ position:absolute; right:14px; bottom:16px; width:46px; height:46px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px -4px rgba(37,211,102,.55), 0 0 0 6px rgba(37,211,102,.12); z-index:7; transition:transform .32s cubic-bezier(.4,0,.2,1), opacity .3s, visibility .3s; }
+  .wa-float svg{ width:24px; height:24px; fill:#fff; }
+  .screen.hasScrollUX .wa-float{ opacity:0; visibility:hidden; pointer-events:none; transform:translateY(8px); }
+  .screen.hasScrollUX.scrolled .wa-float{ opacity:1; visibility:visible; pointer-events:auto; transform:translateY(-52px); }
+  .sticky{ position:absolute; left:0; right:0; bottom:0; padding:10px 14px 12px; background:rgba(255,255,255,.97); border-top:1px solid rgba(27,42,100,.12); backdrop-filter:blur(8px); transform:translateY(120%); transition:transform .32s cubic-bezier(.4,0,.2,1); z-index:5; }
+  .screen.scrolled .sticky{ transform:translateY(0); }
+  .sticky .btn{ display:block; width:100%; padding:13px 0; font-size:14px; }
+  @media (prefers-reduced-motion:reduce){ .sticky,.wa-float{ transition:none; } .scroll{ scroll-behavior:auto; } }
+
+  /* callout markers */
+  .mark{ position:absolute; width:22px; height:22px; border-radius:50%; background:var(--orange); color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px rgba(219,127,46,.28); z-index:8; }
+
+  /* annotations */
+  .notes{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 28px; }
+  .notes h2{ font-size:17px; margin:0 0 18px; }
+  .note{ display:flex; gap:14px; padding:13px 0; border-top:1px solid var(--line); }
+  .note:first-of-type{ border-top:none; }
+  .note .n{ flex:none; width:24px; height:24px; border-radius:50%; background:var(--orange); color:#fff; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center; margin-top:2px; }
+  .note p{ margin:0; font-size:14.5px; }
+  .note p b{ display:block; margin-bottom:2px; }
+  .note .why{ color:var(--muted); font-size:13.5px; }
+  .kept{ margin-top:22px; padding:14px 16px; background:var(--chipbg); border-radius:12px; font-size:13.5px; color:var(--muted); }
+  .kept b{ color:var(--good); }
+  .warn{ margin-top:12px; padding:14px 16px; background:rgba(219,127,46,.08); border:1px solid rgba(219,127,46,.3); border-radius:12px; font-size:13.5px; color:var(--muted); }
+  .warn b{ color:var(--orange); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Hero v3 — Visual-First 📸</h1>
+  <p class="lede">Menjawab masukan tim: hero sekarang <b>"terlalu texty, kurang wow"</b> — gaya yang disukai = hero Villa Tentrem Jiwo (foto dulu). Mockup ini menggabungkan keduanya: <b>foto full-bleed sebagai kanvas</b> + <b>harga tetap di layar pertama</b> (jangan buang hasil eksperimen yang sedang diukur Clarity). Kiri = live sekarang, kanan = usulan v3. Bahan keputusan checkpoint <b>10 Juli</b>.</p>
+  <span class="hint">👉 Scroll layar HP kanan — sticky bar &amp; WA hijau tetap muncul seperti sekarang</span>
+  <div class="fotopick">
+    Coba foto:
+    <button data-img="/tentrem-bhumi/photos/andrawina/andrawina%20foto%20depan.webp" class="on">A · Tentrem Bhumi (Andrawina)</button>
+    <button data-img="/assets/img/unit-unggulan/okina-10.webp">B · Kawa Living (Okina)</button>
+    <button data-img="/assets/img/tentrem-jiwo-mobile.webp">C · foto hero sekarang</button>
+    <em>— final menunggu koleksi foto terbaru tim</em>
+  </div>
+
+  <div class="phones">
+    <!-- ============ SEKARANG (LIVE) ============ -->
+    <div class="phone-col">
+      <div class="phone-label">Sekarang — live (teks dulu)</div>
+      <div class="phone"><div class="screen">
+        <div class="notch"><span></span></div>
+        <div class="scroll"><div class="site">
+          <div class="eyebrow"><span class="dot"></span>Perumahan di Jogja &middot; Sedayu &amp; Ngaglik</div>
+          <div class="disp" style="font-size:24px;">Rumah di Jogja</div>
+          <div class="disp" style="font-size:28px; margin-bottom:4px;"><span class="slab">mulai Rp 410 jt-an.</span></div>
+          <div class="disp" style="font-size:15px; color:#db7f2e; font-style:italic; margin-top:2px;">Angsuran KPR mulai &plusmn;Rp 3 jutaan/bulan*</div>
+          <p class="sub">Developer Jogja yang berani buka-bukaan — progress rumah Anda bisa dipantau online tiap minggu.</p>
+          <div class="ctas oneRow">
+            <a class="btn btn-p">Chat WhatsApp</a>
+            <a class="btn btn-g">Lihat Harga</a>
+          </div>
+          <div class="chips">
+            <a class="chip"><span><b>Kawa Living</b> &middot; Sedayu</span><span class="price">mulai 410 jt-an</span><span class="arrow">&rsaquo;</span></a>
+            <a class="chip"><span><b>Tentrem Bhumi</b> &middot; Ngaglik</span><span class="price">mulai 660 jt-an</span><span class="arrow">&rsaquo;</span></a>
+            <a class="chip"><span><b>Villa Tentrem Jiwo</b> &middot; Sorogenen</span><span class="price">hubungi kami</span><span class="arrow">&rsaquo;</span></a>
+          </div>
+          <div class="stats">
+            <div class="stat"><b>13</b><span>Tahun Terpercaya</span></div>
+            <div class="stat"><b>300+</b><span>Telah Serah Terima</span></div>
+            <div class="stat"><b>5</b><span>Penghargaan</span></div>
+          </div>
+          <div class="photo">
+            <img src="/assets/img/tentrem-jiwo-mobile.webp" alt="" loading="lazy">
+            <div class="badge"><b>13+</b><span>Tahun<br>Terpercaya</span></div>
+          </div>
+          <p class="foot">*Simulasi unit termurah, DP 30%, tenor 20 th, bunga 10,5%. Harga dapat berubah.</p>
+        </div></div>
+        <a class="wa-float"><svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.04c-.24.68-1.2 1.25-1.97 1.41-.53.11-1.22.2-3.54-.76-2.97-1.23-4.88-4.24-5.03-4.44-.15-.2-1.2-1.6-1.2-3.05s.76-2.16 1.03-2.46c.27-.3.59-.37.79-.37.2 0 .39.002.56.01.18.008.42-.07.66.5.24.58.82 2.01.89 2.16.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.47.12.64-.07.17-.2.73-.85.93-1.14.2-.3.4-.25.66-.15.27.1 1.7.8 1.99.95.29.15.48.22.55.35.07.12.07.7-.17 1.38z"/></svg></a>
+      </div></div>
+    </div>
+
+    <!-- ============ USULAN V3 ============ -->
+    <div class="phone-col">
+      <div class="phone-label after">Usulan v3 — visual-first (interaktif)</div>
+      <div class="phone"><div class="screen hasScrollUX" id="v3Screen">
+        <div class="scroll" id="v3Scroll">
+
+          <div class="v3hero">
+            <div class="bg" id="v3Bg" style="background-image:url('/tentrem-bhumi/photos/andrawina/andrawina%20foto%20depan.webp');"></div>
+            <div class="veil"></div>
+            <span class="mark" style="top:64px; left:12px;">1</span>
+            <div class="v3promo"><span class="mark" style="top:-11px; left:-11px;">2</span>Hemat &plusmn;Rp 43 Jt<small>PROMO BULAN INI · S&amp;K</small></div>
+            <div class="in">
+              <div class="v3eyebrow"><span class="dot"></span>Perumahan di Jogja &middot; Sedayu &amp; Ngaglik</div>
+              <div class="v3h1" style="position:relative;">
+                <span class="mark" style="top:-4px; right:-4px;">3</span>
+                <span class="l1">Rumah di Jogja</span>
+                <span class="l2">mulai <em>Rp 410 jt-an.</em></span>
+              </div>
+              <div class="v3kpr">Angsuran KPR mulai &plusmn;Rp 3 jutaan/bulan<sup>*</sup></div>
+              <div class="v3ctas" id="v3Ctas" style="position:relative;">
+                <span class="mark" style="top:-10px; left:-6px;">4</span>
+                <a class="btn btn-p">Chat WhatsApp</a>
+                <button class="btn-w">Lihat Harga</button>
+              </div>
+              <div class="v3chips" style="position:relative;">
+                <span class="mark" style="top:-9px; right:2px;">5</span>
+                <a class="v3chip"><b>Kawa Living</b> <span class="price">410 jt-an</span></a>
+                <a class="v3chip"><b>Tentrem Bhumi</b> <span class="price">660 jt-an</span></a>
+                <a class="v3chip"><b>Villa T. Jiwo</b> <span class="price">call</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="v3band" style="position:relative;">
+            <span class="mark" style="top:-11px; left:14px;">6</span>
+            <p class="bsub">Developer Jogja yang berani buka-bukaan — <b>progress rumah Anda bisa dipantau online tiap minggu.</b></p>
+            <div class="bstats">
+              <div class="bstat"><b>13</b><span>Tahun Terpercaya</span></div>
+              <div class="bstat"><b>300+</b><span>Serah Terima</span></div>
+              <div class="bstat"><b>5</b><span>Penghargaan</span></div>
+            </div>
+            <p class="bfoot">*Simulasi unit termurah, DP 30%, tenor 20 th, bunga 10,5% — sama dengan kalkulator KPR di halaman ini. Harga dapat berubah.</p>
+          </div>
+
+          <div class="filler">
+            <h3>Unit Populer Kami</h3>
+            <p>Enam tipe pilihan, satu komitmen terhadap kualitas hunian.</p>
+            <div class="ph"></div><div class="ph"></div>
+          </div>
+        </div>
+
+        <div class="notch overhero"><span></span></div>
+
+        <div class="sticky">
+          <a class="btn btn-p">Lihat Harga / Pricelist</a>
+        </div>
+        <a class="wa-float"><svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.04c-.24.68-1.2 1.25-1.97 1.41-.53.11-1.22.2-3.54-.76-2.97-1.23-4.88-4.24-5.03-4.44-.15-.2-1.2-1.6-1.2-3.05s.76-2.16 1.03-2.46c.27-.3.59-.37.79-.37.2 0 .39.002.56.01.18.008.42-.07.66.5.24.58.82 2.01.89 2.16.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.47.12.64-.07.17-.2.73-.85.93-1.14.2-.3.4-.25.66-.15.27.1 1.7.8 1.99.95.29.15.48.22.55.35.07.12.07.7-.17 1.38z"/></svg></a>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h2>Apa yang berubah &amp; kenapa</h2>
+
+    <div class="note"><div class="n">1</div>
+      <p><b>Foto full-bleed jadi kanvas layar pertama — gaya Villa Tentrem Jiwo.</b>
+      <span class="why">Ini sumber "wow"-nya: rumahnya langsung terlihat besar, bukan blok teks. Relevan dengan trafik kita: 60% sesi datang dari browser Instagram — audiens yang terbiasa bahasa visual. Data Clarity minggu ini: scroll depth homepage masih 14%, jadi layar pertama harus langsung menjual. Gradasi gelap atas-bawah menjaga teks &amp; menu tetap terbaca di atas foto.</span></p>
+    </div>
+
+    <div class="note"><div class="n">2</div>
+      <p><b>Badge promo "Hemat ±Rp 43 Jt" pindah ke pojok atas foto.</b>
+      <span class="why">Menggantikan badge "13+ Tahun" (angkanya sudah ada di baris statistik). Angka ±43 jt dari PDF pricelist resmi — posisi paling mencolok dipakai untuk promo aktif.</span></p>
+    </div>
+
+    <div class="note"><div class="n">3</div>
+      <p><b>Harga TETAP juara di layar pertama — sekarang overlay tebal di atas foto.</b>
+      <span class="why">Eksperimen "harga di layar pertama" (live 3 Jul) sedang diukur Clarity — v3 tidak membuangnya, hanya mengubah panggungnya. Headline putih besar + aksen emas di atas foto justru lebih dramatis daripada slab oranye di latar terang.</span></p>
+    </div>
+
+    <div class="note"><div class="n">4</div>
+      <p><b>1 CTA utama: "Chat WhatsApp" dominan, "Lihat Harga" jadi tombol kaca.</b>
+      <span class="why">WA = channel revenue (temuan funnel 18 bln), jadi dia yang solid oranye dan lebih besar. "Lihat Harga" tetap sejajar tapi visualnya sekunder (transparan) — hierarki aksi jelas, layar tidak ramai.</span></p>
+    </div>
+
+    <div class="note"><div class="n">5</div>
+      <p><b>Chip proyek dirampingkan: 3 kartu vertikal → 1 baris pil geser.</b>
+      <span class="why">Chip versi sekarang makan ±120px tinggi layar. Versi pil hanya ±30px — proyek + harga tetap satu tap, tapi foto dapat ruang jauh lebih besar. Bisa digeser ke samping.</span></p>
+    </div>
+
+    <div class="note"><div class="n">6</div>
+      <p><b>Subline &amp; statistik 13/300+/5 pindah ke band navy tepat di bawah foto.</b>
+      <span class="why">Meniru pola hero-band Villa Tentrem Jiwo. Layar pertama fokus: foto + harga + aksi. Begitu user scroll sedikit, langsung disambut diferensiator (progress online) + bukti (13 th, 300+, 5 penghargaan) — tidak ada yang hilang, hanya diatur ulang panggungnya.</span></p>
+    </div>
+
+    <div class="kept">
+      <b>Yang sengaja TIDAK diubah:</b> sticky bar "Lihat Harga" + WA hijau muncul setelah scroll (perilaku live), popup form + opsi chat WA (live 3 Jul), isi pesan (headline harga, KPR, chip proyek, footnote asumsi), navbar, dan seluruh section di bawah hero. Desktop mengikuti pola yang sama (foto full-bleed ±88% tinggi layar, konten rata bawah) — persis Villa Tentrem Jiwo.
+    </div>
+
+    <div class="warn">
+      <b>Perlu diperhatikan sebelum go-live:</b> (1) <b>Kualitas foto menentukan segalanya</b> — foto harus tajam, terang, dan dikompres ≤200 KB WebP + preload, supaya LCP tidak melorot dari 1,8 dtk (kekuatan kita sekarang). Tim sedang kolek foto terbaru — mockup ini sekalian jadi brief fotonya: rumah tampak depan, potret/vertikal, langit terlihat, area bawah foto relatif polos untuk tempat teks. (2) Keputusan final tunggu <b>data Clarity checkpoint 10 Jul</b> — kalau eksperimen "harga di layar pertama" terbukti menaikkan scroll/klik, v3 tinggal ganti panggung tanpa mengubah pesan yang sudah terbukti.
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    // sticky + WA muncul saat CTA hero tergulung keluar (replika perilaku live)
+    var scroller = document.getElementById('v3Scroll');
+    var screenEl = document.getElementById('v3Screen');
+    var ctas = document.getElementById('v3Ctas');
+    if(scroller && screenEl && ctas){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ screenEl.classList.toggle('scrolled', !e.isIntersecting); });
+      }, { root: scroller, threshold: 0 });
+      io.observe(ctas);
+    }
+    // pemilih foto
+    var bg = document.getElementById('v3Bg');
+    document.querySelectorAll('.fotopick button').forEach(function(b){
+      b.addEventListener('click', function(){
+        document.querySelectorAll('.fotopick button').forEach(function(x){ x.classList.remove('on'); });
+        b.classList.add('on');
+        bg.style.backgroundImage = "url('" + b.dataset.img + "')";
+      });
+    });
+  })();
+</script>
+</body>
+</html>
