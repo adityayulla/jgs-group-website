@@ -37,8 +37,8 @@
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="assets/img/tentrem-jiwo-mobile.webp" fetchpriority="high" media="(max-width: 767px)">
-  <link rel="preload" as="image" href="assets/img/tentrem%20jiwo.webp" fetchpriority="high" media="(min-width: 768px)">
+  <link rel="preload" as="image" href="assets/img/hero-okina-mobile.jpg" fetchpriority="high" media="(max-width: 767px)">
+  <link rel="preload" as="image" href="assets/img/hero-okina-desktop.jpg" fetchpriority="high" media="(min-width: 768px)">
   <link rel="stylesheet" href="assets/css/global.css?v=20260703-6">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
@@ -46,53 +46,84 @@
   <style>
 
     /* ══════════════════════════════════════════════════════════
-       HERO
+       HERO v3 — visual-first (foto full-bleed, konten rata bawah)
     ══════════════════════════════════════════════════════════ */
-    .hero__grid {
+    .hero--v3 {
+      padding: 0; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .hero3__pic img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 40%;
+    }
+    .hero3__veil {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(10,16,40,.55) 0%, rgba(10,16,40,.05) 34%, rgba(10,16,40,.12) 58%, rgba(8,12,32,.86) 100%);
+    }
+    .hero3__promo {
+      position: absolute; top: 96px; right: max(20px, calc((100% - var(--max-w)) / 2 + 20px)); z-index: 2;
+      background: rgba(219,127,46,.94); color: #fff; border-radius: 999px;
+      padding: 8px 16px; font-size: 13px; font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0,0,0,.3);
+    }
+    .hero3__promo small { display: block; font-size: 9px; font-weight: 600; letter-spacing: .1em; opacity: .92; text-transform: uppercase; }
+    .hero3__in {
+      position: relative; z-index: 1; width: 100%;
       max-width: var(--max-w); margin: 0 auto;
-      padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: 1fr 1.05fr;
-      gap: 60px; align-items: center;
+      padding: 0 var(--pad-x) 36px; color: #fff;
     }
     .hero__eyebrow {
       display: inline-flex; align-items: center; gap: 10px;
       font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em;
-      color: var(--navy); margin-bottom: 24px; text-transform: uppercase;
+      color: #ffd9ae; margin-bottom: 14px; text-transform: uppercase;
+      text-shadow: 0 1px 6px rgba(0,0,0,.5);
     }
     .hero__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 12px var(--orange); }
-    .hero__title {
-      font-family: var(--font-display); font-weight: 400;
-      font-size: clamp(44px, 6vw, 88px);
-      line-height: .98; letter-spacing: -.02em;
-      margin: 0 0 28px; color: var(--navy);
+    .hero3__title { margin: 0 0 10px; font-family: var(--font-display); font-weight: 400; line-height: 1.04; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.55); }
+    .hero3__t1 { display: block; font-size: clamp(24px, 3vw, 42px); }
+    .hero3__t2 { display: block; font-size: clamp(30px, 4.6vw, 62px); font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
+    .hero3__t2 em { font-style: italic; color: #ffb15e; }
+    .hero3__kpr { font-family: var(--font-display); font-style: italic; font-size: clamp(15px, 1.6vw, 20px); color: #ffd9ae; margin: 0 0 18px; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+    .hero3__kpr sup { font-size: .7em; }
+    .hero__ctas { display: flex; gap: 10px; margin-bottom: 14px; max-width: 520px; }
+    .hero__ctas .btn--primary { flex: 1.6; justify-content: center; box-shadow: 0 10px 26px -6px rgba(219,127,46,.55); }
+    .hero3__ghost {
+      flex: 1; justify-content: center; color: #fff;
+      background: rgba(255,255,255,.14); border: 1.5px solid rgba(255,255,255,.55);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     }
-    .hero-title { margin: 0 0 12px; font-family: var(--font-display); font-weight: 400; line-height: 1.15; letter-spacing: -.02em; color: var(--navy); }
-    .hero-title-small  { font-size: 2.5rem; color: var(--navy); margin-bottom: 4px; }
-    .hero-title-main   { font-size: 3.5rem; line-height: 1.3; margin-bottom: 4px; }
-    @media (max-width: 768px) { .br-desktop { display: none; } }
-    .hero-title-medium { font-size: 3.5rem; color: var(--navy); }
-    .highlight {
-      display: inline;
-      background-color: #c8860a;
-      color: #ffffff;
-      font-style: italic;
-      padding: 0 8px;
-      line-height: 1.3;
-      -webkit-box-decoration-break: clone;
-      box-decoration-break: clone;
+    .hero3__ghost:hover { background: rgba(255,255,255,.26); color: #fff; }
+    .hero3__chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+    .hero3__chips::-webkit-scrollbar { display: none; }
+    .hchip {
+      flex: none; display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(12,18,44,.5); border: 1px solid rgba(255,255,255,.28);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      border-radius: 999px; padding: 8px 14px;
+      font-size: 12.5px; color: #fff; text-decoration: none;
+      transition: border-color .2s;
     }
-    .hero__slab  { display: inline-block; background: var(--orange); color: #fff; padding: 2px 16px 8px; font-style: italic; font-weight: 400; border-radius: 2px; }
-    .hero__sub   { font-size: 17px; line-height: 1.55; color: var(--muted); max-width: 480px; margin: 0 0 36px; text-wrap: pretty; }
-    .hero__ctas  { display: flex; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
-    .hero__kpr   { font-family: var(--font-display); font-style: italic; font-size: 19px; color: var(--orange); margin: 0 0 22px; }
-    .hero__chips { display: flex; flex-direction: column; gap: 8px; margin-bottom: 34px; max-width: 460px; }
-    .hchip       { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: #f6f7fb; border: 1px solid var(--line); border-radius: 12px; padding: 11px 14px; font-size: 14px; color: var(--navy); text-decoration: none; transition: border-color .2s, transform .2s; }
-    .hchip:hover { border-color: var(--orange); transform: translateX(3px); }
-    .hchip__name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .hchip__price { color: var(--orange); font-weight: 700; white-space: nowrap; }
-    .hchip__arrow { color: #9aa2c2; }
-    .hero__foot  { font-size: 11px; color: var(--muted); line-height: 1.5; margin: 16px 0 0; max-width: 460px; }
-    .hero__kpr sup, .hero__foot sup { font-size: .7em; }
+    .hchip:hover { border-color: var(--orange); }
+    .hchip__price { color: #ffcf9a; font-weight: 700; white-space: nowrap; }
+    .hchip__arrow { color: rgba(255,255,255,.55); }
+    /* Band navy di bawah hero: subline + statistik + footnote */
+    .hero3-band { background: var(--navy); color: #fff; padding: 28px 0 32px; }
+    .hero3-band__in { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); }
+    .hero3-band__sub { font-size: 16.5px; line-height: 1.6; color: #dfe4f5; margin: 0 0 18px; max-width: 660px; }
+    .hero3-band__sub b { color: #ffcf9a; }
+    .hero3-band__stats { display: flex; border-top: 1px solid rgba(255,255,255,.16); padding-top: 18px; max-width: 660px; }
+    .hero3-band__stat { flex: 1; border-right: 1px solid rgba(255,255,255,.14); padding-right: 16px; }
+    .hero3-band__stat + .hero3-band__stat { padding-left: 16px; }
+    .hero3-band__stat:last-child { border-right: 0; }
+    .hero3-band__stat b { display: block; font-family: var(--font-display); font-weight: 500; font-size: clamp(26px, 2.4vw, 36px); line-height: 1.05; color: #ffcf9a; letter-spacing: -.02em; }
+    .hero3-band__stat > span { display: block; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: #aab4d9; white-space: nowrap; margin-top: 4px; }
+    .hero3-band__foot { font-size: 11px; color: #8b96c2; line-height: 1.5; margin: 16px 0 0; max-width: 660px; }
+    /* Navbar di atas foto (belum scroll): teks putih agar terbaca */
+    .nav:not(.nav--scrolled) .nav__brandline { color: #fff; }
+    .nav:not(.nav--scrolled) .nav__brandsub { color: rgba(255,255,255,.75); }
+    .nav:not(.nav--scrolled) .nav__links > li > a { color: #fff; }
+    .nav:not(.nav--scrolled) .nav__burger span { background: #fff; }
+    .nav:not(.nav--scrolled) .nav__pricelist { border-color: rgba(255,255,255,.7); color: #fff; }
     /* Sticky harga bar (mobile) + WA hijau muncul saat scroll melewati hero */
     .hero-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 80; display: flex; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(255,255,255,.97); border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(15,20,50,.1); backdrop-filter: blur(8px); transform: translateY(140%); transition: transform .32s cubic-bezier(.4,0,.2,1); }
     .hero-sticky .btn { flex: 1; justify-content: center; }
@@ -102,43 +133,6 @@
       body.has-hero-sticky .wa { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s, visibility .3s, transform .32s cubic-bezier(.4,0,.2,1); }
       body.has-hero-sticky.past-hero .wa { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(-62px); }
     }
-    .hero__stats { display: flex; align-items: flex-start; gap: 28px; }
-    .hero__divider { width: 1px; align-self: stretch; background: var(--line); }
-    .stat__num   { font-family: var(--font-display); font-weight: 500; font-size: 42px; line-height: 1; color: var(--navy); letter-spacing: -.02em; }
-    .stat__label { font-size: 12px; color: var(--muted); margin-top: 6px; letter-spacing: .02em; }
-    .hero__visual { position: relative; aspect-ratio: 1/1.05; max-width: 580px; margin-left: auto; margin-top: -50px; }
-    .hero__glow {
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
-      width: 110%; height: 110%;
-      background: radial-gradient(circle, rgba(255,205,120,.55) 0%, rgba(219,127,46,.25) 25%, rgba(90,130,240,.15) 55%, transparent 72%);
-      filter: blur(40px); will-change: transform; z-index: 0;
-    }
-    .hero__frame {
-      position: relative; width: 100%; height: 100%;
-      border-radius: 240px 240px 24px 24px; overflow: hidden;
-      box-shadow: 0 30px 80px -20px rgba(27,42,100,.35);
-      z-index: 1; background: #ccc;
-    }
-    .hero__frame picture { display: block; width: 100%; height: 100%; }
-    .hero__img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.1s ease-out; }
-    .hero__badge {
-      position: absolute; left: -30px; top: 40px;
-      background: #fff; border-radius: 50%; width: 130px; height: 130px;
-      display: grid; place-items: center;
-      box-shadow: 0 10px 30px -10px rgba(27,42,100,.35);
-      z-index: 2; text-align: center; border: 6px solid var(--bg);
-    }
-    .hero__badge-num  { font-family: var(--font-display); font-size: 52px; line-height: 1; color: var(--orange); font-weight: 600; }
-    .hero__badge-text { font-size: 8px; letter-spacing: .16em; color: var(--navy); margin-top: 1px; text-transform: uppercase; font-weight: 600; line-height: 1.4; }
-    .hero__tag {
-      position: absolute; right: -10px; bottom: 60px;
-      background: var(--navy); color: #fff;
-      padding: 12px 18px; border-radius: var(--r-pill);
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 13px; box-shadow: 0 10px 30px -10px rgba(0,0,0,.4); z-index: 2;
-    }
-    .hero__tag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); animation: pulse 2s infinite; }
-
     /* ══════════════════════════════════════════════════════════
        TENTANG KAMI
     ══════════════════════════════════════════════════════════ */
@@ -492,82 +486,25 @@
     /* ── Mobile 760px — primary breakpoint ──────────────── */
     @media (max-width: 760px) {
 
-      /* Hero — stacked: copy top, image card below */
-      .hero {
-        padding: 88px 0 0;
-        min-height: auto;
-      }
-      .hero__grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        padding: 0 20px;
-      }
-      .hero__copy { order: 1; }
-      .hero__eyebrow { font-size: 10px; margin-bottom: 14px; }
-      .hero__title {
-        font-size: clamp(36px, 10vw, 52px);
-        margin-bottom: 16px;
-      }
-      /* Headline — max 3 baris, perkecil di mobile */
-      .hero-title { margin-bottom: 16px; }
-      .hero-title-small  { font-size: clamp(20px, 5.4vw, 26px); margin-bottom: 2px; }
-      .hero-title-main   { font-size: clamp(26px, 7.6vw, 38px); line-height: 1.18; }
-      .hero-title-medium { font-size: clamp(26px, 7.6vw, 38px); }
-      .hero__sub {
-        font-size: 13.5px;
-        line-height: 1.5;
-        margin-bottom: 22px;
-        max-width: none;
-      }
-      .hero__ctas {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        gap: 10px;
-        margin-bottom: 16px;
-      }
-      .hero__ctas .btn {
-        flex: 1;
-        justify-content: center;
-        padding: 14px 10px;
-        font-size: 14px;
-      }
-      .hero__kpr   { font-size: 14px; margin-bottom: 16px; }
-      .hero__chips { max-width: none; gap: 7px; margin-bottom: 24px; }
-      .hchip       { padding: 10px 12px; font-size: 12.5px; }
-      .hero__foot  { max-width: none; font-size: 10.5px; }
-      .hero__stats {
-        gap: 0;
-        justify-content: space-between;
-        padding-bottom: 32px;
-      }
-      .hero__divider { display: none; }
-      .stat__num  { font-size: 28px; }
-      .stat__label { font-size: 11px; }
-
-      /* Hero visual — standalone card below */
-      .hero__visual {
-        order: 2;
-        aspect-ratio: 4 / 5;
-        max-width: none;
-        margin: 0 -20px; /* bleed to edges */
-        width: calc(100% + 40px);
-      }
-      .hero__frame {
-        border-radius: 0; /* full bleed on mobile */
-        box-shadow: none;
-      }
-      .hero__glow { opacity: .5; }
-      .hero__badge {
-        left: 16px; top: 20px;
-        width: 80px; height: 80px;
-        border-width: 4px;
-      }
-      .hero__badge-num  { font-size: 26px; }
-      .hero__badge-text { font-size: 8px; }
-      .hero__tag {
-        right: 16px; bottom: 24px; left: auto; top: auto;
-        font-size: 11px; padding: 8px 14px;
-      }
+      /* Hero v3 — mobile: foto full-bleed satu layar, konten rata bawah */
+      .hero3__in { padding: 0 20px 20px; }
+      .hero__eyebrow { font-size: 10px; margin-bottom: 10px; }
+      .hero3__t1 { font-size: 25px; }
+      .hero3__t2 { font-size: clamp(27px, 8.4vw, 34px); }
+      .hero3__kpr { font-size: 14.5px; margin-bottom: 14px; }
+      .hero3__promo { top: 86px; right: 14px; font-size: 11.5px; padding: 6px 12px; }
+      .hero__ctas { max-width: none; gap: 8px; margin-bottom: 12px; }
+      .hero__ctas .btn { padding: 14px 10px; font-size: 14px; }
+      .hchip { padding: 7px 12px; font-size: 11.5px; }
+      .hero3-band { padding: 20px 0 24px; }
+      .hero3-band__in { padding: 0 20px; }
+      .hero3-band__sub { font-size: 14px; margin-bottom: 14px; }
+      .hero3-band__stats { padding-top: 14px; }
+      .hero3-band__stat { padding-right: 12px; }
+      .hero3-band__stat + .hero3-band__stat { padding-left: 12px; }
+      .hero3-band__stat b { font-size: 24px; }
+      .hero3-band__stat > span { font-size: 8.5px; letter-spacing: .02em; }
+      .hero3-band__foot { font-size: 10px; }
       .hero__scrollcue { display: none; }
 
 
@@ -1133,81 +1070,63 @@
 
 <main>
 
-  <!-- ══ HERO ══════════════════════════════════════════════════ -->
-  <section class="hero" id="hero">
-    <div class="hero__grid">
-      <div class="hero__copy">
-        <div class="hero__eyebrow">
-          <span class="hero__dot"></span>
-          Perumahan di Jogja · Sedayu &amp; Ngaglik
-        </div>
-        <h1 class="hero-title">
-          <div class="hero-title-small">Rumah di Jogja</div>
-          <div class="hero-title-main"><span class="highlight">mulai Rp 410 jt-an.</span></div>
-        </h1>
-        <div class="hero__kpr">Angsuran KPR mulai ±Rp 3 jutaan/bulan<sup>*</sup></div>
-        <p class="hero__sub">
-          Developer Jogja yang berani buka-bukaan — progress rumah Anda bisa dipantau online tiap minggu.
-        </p>
-        <div class="hero__ctas" id="heroCtas">
-          <a href="https://wa.me/6289506888328?text=Halo%20JGS%2C%20saya%20tertarik%20dan%20ingin%20tanya-tanya%20soal%20rumah.%20(via%20web)" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Chat WhatsApp</a>
-          <button class="btn btn--ghost btn--lg" onclick="openPricelistModal()">Lihat Harga</button>
-        </div>
-        <div class="hero__chips">
-          <a href="/kawa-living/" class="hchip"><span class="hchip__name"><b>Kawa Living</b> · Sedayu</span><span class="hchip__price">mulai 410 jt-an</span><span class="hchip__arrow">›</span></a>
-          <a href="/tentrem-bhumi/" class="hchip"><span class="hchip__name"><b>Tentrem Bhumi</b> · Ngaglik</span><span class="hchip__price">mulai 660 jt-an</span><span class="hchip__arrow">›</span></a>
-          <a href="/tentrem-jiwo/" class="hchip"><span class="hchip__name"><b>Villa Tentrem Jiwo</b> · Sorogenen</span><span class="hchip__price">hubungi kami</span><span class="hchip__arrow">›</span></a>
-        </div>
-        <div class="hero__stats">
-          <div>
-            <div class="stat__num"><span data-count="13">0</span></div>
-            <div class="stat__label">Tahun Terpercaya</div>
-          </div>
-          <div class="hero__divider"></div>
-          <div>
-            <div class="stat__num"><span data-count="300">0</span><span style="font-size:.55em">+</span></div>
-            <div class="stat__label">Telah Serah Terima</div>
-          </div>
-          <div class="hero__divider"></div>
-          <div>
-            <div class="stat__num"><span data-count="5">0</span></div>
-            <div class="stat__label">Penghargaan</div>
-          </div>
-        </div>
-        <p class="hero__foot">*Simulasi unit termurah, DP 30%, tenor 20 th, bunga 10,5% — sama dengan kalkulator KPR di halaman ini. Harga dapat berubah.</p>
+  <!-- ══ HERO v3 — visual-first ════════════════════════════════ -->
+  <section class="hero hero--v3" id="hero">
+    <picture class="hero3__pic">
+      <source media="(max-width: 767px)" srcset="assets/img/hero-okina-mobile.jpg">
+      <img
+        src="assets/img/hero-okina-desktop.jpg"
+        alt="Rumah tipe Okina di Kawa Living, Sedayu — perumahan JGS Group Yogyakarta"
+        width="1134" height="1700"
+        loading="eager"
+        fetchpriority="high"
+        onerror="this.closest('section').style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)'"
+      >
+    </picture>
+    <div class="hero3__veil"></div>
+    <div class="hero3__promo">Hemat ±Rp 43 Jt<small>Promo Bulan Ini · S&amp;K</small></div>
+    <div class="hero3__in">
+      <div class="hero__eyebrow">
+        <span class="hero__dot"></span>
+        Perumahan di Jogja
       </div>
-
-      <div class="hero__visual reveal">
-        <div class="hero__glow"></div>
-        <div class="hero__frame">
-          <picture>
-            <source media="(max-width: 767px)" srcset="assets/img/tentrem-jiwo-mobile.webp" type="image/webp">
-            <img
-              src="assets/img/tentrem jiwo.webp"
-              alt="Perumahan JGS Group Yogyakarta"
-              class="hero__img"
-              width="1406" height="1314"
-              loading="eager"
-              fetchpriority="high"
-              onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)'"
-            >
-          </picture>
-        </div>
-        <div class="hero__badge">
-          <div class="hero__badge-num">13+</div>
-          <div class="hero__badge-text">TAHUN<br>TERPERCAYA</div>
-        </div>
-        <div class="hero__tag">
-          <span class="hero__tag-dot"></span>
-          Proyek Aktif
-        </div>
+      <h1 class="hero3__title">
+        <span class="hero3__t1">Rumah di Jogja</span>
+        <span class="hero3__t2">mulai <em>Rp 410 jt-an.</em></span>
+      </h1>
+      <div class="hero3__kpr">Angsuran KPR mulai ±Rp 3 jutaan/bulan<sup>*</sup></div>
+      <div class="hero__ctas" id="heroCtas">
+        <a href="https://wa.me/6289506888328?text=Halo%20JGS%2C%20saya%20tertarik%20dan%20ingin%20tanya-tanya%20soal%20rumah.%20(via%20web)" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Chat WhatsApp</a>
+        <button class="btn btn--lg hero3__ghost" onclick="openPricelistModal()">Lihat Harga</button>
       </div>
-    </div>
-    <div class="hero__scrollcue">
-      <span>scroll</span>
-      <div class="hero__scrollline"></div>
+      <div class="hero3__chips">
+        <a href="/kawa-living/" class="hchip"><span><b>Kawa Living</b></span><span class="hchip__price">410 jt-an</span><span class="hchip__arrow">›</span></a>
+        <a href="/tentrem-bhumi/" class="hchip"><span><b>Tentrem Bhumi</b></span><span class="hchip__price">660 jt-an</span><span class="hchip__arrow">›</span></a>
+        <a href="/tentrem-jiwo/" class="hchip"><span><b>Villa Tentrem Jiwo</b></span><span class="hchip__price">hubungi kami</span><span class="hchip__arrow">›</span></a>
+      </div>
     </div>
   </section>
+
+  <div class="hero3-band">
+    <div class="hero3-band__in">
+      <p class="hero3-band__sub">Developer Jogja yang berani buka-bukaan — <b>progress rumah Anda bisa dipantau online tiap minggu.</b></p>
+      <div class="hero3-band__stats">
+        <div class="hero3-band__stat">
+          <b><span data-count="13">0</span></b>
+          <span>Tahun Terpercaya</span>
+        </div>
+        <div class="hero3-band__stat">
+          <b><span data-count="300">0</span><span style="font-size:.55em">+</span></b>
+          <span>Serah Terima</span>
+        </div>
+        <div class="hero3-band__stat">
+          <b><span data-count="5">0</span></b>
+          <span>Penghargaan</span>
+        </div>
+      </div>
+      <p class="hero3-band__foot">*Simulasi unit termurah, DP 30%, tenor 20 th, bunga 10,5% — sama dengan kalkulator KPR di halaman ini. Harga dapat berubah.</p>
+    </div>
+  </div>
 
   <div class="hero-sticky" id="heroSticky">
     <button class="btn btn--primary" onclick="openPricelistModal()">Lihat Harga / Pricelist</button>
