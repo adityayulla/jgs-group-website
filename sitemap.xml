@@ -41,6 +41,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Halaman SEO lokal: Perumahan di Sedayu -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/perumahan-sedayu/</loc>
+    <lastmod>2026-07-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Download Pricelist -->
   <url>
     <loc>https://jogjagrahaselaras.com/download/</loc>
