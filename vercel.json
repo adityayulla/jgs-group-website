@@ -7,6 +7,11 @@
       "has": [{ "type": "host", "value": "(www\\.)?tentremjiwo\\.id" }],
       "destination": "https://jogjagrahaselaras.com/tentrem-jiwo/",
       "permanent": true
+    },
+    {
+      "source": "/tentremjiwo/:path*",
+      "destination": "/tentrem-jiwo/",
+      "permanent": true
     }
   ],
   "headers": [
