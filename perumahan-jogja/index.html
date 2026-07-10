@@ -96,6 +96,31 @@
     .ph-panel h3 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin: 0 0 12px; }
     .ph-panel p { font-size: 14.5px; line-height: 1.65; color: rgba(255,255,255,.82); margin: 0 0 18px; }
 
+    /* Bukti visual: house tour strip + testimoni mini */
+    .ht-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 8px 0 34px; }
+    .ht-thumb { position: relative; display: block; border-radius: 14px; overflow: hidden; aspect-ratio: 3/4; box-shadow: 0 12px 28px rgba(27,42,100,.12); transition: transform .18s; }
+    .ht-thumb:hover { transform: translateY(-3px); }
+    .ht-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ht-thumb__shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(10,16,40,.72) 100%); }
+    .ht-thumb__play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-58%); width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.92); display: grid; place-items: center; box-shadow: 0 8px 22px rgba(10,16,40,.35); }
+    .ht-thumb__play::before { content: ""; border-style: solid; border-width: 9px 0 9px 15px; border-color: transparent transparent transparent var(--orange); margin-left: 3px; }
+    .ht-thumb__label { position: absolute; left: 12px; right: 12px; bottom: 10px; color: #fff; font-size: 12.5px; font-weight: 600; line-height: 1.35; }
+    .tst-mini { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .tst-card { display: grid; grid-template-columns: 120px 1fr; gap: 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    .tst-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .tst-card__body { padding: 16px 18px; }
+    .tst-card__quote { font-family: var(--font-display); font-style: italic; font-size: 14px; line-height: 1.55; color: var(--navy); margin: 0 0 10px; }
+    .tst-card__quote::before { content: "\201C"; color: var(--orange); font-weight: 700; }
+    .tst-card__quote::after { content: "\201D"; color: var(--orange); font-weight: 700; }
+    .tst-card__name { font-size: 12.5px; font-weight: 700; color: var(--ink); }
+    .tst-card__unit { font-size: 11.5px; color: var(--muted); }
+    .tst-more { display: inline-block; margin-top: 16px; font-weight: 600; font-size: 14px; color: var(--orange); text-decoration: underline; text-underline-offset: 3px; }
+    .tst-more:hover { color: var(--navy); }
+    @media (max-width: 900px) {
+      .ht-strip { grid-template-columns: repeat(2, 1fr); }
+      .tst-mini { grid-template-columns: 1fr; }
+    }
+
     /* Area */
     .ph-areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .ph-area { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
@@ -280,6 +305,58 @@
         <a class="btn btn--outline-white btn--lg" href="https://progress.jogjagrahaselaras.com/progress?utm_source=perumahan-jogja&utm_medium=internal&utm_campaign=pillar" target="_blank" rel="noopener">Lihat Dashboard Progres</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- BUKTI VISUAL: HOUSE TOUR + TESTIMONI -->
+<section class="ph-sec">
+  <div class="container reveal">
+    <p class="ph-tag">Lihat sendiri</p>
+    <h2 class="ph-h2">House tour &amp; kata penghuni perumahan JGS</h2>
+    <p class="ph-lead">Jangan hanya percaya kata kami — tonton video house tour tiap tipe dan baca pengalaman keluarga yang sudah menghuni.</p>
+
+    <div class="ht-strip">
+      <a class="ht-thumb" href="/kawa-living/#house-tour" aria-label="Video house tour tipe Yuri — Kawa Living Sedayu">
+        <img src="/assets/img/unit-unggulan/yuri-12.webp" alt="House tour rumah tipe Yuri, perumahan Kawa Living Sedayu Jogja" width="600" height="744" loading="lazy">
+        <span class="ht-thumb__shade"></span><span class="ht-thumb__play"></span>
+        <span class="ht-thumb__label">Tipe Yuri · Kawa Living</span>
+      </a>
+      <a class="ht-thumb" href="/kawa-living/#house-tour" aria-label="Video house tour tipe Okina — Kawa Living Sedayu">
+        <img src="/assets/img/unit-unggulan/okina-10.webp" alt="House tour rumah 2 lantai tipe Okina, perumahan Kawa Living Sedayu" width="600" height="1067" loading="lazy">
+        <span class="ht-thumb__shade"></span><span class="ht-thumb__play"></span>
+        <span class="ht-thumb__label">Tipe Okina · Kawa Living</span>
+      </a>
+      <a class="ht-thumb" href="/tentrem-bhumi/#house-tour" aria-label="Video house tour tipe Andrawina — Tentrem Bhumi">
+        <img src="/tentrem-bhumi/photos/andrawina/andrawina%20foto%20depan.webp" alt="House tour rumah tipe Andrawina, perumahan Tentrem Bhumi Sleman" width="1080" height="1920" loading="lazy">
+        <span class="ht-thumb__shade"></span><span class="ht-thumb__play"></span>
+        <span class="ht-thumb__label">Tipe Andrawina · Tentrem Bhumi</span>
+      </a>
+      <a class="ht-thumb" href="/tentrem-bhumi/#house-tour" aria-label="Video house tour tipe Cantya — Tentrem Bhumi">
+        <img src="/tentrem-bhumi/photos/cantya/cantya%20berjejer%20miring%20taman.webp" alt="House tour rumah tipe Cantya, perumahan Tentrem Bhumi dekat UII" width="864" height="1184" loading="lazy">
+        <span class="ht-thumb__shade"></span><span class="ht-thumb__play"></span>
+        <span class="ht-thumb__label">Tipe Cantya · Tentrem Bhumi</span>
+      </a>
+    </div>
+
+    <div class="tst-mini">
+      <article class="tst-card">
+        <img src="/assets/img/testimoni/yama-20-foto.webp" alt="Serah terima kunci keluarga Dhaka Galih Pratama di perumahan JGS" width="1200" height="1600" loading="lazy">
+        <div class="tst-card__body">
+          <p class="tst-card__quote">Hunian keren! Model Jepang + Scandinavian, lokasi strategis. Ada masjid, playground, hingga kolam renang — paket komplit. Progress pembangunan bisa dipantau.</p>
+          <div class="tst-card__name">Dhaka Galih Pratama</div>
+          <div class="tst-card__unit">Penghuni · Google Review ★★★★★</div>
+        </div>
+      </article>
+      <article class="tst-card">
+        <img src="/assets/img/testimoni/kumo-1-2-foto.webp" alt="Serah terima kunci Jonathan Ruben, pembeli rumah JGS dari luar kota" width="1600" height="1200" loading="lazy">
+        <div class="tst-card__body">
+          <p class="tst-card__quote">Saat survey ternyata lokasinya dekat pusat kota. Salesnya sat-set. Saat pengecekan progress sangat dibantu tim JGS. Puas!</p>
+          <div class="tst-card__name">Jonathan Ruben</div>
+          <div class="tst-card__unit">Penghuni · Google Review ★★★★★</div>
+        </div>
+      </article>
+    </div>
+    <a class="tst-more" href="/#testimoni">Baca lebih banyak testimoni penghuni →</a>
   </div>
 </section>
 
