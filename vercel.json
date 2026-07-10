@@ -9,7 +9,12 @@
       "permanent": true
     },
     {
-      "source": "/tentremjiwo/:path*",
+      "source": "/tentremjiwo",
+      "destination": "/tentrem-jiwo/",
+      "permanent": true
+    },
+    {
+      "source": "/tentremjiwo/(.*)",
       "destination": "/tentrem-jiwo/",
       "permanent": true
     }
