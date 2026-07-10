@@ -141,6 +141,8 @@
     @media (max-width: 900px) {
       body.has-hero-sticky .wa { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s, visibility .3s, transform .32s cubic-bezier(.4,0,.2,1); }
       body.has-hero-sticky.past-hero .wa { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(-62px); }
+      /* Beri ruang di dasar halaman agar sticky bar tak menutup footer paling bawah */
+      body.has-hero-sticky.past-hero #footer-placeholder { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
     }
     /* ══════════════════════════════════════════════════════════
        TENTANG KAMI
