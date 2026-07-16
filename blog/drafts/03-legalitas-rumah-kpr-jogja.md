@@ -45,7 +45,7 @@ Di perumahan baru, tanah biasanya masih berupa **sertifikat induk** atas nama de
 - **PPJB (Perjanjian Pengikatan Jual Beli)** — perjanjian *awal* antara Anda dan developer, biasanya ditandatangani saat rumah masih dibangun. Ini belum memindahkan kepemilikan.
 - **AJB (Akta Jual Beli)** — akta di hadapan PPAT yang benar-benar memindahkan kepemilikan, biasanya saat rumah siap dan sertifikat siap.
 
-**Yang wajib ada di PPJB:** spesifikasi bangunan, harga dan skema bayar, jadwal serah terima, sanksi keterlambatan (dua arah), dan ketentuan pembatalan. Kami bahas lebih dalam di [artikel rumah inden](/blog/beli-rumah-inden-jogja-aman/).
+**Yang wajib ada di PPJB:** spesifikasi bangunan, harga dan skema bayar, jadwal serah terima, dan ketentuan pembatalan. Kami bahas lebih dalam di [artikel rumah inden](/blog/beli-rumah-inden-jogja-aman/).
 
 ## 5. Balik Nama
 
