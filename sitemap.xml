@@ -68,12 +68,33 @@
   <!-- Blog: daftar artikel -->
   <url>
     <loc>https://jogjagrahaselaras.com/blog/</loc>
-    <lastmod>2026-07-12</lastmod>
+    <lastmod>2026-07-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Blog: Kenalan dengan JGS Progress Dashboard -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/pertanyaan-sebelum-dp-rumah/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/track-record-developer-rumah/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/pantau-rumah-dari-luar-kota/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <url>
     <loc>https://jogjagrahaselaras.com/blog/jgs-progress-dashboard/</loc>
     <lastmod>2026-07-12</lastmod>
