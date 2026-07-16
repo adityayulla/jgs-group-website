@@ -106,16 +106,17 @@
     .hchip:hover { border-color: var(--orange); }
     .hchip__price { color: #ffcf9a; font-weight: 700; white-space: nowrap; }
     .hchip__arrow { color: rgba(255,255,255,.55); }
-    /* Band navy di bawah hero: subline + statistik + footnote */
-    .hero3-band { background: var(--navy); color: #fff; padding: 40px 0 44px; }
+    /* Band di bawah hero: subline + statistik + footnote — tema terang spt section Tentang Kami */
+    .hero3-band { background: var(--bg); color: var(--ink); padding: 40px 0 44px; }
     .hero3-band__in { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); }
-    .hero3-band__sub { font-size: 17px; line-height: 1.6; color: #dfe4f5; margin: 0 0 24px; max-width: 760px; }
-    .hero3-band__sub b { color: #ffcf9a; }
+    .hero3-band__sub { font-size: 17px; line-height: 1.6; color: var(--muted); margin: 0 0 24px; max-width: 760px; }
+    .hero3-band__sub b { color: var(--navy); }
     .hero3-band__stats { display: flex; gap: 16px; padding-top: 4px; }
     .hero3-band__stat {
       flex: 1; position: relative;
-      background: linear-gradient(160deg, rgba(255,255,255,.075), rgba(255,255,255,.03));
-      border: 1px solid rgba(255,255,255,.14); border-radius: 14px;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.7); border-radius: 14px;
       padding: 20px 22px; overflow: hidden;
       transition: border-color .25s, transform .25s;
     }
@@ -123,10 +124,10 @@
       content: ""; position: absolute; left: 0; top: 18px; bottom: 18px;
       width: 3px; border-radius: 3px; background: var(--orange);
     }
-    .hero3-band__stat:hover { border-color: rgba(219,127,46,.55); transform: translateY(-2px); }
-    .hero3-band__stat b { display: block; font-family: var(--font-display); font-weight: 500; font-size: clamp(32px, 3.2vw, 50px); line-height: 1.05; color: var(--orange); letter-spacing: -.02em; }
-    .hero3-band__stat > span { display: block; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: #cdd4ee; white-space: nowrap; margin-top: 6px; }
-    .hero3-band__foot { font-size: 11px; color: #a7b0d8; line-height: 1.5; margin: 18px 0 0; }
+    .hero3-band__stat:hover { border-color: rgba(219,127,46,.45); transform: translateY(-2px); }
+    .hero3-band__stat b { display: block; font-family: var(--font-display); font-weight: 500; font-size: clamp(32px, 3.2vw, 50px); line-height: 1.05; color: var(--navy); letter-spacing: -.02em; }
+    .hero3-band__stat > span { display: block; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); white-space: nowrap; margin-top: 6px; }
+    .hero3-band__foot { font-size: 11px; color: var(--muted); line-height: 1.5; margin: 18px 0 0; }
     /* Navbar di atas foto (belum scroll): teks putih agar terbaca */
     .nav:not(.nav--scrolled) .nav__brandline { color: #fff; }
     .nav:not(.nav--scrolled) .nav__brandsub { color: rgba(255,255,255,.75); }
