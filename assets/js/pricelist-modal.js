@@ -88,12 +88,21 @@
     return { utm_source: ref, utm_medium: 'referral', utm_campaign: '', utm_content: '', referrer: ref };
   }
 
+  // GCLID (Google Click ID) — nempel di URL saat orang klik iklan Google;
+  // persist di sessionStorage supaya tak hilang saat pindah halaman sebelum isi form
+  function captureGclid() {
+    var g = new URLSearchParams(window.location.search).get('gclid') || '';
+    if (g) { try { sessionStorage.setItem('jgs_gclid', g); } catch(e) {} return g; }
+    try { return sessionStorage.getItem('jgs_gclid') || ''; } catch(e) { return ''; }
+  }
+
   // Capture segera saat script load supaya referrer masih tersedia
   function getUtm() {
     if (!_utm) _utm = captureUtm();
     return _utm;
   }
   getUtm();
+  captureGclid();
 
   /* ── Inject CSS ──────────────────────────────────────────── */
   var style = document.createElement('style');
@@ -305,6 +314,7 @@
       utm_campaign: utm.utm_campaign,
       utm_content:  utm.utm_content,
       referrer:     utm.referrer,
+      gclid:        captureGclid(),
       JanganHubungi: (document.getElementById('pl-nocall') && document.getElementById('pl-nocall').checked) ? 'YA' : ''
     };
 

@@ -22,7 +22,8 @@ function doPost(e) {
       data.utm_campaign || '',
       data.utm_content  || '',
       data.referrer     || '',
-      data.JanganHubungi || ''
+      data.JanganHubungi || '',
+      data.gclid        || ''
     ]);
 
     // Email notifikasi
@@ -81,6 +82,6 @@ function doPost(e) {
 
 function testSheet() {
   var sheet = SpreadsheetApp.openById('15Vgoznfl1NHKc7f07IY4FcTCwbHUkKWTZG1i40b9gqk').getActiveSheet();
-  sheet.appendRow(['TEST', '13/5/2026', '16:00', 'Test Nama', '6281234567', 'test@test.com', '/test', 'google', 'cpc', 'test-campaign', '', '']);
+  sheet.appendRow(['TEST', '13/5/2026', '16:00', 'Test Nama', '6281234567', 'test@test.com', '/test', 'google', 'cpc', 'test-campaign', '', '', '', 'test-gclid']);
   Logger.log('Berhasil tulis ke sheet');
 }
