@@ -9,6 +9,7 @@ function doPost(e) {
 
     // Simpan ke Sheet
     var sheet = SpreadsheetApp.openById('15Vgoznfl1NHKc7f07IY4FcTCwbHUkKWTZG1i40b9gqk').getActiveSheet();
+    // Urutan kolom mengikuti header sheet: No|date|time|Nama|Handphone|Email|GCLID|Halaman|Source|Medium|Campaign|Content|Referrer|Jangan Hubungi
     sheet.appendRow([
       sheet.getLastRow(),
       data.date         || '',
@@ -16,14 +17,14 @@ function doPost(e) {
       data.Nama         || '',
       hp,
       data.Email        || '',
+      data.gclid        || '',
       data.Sumber       || '',
       data.utm_source   || '',
       data.utm_medium   || '',
       data.utm_campaign || '',
       data.utm_content  || '',
       data.referrer     || '',
-      data.JanganHubungi || '',
-      data.gclid        || ''
+      data.JanganHubungi || ''
     ]);
 
     // Email notifikasi
@@ -82,6 +83,6 @@ function doPost(e) {
 
 function testSheet() {
   var sheet = SpreadsheetApp.openById('15Vgoznfl1NHKc7f07IY4FcTCwbHUkKWTZG1i40b9gqk').getActiveSheet();
-  sheet.appendRow(['TEST', '13/5/2026', '16:00', 'Test Nama', '6281234567', 'test@test.com', '/test', 'google', 'cpc', 'test-campaign', '', '', '', 'test-gclid']);
+  sheet.appendRow(['TEST', '13/5/2026', '16:00', 'Test Nama', '6281234567', 'test@test.com', 'test-gclid', '/test', 'google', 'cpc', 'test-campaign', '', '', '']);
   Logger.log('Berhasil tulis ke sheet');
 }
