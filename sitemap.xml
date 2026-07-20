@@ -68,12 +68,20 @@
   <!-- Blog: daftar artikel -->
   <url>
     <loc>https://jogjagrahaselaras.com/blog/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Blog: Kenalan dengan JGS Progress Dashboard -->
+  <!-- Blog: Di Balik Layar — Update Progress Tim Lapangan -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/di-balik-layar-update-progress/</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: 9 Pertanyaan sebelum DP -->
   <url>
     <loc>https://jogjagrahaselaras.com/blog/pertanyaan-sebelum-dp-rumah/</loc>
     <lastmod>2026-07-16</lastmod>
