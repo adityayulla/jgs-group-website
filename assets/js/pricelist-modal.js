@@ -96,6 +96,15 @@
     try { return sessionStorage.getItem('jgs_gclid') || ''; } catch(e) { return ''; }
   }
 
+  // FBCLID (Meta Click ID) — nempel di URL saat orang klik iklan Meta.
+  // Belum dipakai pencocokan (upload feed masih CSV, jalur itu tak menerima click ID) —
+  // ditangkap sejak dini supaya riwayatnya sudah ada saat feed pindah ke Conversions API.
+  function captureFbclid() {
+    var f = new URLSearchParams(window.location.search).get('fbclid') || '';
+    if (f) { try { sessionStorage.setItem('jgs_fbclid', f); } catch(e) {} return f; }
+    try { return sessionStorage.getItem('jgs_fbclid') || ''; } catch(e) { return ''; }
+  }
+
   // Capture segera saat script load supaya referrer masih tersedia
   function getUtm() {
     if (!_utm) _utm = captureUtm();
@@ -103,6 +112,7 @@
   }
   getUtm();
   captureGclid();
+  captureFbclid();
 
   /* ── Inject CSS ──────────────────────────────────────────── */
   var style = document.createElement('style');
@@ -315,6 +325,7 @@
       utm_content:  utm.utm_content,
       referrer:     utm.referrer,
       gclid:        captureGclid(),
+      fbclid:       captureFbclid(),
       JanganHubungi: (document.getElementById('pl-nocall') && document.getElementById('pl-nocall').checked) ? 'YA' : ''
     };
 
