@@ -68,8 +68,16 @@
   <!-- Blog: daftar artikel -->
   <url>
     <loc>https://jogjagrahaselaras.com/blog/</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Perumahan di Jogja — Panduan Memilih Area -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/perumahan-jogja-panduan-area/</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
