@@ -68,8 +68,16 @@
   <!-- Blog: daftar artikel -->
   <url>
     <loc>https://jogjagrahaselaras.com/blog/</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Rumah Cash Bertahap Tanpa Riba di Jogja -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/rumah-cash-bertahap-tanpa-riba-jogja/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
