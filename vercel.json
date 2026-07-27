@@ -17,6 +17,41 @@
       "source": "/tentremjiwo/(.*)",
       "destination": "/tentrem-jiwo/",
       "permanent": true
+    },
+    {
+      "source": "/kawa-village",
+      "destination": "/kawa-living/",
+      "permanent": true
+    },
+    {
+      "source": "/kawa-village/(.*)",
+      "destination": "/kawa-living/",
+      "permanent": true
+    },
+    {
+      "source": "/perumahan/kawa-village",
+      "destination": "/kawa-living/",
+      "permanent": true
+    },
+    {
+      "source": "/perumahan/kawa-village/(.*)",
+      "destination": "/kawa-living/",
+      "permanent": true
+    },
+    {
+      "source": "/perumahan/(.*)",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/category/(.*)",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/(.*)",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
     }
   ],
   "headers": [
