@@ -19,6 +19,26 @@
       "permanent": true
     },
     {
+      "source": "/tentrembhumi",
+      "destination": "/tentrem-bhumi/",
+      "permanent": true
+    },
+    {
+      "source": "/tentrembhumi/(.*)",
+      "destination": "/tentrem-bhumi/",
+      "permanent": true
+    },
+    {
+      "source": "/kawaliving",
+      "destination": "/kawa-living/",
+      "permanent": true
+    },
+    {
+      "source": "/kawaliving/(.*)",
+      "destination": "/kawa-living/",
+      "permanent": true
+    },
+    {
       "source": "/kawa-village",
       "destination": "/kawa-living/",
       "permanent": true
