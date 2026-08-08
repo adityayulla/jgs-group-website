@@ -54,7 +54,17 @@
       "permanent": true
     },
     {
+      "source": "/kawa-village-landing-page/(.*)",
+      "destination": "/kawa-living/",
+      "permanent": true
+    },
+    {
       "source": "/downloadtentrem",
+      "destination": "/download/",
+      "permanent": true
+    },
+    {
+      "source": "/downloadtentrem/(.*)",
       "destination": "/download/",
       "permanent": true
     },
@@ -64,7 +74,17 @@
       "permanent": true
     },
     {
+      "source": "/sedang-ingin-membeli-rumah-simak-ada-5-tips-untuk-memilih-developer-rumah-terpercaya/(.*)",
+      "destination": "/blog/cara-memastikan-developer-jogja-terpercaya/",
+      "permanent": true
+    },
+    {
       "source": "/gimana-si-cara-bayar-pajak-penjualan-rumah",
+      "destination": "/blog/pajak-jual-beli-rumah/",
+      "permanent": true
+    },
+    {
+      "source": "/gimana-si-cara-bayar-pajak-penjualan-rumah/(.*)",
       "destination": "/blog/pajak-jual-beli-rumah/",
       "permanent": true
     },
@@ -74,7 +94,17 @@
       "permanent": true
     },
     {
+      "source": "/cari-tahu-3-sistem-pembayaran-rumah/(.*)",
+      "destination": "/blog/rumah-cash-bertahap-tanpa-riba-jogja/",
+      "permanent": true
+    },
+    {
       "source": "/tidak-perlu-takut-membeli-rumah-dengan-cara-mencicil",
+      "destination": "/blog/rumah-cash-bertahap-tanpa-riba-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/tidak-perlu-takut-membeli-rumah-dengan-cara-mencicil/(.*)",
       "destination": "/blog/rumah-cash-bertahap-tanpa-riba-jogja/",
       "permanent": true
     },
@@ -84,12 +114,27 @@
       "permanent": true
     },
     {
+      "source": "/syarat-kpr-bagi-yang-belum-menikah/(.*)",
+      "destination": "/blog/legalitas-rumah-kpr-jogja/",
+      "permanent": true
+    },
+    {
       "source": "/rumah-harga-500jt-dengan-fasilitas-lengkap-yogyakarta",
       "destination": "/perumahan-jogja/",
       "permanent": true
     },
     {
+      "source": "/rumah-harga-500jt-dengan-fasilitas-lengkap-yogyakarta/(.*)",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
       "source": "/mengapa-harga-rumah-di-jogja-mahal-padahal-umr-jogja-sangat-rendah",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/mengapa-harga-rumah-di-jogja-mahal-padahal-umr-jogja-sangat-rendah/(.*)",
       "destination": "/perumahan-jogja/",
       "permanent": true
     },
