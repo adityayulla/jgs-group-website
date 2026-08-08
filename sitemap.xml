@@ -174,12 +174,8 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- Kebijakan Privasi -->
-  <url>
-    <loc>https://jogjagrahaselaras.com/privacy/</loc>
-    <lastmod>2026-06-06</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
+  <!-- Kebijakan Privasi SENGAJA tidak didaftarkan di sini: halamannya
+       ber-meta noindex, jadi mencantumkannya = menyuruh Google mengindeks
+       halaman yang kita larang sendiri (muncul sbg "Excluded by noindex"). -->
 
 </urlset>
