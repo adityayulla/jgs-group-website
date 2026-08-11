@@ -68,8 +68,16 @@
   <!-- Blog: daftar artikel -->
   <url>
     <loc>https://jogjagrahaselaras.com/blog/</loc>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-08-11</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Sedayu Itu Daerah Mana? -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/sedayu-daerah-mana/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
