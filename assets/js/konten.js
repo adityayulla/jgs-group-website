@@ -212,42 +212,71 @@
      ============================================================ */
   const blogSubtitle = 'Panduan jujur membeli rumah di Yogyakarta — memilih developer, legalitas, hingga memantau progress pembangunan.';
 
+  /* Enam artikel terbaru. Urutan = terbaru di atas.
+     ⚠️  Tiap kali ada artikel baru, tambahkan di puncak daftar ini DAN di
+     /blog/index.html — kalau tidak, halaman depan akan terlihat berhenti
+     menulis padahal artikelnya sudah tayang. Gambar tidak boleh dipakai
+     dua kali; sumber cadangan: /assets/img/serah-terima/ dan galeri
+     Lingkungan di Progress Dashboard. */
   const blogPosts = [
     {
-      cat: 'Developer Terpercaya',
-      title: 'Cara Memastikan Developer Jogja Terpercaya (Tanpa Tertipu Rumah Inden)',
-      excerpt: 'Checklist konkret untuk memeriksa kredibilitas developer sebelum menyerahkan uang ratusan juta — plus tanda bahaya developer abal-abal.',
-      date: '15 Juni 2026',
-      href: '/blog/cara-memastikan-developer-jogja-terpercaya/',
-      img: '/assets/img/Proyek-Kami/Tentrem Jiwo/bird view.webp',
+      cat: 'Area & Lokasi',
+      title: 'Sedayu Itu Daerah Mana? Mengenal Kawasan Sedayu, Bantul',
+      excerpt: 'Sedayu masuk Bantul, tapi bertetangga dengan Sleman dan Kulon Progo. Batas wilayah, kalurahan, akses Jalan Wates, dan cara menilai jauh-dekatnya.',
+      date: '11 Agustus 2026',
+      href: '/blog/sedayu-daerah-mana/',
+      img: '/blog/img/sedayu-kawasan.jpg',
     },
     {
-      cat: 'Rumah Inden',
-      title: 'Beli Rumah Inden di Jogja: 7 Hal yang Wajib Dicek Sebelum Bayar',
-      excerpt: 'Bukan menakuti, tapi membekali. Legalitas, izin, skema pembayaran, dan perlindungan pembeli di PPJB.',
-      date: '16 Juni 2026',
-      href: '/blog/beli-rumah-inden-jogja-aman/',
-      img: '/assets/img/Proyek-Kami/Royal Mansion/tipe adiluhung.webp',
+      cat: 'Panduan Membeli',
+      title: 'Beli Rumah Cash Bertahap Tanpa Riba di Jogja: Cara Kerjanya & Yang Perlu Dicek',
+      excerpt: 'Tanpa bunga bank, tanpa BI checking. Kenali skema cash bertahap langsung ke developer — kelebihan, risikonya, dan cara memastikannya aman.',
+      date: '27 Juli 2026',
+      href: '/blog/rumah-cash-bertahap-tanpa-riba-jogja/',
+      img: '/blog/img/cash-bertahap.jpg',
+    },
+    {
+      cat: 'Panduan Membeli',
+      title: 'Perumahan di Jogja: Barat, Utara, atau Timur? Panduan Memilih Area yang Cocok',
+      excerpt: 'Sebelum melihat harga, tentukan dulu sisi Jogja yang cocok — Barat (Sedayu), Utara (Ngaglik), atau Timur (Kalasan). Begini cara memilihnya.',
+      date: '26 Juli 2026',
+      href: '/blog/perumahan-jogja-panduan-area/',
+      img: '/blog/img/perumahan-jogja-area.jpg',
     },
     {
       cat: 'Transparansi Progress',
-      title: 'Kenapa Progress Rumah Harus Bisa Dipantau (dan Cara JGS Membuktikannya)',
-      excerpt: 'Setelah bayar, kabar progress sering menghilang. Beginilah seharusnya pembangunan rumah bisa dipantau.',
-      date: '16 Juni 2026',
-      href: '/blog/cara-pantau-progress-pembangunan-rumah/',
-      img: '/assets/img/Kawa Living tipe Okina.webp',
+      title: 'Di Balik Layar: Bagaimana Tim Lapangan JGS Menyusun Update Progress untuk Anda',
+      excerpt: 'Dari lokasi berdebu, lewat tangan pengawas kami, sampai ke layar HP Anda — begini proses update progress kami disusun setiap minggu.',
+      date: '20 Juli 2026',
+      href: '/blog/di-balik-layar-update-progress/',
+      img: '/blog/img/progress-card.jpg',
+    },
+    {
+      cat: 'Track Record',
+      title: '13 Tahun, 300+ Keluarga: Apa Arti Track Record untuk Pembeli Rumah',
+      excerpt: 'Rekam jejak adalah satu-satunya bukti yang tidak bisa dibuat dalam semalam — dan begini cara memeriksanya.',
+      date: '16 Juli 2026',
+      href: '/blog/track-record-developer-rumah/',
+      img: '/assets/img/serah-terima/tentrem-jiwo__tj-7.webp',
+    },
+    {
+      cat: 'Developer Terpercaya',
+      title: '9 Pertanyaan yang Wajib Anda Ajukan ke Developer Sebelum Bayar DP',
+      excerpt: 'Di momen sebelum DP, Anda masih punya semua daya tawar. Simpan daftar ini dan bawa ke setiap kantor pemasaran.',
+      date: '16 Juli 2026',
+      href: '/blog/pertanyaan-sebelum-dp-rumah/',
+      img: '/assets/img/Proyek-Kami/Tentrem Jiwo/gate tentrem jiwo.webp',
     },
   ];
 
   /* Artikel "Coming Soon" — dipakai mengisi slot kosong saat jumlah artikel
      ganjil (layout 2 kolom di mobile). Kosongkan array ini bila belum ada
      artikel yang akan datang; slotnya akan dibiarkan kosong. */
-  const comingSoonPosts = [
-    {
-      cat: 'Segera Hadir',
-      title: 'Artikel properti berikutnya sedang kami siapkan',
-    },
-  ];
+  /* Kosong: semua artikel yang pernah dijanjikan sudah tayang. Isi lagi
+     HANYA kalau memang ada artikel yang sedang digarap — kartu "segera
+     hadir" di samping artikel yang sudah banyak justru bikin blog
+     terlihat mandek. */
+  const comingSoonPosts = [];
 
   function renderComingSoonCard(d) {
     const dataBg = d.img ? ` data-bg="${d.img}"` : '';
