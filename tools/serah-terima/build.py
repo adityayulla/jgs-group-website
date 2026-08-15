@@ -72,6 +72,60 @@ def unit_label(slug_label: str) -> str | None:
     return f"{tipe} {nomor}".strip()
 
 
+def dhash(path: pathlib.Path, size: int = 8) -> int:
+    """Sidik jari visual. Menangkap foto yang SAMA tapi beda berkas —
+    hasil re-encode/crop WhatsApp yang lolos dedup md5."""
+    im = Image.open(path)
+    im.draft("L", (64, 64))
+    im = im.convert("L").resize((size + 1, size), Image.LANCZOS)
+    px = list(im.getdata())
+    bits = 0
+    for r in range(size):
+        for c in range(size):
+            bits = (bits << 1) | (1 if px[r * (size + 1) + c] > px[r * (size + 1) + c + 1] else 0)
+    return bits
+
+
+def dedup(names: list[str]) -> tuple[list[str], list[str]]:
+    """Dua tahap, sesuai keputusan Direktur 15 Agu:
+
+    1. Foto yang SAMA secara visual → simpan yang punya nama tipe.
+       (Pasangannya selalu 'wa-*', salinan WhatsApp tanpa penanda tipe.)
+    2. Nama unit yang SAMA muncul dua kali → simpan satu saja, kalau
+       tidak pembaca mengira galeri ini cuma pengulangan.
+    """
+    hashes = {n: dhash(RAW / n) for n in names}
+    buang: set[str] = set()
+
+    for i, a in enumerate(names):
+        if a in buang:
+            continue
+        for b in names[i + 1:]:
+            if b in buang:
+                continue
+            if bin(hashes[a] ^ hashes[b]).count("1") > 6:
+                continue
+            la = unit_label(a[:-4].split("__")[1])
+            lb = unit_label(b[:-4].split("__")[1])
+            # Yang tanpa nama tipe yang dibuang. Kalau dua-duanya bertipe
+            # (atau dua-duanya tidak), buang yang belakangan.
+            buang.add(b if (la or not lb) else a)
+
+    sisa = [n for n in names if n not in buang]
+
+    terpakai: set[str] = set()
+    for n in sisa:
+        label = unit_label(n[:-4].split("__")[1])
+        if not label:
+            continue
+        if label in terpakai:
+            buang.add(n)
+        else:
+            terpakai.add(label)
+
+    return [n for n in names if n not in buang], sorted(buang)
+
+
 def encode(im: Image.Image, width: int, target_kb: int, dest: pathlib.Path) -> int:
     """Simpan WebP di bawah target_kb dengan menurunkan kualitas bertahap."""
     w, h = im.size
@@ -88,13 +142,12 @@ def main() -> int:
     OUT_IMG.mkdir(parents=True, exist_ok=True)
     OUT_DATA.mkdir(parents=True, exist_ok=True)
 
-    names = json.load(open("keep.json"))
+    names = [n for n in json.load(open("keep.json")) if n[:-4] not in DROP]
+    names, dibuang = dedup(names)
     items, total = [], 0
 
     for fn in names:
         slug = fn[:-4]                      # buang .jpg
-        if slug in DROP:
-            continue
         proj_key = slug.split("__")[0]
         label = slug.split("__")[1]
         proj = PROJECTS[proj_key]
@@ -132,7 +185,10 @@ def main() -> int:
         json.dumps(payload, ensure_ascii=False, indent=1)
     )
 
-    print(f"tayang: {len(items)} foto (dibuang {len(DROP)})")
+    print(f"tayang: {len(items)} foto "
+          f"(kurasi buang {len(DROP)}, dedup buang {len(dibuang)})")
+    for d in dibuang:
+        print(f"  dedup: {d[:-4]}")
     for k, v in counts.most_common():
         print(f"  {k}: {v}")
     print(f"total berat aset: {total/1024/1024:.2f} MB "

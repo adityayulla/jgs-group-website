@@ -108,7 +108,6 @@
             card.setAttribute('data-project', it.project);
             grid.insertBefore(card, grid.firstElementChild);
           });
-          bumpFilterCount(items);
         }
 
       })
@@ -117,22 +116,6 @@
       });
   }
 
-  /* Tambahkan jumlah live ke label filter proyek terkait. */
-  function bumpFilterCount(items) {
-    var bar = document.getElementById('stFilters');
-    if (!bar) return;
-    var perProject = {};
-    items.forEach(function (it) {
-      perProject[it.project] = (perProject[it.project] || 0) + 1;
-    });
-    Array.prototype.forEach.call(bar.querySelectorAll('.stp__filt'), function (b) {
-      var c = b.querySelector('[data-arsip]');
-      if (!c) return;
-      var proj = b.getAttribute('data-project');
-      var add = proj ? (perProject[proj] || 0) : items.length;
-      c.textContent = String(parseInt(c.getAttribute('data-arsip'), 10) + add);
-    });
-  }
 
   /* ── filter per perumahan (/serah-terima/) ─────────────────── */
   function initFilters() {

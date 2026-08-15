@@ -1,10 +1,10 @@
 {
  "note": "Arsip serah terima Kawa Village & Royal Mansion (pra-dashboard). Entri baru datang otomatis dari Progress Dashboard setelah disetujui approver — lihat /api/public/serah-terima.",
- "total": 96,
+ "total": 84,
  "perProject": {
   "Kawa Living": 3,
-  "Kawa Village": 64,
-  "Royal Mansion": 23,
+  "Kawa Village": 55,
+  "Royal Mansion": 20,
   "Tentrem Jiwo": 5,
   "Tentrem Bhumi": 1
  },
@@ -64,15 +64,6 @@
    "featured": null
   },
   {
-   "slug": "kawa-village__hana-12b",
-   "project": "Kawa Village",
-   "projectKey": "kawa-village",
-   "unit": "Hana 12",
-   "photo": "/assets/img/serah-terima/kawa-village__hana-12b.webp",
-   "thumb": "/assets/img/serah-terima/kawa-village__hana-12b-t.webp",
-   "featured": null
-  },
-  {
    "slug": "kawa-village__hana-15",
    "project": "Kawa Village",
    "projectKey": "kawa-village",
@@ -124,15 +115,6 @@
    "unit": "Hana 7",
    "photo": "/assets/img/serah-terima/kawa-village__hana-7-baru.webp",
    "thumb": "/assets/img/serah-terima/kawa-village__hana-7-baru-t.webp",
-   "featured": null
-  },
-  {
-   "slug": "kawa-village__hana-7",
-   "project": "Kawa Village",
-   "projectKey": "kawa-village",
-   "unit": "Hana 7",
-   "photo": "/assets/img/serah-terima/kawa-village__hana-7.webp",
-   "thumb": "/assets/img/serah-terima/kawa-village__hana-7-t.webp",
    "featured": null
   },
   {
@@ -289,15 +271,6 @@
    "featured": 15
   },
   {
-   "slug": "kawa-village__mizu-14b",
-   "project": "Kawa Village",
-   "projectKey": "kawa-village",
-   "unit": "Mizu 14",
-   "photo": "/assets/img/serah-terima/kawa-village__mizu-14b.webp",
-   "thumb": "/assets/img/serah-terima/kawa-village__mizu-14b-t.webp",
-   "featured": null
-  },
-  {
    "slug": "kawa-village__mizu-15",
    "project": "Kawa Village",
    "projectKey": "kawa-village",
@@ -421,15 +394,6 @@
    "unit": "Yama 12",
    "photo": "/assets/img/serah-terima/kawa-village__yama-12a.webp",
    "thumb": "/assets/img/serah-terima/kawa-village__yama-12a-t.webp",
-   "featured": null
-  },
-  {
-   "slug": "kawa-village__yama-12b",
-   "project": "Kawa Village",
-   "projectKey": "kawa-village",
-   "unit": "Yama 12",
-   "photo": "/assets/img/serah-terima/kawa-village__yama-12b.webp",
-   "thumb": "/assets/img/serah-terima/kawa-village__yama-12b-t.webp",
    "featured": null
   },
   {
@@ -559,24 +523,6 @@
    "featured": null
   },
   {
-   "slug": "kawa-village__wa-a11",
-   "project": "Kawa Village",
-   "projectKey": "kawa-village",
-   "unit": null,
-   "photo": "/assets/img/serah-terima/kawa-village__wa-a11.webp",
-   "thumb": "/assets/img/serah-terima/kawa-village__wa-a11-t.webp",
-   "featured": 13
-  },
-  {
-   "slug": "kawa-village__wa-a2",
-   "project": "Kawa Village",
-   "projectKey": "kawa-village",
-   "unit": null,
-   "photo": "/assets/img/serah-terima/kawa-village__wa-a2.webp",
-   "thumb": "/assets/img/serah-terima/kawa-village__wa-a2-t.webp",
-   "featured": null
-  },
-  {
    "slug": "kawa-village__wa-a3",
    "project": "Kawa Village",
    "projectKey": "kawa-village",
@@ -586,48 +532,12 @@
    "featured": null
   },
   {
-   "slug": "kawa-village__wa-a5",
-   "project": "Kawa Village",
-   "projectKey": "kawa-village",
-   "unit": null,
-   "photo": "/assets/img/serah-terima/kawa-village__wa-a5.webp",
-   "thumb": "/assets/img/serah-terima/kawa-village__wa-a5-t.webp",
-   "featured": null
-  },
-  {
-   "slug": "kawa-village__wa-a6",
-   "project": "Kawa Village",
-   "projectKey": "kawa-village",
-   "unit": null,
-   "photo": "/assets/img/serah-terima/kawa-village__wa-a6.webp",
-   "thumb": "/assets/img/serah-terima/kawa-village__wa-a6-t.webp",
-   "featured": null
-  },
-  {
-   "slug": "kawa-village__wa-a9",
-   "project": "Kawa Village",
-   "projectKey": "kawa-village",
-   "unit": null,
-   "photo": "/assets/img/serah-terima/kawa-village__wa-a9.webp",
-   "thumb": "/assets/img/serah-terima/kawa-village__wa-a9-t.webp",
-   "featured": null
-  },
-  {
    "slug": "royal-mansion__adi-01",
    "project": "Royal Mansion",
    "projectKey": "royal-mansion",
    "unit": "Adiluhung 1",
    "photo": "/assets/img/serah-terima/royal-mansion__adi-01.webp",
    "thumb": "/assets/img/serah-terima/royal-mansion__adi-01-t.webp",
-   "featured": null
-  },
-  {
-   "slug": "royal-mansion__adi-01b",
-   "project": "Royal Mansion",
-   "projectKey": "royal-mansion",
-   "unit": "Adiluhung 1",
-   "photo": "/assets/img/serah-terima/royal-mansion__adi-01b.webp",
-   "thumb": "/assets/img/serah-terima/royal-mansion__adi-01b-t.webp",
    "featured": null
   },
   {
@@ -655,15 +565,6 @@
    "unit": "Adiluhung 12",
    "photo": "/assets/img/serah-terima/royal-mansion__adi-12.webp",
    "thumb": "/assets/img/serah-terima/royal-mansion__adi-12-t.webp",
-   "featured": null
-  },
-  {
-   "slug": "royal-mansion__adi-12b",
-   "project": "Royal Mansion",
-   "projectKey": "royal-mansion",
-   "unit": "Adiluhung 12",
-   "photo": "/assets/img/serah-terima/royal-mansion__adi-12b.webp",
-   "thumb": "/assets/img/serah-terima/royal-mansion__adi-12b-t.webp",
    "featured": null
   },
   {
@@ -799,15 +700,6 @@
    "unit": "Adiluhung 8",
    "photo": "/assets/img/serah-terima/royal-mansion__adi-08.webp",
    "thumb": "/assets/img/serah-terima/royal-mansion__adi-08-t.webp",
-   "featured": null
-  },
-  {
-   "slug": "royal-mansion__adi-08b",
-   "project": "Royal Mansion",
-   "projectKey": "royal-mansion",
-   "unit": "Adiluhung 8",
-   "photo": "/assets/img/serah-terima/royal-mansion__adi-08b.webp",
-   "thumb": "/assets/img/serah-terima/royal-mansion__adi-08b-t.webp",
    "featured": null
   },
   {

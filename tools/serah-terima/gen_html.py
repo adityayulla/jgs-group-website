@@ -19,13 +19,18 @@ ordered = featured + rest
 
 
 def label_of(i):
-    """Label kartu: 'Yama 20'. Kalau tipe/nomornya tak diketahui, pakai
-    nama perumahan — dan stempelnya disembunyikan supaya tidak dobel."""
-    return i["unit"] or i["project"]
+    """Label kartu: 'Yama 20'.
+
+    Kalau tipe/nomornya tak diketahui, kartu TIDAK diberi baris teks —
+    cukup stempel nama perumahan di atas foto. Kalau dipaksa memakai
+    nama perumahan, lima foto Tentrem Jiwo akan terbaca sebagai lima
+    pengulangan yang sama, bukan lima rumah berbeda.
+    """
+    return i["unit"]
 
 
 def cap_of(i):
-    return f"{label_of(i)} · {i['project']}" if i["unit"] else i["project"]
+    return f"{i['unit']} · {i['project']}" if i["unit"] else i["project"]
 
 
 def dims(i):
@@ -44,25 +49,26 @@ def card(i, thumb=True, lazy=True, eager=False):
     src = i["thumb"] if thumb else i["photo"]
     loading = "" if eager else ' loading="lazy"'
     w, h = dims(i)
-    stamp = (f'<span class="st__stamp">{html.escape(i["project"])}</span>'
-             if i["unit"] else "")
+    stamp = f'<span class="st__stamp">{html.escape(i["project"])}</span>'
+    body = (f'<div class="st__body"><div class="st__name">'
+            f'{html.escape(label_of(i))}</div></div>') if i["unit"] else ""
     return f'''      <a class="st__card" href="{i['photo']}" data-st-lb
          data-cap="{html.escape(cap_of(i))}">
         <div class="st__media">
           {stamp}
           <img src="{src}" alt="{html.escape(alt_of(i))}" width="{w}" height="{h}"{loading} decoding="async">
         </div>
-        <div class="st__body">
-          <div class="st__name">{html.escape(label_of(i))}</div>
-        </div>
+        {body}
       </a>'''
 
 
 def tick(i, eager=False):
     loading = "" if eager else ' loading="lazy"'
+    tickcap = (f'<b>{html.escape(label_of(i))}</b>{html.escape(i["project"])}'
+               if i["unit"] else f'<b>{html.escape(i["project"])}</b>')
     return f'''        <a class="st-tick__item" href="/serah-terima/">
           <img src="{i['thumb']}" alt="{html.escape(alt_of(i))}" width="124" height="124"{loading} decoding="async">
-          <span class="st-tick__cap"><b>{html.escape(label_of(i))}</b>{html.escape(i['project'])}</span>
+          <span class="st-tick__cap">{tickcap}</span>
         </a>'''
 
 

@@ -936,6 +936,12 @@ main > section { position: relative; z-index: 1; }
 .st__stamp { position: absolute; left: 10px; top: 10px; background: rgba(255,255,255,.94);
   color: var(--navy); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .08em;
   text-transform: uppercase; padding: 4px 8px; border-radius: 6px; }
+/* Foto yang tipe/nomornya tidak diketahui tampil tanpa baris teks —
+   stempel di atas foto sudah menyebut perumahannya. Beri sedikit ruang
+   di bawah supaya tingginya tidak jomplang dengan kartu bertipe. */
+.st__card > .st__media:last-child { border-bottom: 0; }
+.st__card:not(:has(.st__body)) .st__media { aspect-ratio: 3 / 3.42; }
+.stp__grid .st__card:not(:has(.st__body)) .st__media { aspect-ratio: 1 / 1.18; }
 .st__body { padding: 12px 13px 14px; display: flex; flex-direction: column; gap: 4px; }
 .st__name { font-size: 14px; font-weight: 600; line-height: 1.3; }
 .st__meta { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); letter-spacing: .03em; }
