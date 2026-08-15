@@ -883,3 +883,111 @@ main > section { position: relative; z-index: 1; }
   border-radius: 50%; border: 0; background: rgba(255,255,255,.16); color: #fff;
   font-size: 28px; line-height: 1; cursor: pointer; }
 .ht-lb__close:hover { background: rgba(255,255,255,.3); }
+
+/* ═══════════════════════════════════════════════════════════════
+   WALL OF RECEIPTS — foto serah terima
+   Dua tempat tayang:
+     1. .st-tick  → ticker di dalam .hero3-band (menegaskan angka 300+)
+     2. .st       → section penuh setelah #house-tour
+     3. .stp      → halaman /serah-terima/
+   Sumber data: assets/data/serah-terima-arsip.json (statis, sudah
+   tercetak di HTML) + feed live dashboard (assets/js/serah-terima.js).
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Ticker di dalam band hero ───────────────────────────── */
+.st-tick { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 20px; }
+.st-tick__head { display: flex; align-items: baseline; justify-content: space-between;
+  gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+.st-tick__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--orange); }
+.st-tick__more { font-size: 13px; font-weight: 500; color: var(--navy);
+  text-decoration: none; border-bottom: 1px solid rgba(27,42,100,.3); }
+.st-tick__more:hover { border-bottom-color: var(--orange); color: var(--orange); }
+.st-tick__mask { overflow: hidden; -webkit-mask-image: linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image: linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent); }
+.st-tick__rail { display: flex; gap: 12px; width: max-content;
+  animation: st-slide 46s linear infinite; }
+.st-tick__mask:hover .st-tick__rail,
+.st-tick__mask:focus-within .st-tick__rail { animation-play-state: paused; }
+@keyframes st-slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .st-tick__rail { animation: none; }
+  .st-tick__mask { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+.st-tick__item { flex: none; width: 124px; text-decoration: none; color: inherit; }
+.st-tick__item img { width: 124px; height: 124px; object-fit: cover; object-position: center 55%;
+  border-radius: 12px; display: block; background: rgba(27,42,100,.06); }
+.st-tick__item:hover img { outline: 2px solid var(--orange); outline-offset: 2px; }
+.st-tick__cap { display: block; font-size: 11px; color: var(--muted); margin-top: 7px;
+  line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.st-tick__cap b { display: block; color: var(--ink); font-weight: 600; }
+
+/* ── 2. Section penuh (setelah House Tour) ──────────────────── */
+.st { padding: 72px 0 78px; }
+.st__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); }
+.st__card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md);
+  overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: inherit;
+  transition: transform .25s, box-shadow .25s, border-color .25s; }
+.st__card:hover { transform: translateY(-3px); border-color: rgba(219,127,46,.5);
+  box-shadow: 0 14px 30px -18px rgba(15,20,48,.5); }
+.st__media { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: rgba(27,42,100,.06); }
+.st__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; display: block; }
+.st__stamp { position: absolute; left: 10px; top: 10px; background: rgba(255,255,255,.94);
+  color: var(--navy); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .08em;
+  text-transform: uppercase; padding: 4px 8px; border-radius: 6px; }
+.st__body { padding: 12px 13px 14px; display: flex; flex-direction: column; gap: 4px; }
+.st__name { font-size: 14px; font-weight: 600; line-height: 1.3; }
+.st__meta { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); letter-spacing: .03em; }
+.st__cta { display: flex; justify-content: center; margin-top: 30px; }
+.st__note { max-width: 680px; margin: 26px auto 0; padding: 0 var(--pad-x);
+  font-size: 12.5px; line-height: 1.6; color: var(--muted); text-align: center; }
+
+/* ── 3. Halaman /serah-terima/ ──────────────────────────────── */
+.stp__filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 26px 0 30px; }
+.stp__filt { font-size: 13px; padding: 8px 16px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); color: var(--navy); background: var(--card);
+  font-family: inherit; transition: background .2s, color .2s, border-color .2s; }
+.stp__filt:hover { border-color: var(--orange); }
+.stp__filt[aria-pressed="true"] { background: var(--navy); color: #fff; border-color: var(--navy); }
+.stp__grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.stp__grid .st__media { aspect-ratio: 1 / 1; }
+.stp__grid .st__body { padding: 9px 10px 11px; }
+.stp__grid .st__name { font-size: 12px; }
+.stp__grid .st__meta { font-size: 9.5px; }
+.stp__empty { padding: 40px 0; text-align: center; color: var(--muted); font-size: 14px; }
+.st__consent { margin-top: 34px; padding: 15px 18px; border-radius: var(--r-sm);
+  background: rgba(27,42,100,.05); border: 1px solid var(--line);
+  font-size: 13px; color: var(--muted); line-height: 1.6; }
+.st__consent b { color: var(--navy); }
+
+/* ── 4. Lightbox ────────────────────────────────────────────── */
+.st-lb { position: fixed; inset: 0; z-index: 1200; background: rgba(9,12,30,.9);
+  display: none; align-items: center; justify-content: center; padding: 30px 20px; }
+.st-lb[open], .st-lb.is-open { display: flex; }
+.st-lb__img { max-width: min(880px, 92vw); max-height: 84vh; border-radius: var(--r-md);
+  display: block; object-fit: contain; }
+.st-lb__cap { position: absolute; bottom: 22px; left: 0; right: 0; text-align: center;
+  color: rgba(255,255,255,.86); font-size: 13.5px; line-height: 1.5; padding: 0 20px; }
+.st-lb__cap b { color: #fff; }
+.st-lb__close { position: absolute; top: 18px; right: 22px; width: 46px; height: 46px;
+  border-radius: 50%; border: 0; background: rgba(255,255,255,.16); color: #fff;
+  font-size: 28px; line-height: 1; cursor: pointer; }
+.st-lb__close:hover { background: rgba(255,255,255,.3); }
+
+/* ── Responsif ──────────────────────────────────────────────── */
+@media (max-width: 1000px) {
+  .st__grid { grid-template-columns: repeat(3, 1fr); }
+  .st__card:nth-child(n+4) { display: none; }
+  .stp__grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 700px) {
+  .st { padding: 52px 0 56px; }
+  .st__grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .st__card:nth-child(n+4) { display: none; }
+  .stp__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .st-tick { margin-top: 18px; padding-top: 15px; }
+  .st-tick__item, .st-tick__item img { width: 96px; }
+  .st-tick__item img { height: 96px; }
+  .st__name { font-size: 13px; }
+}

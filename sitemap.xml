@@ -182,6 +182,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Wall of Receipts: arsip foto serah terima -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/serah-terima/</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Kebijakan Privasi SENGAJA tidak didaftarkan di sini: halamannya
        ber-meta noindex, jadi mencantumkannya = menyuruh Google mengindeks
        halaman yang kita larang sendiri (muncul sbg "Excluded by noindex"). -->

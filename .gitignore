@@ -23,3 +23,9 @@ node_modules/
 # Design agent working files (not for deployment)
 .agents/
 **/.agents/
+
+# Wall of Receipts: foto mentah dari Drive + potongan HTML hasil generate.
+# Foto siap-tayang ada di assets/img/serah-terima/. Cara regenerasi:
+# tools/serah-terima/README.md
+tools/serah-terima/raw/
+tools/serah-terima/snippets/
