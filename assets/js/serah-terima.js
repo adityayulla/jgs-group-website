@@ -94,7 +94,7 @@
           while (strip.children.length > 5) strip.removeChild(strip.lastElementChild);
         }
 
-        // Ticker: sisipkan di depan kedua salinan rail
+        // Ticker: sisipkan di depan rel (rel tunggal, tanpa salinan)
         if (rail) {
           items.slice(0, 6).reverse().forEach(function (it) {
             rail.insertBefore(liveTick(it), rail.firstElementChild);

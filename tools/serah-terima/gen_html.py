@@ -73,19 +73,19 @@ def tick(i, eager=False):
 
 
 # ── Ticker ──────────────────────────────────────────────────────
-# Rel dicetak DUA KALI supaya gulirannya mulus (animasi geser -50%).
-# Konsekuensinya: begitu salinan pertama lebih sempit dari layar,
-# pengunjung melihat foto yang sama dua kali dalam satu putaran.
-# Dengan 14 foto (1.904px) itu terjadi di detik ke-11 pada layar 1440px.
-# 36 foto = 4.896px → salinan kedua baru muncul setelah ±83 detik.
-# Kalau angka ini diubah, sesuaikan durasi .st-tick__rail di global.css
-# supaya kecepatannya tetap (±41 px/detik).
+# Rel dicetak SEKALI saja (keputusan Direktur 15 Agu). Dulu dicetak dua
+# kali demi guliran mulus, tapi akibatnya foto yang sama terlihat dua
+# kali dalam satu putaran. Sekarang animasinya bolak-balik
+# (animation-direction: alternate) — geser sampai foto terakhir, lalu
+# balik pelan ke awal. Tidak ada salinan, tidak ada lompatan.
+# Kalau jumlahnya diubah, sesuaikan durasi .st-tick__rail di
+# global.css supaya kecepatannya tetap (±41 px/detik).
+#
 # Hanya foto yang punya nama tipe: di ticker, keterangan itu satu-satunya
 # teks, jadi tiga foto "Kawa Living" tanpa tipe akan terbaca sebagai
 # pengulangan. Di halaman penuh mereka tetap tampil (tanpa baris teks).
 tick_items = [i for i in ordered if i["unit"]][:36]
 rail = "\n".join(tick(i, eager=(n < 3)) for n, i in enumerate(tick_items))
-rail += "\n" + "\n".join(tick(i) for i in tick_items)  # salinan untuk loop
 (OUT / "ticker.html").write_text(rail)
 
 # ── Strip 5 kartu di homepage ──
@@ -94,5 +94,5 @@ rail += "\n" + "\n".join(tick(i) for i in tick_items)  # salinan untuk loop
 # ── Grid penuh halaman /serah-terima/ ──
 (OUT / "grid.html").write_text("\n".join(card(i) for i in ordered))
 
-print(f"ticker: {len(tick_items)}×2 · strip: 5 · grid: {len(ordered)}")
+print(f"ticker: {len(tick_items)} (rel tunggal) · strip: 5 · grid: {len(ordered)}")
 print("per proyek:", d["perProject"])
