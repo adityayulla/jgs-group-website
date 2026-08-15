@@ -985,14 +985,17 @@ main > section { position: relative; z-index: 1; }
 
 /* ── Responsif ──────────────────────────────────────────────── */
 @media (max-width: 1000px) {
+  /* Pemangkasan ini HANYA untuk strip 5 kartu di homepage (.st__grid).
+     Tanpa tanda ">" ia ikut mengenai .stp__grid di /serah-terima/ dan
+     seluruh arsip terpotong jadi 3 kartu di layar kecil. */
   .st__grid { grid-template-columns: repeat(3, 1fr); }
-  .st__card:nth-child(n+4) { display: none; }
+  .st__grid > .st__card:nth-child(n+4) { display: none; }
   .stp__grid { grid-template-columns: repeat(4, 1fr); }
 }
 @media (max-width: 700px) {
   .st { padding: 52px 0 56px; }
   .st__grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .st__card:nth-child(n+4) { display: none; }
+  .st__grid > .st__card:nth-child(n+5) { display: none; }  /* 2×2 penuh */
   .stp__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .st-tick { margin-top: 18px; padding-top: 15px; }
   .st-tick__item, .st-tick__item img { width: 96px; }
