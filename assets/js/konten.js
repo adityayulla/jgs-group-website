@@ -212,12 +212,11 @@
      ============================================================ */
   const blogSubtitle = 'Panduan jujur membeli rumah di Yogyakarta — memilih developer, legalitas, hingga memantau progress pembangunan.';
 
-  /* Enam artikel terbaru. Urutan = terbaru di atas.
-     ⚠️  Tiap kali ada artikel baru, tambahkan di puncak daftar ini DAN di
-     /blog/index.html — kalau tidak, halaman depan akan terlihat berhenti
-     menulis padahal artikelnya sudah tayang. Gambar tidak boleh dipakai
-     dua kali; sumber cadangan: /assets/img/serah-terima/ dan galeri
-     Lingkungan di Progress Dashboard. */
+  /* CADANGAN saja. Daftar sebenarnya dibaca langsung dari
+     /blog/index.html saat halaman dimuat (lihat initBlog) — jadi
+     menambah artikel di sana sudah cukup, halaman depan ikut sendiri.
+     Isi di bawah ini hanya dipakai kalau berkas itu gagal diambil,
+     supaya section blog tidak pernah kosong. */
   const blogPosts = [
     {
       cat: 'Area & Lokasi',
@@ -307,24 +306,47 @@
 </a>`;
   }
 
-  function initBlog() {
-    const sub = document.querySelector('[data-blog-subtitle]');
-    if (sub) sub.textContent = blogSubtitle;
-    const grid = document.getElementById('blogGrid');
-    if (!grid) return;
-    let html = blogPosts.map(renderBlogCard).join('');
-    // Jumlah artikel ganjil → isi 1 slot kosong (mobile 2 kolom) dengan kartu
-    // coming-soon bila tersedia. Kartu ini disembunyikan di desktop via CSS.
-    if (blogPosts.length % 2 === 1 && comingSoonPosts.length) {
-      html += renderComingSoonCard(comingSoonPosts[0]);
-    }
-    grid.innerHTML = html;
+  const BULAN_ID = ['Januari','Februari','Maret','April','Mei','Juni',
+                    'Juli','Agustus','September','Oktober','November','Desember'];
 
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
+  function tanggalID(iso) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+    if (!m) return '';
+    return `${+m[3]} ${BULAN_ID[+m[2] - 1]} ${m[1]}`;
+  }
+
+  /* Baca daftar artikel dari /blog/index.html — satu sumber kebenaran.
+     Halaman itu cuma ~17 KB dan sudah di-cache browser setelah sekali
+     ambil. Kalau gagal (offline, berkas dipindah), pemanggil memakai
+     array cadangan blogPosts. */
+  async function ambilArtikelDariBlog() {
+    const res = await fetch('/blog/index.html', { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+
+    const teks = (el, sel) => (el.querySelector(sel)?.textContent || '').trim();
+    return [...doc.querySelectorAll('a.post-card--live')]
+      .map((a) => ({
+        href: a.getAttribute('href'),
+        iso: a.getAttribute('data-date') || '',
+        date: tanggalID(a.getAttribute('data-date')),
+        img: a.querySelector('img')?.getAttribute('src') || '',
+        cat: teks(a, '.post-card__meta'),
+        title: teks(a, '.post-card__title'),
+        excerpt: teks(a, '.post-card__excerpt'),
+      }))
+      .filter((d) => d.href && d.title)
+      // Urutkan sendiri: kalau suatu saat kartu disisipkan di posisi yang
+      // salah di /blog/, halaman depan tetap menampilkan yang terbaru.
+      .sort((a, b) => (a.iso < b.iso ? 1 : a.iso > b.iso ? -1 : 0));
+  }
+
+  function gambarKartu(grid) {
+    const obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        var el = entry.target;
-        var bg = el.getAttribute('data-bg');
+        const el = entry.target;
+        const bg = el.getAttribute('data-bg');
         if (bg) {
           el.style.backgroundImage = "url('" + bg + "')";
           el.style.backgroundSize = 'cover';
@@ -333,7 +355,39 @@
         obs.unobserve(el);
       });
     }, { rootMargin: '400px' });
-    grid.querySelectorAll('[data-bg]').forEach(function(el) { obs.observe(el); });
+    grid.querySelectorAll('[data-bg]').forEach(function (el) { obs.observe(el); });
+  }
+
+  function tulisKartu(grid, posts) {
+    let html = posts.map(renderBlogCard).join('');
+    // Jumlah artikel ganjil → isi 1 slot kosong (mobile 2 kolom) dengan kartu
+    // coming-soon bila tersedia. Kartu ini disembunyikan di desktop via CSS.
+    if (posts.length % 2 === 1 && comingSoonPosts.length) {
+      html += renderComingSoonCard(comingSoonPosts[0]);
+    }
+    grid.innerHTML = html;
+    gambarKartu(grid);
+  }
+
+  function initBlog() {
+    const sub = document.querySelector('[data-blog-subtitle]');
+    if (sub) sub.textContent = blogSubtitle;
+    const grid = document.getElementById('blogGrid');
+    if (!grid) return;
+
+    const JUMLAH = 6;
+    tulisKartu(grid, blogPosts.slice(0, JUMLAH));   // tampil dulu, jangan kosong
+
+    ambilArtikelDariBlog()
+      .then((semua) => {
+        const baru = semua.slice(0, JUMLAH);
+        if (!baru.length) return;
+        // Sudah sama? jangan digambar ulang — menghindari kedipan.
+        const kunci = (l) => l.map((d) => d.href).join('|');
+        if (kunci(baru) === kunci(blogPosts.slice(0, JUMLAH))) return;
+        tulisKartu(grid, baru);
+      })
+      .catch(() => { /* pakai cadangan yang sudah tampil */ });
   }
 
   document.addEventListener('DOMContentLoaded', () => {
