@@ -903,26 +903,19 @@ main > section { position: relative; z-index: 1; }
 .st-tick__more { font-size: 13px; font-weight: 500; color: var(--navy);
   text-decoration: none; border-bottom: 1px solid rgba(27,42,100,.3); }
 .st-tick__more:hover { border-bottom-color: var(--orange); color: var(--orange); }
-.st-tick__mask { overflow: hidden; -webkit-mask-image: linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+/* Wadah ticker = area yang BISA DIGESER SENDIRI (overflow-x: auto).
+   Gerak otomatisnya didorong lewat scrollLeft di serah-terima.js, bukan
+   animasi CSS — animasi transform tidak menggerakkan posisi scroll, jadi
+   dulu wadahnya sama sekali tidak bisa digeser jari. Begitu pengunjung
+   menyentuh/menggulir, gerak otomatis berhenti permanen: kendali
+   sepenuhnya pindah ke pengunjung. Batang scroll disembunyikan. */
+.st-tick__mask { overflow-x: auto; overflow-y: hidden;
+  scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  -webkit-mask-image: linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
   mask-image: linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent); }
-/* Rel dicetak SEKALI. Karena tidak ada salinan kedua, animasinya tidak
-   bisa geser -50% — ia bergeser sampai foto terakhir lalu BALIK pelan
-   (alternate). Tidak ada pengulangan, tidak ada lompatan.
-   Jarak gesernya = lebar rel dikurangi lebar layar. min() sebagai jaring
-   pengaman: kalau rel lebih sempit dari layar nilainya 0, jadi rel diam,
-   bukan malah bergeser ke kanan. */
-.st-tick__rail { display: flex; gap: 12px; width: max-content;
-  animation: st-slide 85s linear infinite alternate; }
-.st-tick__mask:hover .st-tick__rail,
-.st-tick__mask:focus-within .st-tick__rail { animation-play-state: paused; }
-@keyframes st-slide {
-  from { transform: translateX(0); }
-  to   { transform: translateX(min(0px, calc(100vw - 100% - 60px))); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .st-tick__rail { animation: none; }
-  .st-tick__mask { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-}
+.st-tick__mask::-webkit-scrollbar { display: none; }
+.st-tick__rail { display: flex; gap: 12px; width: max-content; }
 .st-tick__item { flex: none; width: 124px; text-decoration: none; color: inherit; }
 .st-tick__item img { width: 124px; height: 124px; object-fit: cover; object-position: center 55%;
   border-radius: 12px; display: block; background: rgba(27,42,100,.06); }

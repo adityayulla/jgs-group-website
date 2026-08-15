@@ -194,8 +194,71 @@
     });
   }
 
+  /* ── ticker: geser sendiri, tapi pengunjung selalu boleh ambil alih ──
+     Dulu gerakannya animasi CSS transform. Masalahnya transform tidak
+     memindahkan posisi scroll, jadi wadahnya tidak bisa digeser jari —
+     di HP orang mencoba menggeser, yang terjadi malah animasinya berhenti.
+
+     Sekarang: wadahnya benar-benar bisa di-scroll, dan gerak otomatis
+     hanya "mendorong" scrollLeft sedikit demi sedikit. Begitu ada
+     sentuhan, wheel, atau tombol panah, dorongan itu berhenti PERMANEN —
+     tidak melawan jari pengunjung. */
+  function initTicker() {
+    var mask = document.querySelector('.st-tick__mask');
+    var rail = document.getElementById('stRail');
+    if (!mask || !rail) return;
+
+    var KECEPATAN = 41 / 1000;   // px per milidetik, sama dgn versi lama
+    var arah = 1;
+    var berhenti = false;
+    var jeda = false;
+    var last = 0;
+
+    if (window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;                    // biarkan digeser manual saja
+    }
+
+    function stop() {
+      berhenti = true;
+      mask.removeEventListener('pointerdown', stop);
+      mask.removeEventListener('touchstart', stop);
+      mask.removeEventListener('wheel', stop);
+      mask.removeEventListener('keydown', stop);
+    }
+
+    ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function (ev) {
+      mask.addEventListener(ev, stop, { passive: true });
+    });
+    mask.addEventListener('mouseenter', function () { jeda = true; });
+    mask.addEventListener('mouseleave', function () { jeda = false; });
+
+    // Posisi disimpan sendiri, tidak dibaca ulang dari scrollLeft tiap
+    // frame: sebagian browser membulatkan scrollLeft ke bilangan bulat,
+    // dan 0,68px per frame bisa hilang oleh pembulatan sehingga ticker
+    // mandek di tempat.
+    var pos = 0;
+
+    function langkah(now) {
+      if (berhenti) return;
+      var delta = last ? Math.min(now - last, 50) : 0;  // abaikan lompatan tab
+      last = now;
+
+      var sisa = mask.scrollWidth - mask.clientWidth;
+      if (sisa > 8 && !jeda) {
+        pos += arah * KECEPATAN * delta;
+        if (pos <= 0)         { pos = 0;    arah = 1; }
+        else if (pos >= sisa) { pos = sisa; arah = -1; }
+        mask.scrollLeft = pos;
+      }
+      requestAnimationFrame(langkah);
+    }
+    requestAnimationFrame(langkah);
+  }
+
   function init() {
     loadLive();
+    initTicker();
     initFilters();
     initLightbox();
   }
