@@ -72,8 +72,18 @@ def tick(i, eager=False):
         </a>'''
 
 
-# ── Ticker: 14 item, dicetak dua kali supaya marquee tak putus ──
-tick_items = ordered[:14]
+# ── Ticker ──────────────────────────────────────────────────────
+# Rel dicetak DUA KALI supaya gulirannya mulus (animasi geser -50%).
+# Konsekuensinya: begitu salinan pertama lebih sempit dari layar,
+# pengunjung melihat foto yang sama dua kali dalam satu putaran.
+# Dengan 14 foto (1.904px) itu terjadi di detik ke-11 pada layar 1440px.
+# 36 foto = 4.896px → salinan kedua baru muncul setelah ±83 detik.
+# Kalau angka ini diubah, sesuaikan durasi .st-tick__rail di global.css
+# supaya kecepatannya tetap (±41 px/detik).
+# Hanya foto yang punya nama tipe: di ticker, keterangan itu satu-satunya
+# teks, jadi tiga foto "Kawa Living" tanpa tipe akan terbaca sebagai
+# pengulangan. Di halaman penuh mereka tetap tampil (tanpa baris teks).
+tick_items = [i for i in ordered if i["unit"]][:36]
 rail = "\n".join(tick(i, eager=(n < 3)) for n, i in enumerate(tick_items))
 rail += "\n" + "\n".join(tick(i) for i in tick_items)  # salinan untuk loop
 (OUT / "ticker.html").write_text(rail)
