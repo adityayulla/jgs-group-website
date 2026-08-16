@@ -159,6 +159,16 @@
       "permanent": true
     },
     {
+      "source": "/wp-content/uploads/(.*)Kawa-Living(.*)",
+      "destination": "/kawa-living/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/(.*)Tentrem-Bhumi(.*)",
+      "destination": "/tentrem-bhumi/",
+      "permanent": true
+    },
+    {
       "source": "/wp-content/(.*)",
       "destination": "/perumahan-jogja/",
       "permanent": true
