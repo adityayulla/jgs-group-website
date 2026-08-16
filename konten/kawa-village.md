@@ -16,10 +16,10 @@
 |---|---|---|
 | Nama proyek | Kawa Village | |
 | Status | Terjual habis, seluruh unit sudah diserahterimakan | |
-| Jumlah unit | **`[CEK]`** | Catatan internal menyebut 68, tapi Anda bilang **bukan 68**. Mohon diisi yang benar. |
-| Lokasi | **`[CEK]`** | Kalurahan & kecamatan. Dipakai untuk SEO lokal — makin spesifik makin baik. |
-| Tahun mulai bangun | **`[CEK]`** | |
-| Tahun serah terima terakhir | **`[CEK]`** | |
+| Jumlah unit | **71** | ✅ Dikoreksi Direktur 17 Agu (bukan 68). |
+| Lokasi | **Joho RT 001, Jambidan, Banguntapan, Bantul** | ✅ Diisi 17 Agu. Perhatikan: **Banguntapan (timur)**, bukan Sedayu. |
+| Tahun mulai bangun | **2021** | ✅ |
+| Tahun serah terima terakhir | **2026** | ✅ |
 | Tipe rumah | Yama, Mizu, Hana, Kumo | Dari nama berkas foto. Koreksi kalau ada tipe lain yang tak terdokumentasi. |
 | Foto serah terima tersedia | 55 | Sudah live di `/serah-terima/`, tidak perlu diapa-apakan |
 
@@ -27,7 +27,7 @@
 Saran saya: **jangan ditampilkan.** Proyeknya sudah habis, jadi angka itu tidak
 menjual apa pun — yang terjadi malah jadi pembanding untuk proyek yang sekarang
 dijual. Kalau Anda ingin tetap menampilkan, beri tahu saya.
-→ Keputusan: `[TAMPILKAN / JANGAN]`
+→ Keputusan: **JANGAN TAMPILKAN** ✅ (Direktur, 17 Agu)
 
 ---
 
@@ -37,8 +37,8 @@ dijual. Kalau Anda ingin tetap menampilkan, beri tahu saya.
 
 **Kalimat pembuka** — angka unit menyusul setelah `[CEK]` di atas terisi:
 
-> `[JUMLAH]` rumah, `[JUMLAH]` keluarga. Proyek ini sudah tuntas dan dihuni —
-> halaman ini kami biarkan terbuka sebagai catatan.
+> 71 rumah, 71 keluarga. Proyek ini sudah tuntas dan dihuni — halaman ini
+> kami biarkan terbuka sebagai catatan.
 
 Label status: **Selesai · Terjual habis**
 
@@ -76,7 +76,19 @@ terjawab, bukan sebagai gantinya.
 
 Tombol: **Lihat Kawa Living** · **Semua proyek**
 
-→ Proyek yang diarahkan sudah tepat? `[YA / GANTI KE: ___]`
+→ Dibiarkan **Kawa Living** (tidak diubah Direktur).
+
+⚠️ **Satu hal yang baru terlihat setelah lokasi terisi.** Kawa Village ada di
+Banguntapan (timur), sementara Kawa Living di Sedayu (barat) — praktis
+seberang kota. Yang secara geografis paling dekat justru **Tentrem Jiwo
+(Kalasan)**, dan yang paling dekat secara harga **Tentrem Bhumi (660 jt-an
+vs rata-rata Kawa Village 763 jt)**.
+
+Alasan tetap ke Kawa Living juga kuat: **satu keluarga nama "Kawa"** — orang
+yang mencari Kawa Village besar kemungkinan tertarik karena mereknya, bukan
+semata lokasinya. Halaman dibangun dengan Kawa Living sebagai tombol utama.
+Kalau Direktur mau ditukar, ini perubahan satu baris.
+→ `[TETAP KAWA LIVING / GANTI KE: ___]`
 
 ---
 
@@ -88,12 +100,15 @@ Tombol: **Lihat Kawa Living** · **Semua proyek**
 
 **Meta description** (maks ±155 karakter):
 
-> Kawa Village, perumahan JGS Group di `[LOKASI]`, seluruh unitnya sudah
-> diserahterimakan. Lihat foto hari serah terima dari keluarga yang kini
-> menghuninya.
+> Kawa Village, perumahan JGS Group di Jambidan, Banguntapan, Bantul —
+> seluruh unitnya sudah diserahterimakan. Lihat foto hari serah terima dari
+> keluarga yang kini menghuninya.
 
 Kata kunci yang dikejar: `kawa village`, `perumahan kawa village`,
-`kawa village jogja`, `kawa village sedayu`
+`kawa village jogja`, `kawa village banguntapan`, `kawa village bantul`
+
+⚠️ Draft saya sebelumnya menulis `kawa village sedayu` — **itu salah.**
+Kawa Village di Banguntapan; Sedayu itu Kawa Living. Sudah diperbaiki.
 
 ---
 

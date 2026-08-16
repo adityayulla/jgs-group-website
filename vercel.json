@@ -4,7 +4,12 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "(www\\.)?tentremjiwo\\.id" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?tentremjiwo\\.id"
+        }
+      ],
       "destination": "https://jogjagrahaselaras.com/tentrem-jiwo/",
       "permanent": true
     },
@@ -35,16 +40,6 @@
     },
     {
       "source": "/kawaliving/(.*)",
-      "destination": "/kawa-living/",
-      "permanent": true
-    },
-    {
-      "source": "/kawa-village",
-      "destination": "/kawa-living/",
-      "permanent": true
-    },
-    {
-      "source": "/kawa-village/(.*)",
       "destination": "/kawa-living/",
       "permanent": true
     },
@@ -178,25 +173,37 @@
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/assets/(.*)\\.(css|js)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     },
     {
       "source": "/tentrem-jiwo/img/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)\\.html",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
       ]
     }
   ]

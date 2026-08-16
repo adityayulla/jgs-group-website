@@ -182,6 +182,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Proyek selesai: Kawa Village -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/kawa-village/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Wall of Receipts: arsip foto serah terima -->
   <url>
     <loc>https://jogjagrahaselaras.com/serah-terima/</loc>

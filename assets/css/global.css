@@ -1003,3 +1003,58 @@ main > section { position: relative; z-index: 1; }
   .st-tick__item img { height: 96px; }
   .st__name { font-size: 13px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   HALAMAN PROYEK SELESAI (/kawa-village/, nanti /royal-mansion/)
+   Sengaja TANPA kotak fakta 4 kolom — angka dilebur ke kalimat.
+   Latar memakai .bg-root/.reb yang sama dengan homepage.
+   ══════════════════════════════════════════════════════════════ */
+.pj-hero { position: relative; min-height: 420px; display: flex; align-items: flex-end;
+  overflow: hidden; background: var(--navy); }
+.pj-hero__bg { position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 45%; opacity: .55; }
+.pj-hero__veil { position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(9,12,30,.9) 0%, rgba(9,12,30,.35) 55%, rgba(9,12,30,.55) 100%); }
+.pj-hero__in { position: relative; z-index: 1; color: #fff; padding-top: 150px; padding-bottom: 44px;
+  display: flex; flex-direction: column; gap: 13px; }
+.pj-pil { align-self: flex-start; background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.36); border-radius: var(--r-pill);
+  padding: 6px 15px; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; }
+.pj-hero__title { font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(38px, 6vw, 64px); line-height: 1.04; margin: 0; letter-spacing: -.02em; }
+.pj-hero__sub { font-size: 16px; line-height: 1.65; color: rgba(255,255,255,.85);
+  max-width: 56ch; margin: 0; }
+
+.pj-teks { max-width: 720px; }
+.pj-teks p { font-size: 16.5px; line-height: 1.8; color: var(--muted); margin: 18px 0 0; }
+.pj-teks p strong { color: var(--ink); font-weight: 600; }
+
+.pj-ajak { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg);
+  padding: 28px 30px; display: flex; gap: 24px; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; }
+.pj-ajak h3 { font-family: var(--font-display); font-weight: 400; font-size: 25px;
+  margin: 0 0 8px; color: var(--ink); line-height: 1.2; }
+.pj-ajak p { font-size: 15px; line-height: 1.65; color: var(--muted); margin: 0; max-width: 48ch; }
+.pj-ajak__btn { display: flex; gap: 10px; flex-wrap: wrap; }
+.pj-btn-alt { background: transparent; color: var(--navy); border: 1px solid rgba(27,42,100,.3); }
+.pj-btn-alt:hover { border-color: var(--orange); color: var(--orange); }
+
+@media (max-width: 900px) {
+  .pj-hero { min-height: 340px; }
+  .pj-hero__in { padding-top: 120px; padding-bottom: 32px; }
+  .pj-ajak { padding: 22px; }
+}
+@media (max-width: 700px) {
+  .pj-teks p { font-size: 15.5px; }
+  .pj-ajak__btn { width: 100%; }
+  .pj-ajak__btn .btn { flex: 1; justify-content: center; }
+}
+
+/* Navbar di atas hero gelap: teks putih sampai halaman di-scroll.
+   Di homepage aturan ini ditulis inline; di sini dijadikan kelas supaya
+   /kawa-village/ (dan nanti /royal-mansion/) bisa memakainya juga. */
+.dark-hero .nav:not(.nav--scrolled) .nav__brandline { color: #fff; }
+.dark-hero .nav:not(.nav--scrolled) .nav__brandsub { color: rgba(255,255,255,.75); }
+.dark-hero .nav:not(.nav--scrolled) .nav__links > li > a { color: #fff; }
+.dark-hero .nav:not(.nav--scrolled) .nav__burger span { background: #fff; }
+.dark-hero .nav:not(.nav--scrolled) .nav__pricelist { border-color: rgba(255,255,255,.7); color: #fff; }

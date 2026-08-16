@@ -16,9 +16,9 @@
 | Nama proyek | Royal Mansion | |
 | Status | Terjual habis | |
 | **Jumlah unit** | **205** | Dari koreksi Anda 16 Agu. Konfirmasi sekali lagi kalau angkanya perlu dipertajam. |
-| Lokasi | **`[CEK]`** | Kalurahan & kecamatan |
-| Masa pembangunan | 2018–2022 | Dari catatan internal. `[CEK]` kalau meleset. |
-| Jumlah cluster | **`[CEK]`** | Berapa cluster seluruhnya, dan nama-namanya? |
+| Lokasi | **Jl. Pleret KM 2,2, Bintaran, Jambidan, Banguntapan, Bantul** | ✅ 17 Agu |
+| Masa pembangunan | **2013–2022** | ✅ Dikoreksi 17 Agu (bukan 2018). Sembilan tahun. |
+| Jumlah cluster | **3: Tahap 1, Tahap 2, Adiluhung** | ✅ 17 Agu |
 | Foto serah terima tersedia | 20 | **Semuanya dari cluster akhir (Adiluhung)** |
 
 ### ⚠️ Ketimpangan yang harus diputuskan
@@ -44,10 +44,23 @@ Tiga cara menanganinya, pilih satu:
 - **C. Tunda sampai foto cluster lama terkumpul.** Paling lengkap, tapi 204
   impresi/bulan terus hangus selama menunggu.
 
-→ Pilihan: `[A / B / C]`
+→ Pilihan: **C — TUNDA** ✅ (Direktur, 17 Agu)
 
-Kalau **A**: apakah ada arsip foto cluster lain di Drive atau di tangan tim
-lapangan yang bisa ditambahkan nanti? `[ADA / TIDAK / PERLU DICARI]`
+Arsip foto cluster Tahap 1 & Tahap 2: **PERLU DICARI**.
+
+## 🔴 STATUS: DITUNDA — halaman TIDAK dibangun dulu
+
+Direktur memilih **C**: tunggu sampai foto cluster lama terkumpul, supaya
+halaman ini mewakili 205 rumah, bukan cuma 20 dari cluster penutup.
+
+**Konsekuensi yang diterima:** `/royal-mansion/` tetap 404 dan 204
+impresi/bulan terus hangus selama penantian. Ini keputusan sadar, bukan
+kelalaian.
+
+**Pemblokirnya sekarang: mencari foto serah terima Tahap 1 & Tahap 2
+(2013–2020).** Begitu ada — walau cuma 10–15 foto — halaman ini bisa
+langsung dibangun. Tempat yang belum diperiksa: folder Drive lain, arsip
+tim lapangan, dan akun IG lama @graharoyalmansion.
 
 ---
 
@@ -74,7 +87,7 @@ Label status: **Selesai · Terjual habis**
 Versi untuk pilihan **A**:
 
 > Royal Mansion adalah proyek terbesar JGS Group sebelum era Kawa dan Tentrem —
-> 205 rumah, dibangun bertahap dari `[TAHUN]` sampai `[TAHUN]`. Nama *Adiluhung*
+> 205 rumah, dibangun bertahap dari 2013 sampai 2022. Nama *Adiluhung*
 > yang kini dipakai sebagai nama tipe berasal dari cluster penutupnya. Foto di
 > bawah ini diambil di cluster tersebut, saat kami mulai membiasakan diri
 > memotret setiap serah terima — kebiasaan yang sekarang berlaku di semua proyek.
@@ -91,7 +104,7 @@ Tampil 5–6 di halaman, sisanya lewat tautan ke `/serah-terima/`.
 
 **Catatan:** sebagian foto punya cap tanggal bawaan kamera (2021–2022). Di
 halaman ini justru berguna — ia membuktikan kapan. Saran saya dibiarkan.
-→ Keputusan: `[BIARKAN / BERSIHKAN]`
+→ Keputusan: **BIARKAN** ✅ (cap tanggal justru jadi bukti)
 
 ---
 
@@ -103,7 +116,7 @@ halaman ini justru berguna — ia membuktikan kapan. Saran saya dibiarkan.
 Tombol: **Lihat Tentrem Bhumi** · **Semua proyek**
 
 → Padanan ini masih asumsi saya (sama-sama dua lantai). Kalau tim punya
-padanan yang lebih tepat: `[BENAR / GANTI KE: ___]`
+padanan yang lebih tepat: **BENAR — Tentrem Bhumi** ✅
 
 ---
 
@@ -115,8 +128,8 @@ padanan yang lebih tepat: `[BENAR / GANTI KE: ___]`
 
 **Meta description** (maks ±155 karakter):
 
-> Royal Mansion, 205 rumah yang dibangun JGS Group di `[LOKASI]` dan kini
-> seluruhnya dihuni. Lihat foto hari serah terima cluster Adiluhung.
+> Royal Mansion, 205 rumah yang dibangun JGS Group di Jambidan, Banguntapan,
+> Bantul dan kini seluruhnya dihuni. Lihat foto hari serah terima.
 
 Kata kunci yang dikejar: `royal mansion`, `royal mansion jogja`,
 `perumahan royal mansion`, `graha royal mansion`, `adiluhung`

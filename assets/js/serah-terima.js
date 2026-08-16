@@ -108,6 +108,10 @@
             card.setAttribute('data-project', it.project);
             grid.insertBefore(card, grid.firstElementChild);
           });
+          // Kartu ini datang SESUDAH filter dijalankan, jadi belum tersaring.
+          // Tanpa baris ini, /serah-terima/#kawa-village ikut menampilkan
+          // entri live dari proyek lain.
+          terapkanFilterAktif();
         }
 
       })
@@ -116,6 +120,28 @@
       });
   }
 
+
+  /* Terapkan filter yang sedang aktif ke SELURUH isi grid. Dipanggil
+     saat tombol diklik dan setiap kali kartu baru disisipkan. */
+  function terapkanFilterAktif() {
+    var bar = document.getElementById('stFilters');
+    var grid = document.getElementById('stGrid');
+    if (!bar || !grid) return;
+    var btn = bar.querySelector('.stp__filt[aria-pressed="true"]');
+    var want = btn ? (btn.getAttribute('data-project') || '') : '';
+
+    var shown = 0;
+    Array.prototype.forEach.call(grid.children, function (card) {
+      var stamp = card.querySelector('.st__stamp');
+      var proj = card.getAttribute('data-project') || (stamp ? stamp.textContent : '');
+      var ok = !want || proj === want;
+      card.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+
+    var empty = document.getElementById('stEmpty');
+    if (empty) empty.hidden = shown > 0;
+  }
 
   /* ── filter per perumahan (/serah-terima/) ─────────────────── */
   function initFilters() {
@@ -126,23 +152,22 @@
     bar.addEventListener('click', function (e) {
       var btn = e.target.closest('.stp__filt');
       if (!btn) return;
-
-      var want = btn.getAttribute('data-project') || '';
       Array.prototype.forEach.call(bar.querySelectorAll('.stp__filt'), function (b) {
         b.setAttribute('aria-pressed', String(b === btn));
       });
+      terapkanFilterAktif();
+    });
 
-      var shown = 0;
-      Array.prototype.forEach.call(grid.children, function (card) {
-        var stamp = card.querySelector('.st__stamp');
-        var proj = card.getAttribute('data-project') || (stamp ? stamp.textContent : '');
-        var ok = !want || proj === want;
-        card.style.display = ok ? '' : 'none';
-        if (ok) shown++;
-      });
-
-      var empty = document.getElementById('stEmpty');
-      if (empty) empty.hidden = shown > 0;
+    // Tautan dari halaman proyek, mis. /serah-terima/#kawa-village —
+    // filternya langsung diterapkan supaya pengunjung mendarat tepat.
+    var minta = decodeURIComponent(location.hash.replace('#', '')).toLowerCase();
+    if (!minta) return;
+    Array.prototype.some.call(bar.querySelectorAll('.stp__filt'), function (b) {
+      var proj = (b.getAttribute('data-project') || '').toLowerCase();
+      if (!proj || proj.replace(/\s+/g, '-') !== minta) return false;
+      b.click();
+      b.scrollIntoView({ block: 'center' });
+      return true;
     });
   }
 
