@@ -57,9 +57,9 @@
     return a;
   }
 
-  function liveTick(item) {
+  function liveTick(item, href) {
     var label = item.unit || item.project;
-    var a = el('a', 'st-tick__item', { href: '/serah-terima/' });
+    var a = el('a', 'st-tick__item', { href: href || '/serah-terima/' });
     var img = el('img', null, {
       src: item.photo,
       alt: 'Serah terima kunci unit ' + label + ' di ' + item.project + ' — JGS Group',
@@ -71,6 +71,16 @@
     cap.appendChild(document.createTextNode(item.project));
     a.appendChild(img); a.appendChild(cap);
     return a;
+  }
+
+  /* ── saring per perumahan ────────────────────────────────────
+     Halaman proyek (mis. /tentrem-bhumi/) menandai wadahnya dengan
+     data-project="tentrem-bhumi"; tanpa atribut itu semua entri
+     dipakai, seperti di homepage. */
+  function saring(items, wadah) {
+    var slug = wadah.getAttribute('data-project') || '';
+    if (!slug) return items;
+    return items.filter(function (it) { return it.projectSlug === slug; });
   }
 
   /* ── ambil feed live, sisipkan di depan ────────────────────── */
@@ -88,7 +98,7 @@
 
         // Strip homepage: sisipkan di depan, buang kelebihan di belakang
         if (strip) {
-          items.slice(0, 5).reverse().forEach(function (it) {
+          saring(items, strip).slice(0, 5).reverse().forEach(function (it) {
             strip.insertBefore(liveCard(it), strip.firstElementChild);
           });
           while (strip.children.length > 5) strip.removeChild(strip.lastElementChild);
@@ -96,14 +106,15 @@
 
         // Ticker: sisipkan di depan rel (rel tunggal, tanpa salinan)
         if (rail) {
-          items.slice(0, 6).reverse().forEach(function (it) {
-            rail.insertBefore(liveTick(it), rail.firstElementChild);
+          var railHref = rail.getAttribute('data-more') || '/serah-terima/';
+          saring(items, rail).slice(0, 6).reverse().forEach(function (it) {
+            rail.insertBefore(liveTick(it, railHref), rail.firstElementChild);
           });
         }
 
         // Halaman penuh: sisipkan di depan grid
         if (grid) {
-          items.slice().reverse().forEach(function (it) {
+          saring(items, grid).slice().reverse().forEach(function (it) {
             var card = liveCard(it);
             card.setAttribute('data-project', it.project);
             grid.insertBefore(card, grid.firstElementChild);

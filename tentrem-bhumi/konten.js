@@ -324,9 +324,12 @@ var KONTEN = {
   /* ══════════════════════════════════════════════════════════════════════
      13. PROGRESS PENJUALAN — update angka ini secara berkala
   ══════════════════════════════════════════════════════════════════════ */
+  /* CADANGAN saja. Angka yang tampil ditarik live dari Progress
+     Dashboard (terjual = total − tersedia); nilai di bawah hanya
+     dipakai kalau dashboard tidak terjangkau. */
   penjualan: {
-    terjual: 13,  /* ✏️  jumlah unit yang sudah terjual */
-    total:   33,  /* ✏️  total unit keseluruhan */
+    terjual: 16,  /* ✏️  jumlah unit yang sudah terjual */
+    total:   35,  /* ✏️  total unit keseluruhan */
   },
 
 

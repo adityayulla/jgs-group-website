@@ -37,6 +37,8 @@
 <link rel="manifest" href="/assets/favicon/site.webmanifest"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<!-- Feed statistik unit + serah terima (Progress Dashboard) -->
+<link rel="preconnect" href="https://progress.jogjagrahaselaras.com"/>
 <link rel="stylesheet" href="../assets/css/global.css?v=20260703-6"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'"/>
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"/></noscript>
@@ -446,6 +448,75 @@ img { display: block; }
 }
 .prog-callout__meta {
   font-size: 11px; color: #888; letter-spacing: .03em;
+}
+
+/* ─────────────────────────────────────────
+   KARTU LIVE — JGS PROGRESS DASHBOARD
+   Angka & foto ditarik dari progress.jogjagrahaselaras.com.
+   Nilai di HTML hanya cadangan kalau dashboard tak terjangkau.
+───────────────────────────────────────── */
+.dash-live {
+  background: #fff;
+  border-radius: 14px;
+  margin: 0 6px 12px 6px;
+  border: 1px solid rgba(27,42,100,.18);
+  padding: 18px 20px 16px;
+}
+.dash-live__head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+}
+.dash-live__eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: #1b2a64; font-weight: 500;
+}
+.dash-live__dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #e07a2f;
+  box-shadow: 0 0 0 3px rgba(224,122,47,.18);
+}
+.dash-live__more {
+  font-size: 13px; font-weight: 600; color: #1b2a64; text-decoration: none;
+  border-bottom: 1px solid rgba(27,42,100,.25);
+}
+.dash-live__more:hover { color: #e07a2f; border-bottom-color: #e07a2f; }
+.dash-live__stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 8px; text-align: center; margin-top: 16px;
+}
+.dash-live__num {
+  font-size: 26px; font-weight: 800; line-height: 1;
+  font-variant-numeric: tabular-nums; color: #1b2a64;
+}
+.dash-live__num--ok     { color: #1f8a4c; }
+.dash-live__num--orange { color: #e07a2f; }
+.dash-live__lab {
+  margin-top: 5px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #888;
+}
+.dash-live__foot {
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px solid rgba(27,42,100,.10);
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 10px; flex-wrap: wrap;
+}
+.dash-live__upd {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; color: #888;
+}
+.dash-live__src { font-size: 11px; color: #aaa; }
+/* Strip serah terima memakai kelas .st-tick dari global.css */
+.dash-live .st-tick { margin-top: 16px; border-top-color: rgba(27,42,100,.10); }
+@media (min-width: 1024px) {
+  .dash-live { margin: 0 8px 20px 8px; padding: 24px 26px 20px; }
+  .dash-live__num { font-size: 32px; }
+  /* Foto Tentrem Bhumi jumlahnya sedikit — melar mengisi baris supaya
+     tidak menyisakan ruang kosong lebar di kanan. */
+  .dash-live .st-tick__rail { width: 100%; gap: 14px; }
+  .dash-live .st-tick__item { flex: 1 1 0; width: auto; min-width: 110px; max-width: 168px; }
+  .dash-live .st-tick__item img { width: 100%; height: auto; aspect-ratio: 1 / 1; }
 }
 
 /* ─────────────────────────────────────────
@@ -1248,17 +1319,70 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ══════════════════════════════════════════
      PROGRESS PENJUALAN
-     ✏️  Update angka di konten.js → penjualan.terjual & penjualan.total
+     Angka LIVE dari Progress Dashboard (terjual = total − tersedia).
+     ✏️  konten.js → penjualan hanya CADANGAN kalau dashboard down.
 ══════════════════════════════════════════ -->
 <div class="prog-callout" id="prog-callout">
   <div class="prog-callout__row">
-    <span class="prog-callout__big" id="pc-terjual">8</span>
-    <span class="prog-callout__text" id="pc-label">dari 33 unit telah dipercayakan kepada keluarga baru.</span>
+    <span class="prog-callout__big" id="pc-terjual">16</span>
+    <span class="prog-callout__text" id="pc-label">dari 35 unit telah dipercayakan kepada keluarga baru.</span>
   </div>
   <div class="prog-callout__track">
     <div class="prog-callout__bar" id="pc-bar"></div>
   </div>
-  <div class="prog-callout__meta" id="pc-sisa">25 unit tersisa</div>
+  <div class="prog-callout__meta" id="pc-sisa">19 unit tersisa</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     LIVE — JGS PROGRESS DASHBOARD
+     Status unit + serah terima terbaru khusus Tentrem Bhumi.
+     Sumber: progress.jogjagrahaselaras.com/api/public/*
+     Angka & kartu di bawah ini cadangan statis (dipakai kalau
+     dashboard tidak terjangkau) — dinamis lewat skrip di bawah.
+══════════════════════════════════════════ -->
+<div class="dash-live" id="dash-live">
+  <div class="dash-live__head">
+    <span class="dash-live__eyebrow"><span class="dash-live__dot"></span>Progress Dashboard · Live</span>
+    <a class="dash-live__more" href="https://progress.jogjagrahaselaras.com/progress/tentrem-bhumi" target="_blank" rel="noopener">Lihat Progress ›</a>
+  </div>
+
+  <div class="dash-live__stats">
+    <div>
+      <div class="dash-live__num" id="dl-dibangun">8</div>
+      <div class="dash-live__lab">Dibangun</div>
+    </div>
+    <div>
+      <div class="dash-live__num dash-live__num--ok" id="dl-selesai">8</div>
+      <div class="dash-live__lab">Selesai</div>
+    </div>
+    <div>
+      <div class="dash-live__num dash-live__num--orange" id="dl-tersedia">19</div>
+      <div class="dash-live__lab">Tersedia</div>
+    </div>
+  </div>
+
+  <div class="dash-live__foot">
+    <span class="dash-live__upd" id="dl-update">Update 9 Agustus 2026</span>
+    <span class="dash-live__src">Data langsung dari dashboard, diperbarui tiap minggu.</span>
+  </div>
+
+  <!-- Serah terima terbaru — hanya unit Tentrem Bhumi.
+       data-project menyaring feed live di assets/js/serah-terima.js -->
+  <div class="st-tick">
+    <div class="st-tick__head">
+      <span class="st-tick__label">→ Serah terima terbaru</span>
+      <a class="st-tick__more" href="/serah-terima/#tentrem-bhumi">Lihat selengkapnya ›</a>
+    </div>
+    <div class="st-tick__mask">
+      <div class="st-tick__rail" id="stRail"
+           data-project="tentrem-bhumi" data-more="/serah-terima/#tentrem-bhumi">
+        <a class="st-tick__item" href="/serah-terima/#tentrem-bhumi">
+          <img src="/assets/img/serah-terima/tentrem-bhumi__tb-1-t.webp" alt="Serah terima kunci di Tentrem Bhumi — JGS Group" width="248" height="248" loading="lazy" decoding="async">
+          <span class="st-tick__cap"><b>Serah terima</b>Tentrem Bhumi</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -1711,20 +1835,33 @@ function setHtml(id, val) { var el = document.getElementById(id); if (el && val 
     '<a href="' + K.footer.igUrl   + '" target="_blank" rel="noopener">' + K.footer.igLabel   + '</a>' +
     '<a href="' + K.footer.telpUrl + '">'                                 + K.footer.telpLabel + '</a>');
 
-  /* PROGRESS PENJUALAN */
-  if (K.penjualan) {
-    var p = K.penjualan;
-    var sisa = p.total - p.terjual;
-    var pct  = (p.terjual / p.total * 100).toFixed(1);
-    setText('pc-terjual', p.terjual);
-    setText('pc-label',   'dari ' + p.total + ' unit telah dipercayakan kepada keluarga baru.');
+  /* PROGRESS PENJUALAN
+     Angka konten.js dipasang lebih dulu sebagai cadangan; kalau feed
+     Progress Dashboard menjawab, setPenjualan() dipanggil ulang dengan
+     angka live (lihat skrip "LIVE DASHBOARD" di bawah). */
+  var barSudahTampil = false;   // bar sudah masuk viewport → langsung ubah lebar
+
+  window.setPenjualan = function (terjual, total) {
+    if (!total) return;
+    var sisa = Math.max(0, total - terjual);
+    setText('pc-terjual', terjual);
+    setText('pc-label',   'dari ' + total + ' unit telah dipercayakan kepada keluarga baru.');
     setText('pc-sisa',    sisa + ' unit tersisa');
+    var bar = document.getElementById('pc-bar');
+    if (!bar) return;
+    bar.dataset.pct = (terjual / total * 100).toFixed(1);
+    if (barSudahTampil) bar.style.width = bar.dataset.pct + '%';
+  };
+
+  if (K.penjualan) {
+    window.setPenjualan(K.penjualan.terjual, K.penjualan.total);
     /* Animate bar on scroll into view */
     var barEl = document.getElementById('pc-bar');
     if (barEl) {
       var obs = new IntersectionObserver(function(entries) {
         if (entries[0].isIntersecting) {
-          barEl.style.width = pct + '%';
+          barSudahTampil = true;
+          barEl.style.width = (barEl.dataset.pct || 0) + '%';
           obs.disconnect();
         }
       }, { threshold: 0.4 });
@@ -1864,6 +2001,58 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <script src="../assets/js/main.js?v=20260625"></script>
 <script src="/assets/js/pricelist-modal.js?v=20260723-1" data-agent="fira"></script>
+
+<!-- Strip serah terima: mengisi #stRail dari feed dashboard, sudah
+     tersaring lewat data-project. Juga membawa lightbox + auto-scroll. -->
+<script src="/assets/js/serah-terima.js?v=20260817-3" defer></script>
+
+<!-- ══════════════════════════════════════════
+     LIVE — statistik unit dari Progress Dashboard
+     Satu sumber angka untuk kartu status DAN bar penjualan
+     (terjual = total − tersedia), jadi halaman ini tidak pernah
+     berbeda dengan progress.jogjagrahaselaras.com.
+     Kalau feed gagal: angka statis di HTML tetap tampil.
+══════════════════════════════════════════ -->
+<script>
+(function () {
+  var API  = 'https://progress.jogjagrahaselaras.com/api/public/projects?slug=tentrem-bhumi';
+  var BULAN = ['Januari','Februari','Maret','April','Mei','Juni',
+               'Juli','Agustus','September','Oktober','November','Desember'];
+
+  function set(id, val) {
+    var el = document.getElementById(id);
+    if (el && val !== null && val !== undefined) el.textContent = val;
+  }
+
+  function tanggalID(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return null;
+    return d.getDate() + ' ' + BULAN[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  fetch(API, { mode: 'cors' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      var p = data && data.items && data.items[0];
+      if (!p) return;
+
+      set('dl-dibangun', p.unitsInConstruction);
+      set('dl-selesai',  p.unitsCompleted);
+      set('dl-tersedia', p.unitsAvailable);
+
+      var tgl = p.lastUpdate ? tanggalID(p.lastUpdate) : null;
+      set('dl-update', tgl ? 'Update ' + tgl : 'Belum ada update');
+
+      /* Bar penjualan ikut angka yang sama: terjual = total − tersedia */
+      if (typeof window.setPenjualan === 'function' && p.totalUnits) {
+        window.setPenjualan(p.unitsSold, p.totalUnits);
+      }
+    })
+    .catch(function () {
+      /* Dashboard tidak terjangkau — angka statis di HTML tetap tampil. */
+    });
+})();
+</script>
 
 <!-- Denah Lightbox -->
 <div class="dlb" id="dlb" role="dialog" aria-modal="true" aria-label="Lihat denah">
