@@ -192,6 +192,55 @@ img { display: block; }
 }
 
 /* ─────────────────────────────────────────
+   FOTO FASILITAS — baris berlabel
+   Baris pertama foto asli lapangan (live dari Progress Dashboard),
+   baris kedua render 3D. Labelnya wajib: pengunjung berhak tahu
+   mana yang sudah jadi dan mana yang masih gambar.
+───────────────────────────────────────── */
+.fas-shots-wrap { margin-top: 26px; }
+.fas-shots__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+}
+.fas-shots__eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: #1b2a64; font-weight: 500;
+}
+.fas-shots__eyebrow--muted { color: #999; }
+.fas-shots__more {
+  font-size: 12px; font-weight: 600; color: #1b2a64; text-decoration: none;
+  border-bottom: 1px solid rgba(27,42,100,.25);
+}
+.fas-shots__more:hover { color: #e07a2f; border-bottom-color: #e07a2f; }
+.fas-shots {
+  display: flex; gap: 10px; overflow-x: auto;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px; margin-top: 12px;
+}
+.fas-shots::-webkit-scrollbar { display: none; }
+.fas-shots figure { flex: none; width: 268px; margin: 0; scroll-snap-align: start; }
+.fas-shots img {
+  width: 100%; height: 180px; object-fit: cover;
+  border-radius: 12px; border: 1px solid rgba(0,0,0,.06);
+  cursor: zoom-in;
+}
+.fas-shots a { display: block; text-decoration: none; }
+.fas-shots a:hover img { outline: 2px solid #e07a2f; outline-offset: 2px; }
+.fas-shots figcaption {
+  margin-top: 8px; font-size: 12px; color: #888; line-height: 1.45;
+}
+@media (min-width: 768px) {
+  .fas-shots {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    overflow: visible; scroll-snap-type: none; gap: 12px; margin-top: 14px;
+  }
+  .fas-shots figure { width: auto; }
+  .fas-shots img { height: 200px; }
+}
+
+/* ─────────────────────────────────────────
    FASILITAS GRID
 ───────────────────────────────────────── */
 .fас-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-bottom: 0; }
@@ -1431,7 +1480,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p class="section-sub">Fasilitas lengkap untuk keluarga tumbuh dan berkembang</p>
 
   <div class="fас-grid" id="k-fasilitas-grid"><!-- diisi JS dari KONTEN.fasilitas --></div>
-  <div class="photo-scroll" id="k-foto-fasilitas"><!-- diisi JS dari KONTEN.fotoFasilitas --></div>
+
+  <!-- FOTO ASLI LAPANGAN — live dari Progress Dashboard (galeri
+       "Lingkungan Perumahan" proyek). Disembunyikan bila feed kosong
+       atau tak terjangkau; render 3D di bawah tetap tampil. -->
+  <div class="fas-shots-wrap" id="fas-real" hidden>
+    <div class="fas-shots__head">
+      <span class="fas-shots__eyebrow"><span class="dash-live__dot"></span>Foto asli di lapangan</span>
+      <a class="fas-shots__more" href="https://progress.jogjagrahaselaras.com/progress/tentrem-bhumi" target="_blank" rel="noopener">Lihat progress kawasan ›</a>
+    </div>
+    <div class="fas-shots" id="fas-real-grid"><!-- diisi JS dari feed dashboard --></div>
+  </div>
+
+  <!-- RENCANA 3D — aset statis di konten.js -->
+  <div class="fas-shots-wrap">
+    <div class="fas-shots__head">
+      <span class="fas-shots__eyebrow fas-shots__eyebrow--muted">Ilustrasi rencana kawasan (3D)</span>
+    </div>
+    <div class="photo-scroll" id="k-foto-fasilitas"><!-- diisi JS dari KONTEN.fotoFasilitas --></div>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -2064,6 +2131,50 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(function () {
       /* Dashboard tidak terjangkau — angka statis di HTML tetap tampil. */
+    });
+
+  /* ── Foto asli fasilitas & lingkungan ──────────────────────────
+     Sumber sama dengan galeri "Lingkungan Perumahan" di dashboard.
+     Foto dibuka lightbox (ditangani serah-terima.js lewat data-st-lb). */
+  var API_FOTO = 'https://progress.jogjagrahaselaras.com/api/public/environment-photos?slug=tentrem-bhumi';
+
+  fetch(API_FOTO, { mode: 'cors' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      var items = (data && data.items) || [];
+      var wrap  = document.getElementById('fas-real');
+      var grid  = document.getElementById('fas-real-grid');
+      if (!items.length || !wrap || !grid) return;
+
+      items.forEach(function (p) {
+        if (!p.url) return;
+        var teks = p.caption || 'Fasilitas & lingkungan Tentrem Bhumi';
+
+        var img = document.createElement('img');
+        img.src = p.url;
+        img.alt = teks + ' — Tentrem Bhumi, JGS Group';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+
+        var a = document.createElement('a');
+        a.href = p.url;
+        a.setAttribute('data-st-lb', '');
+        a.setAttribute('data-cap', teks);
+        a.appendChild(img);
+
+        var cap = document.createElement('figcaption');
+        cap.textContent = teks;
+
+        var fig = document.createElement('figure');
+        fig.appendChild(a);
+        fig.appendChild(cap);
+        grid.appendChild(fig);
+      });
+
+      wrap.hidden = false;
+    })
+    .catch(function () {
+      /* Feed foto gagal — bagian ini tetap tersembunyi, render 3D tampil. */
     });
 })();
 </script>
