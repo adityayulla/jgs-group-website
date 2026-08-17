@@ -57,9 +57,17 @@
     return a;
   }
 
-  function liveTick(item, href) {
+  /* opsi.lightbox = foto dibuka di tempat (halaman proyek), bukan
+     melempar pengunjung ke /serah-terima/. */
+  function liveTick(item, opsi) {
     var label = item.unit || item.project;
-    var a = el('a', 'st-tick__item', { href: href || '/serah-terima/' });
+    var a = opsi.lightbox
+      ? el('a', 'st-tick__item', {
+          href: item.photo,
+          'data-st-lb': '',
+          'data-cap': label + ' · ' + item.project
+        })
+      : el('a', 'st-tick__item', { href: opsi.href || '/serah-terima/' });
     var img = el('img', null, {
       src: item.photo,
       alt: 'Serah terima kunci unit ' + label + ' di ' + item.project + ' — JGS Group',
@@ -106,9 +114,12 @@
 
         // Ticker: sisipkan di depan rel (rel tunggal, tanpa salinan)
         if (rail) {
-          var railHref = rail.getAttribute('data-more') || '/serah-terima/';
+          var railOpsi = {
+            href: rail.getAttribute('data-more') || '/serah-terima/',
+            lightbox: rail.hasAttribute('data-lightbox')
+          };
           saring(items, rail).slice(0, 6).reverse().forEach(function (it) {
-            rail.insertBefore(liveTick(it, railHref), rail.firstElementChild);
+            rail.insertBefore(liveTick(it, railOpsi), rail.firstElementChild);
           });
         }
 
