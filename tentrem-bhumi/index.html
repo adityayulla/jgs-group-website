@@ -507,16 +507,27 @@ img { display: block; }
   font-size: 11px; color: #888;
 }
 .dash-live__src { font-size: 11px; color: #aaa; }
-/* Strip serah terima memakai kelas .st-tick dari global.css */
+/* Strip serah terima memakai kelas .st-tick dari global.css, tapi
+   fotonya dibuat lebih besar dari versi homepage — di sini isinya
+   hanya unit Tentrem Bhumi, jadi wajahnya layak dilihat. */
 .dash-live .st-tick { margin-top: 16px; border-top-color: rgba(27,42,100,.10); }
+.dash-live .st-tick__item,
+.dash-live .st-tick__item img { width: 150px; }
+.dash-live .st-tick__item img { height: 150px; }
+@media (max-width: 767px) {
+  .dash-live .st-tick__item,
+  .dash-live .st-tick__item img { width: 132px; }
+  .dash-live .st-tick__item img { height: 132px; }
+}
 @media (min-width: 1024px) {
   .dash-live { margin: 0 8px 20px 8px; padding: 24px 26px 20px; }
   .dash-live__num { font-size: 32px; }
-  /* Foto Tentrem Bhumi jumlahnya sedikit — melar mengisi baris supaya
-     tidak menyisakan ruang kosong lebar di kanan. */
+  /* Foto Tentrem Bhumi jumlahnya sedikit — melar mengisi penuh lebar
+     baris, bukan menyisakan ruang kosong di kanan. */
   .dash-live .st-tick__rail { width: 100%; gap: 14px; }
-  .dash-live .st-tick__item { flex: 1 1 0; width: auto; min-width: 110px; max-width: 168px; }
+  .dash-live .st-tick__item { flex: 1 1 0; width: auto; min-width: 110px; }
   .dash-live .st-tick__item img { width: 100%; height: auto; aspect-ratio: 1 / 1; }
+  .dash-live .st-tick__cap { font-size: 12px; margin-top: 9px; }
 }
 
 /* ─────────────────────────────────────────
@@ -1324,13 +1335,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 ══════════════════════════════════════════ -->
 <div class="prog-callout" id="prog-callout">
   <div class="prog-callout__row">
-    <span class="prog-callout__big" id="pc-terjual">16</span>
-    <span class="prog-callout__text" id="pc-label">dari 35 unit telah dipercayakan kepada keluarga baru.</span>
+    <span class="prog-callout__big" id="pc-sisa">19</span>
+    <span class="prog-callout__text" id="pc-label">unit tersisa dari 35. Pilihan terbaik biasanya lebih dulu habis — amankan unit Anda sekarang.</span>
   </div>
   <div class="prog-callout__track">
     <div class="prog-callout__bar" id="pc-bar"></div>
   </div>
-  <div class="prog-callout__meta" id="pc-sisa">19 unit tersisa</div>
+  <div class="prog-callout__meta" id="pc-meta">16 unit sudah dipercayakan kepada keluarga baru</div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -1841,12 +1852,14 @@ function setHtml(id, val) { var el = document.getElementById(id); if (el && val 
      angka live (lihat skrip "LIVE DASHBOARD" di bawah). */
   var barSudahTampil = false;   // bar sudah masuk viewport → langsung ubah lebar
 
+  /* Yang ditonjolkan SISA unit (urgensi), bukan jumlah terjual. */
   window.setPenjualan = function (terjual, total) {
     if (!total) return;
     var sisa = Math.max(0, total - terjual);
-    setText('pc-terjual', terjual);
-    setText('pc-label',   'dari ' + total + ' unit telah dipercayakan kepada keluarga baru.');
-    setText('pc-sisa',    sisa + ' unit tersisa');
+    setText('pc-sisa',  sisa);
+    setText('pc-label', 'unit tersisa dari ' + total +
+                        '. Pilihan terbaik biasanya lebih dulu habis — amankan unit Anda sekarang.');
+    setText('pc-meta',  terjual + ' unit sudah dipercayakan kepada keluarga baru');
     var bar = document.getElementById('pc-bar');
     if (!bar) return;
     bar.dataset.pct = (terjual / total * 100).toFixed(1);
