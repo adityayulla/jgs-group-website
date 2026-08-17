@@ -445,9 +445,12 @@ img { display: block; }
 .siteplan-scroll::-webkit-scrollbar { display: none; }
 .siteplan-stage {
   position: relative;
-  min-width: 560px;   /* di HP: siteplan digeser, kavling cukup besar disentuh */
+  /* Di HP siteplan digeser ke samping. 720px dipilih supaya kotak kavling
+     terkecil (Bhama, ±4,8% lebar) masih muat menampung tulisan TERJUAL. */
+  min-width: 720px;
   margin: 0 auto;
 }
+.sp-hint { font-size: 12px; color: #999; margin: 0 2px 8px; }
 .sp-overlay { position: absolute; inset: 0; }
 /* Bentuk kavling digambar sebagai poligon SVG — sebagian kavling
    (mis. Cantya 15 & 18) ujungnya miring, tidak bisa diwakili kotak. */
@@ -466,6 +469,8 @@ img { display: block; }
 .sp-poly--free:hover  { fill: rgba(31,138,76,.28); stroke: rgba(31,138,76,.9); stroke-width: 2; }
 .sp-poly--ready:hover { fill: rgba(224,122,47,.6); }
 .sp-poly--sold:hover  { stroke: rgba(224,122,47,.95); stroke-width: 2; }
+/* Ukuran hurufnya diatur JS (pasLabel) mengikuti lebar kavling —
+   angka 9px di sini cuma cadangan kalau JS gagal jalan. */
 .sp-kav__x {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -496,29 +501,10 @@ img { display: block; }
   .siteplan-scroll { overflow: visible; }
   .siteplan-stage { min-width: 0; max-width: 800px; }
   .sp-kav__x { font-size: 10px; }
+  .sp-hint { display: none; }   /* di layar lebar tidak perlu digeser */
 }
 
-/* ─────────────────────────────────────────
-   SOCIAL PROOF
-───────────────────────────────────────── */
-.sold-banner {
-  background: #fff; border-radius: 16px; padding: 22px;
-  display: flex; align-items: center; gap: 16px; margin-bottom: 14px;
-  border: 1px solid rgba(27,42,100,.10);
-  box-shadow: 0 8px 28px rgba(27,42,100,.08);
-}
-.sold-num { font-size: 34px; font-weight: 700; color: #1b2a64; }
-.sold-text { font-size: 13px; color: #2c3e8c; line-height: 1.5; font-weight: 600; }
-.rating-row { display: flex; align-items: center; gap: 8px; padding: 0 6px; }
-.rating-stars { color: #FBBC04; font-size: 18px; }
-.rating-text { font-size: 13px; color: #1b2a64; font-weight: 600; }
-.social-right {
-  background: #fff; border-radius: 16px; padding: 24px;
-  border: 1px solid rgba(27,42,100,.10);
-  box-shadow: 0 8px 28px rgba(27,42,100,.08);
-}
-.social-right p { color: #0f1430 !important; font-size: 15px !important; font-weight: 500 !important; line-height: 1.7 !important; }
-.social-right p + p { margin-top: 14px !important; }
+/* Gaya section SOCIAL PROOF dihapus bersama section-nya (17 Agu 2026). */
 
 /* ─────────────────────────────────────────
    PROGRESS CALLOUT
@@ -889,11 +875,6 @@ img { display: block; }
 
   /* ── Siteplan ── */
   .siteplan-img { max-width: 800px; margin: 0 auto; }
-
-  /* ── Social proof: 2 cols ── */
-  .social-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-  .social-left .sold-banner { margin-bottom: 16px; }
-  .sold-num { font-size: 48px; }
 
   /* ── CTA ── */
   .cta-final { padding: 72px 56px; }
@@ -1660,6 +1641,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- Overlay status jual diisi JS: koordinat kavling dari
        siteplan-kavling.json, status laku dari Progress Dashboard.
        Kalau salah satunya gagal, yang tampil siteplan polos. -->
+  <p class="sp-hint">Geser siteplan ke samping untuk melihat seluruh kawasan →</p>
   <div class="siteplan-scroll">
     <div class="siteplan-stage" id="siteplan-stage">
       <img class="siteplan-img" id="k-siteplan" src="photos/kawasan/Siteplan%20Tentrem%20Bhumi%20Berwarna_page-0001.webp" alt="Siteplan Tentrem Bhumi"/>
@@ -1675,34 +1657,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════
-     SOCIAL PROOF
-══════════════════════════════════════════ -->
-<div class="section">
-  <div class="section-tag">Kepercayaan</div>
-  <div class="section-title">Sudah dipercaya banyak keluarga</div>
-  <p class="section-sub">Unit terus terjual sejak grand opening Oktober 2024</p>
-  <div class="social-cols">
-    <div class="social-left">
-      <div class="sold-banner">
-        <div class="sold-num" id="k-unit-terjual">6+</div>
-        <div class="sold-text">
-          <span id="k-label-terjual">Unit sudah terjual</span><br>
-          <span id="k-label-total">dari 35 unit tersedia</span><br>
-          <strong id="k-label-stok" style="font-size:12px;">Stok terbatas!</strong>
-        </div>
-      </div>
-      <div class="rating-row">
-        <span class="rating-stars">★★★★★</span>
-        <span class="rating-text" id="k-label-rating">Rating Google — 5 bintang</span>
-      </div>
-    </div>
-    <div class="social-right">
-      <p id="k-sosial-cerita" style="font-size:14px;color:#555;line-height:1.7;"></p>
-      <p id="k-sosial-dev"    style="font-size:13px;color:#888;margin-top:14px;line-height:1.6;"></p>
-    </div>
-  </div>
-</div>
+<!-- Section "Kepercayaan" (social proof) dihapus 17 Agu 2026 atas permintaan
+     Direktur. Angka terjual tetap terlihat di legenda siteplan, bukti
+     sosialnya di section Testimoni di bawah. Data KONTEN.sosial dibiarkan
+     di konten.js kalau suatu saat mau dipasang lagi. -->
 
 <!-- ══════════════════════════════════════════
      TESTIMONI
@@ -2386,16 +2344,55 @@ document.addEventListener('DOMContentLoaded', function() {
         tanda.className = 'sp-kav__x';
         tanda.style.left = ((bbox[0] + bbox[2]) / 2) + '%';
         tanda.style.top  = ((bbox[1] + bbox[3]) / 2) + '%';
-        /* Stok yang belum laku: sebut progresnya dulu, baru "SIAP HUNI" —
+        /* Lebar kavling (persen) disimpan supaya ukuran hurufnya bisa
+           disesuaikan — lihat pasLabel() di bawah. Versi pendek dipakai
+           kalau kotaknya terlalu kecil untuk tulisan penuh.
+           Stok yang belum laku: sebut progresnya dulu, baru "SIAP HUNI" —
            supaya tidak terbaca sebagai janji bisa ditempati besok. */
-        if (laku) tanda.textContent = 'TERJUAL';
-        else tanda.innerHTML = persen + '%<br>SIAP HUNI';
+        tanda.setAttribute('data-w', (bbox[2] - bbox[0]));
+        tanda.setAttribute('data-penuh',  laku ? 'TERJUAL' : persen + '%|SIAP HUNI');
+        tanda.setAttribute('data-pendek', laku ? 'TERJUAL' : persen + '%');
         labelLayer.appendChild(tanda);
       }
     });
 
     lapis.appendChild(svg);
     lapis.appendChild(labelLayer);
+
+    /* ── Ukuran huruf label mengikuti lebar kavling ──────────────
+       Kotak kavling ikut melar bersama gambar, tapi hurufnya tidak.
+       Di layar sempit, tulisan berukuran tetap jadi lebih lebar dari
+       kotaknya — teks keluar kotak dan saling tumpang tindih.
+       Di sini ukurannya dihitung dari lebar kotak; kalau tulisan penuh
+       tetap tidak muat (mis. "SIAP HUNI" di kavling sempit), yang
+       dipakai versi pendeknya. */
+    var panggung = document.getElementById('siteplan-stage');
+    function pasLabel() {
+      var lebarPanggung = panggung ? panggung.clientWidth : 0;
+      if (!lebarPanggung) return;
+      var daftar = labelLayer.children;
+      for (var i = 0; i < daftar.length; i++) {
+        var el = daftar[i];
+        var kotakPx = lebarPanggung * parseFloat(el.getAttribute('data-w')) / 100;
+        var baris = el.getAttribute('data-penuh').split('|');
+        var terpanjang = 0;
+        baris.forEach(function (b) { if (b.length > terpanjang) terpanjang = b.length; });
+        /* monospace: 1 huruf ≈ 0,66em (0,60 lebar huruf + 0,06 letter-spacing);
+           0,92 menyisakan sedikit napas di tepi kotak. */
+        var muat = function (jml) { return (kotakPx * 0.92) / (jml * 0.66); };
+        var ukuran = muat(terpanjang);
+        if (ukuran < 6) {
+          var pendek = el.getAttribute('data-pendek');
+          el.textContent = pendek;
+          ukuran = muat(pendek.length);
+        } else {
+          el.innerHTML = baris.join('<br>');
+        }
+        el.style.fontSize = Math.min(11, Math.max(6, ukuran)).toFixed(1) + 'px';
+      }
+    }
+    pasLabel();
+    window.addEventListener('resize', pasLabel);
 
     set('sp-sold', nSold);
     set('sp-ready', nReady);
