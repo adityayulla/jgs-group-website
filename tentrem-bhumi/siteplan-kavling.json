@@ -1,0 +1,261 @@
+{
+ "_catatan": [
+  "Koordinat kavling untuk overlay status jual di halaman /tentrem-bhumi/.",
+  "x/y/w/h dalam PERSEN terhadap gambar siteplan, jadi ikut ukuran layar.",
+  "Dibuat otomatis dari 'photos/kawasan/Siteplan Tentrem Bhumi Berwarna_page-0001.webp'",
+  "(deteksi warna blok + pembagian per kolom). Kalau gambar siteplan diganti,",
+  "koordinat ini WAJIB dibuat ulang — kalau tidak, kotak akan meleset.",
+  "code = label yang tercetak di gambar. unit = kode unit di Progress Dashboard",
+  "(diisi hanya bila berbeda). Kavling ber-'status':'unknown' tidak diberi warna."
+ ],
+ "gambar": "photos/kawasan/Siteplan Tentrem Bhumi Berwarna_page-0001.webp",
+ "kavling": [
+  {
+   "code": "Andrawina 1",
+   "x": 42.466,
+   "y": 79.532,
+   "w": 8.139,
+   "h": 3.25
+  },
+  {
+   "code": "Andrawina 2",
+   "x": 42.466,
+   "y": 76.283,
+   "w": 8.139,
+   "h": 3.25
+  },
+  {
+   "code": "Andrawina 3",
+   "x": 42.466,
+   "y": 73.09,
+   "w": 8.3,
+   "h": 3.193
+  },
+  {
+   "code": "Andrawina 4",
+   "x": 42.466,
+   "y": 69.84,
+   "w": 8.461,
+   "h": 3.25
+  },
+  {
+   "code": "Andrawina 5",
+   "x": 42.466,
+   "y": 66.591,
+   "w": 8.541,
+   "h": 3.25
+  },
+  {
+   "code": "Andrawina 6",
+   "x": 42.466,
+   "y": 63.341,
+   "w": 8.703,
+   "h": 3.25
+  },
+  {
+   "code": "Andrawina 7",
+   "x": 42.385,
+   "y": 58.78,
+   "w": 9.106,
+   "h": 3.022
+  },
+  {
+   "code": "Andrawina 8",
+   "x": 42.224,
+   "y": 55.758,
+   "w": 9.267,
+   "h": 3.022
+  },
+  {
+   "code": "Andrawina 9",
+   "x": 42.224,
+   "y": 52.794,
+   "w": 9.508,
+   "h": 2.965
+  },
+  {
+   "code": "Andrawina 10",
+   "x": 42.224,
+   "y": 49.772,
+   "w": 9.67,
+   "h": 3.022
+  },
+  {
+   "code": "Andrawina 11",
+   "x": 42.224,
+   "y": 46.75,
+   "w": 9.831,
+   "h": 3.022
+  },
+  {
+   "code": "Bhama 1",
+   "x": 51.088,
+   "y": 14.538,
+   "w": 6.285,
+   "h": 2.965
+  },
+  {
+   "code": "Bhama 2",
+   "x": 51.007,
+   "y": 17.617,
+   "w": 6.366,
+   "h": 3.022
+  },
+  {
+   "code": "Bhama 3",
+   "x": 60.838,
+   "y": 5.188,
+   "w": 6.124,
+   "h": 2.965
+  },
+  {
+   "code": "Bhama 4",
+   "x": 60.757,
+   "y": 8.324,
+   "w": 6.366,
+   "h": 2.965
+  },
+  {
+   "code": "Bhama 5",
+   "x": 60.757,
+   "y": 11.403,
+   "w": 6.527,
+   "h": 2.965
+  },
+  {
+   "code": "Bhama 6",
+   "x": 60.757,
+   "y": 14.481,
+   "w": 6.608,
+   "h": 3.022
+  },
+  {
+   "code": "Bhama 7",
+   "x": 60.757,
+   "y": 17.617,
+   "w": 6.769,
+   "h": 2.965
+  },
+  {
+   "code": "Cantya 1",
+   "x": 52.377,
+   "y": 23.717,
+   "w": 9.186,
+   "h": 2.509
+  },
+  {
+   "code": "Cantya 2",
+   "x": 65.431,
+   "y": 27.252,
+   "w": 9.025,
+   "h": 2.509
+  },
+  {
+   "code": "Cantya 3",
+   "x": 52.458,
+   "y": 26.34,
+   "w": 9.106,
+   "h": 2.281
+  },
+  {
+   "code": "Cantya 4",
+   "x": 65.431,
+   "y": 29.761,
+   "w": 9.025,
+   "h": 2.509
+  },
+  {
+   "code": "Cantya 5",
+   "x": 52.377,
+   "y": 28.791,
+   "w": 9.106,
+   "h": 2.281
+  },
+  {
+   "code": "Cantya 6",
+   "x": 65.27,
+   "y": 32.269,
+   "w": 9.106,
+   "h": 2.509
+  },
+  {
+   "code": "Cantya 7",
+   "x": 52.377,
+   "y": 31.243,
+   "w": 9.186,
+   "h": 2.908
+  },
+  {
+   "code": "Cantya 8",
+   "x": 65.351,
+   "y": 34.778,
+   "w": 8.944,
+   "h": 2.509
+  },
+  {
+   "code": "Cantya 9",
+   "x": 52.377,
+   "y": 34.322,
+   "w": 9.186,
+   "h": 3.022
+  },
+  {
+   "code": "Cantya 10",
+   "x": 65.351,
+   "y": 37.286,
+   "w": 8.864,
+   "h": 2.452
+  },
+  {
+   "code": "Cantya 11",
+   "x": 52.377,
+   "y": 37.514,
+   "w": 9.186,
+   "h": 2.965
+  },
+  {
+   "code": "Cantya 12",
+   "x": 65.351,
+   "y": 39.738,
+   "w": 8.703,
+   "h": 2.509
+  },
+  {
+   "code": "Cantya 13",
+   "x": 52.458,
+   "y": 40.764,
+   "w": 9.106,
+   "h": 2.908
+  },
+  {
+   "code": "Cantya 14",
+   "x": 65.351,
+   "y": 42.246,
+   "w": 8.703,
+   "h": 2.509
+  },
+  {
+   "code": "Cantya 15",
+   "x": 52.458,
+   "y": 43.786,
+   "w": 9.186,
+   "h": 3.991
+  },
+  {
+   "code": "Cantya 16",
+   "x": 65.351,
+   "y": 44.755,
+   "w": 8.622,
+   "h": 2.509
+  },
+  {
+   "code": "Cantya 18",
+   "x": 65.351,
+   "y": 47.263,
+   "w": 8.622,
+   "h": 2.509,
+   "status": "unknown",
+   "_catatan": "Gambar menulis 'Cantya 18', dashboard menulis 'Cantya 17'. Netral sampai marketing memastikan yang benar."
+  }
+ ]
+}

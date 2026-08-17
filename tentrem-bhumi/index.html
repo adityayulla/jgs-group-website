@@ -434,7 +434,70 @@ img { display: block; }
 /* ─────────────────────────────────────────
    SITEPLAN
 ───────────────────────────────────────── */
-.siteplan-img { width: 100%; border-radius: 11px; border: 1px solid #eee; }
+.siteplan-img { width: 100%; border-radius: 11px; border: 1px solid #eee; display: block; }
+
+/* ─────────────────────────────────────────
+   SITEPLAN — overlay status jual
+   Kotak kavling diletakkan dalam PERSEN (siteplan-kavling.json),
+   jadi ikut melar bersama gambar tanpa perhitungan ulang.
+───────────────────────────────────────── */
+.siteplan-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.siteplan-scroll::-webkit-scrollbar { display: none; }
+.siteplan-stage {
+  position: relative;
+  min-width: 560px;   /* di HP: siteplan digeser, kavling cukup besar disentuh */
+  margin: 0 auto;
+}
+.sp-overlay { position: absolute; inset: 0; }
+.sp-kav {
+  position: absolute;
+  display: block;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background .15s ease, box-shadow .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.sp-kav--sold {
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(27,42,100,.52) 0 6px,
+      rgba(27,42,100,.30) 6px 12px);
+  box-shadow: inset 0 0 0 1px rgba(27,42,100,.8);
+}
+.sp-kav--free  { background: transparent; box-shadow: inset 0 0 0 1px rgba(31,138,76,.35); }
+.sp-kav--unknown { background: rgba(120,120,120,.30); box-shadow: inset 0 0 0 1px rgba(90,90,90,.5); }
+.sp-kav--free:hover  { background: rgba(31,138,76,.28); box-shadow: inset 0 0 0 2px rgba(31,138,76,.9); }
+.sp-kav--sold:hover  { box-shadow: inset 0 0 0 2px rgba(224,122,47,.95); }
+.sp-kav__x {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9px; letter-spacing: .06em; font-weight: 600;
+  color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.45);
+  pointer-events: none;
+}
+.sp-legend {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin-top: 14px; padding: 0 2px;
+}
+.sp-legend__item {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 13px; color: #555;
+}
+.sp-legend__item b { color: #1b2a64; font-weight: 700; }
+.sp-swatch { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+.sp-swatch--sold {
+  background: repeating-linear-gradient(135deg,
+    rgba(27,42,100,.62) 0 4px, rgba(27,42,100,.42) 4px 8px);
+  box-shadow: inset 0 0 0 1px rgba(27,42,100,.85);
+}
+.sp-swatch--free { background: #fff; box-shadow: inset 0 0 0 1px rgba(31,138,76,.6); }
+.sp-legend__hint { font-size: 12px; color: #999; margin-left: auto; }
+@media (min-width: 768px) {
+  .siteplan-scroll { overflow: visible; }
+  .siteplan-stage { min-width: 0; max-width: 800px; }
+  .sp-kav__x { font-size: 10px; }
+}
 
 /* ─────────────────────────────────────────
    SOCIAL PROOF
@@ -1594,7 +1657,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="section-tag">Siteplan</div>
   <div class="section-title">Tata letak kawasan</div>
   <p class="section-sub">35 unit tertata rapi — fasilitas berada di pusat kawasan</p>
-  <img class="siteplan-img" id="k-siteplan" src="photos/kawasan/Siteplan%20Tentrem%20Bhumi%20Berwarna_page-0001.webp" alt="Siteplan Tentrem Bhumi"/>
+
+  <!-- Overlay status jual diisi JS: koordinat kavling dari
+       siteplan-kavling.json, status laku dari Progress Dashboard.
+       Kalau salah satunya gagal, yang tampil siteplan polos. -->
+  <div class="siteplan-scroll">
+    <div class="siteplan-stage" id="siteplan-stage">
+      <img class="siteplan-img" id="k-siteplan" src="photos/kawasan/Siteplan%20Tentrem%20Bhumi%20Berwarna_page-0001.webp" alt="Siteplan Tentrem Bhumi"/>
+      <div class="sp-overlay" id="sp-overlay"></div>
+    </div>
+  </div>
+
+  <div class="sp-legend" id="sp-legend" hidden>
+    <span class="sp-legend__item"><i class="sp-swatch sp-swatch--sold"></i>Terjual <b id="sp-sold">0</b></span>
+    <span class="sp-legend__item"><i class="sp-swatch sp-swatch--free"></i>Tersedia <b id="sp-free">0</b></span>
+    <span class="sp-legend__hint">Ketuk kavling untuk tanya ketersediaan lewat WhatsApp</span>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -2177,6 +2255,79 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(function () {
       /* Feed foto gagal — bagian ini tetap tersembunyi, render 3D tampil. */
     });
+
+  /* ── Siteplan: status jual per kavling ────────────────────────
+     Koordinat kavling dari siteplan-kavling.json (persen, ikut ukuran
+     gambar). Status laku dari dashboard: kavling yang kodenya ada di
+     daftar `sold` = terjual, sisanya tersedia. Approver yang menandai,
+     lewat panel "Tanda laku" di /admin.
+
+     Kalau salah satu gagal dimuat, overlay TIDAK digambar sama sekali —
+     lebih baik siteplan polos daripada semua kavling terlihat tersedia. */
+  var API_SITEPLAN = 'https://progress.jogjagrahaselaras.com/api/public/siteplan?slug=tentrem-bhumi';
+  var WA_SITEPLAN  = 'https://wa.me/6289506888328?text=';
+
+  Promise.all([
+    fetch('siteplan-kavling.json').then(function (r) { return r.ok ? r.json() : null; }),
+    fetch(API_SITEPLAN, { mode: 'cors' }).then(function (r) { return r.ok ? r.json() : null; })
+  ]).then(function (hasil) {
+    var peta   = hasil[0];
+    var status = hasil[1];
+    var lapis  = document.getElementById('sp-overlay');
+    if (!lapis || !peta || !peta.kavling || !peta.kavling.length) return;
+    if (!status || !status.sold || !status.sold.length) return;
+
+    var terjual = {};
+    status.sold.forEach(function (kode) { terjual[String(kode).toLowerCase()] = true; });
+
+    var nSold = 0, nFree = 0;
+
+    peta.kavling.forEach(function (kav) {
+      var kodeUnit = kav.unit || kav.code;
+      var belumPasti = kav.status === 'unknown';
+      var laku = !belumPasti && terjual[kodeUnit.toLowerCase()] === true;
+
+      if (belumPasti)   { /* tidak dihitung */ }
+      else if (laku)    { nSold++; }
+      else              { nFree++; }
+
+      var keterangan = belumPasti
+        ? kav.code + ' — tanya status ke marketing'
+        : kav.code + (laku ? ' — sudah terjual' : ' — masih tersedia');
+
+      var a = document.createElement('a');
+      a.className = 'sp-kav ' + (belumPasti ? 'sp-kav--unknown' : laku ? 'sp-kav--sold' : 'sp-kav--free');
+      a.style.left   = kav.x + '%';
+      a.style.top    = kav.y + '%';
+      a.style.width  = kav.w + '%';
+      a.style.height = kav.h + '%';
+      a.href = WA_SITEPLAN + encodeURIComponent(
+        'Halo JGS, saya ingin info unit ' + kav.code + ' di Tentrem Bhumi' +
+        (laku ? ' (di siteplan tertulis terjual — adakah unit lain yang mirip?)' : '') +
+        '. (via siteplan web)'
+      );
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.title = keterangan;
+      a.setAttribute('aria-label', keterangan);
+
+      if (laku) {
+        var tanda = document.createElement('span');
+        tanda.className = 'sp-kav__x';
+        tanda.textContent = 'TERJUAL';
+        a.appendChild(tanda);
+      }
+
+      lapis.appendChild(a);
+    });
+
+    set('sp-sold', nSold);
+    set('sp-free', nFree);
+    var legenda = document.getElementById('sp-legend');
+    if (legenda) legenda.hidden = false;
+  }).catch(function () {
+    /* Koordinat atau status tidak terbaca — siteplan polos saja. */
+  });
 })();
 </script>
 
