@@ -449,38 +449,30 @@ img { display: block; }
   margin: 0 auto;
 }
 .sp-overlay { position: absolute; inset: 0; }
-.sp-kav {
-  position: absolute;
-  display: block;
-  border-radius: 3px;
-  text-decoration: none;
-  transition: background .15s ease, box-shadow .15s ease;
+/* Bentuk kavling digambar sebagai poligon SVG — sebagian kavling
+   (mis. Cantya 15 & 18) ujungnya miring, tidak bisa diwakili kotak. */
+.sp-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sp-poly {
+  pointer-events: all;
+  vector-effect: non-scaling-stroke;
+  transition: fill .15s ease, stroke .15s ease;
   -webkit-tap-highlight-color: transparent;
 }
-.sp-kav--sold {
-  background:
-    repeating-linear-gradient(135deg,
-      rgba(27,42,100,.52) 0 6px,
-      rgba(27,42,100,.30) 6px 12px);
-  box-shadow: inset 0 0 0 1px rgba(27,42,100,.8);
-}
-.sp-kav--free  { background: transparent; box-shadow: inset 0 0 0 1px rgba(31,138,76,.35); }
+.sp-poly--sold  { fill: url(#sp-hatch); stroke: rgba(27,42,100,.8);  stroke-width: 1; }
+.sp-poly--free  { fill: transparent;   stroke: rgba(31,138,76,.35); stroke-width: 1; }
 /* Dibangun tapi belum laku — stok siap huni, bukan kavling kosong. */
-.sp-kav--ready {
-  background: rgba(224,122,47,.42);
-  box-shadow: inset 0 0 0 1.5px rgba(224,122,47,.95);
-}
-.sp-kav--ready:hover { background: rgba(224,122,47,.6); }
-.sp-kav--unknown { background: rgba(120,120,120,.30); box-shadow: inset 0 0 0 1px rgba(90,90,90,.5); }
-.sp-kav--free:hover  { background: rgba(31,138,76,.28); box-shadow: inset 0 0 0 2px rgba(31,138,76,.9); }
-.sp-kav--sold:hover  { box-shadow: inset 0 0 0 2px rgba(224,122,47,.95); }
+.sp-poly--ready { fill: rgba(224,122,47,.42); stroke: rgba(224,122,47,.95); stroke-width: 1.5; }
+.sp-poly--unknown { fill: rgba(120,120,120,.30); stroke: rgba(90,90,90,.5); stroke-width: 1; }
+.sp-poly--free:hover  { fill: rgba(31,138,76,.28); stroke: rgba(31,138,76,.9); stroke-width: 2; }
+.sp-poly--ready:hover { fill: rgba(224,122,47,.6); }
+.sp-poly--sold:hover  { stroke: rgba(224,122,47,.95); stroke-width: 2; }
 .sp-kav__x {
-  position: absolute; inset: 0;
-  display: grid; place-items: center;
+  position: absolute;
+  transform: translate(-50%, -50%);
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 9px; letter-spacing: .06em; font-weight: 600;
-  color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.45);
-  pointer-events: none;
+  color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.5);
+  pointer-events: none; white-space: nowrap;
 }
 .sp-legend {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
@@ -2295,6 +2287,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var nSold = 0, nReady = 0, nFree = 0;
 
+    /* Kanvas SVG memakai satuan persen (viewBox 0-100, tanpa menjaga rasio)
+       supaya titik poligon langsung jatuh di tempatnya berapa pun lebar
+       gambar. Garis tepinya dijaga tetap tipis lewat non-scaling-stroke. */
+    var NS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'sp-svg');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('preserveAspectRatio', 'none');
+    svg.setAttribute('aria-hidden', 'false');
+
+    var defs = document.createElementNS(NS, 'defs');
+    defs.innerHTML =
+      '<pattern id="sp-hatch" width="2.6" height="2.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
+      '<rect width="2.6" height="2.6" fill="rgba(27,42,100,.30)"/>' +
+      '<rect width="1.3" height="2.6" fill="rgba(27,42,100,.55)"/></pattern>';
+    svg.appendChild(defs);
+
+    var labelLayer = document.createElement('div');
+    labelLayer.className = 'sp-overlay';
+    labelLayer.style.pointerEvents = 'none';
+
     peta.kavling.forEach(function (kav) {
       var kodeUnit = kav.unit || kav.code;
       var kunci = kodeUnit.toLowerCase();
@@ -2313,35 +2326,60 @@ document.addEventListener('DOMContentLoaded', function() {
                     : siap ? ' — sedang dibangun, siap huni & masih tersedia'
                            : ' — masih tersedia');
 
-      var a = document.createElement('a');
-      a.className = 'sp-kav ' + (belumPasti ? 'sp-kav--unknown'
-                              : laku ? 'sp-kav--sold'
-                              : siap ? 'sp-kav--ready'
-                                     : 'sp-kav--free');
-      a.style.left   = kav.x + '%';
-      a.style.top    = kav.y + '%';
-      a.style.width  = kav.w + '%';
-      a.style.height = kav.h + '%';
-      a.href = WA_SITEPLAN + encodeURIComponent(
+      /* Kavling lama (tanpa poly) tetap digambar sebagai kotak. */
+      var titik = kav.poly;
+      var bbox  = kav.bbox;
+      if (!titik && kav.w) {
+        titik = [[kav.x, kav.y], [kav.x + kav.w, kav.y],
+                 [kav.x + kav.w, kav.y + kav.h], [kav.x, kav.y + kav.h]];
+        bbox  = [kav.x, kav.y, kav.x + kav.w, kav.y + kav.h];
+      }
+      if (!titik || !titik.length) return;
+      if (!bbox) {
+        var xs = titik.map(function (t) { return t[0]; });
+        var ys = titik.map(function (t) { return t[1]; });
+        bbox = [Math.min.apply(null, xs), Math.min.apply(null, ys),
+                Math.max.apply(null, xs), Math.max.apply(null, ys)];
+      }
+
+      var a = document.createElementNS(NS, 'a');
+      a.setAttribute('href', WA_SITEPLAN + encodeURIComponent(
         'Halo JGS, saya ingin info unit ' + kav.code + ' di Tentrem Bhumi' +
         (laku ? ' (di siteplan tertulis terjual — adakah unit lain yang mirip?)'
               : siap ? ' (unit siap huni)' : '') +
         '. (via siteplan web)'
-      );
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.title = keterangan;
+      ));
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
       a.setAttribute('aria-label', keterangan);
+
+      var poly = document.createElementNS(NS, 'polygon');
+      poly.setAttribute('points', titik.map(function (t) {
+        return t[0] + ',' + t[1];
+      }).join(' '));
+      poly.setAttribute('class', 'sp-poly ' + (belumPasti ? 'sp-poly--unknown'
+                                            : laku ? 'sp-poly--sold'
+                                            : siap ? 'sp-poly--ready'
+                                                   : 'sp-poly--free'));
+      var judul = document.createElementNS(NS, 'title');
+      judul.textContent = keterangan;
+      poly.appendChild(judul);
+
+      a.appendChild(poly);
+      svg.appendChild(a);
 
       if (laku || siap) {
         var tanda = document.createElement('span');
         tanda.className = 'sp-kav__x';
+        tanda.style.left = ((bbox[0] + bbox[2]) / 2) + '%';
+        tanda.style.top  = ((bbox[1] + bbox[3]) / 2) + '%';
         tanda.textContent = laku ? 'TERJUAL' : 'SIAP HUNI';
-        a.appendChild(tanda);
+        labelLayer.appendChild(tanda);
       }
-
-      lapis.appendChild(a);
     });
+
+    lapis.appendChild(svg);
+    lapis.appendChild(labelLayer);
 
     set('sp-sold', nSold);
     set('sp-ready', nReady);
