@@ -103,6 +103,13 @@
       padding: 12px 18px; border-radius: var(--r-pill);
       display: inline-flex; align-items: center; gap: 10px;
       font-size: 13px; box-shadow: 0 10px 30px -10px rgba(0,0,0,.4); z-index: 2;
+      /* Isinya kalimat sisa unit dari dashboard — biar tetap satu baris
+         dan tidak melewati tepi foto di layar sempit. */
+      white-space: nowrap; max-width: calc(100% + 20px);
+    }
+    .hero__tag-dot { flex: none; }
+    @media (max-width: 600px) {
+      .hero__tag { font-size: 12px; padding: 10px 14px; right: 0; }
     }
     .hero__tag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); animation: pulse 2s infinite; }
 
@@ -481,25 +488,178 @@
     .sp__inner {
       max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
     }
-    .sp__img-wrap {
-      position: relative; border-radius: var(--r-lg); overflow: hidden;
-      box-shadow: 0 12px 40px rgba(27,42,100,.12);
-      cursor: zoom-in;
-      margin-top: 40px;
-      max-width: 64%;
-      margin-left: auto; margin-right: auto;
+
+    /* Overlay status jual: bentuk kavling diletakkan dalam PERSEN
+       (siteplan-kavling.json), jadi ikut melar bersama gambar tanpa
+       perhitungan ulang. */
+    .siteplan-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 36px; }
+    .siteplan-scroll::-webkit-scrollbar { display: none; }
+    .siteplan-stage {
+      position: relative;
+      /* Di HP siteplan digeser ke samping. 640px dipilih supaya kavling
+         tersempit (Hiroi Yuri, ±11% lebar) masih memuat tulisan TERJUAL. */
+      min-width: 640px;
+      margin: 0 auto;
     }
-    .sp__img-wrap img {
+    .siteplan-img {
       width: 100%; display: block;
-      transition: transform .5s var(--ease);
+      border-radius: var(--r-lg);
+      box-shadow: 0 12px 40px rgba(27,42,100,.12);
     }
-    .sp__img-wrap:hover img { transform: scale(1.02); }
-    .sp__hint {
-      position: absolute; bottom: 16px; right: 16px;
-      background: rgba(0,0,0,.55); color: #fff;
+    .sp-hint { font-size: 12px; color: var(--muted); margin: 28px 0 0; }
+    .sp-overlay { position: absolute; inset: 0; }
+    .sp-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .sp-poly {
+      pointer-events: all;
+      vector-effect: non-scaling-stroke;
+      transition: fill .15s ease, stroke .15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .sp-poly--sold  { fill: url(#sp-hatch); stroke: rgba(27,42,100,.8);  stroke-width: 1; }
+    .sp-poly--free  { fill: transparent;    stroke: rgba(31,138,76,.35); stroke-width: 1; }
+    /* Dibangun tapi belum laku — stok siap huni, bukan kavling kosong. */
+    .sp-poly--ready { fill: rgba(224,122,47,.42); stroke: rgba(224,122,47,.95); stroke-width: 1.5; }
+    .sp-poly--unknown { fill: rgba(120,120,120,.30); stroke: rgba(90,90,90,.5); stroke-width: 1; }
+    .sp-poly--free:hover  { fill: rgba(31,138,76,.28); stroke: rgba(31,138,76,.9); stroke-width: 2; }
+    .sp-poly--ready:hover { fill: rgba(224,122,47,.6); }
+    .sp-poly--sold:hover  { stroke: rgba(224,122,47,.95); stroke-width: 2; }
+    /* Ukuran hurufnya diatur JS (pasLabel) mengikuti lebar kavling —
+       angka 9px di sini cuma cadangan kalau JS gagal jalan. */
+    .sp-kav__x {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-mono);
+      font-size: 9px; line-height: 1.15; letter-spacing: .06em; font-weight: 600;
+      color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.5);
+      pointer-events: none; white-space: nowrap; text-align: center;
+    }
+    .sp-legend {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .sp-legend__item {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 13px; color: var(--muted);
+    }
+    .sp-legend__item b { color: var(--navy); font-weight: 700; }
+    /* display:inline-flex di atas mengalahkan atribut hidden — tanpa baris
+       ini, "Siap huni 0" tetap terlihat saat tidak ada stok siap huni. */
+    .sp-legend__item[hidden] { display: none; }
+    .sp-swatch { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+    .sp-swatch--sold {
+      background: repeating-linear-gradient(135deg,
+        rgba(27,42,100,.62) 0 4px, rgba(27,42,100,.42) 4px 8px);
+      box-shadow: inset 0 0 0 1px rgba(27,42,100,.85);
+    }
+    .sp-swatch--ready { background: rgba(224,122,47,.42); box-shadow: inset 0 0 0 1.5px rgba(224,122,47,.95); }
+    .sp-swatch--free  { background: #fff; box-shadow: inset 0 0 0 1px rgba(31,138,76,.6); }
+    .sp-legend__hint { font-size: 12px; color: var(--muted); opacity: .8; }
+    @media (min-width: 768px) { .sp-legend__hint { margin-left: auto; } }
+    @media (min-width: 768px) {
+      .siteplan-scroll { overflow: visible; }
+      .siteplan-stage { min-width: 0; max-width: 700px; }
+      .sp-kav__x { font-size: 10px; }
+      .sp-hint { display: none; }   /* di layar lebar tidak perlu digeser */
+      .sp-legend { max-width: 700px; margin-inline: auto; }
+    }
+
+    /* ── Live Progress Dashboard ──────────────────────────────── */
+    .dashsec { padding: 0 0 var(--sp-16); }
+    .dashsec__inner {
+      max-width: 1080px; margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid; gap: 14px;
+    }
+    /* Rel foto serah terima selebar isinya (width:max-content di global.css).
+       Tanpa min-width:0 kolom grid ikut melebar mengikutinya dan kartu
+       keluar dari layar. */
+    .dashsec__inner > * { min-width: 0; }
+    .prog-callout {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--navy);
+      border-radius: var(--r-md);
+      padding: 20px 22px 18px;
+    }
+    .prog-callout__row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .prog-callout__big {
+      font-family: var(--font-display); font-weight: 600; font-size: 40px;
+      line-height: 1; color: var(--orange); font-variant-numeric: tabular-nums;
+    }
+    .prog-callout__text { font-size: 14px; color: var(--muted); line-height: 1.5; flex: 1 1 220px; }
+    .prog-callout__track {
+      margin-top: 14px; height: 7px; border-radius: 999px;
+      background: rgba(27,42,100,.10); overflow: hidden;
+    }
+    .prog-callout__bar {
+      height: 100%; width: 0; border-radius: 999px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-2));
+      transition: width 1.2s var(--ease);
+    }
+    .prog-callout__meta {
+      margin-top: 9px;
       font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em;
-      padding: 6px 12px; border-radius: var(--r-pill);
-      pointer-events: none;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .dash-live {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--r-md); padding: 20px 22px 18px;
+    }
+    .dash-live__head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; flex-wrap: wrap;
+    }
+    .dash-live__eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--navy);
+    }
+    .dash-live__dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--orange);
+      box-shadow: 0 0 0 3px rgba(219,127,46,.18);
+    }
+    .dash-live__more {
+      font-size: 13px; font-weight: 600; color: var(--navy); text-decoration: none;
+      border-bottom: 1px solid rgba(27,42,100,.25);
+    }
+    .dash-live__more:hover { color: var(--orange); border-bottom-color: var(--orange); }
+    .dash-live__stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 8px; text-align: center; margin-top: 18px;
+    }
+    .dash-live__num {
+      font-family: var(--font-display); font-weight: 500; font-size: 32px;
+      line-height: 1; color: var(--navy); font-variant-numeric: tabular-nums;
+    }
+    .dash-live__num--ok     { color: #1f8a4c; }
+    .dash-live__num--orange { color: var(--orange); }
+    .dash-live__lab {
+      margin-top: 6px;
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+    }
+    .dash-live__foot {
+      margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line);
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 10px; flex-wrap: wrap;
+    }
+    .dash-live__upd { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+    .dash-live__src { font-size: 11px; color: var(--muted); opacity: .75; }
+    /* Strip serah terima memakai kelas .st-tick dari global.css, tapi
+       fotonya dibuat lebih besar dari versi homepage — di sini isinya
+       hanya unit Kawa Living, jadi wajahnya layak dilihat. */
+    .dash-live .st-tick { margin-top: 18px; }
+    .dash-live .st-tick__item,
+    .dash-live .st-tick__item img { width: 150px; }
+    .dash-live .st-tick__item img { height: 150px; }
+    @media (min-width: 900px) {
+      .dashsec__inner { grid-template-columns: 1fr 1.4fr; align-items: start; }
+      .dash-live .st-tick__rail { gap: 14px; }
+    }
+    @media (max-width: 767px) {
+      .dash-live .st-tick__item,
+      .dash-live .st-tick__item img { width: 132px; }
+      .dash-live .st-tick__item img { height: 132px; }
     }
 
     /* ══ Sambutan Direktur ══════════════════════════════════════ */
@@ -587,9 +747,13 @@
             <div class="stat__label">Mulai dari</div>
           </div>
           <div class="hero__divider"></div>
+          <!-- Angka LIVE dari Progress Dashboard (lihat skrip di bawah).
+               Nilai di HTML hanya cadangan kalau dashboard tak terjangkau —
+               karena itu tanpa data-count: penghitung animasi akan menimpanya
+               kembali ke angka lama saat feed sudah menjawab. -->
           <div>
-            <div class="stat__num"><span data-count="48">0</span><span style="font-size:.55em">+</span></div>
-            <div class="stat__label">Unit Tersedia</div>
+            <div class="stat__num" id="kl-stat-tersedia">47</div>
+            <div class="stat__label" id="kl-stat-tersedia-lab">Unit tersedia dari 74</div>
           </div>
           <div class="hero__divider"></div>
           <div>
@@ -615,9 +779,11 @@
           <div class="hero__badge-num">Free</div>
           <div class="hero__badge-text">Biaya KPR</div>
         </div>
-        <div class="hero__tag">
+        <!-- Pill di atas foto hero ikut angka live yang sama dengan
+             statistik di kiri — jangan sampai dua tempat berbeda. -->
+        <div class="hero__tag" id="kl-hero-tag">
           <span class="hero__tag-dot"></span>
-          Unit Tersedia
+          <span id="kl-hero-tag-text">47 dari 74 unit masih tersedia</span>
         </div>
       </div>
     </div>
@@ -625,6 +791,87 @@
     <div class="hero__scrollcue">
       <span>scroll</span>
       <div class="hero__scrollline"></div>
+    </div>
+  </section>
+
+  <!-- ══ LIVE — JGS PROGRESS DASHBOARD ══════════════════════════
+       Status penjualan + status unit khusus Kawa Living.
+       Sumber: progress.jogjagrahaselaras.com/api/public/*
+       Angka & kartu di bawah ini cadangan statis (dipakai kalau
+       dashboard tidak terjangkau) — dinamis lewat skrip di bawah.
+  ═════════════════════════════════════════════════════════════ -->
+  <section class="dashsec" id="progress">
+    <div class="dashsec__inner">
+
+      <!-- Progress penjualan -->
+      <div class="prog-callout" id="prog-callout">
+        <div class="prog-callout__row">
+          <span class="prog-callout__big" id="pc-terjual">27</span>
+          <span class="prog-callout__text" id="pc-label">unit terjual dari 74 unit. Pilihan terbaik biasanya lebih dulu habis — amankan unit Anda sekarang.</span>
+        </div>
+        <div class="prog-callout__track">
+          <div class="prog-callout__bar" id="pc-bar"></div>
+        </div>
+        <div class="prog-callout__meta" id="pc-meta">47 unit tersisa</div>
+      </div>
+
+      <!-- Kartu status unit -->
+      <div class="dash-live" id="dash-live">
+        <div class="dash-live__head">
+          <span class="dash-live__eyebrow"><span class="dash-live__dot"></span>Progress Dashboard · Live</span>
+          <a class="dash-live__more" href="https://progress.jogjagrahaselaras.com/progress/kawa-living" target="_blank" rel="noopener">Lihat Progress ›</a>
+        </div>
+
+        <div class="dash-live__stats">
+          <div>
+            <div class="dash-live__num" id="dl-dibangun">17</div>
+            <div class="dash-live__lab">Dibangun</div>
+          </div>
+          <div>
+            <div class="dash-live__num dash-live__num--ok" id="dl-selesai">10</div>
+            <div class="dash-live__lab">Selesai</div>
+          </div>
+          <div>
+            <div class="dash-live__num dash-live__num--orange" id="dl-tersedia">47</div>
+            <div class="dash-live__lab">Tersedia</div>
+          </div>
+        </div>
+
+        <div class="dash-live__foot">
+          <span class="dash-live__upd" id="dl-update">Update 10 Agustus 2026</span>
+          <span class="dash-live__src">Data langsung dari dashboard, diperbarui tiap minggu.</span>
+        </div>
+
+        <!-- Serah terima terbaru — hanya unit Kawa Living.
+             data-project menyaring feed live di assets/js/serah-terima.js -->
+        <div class="st-tick">
+          <div class="st-tick__head">
+            <span class="st-tick__label">→ Serah terima terbaru</span>
+            <a class="st-tick__more" href="/serah-terima/#kawa-living">Lihat selengkapnya ›</a>
+          </div>
+          <div class="st-tick__mask">
+            <div class="st-tick__rail" id="stRail"
+                 data-project="kawa-living" data-more="/serah-terima/#kawa-living" data-lightbox>
+              <a class="st-tick__item" href="/assets/img/serah-terima/kawa-living__kl-1.webp"
+                 data-st-lb data-cap="Serah terima · Kawa Living">
+                <img src="/assets/img/serah-terima/kawa-living__kl-1-t.webp" alt="Serah terima kunci di Kawa Living — JGS Group" width="248" height="248" loading="lazy" decoding="async">
+                <span class="st-tick__cap"><b>Serah terima</b>Kawa Living</span>
+              </a>
+              <a class="st-tick__item" href="/assets/img/serah-terima/kawa-living__kl-2.webp"
+                 data-st-lb data-cap="Serah terima · Kawa Living">
+                <img src="/assets/img/serah-terima/kawa-living__kl-2-t.webp" alt="Serah terima kunci di Kawa Living — JGS Group" width="248" height="248" loading="lazy" decoding="async">
+                <span class="st-tick__cap"><b>Serah terima</b>Kawa Living</span>
+              </a>
+              <a class="st-tick__item" href="/assets/img/serah-terima/kawa-living__kl-3.webp"
+                 data-st-lb data-cap="Serah terima · Kawa Living">
+                <img src="/assets/img/serah-terima/kawa-living__kl-3-t.webp" alt="Serah terima kunci di Kawa Living — JGS Group" width="248" height="248" loading="lazy" decoding="async">
+                <span class="st-tick__cap"><b>Serah terima</b>Kawa Living</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -944,12 +1191,27 @@
         <h2 class="section-title reveal" style="text-align:left;">Siteplan <em>Kawasan</em></h2>
         <p class="section-lead reveal reveal--delay-1" style="text-align:left; margin-top:12px;">
           Lihat posisi tiap unit, fasilitas, dan akses kawasan Kawa Living secara lengkap.
+          Kavling yang sudah terjual ditandai langsung dari Progress Dashboard.
         </p>
       </div>
-      <div class="sp__img-wrap reveal reveal--delay-1"
-           onclick="openLb('img/Siteplan%20Kawa%20Living.webp', 'Siteplan Kawasan Kawa Living')">
-        <img src="img/Siteplan%20Kawa%20Living.webp" alt="Siteplan Kawasan Kawa Living" loading="lazy">
-        <span class="sp__hint">Klik untuk perbesar →</span>
+
+      <!-- Siteplan interaktif: bentuk kavling dari siteplan-kavling.json,
+           status laku dari Progress Dashboard. Kalau salah satunya gagal,
+           yang tampil siteplan polos. -->
+      <p class="sp-hint">Geser siteplan ke samping untuk melihat seluruh kawasan →</p>
+      <div class="siteplan-scroll reveal reveal--delay-1">
+        <div class="siteplan-stage" id="siteplan-stage">
+          <img class="siteplan-img" id="kl-siteplan" src="img/Siteplan%20Kawa%20Living.webp"
+               alt="Siteplan Kawasan Kawa Living" loading="lazy">
+          <div class="sp-overlay" id="sp-overlay"></div>
+        </div>
+      </div>
+
+      <div class="sp-legend" id="sp-legend" hidden>
+        <span class="sp-legend__item"><i class="sp-swatch sp-swatch--sold"></i>Terjual <b id="sp-sold">0</b></span>
+        <span class="sp-legend__item" id="sp-ready-item" hidden><i class="sp-swatch sp-swatch--ready"></i>Siap huni <b id="sp-ready">0</b></span>
+        <span class="sp-legend__item"><i class="sp-swatch sp-swatch--free"></i>Tersedia <b id="sp-free">0</b></span>
+        <span class="sp-legend__hint">Klik kavling untuk melihat progress unitnya</span>
       </div>
     </div>
   </section>
@@ -1190,6 +1452,289 @@
 
 <script src="../assets/js/main.js?v=20260625"></script>
 <script src="/assets/js/pricelist-modal.js?v=20260723-1" data-agent="dwi"></script>
+
+<!-- Strip serah terima: mengisi #stRail dari feed dashboard, sudah
+     tersaring lewat data-project. Juga membawa lightbox + auto-scroll. -->
+<script src="/assets/js/serah-terima.js?v=20260817-4" defer></script>
+
+<!-- ══════════════════════════════════════════
+     LIVE — statistik unit dari Progress Dashboard
+     Satu sumber angka untuk kartu status, bar penjualan, DAN pill di
+     hero (terjual = total − tersedia), jadi halaman ini tidak pernah
+     berbeda dengan progress.jogjagrahaselaras.com.
+     Kalau feed gagal: angka statis di HTML tetap tampil.
+══════════════════════════════════════════ -->
+<script>
+(function () {
+  var API   = 'https://progress.jogjagrahaselaras.com/api/public/projects?slug=kawa-living';
+  var BULAN = ['Januari','Februari','Maret','April','Mei','Juni',
+               'Juli','Agustus','September','Oktober','November','Desember'];
+
+  function set(id, val) {
+    var el = document.getElementById(id);
+    if (el && val !== null && val !== undefined) el.textContent = val;
+  }
+
+  function tanggalID(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return null;
+    return d.getDate() + ' ' + BULAN[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  /* Bar penjualan baru boleh melebar setelah masuk layar — sebelum itu
+     lebarnya cukup disimpan di dataset. */
+  var barTampil = false;
+
+  function setPenjualan(terjual, total, tersedia, siapHuni) {
+    if (!total) return;
+    var sisa = tersedia !== null && tersedia !== undefined
+             ? tersedia : Math.max(0, total - terjual);
+    set('pc-terjual', terjual);
+    set('pc-label', 'unit terjual dari ' + total +
+                    ' unit. Pilihan terbaik biasanya lebih dulu habis — amankan unit Anda sekarang.');
+    /* Unit siap huni = sudah/sedang dibangun tapi belum laku — layak
+       disebut, itu yang bisa ditempati paling cepat. */
+    set('pc-meta', sisa + ' unit tersisa' +
+                   (siapHuni ? ' · ' + siapHuni + ' unit siap huni' : ''));
+
+    /* Hero ikut angka yang sama — jangan sampai dua tempat berbeda. */
+    set('kl-stat-tersedia', sisa);
+    set('kl-stat-tersedia-lab', 'Unit tersedia dari ' + total);
+    set('kl-hero-tag-text', sisa + ' dari ' + total + ' unit masih tersedia');
+
+    var bar = document.getElementById('pc-bar');
+    if (!bar) return;
+    bar.dataset.pct = (terjual / total * 100).toFixed(1);
+    if (barTampil) bar.style.width = bar.dataset.pct + '%';
+  }
+
+  /* Animasi bar saat callout masuk layar (pakai angka cadangan dulu). */
+  var bar = document.getElementById('pc-bar');
+  var callout = document.getElementById('prog-callout');
+  if (bar && callout) {
+    bar.dataset.pct = (27 / 74 * 100).toFixed(1);
+    var obs = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      barTampil = true;
+      bar.style.width = (bar.dataset.pct || 0) + '%';
+      obs.disconnect();
+    }, { threshold: 0.4 });
+    obs.observe(callout);
+  }
+
+  fetch(API, { mode: 'cors' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      var p = data && data.items && data.items[0];
+      if (!p) return;
+
+      set('dl-dibangun', p.unitsInConstruction);
+      set('dl-selesai',  p.unitsCompleted);
+      set('dl-tersedia', p.unitsAvailable);
+
+      var tgl = p.lastUpdate ? tanggalID(p.lastUpdate) : null;
+      set('dl-update', tgl ? 'Update ' + tgl : 'Belum ada update');
+
+      /* Bar penjualan memakai status jual dari dashboard (bukan tahap
+         bangun: unit bisa dibangun sebagai stok siap huni tanpa pembeli). */
+      if (p.totalUnits) {
+        setPenjualan(p.unitsSold, p.totalUnits, p.unitsAvailable, p.unitsReadyStock || 0);
+      }
+    })
+    .catch(function () {
+      /* Dashboard tidak terjangkau — angka statis di HTML tetap tampil. */
+    });
+
+  /* ── Siteplan: status jual per kavling ────────────────────────
+     Bentuk kavling dari siteplan-kavling.json (persen, ikut ukuran
+     gambar). Status laku dari dashboard: kavling yang kodenya ada di
+     daftar `sold` = terjual, sisanya tersedia. Approver yang menandai,
+     lewat panel "Tanda laku" di /admin.
+
+     Kalau salah satu gagal dimuat, overlay TIDAK digambar sama sekali —
+     lebih baik siteplan polos daripada semua kavling terlihat tersedia. */
+  var API_SITEPLAN = 'https://progress.jogjagrahaselaras.com/api/public/siteplan?slug=kawa-living';
+  var WA_SITEPLAN  = 'https://wa.me/6289506888328?text=';
+
+  Promise.all([
+    fetch('siteplan-kavling.json').then(function (r) { return r.ok ? r.json() : null; }),
+    fetch(API_SITEPLAN, { mode: 'cors' }).then(function (r) { return r.ok ? r.json() : null; })
+  ]).then(function (hasil) {
+    var peta   = hasil[0];
+    var status = hasil[1];
+    var lapis  = document.getElementById('sp-overlay');
+    if (!lapis || !peta || !peta.kavling || !peta.kavling.length) return;
+    if (!status || !status.sold || !status.sold.length) return;
+
+    var terjual = {}, siapHuni = {}, detail = {};
+    status.sold.forEach(function (kode) { terjual[String(kode).toLowerCase()] = true; });
+    (status.readyStock || []).forEach(function (kode) { siapHuni[String(kode).toLowerCase()] = true; });
+    /* Satu baris per unit, lengkap dengan progres dan tautan ke halaman
+       progress unitnya (null bila unit belum dibangun). */
+    (status.units || []).forEach(function (u) { detail[String(u.code).toLowerCase()] = u; });
+
+    var nSold = 0, nReady = 0, nFree = 0;
+
+    /* Kanvas SVG memakai satuan persen (viewBox 0-100, tanpa menjaga
+       rasio) supaya titik poligon langsung jatuh di tempatnya berapa pun
+       lebar gambar. Garis tepinya dijaga tipis lewat non-scaling-stroke. */
+    var NS  = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'sp-svg');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('preserveAspectRatio', 'none');
+
+    var defs = document.createElementNS(NS, 'defs');
+    defs.innerHTML =
+      '<pattern id="sp-hatch" width="2.6" height="2.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
+      '<rect width="2.6" height="2.6" fill="rgba(27,42,100,.30)"/>' +
+      '<rect width="1.3" height="2.6" fill="rgba(27,42,100,.55)"/></pattern>';
+    svg.appendChild(defs);
+
+    var labelLayer = document.createElement('div');
+    labelLayer.className = 'sp-overlay';
+    labelLayer.style.pointerEvents = 'none';
+
+    peta.kavling.forEach(function (kav) {
+      var kunci = (kav.unit || kav.code).toLowerCase();
+      var unit  = detail[kunci];
+      var belumPasti = kav.status === 'unknown';
+      var laku = !belumPasti && (unit ? unit.sold : terjual[kunci] === true);
+      var siap = !belumPasti && !laku && (unit ? unit.built : siapHuni[kunci] === true);
+
+      if (belumPasti)   { /* tidak dihitung */ }
+      else if (laku)    { nSold++; }
+      else if (siap)    { nReady++; }
+      else              { nFree++; }
+
+      var persen = unit && unit.progress ? unit.progress : 0;
+      var keterangan = belumPasti
+        ? kav.code + ' — tanya status ke marketing'
+        : kav.code + (laku ? ' — sudah terjual'
+                    : siap ? ' — ' + persen + '% terbangun, belum laku'
+                           : ' — masih tersedia');
+
+      var titik = kav.poly;
+      var bbox  = kav.bbox;
+      if (!titik || !titik.length) return;
+      if (!bbox) {
+        var xs = titik.map(function (t) { return t[0]; });
+        var ys = titik.map(function (t) { return t[1]; });
+        bbox = [Math.min.apply(null, xs), Math.min.apply(null, ys),
+                Math.max.apply(null, xs), Math.max.apply(null, ys)];
+      }
+
+      /* Unit yang sudah dibangun punya halaman progress sendiri — ke
+         sanalah kliknya diarahkan. Unit yang belum dibangun tidak punya
+         halaman, jadi diarahkan ke WhatsApp untuk ditanyakan. */
+      var tujuan = unit && unit.url
+        ? unit.url
+        : WA_SITEPLAN + encodeURIComponent(
+            'Halo JGS, saya ingin info unit ' + kav.code + ' di Kawa Living' +
+            (laku ? ' (di siteplan tertulis terjual — adakah unit lain yang mirip?)' : '') +
+            '. (via siteplan web)'
+          );
+
+      var a = document.createElementNS(NS, 'a');
+      a.setAttribute('href', tujuan);
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      a.setAttribute('aria-label', keterangan +
+        (unit && unit.url ? ' — buka progress unit' : ' — tanya lewat WhatsApp'));
+
+      var poly = document.createElementNS(NS, 'polygon');
+      poly.setAttribute('points', titik.map(function (t) {
+        return t[0] + ',' + t[1];
+      }).join(' '));
+      poly.setAttribute('class', 'sp-poly ' + (belumPasti ? 'sp-poly--unknown'
+                                            : laku ? 'sp-poly--sold'
+                                            : siap ? 'sp-poly--ready'
+                                                   : 'sp-poly--free'));
+      var judul = document.createElementNS(NS, 'title');
+      judul.textContent = keterangan;
+      poly.appendChild(judul);
+
+      a.appendChild(poly);
+      svg.appendChild(a);
+
+      if (laku || siap) {
+        var tanda = document.createElement('span');
+        tanda.className = 'sp-kav__x';
+        tanda.style.left = ((bbox[0] + bbox[2]) / 2) + '%';
+        tanda.style.top  = ((bbox[1] + bbox[3]) / 2) + '%';
+        /* Lebar kavling (persen) disimpan supaya ukuran hurufnya bisa
+           disesuaikan — lihat pasLabel() di bawah. Versi pendek dipakai
+           kalau kavlingnya terlalu sempit untuk tulisan penuh.
+           Stok yang belum laku: sebut progresnya dulu, baru "SIAP HUNI" —
+           supaya tidak terbaca sebagai janji bisa ditempati besok. */
+        tanda.setAttribute('data-w', (bbox[2] - bbox[0]));
+        tanda.setAttribute('data-penuh',  laku ? 'TERJUAL' : persen + '%|SIAP HUNI');
+        tanda.setAttribute('data-pendek', laku ? 'TERJUAL' : persen + '%');
+        labelLayer.appendChild(tanda);
+      }
+    });
+
+    lapis.appendChild(svg);
+    lapis.appendChild(labelLayer);
+
+    /* ── Ukuran huruf label mengikuti lebar kavling ──────────────
+       Kavling ikut melar bersama gambar, tapi hurufnya tidak. Di layar
+       sempit, tulisan berukuran tetap jadi lebih lebar dari kavlingnya —
+       teks keluar kotak dan saling tumpang tindih. Di sini ukurannya
+       dihitung dari lebar kavling; kalau tulisan penuh tetap tidak muat,
+       yang dipakai versi pendeknya. */
+    var panggung = document.getElementById('siteplan-stage');
+    function pasLabel() {
+      var lebarPanggung = panggung ? panggung.clientWidth : 0;
+      if (!lebarPanggung) return;
+      var daftar = labelLayer.children;
+      for (var i = 0; i < daftar.length; i++) {
+        var el = daftar[i];
+        var kotakPx = lebarPanggung * parseFloat(el.getAttribute('data-w')) / 100;
+        var baris = el.getAttribute('data-penuh').split('|');
+        var terpanjang = 0;
+        baris.forEach(function (b) { if (b.length > terpanjang) terpanjang = b.length; });
+        /* monospace: 1 huruf ≈ 0,66em (0,60 lebar huruf + 0,06 letter-spacing);
+           0,92 menyisakan sedikit napas di tepi kavling. */
+        var muat = function (jml) { return (kotakPx * 0.92) / (jml * 0.66); };
+        var ukuran = muat(terpanjang);
+        if (ukuran < 6) {
+          var pendek = el.getAttribute('data-pendek');
+          el.textContent = pendek;
+          ukuran = muat(pendek.length);
+        } else {
+          el.innerHTML = baris.join('<br>');
+        }
+        el.style.fontSize = Math.min(11, Math.max(6, ukuran)).toFixed(1) + 'px';
+
+        /* Perkiraan di atas memakai lebar huruf JetBrains Mono. Kalau font
+           itu belum/gagal dimuat, huruf penggantinya lebih lebar dan
+           tulisan melewati kavlingnya — di sini hasilnya diukur sungguhan
+           lalu dikecilkan seperlunya. */
+        var lebar = el.offsetWidth;
+        if (lebar > kotakPx) {
+          var koreksi = Math.max(5, ukuran * kotakPx / lebar);
+          el.style.fontSize = koreksi.toFixed(1) + 'px';
+        }
+      }
+    }
+    pasLabel();
+    window.addEventListener('resize', pasLabel);
+    /* Font mono dimuat asinkron — ukur ulang setelah huruf aslinya siap. */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(pasLabel);
+
+    set('sp-sold',  nSold);
+    set('sp-ready', nReady);
+    set('sp-free',  nFree);
+    var itemReady = document.getElementById('sp-ready-item');
+    if (itemReady) itemReady.hidden = nReady === 0;
+    var legenda = document.getElementById('sp-legend');
+    if (legenda) legenda.hidden = false;
+  }).catch(function () {
+    /* Bentuk kavling atau status tidak terbaca — siteplan polos saja. */
+  });
+})();
+</script>
 
 <!-- Lightbox -->
 <div class="lb-overlay" id="lb-overlay">
