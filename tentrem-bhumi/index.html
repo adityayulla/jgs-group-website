@@ -470,9 +470,9 @@ img { display: block; }
   position: absolute;
   transform: translate(-50%, -50%);
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 9px; letter-spacing: .06em; font-weight: 600;
+  font-size: 9px; line-height: 1.15; letter-spacing: .06em; font-weight: 600;
   color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.5);
-  pointer-events: none; white-space: nowrap;
+  pointer-events: none; white-space: nowrap; text-align: center;
 }
 .sp-legend {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
@@ -2281,9 +2281,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!lapis || !peta || !peta.kavling || !peta.kavling.length) return;
     if (!status || !status.sold || !status.sold.length) return;
 
-    var terjual = {}, siapHuni = {};
+    var terjual = {}, siapHuni = {}, detail = {};
     status.sold.forEach(function (kode) { terjual[String(kode).toLowerCase()] = true; });
     (status.readyStock || []).forEach(function (kode) { siapHuni[String(kode).toLowerCase()] = true; });
+    /* Feed baru: satu baris per unit, lengkap dengan progres dan tautan
+       ke halaman progress unitnya (null bila unit belum dibangun). */
+    (status.units || []).forEach(function (u) { detail[String(u.code).toLowerCase()] = u; });
 
     var nSold = 0, nReady = 0, nFree = 0;
 
@@ -2311,19 +2314,22 @@ document.addEventListener('DOMContentLoaded', function() {
     peta.kavling.forEach(function (kav) {
       var kodeUnit = kav.unit || kav.code;
       var kunci = kodeUnit.toLowerCase();
+      var unit  = detail[kunci];
       var belumPasti = kav.status === 'unknown';
-      var laku  = !belumPasti && terjual[kunci] === true;
-      var siap  = !belumPasti && !laku && siapHuni[kunci] === true;
+      var laku  = !belumPasti && (unit ? unit.sold : terjual[kunci] === true);
+      var siap  = !belumPasti && !laku &&
+                  (unit ? unit.built : siapHuni[kunci] === true);
 
       if (belumPasti)   { /* tidak dihitung */ }
       else if (laku)    { nSold++; }
       else if (siap)    { nReady++; }
       else              { nFree++; }
 
+      var persen = unit && unit.progress ? unit.progress : 0;
       var keterangan = belumPasti
         ? kav.code + ' — tanya status ke marketing'
         : kav.code + (laku ? ' — sudah terjual'
-                    : siap ? ' — sedang dibangun, siap huni & masih tersedia'
+                    : siap ? ' — ' + persen + '% terbangun, belum laku'
                            : ' — masih tersedia');
 
       /* Kavling lama (tanpa poly) tetap digambar sebagai kotak. */
@@ -2342,16 +2348,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 Math.max.apply(null, xs), Math.max.apply(null, ys)];
       }
 
+      /* Unit yang sudah dibangun punya halaman progress sendiri — ke sanalah
+         kliknya diarahkan. Unit yang belum dibangun tidak punya halaman,
+         jadi diarahkan ke WhatsApp untuk ditanyakan. */
+      var tujuan = unit && unit.url
+        ? unit.url
+        : WA_SITEPLAN + encodeURIComponent(
+            'Halo JGS, saya ingin info unit ' + kav.code + ' di Tentrem Bhumi' +
+            (laku ? ' (di siteplan tertulis terjual — adakah unit lain yang mirip?)' : '') +
+            '. (via siteplan web)'
+          );
+
       var a = document.createElementNS(NS, 'a');
-      a.setAttribute('href', WA_SITEPLAN + encodeURIComponent(
-        'Halo JGS, saya ingin info unit ' + kav.code + ' di Tentrem Bhumi' +
-        (laku ? ' (di siteplan tertulis terjual — adakah unit lain yang mirip?)'
-              : siap ? ' (unit siap huni)' : '') +
-        '. (via siteplan web)'
-      ));
+      a.setAttribute('href', tujuan);
       a.setAttribute('target', '_blank');
       a.setAttribute('rel', 'noopener');
-      a.setAttribute('aria-label', keterangan);
+      a.setAttribute('aria-label', keterangan +
+        (unit && unit.url ? ' — buka progress unit' : ' — tanya lewat WhatsApp'));
 
       var poly = document.createElementNS(NS, 'polygon');
       poly.setAttribute('points', titik.map(function (t) {
@@ -2373,7 +2386,10 @@ document.addEventListener('DOMContentLoaded', function() {
         tanda.className = 'sp-kav__x';
         tanda.style.left = ((bbox[0] + bbox[2]) / 2) + '%';
         tanda.style.top  = ((bbox[1] + bbox[3]) / 2) + '%';
-        tanda.textContent = laku ? 'TERJUAL' : 'SIAP HUNI';
+        /* Stok yang belum laku: sebut progresnya dulu, baru "SIAP HUNI" —
+           supaya tidak terbaca sebagai janji bisa ditempati besok. */
+        if (laku) tanda.textContent = 'TERJUAL';
+        else tanda.innerHTML = persen + '%<br>SIAP HUNI';
         labelLayer.appendChild(tanda);
       }
     });
