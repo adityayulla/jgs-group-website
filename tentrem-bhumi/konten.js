@@ -80,8 +80,10 @@ var KONTEN = {
     trustNum:   '13+',
     trustLabel: 'TAHUN\nTERPERCAYA',
 
-    /* ── Pill bawah gambar ── */
-    hotDeals:   'Stok Terbatas · 10 dari 35 Unit Terjual',
+    /* ── Pill bawah gambar ──
+       CADANGAN: angkanya ditimpa data live Progress Dashboard,
+       sumber yang sama dengan bar penjualan (lihat penjualan). ── */
+    hotDeals:   'Stok Terbatas · 16 dari 35 Unit Terjual',
   },
 
 

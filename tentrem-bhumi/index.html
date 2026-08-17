@@ -1928,6 +1928,8 @@ function setHtml(id, val) { var el = document.getElementById(id); if (el && val 
     setText('pc-label', 'unit tersisa dari ' + total +
                         '. Pilihan terbaik biasanya lebih dulu habis — amankan unit Anda sekarang.');
     setText('pc-meta',  terjual + ' unit sudah dipercayakan kepada keluarga baru');
+    /* Pill di hero ikut angka yang sama — jangan sampai dua tempat beda. */
+    setText('k-hero-hot', 'Stok Terbatas · ' + terjual + ' dari ' + total + ' Unit Terjual');
     var bar = document.getElementById('pc-bar');
     if (!bar) return;
     bar.dataset.pct = (terjual / total * 100).toFixed(1);
