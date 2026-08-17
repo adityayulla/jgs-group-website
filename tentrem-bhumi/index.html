@@ -1384,13 +1384,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 ══════════════════════════════════════════ -->
 <div class="prog-callout" id="prog-callout">
   <div class="prog-callout__row">
-    <span class="prog-callout__big" id="pc-sisa">19</span>
-    <span class="prog-callout__text" id="pc-label">unit tersisa dari 35. Pilihan terbaik biasanya lebih dulu habis — amankan unit Anda sekarang.</span>
+    <span class="prog-callout__big" id="pc-terjual">16</span>
+    <span class="prog-callout__text" id="pc-label">unit terjual dari 35 unit. Pilihan terbaik biasanya lebih dulu habis — amankan unit Anda sekarang.</span>
   </div>
   <div class="prog-callout__track">
     <div class="prog-callout__bar" id="pc-bar"></div>
   </div>
-  <div class="prog-callout__meta" id="pc-meta">16 unit sudah dipercayakan kepada keluarga baru</div>
+  <div class="prog-callout__meta" id="pc-meta">19 unit tersisa</div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -1920,14 +1920,13 @@ function setHtml(id, val) { var el = document.getElementById(id); if (el && val 
      angka live (lihat skrip "LIVE DASHBOARD" di bawah). */
   var barSudahTampil = false;   // bar sudah masuk viewport → langsung ubah lebar
 
-  /* Yang ditonjolkan SISA unit (urgensi), bukan jumlah terjual. */
   window.setPenjualan = function (terjual, total) {
     if (!total) return;
     var sisa = Math.max(0, total - terjual);
-    setText('pc-sisa',  sisa);
-    setText('pc-label', 'unit tersisa dari ' + total +
-                        '. Pilihan terbaik biasanya lebih dulu habis — amankan unit Anda sekarang.');
-    setText('pc-meta',  terjual + ' unit sudah dipercayakan kepada keluarga baru');
+    setText('pc-terjual', terjual);
+    setText('pc-label', 'unit terjual dari ' + total +
+                        ' unit. Pilihan terbaik biasanya lebih dulu habis — amankan unit Anda sekarang.');
+    setText('pc-meta',  sisa + ' unit tersisa');
     /* Pill di hero ikut angka yang sama — jangan sampai dua tempat beda. */
     setText('k-hero-hot', 'Stok Terbatas · ' + terjual + ' dari ' + total + ' Unit Terjual');
     var bar = document.getElementById('pc-bar');
