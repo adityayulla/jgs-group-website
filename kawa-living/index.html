@@ -581,12 +581,19 @@
       border-radius: var(--r-md);
       padding: 20px 22px 18px;
     }
-    .prog-callout__row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .prog-callout__eyebrow {
+      display: inline-flex; align-items: center; gap: 7px; margin-bottom: 10px;
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--orange);
+    }
+    .prog-callout__eyebrow[hidden] { display: none; }
+    .prog-callout__row { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
     .prog-callout__big {
-      font-family: var(--font-display); font-weight: 600; font-size: 40px;
+      font-family: var(--font-display); font-weight: 600; font-size: 44px;
       line-height: 1; color: var(--orange); font-variant-numeric: tabular-nums;
     }
-    .prog-callout__text { font-size: 14px; color: var(--muted); line-height: 1.5; flex: 1 1 220px; }
+    .prog-callout__text { font-size: 15px; color: var(--muted); line-height: 1.5; flex: 1 1 260px; }
+    .prog-callout__text b { color: var(--navy); font-weight: 600; }
     .prog-callout__track {
       margin-top: 14px; height: 7px; border-radius: 999px;
       background: rgba(27,42,100,.10); overflow: hidden;
@@ -652,8 +659,11 @@
     .dash-live .st-tick__item,
     .dash-live .st-tick__item img { width: 150px; }
     .dash-live .st-tick__item img { height: 150px; }
+    /* Dua BARIS, bukan dua kolom: 74 unit itu banyak, dan callout yang
+       diadu sebelahan dengan kartu status jadi sempit — kalimat urgensinya
+       ikut mengecil justru di tempat yang paling perlu terbaca. */
     @media (min-width: 900px) {
-      .dashsec__inner { grid-template-columns: 1fr 1.4fr; align-items: start; }
+      .prog-callout { padding: 24px 26px 22px; }
       .dash-live .st-tick__rail { gap: 14px; }
     }
     @media (max-width: 767px) {
@@ -803,8 +813,13 @@
   <section class="dashsec" id="progress">
     <div class="dashsec__inner">
 
-      <!-- Progress penjualan -->
+      <!-- Progress penjualan.
+           Yang ditonjolkan tipe PALING LARIS, bukan angka seluruh kawasan:
+           "27 dari 74" terbaca masih banyak sisa. Tipe terlaris dihitung
+           dari feed siteplan (lihat skrip di bawah); angka di HTML ini
+           cadangan seluruh kawasan kalau dashboard tak terjangkau. -->
       <div class="prog-callout" id="prog-callout">
+        <div class="prog-callout__eyebrow" id="pc-eyebrow" hidden></div>
         <div class="prog-callout__row">
           <span class="prog-callout__big" id="pc-terjual">27</span>
           <span class="prog-callout__text" id="pc-label">unit terjual dari 74 unit. Pilihan terbaik biasanya lebih dulu habis — amankan unit Anda sekarang.</span>
@@ -1485,27 +1500,93 @@
      lebarnya cukup disimpan di dataset. */
   var barTampil = false;
 
-  function setPenjualan(terjual, total, tersedia, siapHuni) {
-    if (!total) return;
-    var sisa = tersedia !== null && tersedia !== undefined
-             ? tersedia : Math.max(0, total - terjual);
-    set('pc-terjual', terjual);
-    set('pc-label', 'unit terjual dari ' + total +
-                    ' unit. Pilihan terbaik biasanya lebih dulu habis — amankan unit Anda sekarang.');
-    /* Unit siap huni = sudah/sedang dibangun tapi belum laku — layak
-       disebut, itu yang bisa ditempati paling cepat. */
-    set('pc-meta', sisa + ' unit tersisa' +
-                   (siapHuni ? ' · ' + siapHuni + ' unit siap huni' : ''));
+  /* Dua sumber untuk satu callout: angka seluruh kawasan dari feed projects,
+     tipe paling laris dari feed siteplan. Keduanya disimpan lalu digambar
+     oleh render() supaya feed mana pun yang datang belakangan tidak
+     menimpa hasil feed yang lain. */
+  var kawasan  = null;   // { terjual, total, sisa, siapHuni }
+  var terlaris = null;   // { nama, laku, total, sisa }
 
-    /* Hero ikut angka yang sama — jangan sampai dua tempat berbeda. */
-    set('kl-stat-tersedia', sisa);
-    set('kl-stat-tersedia-lab', 'Unit tersedia dari ' + total);
-    set('kl-hero-tag-text', sisa + ' dari ' + total + ' unit masih tersedia');
+  function render() {
+    if (!kawasan) return;
+
+    /* Hero selalu memakai angka seluruh kawasan. */
+    set('kl-stat-tersedia', kawasan.sisa);
+    set('kl-stat-tersedia-lab', 'Unit tersedia dari ' + kawasan.total);
+    set('kl-hero-tag-text', kawasan.sisa + ' dari ' + kawasan.total + ' unit masih tersedia');
+
+    var eyebrow = document.getElementById('pc-eyebrow');
+    var pct;
+
+    if (terlaris) {
+      /* Yang menekan calon pembeli bukan "27 dari 74" — itu terdengar
+         masih banyak sisa — tapi tipe yang hampir habis. */
+      if (eyebrow) {
+        eyebrow.textContent = 'Tipe paling laris · ' + terlaris.nama;
+        eyebrow.hidden = false;
+      }
+      set('pc-terjual', terlaris.laku);
+      set('pc-label', 'unit tipe ' + terlaris.nama + ' sudah terjual dari ' +
+                      terlaris.total + ' unit. Tinggal ' + terlaris.sisa +
+                      ' unit lagi — tipe ini yang paling cepat habis.');
+      set('pc-meta', 'Seluruh kawasan: ' + kawasan.terjual + ' dari ' +
+                     kawasan.total + ' unit terjual' +
+                     (kawasan.siapHuni ? ' · ' + kawasan.siapHuni + ' unit siap huni' : ''));
+      pct = terlaris.laku / terlaris.total * 100;
+    } else {
+      if (eyebrow) eyebrow.hidden = true;
+      set('pc-terjual', kawasan.terjual);
+      set('pc-label', 'unit terjual dari ' + kawasan.total +
+                      ' unit. Pilihan terbaik biasanya lebih dulu habis — amankan unit Anda sekarang.');
+      /* Unit siap huni = sudah/sedang dibangun tapi belum laku — layak
+         disebut, itu yang bisa ditempati paling cepat. */
+      set('pc-meta', kawasan.sisa + ' unit tersisa' +
+                     (kawasan.siapHuni ? ' · ' + kawasan.siapHuni + ' unit siap huni' : ''));
+      pct = kawasan.terjual / kawasan.total * 100;
+    }
 
     var bar = document.getElementById('pc-bar');
     if (!bar) return;
-    bar.dataset.pct = (terjual / total * 100).toFixed(1);
+    bar.dataset.pct = pct.toFixed(1);
     if (barTampil) bar.style.width = bar.dataset.pct + '%';
+  }
+
+  function setPenjualan(terjual, total, tersedia, siapHuni) {
+    if (!total) return;
+    kawasan = {
+      terjual: terjual,
+      total: total,
+      sisa: tersedia !== null && tersedia !== undefined
+          ? tersedia : Math.max(0, total - terjual),
+      siapHuni: siapHuni || 0
+    };
+    render();
+  }
+
+  /* Tipe paling laris = persentase laku tertinggi, di antara tipe yang
+     masih punya sisa (tipe yang sudah habis tidak bisa ditawarkan) dan
+     cukup besar untuk bermakna. */
+  function setTerlaris(units) {
+    var tipe = {};
+    (units || []).forEach(function (u) {
+      var nama = String(u.code).replace(/\s*\d+\s*$/, '').trim();
+      if (!nama) return;
+      var t = tipe[nama] || (tipe[nama] = { nama: nama, total: 0, laku: 0 });
+      t.total++;
+      if (u.sold) t.laku++;
+    });
+
+    var pilih = null;
+    Object.keys(tipe).forEach(function (nama) {
+      var t = tipe[nama];
+      t.sisa = t.total - t.laku;
+      if (t.total < 4 || t.laku < 2 || t.sisa < 1) return;
+      if (!pilih || t.laku / t.total > pilih.laku / pilih.total) pilih = t;
+    });
+
+    if (!pilih) return;      /* tidak ada yang layak — pakai angka kawasan */
+    terlaris = pilih;
+    render();
   }
 
   /* Animasi bar saat callout masuk layar (pakai angka cadangan dulu). */
@@ -1562,6 +1643,12 @@
   ]).then(function (hasil) {
     var peta   = hasil[0];
     var status = hasil[1];
+
+    /* Tipe paling laris dihitung dari daftar unit saja — tidak bergantung
+       pada bentuk kavling, jadi callout tetap terisi walau overlay
+       siteplannya sendiri gagal digambar. */
+    if (status && status.units && status.units.length) setTerlaris(status.units);
+
     var lapis  = document.getElementById('sp-overlay');
     if (!lapis || !peta || !peta.kavling || !peta.kavling.length) return;
     if (!status || !status.sold || !status.sold.length) return;

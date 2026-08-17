@@ -105,21 +105,81 @@ def slots(fam, roi, labels, axis):
     cs = cuts_periodik(prof, u0 - u.min(), u1 - u.min(), len(labels))
     cs = [c + u.min() for c in cs]
 
-    out = []
+    potongan = []
     for k in range(len(labels)):
-        a, b = cs[k], cs[k+1]
-        sel = (u >= a) & (u <= b)
-        if sel.sum() < 200:
-            out.append(None); continue
-        uu, vv = u[sel], v[sel]
-        ua, ub = np.percentile(uu, 0.5), np.percentile(uu, 99.5)
-        va, vb = np.percentile(vv, 1.0), np.percentile(vv, 99.0)
-        corners = []
-        for (p, q) in ((ua,va),(ub,va),(ub,vb),(ua,vb)):
-            pt = np.array([cx,cy]) + ex*p + ey*q
-            corners.append([round(float(pt[0])/W*100, 3), round(float(pt[1])/H*100, 3)])
-        out.append(corners)
-    return out
+        sel = (u >= cs[k]) & (u <= cs[k+1])
+        potongan.append(pts[sel] if sel.sum() >= 200 else None)
+
+    kotak = [kotak_miring(p) if p is not None else None for p in potongan]
+
+    # Rapikan: tiap piksel dikembalikan ke kavling yang paling "memilikinya"
+    # (jarak Chebyshev di dalam kerangka kotaknya), lalu kotaknya dihitung
+    # ulang. Perlu karena garis potong tegak lurus sumbu DERET, sementara
+    # deret yang bertangga (Yuri 6-10, Okina 11-20) membuat potongan itu
+    # menyerempet blok tetangga — kotak hasil potongan mentah jadi kebesaran.
+    for _ in range(3):
+        nilai = np.full((len(pts), len(kotak)), np.inf)
+        for j, kk in enumerate(kotak):
+            if kk is None: continue
+            pusat, e1, e2, sa, sb = kk
+            P = pts - pusat
+            nilai[:, j] = np.maximum(np.abs(P @ e1) / sa, np.abs(P @ e2) / sb)
+        milik = np.argmin(nilai, axis=1)
+        cukup = np.min(nilai, axis=1) < 1.6      # piksel jauh dibuang
+        baru = []
+        for j in range(len(kotak)):
+            pil = pts[(milik == j) & cukup]
+            baru.append(kotak_miring(pil) if len(pil) >= 200 else kotak[j])
+        kotak = baru
+
+    # Bentuk akhir ditelusuri dari tepi pikselnya sendiri, bukan kotak
+    # pembatasnya: sebagian kavling (Yuri 1-2, Okina 11) trapesium mengikuti
+    # batas kawasan, dan kotak menutupi tanah yang bukan miliknya.
+    hasil = []
+    for j, kk in enumerate(kotak):
+        if kk is None:
+            hasil.append(None); continue
+        pil = pts[(milik == j) & (nilai[:, j] <= 1.02)]
+        hasil.append(telusuri_tepi(pil) if len(pil) >= 200 else sudut_persen(kk))
+    return hasil
+
+
+def telusuri_tepi(milik):
+    """Poligon cembung yang mengikuti tepi kavling (4-10 titik)."""
+    hull = cv2.convexHull(milik.astype(np.float32))
+    keliling = cv2.arcLength(hull, True)
+    poly = cv2.approxPolyDP(hull, 0.012 * keliling, True).reshape(-1, 2)
+    return [[round(float(x)/W*100, 3), round(float(y)/H*100, 3)] for x, y in poly]
+
+
+def kotak_miring(milik):
+    """Kotak miring untuk SATU kavling: pusat, dua sumbu, dua setengah-sisi.
+
+    Kemiringan diambil per kavling, bukan dari deretnya: deret Yuri 6-10 dan
+    Okina 11-20 menyerong, tapi tiap kavlingnya sendiri hampir lurus (deretnya
+    bertangga, bukan berputar). Kalau dipaksa ikut kemiringan deret, poligonnya
+    jadi jajar genjang yang meleset dari bloknya.
+    """
+    (bx, by), _, bang = cv2.minAreaRect(milik)
+    th = np.deg2rad(bang)
+    e1 = np.array([np.cos(th), np.sin(th)])
+    e2 = np.array([-np.sin(th), np.cos(th)])
+    P = milik - np.array([bx, by])
+    s, t = P @ e1, P @ e2
+    # percentil menahan sisa piksel "jembatan" antar kavling di celahnya
+    s0, s1 = np.percentile(s, 0.7), np.percentile(s, 99.3)
+    t0, t1 = np.percentile(t, 0.7), np.percentile(t, 99.3)
+    pusat = np.array([bx, by]) + e1*(s0+s1)/2 + e2*(t0+t1)/2
+    return pusat, e1, e2, max((s1-s0)/2, 1.0), max((t1-t0)/2, 1.0)
+
+
+def sudut_persen(kk):
+    pusat, e1, e2, sa, sb = kk
+    corners = []
+    for (p, q) in ((-sa,-sb), (sa,-sb), (sa,sb), (-sa,sb)):
+        pt = pusat + e1*p + e2*q
+        corners.append([round(float(pt[0])/W*100, 3), round(float(pt[1])/H*100, 3)])
+    return corners
 
 
 kavling = []
