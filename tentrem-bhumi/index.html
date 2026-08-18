@@ -445,12 +445,25 @@ img { display: block; }
 .siteplan-scroll::-webkit-scrollbar { display: none; }
 .siteplan-stage {
   position: relative;
-  /* Di HP siteplan digeser ke samping. 720px dipilih supaya kotak kavling
-     terkecil (Bhama, ±4,8% lebar) masih muat menampung tulisan TERJUAL. */
-  min-width: 720px;
+  /* Bawaannya siteplan dipaskan ke lebar layar — di HP tidak ada lagi
+     yang terpotong. Tulisan di kavling terkecil otomatis disembunyikan
+     (lihat pasLabel), warna kavling + legenda yang bercerita. */
+  min-width: 0;
   margin: 0 auto;
 }
-.sp-hint { font-size: 12px; color: #999; margin: 0 2px 8px; }
+/* Mode "Perbesar": 720px dipilih supaya kotak kavling terkecil
+   (Bhama, ±4,8% lebar) masih muat menampung tulisan TERJUAL. */
+.siteplan-scroll.is-zoom .siteplan-stage { min-width: 720px; }
+.sp-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 2px 10px; }
+.sp-zoom {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 15px;
+  border: 1.5px solid #1b2a64; border-radius: 999px;
+  background: #fff; color: #1b2a64;
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.sp-hint { font-size: 12px; color: #999; margin: 0; }
 .sp-overlay { position: absolute; inset: 0; }
 /* Bentuk kavling digambar sebagai poligon SVG — sebagian kavling
    (mis. Cantya 15 & 18) ujungnya miring, tidak bisa diwakili kotak. */
@@ -498,10 +511,11 @@ img { display: block; }
 .sp-swatch--free { background: #fff; box-shadow: inset 0 0 0 1px rgba(31,138,76,.6); }
 .sp-legend__hint { font-size: 12px; color: #999; margin-left: auto; }
 @media (min-width: 768px) {
-  .siteplan-scroll { overflow: visible; }
-  .siteplan-stage { min-width: 0; max-width: 800px; }
+  .siteplan-scroll, .siteplan-scroll.is-zoom { overflow: visible; }
+  .siteplan-stage,
+  .siteplan-scroll.is-zoom .siteplan-stage { min-width: 0; max-width: 800px; }
   .sp-kav__x { font-size: 10px; }
-  .sp-hint { display: none; }   /* di layar lebar tidak perlu digeser */
+  .sp-tools { display: none; }   /* di layar lebar sudah terbaca apa adanya */
 }
 
 /* Gaya section SOCIAL PROOF dihapus bersama section-nya (17 Agu 2026). */
@@ -1641,8 +1655,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- Overlay status jual diisi JS: koordinat kavling dari
        siteplan-kavling.json, status laku dari Progress Dashboard.
        Kalau salah satunya gagal, yang tampil siteplan polos. -->
-  <p class="sp-hint">Geser siteplan ke samping untuk melihat seluruh kawasan →</p>
-  <div class="siteplan-scroll">
+  <div class="sp-tools">
+    <button type="button" class="sp-zoom" id="sp-zoom" aria-expanded="false">🔍 Perbesar siteplan</button>
+    <span class="sp-hint" id="sp-hint" hidden>Geser ke samping untuk melihat seluruh kawasan →</span>
+  </div>
+  <div class="siteplan-scroll" id="siteplan-scroll">
     <div class="siteplan-stage" id="siteplan-stage">
       <img class="siteplan-img" id="k-siteplan" src="photos/kawasan/Siteplan%20Tentrem%20Bhumi%20Berwarna_page-0001.webp" alt="Siteplan Tentrem Bhumi"/>
       <div class="sp-overlay" id="sp-overlay"></div>
@@ -1656,6 +1673,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="sp-legend__hint">Ketuk kavling untuk tanya ketersediaan lewat WhatsApp</span>
   </div>
 </div>
+
+<!-- Tombol Perbesar siteplan. Bawaannya siteplan dipaskan ke lebar layar;
+     sekali ketuk panggung dilebarkan ke 720px supaya tulisan tiap kavling
+     terbaca, dan barulah digeser ke samping. -->
+<script>
+(function () {
+  var tombol   = document.getElementById('sp-zoom');
+  var gulir    = document.getElementById('siteplan-scroll');
+  var petunjuk = document.getElementById('sp-hint');
+  if (!tombol || !gulir) return;
+  tombol.addEventListener('click', function () {
+    var besar = gulir.classList.toggle('is-zoom');
+    tombol.textContent = besar ? '🔍 Perkecil siteplan' : '🔍 Perbesar siteplan';
+    tombol.setAttribute('aria-expanded', besar ? 'true' : 'false');
+    if (petunjuk) petunjuk.hidden = !besar;
+    if (!besar) gulir.scrollLeft = 0;
+    /* pasLabel() ikut mendengar resize — ukuran huruf label dihitung
+       ulang mengikuti lebar panggung yang baru. */
+    window.dispatchEvent(new Event('resize'));
+  });
+})();
+</script>
 
 <!-- Section "Kepercayaan" (social proof) dihapus 17 Agu 2026 atas permintaan
      Direktur. Angka terjual tetap terlihat di legenda siteplan, bukti
@@ -2388,6 +2427,11 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
           el.innerHTML = baris.join('<br>');
         }
+        /* Versi pendek pun tidak muat (siteplan sedang dipaskan ke lebar
+           HP) — tulisannya disembunyikan supaya tidak tumpang tindih.
+           Warna kavling + legenda sudah cukup, dan tombol "Perbesar"
+           mengembalikan tulisannya. */
+        el.style.display = ukuran < 5.5 ? 'none' : '';
         el.style.fontSize = Math.min(11, Math.max(6, ukuran)).toFixed(1) + 'px';
       }
     }
