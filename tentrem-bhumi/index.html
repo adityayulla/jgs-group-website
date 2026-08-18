@@ -454,7 +454,7 @@ img { display: block; }
 /* Mode "Perbesar": 720px dipilih supaya kotak kavling terkecil
    (Bhama, ±4,8% lebar) masih muat menampung tulisan TERJUAL. */
 .siteplan-scroll.is-zoom .siteplan-stage { min-width: 720px; }
-.sp-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 2px 10px; }
+.sp-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 12px 2px 0; }
 .sp-zoom {
   display: inline-flex; align-items: center; gap: 7px;
   padding: 9px 15px;
@@ -1655,15 +1655,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- Overlay status jual diisi JS: koordinat kavling dari
        siteplan-kavling.json, status laku dari Progress Dashboard.
        Kalau salah satunya gagal, yang tampil siteplan polos. -->
-  <div class="sp-tools">
-    <button type="button" class="sp-zoom" id="sp-zoom" aria-expanded="false">🔍 Perbesar siteplan</button>
-    <span class="sp-hint" id="sp-hint" hidden>Geser ke samping untuk melihat seluruh kawasan →</span>
-  </div>
   <div class="siteplan-scroll" id="siteplan-scroll">
     <div class="siteplan-stage" id="siteplan-stage">
       <img class="siteplan-img" id="k-siteplan" src="photos/kawasan/Siteplan%20Tentrem%20Bhumi%20Berwarna_page-0001.webp" alt="Siteplan Tentrem Bhumi"/>
       <div class="sp-overlay" id="sp-overlay"></div>
     </div>
+  </div>
+  <div class="sp-tools">
+    <button type="button" class="sp-zoom" id="sp-zoom" aria-expanded="false">🔍 Perbesar siteplan</button>
+    <span class="sp-hint" id="sp-hint" hidden>Geser ke samping untuk melihat seluruh kawasan →</span>
   </div>
 
   <div class="sp-legend" id="sp-legend" hidden>
@@ -1692,6 +1692,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     /* pasLabel() ikut mendengar resize — ukuran huruf label dihitung
        ulang mengikuti lebar panggung yang baru. */
     window.dispatchEvent(new Event('resize'));
+    /* Gambarnya berubah tinggi — halaman dibawa ke atas siteplan
+       supaya yang terlihat langsung gambarnya, bukan bagian
+       tengah/bawah yang tergeser. 80px menyisakan ruang untuk
+       header yang menempel di atas. */
+    window.scrollBy(0, gulir.getBoundingClientRect().top - 80);
   });
 })();
 </script>

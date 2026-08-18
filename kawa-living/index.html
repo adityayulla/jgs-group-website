@@ -510,7 +510,7 @@
       border-radius: var(--r-lg);
       box-shadow: 0 12px 40px rgba(27,42,100,.12);
     }
-    .sp-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 28px 0 0; }
+    .sp-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 18px 0 0; }
     .sp-zoom {
       display: inline-flex; align-items: center; gap: 7px;
       padding: 9px 15px;
@@ -1227,16 +1227,16 @@
       <!-- Siteplan interaktif: bentuk kavling dari siteplan-kavling.json,
            status laku dari Progress Dashboard. Kalau salah satunya gagal,
            yang tampil siteplan polos. -->
-      <div class="sp-tools">
-        <button type="button" class="sp-zoom" id="sp-zoom" aria-expanded="false">🔍 Perbesar siteplan</button>
-        <span class="sp-hint" id="sp-hint" hidden>Geser ke samping untuk melihat seluruh kawasan →</span>
-      </div>
       <div class="siteplan-scroll reveal reveal--delay-1" id="siteplan-scroll">
         <div class="siteplan-stage" id="siteplan-stage">
           <img class="siteplan-img" id="kl-siteplan" src="img/Siteplan%20Kawa%20Living.webp"
                alt="Siteplan Kawasan Kawa Living" loading="lazy">
           <div class="sp-overlay" id="sp-overlay"></div>
         </div>
+      </div>
+      <div class="sp-tools">
+        <button type="button" class="sp-zoom" id="sp-zoom" aria-expanded="false">🔍 Perbesar siteplan</button>
+        <span class="sp-hint" id="sp-hint" hidden>Geser ke samping untuk melihat seluruh kawasan →</span>
       </div>
 
       <div class="sp-legend" id="sp-legend" hidden>
@@ -1266,6 +1266,11 @@
       /* pasLabel() ikut mendengar resize — ukuran huruf label dihitung
          ulang mengikuti lebar panggung yang baru. */
       window.dispatchEvent(new Event('resize'));
+      /* Gambarnya berubah tinggi — halaman dibawa ke atas siteplan
+         supaya yang terlihat langsung gambarnya, bukan bagian
+         tengah/bawah yang tergeser. 80px menyisakan ruang untuk
+         header yang menempel di atas. */
+      window.scrollBy(0, gulir.getBoundingClientRect().top - 80);
     });
   })();
   </script>
