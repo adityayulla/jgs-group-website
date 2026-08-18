@@ -1800,7 +1800,13 @@
            supaya tidak terbaca sebagai janji bisa ditempati besok. */
         tanda.setAttribute('data-w', (bbox[2] - bbox[0]));
         tanda.setAttribute('data-penuh',  laku ? 'TERJUAL' : persen + '%|SIAP HUNI');
-        tanda.setAttribute('data-pendek', laku ? 'TERJUAL' : persen + '%');
+        /* Versi pendek untuk kavling sempit: "READY", bukan angka persen.
+           Kavling di siteplan hanya setinggi ±14px saat gambar dipaskan ke
+           layar HP — cuma muat satu baris, dan "SIAP HUNI" (9 huruf) baru
+           terbaca kalau siteplan diperbesar. Angka "85%" sendirian tidak
+           memberi tahu apa-apa; statusnya yang perlu tersampaikan. Persen
+           progresnya tetap muncul di versi penuh (mode Perbesar & desktop). */
+        tanda.setAttribute('data-pendek', laku ? 'TERJUAL' : 'READY');
         labelLayer.appendChild(tanda);
       }
     });
