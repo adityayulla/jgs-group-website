@@ -720,6 +720,57 @@
       .greet__body { padding: 34px 26px; min-width: 0; }
       .greet__quote { font-size: 19px; }
     }
+
+    /* ══ Lingkungan Kawasan ═════════════════════════════════════
+       Foto asli lapangan, live dari Progress Dashboard (galeri
+       "Lingkungan Perumahan" proyek). Sama seperti di Tentrem Bhumi.
+       Section hanya muncul kalau feed berisi — jangan pernah
+       menampilkan kerangka kosong. */
+    .lingk[hidden] { display: none; }
+    .lingk__head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 12px; flex-wrap: wrap; margin-bottom: 14px;
+    }
+    .lingk__live {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--navy); font-weight: 500;
+    }
+    .lingk__dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--orange); box-shadow: 0 0 12px var(--orange);
+    }
+    .lingk__more {
+      font-size: 12px; font-weight: 600; color: var(--navy); text-decoration: none;
+      border-bottom: 1px solid rgba(27,42,100,.25);
+    }
+    .lingk__more:hover { color: var(--orange); border-bottom-color: var(--orange); }
+    /* Mobile: rel geser. Desktop: grid. */
+    .lingk__grid {
+      display: flex; gap: 10px; overflow-x: auto;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      padding-bottom: 6px;
+    }
+    .lingk__grid::-webkit-scrollbar { display: none; }
+    .lingk__grid figure { flex: none; width: 268px; margin: 0; scroll-snap-align: start; }
+    .lingk__grid img {
+      width: 100%; height: 190px; object-fit: cover;
+      border-radius: var(--r-md, 12px); border: 1px solid var(--line);
+      cursor: zoom-in; display: block;
+    }
+    .lingk__grid img:hover { outline: 2px solid var(--orange); outline-offset: 2px; }
+    .lingk__grid figcaption {
+      margin-top: 8px; font-size: 12px; color: var(--muted); line-height: 1.45;
+    }
+    @media (min-width: 768px) {
+      .lingk__grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        overflow: visible; scroll-snap-type: none; gap: 14px;
+      }
+      .lingk__grid figure { width: auto; }
+      .lingk__grid img { height: 210px; }
+    }
   </style>
 </head>
 <body>
@@ -1169,6 +1220,28 @@
         <span class="ht__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
         <span class="ht__cap">Himawari<br><span style="font-size:13px;font-weight:400;opacity:.85;">Pasca serah terima</span></span>
       </button>
+    </div>
+  </section>
+
+  <!-- ══ LINGKUNGAN KAWASAN ═══════════════════════════════════════
+       Foto asli lapangan, LIVE dari Progress Dashboard (galeri
+       "Lingkungan Perumahan" proyek kawa-living). Tim lapangan yang
+       mengisi lewat /admin di dashboard — tidak ada yang perlu diubah
+       di sini saat foto bertambah.
+       Section start `hidden`: kalau feed kosong / tak terjangkau,
+       lebih baik tak tampil sama sekali daripada kerangka kosong. -->
+  <section class="lingk section--sm" id="lingkungan" hidden>
+    <div class="section__head container">
+      <span class="eyebrow">Lingkungan Kawasan</span>
+      <h2 class="section-title reveal">Bukan render.<br>Ini kondisi asli di lapangan.</h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Foto terbaru taman, jalan, dan fasilitas kawasan Kawa Living — diperbarui langsung dari Progress Dashboard JGS.</p>
+    </div>
+    <div class="container reveal">
+      <div class="lingk__head">
+        <span class="lingk__live"><span class="lingk__dot"></span>Foto asli di lapangan</span>
+        <a class="lingk__more" href="https://progress.jogjagrahaselaras.com/progress/kawa-living" target="_blank" rel="noopener">Lihat progress kawasan &rsaquo;</a>
+      </div>
+      <div class="lingk__grid" id="kl-lingk-grid"><!-- diisi JS dari feed dashboard --></div>
     </div>
   </section>
 
@@ -1670,6 +1743,49 @@
       /* Dashboard tidak terjangkau — angka statis di HTML tetap tampil. */
     });
 
+  /* ── Foto asli lingkungan kawasan ─────────────────────────────
+     Sumber sama dengan galeri "Lingkungan Perumahan" di dashboard —
+     persis seperti di halaman Tentrem Bhumi. Section baru ditampilkan
+     setelah ada foto yang benar-benar masuk. Klik foto = lightbox
+     halaman ini (openLb). */
+  var API_FOTO = 'https://progress.jogjagrahaselaras.com/api/public/environment-photos?slug=kawa-living';
+
+  fetch(API_FOTO, { mode: 'cors' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      var items = (data && data.items) || [];
+      var sec  = document.getElementById('lingkungan');
+      var grid = document.getElementById('kl-lingk-grid');
+      if (!items.length || !sec || !grid) return;
+
+      items.forEach(function (foto) {
+        if (!foto.url) return;
+        var teks = foto.caption || 'Lingkungan kawasan Kawa Living';
+
+        var img = document.createElement('img');
+        img.src = foto.url;
+        img.alt = teks + ' — Kawa Living, JGS Group';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.addEventListener('click', function () {
+          if (typeof window.openLb === 'function') window.openLb(this.src, this.alt);
+        });
+
+        var cap = document.createElement('figcaption');
+        cap.textContent = teks;
+
+        var fig = document.createElement('figure');
+        fig.appendChild(img);
+        fig.appendChild(cap);
+        grid.appendChild(fig);
+      });
+
+      sec.hidden = false;
+    })
+    .catch(function () {
+      /* Feed foto gagal — section tetap tersembunyi, halaman utuh. */
+    });
+
   /* ── Siteplan: status jual per kavling ────────────────────────
      Bentuk kavling dari siteplan-kavling.json (persen, ikut ukuran
      gambar). Status laku dari dashboard: kavling yang kodenya ada di
@@ -1679,7 +1795,7 @@
      Kalau salah satu gagal dimuat, overlay TIDAK digambar sama sekali —
      lebih baik siteplan polos daripada semua kavling terlihat tersedia. */
   var API_SITEPLAN = 'https://progress.jogjagrahaselaras.com/api/public/siteplan?slug=kawa-living';
-  var WA_SITEPLAN  = 'https://wa.me/6289506888328?text=';
+  var PROGRESS_PROYEK = 'https://progress.jogjagrahaselaras.com/progress/kawa-living/';
 
   Promise.all([
     fetch('siteplan-kavling.json').then(function (r) { return r.ok ? r.json() : null; }),
@@ -1755,23 +1871,17 @@
                 Math.max.apply(null, xs), Math.max.apply(null, ys)];
       }
 
-      /* Unit yang sudah dibangun punya halaman progress sendiri — ke
-         sanalah kliknya diarahkan. Unit yang belum dibangun tidak punya
-         halaman, jadi diarahkan ke WhatsApp untuk ditanyakan. */
-      var tujuan = unit && unit.url
-        ? unit.url
-        : WA_SITEPLAN + encodeURIComponent(
-            'Halo JGS, saya ingin info unit ' + kav.code + ' di Kawa Living' +
-            (laku ? ' (di siteplan tertulis terjual — adakah unit lain yang mirip?)' : '') +
-            '. (via siteplan web)'
-          );
+      /* Semua kavling mendarat di dashboard progress: unit yang punya halaman
+         sendiri ke halaman unitnya, sisanya ke progress kawasan proyek ini. */
+      var punyaHalaman = !!(unit && unit.url);
+      var tujuan = punyaHalaman ? unit.url : PROGRESS_PROYEK;
 
       var a = document.createElementNS(NS, 'a');
       a.setAttribute('href', tujuan);
       a.setAttribute('target', '_blank');
       a.setAttribute('rel', 'noopener');
       a.setAttribute('aria-label', keterangan +
-        (unit && unit.url ? ' — buka progress unit' : ' — tanya lewat WhatsApp'));
+        (punyaHalaman ? ' — buka progress unit' : ' — lihat progress kawasan'));
 
       var poly = document.createElementNS(NS, 'polygon');
       poly.setAttribute('points', titik.map(function (t) {

@@ -1670,7 +1670,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="sp-legend__item"><i class="sp-swatch sp-swatch--sold"></i>Terjual <b id="sp-sold">0</b></span>
     <span class="sp-legend__item" id="sp-ready-item" hidden><i class="sp-swatch sp-swatch--ready"></i>Siap huni <b id="sp-ready">0</b></span>
     <span class="sp-legend__item"><i class="sp-swatch sp-swatch--free"></i>Tersedia <b id="sp-free">0</b></span>
-    <span class="sp-legend__hint">Ketuk kavling untuk tanya ketersediaan lewat WhatsApp</span>
+    <span class="sp-legend__hint">Ketuk kavling untuk melihat progress unitnya</span>
   </div>
 </div>
 
@@ -2271,7 +2271,7 @@ document.addEventListener('DOMContentLoaded', function() {
      Kalau salah satu gagal dimuat, overlay TIDAK digambar sama sekali —
      lebih baik siteplan polos daripada semua kavling terlihat tersedia. */
   var API_SITEPLAN = 'https://progress.jogjagrahaselaras.com/api/public/siteplan?slug=tentrem-bhumi';
-  var WA_SITEPLAN  = 'https://wa.me/6289506888328?text=';
+  var PROGRESS_PROYEK = 'https://progress.jogjagrahaselaras.com/progress/tentrem-bhumi/';
 
   Promise.all([
     fetch('siteplan-kavling.json').then(function (r) { return r.ok ? r.json() : null; }),
@@ -2350,23 +2350,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 Math.max.apply(null, xs), Math.max.apply(null, ys)];
       }
 
-      /* Unit yang sudah dibangun punya halaman progress sendiri — ke sanalah
-         kliknya diarahkan. Unit yang belum dibangun tidak punya halaman,
-         jadi diarahkan ke WhatsApp untuk ditanyakan. */
-      var tujuan = unit && unit.url
-        ? unit.url
-        : WA_SITEPLAN + encodeURIComponent(
-            'Halo JGS, saya ingin info unit ' + kav.code + ' di Tentrem Bhumi' +
-            (laku ? ' (di siteplan tertulis terjual — adakah unit lain yang mirip?)' : '') +
-            '. (via siteplan web)'
-          );
+      /* Semua kavling mendarat di dashboard progress: unit yang punya halaman
+         sendiri ke halaman unitnya, sisanya ke progress kawasan proyek ini. */
+      var punyaHalaman = !!(unit && unit.url);
+      var tujuan = punyaHalaman ? unit.url : PROGRESS_PROYEK;
 
       var a = document.createElementNS(NS, 'a');
       a.setAttribute('href', tujuan);
       a.setAttribute('target', '_blank');
       a.setAttribute('rel', 'noopener');
       a.setAttribute('aria-label', keterangan +
-        (unit && unit.url ? ' — buka progress unit' : ' — tanya lewat WhatsApp'));
+        (punyaHalaman ? ' — buka progress unit' : ' — lihat progress kawasan'));
 
       var poly = document.createElementNS(NS, 'polygon');
       poly.setAttribute('points', titik.map(function (t) {
