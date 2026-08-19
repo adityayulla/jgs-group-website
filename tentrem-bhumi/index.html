@@ -238,14 +238,18 @@ img { display: block; }
   }
   .fas-shots figure { width: auto; }
   .fas-shots img { height: 240px; }
-  /* Foto terakhir yang tersisa sendirian di barisnya dilebarkan penuh —
-     lebih baik satu foto lebar daripada satu kartu kecil menggantung. */
-  .fas-shots figure:nth-child(3n+1):last-child { grid-column: 1 / -1; }
-  .fas-shots figure:nth-child(3n+1):last-child img { height: 300px; }
+  /* Foto pertama (gerbang bernama perumahan) jadi pembuka selebar baris,
+     sisanya tiga per baris. Kalau foto terakhir tersisa sendirian di
+     barisnya, ikut dilebarkan supaya tidak menggantung sebagai kartu kecil. */
+  .fas-shots figure:first-child,
+  .fas-shots figure:nth-child(3n+2):last-child { grid-column: 1 / -1; }
+  .fas-shots figure:first-child img,
+  .fas-shots figure:nth-child(3n+2):last-child img { height: 300px; }
 }
 @media (min-width: 1024px) {
   .fas-shots img { height: 300px; }
-  .fas-shots figure:nth-child(3n+1):last-child img { height: 380px; }
+  .fas-shots figure:first-child img,
+  .fas-shots figure:nth-child(3n+2):last-child img { height: 420px; }
 }
 
 /* ─────────────────────────────────────────
