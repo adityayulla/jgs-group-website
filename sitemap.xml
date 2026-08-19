@@ -33,6 +33,14 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Villa Tentrem Jiwo (halaman detail) -->
+<url>
+    <loc>https://jogjagrahaselaras.com/tentrem-jiwo/villa/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Halaman SEO: Perumahan di Jogja (pilar) -->
   <url>
     <loc>https://jogjagrahaselaras.com/perumahan-jogja/</loc>
@@ -185,7 +193,15 @@
   <!-- Proyek selesai: Kawa Village -->
   <url>
     <loc>https://jogjagrahaselaras.com/kawa-village/</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Proyek selesai: Royal Mansion -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/royal-mansion/</loc>
+    <lastmod>2026-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
