@@ -123,6 +123,17 @@
     .dash-live .st-tick__item,
     .dash-live .st-tick__item img { width: 150px; }
     .dash-live .st-tick__item img { height: 150px; }
+    /* Kartu dashboard di halaman ini selebar halaman (dua baris, bukan
+       dua kolom), jadi thumbnail berukuran tetap menyisakan ruang kosong
+       di kanan. Mulai 760px keenam item dibagi rata selebar kartu; di
+       bawah itu tetap rel bergulir seperti halaman lain. */
+    @media (min-width: 760px) {
+      .dash-live .st-tick__rail { width: 100%; gap: 14px; }
+      .dash-live .st-tick__item { flex: 1 1 0; width: auto; max-width: 240px; }
+      .dash-live .st-tick__item img {
+        width: 100%; height: auto; aspect-ratio: 1 / 1;
+      }
+    }
 
     /* ── Dua kartu unit yang masih dijual ── */
     .tj-units { display: grid; gap: 20px; }
