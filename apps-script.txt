@@ -9,22 +9,28 @@ function doPost(e) {
 
     // Simpan ke Sheet
     var sheet = SpreadsheetApp.openById('15Vgoznfl1NHKc7f07IY4FcTCwbHUkKWTZG1i40b9gqk').getActiveSheet();
-    // Urutan kolom mengikuti header sheet: No|date|time|Nama|Handphone|Email|GCLID|Halaman|Source|Medium|Campaign|Content|Referrer|Jangan Hubungi
+    // Urutan kolom mengikuti header sheet (update 31 Jul 2026):
+    // No|date|time|Nama|Handphone|Halaman|Source|Medium|Campaign|Content|Referrer|Jangan Hubungi|Status|Survey|Catatan/ Ket|Email|GCLID|FBCLID
+    // Status, Survey, Catatan = kolom manual (diisi marketing) -> selalu dikirim kosong.
     sheet.appendRow([
       sheet.getLastRow(),
-      data.date         || '',
-      data.time         || '',
-      data.Nama         || '',
+      data.date          || '',
+      data.time          || '',
+      data.Nama          || '',
       hp,
-      data.Email        || '',
-      data.gclid        || '',
-      data.Sumber       || '',
-      data.utm_source   || '',
-      data.utm_medium   || '',
-      data.utm_campaign || '',
-      data.utm_content  || '',
-      data.referrer     || '',
-      data.JanganHubungi || ''
+      data.Sumber        || '',   // Halaman
+      data.utm_source    || '',   // Source
+      data.utm_medium    || '',   // Medium
+      data.utm_campaign  || '',   // Campaign
+      data.utm_content   || '',   // Content
+      data.referrer      || '',   // Referrer
+      data.JanganHubungi || '',
+      '',                         // Status (manual)
+      '',                         // Survey (manual)
+      '',                         // Catatan/ Ket (manual)
+      data.Email         || '',
+      data.gclid         || '',
+      data.fbclid        || ''
     ]);
 
     // Email notifikasi
@@ -83,6 +89,6 @@ function doPost(e) {
 
 function testSheet() {
   var sheet = SpreadsheetApp.openById('15Vgoznfl1NHKc7f07IY4FcTCwbHUkKWTZG1i40b9gqk').getActiveSheet();
-  sheet.appendRow(['TEST', '13/5/2026', '16:00', 'Test Nama', '6281234567', 'test@test.com', 'test-gclid', '/test', 'google', 'cpc', 'test-campaign', '', '', '']);
+  sheet.appendRow(['TEST', '13/5/2026', '16:00', 'Test Nama', '6281234567', '/test', 'google', 'cpc', 'test-campaign', 'test-content', 'https://www.google.com/', '', '', '', '', 'test@test.com', 'test-gclid', 'test-fbclid']);
   Logger.log('Berhasil tulis ke sheet');
 }

@@ -31,6 +31,31 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/assets/css/global.css?v=20260818-1">
+
+  <style>
+    /* Galeri foto kawasan & tipe — mobile: rel geser, desktop: 3 per baris.
+       Pola sama dengan #lingkungan di /kawa-living/. */
+    .kv-gal { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+    .kv-gal::-webkit-scrollbar { display: none; }
+    .kv-gal figure { flex: none; width: 268px; margin: 0; scroll-snap-align: start; }
+    .kv-gal a { display: block; }
+    .kv-gal img { width: 100%; height: 190px; object-fit: cover; border-radius: var(--r-md, 12px);
+      border: 1px solid var(--line); cursor: zoom-in; display: block; }
+    .kv-gal a:hover img { outline: 2px solid var(--orange); outline-offset: 2px; }
+    .kv-gal figcaption { margin-top: 8px; font-size: 12px; color: var(--muted); line-height: 1.45; }
+    .kv-gal figcaption b { color: var(--ink); font-weight: 600; }
+    @media (min-width: 768px) {
+      .kv-gal { display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible;
+        scroll-snap-type: none; gap: 18px; }
+      .kv-gal figure { width: auto; }
+      .kv-gal img { height: 300px; }
+      .kv-gal figcaption { font-size: 13px; margin-top: 10px; }
+    }
+    @media (min-width: 1100px) { .kv-gal { gap: 22px; } .kv-gal img { height: 340px; } }
+    /* Empat tipe: empat kolom di layar lebar, foto potret dibiarkan lebih tinggi. */
+    @media (min-width: 900px) { .kv-gal--tipe { grid-template-columns: repeat(4, 1fr); } }
+  </style>
 </head>
 <body class="dark-hero">
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNJW22Z" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -68,6 +93,130 @@
       <h2 class="section-title reveal" style="margin-top:12px;">Proyek yang dulu dijanjikan,<br><em>jadi atau tidak?</em></h2>
       <p class="reveal reveal--delay-1">Kawa Village adalah salah satu perumahan JGS Group yang seluruh unitnya sudah diserahterimakan. Kami tetap menayangkan halaman ini karena calon pembeli sering ingin tahu satu hal itu. Di bawah ini jawabannya — foto hari serah terima dari rumah-rumah yang kini dihuni.</p>
       <p class="reveal reveal--delay-2">Dibangun sejak <strong>2021</strong> di <strong>Joho, Jambidan, Banguntapan, Bantul</strong>, Kawa Village terdiri dari <strong>71 unit</strong> dalam empat tipe — Yama, Mizu, Hana, dan Kumo. Serah terima terakhirnya tuntas pada <strong>2026</strong>.</p>
+    </div>
+  </section>
+
+
+  <!-- ══ KAWASAN ══ -->
+  <section class="section--sm">
+    <div class="section__head container">
+      <span class="eyebrow">→ Kawasannya</span>
+      <h2 class="section-title reveal">Bukan gambar rencana.<br><em>Ini yang berdiri.</em></h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Foto kawasan Kawa Village, diambil <strong>November 2024</strong> — saat sebagian rumah sudah dihuni dan sebagian lagi masih dalam penyelesaian menjelang serah terima terakhir.</p>
+    </div>
+    <div class="container">
+      <div class="kv-gal reveal">
+        <figure>
+          <a data-st-lb href="img/kawasan-gerbang.webp" data-cap="Gerbang masuk kawasan.">
+            <img src="img/kawasan-gerbang.webp" alt="Gerbang masuk perumahan Kawa Village di Jambidan, Banguntapan" width="1400" height="788" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Gerbang masuk kawasan.</figcaption>
+        </figure>
+        <figure>
+          <a data-st-lb href="img/kawasan-1.webp" data-cap="Deret rumah di jalan utama — mobil penghuni sudah terparkir di carport masing-masing.">
+            <img src="img/kawasan-1.webp" alt="Deretan rumah dua lantai di Kawa Village yang sudah dihuni" width="1200" height="675" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Deret rumah di jalan utama — mobil penghuni sudah terparkir di carport masing-masing.</figcaption>
+        </figure>
+        <figure>
+          <a data-st-lb href="img/kawasan-2.webp" data-cap="Jalan kawasan, dilihat dari sisi dalam.">
+            <img src="img/kawasan-2.webp" alt="Jalan kawasan Kawa Village dengan rumah di kiri dan kanan" width="1200" height="675" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Jalan kawasan, dilihat dari sisi dalam.</figcaption>
+        </figure>
+        <figure>
+          <a data-st-lb href="img/kawasan-3.webp" data-cap="Halaman depan salah satu unit yang sudah ditempati.">
+            <img src="img/kawasan-3.webp" alt="Halaman depan salah satu unit Kawa Village" width="1200" height="675" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Halaman depan salah satu unit yang sudah ditempati.</figcaption>
+        </figure>
+        <figure>
+          <a data-st-lb href="img/kawasan-4.webp" data-cap="Barisan rumah dilihat dari ujung jalan.">
+            <img src="img/kawasan-4.webp" alt="Barisan rumah Kawa Village dilihat dari ujung jalan" width="1200" height="675" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Barisan rumah dilihat dari ujung jalan.</figcaption>
+        </figure>
+        <figure>
+          <a data-st-lb href="img/kawasan-5.webp" data-cap="Fasad dua lantai dari jarak dekat.">
+            <img src="img/kawasan-5.webp" alt="Fasad rumah dua lantai Kawa Village dari dekat" width="1200" height="675" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Fasad dua lantai dari jarak dekat.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EMPAT TIPE ══ -->
+  <section class="section--sm">
+    <div class="section__head container">
+      <span class="eyebrow">→ Empat Tipe</span>
+      <h2 class="section-title reveal">Yama, Mizu,<br>Hana, dan <em>Kumo.</em></h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Keempatnya sudah habis terjual. Foto di bawah adalah unit terbangun, bukan gambar tiga dimensi.</p>
+    </div>
+    <div class="container">
+      <div class="kv-gal kv-gal--tipe reveal">
+        <figure>
+          <a data-st-lb href="img/tipe-hana.webp" data-cap="Tipe Hana · Kawa Village">
+            <img src="img/tipe-hana.webp" alt="Fasad rumah tipe Hana di perumahan Kawa Village" width="675" height="1200" loading="lazy" decoding="async">
+          </a>
+          <figcaption><b>Hana</b></figcaption>
+        </figure>
+        <figure>
+          <a data-st-lb href="img/tipe-mizu.webp" data-cap="Tipe Mizu · Kawa Village">
+            <img src="img/tipe-mizu.webp" alt="Fasad rumah tipe Mizu di perumahan Kawa Village" width="1100" height="733" loading="lazy" decoding="async">
+          </a>
+          <figcaption><b>Mizu</b></figcaption>
+        </figure>
+        <figure>
+          <a data-st-lb href="img/tipe-yama.webp" data-cap="Tipe Yama · Kawa Village">
+            <img src="img/tipe-yama.webp" alt="Fasad rumah tipe Yama di perumahan Kawa Village" width="1100" height="619" loading="lazy" decoding="async">
+          </a>
+          <figcaption><b>Yama</b></figcaption>
+        </figure>
+        <figure>
+          <a data-st-lb href="img/tipe-kumo.webp" data-cap="Tipe Kumo · Kawa Village">
+            <img src="img/tipe-kumo.webp" alt="Fasad rumah tipe Kumo di perumahan Kawa Village" width="1100" height="619" loading="lazy" decoding="async">
+          </a>
+          <figcaption><b>Kumo</b></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ISI RUMAH ══ -->
+  <section class="section--sm">
+    <div class="section__head container">
+      <span class="eyebrow">→ Isi Rumahnya</span>
+      <h2 class="section-title reveal">Apa adanya,<br><em>sebelum ditempati.</em></h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Foto ini diambil saat unit masih kosong — tanpa penataan dan tanpa perabot tambahan, supaya yang terlihat memang bangunannya.</p>
+    </div>
+    <div class="container">
+      <div class="kv-gal kv-gal--tipe reveal">
+        <figure>
+          <a data-st-lb href="img/isi-ruang.webp" data-cap="Ruang keluarga.">
+            <img src="img/isi-ruang.webp" alt="Ruang keluarga unit Kawa Village sebelum ditempati" width="675" height="1200" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Ruang keluarga.</figcaption>
+        </figure>
+        <figure>
+          <a data-st-lb href="img/isi-dapur.webp" data-cap="Dapur dengan meja cor finishing hitam.">
+            <img src="img/isi-dapur.webp" alt="Dapur unit Kawa Village dengan meja beton finishing hitam" width="675" height="1200" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Dapur dengan meja cor finishing hitam.</figcaption>
+        </figure>
+        <figure>
+          <a data-st-lb href="img/isi-tangga.webp" data-cap="Tangga dan railing besi.">
+            <img src="img/isi-tangga.webp" alt="Tangga unit Kawa Village dengan railing besi" width="675" height="1200" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Tangga dan railing besi.</figcaption>
+        </figure>
+        <figure>
+          <a data-st-lb href="img/isi-kamar-mandi.webp" data-cap="Kamar mandi.">
+            <img src="img/isi-kamar-mandi.webp" alt="Kamar mandi unit Kawa Village" width="675" height="1200" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Kamar mandi.</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
