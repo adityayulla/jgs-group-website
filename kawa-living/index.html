@@ -763,13 +763,20 @@
     .lingk__grid figcaption {
       margin-top: 8px; font-size: 12px; color: var(--muted); line-height: 1.45;
     }
+    /* Tiga foto per baris — cukup besar untuk melihat kondisi aslinya.
+       Foto ke-4 dst. jatuh ke baris berikutnya. */
     @media (min-width: 768px) {
       .lingk__grid {
-        display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        overflow: visible; scroll-snap-type: none; gap: 14px;
+        display: grid; grid-template-columns: repeat(3, 1fr);
+        overflow: visible; scroll-snap-type: none; gap: 18px;
       }
       .lingk__grid figure { width: auto; }
-      .lingk__grid img { height: 210px; }
+      .lingk__grid img { height: 300px; }
+      .lingk__grid figcaption { font-size: 13px; margin-top: 10px; }
+    }
+    @media (min-width: 1100px) {
+      .lingk__grid { gap: 22px; }
+      .lingk__grid img { height: 360px; }
     }
   </style>
 </head>
