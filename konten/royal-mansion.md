@@ -44,23 +44,30 @@ Tiga cara menanganinya, pilih satu:
 - **C. Tunda sampai foto cluster lama terkumpul.** Paling lengkap, tapi 204
   impresi/bulan terus hangus selama menunggu.
 
-→ Pilihan: **C — TUNDA** ✅ (Direktur, 17 Agu)
+→ Pilihan awal: **C — TUNDA** (Direktur, 17 Agu). **Dibuka kembali 19 Agu 2026.**
 
-Arsip foto cluster Tahap 1 & Tahap 2: **PERLU DICARI**.
+## 🟢 STATUS: TERBIT — `/royal-mansion/` sudah hidup (19 Agu 2026)
 
-## 🔴 STATUS: DITUNDA — halaman TIDAK dibangun dulu
+Direktur mengirim folder bahan baru (Drive `1hAGEuVNVSX_...`) berisi foto udara
+kawasan dan fasum: **masjid, kids club, playground**. Foto-foto itu memotret
+*kawasan*, bukan satu cluster — jadi halaman bisa mewakili 205 rumah tanpa harus
+menunggu foto serah terima cluster lama. Karena pemblokirnya lewat, halaman
+dibangun dengan **opsi A**.
 
-Direktur memilih **C**: tunggu sampai foto cluster lama terkumpul, supaya
-halaman ini mewakili 205 rumah, bukan cuma 20 dari cluster penutup.
+**Yang tayang:** hero foto deret rumah, dua paragraf cerita (205 unit, 2013–2022,
+tiga cluster), galeri kawasan 5 foto, galeri 6 dari 20 foto serah terima
+Adiluhung, ajakan ke Tentrem Bhumi.
 
-**Konsekuensi yang diterima:** `/royal-mansion/` tetap 404 dan 204
-impresi/bulan terus hangus selama penantian. Ini keputusan sadar, bukan
-kelalaian.
+**Ketimpangan dokumentasi ditulis apa adanya** di badan halaman: 20 foto, semuanya
+dari Adiluhung, Tahap 1 & 2 belum terwakili.
 
-**Pemblokirnya sekarang: mencari foto serah terima Tahap 1 & Tahap 2
-(2013–2020).** Begitu ada — walau cuma 10–15 foto — halaman ini bisa
-langsung dibangun. Tempat yang belum diperiksa: folder Drive lain, arsip
-tim lapangan, dan akun IG lama @graharoyalmansion.
+**Yang masih dicari:** foto serah terima Tahap 1 & Tahap 2 (2013–2020). Begitu
+ketemu, tinggal masuk ke arsip `/serah-terima/` dan angka di halaman diperbarui.
+Tempat yang belum diperiksa: arsip tim lapangan dan akun IG lama
+@graharoyalmansion.
+
+**Tidak dipakai:** `_14A7189.jpg` (render 3D kolam/clubhouse, bukan foto) dan
+`Background_page1-revisi juli 22.jpg` (materi poster pemasaran).
 
 ---
 
