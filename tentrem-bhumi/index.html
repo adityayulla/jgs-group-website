@@ -233,17 +233,25 @@ img { display: block; }
 }
 @media (min-width: 768px) {
   .fas-shots {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: grid; grid-template-columns: repeat(3, 1fr);
     overflow: visible; scroll-snap-type: none; gap: 12px; margin-top: 14px;
   }
   .fas-shots figure { width: auto; }
-  .fas-shots img { height: 200px; }
+  .fas-shots img { height: 240px; }
+  /* Foto terakhir yang tersisa sendirian di barisnya dilebarkan penuh —
+     lebih baik satu foto lebar daripada satu kartu kecil menggantung. */
+  .fas-shots figure:nth-child(3n+1):last-child { grid-column: 1 / -1; }
+  .fas-shots figure:nth-child(3n+1):last-child img { height: 300px; }
+}
+@media (min-width: 1024px) {
+  .fas-shots img { height: 300px; }
+  .fas-shots figure:nth-child(3n+1):last-child img { height: 380px; }
 }
 
 /* ─────────────────────────────────────────
    FASILITAS GRID
 ───────────────────────────────────────── */
-.fас-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-bottom: 0; }
+.fас-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin: 30px 0 0; }
 .fас-card {
   background: #fff; border-radius: 12px; padding: 14px 12px;
   display: flex; align-items: center; gap: 10px;
@@ -1504,39 +1512,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <!-- ══════════════════════════════════════════
-     UNTUK SIAPA TENTREM BHUMI?
-══════════════════════════════════════════ -->
-<div class="section" id="untuk-siapa">
-  <div class="section-tag">Untuk Siapa Tentrem Bhumi?</div>
-  <h2 class="usi-headline">Tentrem Bhumi dibangun<br>untuk Anda yang...</h2>
-  <div class="usi-grid">
-    <div class="usi-card">
-      <div class="usi-num">01</div>
-      <div class="usi-title">Menginginkan rumah yang lebih lega untuk keluarga</div>
-      <div class="usi-body">Tipe 48–68 yang lapang, tanah yang luas, untuk Anda yang sudah cukup matang untuk tahu apa yang Anda butuhkan dari sebuah rumah.</div>
-    </div>
-    <div class="usi-card">
-      <div class="usi-num">02</div>
-      <div class="usi-title">Mengutamakan keamanan dan privasi keluarga</div>
-      <div class="usi-body">Lingkungan eksklusif dengan keamanan 24 jam—bukan kawasan terbuka yang bisa diakses sembarang orang.</div>
-    </div>
-    <div class="usi-card">
-      <div class="usi-num">03</div>
-      <div class="usi-title">Mencari hunian yang sejuk dan tenang di Jogja Utara</div>
-      <div class="usi-body">&lt;10 menit dari UII, udara sejuk khas Jakal, jauh dari hiruk-pikuk pusat kota tapi tetap dengan akses cepat.</div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════
      FASILITAS
 ══════════════════════════════════════════ -->
 <div class="section" id="fasilitas">
   <div class="section-tag">Fasilitas Umum</div>
   <div class="section-title">Lebih dari sekadar rumah</div>
   <p class="section-sub">Fasilitas lengkap untuk keluarga tumbuh dan berkembang</p>
-
-  <div class="fас-grid" id="k-fasilitas-grid"><!-- diisi JS dari KONTEN.fasilitas --></div>
 
   <!-- FOTO ASLI LAPANGAN — live dari Progress Dashboard (galeri
        "Lingkungan Perumahan" proyek). Disembunyikan bila feed kosong
@@ -1556,6 +1537,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="photo-scroll" id="k-foto-fasilitas"><!-- diisi JS dari KONTEN.fotoFasilitas --></div>
   </div>
+
+  <!-- Daftar fasilitas — ringkasan, ditaruh setelah buktinya (foto). -->
+  <div class="fас-grid" id="k-fasilitas-grid"><!-- diisi JS dari KONTEN.fasilitas --></div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -1591,56 +1575,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="ht__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
       <span class="ht__cap">Cantya<br><span style="font-size:13px;font-weight:400;opacity:.85;">House tour</span></span>
     </button>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     INTERIOR
-══════════════════════════════════════════ -->
-<div class="section" id="interior">
-  <div class="section-tag">Interior</div>
-  <div class="section-title">Nyaman di setiap sudut</div>
-  <p class="section-sub">Visualisasi interior — desain modern fungsional untuk keluarga Indonesia</p>
-  <div class="interior-strip" id="k-interior"><!-- diisi JS dari KONTEN.interior --></div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     SPESIFIKASI BANGUNAN
-══════════════════════════════════════════ -->
-<div class="section" id="spesifikasi">
-  <div class="section-tag">Spesifikasi</div>
-  <div class="section-title">Bangunan berkualitas premium</div>
-  <p class="section-sub">Setiap unit dibangun dengan material pilihan dan standar konstruksi tinggi</p>
-  <div class="spec-cols" id="k-spesifikasi"><!-- diisi JS dari KONTEN.spesifikasi --></div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     LOKASI & AKSES
-══════════════════════════════════════════ -->
-<div class="section" id="lokasi">
-  <div class="section-tag">Lokasi</div>
-  <div class="section-title">Mudah dijangkau dari mana saja</div>
-  <p class="section-sub">Jl. Besi Jangkang, Tanjungsari, Ngaglik, Sleman</p>
-
-  <div class="lokasi-flex">
-    <div class="lokasi-left">
-      <div class="akses-list" id="k-akses"><!-- diisi JS dari KONTEN.akses --></div>
-    </div>
-    <div class="lokasi-right">
-      <div class="maps-wrap">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.86238093926!2d110.4306170749189!3d-7.697914492319535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5d2781b7f58b%3A0x5b1fa95f2222dc20!2sPerumahan%20Tentrem%20Bhumi!5e0!3m2!1sen!2sid!4v1777038476472!5m2!1sen!2sid"
-          width="100%" height="220" style="border:0;display:block;"
-          allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
-      <a class="maps-link"
-         href="https://maps.google.com/?q=Perumahan+Tentrem+Bhumi+Ngaglik+Sleman"
-         target="_blank" rel="noopener">
-        📍 Buka di Google Maps
-      </a>
-    </div>
   </div>
 </div>
 
@@ -1701,6 +1635,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 })();
 </script>
 
+<!-- ══════════════════════════════════════════
+     LOKASI & AKSES
+══════════════════════════════════════════ -->
+<div class="section" id="lokasi">
+  <div class="section-tag">Lokasi</div>
+  <div class="section-title">Mudah dijangkau dari mana saja</div>
+  <p class="section-sub">Jl. Besi Jangkang, Tanjungsari, Ngaglik, Sleman</p>
+
+  <div class="lokasi-flex">
+    <div class="lokasi-left">
+      <div class="akses-list" id="k-akses"><!-- diisi JS dari KONTEN.akses --></div>
+    </div>
+    <div class="lokasi-right">
+      <div class="maps-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.86238093926!2d110.4306170749189!3d-7.697914492319535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5d2781b7f58b%3A0x5b1fa95f2222dc20!2sPerumahan%20Tentrem%20Bhumi!5e0!3m2!1sen!2sid!4v1777038476472!5m2!1sen!2sid"
+          width="100%" height="220" style="border:0;display:block;"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <a class="maps-link"
+         href="https://maps.google.com/?q=Perumahan+Tentrem+Bhumi+Ngaglik+Sleman"
+         target="_blank" rel="noopener">
+        📍 Buka di Google Maps
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     INTERIOR
+══════════════════════════════════════════ -->
+<div class="section" id="interior">
+  <div class="section-tag">Interior</div>
+  <div class="section-title">Nyaman di setiap sudut</div>
+  <p class="section-sub">Visualisasi interior — desain modern fungsional untuk keluarga Indonesia</p>
+  <div class="interior-strip" id="k-interior"><!-- diisi JS dari KONTEN.interior --></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SPESIFIKASI BANGUNAN
+══════════════════════════════════════════ -->
+<div class="section" id="spesifikasi">
+  <div class="section-tag">Spesifikasi</div>
+  <div class="section-title">Bangunan berkualitas premium</div>
+  <p class="section-sub">Setiap unit dibangun dengan material pilihan dan standar konstruksi tinggi</p>
+  <div class="spec-cols" id="k-spesifikasi"><!-- diisi JS dari KONTEN.spesifikasi --></div>
+</div>
+
 <!-- Section "Kepercayaan" (social proof) dihapus 17 Agu 2026 atas permintaan
      Direktur. Angka terjual tetap terlihat di legenda siteplan, bukti
      sosialnya di section Testimoni di bawah. Data KONTEN.sosial dibiarkan
@@ -1752,6 +1736,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
     </article>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     UNTUK SIAPA TENTREM BHUMI?
+══════════════════════════════════════════ -->
+<div class="section" id="untuk-siapa">
+  <div class="section-tag">Untuk Siapa Tentrem Bhumi?</div>
+  <h2 class="usi-headline">Tentrem Bhumi dibangun<br>untuk Anda yang...</h2>
+  <div class="usi-grid">
+    <div class="usi-card">
+      <div class="usi-num">01</div>
+      <div class="usi-title">Menginginkan rumah yang lebih lega untuk keluarga</div>
+      <div class="usi-body">Tipe 48–68 yang lapang, tanah yang luas, untuk Anda yang sudah cukup matang untuk tahu apa yang Anda butuhkan dari sebuah rumah.</div>
+    </div>
+    <div class="usi-card">
+      <div class="usi-num">02</div>
+      <div class="usi-title">Mengutamakan keamanan dan privasi keluarga</div>
+      <div class="usi-body">Lingkungan eksklusif dengan keamanan 24 jam—bukan kawasan terbuka yang bisa diakses sembarang orang.</div>
+    </div>
+    <div class="usi-card">
+      <div class="usi-num">03</div>
+      <div class="usi-title">Mencari hunian yang sejuk dan tenang di Jogja Utara</div>
+      <div class="usi-body">&lt;10 menit dari UII, udara sejuk khas Jakal, jauh dari hiruk-pikuk pusat kota tapi tetap dengan akses cepat.</div>
+    </div>
   </div>
 </div>
 
