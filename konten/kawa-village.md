@@ -117,3 +117,35 @@ Kawa Village di Banguntapan; Sedayu itu Kawa Living. Sudah diperbaiki.
 Sesuai arahan 16 Agu:
 - **Kotak fakta 4 kolom dihapus.** Angka-angkanya dilebur ke kalimat.
 - **Latar mengikuti homepage** — kertas krem + blueprint, bukan blok putih.
+
+---
+
+## 8. Pembaruan 19 Agustus 2026 — halaman diperkaya
+
+Bahan dari Drive `17pcNkQc3ybN_...` masuk. Halaman yang tadinya hanya hero +
+galeri serah terima + ajakan sekarang punya tiga bagian tambahan:
+
+- **Kawasannya** — 6 foto kawasan (gerbang + streetscape), diambil November 2024.
+  Ditulis tanggalnya di halaman, karena saat itu sebagian rumah masih dalam
+  penyelesaian. Lebih jujur daripada membiarkan pembaca mengira semua sudah rapi.
+- **Empat tipe** — satu foto fasad terbangun per tipe (Hana, Mizu, Yama, Kumo).
+  Tanpa angka luas tanah/bangunan, karena datanya belum ada di tangan saya.
+- **Isi rumahnya** — 4 foto unit kosong (ruang keluarga, dapur, tangga, kamar mandi).
+
+**Yang sengaja TIDAK dipakai** (keputusan Direktur, 19 Agu):
+
+- Semua berkas PNG hasil **virtual staging AI** — `kamar remaja cewe.png`,
+  `dapur nuansa industrial-modern.png`, `pigura islami.png`, dan juga
+  `ruang tamu 1–5` / `kamar tidur 1–4` yang berwatermark layanan staging.
+  Halaman proyek selesai fungsinya sebagai bukti; render tidak boleh tampil
+  seolah-olah foto.
+- Foto yang menampilkan wajah orang di luar konteks serah terima (foto keluarga,
+  foto tim marketing) — belum ada izin untuk konteks ini.
+- Materi Web `Fasum` & `Headline`: isinya grafis feed Instagram dan render 3D,
+  bukan foto lapangan.
+
+**Yang belum bisa dikerjakan:** bagian *house tour* dan *video testimoni*.
+Folder `06. Materi House Tour` dan `08. Testimoni` di Drive isinya **rekaman
+mentah drone** (MP4/LRF, 10–240 MB per berkas) plus folder VO — bukan video jadi.
+Begitu ada tautan YouTube-nya (seperti pola di `/kawa-living/#house-tour`),
+bagian itu bisa ditambahkan dalam hitungan menit.
