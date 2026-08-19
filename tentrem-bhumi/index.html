@@ -2231,6 +2231,30 @@ document.addEventListener('DOMContentLoaded', function() {
       /* Dashboard tidak terjangkau — angka statis di HTML tetap tampil. */
     });
 
+  /* ── Gambar hero dari dashboard ───────────────────────────────
+     Approver bisa menunjuk satu foto lingkungan sebagai hero halaman
+     ini lewat /admin/environment. Bingkainya lengkung 3:4, jadi foto
+     vertikal paling pas. Slot kosong = foto statis (K.hero.archImage)
+     yang dipakai. Fetch ini selalu selesai setelah konten.js dijalankan,
+     jadi hasilnya tidak akan tertimpa. */
+  fetch('https://progress.jogjagrahaselaras.com/api/public/hero?target=tentrem-bhumi', { mode: 'cors' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var it = j && j.items && j.items[0];
+      var img = document.getElementById('k-hero-arch-img');
+      if (!it || !it.url || !img) return;
+
+      /* Tukar setelah fotonya termuat — tanpa kedip, dan kalau URL-nya
+         bermasalah foto lama tetap di tempatnya. */
+      var pre = new Image();
+      pre.onload = function () {
+        img.src = it.url;
+        if (it.caption) img.alt = it.caption + ' — Tentrem Bhumi, Perumahan Sleman';
+      };
+      pre.src = it.url;
+    })
+    .catch(function () { /* foto statis tetap tampil */ });
+
   /* ── Foto asli fasilitas & lingkungan ──────────────────────────
      Sumber sama dengan galeri "Lingkungan Perumahan" di dashboard.
      Foto dibuka lightbox (ditangani serah-terima.js lewat data-st-lb). */

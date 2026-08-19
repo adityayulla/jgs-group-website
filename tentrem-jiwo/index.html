@@ -34,6 +34,21 @@
   <link rel="stylesheet" href="/assets/css/global.css?v=20260818-1">
 
   <style>
+    /* ── Hero tanpa masking gelap ──────────────────────────────
+       Beda dari /kawa-village/ & /royal-mansion/ yang memakai
+       .pj-hero versi global: di halaman ini fotonya tampil apa
+       adanya (opacity penuh). Yang tersisa cuma scrim tipis di
+       tepi — secukupnya supaya navbar putih di atas dan judul di
+       bawah tetap terbaca, bukan untuk menggelapkan fotonya. */
+    .pj-hero__bg { opacity: 1; }
+    .pj-hero__veil {
+      background: linear-gradient(0deg,
+        rgba(9,12,30,.68) 0%, rgba(9,12,30,.16) 46%,
+        rgba(9,12,30,.10) 72%, rgba(9,12,30,.34) 100%);
+    }
+    .pj-hero__title,
+    .pj-hero__sub { text-shadow: 0 2px 14px rgba(6,9,24,.55); }
+
     /* ── Kartu status live (pola sama dengan /kawa-living/ & /tentrem-bhumi/) ── */
     .dashsec__inner { display: grid; gap: 14px; }
     .dashsec__inner > * { min-width: 0; }
@@ -200,7 +215,7 @@
 <main>
   <!-- ══ HERO ══ -->
   <section class="pj-hero">
-    <img class="pj-hero__bg" src="img/kawasan-jalan.webp" alt="Jalan lingkungan perumahan Tentrem Jiwo, Kalasan, Sleman" width="960" height="1280" fetchpriority="high">
+    <img class="pj-hero__bg" id="tj-hero-bg" src="img/kawasan-jalan.webp" alt="Jalan lingkungan perumahan Tentrem Jiwo, Kalasan, Sleman" width="960" height="1280" fetchpriority="high">
     <div class="pj-hero__veil"></div>
     <div class="pj-hero__in container">
       <span class="pj-pil" id="tj-pil">Sisa 2 unit · Sorogenen, Kalasan</span>
@@ -509,6 +524,29 @@
       });
     })
     .catch(function () { /* tiga foto lokal sudah cukup */ });
+
+  /* ── 2b. Gambar hero dari dashboard ──────────────────────────
+     Approver bisa menunjuk satu foto lingkungan (horizontal) sebagai
+     hero halaman ini lewat /admin/environment. Slot kosong = foto
+     statis di HTML yang dipakai. */
+  fetch(BASE + 'hero?target=tentrem-jiwo', { mode: 'cors' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var it = j && j.items && j.items[0];
+      var bg = document.getElementById('tj-hero-bg');
+      if (!it || !it.url || !bg) return;
+
+      /* Tukar setelah fotonya termuat — tanpa kedip, dan kalau URL-nya
+         bermasalah foto lama tetap di tempatnya. */
+      var pre = new Image();
+      pre.onload = function () {
+        bg.src = it.url;
+        if (it.width && it.height) { bg.width = it.width; bg.height = it.height; }
+        if (it.caption) bg.alt = it.caption + ' — perumahan Tentrem Jiwo, Kalasan, Sleman';
+      };
+      pre.src = it.url;
+    })
+    .catch(function () { /* foto statis tetap tampil */ });
 
   /* ── 3. Spesifikasi tipe Abirama ─────────────────────────────
      Diisi dari dashboard supaya tidak perlu diketik ulang di sini:

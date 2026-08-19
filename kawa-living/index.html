@@ -849,6 +849,7 @@
         <div class="hero__glow"></div>
         <div class="hero__frame">
           <img
+            id="kl-hero-img"
             src="img/tipe/tipe%20okina.webp"
             alt="Kawa Living Sedayu — Tipe Okina"
             class="hero__img"
@@ -1755,6 +1756,28 @@
      persis seperti di halaman Tentrem Bhumi. Section baru ditampilkan
      setelah ada foto yang benar-benar masuk. Klik foto = lightbox
      halaman ini (openLb). */
+  /* ── Gambar hero dari dashboard ───────────────────────────────
+     Approver bisa menunjuk satu foto lingkungan (vertikal — bingkai
+     hero-nya lengkung 3:4) sebagai hero halaman ini lewat
+     /admin/environment. Slot kosong = foto statis di HTML yang dipakai. */
+  fetch('https://progress.jogjagrahaselaras.com/api/public/hero?target=kawa-living', { mode: 'cors' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var it = j && j.items && j.items[0];
+      var img = document.getElementById('kl-hero-img');
+      if (!it || !it.url || !img) return;
+
+      /* Tukar setelah fotonya termuat — tanpa kedip, dan kalau URL-nya
+         bermasalah foto lama tetap di tempatnya. */
+      var pre = new Image();
+      pre.onload = function () {
+        img.src = it.url;
+        if (it.caption) img.alt = it.caption + ' — Kawa Living, JGS Group';
+      };
+      pre.src = it.url;
+    })
+    .catch(function () { /* foto statis tetap tampil */ });
+
   var API_FOTO = 'https://progress.jogjagrahaselaras.com/api/public/environment-photos?slug=kawa-living';
 
   fetch(API_FOTO, { mode: 'cors' })

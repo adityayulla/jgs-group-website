@@ -37,6 +37,7 @@
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://progress.jogjagrahaselaras.com">
   <link rel="preload" as="image" href="assets/img/hero-okina-mobile.jpg" fetchpriority="high" media="(max-width: 767px)">
   <link rel="preload" as="image" href="assets/img/hero-yuri-desktop.jpg" fetchpriority="high" media="(min-width: 768px)">
   <link rel="stylesheet" href="assets/css/global.css?v=20260818-1">
@@ -1082,8 +1083,9 @@
   <!-- ══ HERO v3 — visual-first ════════════════════════════════ -->
   <section class="hero hero--v3" id="hero">
     <picture class="hero3__pic">
-      <source media="(max-width: 767px)" srcset="assets/img/hero-okina-mobile.jpg">
+      <source id="hero-src-mobile" media="(max-width: 767px)" srcset="assets/img/hero-okina-mobile.jpg">
       <img
+        id="hero-img-desktop"
         src="assets/img/hero-yuri-desktop.jpg"
         alt="Rumah tipe Yuri di Kawa Living, Sedayu — perumahan JGS Group Yogyakarta"
         width="1600" height="1066"
@@ -2225,6 +2227,47 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
     new IntersectionObserver(function (entries) {
       document.body.classList.toggle('past-hero', !entries[0].isIntersecting);
     }, { threshold: 0 }).observe(ctas);
+  })();
+</script>
+<script>
+  /* ── Hero dari dashboard ───────────────────────────────────────
+     Approver bisa menunjuk foto lingkungan mana pun sebagai gambar
+     hero lewat /admin/environment di dashboard progress. Dua slot:
+     "Beranda — desktop" (horizontal) dan "Beranda — HP" (vertikal).
+     Slot kosong / feed mati = foto statis di atas yang dipakai, jadi
+     hero tidak pernah bisa jadi kosong karena fitur ini. */
+  (function () {
+    var API = 'https://progress.jogjagrahaselaras.com/api/public/hero';
+
+    /* Tukar hanya setelah fotonya benar-benar termuat — supaya tidak
+       ada kedipan atau gambar rusak kalau URL-nya bermasalah. */
+    function pasang(url, terapkan) {
+      var pre = new Image();
+      pre.onload = function () { terapkan(url); };
+      pre.src = url;
+    }
+
+    fetch(API, { mode: 'cors' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        var items = (j && j.items) || [];
+        var img = document.getElementById('hero-img-desktop');
+        var src = document.getElementById('hero-src-mobile');
+
+        items.forEach(function (it) {
+          if (!it.url) return;
+          if (it.target === 'mainweb-desktop' && img) {
+            pasang(it.url, function (u) {
+              img.src = u;
+              if (it.caption) img.alt = it.caption + ' — perumahan JGS Group Yogyakarta';
+            });
+          }
+          if (it.target === 'mainweb-mobile' && src) {
+            pasang(it.url, function (u) { src.srcset = u; });
+          }
+        });
+      })
+      .catch(function () { /* foto statis tetap tampil */ });
   })();
 </script>
 </body>
