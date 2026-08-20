@@ -73,7 +73,7 @@ Tugas kamu adalah melanjutkan pengembangan sesuai permintaan user.
 - Tipe 48: LB 48m², Cash Keras mulai Rp 695.900.000
 - Cantya-3 & 5: SOLD
 
-**Total tersedia:** 35 unit | **Sudah terjual:** 6+ unit
+**Total tersedia:** 33 unit | **Sudah terjual:** 6+ unit
 
 ---
 
@@ -329,7 +329,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <p class="section-sub">Unit terus terjual sejak Oktober 2024</p>
   <div class="sold-banner">
     <div class="sold-num">6+</div>
-    <div class="sold-text">Unit sudah terjual<br>dari 35 unit tersedia</div>
+    <div class="sold-text">Unit sudah terjual<br>dari 33 unit tersedia</div>
   </div>
   <p style="font-size:13px;color:#666;line-height:1.6;">JGS Group berpengalaman sejak 2013 dan telah membangun ratusan hunian di Yogyakarta.</p>
 </div>

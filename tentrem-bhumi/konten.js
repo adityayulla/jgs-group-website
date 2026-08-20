@@ -83,7 +83,7 @@ var KONTEN = {
     /* ── Pill bawah gambar ──
        CADANGAN: angkanya ditimpa data live Progress Dashboard,
        sumber yang sama dengan bar penjualan (lihat penjualan). ── */
-    hotDeals:   'Stok Terbatas · 16 dari 35 Unit Terjual',
+    hotDeals:   'Stok Terbatas · 16 dari 33 Unit Terjual',
   },
 
 
@@ -290,8 +290,8 @@ var KONTEN = {
      10. SITEPLAN
   ══════════════════════════════════════════════════════════════════════ */
   siteplan: {
-    gambar: 'photos/kawasan/Siteplan%20Tentrem%20Bhumi%20Berwarna_page-0001.webp',
-    alt:    'Siteplan Tentrem Bhumi 2025',
+    gambar: 'photos/kawasan/siteplan-tentrem-bhumi-2026-08.webp',
+    alt:    'Siteplan Tentrem Bhumi',
   },
 
 
@@ -301,8 +301,8 @@ var KONTEN = {
   sosial: {
     unitTerjual:  '10+',
     labelTerjual: 'Unit sudah terjual',
-    totalUnit:    '35',
-    labelTotal:   'dari 35 unit tersedia',
+    totalUnit:    '33',
+    labelTotal:   'dari 33 unit tersedia',
     labelStok:    'Stok terbatas!',
     labelRating:  'Rating Google — 5 bintang',
 

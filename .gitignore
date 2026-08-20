@@ -12,6 +12,9 @@ JGS Living Landing (standalone).html
 
 # PDF mockups (optional — remove these lines if you want PDFs tracked)
 *.pdf
+# ...kecuali CAD sumber siteplan: bahan skrip di tools/siteplan/, harus ikut
+# supaya siteplan bisa dibuat ulang dari repo saja.
+!tools/siteplan/**/cad/*.pdf
 
 # Node (if ever used)
 node_modules/
