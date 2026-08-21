@@ -203,6 +203,91 @@
       width: 100%; max-width: 820px; margin: 0 auto; display: block;
       border: 1px solid var(--line); border-radius: var(--r-md); background: #fff;
     }
+
+    /* ── Siteplan: overlay status jual ────────────────────────────
+       Pola yang sama dengan /tentrem-bhumi/: bentuk tiap kavling
+       disimpan dalam PERSEN (siteplan-kavling.json), jadi ikut melar
+       bersama gambar tanpa perhitungan ulang. Statusnya datang dari
+       Progress Dashboard. Kalau salah satunya gagal, yang tampil
+       siteplan polos seperti sebelumnya. */
+    .sp-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .sp-scroll::-webkit-scrollbar { display: none; }
+    .sp-stage {
+      position: relative; max-width: 820px; margin: 0 auto;
+      /* Bawaannya siteplan dipaskan ke lebar layar — tidak ada yang
+         terpotong di HP. Tulisan di kavling tersempit mengecil sendiri
+         (lihat pasLabel), warna kavling + legenda yang bercerita. */
+      min-width: 0;
+    }
+    .sp-stage .tj-siteplan { max-width: none; }
+    /* Mode "Perbesar": 720px cukup untuk membaca label yang tercetak
+       di gambar sekaligus tulisan TERJUAL di kavling Baswara. */
+    .sp-scroll.is-zoom .sp-stage { min-width: 720px; }
+    .sp-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 12px 2px 0; }
+    .sp-zoom {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 15px;
+      border: 1.5px solid var(--navy); border-radius: 999px;
+      background: #fff; color: var(--navy);
+      font-family: inherit; font-size: 13px; font-weight: 600;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
+    }
+    .sp-hint { font-size: 12px; color: var(--muted); margin: 0; }
+    .sp-overlay { position: absolute; inset: 0; }
+    /* Kavling digambar sebagai poligon SVG — tidak ada satu pun yang
+       persegi betul, deretnya miring mengikuti jalan. */
+    .sp-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .sp-poly {
+      pointer-events: all;
+      vector-effect: non-scaling-stroke;
+      transition: fill .15s ease, stroke .15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .sp-poly--sold  { fill: url(#sp-hatch); stroke: rgba(27,42,100,.8);  stroke-width: 1; }
+    .sp-poly--free  { fill: transparent;    stroke: rgba(31,138,76,.35); stroke-width: 1; }
+    /* Dibangun tapi belum laku — stok siap huni, bukan kavling kosong. */
+    .sp-poly--ready { fill: rgba(224,122,47,.42); stroke: rgba(224,122,47,.95); stroke-width: 1.5; }
+    .sp-poly--free:hover  { fill: rgba(31,138,76,.28); stroke: rgba(31,138,76,.9); stroke-width: 2; }
+    .sp-poly--ready:hover { fill: rgba(224,122,47,.6); }
+    .sp-poly--sold:hover  { stroke: rgba(224,122,47,.95); stroke-width: 2; }
+    /* Ukuran hurufnya diatur JS (pasLabel) mengikuti lebar kavling —
+       angka 9px di sini cuma cadangan kalau JS gagal jalan. */
+    .sp-kav__x {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-mono);
+      font-size: 9px; line-height: 1.15; letter-spacing: .06em; font-weight: 600;
+      color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.5);
+      pointer-events: none; white-space: nowrap; text-align: center;
+    }
+    /* Kavling sempit: jarak antar huruf dibuang supaya tulisannya masih
+       muat (dipasang JS lewat pasLabel — yang menentukan lebar kavlingnya,
+       bukan lebar jendela). */
+    .sp-kav__x--rapat { letter-spacing: 0; }
+    .sp-legend {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      margin-top: 14px; padding: 0 2px;
+    }
+    .sp-legend__item {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 13px; color: var(--muted);
+    }
+    .sp-legend__item b { color: var(--navy); font-weight: 700; }
+    .sp-swatch { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+    .sp-swatch--sold {
+      background: repeating-linear-gradient(135deg,
+        rgba(27,42,100,.62) 0 4px, rgba(27,42,100,.42) 4px 8px);
+      box-shadow: inset 0 0 0 1px rgba(27,42,100,.85);
+    }
+    .sp-swatch--ready { background: rgba(224,122,47,.42); box-shadow: inset 0 0 0 1.5px rgba(224,122,47,.95); }
+    .sp-swatch--free { background: #fff; box-shadow: inset 0 0 0 1px rgba(31,138,76,.6); }
+    .sp-legend__hint { font-size: 12px; color: var(--muted); margin-left: auto; }
+    @media (min-width: 768px) {
+      .sp-scroll, .sp-scroll.is-zoom { overflow: visible; }
+      .sp-stage, .sp-scroll.is-zoom .sp-stage { min-width: 0; max-width: 820px; }
+      .sp-kav__x { font-size: 10px; }
+      .sp-tools { display: none; }   /* di layar lebar sudah terbaca apa adanya */
+    }
   </style>
 </head>
 <body class="dark-hero">
@@ -390,9 +475,53 @@
       <h2 class="section-title reveal">Tiga belas kavling,<br><em>satu gerbang.</em></h2>
     </div>
     <div class="container">
-      <img class="tj-siteplan reveal" src="img/siteplan.jpg" alt="Siteplan kawasan Tentrem Jiwo — posisi kavling Abirama, Baswara, dan villa" width="820" height="580" loading="lazy" decoding="async">
+      <!-- Overlay status jual diisi skrip di bawah: bentuk kavling dari
+           siteplan-kavling.json, status laku dari Progress Dashboard.
+           Kalau salah satunya gagal, yang tampil siteplan polos. -->
+      <div class="sp-scroll reveal" id="sp-scroll">
+        <div class="sp-stage" id="sp-stage">
+          <img class="tj-siteplan" id="tj-siteplan" src="img/siteplan.jpg" alt="Siteplan kawasan Tentrem Jiwo — posisi kavling Abirama, Baswara, dan villa" width="2172" height="2038" loading="lazy" decoding="async">
+          <div class="sp-overlay" id="sp-overlay"></div>
+        </div>
+      </div>
+      <div class="sp-tools">
+        <button type="button" class="sp-zoom" id="sp-zoom" aria-expanded="false">🔍 Perbesar siteplan</button>
+        <span class="sp-hint" id="sp-hint" hidden>Geser ke samping untuk melihat seluruh kawasan →</span>
+      </div>
+      <div class="sp-legend" id="sp-legend" hidden>
+        <span class="sp-legend__item"><i class="sp-swatch sp-swatch--sold"></i>Terjual <b id="sp-sold">0</b></span>
+        <span class="sp-legend__item" id="sp-ready-item" hidden><i class="sp-swatch sp-swatch--ready"></i>Siap huni <b id="sp-ready">0</b></span>
+        <span class="sp-legend__item"><i class="sp-swatch sp-swatch--free"></i>Tersedia <b id="sp-free">0</b></span>
+        <span class="sp-legend__hint">Ketuk kavling untuk melihat progress unitnya</span>
+      </div>
       <p class="st__note">Status jual per kavling bisa dicek kapan saja di <a href="https://progress.jogjagrahaselaras.com/progress/tentrem-jiwo" target="_blank" rel="noopener">Progress Dashboard</a> — sumber angka yang sama dengan halaman ini.</p>
     </div>
+
+    <!-- Tombol Perbesar. Bawaannya siteplan dipaskan ke lebar layar; sekali
+         ketuk panggungnya dilebarkan ke 720px supaya label yang tercetak di
+         gambar ikut terbaca, dan barulah digeser ke samping. -->
+    <script>
+    (function () {
+      var tombol   = document.getElementById('sp-zoom');
+      var gulir    = document.getElementById('sp-scroll');
+      var petunjuk = document.getElementById('sp-hint');
+      if (!tombol || !gulir) return;
+      tombol.addEventListener('click', function () {
+        var besar = gulir.classList.toggle('is-zoom');
+        tombol.textContent = besar ? '🔍 Perkecil siteplan' : '🔍 Perbesar siteplan';
+        tombol.setAttribute('aria-expanded', besar ? 'true' : 'false');
+        if (petunjuk) petunjuk.hidden = !besar;
+        if (!besar) gulir.scrollLeft = 0;
+        /* pasLabel() ikut mendengar resize — ukuran huruf label dihitung
+           ulang mengikuti lebar panggung yang baru. */
+        window.dispatchEvent(new Event('resize'));
+        /* Gambarnya berubah tinggi — halaman dibawa ke atas siteplan supaya
+           yang terlihat langsung gambarnya. 80px menyisakan ruang untuk
+           header yang menempel di atas. */
+        window.scrollBy(0, gulir.getBoundingClientRect().top - 80);
+      });
+    })();
+    </script>
   </section>
 
   <!-- ══ LOKASI ══ -->
@@ -584,6 +713,204 @@
       if (box) box.hidden = false;
     })
     .catch(function () { /* baris spesifikasi tetap tersembunyi */ });
+
+  /* ── 4. Siteplan: status jual per kavling ────────────────────
+     Bentuk kavling dari siteplan-kavling.json (persen, ikut ukuran
+     gambar — dibuat tools/siteplan/trace-tentrem-jiwo.py). Statusnya dari
+     dashboard: kavling yang kodenya ada di daftar `sold` = terjual,
+     yang `built` tapi belum laku = stok siap huni, sisanya tersedia.
+
+     Kalau salah satu gagal dimuat, overlay TIDAK digambar sama sekali —
+     lebih baik siteplan polos daripada semua kavling terlihat tersedia. */
+  var PROGRESS_PROYEK = 'https://progress.jogjagrahaselaras.com/progress/' + SLUG + '/';
+
+  Promise.all([
+    fetch('siteplan-kavling.json').then(function (r) { return r.ok ? r.json() : null; }),
+    fetch(BASE + 'siteplan?slug=' + SLUG, { mode: 'cors' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+  ]).then(function (hasil) {
+    var peta   = hasil[0];
+    var status = hasil[1];
+    var lapis  = document.getElementById('sp-overlay');
+    if (!lapis || !peta || !peta.kavling || !peta.kavling.length) return;
+    if (!status || !status.sold || !status.sold.length) return;
+
+    var terjual = {}, siapHuni = {}, detail = {};
+    status.sold.forEach(function (kode) { terjual[String(kode).toLowerCase()] = true; });
+    (status.readyStock || []).forEach(function (kode) { siapHuni[String(kode).toLowerCase()] = true; });
+    /* Satu baris per unit, lengkap dengan progres dan tautan ke halaman
+       progress unitnya (null bila unit belum dibangun). */
+    (status.units || []).forEach(function (u) { detail[String(u.code).toLowerCase()] = u; });
+
+    var nSold = 0, nReady = 0, nFree = 0;
+
+    /* Kanvas SVG memakai satuan persen (viewBox 0-100, tanpa menjaga rasio)
+       supaya titik poligon langsung jatuh di tempatnya berapa pun lebar
+       gambar. Garis tepinya dijaga tetap tipis lewat non-scaling-stroke. */
+    var NS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'sp-svg');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('preserveAspectRatio', 'none');
+
+    var defs = document.createElementNS(NS, 'defs');
+    defs.innerHTML =
+      '<pattern id="sp-hatch" width="2.6" height="2.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
+      '<rect width="2.6" height="2.6" fill="rgba(27,42,100,.30)"/>' +
+      '<rect width="1.3" height="2.6" fill="rgba(27,42,100,.55)"/></pattern>';
+    svg.appendChild(defs);
+
+    var labelLayer = document.createElement('div');
+    labelLayer.className = 'sp-overlay';
+    labelLayer.style.pointerEvents = 'none';
+
+    peta.kavling.forEach(function (kav) {
+      var kunci = kav.code.toLowerCase();
+      var unit  = detail[kunci];
+      var laku  = unit ? unit.sold : terjual[kunci] === true;
+      var siap  = !laku && (unit ? unit.built : siapHuni[kunci] === true);
+
+      if (laku)      { nSold++; }
+      else if (siap) { nReady++; }
+      else           { nFree++; }
+
+      var persen = unit && unit.progress ? unit.progress : 0;
+      var keterangan = kav.code + (laku ? ' — sudah terjual'
+                                : siap ? ' — ' + persen + '% terbangun, belum laku'
+                                       : ' — masih tersedia');
+
+      var titik = kav.poly;
+      var bbox  = kav.bbox;
+      if (!titik || !titik.length) return;
+
+      /* Semua kavling mendarat di dashboard progress: unit yang punya
+         halaman sendiri ke halaman unitnya, sisanya ke progress kawasan. */
+      var punyaHalaman = !!(unit && unit.url);
+      var tujuan = punyaHalaman ? unit.url : PROGRESS_PROYEK;
+
+      var a = document.createElementNS(NS, 'a');
+      a.setAttribute('href', tujuan);
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      a.setAttribute('aria-label', keterangan +
+        (punyaHalaman ? ' — buka progress unit' : ' — lihat progress kawasan'));
+
+      var poly = document.createElementNS(NS, 'polygon');
+      poly.setAttribute('points', titik.map(function (t) {
+        return t[0] + ',' + t[1];
+      }).join(' '));
+      poly.setAttribute('class', 'sp-poly ' + (laku ? 'sp-poly--sold'
+                                            : siap ? 'sp-poly--ready'
+                                                   : 'sp-poly--free'));
+      var judul = document.createElementNS(NS, 'title');
+      judul.textContent = keterangan;
+      poly.appendChild(judul);
+
+      a.appendChild(poly);
+      svg.appendChild(a);
+
+      if (laku || siap) {
+        var tanda = document.createElement('span');
+        tanda.className = 'sp-kav__x';
+        tanda.style.left = ((bbox[0] + bbox[2]) / 2) + '%';
+        tanda.style.top  = ((bbox[1] + bbox[3]) / 2) + '%';
+        /* Lebar kavling (persen) disimpan supaya ukuran hurufnya bisa
+           disesuaikan — lihat pasLabel() di bawah. Yang dipakai `lebar`:
+           semua kavling di sini miring, jadi kotak pembatasnya lebih lebar
+           daripada kavlingnya — menakar huruf dari kotak itu membuat
+           tulisan deret Baswara saling tumpang tindih. Stok yang belum
+           laku: sebut progresnya dulu, baru "SIAP HUNI" — supaya tidak
+           terbaca sebagai janji bisa ditempati besok. */
+        tanda.setAttribute('data-w', kav.lebar || (bbox[2] - bbox[0]));
+        tanda.setAttribute('data-penuh',  laku ? 'TERJUAL' : persen + '%|SIAP HUNI');
+        /* Versi pendek untuk kavling sempit: "READY", bukan angka persen —
+           angka sendirian tidak memberi tahu apa-apa, statusnya yang perlu
+           tersampaikan. Persennya tetap muncul di versi penuh. */
+        tanda.setAttribute('data-pendek', laku ? 'TERJUAL' : 'READY');
+        labelLayer.appendChild(tanda);
+      }
+    });
+
+    lapis.appendChild(svg);
+    lapis.appendChild(labelLayer);
+
+    /* ── Ukuran huruf label mengikuti lebar kavling ──────────────
+       Kotak kavling ikut melar bersama gambar, tapi hurufnya tidak. Di
+       layar sempit, tulisan berukuran tetap jadi lebih lebar dari
+       kavlingnya — teks keluar bentuk dan saling tumpang tindih. Di sini
+       ukurannya dihitung dari lebar kavling; kalau tulisan penuh tetap
+       tidak muat (mis. "SIAP HUNI" di kavling sempit), yang dipakai versi
+       pendeknya. Kode yang sama dipakai di /tentrem-bhumi/ — kalau salah
+       satu diubah, ubah keduanya. */
+    var panggung = document.getElementById('sp-stage');
+    function pasLabel() {
+      var lebarPanggung = panggung ? panggung.clientWidth : 0;
+      if (!lebarPanggung) return;
+      var daftar = labelLayer.children;
+      for (var i = 0; i < daftar.length; i++) {
+        var el = daftar[i];
+        var kotakPx = lebarPanggung * parseFloat(el.getAttribute('data-w')) / 100;
+        var baris = el.getAttribute('data-penuh').split('|');
+        var terpanjang = 0;
+        baris.forEach(function (b) { if (b.length > terpanjang) terpanjang = b.length; });
+        /* monospace: 1 huruf ≈ 0,66em (0,60 lebar huruf + 0,06 jarak antar
+           huruf); 0,92 menyisakan sedikit napas di tepi kavling. Mode rapat
+           membuang jarak antar hurufnya — dipakai kalau kavlingnya sempit. */
+        var muat = function (jml, rapat) {
+          return (kotakPx * (rapat ? 0.96 : 0.92)) / (jml * (rapat ? 0.60 : 0.66));
+        };
+        var ukuran = muat(terpanjang, false);
+        if (ukuran < 6) {
+          var pendek = el.getAttribute('data-pendek');
+          el.textContent = pendek;
+          ukuran = muat(pendek.length, false);
+          if (ukuran < 6) {
+            el.classList.add('sp-kav__x--rapat');
+            ukuran = muat(pendek.length, true);
+          } else {
+            el.classList.remove('sp-kav__x--rapat');
+          }
+        } else {
+          el.classList.remove('sp-kav__x--rapat');
+          el.innerHTML = baris.join('<br>');
+        }
+        el.style.display = '';   /* ditampilkan dulu supaya bisa diukur */
+        ukuran = Math.min(11, Math.max(5, ukuran));
+        el.style.fontSize = ukuran.toFixed(1) + 'px';
+
+        /* Perkiraan di atas memakai lebar huruf JetBrains Mono. Kalau font
+           itu belum/gagal dimuat, huruf penggantinya lebih lebar dan
+           tulisan melewati kavlingnya — di sini hasilnya diukur sungguhan
+           lalu dikecilkan seperlunya. */
+        var lebar = el.offsetWidth;
+        if (lebar > kotakPx) {
+          ukuran = ukuran * kotakPx / lebar;
+          el.style.fontSize = ukuran.toFixed(1) + 'px';
+        }
+
+        /* Di bawah 5,5px hurufnya tidak lagi terbaca — baru di titik itu
+           tulisannya disembunyikan supaya tidak jadi noda tinta. Warna
+           kavling + legenda tetap bercerita, dan tombol "Perbesar"
+           mengembalikan tulisannya. */
+        el.style.display = ukuran < 5.5 ? 'none' : '';
+      }
+    }
+
+    pasLabel();
+    window.addEventListener('resize', pasLabel);
+    /* Font mono dimuat asinkron — ukur ulang setelah huruf aslinya siap. */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(pasLabel);
+
+    set('sp-sold', nSold);
+    set('sp-ready', nReady);
+    set('sp-free', nFree);
+    var itemReady = document.getElementById('sp-ready-item');
+    if (itemReady) itemReady.hidden = nReady === 0;
+    var legenda = document.getElementById('sp-legend');
+    if (legenda) legenda.hidden = false;
+  }).catch(function () {
+    /* Bentuk kavling atau statusnya tidak terbaca — siteplan polos saja. */
+  });
 })();
 </script>
 

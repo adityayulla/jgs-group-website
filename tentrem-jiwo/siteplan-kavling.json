@@ -1,0 +1,429 @@
+{
+ "_catatan": [
+  "Bentuk kavling untuk overlay status jual di halaman /tentrem-jiwo/.",
+  "poly = titik-titik bentuk kavling dalam PERSEN terhadap gambar siteplan",
+  "([x,y]), jadi ikut ukuran layar. Kavling Tentrem Jiwo tidak ada yang",
+  "persegi betul — semua deretnya miring mengikuti jalan.",
+  "bbox = kotak pembatas, dipakai menaruh label TERJUAL/SIAP HUNI.",
+  "lebar = lebar kavling di tengah tingginya, buat menakar ukuran huruf",
+  "label — kavling miring, jadi bbox-nya lebih lebar dari kavlingnya.",
+  "JANGAN disunting tangan. Dibuat otomatis dari 'img/siteplan.jpg' lewat",
+  "tools/siteplan/trace-tentrem-jiwo.py (sel tertutup di antara garis).",
+  "Kalau gambar siteplan diganti, file ini WAJIB dibuat ulang — kalau tidak,",
+  "overlay menempel di kavling yang salah, di situs maupun di Progress",
+  "Dashboard (dashboard memakai file yang sama lewat getSiteplanMap()).",
+  "code = kode unit di Progress Dashboard. Di gambar, Abirama 1 tercetak",
+  "'A 1'."
+ ],
+ "gambar": "img/siteplan.jpg",
+ "ukuran": [
+  2172,
+  2038
+ ],
+ "kavling": [
+  {
+   "code": "Abirama 1",
+   "poly": [
+    [
+     18.16,
+     0.085
+    ],
+    [
+     41.201,
+     5.807
+    ],
+    [
+     38.628,
+     23.258
+    ],
+    [
+     15.47,
+     19.382
+    ]
+   ],
+   "bbox": [
+    15.47,
+    0.085,
+    41.201,
+    23.258
+   ],
+   "lebar": 23.791
+  },
+  {
+   "code": "Abirama 2",
+   "poly": [
+    [
+     50.46,
+     13.592
+    ],
+    [
+     74.125,
+     17.615
+    ],
+    [
+     71.869,
+     28.754
+    ],
+    [
+     48.803,
+     24.828
+    ]
+   ],
+   "bbox": [
+    48.803,
+    13.592,
+    74.125,
+    28.754
+   ],
+   "lebar": 24.062
+  },
+  {
+   "code": "Abirama 3",
+   "poly": [
+    [
+     15.47,
+     19.382
+    ],
+    [
+     38.628,
+     23.258
+    ],
+    [
+     36.971,
+     34.495
+    ],
+    [
+     13.904,
+     30.618
+    ]
+   ],
+   "bbox": [
+    13.904,
+    19.382,
+    38.628,
+    34.495
+   ],
+   "lebar": 23.668
+  },
+  {
+   "code": "Abirama 4",
+   "poly": [
+    [
+     48.757,
+     24.975
+    ],
+    [
+     71.823,
+     28.901
+    ],
+    [
+     69.567,
+     40.039
+    ],
+    [
+     47.053,
+     36.261
+    ]
+   ],
+   "bbox": [
+    47.053,
+    24.975,
+    71.823,
+    40.039
+   ],
+   "lebar": 23.473
+  },
+  {
+   "code": "Abirama 5",
+   "poly": [
+    [
+     13.812,
+     30.765
+    ],
+    [
+     36.924,
+     34.691
+    ],
+    [
+     35.267,
+     45.927
+    ],
+    [
+     12.247,
+     42.051
+    ]
+   ],
+   "bbox": [
+    12.247,
+    30.765,
+    36.924,
+    45.927
+   ],
+   "lebar": 23.624
+  },
+  {
+   "code": "Abirama 6",
+   "poly": [
+    [
+     47.053,
+     36.408
+    ],
+    [
+     69.475,
+     40.236
+    ],
+    [
+     67.265,
+     51.325
+    ],
+    [
+     45.396,
+     47.694
+    ]
+   ],
+   "bbox": [
+    45.396,
+    36.408,
+    69.475,
+    51.325
+   ],
+   "lebar": 22.794
+  },
+  {
+   "code": "Abirama 7",
+   "poly": [
+    [
+     12.155,
+     42.247
+    ],
+    [
+     35.221,
+     46.124
+    ],
+    [
+     33.702,
+     55.741
+    ],
+    [
+     32.228,
+     56.575
+    ],
+    [
+     10.635,
+     52.895
+    ]
+   ],
+   "bbox": [
+    10.635,
+    42.247,
+    35.221,
+    56.575
+   ],
+   "lebar": 23.569
+  },
+  {
+   "code": "Abirama 8",
+   "poly": [
+    [
+     45.304,
+     47.89
+    ],
+    [
+     79.742,
+     53.631
+    ],
+    [
+     78.177,
+     64.082
+    ],
+    [
+     45.258,
+     58.538
+    ],
+    [
+     43.969,
+     56.771
+    ]
+   ],
+   "bbox": [
+    43.969,
+    47.89,
+    79.742,
+    64.082
+   ],
+   "lebar": 35.302
+  },
+  {
+   "code": "Baswara 1",
+   "poly": [
+    [
+     9.438,
+     60.991
+    ],
+    [
+     20.764,
+     62.856
+    ],
+    [
+     17.956,
+     82.287
+    ],
+    [
+     6.63,
+     80.569
+    ]
+   ],
+   "bbox": [
+    6.63,
+    60.991,
+    20.764,
+    82.287
+   ],
+   "lebar": 11.584
+  },
+  {
+   "code": "Baswara 2",
+   "poly": [
+    [
+     20.948,
+     62.905
+    ],
+    [
+     32.274,
+     64.769
+    ],
+    [
+     31.446,
+     70.51
+    ],
+    [
+     31.169,
+     72.179
+    ],
+    [
+     29.466,
+     84.053
+    ],
+    [
+     18.14,
+     82.336
+    ],
+    [
+     20.396,
+     70.559
+    ]
+   ],
+   "bbox": [
+    18.14,
+    62.905,
+    32.274,
+    84.053
+   ],
+   "lebar": 11.146
+  },
+  {
+   "code": "Baswara 3",
+   "poly": [
+    [
+     32.459,
+     64.769
+    ],
+    [
+     43.785,
+     66.634
+    ],
+    [
+     41.022,
+     85.819
+    ],
+    [
+     29.65,
+     84.102
+    ]
+   ],
+   "bbox": [
+    29.65,
+    64.769,
+    43.785,
+    85.819
+   ],
+   "lebar": 11.608
+  },
+  {
+   "code": "Baswara 4",
+   "poly": [
+    [
+     43.923,
+     66.683
+    ],
+    [
+     55.249,
+     68.548
+    ],
+    [
+     54.374,
+     74.436
+    ],
+    [
+     54.144,
+     76.104
+    ],
+    [
+     52.486,
+     87.586
+    ],
+    [
+     41.16,
+     85.868
+    ],
+    [
+     43.37,
+     74.485
+    ]
+   ],
+   "bbox": [
+    41.16,
+    66.683,
+    55.249,
+    87.586
+   ],
+   "lebar": 11.14
+  },
+  {
+   "code": "Villa Tentrem Jiwo",
+   "poly": [
+    [
+     55.479,
+     68.646
+    ],
+    [
+     77.67,
+     69.823
+    ],
+    [
+     76.934,
+     72.179
+    ],
+    [
+     93.785,
+     72.718
+    ],
+    [
+     90.562,
+     93.376
+    ],
+    [
+     52.716,
+     87.586
+    ]
+   ],
+   "bbox": [
+    52.716,
+    68.646,
+    93.785,
+    93.376
+   ],
+   "lebar": 38.816
+  }
+ ]
+}
