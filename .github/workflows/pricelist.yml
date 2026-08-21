@@ -34,9 +34,12 @@ on:
 permissions:
   contents: write
 
+# Menandai lima unit laku beruntun mengirim lima sinyal. Isinya sama saja —
+# tiap build membaca keadaan dashboard yang terbaru — jadi yang lama
+# dibatalkan, cukup yang terakhir yang jalan.
 concurrency:
   group: pricelist
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   bangun:
