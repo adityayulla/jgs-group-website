@@ -1,0 +1,40 @@
+{
+  "slug": "tentrem-jiwo",
+  "pdf": "PriceList_Tentrem_Jiwo.pdf",
+  "html": "pricelist-tentrem-jiwo.html",
+  "judul": "Tentrem Jiwo",
+  "logo": "../img/Logo-Perumahan/Logo%20Tentrem%20Jiwo.webp",
+  "tagline": "Lima menit ke bandara, lima menit ke pintu tol — Purwomartani, Kalasan",
+  "alamat": "Jl. Kenanga II, Sorogenen, Cupuwatu I, Purwomartani, Kalasan, Sleman",
+  "tautanTeks": "jogjagrahaselaras.com/tentrem-jiwo",
+  "tautanHref": "https://jogjagrahaselaras.com/tentrem-jiwo",
+  "promo": {
+    "judul": "PROMO BULAN INI",
+    "teks": "Diskon Rp 15 Jt + Rp 5 Jt saat booking survey · Free AJB · Free Provisi & Admin KPR · Free Kenaikan SHM",
+    "cap": "Total Hemat",
+    "jumlah": "±Rp 43 Jt",
+    "sub": "per unit · S&K"
+  },
+  "seksi": [
+    {
+      "deret": "Abirama",
+      "band": "ABIRAMA · Tipe 82, 86 & 100 · 8 unit"
+    },
+    {
+      "deret": "Baswara",
+      "band": "BASWARA · Tipe 93 · 4 unit"
+    },
+    {
+      "deret": "Villa Tentrem Jiwo",
+      "band": "VILLA TENTREM JIWO · Tipe 225 · 6 KT ensuite · private pool 8×3 m"
+    }
+  ],
+  "catatan": "* Cash Keras = tunai bertahap, DP 80%. ** KPR / Cash Tempo = DP 30%, sisa via bank rekanan (BSI, BTN, BNI, BRI, BSN, BPD DIY). Unit Office (Abirama 1) sudah selesai dibangun dan bisa dilihat langsung kapan saja. Villa Tentrem Jiwo masih dalam pembangunan — progres terkininya bisa dipantau di progress.jogjagrahaselaras.com. Harga & ketersediaan dapat berubah sewaktu-waktu. Unit TERJUAL ditampilkan sebagai gambaran penyerapan kawasan.",
+  "cta": {
+    "judul": "Ingin lihat unitnya langsung?",
+    "teks": "Unit Office di lokasi sekaligus kantor pemasaran kami — datang kapan saja, tanpa janji khusus.",
+    "waNama": "WhatsApp Dwi",
+    "waNomor": "0889-0292-9571"
+  },
+  "footer": "jogjagrahaselaras.com · IG @jogjagrahaselaras · JGS Group — 13 tahun, 300+ rumah serah terima"
+}

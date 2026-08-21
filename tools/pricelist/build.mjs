@@ -106,6 +106,14 @@ function gabung(units) {
 
 /** ["Mizu 4","Mizu 5","Mizu 6"] → "Mizu 4 s/d 6" */
 function labelGrup(grup) {
+  // Tidak semua kavling bernomor: "Villa Tentrem Jiwo" berdiri sendiri
+  // tanpa angka di belakang. Tanpa cabang ini nomor()-nya jatuh ke 0 dan
+  // namanya tercetak "Villa Tentrem Jiwo 0".
+  if (grup.some((u) => !/\d\s*$/.test(u.code))) {
+    const teks = grup.map((u) => u.code).join(" & ");
+    return grup[0].hook ? `${teks} (Hook)` : teks;
+  }
+
   const nama = deret(grup[0].code);
   const angka = grup.map((u) => nomor(u.code)).sort((a, b) => a - b);
   const berurutan = angka.every((n, i) => i === 0 || n === angka[i - 1] + 1);
@@ -342,7 +350,9 @@ async function bangun(slug) {
   return true;
 }
 
-const daftar = pilihan.length ? pilihan : ["tentrem-bhumi", "kawa-living"];
+const daftar = pilihan.length
+  ? pilihan
+  : ["tentrem-bhumi", "kawa-living", "tentrem-jiwo"];
 let adaPerubahan = false;
 for (const slug of daftar) {
   adaPerubahan = (await bangun(slug)) || adaPerubahan;

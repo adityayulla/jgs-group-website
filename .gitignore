@@ -15,6 +15,11 @@ JGS Living Landing (standalone).html
 # ...kecuali CAD sumber siteplan: bahan skrip di tools/siteplan/, harus ikut
 # supaya siteplan bisa dibuat ulang dari repo saja.
 !tools/siteplan/**/cad/*.pdf
+# ...dan kecuali pricelist hasil bangun: file inilah yang dipakai tombol
+# "Download Pricelist" di /download/. Tanpa baris ini, PDF proyek baru
+# diam-diam tidak ikut ter-commit oleh workflow Pricelist (git add tidak
+# menyentuh file yang diabaikan) — dan tombolnya 404 di produksi.
+!download/PriceList_*.pdf
 
 # Node (if ever used)
 node_modules/
