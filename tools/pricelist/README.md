@@ -66,15 +66,3 @@ set `CHROME=/path/ke/chrome`). Tidak ada dependensi npm.
   diam-diam dari daftar harga.
 - **PDF hanya dirender kalau HTML-nya berubah.** Chrome menstempel tanggal ke
   tiap PDF, jadi tanpa penjagaan ini tiap kali jalan akan terlihat "berubah".
-
-## `data/_snapshot-harga.json` — sementara
-
-Salinan harga per kavling, dipakai **hanya** selama
-`/api/public/pricelist` di dashboard belum hidup — persisnya kalau API-nya
-menjawab 404 (rutenya belum ter-deploy) atau `pricing-not-migrated`
-(`supabase/migrations/0032_unit_pricing.sql` belum dijalankan di Supabase).
-Dashboard yang sedang bermasalah **tidak** ditolong salinan ini: di situ
-build memang harus gagal, supaya tidak ada harga lama yang terbit diam-diam.
-Status jual tetap diambil dari dashboard walau memakai salinan ini.
-
-Begitu API-nya menjawab, skrip berhenti membacanya — file ini boleh dihapus.

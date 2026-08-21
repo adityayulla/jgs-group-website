@@ -44,18 +44,6 @@ const pilihan = argv.filter((a) => !a.startsWith("--"));
 const baca = (p) => JSON.parse(readFileSync(p, "utf8"));
 const bersama = baca(join(DATA, "_bersama.json"));
 
-/**
- * Salinan harga sementara, dipakai HANYA selama dashboard belum punya
- * /api/public/pricelist (migration 0032). Sengaja dipisah dan berisik:
- * begitu API-nya hidup, file ini tidak terpakai dan boleh dihapus.
- */
-function snapshot(slug) {
-  const p = join(DATA, "_snapshot-harga.json");
-  if (!existsSync(p)) return null;
-  const isi = baca(p)[slug];
-  return isi?.length ? isi : null;
-}
-
 async function ambilUnit(slug) {
   let res = null;
   let galatJaringan = null;
@@ -72,47 +60,17 @@ async function ambilUnit(slug) {
 
   if (res?.ok) {
     const data = await res.json();
-    if (data.units?.length) return { units: data.units, sumber: "dashboard" };
+    if (data.units?.length) return { units: data.units };
   }
 
   // Dashboard tidak bisa dipakai. Status jual TIDAK boleh dikarang, jadi
   // tanpa jawaban dari sana pricelist tidak dibangun ulang sama sekali —
   // PDF lama yang masih terpasang lebih baik daripada PDF baru yang salah.
   const sebab = res ? (await res.json().catch(() => ({}))).error ?? "" : "";
-  const alasan = res
-    ? `${res.status} ${sebab}`.trim()
-    : `tidak bisa dihubungi (${galatJaringan})`;
-
-  // Salinan harga hanya sah untuk satu keadaan: harganya memang belum
-  // pindah ke dashboard (404 = rutenya belum ter-deploy, atau RPC-nya
-  // belum ada). Dashboard yang sedang bermasalah TIDAK boleh diam-diam
-  // diganti angka lama — di situ build memang harus gagal.
-  const belumPindah = res?.status === 404 || sebab === "pricing-not-migrated";
-  const cadangan = belumPindah ? snapshot(slug) : null;
-  if (!cadangan) throw new Error(`API pricelist ${slug}: ${alasan}`);
-
-  // Harga boleh dari salinan, status jual tetap wajib dari dashboard.
-  const laku = await ambilStatusJual(slug);
-  console.warn(
-    `  ⚠ /api/public/pricelist belum bisa dipakai (${alasan}).\n` +
-      `    Harga diambil dari data/_snapshot-harga.json; status jual tetap dari dashboard.\n` +
-      `    Jalankan supabase/migrations/0032_unit_pricing.sql supaya salinan ini tidak dibutuhkan lagi.`
+  throw new Error(
+    `API pricelist ${slug}: ` +
+      (res ? `${res.status} ${sebab}`.trim() : `tidak bisa dihubungi (${galatJaringan})`)
   );
-  return {
-    units: cadangan.map((u) => ({ ...u, sold: laku.has(u.code) })),
-    sumber: "snapshot",
-  };
-}
-
-/** Status jual dari endpoint siteplan — sudah hidup jauh sebelum 0032. */
-async function ambilStatusJual(slug) {
-  const res = await fetch(
-    `https://progress.jogjagrahaselaras.com/api/public/siteplan?slug=${slug}&t=${Date.now()}`
-  );
-  if (!res.ok) throw new Error(`API siteplan ${slug}: ${res.status}`);
-  const data = await res.json();
-  if (!data.units?.length) throw new Error(`API siteplan ${slug}: kosong`);
-  return new Set(data.units.filter((u) => u.sold).map((u) => u.code));
 }
 
 /* ── Baris tabel ──────────────────────────────────────────────── */
@@ -329,7 +287,7 @@ async function bangun(slug) {
   const cfg = baca(join(DATA, `${slug}.json`));
   console.log(`\n▸ ${cfg.judul}`);
 
-  const { units, sumber } = await ambilUnit(slug);
+  const { units } = await ambilUnit(slug);
 
   // Tiap kavling harus punya seksi. Kalau ada deret baru di dashboard
   // yang belum dikenal di sini, berhenti — diam-diam menghilangkan
@@ -357,9 +315,7 @@ async function bangun(slug) {
   const tanpaHarga = units.filter(
     (u) => !u.sold && (u.priceCash === null || u.priceCash === undefined)
   );
-  console.log(
-    `  ${units.length} kavling · ${laku} terjual · sumber harga: ${sumber}`
-  );
+  console.log(`  ${units.length} kavling · ${laku} terjual`);
   if (tanpaHarga.length) {
     console.log(
       `  ${tanpaHarga.length} tersedia tanpa harga → "Hubungi Marketing": ` +
