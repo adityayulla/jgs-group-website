@@ -546,6 +546,9 @@
       color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.5);
       pointer-events: none; white-space: nowrap; text-align: center;
     }
+    /* Kavling sempit: jarak antar huruf dibuang supaya tulisannya masih muat
+       (dipasang JS lewat pasLabel, mengikuti lebar kavling). */
+    .sp-kav__x--rapat { letter-spacing: 0; }
     .sp-legend {
       display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
       margin-top: 18px;
@@ -1971,19 +1974,35 @@
         var baris = el.getAttribute('data-penuh').split('|');
         var terpanjang = 0;
         baris.forEach(function (b) { if (b.length > terpanjang) terpanjang = b.length; });
-        /* monospace: 1 huruf ≈ 0,66em (0,60 lebar huruf + 0,06 letter-spacing);
-           0,92 menyisakan sedikit napas di tepi kavling. */
-        var muat = function (jml) { return (kotakPx * 0.92) / (jml * 0.66); };
-        var ukuran = muat(terpanjang);
+        /* monospace: 1 huruf ≈ 0,66em (0,60 lebar huruf + 0,06 jarak antar
+           huruf); 0,92 menyisakan sedikit napas di tepi kavling. Mode rapat
+           membuang jarak antar hurufnya — dipakai kalau kavlingnya sempit. */
+        var muat = function (jml, rapat) {
+          return (kotakPx * (rapat ? 0.96 : 0.92)) / (jml * (rapat ? 0.60 : 0.66));
+        };
+        var ukuran = muat(terpanjang, false);
         if (ukuran < 6) {
           var pendek = el.getAttribute('data-pendek');
           el.textContent = pendek;
-          ukuran = muat(pendek.length);
+          ukuran = muat(pendek.length, false);
+          /* Kavling paling sempit (mis. Bhama saat siteplan dipaskan ke lebar
+             HP) tetap tidak muat — hurufnya dikecilkan dan dirapatkan, bukan
+             dihilangkan. "TERJUAL" lebih berguna kecil daripada tidak ada. */
+          if (ukuran < 6) {
+            el.classList.add('sp-kav__x--rapat');
+            ukuran = muat(pendek.length, true);
+          } else {
+            el.classList.remove('sp-kav__x--rapat');
+          }
         } else {
+          el.classList.remove('sp-kav__x--rapat');
           el.innerHTML = baris.join('<br>');
         }
         el.style.display = '';   /* ditampilkan dulu supaya bisa diukur */
-        el.style.fontSize = Math.min(11, Math.max(6, ukuran)).toFixed(1) + 'px';
+        /* Dipasang dulu, baru diukur — jadi ukuran yang dipakai untuk
+           koreksi di bawah persis ukuran yang sedang tampil. */
+        ukuran = Math.min(11, Math.max(5, ukuran));
+        el.style.fontSize = ukuran.toFixed(1) + 'px';
 
         /* Perkiraan di atas memakai lebar huruf JetBrains Mono. Kalau font
            itu belum/gagal dimuat, huruf penggantinya lebih lebar dan
@@ -1991,17 +2010,18 @@
            lalu dikecilkan seperlunya. */
         var lebar = el.offsetWidth;
         if (lebar > kotakPx) {
-          var koreksi = Math.max(5, ukuran * kotakPx / lebar);
-          el.style.fontSize = koreksi.toFixed(1) + 'px';
-          ukuran = koreksi;
+          ukuran = ukuran * kotakPx / lebar;
+          el.style.fontSize = ukuran.toFixed(1) + 'px';
         }
 
-        /* Tulisan yang tetap tidak muat (siteplan sedang dipaskan ke lebar
-           HP) disembunyikan supaya tidak tumpang tindih — warna kavling +
-           legenda sudah cukup, dan tombol "Perbesar" mengembalikannya. */
-        if (ukuran < 5.5) el.style.display = 'none';
+        /* Di bawah 5,5px hurufnya tidak lagi terbaca — baru di titik itu
+           tulisannya disembunyikan supaya tidak jadi noda tinta. Warna
+           kavling + legenda tetap bercerita, dan tombol "Perbesar"
+           mengembalikan tulisannya. */
+        el.style.display = ukuran < 5.5 ? 'none' : '';
       }
     }
+
     pasLabel();
     window.addEventListener('resize', pasLabel);
     /* Font mono dimuat asinkron — ukur ulang setelah huruf aslinya siap. */

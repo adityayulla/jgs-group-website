@@ -1,0 +1,869 @@
+{
+ "_catatan": [
+  "Salinan harga SEMENTARA — dipakai hanya selama /api/public/pricelist",
+  "di dashboard belum hidup (migration 0032 belum dijalankan).",
+  "Begitu API-nya menjawab, file ini tidak dibaca lagi dan boleh dihapus.",
+  "Isinya sama dengan seed di supabase/migrations/0032_unit_pricing.sql.",
+  "Status jual TIDAK ada di sini — itu selalu dari dashboard."
+ ],
+ "tentrem-bhumi": [
+  {
+   "code": "Andrawina 1",
+   "type": "68",
+   "landArea": 88,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Andrawina 2",
+   "type": "68",
+   "landArea": 127,
+   "priceCash": 965500000,
+   "priceKpr": 1040500000,
+   "hook": false
+  },
+  {
+   "code": "Andrawina 3",
+   "type": "68",
+   "landArea": 130,
+   "priceCash": 979200000,
+   "priceKpr": 1054200000,
+   "hook": false
+  },
+  {
+   "code": "Andrawina 4",
+   "type": "68",
+   "landArea": 132,
+   "priceCash": 988300000,
+   "priceKpr": 1063300000,
+   "hook": false
+  },
+  {
+   "code": "Andrawina 5",
+   "type": "68",
+   "landArea": 167,
+   "priceCash": 1148200000,
+   "priceKpr": 1223200000,
+   "hook": false
+  },
+  {
+   "code": "Andrawina 6",
+   "type": "68",
+   "landArea": 99,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Andrawina 7",
+   "type": "68",
+   "landArea": 125,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Andrawina 8",
+   "type": "68",
+   "landArea": 127,
+   "priceCash": 965500000,
+   "priceKpr": 1040500000,
+   "hook": false
+  },
+  {
+   "code": "Andrawina 9",
+   "type": "68",
+   "landArea": 130,
+   "priceCash": 979200000,
+   "priceKpr": 1054200000,
+   "hook": false
+  },
+  {
+   "code": "Andrawina 10",
+   "type": "68",
+   "landArea": 133,
+   "priceCash": 992900000,
+   "priceKpr": 1067900000,
+   "hook": false
+  },
+  {
+   "code": "Andrawina 11",
+   "type": "68",
+   "landArea": 128,
+   "priceCash": 970100000,
+   "priceKpr": 1045100000,
+   "hook": false
+  },
+  {
+   "code": "Bhama 1",
+   "type": "48",
+   "landArea": 92,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": true
+  },
+  {
+   "code": "Bhama 2",
+   "type": "48",
+   "landArea": 94,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Bhama 3",
+   "type": "48",
+   "landArea": 93,
+   "priceCash": 646900000,
+   "priceKpr": 721900000,
+   "hook": false
+  },
+  {
+   "code": "Bhama 4",
+   "type": "48",
+   "landArea": 95,
+   "priceCash": 656100000,
+   "priceKpr": 731100000,
+   "hook": false
+  },
+  {
+   "code": "Bhama 5",
+   "type": "48",
+   "landArea": 97,
+   "priceCash": 665200000,
+   "priceKpr": 740200000,
+   "hook": false
+  },
+  {
+   "code": "Bhama 6",
+   "type": "48",
+   "landArea": 98,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Bhama 7",
+   "type": "48",
+   "landArea": 100,
+   "priceCash": 695900000,
+   "priceKpr": 770900000,
+   "hook": true
+  },
+  {
+   "code": "Cantya 1",
+   "type": "32,5",
+   "landArea": null,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Cantya 2",
+   "type": "48/32,5",
+   "landArea": 100,
+   "priceCash": 695900000,
+   "priceKpr": 705900000,
+   "hook": true
+  },
+  {
+   "code": "Cantya 3",
+   "type": "32,5",
+   "landArea": 100,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Cantya 5",
+   "type": "32,5",
+   "landArea": 100,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Cantya 4",
+   "type": "32,5",
+   "landArea": 99,
+   "priceCash": 674900000,
+   "priceKpr": 684900000,
+   "hook": false
+  },
+  {
+   "code": "Cantya 6",
+   "type": "32,5",
+   "landArea": 131,
+   "priceCash": 821600000,
+   "priceKpr": 831600000,
+   "hook": false
+  },
+  {
+   "code": "Cantya 7",
+   "type": "32,5",
+   "landArea": 134,
+   "priceCash": 834200000,
+   "priceKpr": 844200000,
+   "hook": false
+  },
+  {
+   "code": "Cantya 9",
+   "type": "32,5",
+   "landArea": 134,
+   "priceCash": 834200000,
+   "priceKpr": 844200000,
+   "hook": false
+  },
+  {
+   "code": "Cantya 11",
+   "type": "32,5",
+   "landArea": 134,
+   "priceCash": 834200000,
+   "priceKpr": 844200000,
+   "hook": false
+  },
+  {
+   "code": "Cantya 13",
+   "type": "32,5",
+   "landArea": 134,
+   "priceCash": 834200000,
+   "priceKpr": 844200000,
+   "hook": false
+  },
+  {
+   "code": "Cantya 8",
+   "type": "32,5",
+   "landArea": 130,
+   "priceCash": 817000000,
+   "priceKpr": 827000000,
+   "hook": false
+  },
+  {
+   "code": "Cantya 10",
+   "type": "32,5",
+   "landArea": 128,
+   "priceCash": 807800000,
+   "priceKpr": 817800000,
+   "hook": false
+  },
+  {
+   "code": "Cantya 12",
+   "type": "32,5",
+   "landArea": 127,
+   "priceCash": 803200000,
+   "priceKpr": 813200000,
+   "hook": false
+  },
+  {
+   "code": "Cantya 14",
+   "type": "32,5",
+   "landArea": 202,
+   "priceCash": 1148300000,
+   "priceKpr": 1158300000,
+   "hook": false
+  },
+  {
+   "code": "Cantya 15",
+   "type": "32,5",
+   "landArea": 181,
+   "priceCash": 1048900000,
+   "priceKpr": 1058900000,
+   "hook": false
+  }
+ ],
+ "kawa-living": [
+  {
+   "code": "Mizu 1",
+   "type": "36",
+   "landArea": 76,
+   "priceCash": 449100000,
+   "priceKpr": 489100000,
+   "hook": true
+  },
+  {
+   "code": "Mizu 2",
+   "type": "36",
+   "landArea": 71,
+   "priceCash": 414900000,
+   "priceKpr": 454900000,
+   "hook": false
+  },
+  {
+   "code": "Mizu 3",
+   "type": "36",
+   "landArea": 71,
+   "priceCash": 414900000,
+   "priceKpr": 454900000,
+   "hook": false
+  },
+  {
+   "code": "Mizu 4",
+   "type": "36",
+   "landArea": 72,
+   "priceCash": 418300000,
+   "priceKpr": 458300000,
+   "hook": false
+  },
+  {
+   "code": "Mizu 5",
+   "type": "36",
+   "landArea": 72,
+   "priceCash": 418300000,
+   "priceKpr": 458300000,
+   "hook": false
+  },
+  {
+   "code": "Mizu 6",
+   "type": "36",
+   "landArea": 72,
+   "priceCash": 418300000,
+   "priceKpr": 458300000,
+   "hook": false
+  },
+  {
+   "code": "Mizu 7",
+   "type": "36",
+   "landArea": 72,
+   "priceCash": 418300000,
+   "priceKpr": 458300000,
+   "hook": false
+  },
+  {
+   "code": "Mizu 8",
+   "type": "36",
+   "landArea": 73,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Mizu 9",
+   "type": "36",
+   "landArea": 72,
+   "priceCash": 418300000,
+   "priceKpr": 458300000,
+   "hook": false
+  },
+  {
+   "code": "Mizu 10",
+   "type": "36",
+   "landArea": 72,
+   "priceCash": 418300000,
+   "priceKpr": 458300000,
+   "hook": false
+  },
+  {
+   "code": "Mizu 11",
+   "type": "36",
+   "landArea": 72,
+   "priceCash": 418300000,
+   "priceKpr": 458300000,
+   "hook": false
+  },
+  {
+   "code": "Mizu 12",
+   "type": "36",
+   "landArea": 73,
+   "priceCash": 421700000,
+   "priceKpr": 461700000,
+   "hook": false
+  },
+  {
+   "code": "Mizu 13",
+   "type": "36",
+   "landArea": 73,
+   "priceCash": 421700000,
+   "priceKpr": 461700000,
+   "hook": false
+  },
+  {
+   "code": "Mizu 14",
+   "type": "36",
+   "landArea": 72,
+   "priceCash": 418300000,
+   "priceKpr": 458300000,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 1",
+   "type": "37/42",
+   "landArea": 71,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": true
+  },
+  {
+   "code": "Hiroi Yuri 2",
+   "type": "37/42",
+   "landArea": 71,
+   "priceCash": 424900000,
+   "priceKpr": 484900000,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 3",
+   "type": "37/42",
+   "landArea": 70,
+   "priceCash": 421500000,
+   "priceKpr": 481500000,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 4",
+   "type": "37/42",
+   "landArea": 70,
+   "priceCash": 421500000,
+   "priceKpr": 481500000,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 5",
+   "type": "37/42",
+   "landArea": 70,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 6",
+   "type": "37/42",
+   "landArea": 70,
+   "priceCash": 421500000,
+   "priceKpr": 481500000,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 7",
+   "type": "37/42",
+   "landArea": 71,
+   "priceCash": 424900000,
+   "priceKpr": 484900000,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 8",
+   "type": "37/42",
+   "landArea": 71,
+   "priceCash": 424900000,
+   "priceKpr": 484900000,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 9",
+   "type": "37/42",
+   "landArea": 71,
+   "priceCash": 424900000,
+   "priceKpr": 484900000,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 10",
+   "type": "37/42",
+   "landArea": 71,
+   "priceCash": 424900000,
+   "priceKpr": 484900000,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 11",
+   "type": "37/42",
+   "landArea": 72,
+   "priceCash": 428300000,
+   "priceKpr": 488300000,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 12",
+   "type": "37/42",
+   "landArea": 70,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 13",
+   "type": "37/42",
+   "landArea": 73,
+   "priceCash": 431700000,
+   "priceKpr": 491700000,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 14",
+   "type": "37/42",
+   "landArea": 71,
+   "priceCash": 424900000,
+   "priceKpr": 484900000,
+   "hook": false
+  },
+  {
+   "code": "Hiroi Yuri 15",
+   "type": "37/42",
+   "landArea": 72,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Yuri 1",
+   "type": "34,5/40",
+   "landArea": 79,
+   "priceCash": 475100000,
+   "priceKpr": 537100000,
+   "hook": true
+  },
+  {
+   "code": "Yuri 2",
+   "type": "34,5/40",
+   "landArea": 97,
+   "priceCash": 521200000,
+   "priceKpr": 583200000,
+   "hook": false
+  },
+  {
+   "code": "Yuri 7",
+   "type": "34,5/40",
+   "landArea": 97,
+   "priceCash": 521200000,
+   "priceKpr": 583200000,
+   "hook": false
+  },
+  {
+   "code": "Yuri 3",
+   "type": "34,5/40",
+   "landArea": 81,
+   "priceCash": 482100000,
+   "priceKpr": 544100000,
+   "hook": true
+  },
+  {
+   "code": "Yuri 4",
+   "type": "34,5/40",
+   "landArea": 81,
+   "priceCash": 464900000,
+   "priceKpr": 526900000,
+   "hook": false
+  },
+  {
+   "code": "Yuri 5",
+   "type": "34,5/40",
+   "landArea": 85,
+   "priceCash": 479000000,
+   "priceKpr": 541000000,
+   "hook": false
+  },
+  {
+   "code": "Yuri 11",
+   "type": "34,5/40",
+   "landArea": 85,
+   "priceCash": 479000000,
+   "priceKpr": 541000000,
+   "hook": false
+  },
+  {
+   "code": "Yuri 6",
+   "type": "34,5/40",
+   "landArea": 106,
+   "priceCash": 570100000,
+   "priceKpr": 632100000,
+   "hook": true
+  },
+  {
+   "code": "Yuri 8",
+   "type": "34,5/40",
+   "landArea": 88,
+   "priceCash": 489600000,
+   "priceKpr": 551600000,
+   "hook": false
+  },
+  {
+   "code": "Yuri 9",
+   "type": "34,5/40",
+   "landArea": 79,
+   "priceCash": 457000000,
+   "priceKpr": 519000000,
+   "hook": false
+  },
+  {
+   "code": "Yuri 10",
+   "type": "34,5/40",
+   "landArea": null,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Yuri 12",
+   "type": "34,5/40",
+   "landArea": null,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Yuri 13",
+   "type": "34,5/40",
+   "landArea": 90,
+   "priceCash": 496600000,
+   "priceKpr": 558600000,
+   "hook": false
+  },
+  {
+   "code": "Yuri 14",
+   "type": "34,5/40",
+   "landArea": 104,
+   "priceCash": 563000000,
+   "priceKpr": 625000000,
+   "hook": true
+  },
+  {
+   "code": "Himawari 1",
+   "type": "51",
+   "landArea": 88,
+   "priceCash": 613300000,
+   "priceKpr": 653300000,
+   "hook": true
+  },
+  {
+   "code": "Himawari 2",
+   "type": "51",
+   "landArea": 82,
+   "priceCash": 575800000,
+   "priceKpr": 615800000,
+   "hook": false
+  },
+  {
+   "code": "Himawari 3",
+   "type": "51",
+   "landArea": 83,
+   "priceCash": 596400000,
+   "priceKpr": 636400000,
+   "hook": true
+  },
+  {
+   "code": "Himawari 4",
+   "type": "49",
+   "landArea": 74,
+   "priceCash": 552700000,
+   "priceKpr": 592700000,
+   "hook": true
+  },
+  {
+   "code": "Himawari 5",
+   "type": "49",
+   "landArea": 69,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Himawari 6",
+   "type": "49",
+   "landArea": 73,
+   "priceCash": 532100000,
+   "priceKpr": 572100000,
+   "hook": false
+  },
+  {
+   "code": "Himawari 7",
+   "type": "49",
+   "landArea": 77,
+   "priceCash": 545700000,
+   "priceKpr": 585700000,
+   "hook": false
+  },
+  {
+   "code": "Himawari 8",
+   "type": "49",
+   "landArea": 82,
+   "priceCash": 562700000,
+   "priceKpr": 602700000,
+   "hook": false
+  },
+  {
+   "code": "Himawari 10",
+   "type": "49",
+   "landArea": 82,
+   "priceCash": 562700000,
+   "priceKpr": 602700000,
+   "hook": false
+  },
+  {
+   "code": "Himawari 9",
+   "type": "49",
+   "landArea": 83,
+   "priceCash": 566100000,
+   "priceKpr": 606100000,
+   "hook": false
+  },
+  {
+   "code": "Himawari 11",
+   "type": "49",
+   "landArea": 119,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Okina 1",
+   "type": "61",
+   "landArea": null,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Okina 4",
+   "type": "61",
+   "landArea": null,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Okina 9",
+   "type": "61",
+   "landArea": null,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Okina 19",
+   "type": "61",
+   "landArea": null,
+   "priceCash": null,
+   "priceKpr": null,
+   "hook": false
+  },
+  {
+   "code": "Okina 2",
+   "type": "61",
+   "landArea": 76,
+   "priceCash": 621100000,
+   "priceKpr": 661100000,
+   "hook": false
+  },
+  {
+   "code": "Okina 3",
+   "type": "61",
+   "landArea": 79,
+   "priceCash": 631300000,
+   "priceKpr": 671300000,
+   "hook": false
+  },
+  {
+   "code": "Okina 17",
+   "type": "61",
+   "landArea": 79,
+   "priceCash": 631300000,
+   "priceKpr": 671300000,
+   "hook": false
+  },
+  {
+   "code": "Okina 5",
+   "type": "61",
+   "landArea": 85,
+   "priceCash": 651700000,
+   "priceKpr": 691700000,
+   "hook": false
+  },
+  {
+   "code": "Okina 6",
+   "type": "61",
+   "landArea": 90,
+   "priceCash": 668600000,
+   "priceKpr": 708600000,
+   "hook": false
+  },
+  {
+   "code": "Okina 7",
+   "type": "61",
+   "landArea": 93,
+   "priceCash": 678800000,
+   "priceKpr": 718800000,
+   "hook": false
+  },
+  {
+   "code": "Okina 8",
+   "type": "61",
+   "landArea": 97,
+   "priceCash": 692400000,
+   "priceKpr": 732400000,
+   "hook": false
+  },
+  {
+   "code": "Okina 10",
+   "type": "61",
+   "landArea": 103,
+   "priceCash": 729900000,
+   "priceKpr": 769900000,
+   "hook": true
+  },
+  {
+   "code": "Okina 11",
+   "type": "61",
+   "landArea": 102,
+   "priceCash": 709400000,
+   "priceKpr": 749400000,
+   "hook": false
+  },
+  {
+   "code": "Okina 13",
+   "type": "61",
+   "landArea": 102,
+   "priceCash": 709400000,
+   "priceKpr": 749400000,
+   "hook": false
+  },
+  {
+   "code": "Okina 12",
+   "type": "61",
+   "landArea": 107,
+   "priceCash": 726300000,
+   "priceKpr": 766300000,
+   "hook": false
+  },
+  {
+   "code": "Okina 14",
+   "type": "61",
+   "landArea": 94,
+   "priceCash": 682200000,
+   "priceKpr": 722200000,
+   "hook": false
+  },
+  {
+   "code": "Okina 15",
+   "type": "61",
+   "landArea": 89,
+   "priceCash": 665200000,
+   "priceKpr": 705200000,
+   "hook": false
+  },
+  {
+   "code": "Okina 16",
+   "type": "61",
+   "landArea": 83,
+   "priceCash": 644900000,
+   "priceKpr": 684900000,
+   "hook": false
+  },
+  {
+   "code": "Okina 18",
+   "type": "61",
+   "landArea": 74,
+   "priceCash": 614300000,
+   "priceKpr": 654300000,
+   "hook": false
+  },
+  {
+   "code": "Okina 20",
+   "type": "61",
+   "landArea": 78,
+   "priceCash": 645100000,
+   "priceKpr": 685100000,
+   "hook": true
+  }
+ ]
+}

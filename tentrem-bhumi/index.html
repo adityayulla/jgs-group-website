@@ -504,6 +504,10 @@ img { display: block; }
   color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.5);
   pointer-events: none; white-space: nowrap; text-align: center;
 }
+/* Kavling sempit: jarak antar huruf dibuang supaya tulisannya masih muat
+   (dipasang JS lewat pasLabel, bukan lebar layar — yang menentukan lebar
+   kavlingnya, bukan lebar jendela). */
+.sp-kav__x--rapat { letter-spacing: 0; }
 .sp-legend {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
   margin-top: 14px; padding: 0 2px;
@@ -1899,8 +1903,11 @@ function setHtml(id, val) { var el = document.getElementById(id); if (el && val 
   }
 
   /* TRUST BAR */
+  /* id opsional (mis. 'dl-total-unit') supaya angkanya bisa ditimpa
+     feed dashboard — lihat blok "Satu sumber angka" di bawah. */
   setHtml('k-trust-bar', K.trustBar.map(function(t) {
-    return '<div class="trust-item"><div class="trust-num' + (t.bintang ? ' stars' : '') + '">'
+    return '<div class="trust-item"><div class="trust-num' + (t.bintang ? ' stars' : '') + '"'
+         + (t.id ? ' id="' + t.id + '"' : '') + '>'
          + t.nilai + '</div><div class="trust-label">' + t.label + '</div></div>';
   }).join(''));
 
@@ -2217,6 +2224,7 @@ document.addEventListener('DOMContentLoaded', function() {
       set('dl-dibangun', p.unitsInConstruction);
       set('dl-selesai',  p.unitsCompleted);
       set('dl-tersedia', p.unitsAvailable);
+      set('dl-total-unit', p.totalUnits);
 
       var tgl = p.lastUpdate ? tanggalID(p.lastUpdate) : null;
       set('dl-update', tgl ? 'Update ' + tgl : 'Belum ada update');
@@ -2458,27 +2466,58 @@ document.addEventListener('DOMContentLoaded', function() {
         var baris = el.getAttribute('data-penuh').split('|');
         var terpanjang = 0;
         baris.forEach(function (b) { if (b.length > terpanjang) terpanjang = b.length; });
-        /* monospace: 1 huruf ≈ 0,66em (0,60 lebar huruf + 0,06 letter-spacing);
-           0,92 menyisakan sedikit napas di tepi kotak. */
-        var muat = function (jml) { return (kotakPx * 0.92) / (jml * 0.66); };
-        var ukuran = muat(terpanjang);
+        /* monospace: 1 huruf ≈ 0,66em (0,60 lebar huruf + 0,06 jarak antar
+           huruf); 0,92 menyisakan sedikit napas di tepi kavling. Mode rapat
+           membuang jarak antar hurufnya — dipakai kalau kavlingnya sempit. */
+        var muat = function (jml, rapat) {
+          return (kotakPx * (rapat ? 0.96 : 0.92)) / (jml * (rapat ? 0.60 : 0.66));
+        };
+        var ukuran = muat(terpanjang, false);
         if (ukuran < 6) {
           var pendek = el.getAttribute('data-pendek');
           el.textContent = pendek;
-          ukuran = muat(pendek.length);
+          ukuran = muat(pendek.length, false);
+          /* Kavling paling sempit (mis. Bhama saat siteplan dipaskan ke lebar
+             HP) tetap tidak muat — hurufnya dikecilkan dan dirapatkan, bukan
+             dihilangkan. "TERJUAL" lebih berguna kecil daripada tidak ada. */
+          if (ukuran < 6) {
+            el.classList.add('sp-kav__x--rapat');
+            ukuran = muat(pendek.length, true);
+          } else {
+            el.classList.remove('sp-kav__x--rapat');
+          }
         } else {
+          el.classList.remove('sp-kav__x--rapat');
           el.innerHTML = baris.join('<br>');
         }
-        /* Versi pendek pun tidak muat (siteplan sedang dipaskan ke lebar
-           HP) — tulisannya disembunyikan supaya tidak tumpang tindih.
-           Warna kavling + legenda sudah cukup, dan tombol "Perbesar"
+        el.style.display = '';   /* ditampilkan dulu supaya bisa diukur */
+        /* Dipasang dulu, baru diukur — jadi ukuran yang dipakai untuk
+           koreksi di bawah persis ukuran yang sedang tampil. */
+        ukuran = Math.min(11, Math.max(5, ukuran));
+        el.style.fontSize = ukuran.toFixed(1) + 'px';
+
+        /* Perkiraan di atas memakai lebar huruf JetBrains Mono. Kalau font
+           itu belum/gagal dimuat, huruf penggantinya lebih lebar dan
+           tulisan melewati kavlingnya — di sini hasilnya diukur sungguhan
+           lalu dikecilkan seperlunya. */
+        var lebar = el.offsetWidth;
+        if (lebar > kotakPx) {
+          ukuran = ukuran * kotakPx / lebar;
+          el.style.fontSize = ukuran.toFixed(1) + 'px';
+        }
+
+        /* Di bawah 5,5px hurufnya tidak lagi terbaca — baru di titik itu
+           tulisannya disembunyikan supaya tidak jadi noda tinta. Warna
+           kavling + legenda tetap bercerita, dan tombol "Perbesar"
            mengembalikan tulisannya. */
         el.style.display = ukuran < 5.5 ? 'none' : '';
-        el.style.fontSize = Math.min(11, Math.max(6, ukuran)).toFixed(1) + 'px';
       }
     }
+
     pasLabel();
     window.addEventListener('resize', pasLabel);
+    /* Font mono dimuat asinkron — ukur ulang setelah huruf aslinya siap. */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(pasLabel);
 
     set('sp-sold', nSold);
     set('sp-ready', nReady);

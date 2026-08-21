@@ -1,0 +1,39 @@
+{
+  "_catatan": [
+    "Blok yang sama di semua pricelist: Komitmen 5P dan ajakan pantau progress.",
+    "Kalau berubah, ubah di sini sekali — kedua PDF ikut saat dibangun ulang."
+  ],
+  "k5Band": "KOMITMEN 5P — JAMINAN JGS GROUP",
+  "k5": [
+    {
+      "no": "01",
+      "judul": "Pasti Balik Nama Sertifikat",
+      "teks": "Sertifikat atas nama Anda — kami urus prosesnya."
+    },
+    {
+      "no": "02",
+      "judul": "Pasti Dibangun",
+      "teks": "Tidak ada unit fiktif. Setiap kavling kami bangun sampai serah terima."
+    },
+    {
+      "no": "03",
+      "judul": "Pasti Tidak Diagunkan ke Bank",
+      "teks": "Tanah Anda bukan jaminan utang kami. Aman dari risiko sita."
+    },
+    {
+      "no": "04",
+      "judul": "Pasti Bisa SHM",
+      "teks": "Dari tanah SHM — bukan tanah kesultanan, negara, atau sewa."
+    },
+    {
+      "no": "05",
+      "judul": "Pasti Sesuai Spesifikasi",
+      "teks": "Spek & gambar disepakati di awal. Kami amanah pada perjanjian."
+    }
+  ],
+  "callout": {
+    "judul": "Pernah khawatir progress rumah inden?",
+    "teks": "Di JGS, Anda bisa pantau sendiri progress pembangunan rumah Anda — kapan saja, update tiap minggu. Transparan, tanpa perlu bertanya. progress.jogjagrahaselaras.com",
+    "tebal": "progress.jogjagrahaselaras.com"
+  }
+}

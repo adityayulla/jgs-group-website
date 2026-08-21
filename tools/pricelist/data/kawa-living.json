@@ -1,0 +1,48 @@
+{
+  "slug": "kawa-living",
+  "pdf": "PriceList_Kawa_Living.pdf",
+  "html": "pricelist-kawa-living.html",
+  "judul": "Kawa Living",
+  "logo": "../img/Logo-Perumahan/Logo%20Kawa%20Living.webp",
+  "tagline": "Rumah yang Anda butuhkan — untuk anak, keluarga, & akses kerja · Sedayu, Bantul",
+  "alamat": "Dusun Surobayan RT 09, Argomulyo, Sedayu, Bantul",
+  "tautanTeks": "jogjagrahaselaras.com/kawa-living",
+  "tautanHref": "https://jogjagrahaselaras.com/kawa-living",
+  "promo": {
+    "judul": "PROMO BULAN INI",
+    "teks": "Diskon Rp 15 Jt + Rp 5 Jt saat booking survey · Free AJB · Free Provisi & Admin KPR · Free Kenaikan SHM",
+    "cap": "Total Hemat",
+    "jumlah": "±Rp 43 Jt",
+    "sub": "per unit · S&K"
+  },
+  "seksi": [
+    {
+      "deret": "Mizu",
+      "band": "MIZU · 1 Lantai · 2 KT / 1 KM — mulai Rp 414 Jt"
+    },
+    {
+      "deret": "Hiroi Yuri",
+      "band": "HIROI YURI · 1 Lantai · 2 KT / 1 KM · Tipe 37 & 42"
+    },
+    {
+      "deret": "Yuri",
+      "band": "YURI · 1 Lantai · 2 KT / 1 KM · Tipe 34,5 & 40"
+    },
+    {
+      "deret": "Himawari",
+      "band": "HIMAWARI · 2 Lantai · 2 KT / 1 KM · Tipe 49 & 51"
+    },
+    {
+      "deret": "Okina",
+      "band": "OKINA · 2 Lantai · 3 KT / 2 KM · Tipe 61"
+    }
+  ],
+  "catatan": "* Cash Keras = tunai bertahap, DP 80%. ** KPR / Cash Tempo = DP 30%, sisa via bank rekanan (BSI, BTN, BNI, BRI, BSN, BPD DIY). Harga normal sebelum diskon tersedia dari marketing. Harga & ketersediaan dapat berubah sewaktu-waktu. Unit TERJUAL ditampilkan sebagai gambaran penyerapan kawasan.",
+  "cta": {
+    "judul": "Ingin lihat unit & denah detail?",
+    "teks": "Jadwalkan survey gratis — tanpa kewajiban beli.",
+    "waNama": "WhatsApp Dwi",
+    "waNomor": "0889-0292-9571"
+  },
+  "footer": "jogjagrahaselaras.com · IG @jogjagrahaselaras · JGS Group — 13 tahun, 300+ rumah serah terima"
+}

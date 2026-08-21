@@ -92,7 +92,7 @@ var KONTEN = {
      ── Tambah/hapus baris sesuai kebutuhan ──
   ══════════════════════════════════════════════════════════════════════ */
   trustBar: [
-    { nilai: '35',    label: 'Total unit'    },
+    { nilai: '33',    label: 'Total unit', id: 'dl-total-unit' },
     { nilai: '★★★★★', label: 'Google rating', bintang: true },
     { nilai: '5P',  label: 'Legalitas terjamin' },
   ],
@@ -331,7 +331,7 @@ var KONTEN = {
      dipakai kalau dashboard tidak terjangkau. */
   penjualan: {
     terjual: 16,  /* ✏️  jumlah unit yang sudah terjual */
-    total:   35,  /* ✏️  total unit keseluruhan */
+    total:   33,  /* ✏️  total unit keseluruhan */
   },
 
 

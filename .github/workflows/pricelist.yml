@@ -1,0 +1,81 @@
+# Pricelist PDF ikut dashboard.
+#
+# Harga & status jual tinggal di dashboard (progress.jogjagrahaselaras.com).
+# Alur ini membangun ulang HTML + PDF pricelist dari sana, lalu commit HANYA
+# kalau isinya benar-benar berubah — jadi tidak ada lagi PDF yang basi karena
+# tidak sempat disunting orang.
+#
+# Pemicunya perubahan, bukan jam: begitu approver menyimpan harga di
+# /admin/harga atau menandai unit laku, dashboard mengirim repository_dispatch
+# ke sini (lib/pricelist-hook.ts di repo dashboard). PDF baru terpasang
+# beberapa menit kemudian.
+#
+# Jadwal mingguan di bawah cuma jaring pengaman kalau sinyal itu tidak sampai
+# (token kedaluwarsa, GitHub sedang bermasalah). Butuh sekarang juga? Tab
+# Actions → "Pricelist" → "Run workflow".
+
+name: Pricelist
+
+on:
+  repository_dispatch:
+    types: [pricelist]
+  workflow_dispatch:
+  schedule:
+    # Senin 01:00 UTC (08:00 WIB) — penjaga terakhir, bukan jalur utama.
+    - cron: "0 1 * * 1"
+  push:
+    branches: [main]
+    # Ubah template/teksnya → PDF langsung dibangun ulang.
+    paths:
+      - "tools/pricelist/**"
+      - "assets/pdf/pricelist.css"
+      - ".github/workflows/pricelist.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pricelist
+  cancel-in-progress: false
+
+jobs:
+  bangun:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Alasan
+        run: echo "${{ github.event.client_payload.alasan || github.event_name }}"
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # PDF-nya juga sering dibangun manual dari Mac. Arial & Georgia
+      # dipasang supaya huruf (dan karena itu potongan halaman) di runner
+      # sama persis dengan hasil di Mac.
+      - name: Pasang font Arial & Georgia
+        run: |
+          echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" \
+            | sudo debconf-set-selections
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ttf-mscorefonts-installer fonts-liberation
+          sudo fc-cache -f
+
+      - name: Pastikan Chrome ada
+        run: google-chrome --version
+
+      - name: Bangun pricelist
+        run: node tools/pricelist/build.mjs
+
+      - name: Commit kalau berubah
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Pricelist sudah sesuai dashboard — tidak ada yang perlu di-commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/pdf download
+          git commit -m "Pricelist ikut dashboard ($(date -u -d '+7 hours' '+%-d %b %Y'))"
+          git push

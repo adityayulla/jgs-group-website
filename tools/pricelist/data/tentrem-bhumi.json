@@ -1,0 +1,40 @@
+{
+  "slug": "tentrem-bhumi",
+  "pdf": "PriceList_Tentrem_Bhumi.pdf",
+  "html": "pricelist-tentrem-bhumi.html",
+  "judul": "Tentrem Bhumi",
+  "logo": "../img/Logo-Perumahan/Logo%20Tentrem%20Bhumi.webp",
+  "tagline": "Saatnya menetap dengan tentram — Ngaglik, Sleman (7 menit ke UII)",
+  "alamat": "Jl. Besi Jangkang, Tanjungsari, Ngaglik, Sleman",
+  "tautanTeks": "jogjagrahaselaras.com/tentrem-bhumi",
+  "tautanHref": "https://jogjagrahaselaras.com/tentrem-bhumi",
+  "promo": {
+    "judul": "PROMO BULAN INI",
+    "teks": "Diskon Rp 15 Jt + Rp 5 Jt saat booking survey · Free AJB · Free Provisi & Admin KPR · Free Kenaikan SHM",
+    "cap": "Total Hemat",
+    "jumlah": "±Rp 43 Jt",
+    "sub": "per unit · S&K"
+  },
+  "seksi": [
+    {
+      "deret": "Andrawina",
+      "band": "ANDRAWINA · 2 Lantai · 3 KT / 2 KM"
+    },
+    {
+      "deret": "Bhama",
+      "band": "BHAMA · 1 Lantai · 2 KT / 1 KM · Lebar 8 m"
+    },
+    {
+      "deret": "Cantya",
+      "band": "CANTYA · 1 Lantai · 2 KT / 1 KM · Lebar 6 m"
+    }
+  ],
+  "catatan": "* Cash Keras = tunai bertahap, DP 80%. ** KPR / Cash Tempo = DP 30%, sisa via bank rekanan (BSI, BTN, BNI, BRI, BSN, BPD DIY). Harga normal sebelum diskon tersedia dari marketing. Harga & ketersediaan dapat berubah sewaktu-waktu. Unit TERJUAL ditampilkan sebagai gambaran penyerapan kawasan.",
+  "cta": {
+    "judul": "Ingin lihat unit & denah detail?",
+    "teks": "Jadwalkan survey gratis — tanpa kewajiban beli.",
+    "waNama": "WhatsApp Fira",
+    "waNomor": "0895-0688-8328"
+  },
+  "footer": "jogjagrahaselaras.com · IG @jogjagrahaselaras · JGS Group — 13 tahun, 300+ rumah serah terima"
+}
