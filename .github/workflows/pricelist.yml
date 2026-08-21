@@ -10,9 +10,12 @@
 # ke sini (lib/pricelist-hook.ts di repo dashboard). PDF baru terpasang
 # beberapa menit kemudian.
 #
-# Jadwal mingguan di bawah cuma jaring pengaman kalau sinyal itu tidak sampai
-# (token kedaluwarsa, GitHub sedang bermasalah). Butuh sekarang juga? Tab
-# Actions → "Pricelist" → "Run workflow".
+# Jadwal harian di bawah cuma jaring pengaman kalau sinyal itu tidak sampai
+# (token belum/tidak lagi dipasang, GitHub sedang bermasalah). Dulu seminggu
+# sekali — dijadikan harian 21 Agu 2026, setelah PDF sempat memuat harga basi
+# berhari-hari karena GITHUB_DISPATCH_TOKEN belum ada di env dashboard.
+# Buildnya hanya commit kalau isinya berubah, jadi hari sepi tidak berbekas.
+# Butuh sekarang juga? Tab Actions → "Pricelist" → "Run workflow".
 
 name: Pricelist
 
@@ -21,8 +24,8 @@ on:
     types: [pricelist]
   workflow_dispatch:
   schedule:
-    # Senin 01:00 UTC (08:00 WIB) — penjaga terakhir, bukan jalur utama.
-    - cron: "0 1 * * 1"
+    # Tiap hari 01:00 UTC (08:00 WIB) — penjaga terakhir, bukan jalur utama.
+    - cron: "0 1 * * *"
   push:
     branches: [main]
     # Ubah template/teksnya → PDF langsung dibangun ulang.
