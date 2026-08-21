@@ -272,6 +272,9 @@
       display: inline-flex; align-items: center; gap: 7px;
       font-size: 13px; color: var(--muted);
     }
+    /* display:inline-flex di atas mengalahkan [hidden] bawaan browser —
+       tanpa baris ini, kategori kosong tetap terlihat ("Tersedia 0"). */
+    .sp-legend__item[hidden] { display: none; }
     .sp-legend__item b { color: var(--navy); font-weight: 700; }
     .sp-swatch { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
     .sp-swatch--sold {
@@ -340,7 +343,7 @@
           <div class="prog-callout__track">
             <div class="prog-callout__bar" id="pc-bar"></div>
           </div>
-          <div class="prog-callout__meta" id="pc-meta">2 unit tersisa · 1 unit siap huni</div>
+          <div class="prog-callout__meta" id="pc-meta">2 unit tersisa · 1 siap huni, 1 masih dibangun</div>
         </div>
 
         <div class="dash-live" id="dash-live">
@@ -350,7 +353,7 @@
           </div>
           <div class="dash-live__stats">
             <div>
-              <div class="dash-live__num" id="dl-dibangun">1</div>
+              <div class="dash-live__num" id="dl-dibangun">2</div>
               <div class="dash-live__lab">Dibangun</div>
             </div>
             <div>
@@ -491,7 +494,8 @@
       <div class="sp-legend" id="sp-legend" hidden>
         <span class="sp-legend__item"><i class="sp-swatch sp-swatch--sold"></i>Terjual <b id="sp-sold">0</b></span>
         <span class="sp-legend__item" id="sp-ready-item" hidden><i class="sp-swatch sp-swatch--ready"></i>Siap huni <b id="sp-ready">0</b></span>
-        <span class="sp-legend__item"><i class="sp-swatch sp-swatch--free"></i>Tersedia <b id="sp-free">0</b></span>
+        <span class="sp-legend__item" id="sp-build-item" hidden><i class="sp-swatch sp-swatch--ready"></i>Dibangun <b id="sp-build">0</b></span>
+        <span class="sp-legend__item" id="sp-free-item" hidden><i class="sp-swatch sp-swatch--free"></i>Tersedia <b id="sp-free">0</b></span>
         <span class="sp-legend__hint">Ketuk kavling untuk melihat progress unitnya</span>
       </div>
       <p class="st__note">Status jual per kavling bisa dicek kapan saja di <a href="https://progress.jogjagrahaselaras.com/progress/tentrem-jiwo" target="_blank" rel="noopener">Progress Dashboard</a> — sumber angka yang sama dengan halaman ini.</p>
@@ -580,6 +584,21 @@
     if (el && val !== null && val !== undefined) el.textContent = val;
   }
 
+  function sembunyi(id, ya) {
+    var el = document.getElementById(id);
+    if (el) el.hidden = ya;
+  }
+
+  /* Baris kecil di kartu status ditulis dua sumber yang datang sendiri-
+     sendiri: jumlah sisa unit dari feed proyek (section 1), rincian stok
+     dari feed siteplan (section 4). Keduanya menaruh potongannya di sini
+     supaya yang datang belakangan tidak menghapus milik yang lain. */
+  var metaSisa = null, metaRinci = null;
+  function tulisMeta() {
+    if (!metaSisa) return;
+    set('pc-meta', metaSisa + (metaRinci ? ' · ' + metaRinci : ''));
+  }
+
   function tanggalID(iso) {
     var d = new Date(iso);
     if (isNaN(d)) return null;
@@ -602,8 +621,11 @@
       set('pc-label', 'unit terjual dari ' + total + ' unit. Yang tersisa tinggal ' +
                       (tersedia === 2 ? 'dua' : tersedia) +
                       ' — Unit Office (Abirama 1) dan Villa Tentrem Jiwo.');
-      set('pc-meta', tersedia + ' unit tersisa' +
-                     (siapHuni ? ' · ' + siapHuni + ' unit siap huni' : ''));
+      /* Rinciannya (berapa siap huni, berapa masih dibangun) datang dari
+         section 4 yang tahu progres tiap unit — `siapHuni` di sini
+         menghitung keduanya jadi satu, dan villa 30% bukan siap huni. */
+      metaSisa = tersedia + ' unit tersisa';
+      tulisMeta();
 
       set('dl-dibangun', p.unitsInConstruction);
       set('dl-selesai',  p.unitsCompleted);
@@ -742,7 +764,7 @@
        progress unitnya (null bila unit belum dibangun). */
     (status.units || []).forEach(function (u) { detail[String(u.code).toLowerCase()] = u; });
 
-    var nSold = 0, nReady = 0, nFree = 0;
+    var nSold = 0, nReady = 0, nBuild = 0, nFree = 0;
 
     /* Kanvas SVG memakai satuan persen (viewBox 0-100, tanpa menjaga rasio)
        supaya titik poligon langsung jatuh di tempatnya berapa pun lebar
@@ -770,13 +792,18 @@
       var laku  = unit ? unit.sold : terjual[kunci] === true;
       var siap  = !laku && (unit ? unit.built : siapHuni[kunci] === true);
 
-      if (laku)      { nSold++; }
-      else if (siap) { nReady++; }
-      else           { nFree++; }
-
       var persen = unit && unit.progress ? unit.progress : 0;
+
+      /* Stok JGS dipisah dua: yang rumahnya sudah jadi (siap huni) dan
+         yang masih dalam pembangunan. Warnanya sama — sama-sama milik
+         JGS dan belum laku — tapi tulisannya tidak boleh sama: villa
+         yang baru 30% bukan unit siap huni. */
+      if (laku)      { nSold++; }
+      else if (siap) { if (persen >= 100) nReady++; else nBuild++; }
+      else           { nFree++; }
       var keterangan = kav.code + (laku ? ' — sudah terjual'
-                                : siap ? ' — ' + persen + '% terbangun, belum laku'
+                                : siap ? (persen >= 100 ? ' — sudah jadi, belum laku'
+                                                        : ' — ' + persen + '% terbangun, belum laku')
                                        : ' — masih tersedia');
 
       var titik = kav.poly;
@@ -822,11 +849,14 @@
            laku: sebut progresnya dulu, baru "SIAP HUNI" — supaya tidak
            terbaca sebagai janji bisa ditempati besok. */
         tanda.setAttribute('data-w', kav.lebar || (bbox[2] - bbox[0]));
-        tanda.setAttribute('data-penuh',  laku ? 'TERJUAL' : persen + '%|SIAP HUNI');
+        tanda.setAttribute('data-penuh', laku ? 'TERJUAL'
+                         : persen >= 100 ? persen + '%|SIAP HUNI'
+                                         : persen + '%|DIBANGUN');
         /* Versi pendek untuk kavling sempit: "READY", bukan angka persen —
            angka sendirian tidak memberi tahu apa-apa, statusnya yang perlu
            tersampaikan. Persennya tetap muncul di versi penuh. */
-        tanda.setAttribute('data-pendek', laku ? 'TERJUAL' : 'READY');
+        tanda.setAttribute('data-pendek', laku ? 'TERJUAL'
+                          : persen >= 100 ? 'READY' : 'BANGUN');
         labelLayer.appendChild(tanda);
       }
     });
@@ -903,11 +933,22 @@
 
     set('sp-sold', nSold);
     set('sp-ready', nReady);
+    set('sp-build', nBuild);
     set('sp-free', nFree);
-    var itemReady = document.getElementById('sp-ready-item');
-    if (itemReady) itemReady.hidden = nReady === 0;
+    /* Kategori yang kosong tidak ditampilkan — angka 0 di legenda terbaca
+       seperti kesalahan, bukan keterangan. */
+    sembunyi('sp-ready-item', nReady === 0);
+    sembunyi('sp-build-item', nBuild === 0);
+    sembunyi('sp-free-item',  nFree === 0);
     var legenda = document.getElementById('sp-legend');
     if (legenda) legenda.hidden = false;
+
+    /* Kalimat di kartu status ikut memakai rincian ini — section 1 hanya
+       tahu jumlah stoknya, tidak tahu mana yang sudah jadi. */
+    var rinci = [];
+    if (nReady) rinci.push(nReady + ' siap huni');
+    if (nBuild) rinci.push(nBuild + ' masih dibangun');
+    if (rinci.length) { metaRinci = rinci.join(', '); tulisMeta(); }
   }).catch(function () {
     /* Bentuk kavling atau statusnya tidak terbaca — siteplan polos saja. */
   });
