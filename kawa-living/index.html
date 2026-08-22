@@ -976,7 +976,7 @@
 
       <!-- 1. Hiroi Yuri -->
       <div class="un__row glass reveal">
-        <div class="un__img">
+        <div class="un__img" data-tipe="37/42">
           <img src="img/tipe/tipe%20yuri.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
         </div>
@@ -1015,8 +1015,8 @@
 
       <!-- 2. Yuri -->
       <div class="un__row un__row--alt glass reveal">
-        <div class="un__img">
-          <img src="img/tipe/tipe-yuri-pot.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
+        <div class="un__img" data-tipe="34,5/40">
+          <img src="img/tipe/yuri-12-13.webp" alt="Rumah Yuri 12 dan 13 Kawa Living yang sudah terbangun" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
         </div>
         <div class="un__copy">
@@ -1053,7 +1053,7 @@
 
       <!-- 3. Mizu -->
       <div class="un__row glass reveal">
-        <div class="un__img">
+        <div class="un__img" data-tipe="36">
           <img src="img/tipe/tipe%20Mizu.webp" alt="Kawa Living Tipe Mizu" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
         </div>
@@ -1091,7 +1091,7 @@
 
       <!-- 4. Himawari -->
       <div class="un__row un__row--alt glass reveal">
-        <div class="un__img">
+        <div class="un__img" data-tipe="49">
           <img src="img/tipe/tipe%20himawari.webp" alt="Kawa Living Tipe Himawari" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
         </div>
@@ -1130,8 +1130,8 @@
 
       <!-- 5. Okina -->
       <div class="un__row glass reveal">
-        <div class="un__img">
-          <img src="img/tipe/tipe%20Okina%20landscape.webp" alt="Kawa Living Tipe Okina" loading="lazy"
+        <div class="un__img" data-tipe="61">
+          <img src="img/tipe/okina-10.webp" alt="Rumah Okina 10 Kawa Living yang sudah terbangun" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#db7f2e33)';this.style.display='block'">
         </div>
         <div class="un__copy">
@@ -1778,6 +1778,38 @@
         if (it.caption) img.alt = it.caption + ' — Kawa Living, JGS Group';
       };
       pre.src = it.url;
+    })
+    .catch(function () { /* foto statis tetap tampil */ });
+
+  /* ── Foto kartu Detail Unit dari dashboard ────────────────────
+     Approver memasang satu foto per tipe rumah di /admin/foto-tipe.
+     Pencocokannya lewat data-tipe pada .un__img — isinya nilai
+     unit_type di dashboard, yang berupa ukuran bangunan ("61",
+     "37/42"), bukan nama pemasaran ("Okina"). Tipe tanpa foto, feed
+     mati, atau URL bermasalah = gambar statis di HTML ini yang tetap
+     tampil, jadi kartunya tidak pernah kosong. */
+  fetch('https://progress.jogjagrahaselaras.com/api/public/unit-types?slug=kawa-living', { mode: 'cors' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var items = (j && j.items) || [];
+      if (!items.length) return;
+
+      var foto = {};
+      items.forEach(function (it) {
+        if (it && it.type && it.photo && it.photo.url) foto[it.type] = it.photo.url;
+      });
+
+      document.querySelectorAll('.un__img[data-tipe]').forEach(function (bingkai) {
+        var url = foto[bingkai.getAttribute('data-tipe')];
+        var img = bingkai.querySelector('img');
+        if (!url || !img) return;
+
+        /* Tukar setelah fotonya benar-benar termuat — tanpa kedip, dan
+           kalau URL-nya bermasalah foto lama tetap di tempatnya. */
+        var pre = new Image();
+        pre.onload = function () { img.src = url; };
+        pre.src = url;
+      });
     })
     .catch(function () { /* foto statis tetap tampil */ });
 
