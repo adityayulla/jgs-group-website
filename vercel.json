@@ -134,6 +134,136 @@
       "permanent": true
     },
     {
+      "source": "/page",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/page/(.*)",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/tempat-paling-nyaman-itu-rumah-sendiri",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/tempat-paling-nyaman-itu-rumah-sendiri/(.*)",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/beli-rumah-untuk-investasi-agar-selalu-untung-untuk-anak-muda",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/beli-rumah-untuk-investasi-agar-selalu-untung-untuk-anak-muda/(.*)",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/5-cara-menabung-agar-bisa-beli-rumah",
+      "destination": "/blog/rumah-cash-bertahap-tanpa-riba-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/5-cara-menabung-agar-bisa-beli-rumah/(.*)",
+      "destination": "/blog/rumah-cash-bertahap-tanpa-riba-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/milenial-cenderung-membeli-apartemen-dibandingkan-dengan-rumah-cari-tahu-alasannya",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/milenial-cenderung-membeli-apartemen-dibandingkan-dengan-rumah-cari-tahu-alasannya/(.*)",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/agar-rumah-selalu-bersih-dan-rapi-lakukan-hal-ini",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/agar-rumah-selalu-bersih-dan-rapi-lakukan-hal-ini/(.*)",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/4-drama-saat-membeli-rumah-pertama-kali",
+      "destination": "/blog/pertanyaan-sebelum-dp-rumah/",
+      "permanent": true
+    },
+    {
+      "source": "/4-drama-saat-membeli-rumah-pertama-kali/(.*)",
+      "destination": "/blog/pertanyaan-sebelum-dp-rumah/",
+      "permanent": true
+    },
+    {
+      "source": "/pentingnya-memiliki-rumah-setelah-menikah",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/pentingnya-memiliki-rumah-setelah-menikah/(.*)",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/rumah-ala-jepang-untuk-anak-muda-jaman-sekarang",
+      "destination": "/kawa-living/",
+      "permanent": true
+    },
+    {
+      "source": "/rumah-ala-jepang-untuk-anak-muda-jaman-sekarang/(.*)",
+      "destination": "/kawa-living/",
+      "permanent": true
+    },
+    {
+      "source": "/tips-membeli-rumah-di-developer-copy",
+      "destination": "/blog/cara-memastikan-developer-jogja-terpercaya/",
+      "permanent": true
+    },
+    {
+      "source": "/tips-membeli-rumah-di-developer-copy/(.*)",
+      "destination": "/blog/cara-memastikan-developer-jogja-terpercaya/",
+      "permanent": true
+    },
+    {
+      "source": "/5-alasan-kenapa-rumah-minimalis-jadi-rumah-favorit-anak-muda",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/5-alasan-kenapa-rumah-minimalis-jadi-rumah-favorit-anak-muda/(.*)",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/yogyakarta-sebagai-tempat-tinggal-pilihan-bagi-pensiunan",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/yogyakarta-sebagai-tempat-tinggal-pilihan-bagi-pensiunan/(.*)",
+      "destination": "/perumahan-jogja/",
+      "permanent": true
+    },
+    {
+      "source": "/bln",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/bln/(.*)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/perumahan/kawa-village",
       "destination": "/kawa-living/",
       "permanent": true
