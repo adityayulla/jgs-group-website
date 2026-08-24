@@ -132,6 +132,10 @@ var KONTEN = {
     {
       id:   'andrawina',         /* jangan diubah — ID internal */
       nama: 'Andrawina 68',
+      /* Nama tipe di dashboard — HARUS sama persis dengan yang tampil
+         di /admin/foto-tipe, karena itu kunci pasangan fotonya.
+         Kalau tidak cocok, kartu ini cuma pakai foto statis di bawah. */
+      tipeDashboard: 'Andrawina 68',
 
       /* Foto-foto unit (slide kiri-kanan di mobile) */
       foto: [
@@ -170,6 +174,7 @@ var KONTEN = {
     {
       id:   'bhama',
       nama: 'Bhama 48',
+      tipeDashboard: 'Bhama 48',
       foto: [
         { src: '/assets/img/Proyek-Kami/Tentrem-Bhumi/tipe-bhama.webp', alt: 'Bhama tampak depan' },
         { src: 'photos/bhama/bhama%203d%201.webp', alt: 'Bhama 3D view 1' },
@@ -194,6 +199,7 @@ var KONTEN = {
     {
       id:   'cantya',
       nama: 'Cantya 32.5 & 48',
+      tipeDashboard: 'Cantya 32.5 & 48',
       foto: [
         { src: '/assets/img/Proyek-Kami/Tentrem-Bhumi/tipe-cantya.webp',   alt: 'Cantya tampak depan' },
         { src: '/assets/img/Proyek-Kami/Tentrem-Bhumi/tipe-cantya 2.webp', alt: 'Cantya tampak 2'     },
