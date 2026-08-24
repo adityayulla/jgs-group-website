@@ -2311,17 +2311,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
   /* ── Foto tipe dari dashboard ──────────────────────────────────
-     Approver memasang satu foto tampak depan per tipe lewat
-     /admin/foto-tipe. Fotonya DISISIPKAN sebagai slide pertama di
-     kartu tipe — foto statis di konten.js tetap ada di belakangnya,
-     jadi tidak ada yang hilang kalau slot dashboard dikosongkan.
+     Approver menyusun foto tiap tipe lewat /admin/foto-tipe: boleh
+     beberapa foto, boleh diatur urutannya, boleh disembunyikan.
 
-     Pasangan kartu ↔ tipe lewat `tipeDashboard` di konten.js, yang
-     harus sama persis dengan nama tipe di dashboard. Tipe yang belum
-     ada fotonya (photo: null) tidak mengubah kartunya sama sekali.
+     Kalau sebuah tipe punya foto di dashboard, slider kartunya diganti
+     TOTAL oleh daftar itu — bukan ditambahi. Supaya yang terlihat di
+     panel benar-benar sama dengan yang tayang di sini; kalau foto lama
+     tetap menempel di belakang, panel jadi tidak jujur.
+
+     Foto statis di konten.js tetap dipakai kalau tipe itu belum punya
+     foto, kalau feed-nya gagal, atau kalau salah satu fotonya gagal
+     dimuat — jadi kartu tidak pernah jadi kosong.
+
+     Pasangan kartu <-> tipe lewat `tipeDashboard` di konten.js, yang
+     harus sama persis dengan nama tipe di dashboard.
 
      Bingkai slide-nya 3:4 dengan object-fit: cover, jadi foto
-     horizontal akan terpotong kiri-kanan — foto vertikal paling pas. */
+     horizontal terpotong kiri-kanan — foto vertikal paling pas. */
   var API_TIPE = 'https://progress.jogjagrahaselaras.com/api/public/unit-types?slug=tentrem-bhumi';
 
   fetch(API_TIPE, { mode: 'cors' })
@@ -2332,31 +2338,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
       var fotoPerTipe = {};
       items.forEach(function (it) {
-        if (it.photo && it.photo.url) fotoPerTipe[it.type] = it.photo;
+        var daftar = (it.photos || []).filter(function (f) { return f && f.url; });
+        if (daftar.length) fotoPerTipe[it.type] = daftar;
       });
 
       KONTEN.unit.forEach(function (u) {
-        var foto   = u.tipeDashboard ? fotoPerTipe[u.tipeDashboard] : null;
+        var daftar = u.tipeDashboard ? fotoPerTipe[u.tipeDashboard] : null;
         var slides = document.querySelector('#unit-' + u.id + ' .unit-slides');
-        if (!foto || !foto.url || !slides) return;
+        if (!daftar || !slides) return;
 
-        /* Sisipkan setelah fotonya benar-benar termuat — kalau URL-nya
-           bermasalah, slider tetap persis seperti semula. */
-        var pre = new Image();
-        pre.onload = function () {
-          /* Kalau pengunjung sudah menggeser slider, jangan direnggut
-             balik: slide baru diam di kiri sampai dia geser ke sana. */
-          var diAwal = slides.scrollLeft === 0;
+        /* Tukar hanya kalau SEMUA fotonya sudah termuat. Satu saja gagal,
+           slider lama dibiarkan utuh — lebih baik foto lama daripada
+           kartu yang bolong. */
+        var siap = 0, gagal = false;
 
-          var img = document.createElement('img');
-          img.src = foto.url;
-          img.alt = u.nama + ' tampak depan — Tentrem Bhumi, Perumahan Sleman';
-          img.decoding = 'async';
-          slides.insertBefore(img, slides.firstChild);
+        function tukar() {
+          slides.innerHTML = '';
+          daftar.forEach(function (f, i) {
+            var img = document.createElement('img');
+            img.src = f.url;
+            img.alt = u.nama + (i === 0 ? ' tampak depan' : ' foto ' + (i + 1))
+                    + ' — Tentrem Bhumi, Perumahan Sleman';
+            img.decoding = 'async';
+            if (i > 0) img.loading = 'lazy';
+            slides.appendChild(img);
+          });
+          slides.scrollLeft = 0;
+        }
 
-          if (diAwal) slides.scrollLeft = 0;
-        };
-        pre.src = foto.url;
+        daftar.forEach(function (f) {
+          var pre = new Image();
+          pre.onload = function () {
+            siap++;
+            if (!gagal && siap === daftar.length) tukar();
+          };
+          pre.onerror = function () { gagal = true; };
+          pre.src = f.url;
+        });
       });
     })
     .catch(function () { /* foto statis di konten.js tetap tampil */ });
