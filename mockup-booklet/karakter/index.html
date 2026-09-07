@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Character Sheet Kawa Living — Bayu, Sekar, Langit | JGS Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  :root{ --paper:#f4efe5; --paper2:#e9e1d0; --ink:#2f474d; --sage:#7f9160; --kinari:#c9a648; --slate:#6b8a99; --wood:#b07a4a; --muted:#6b7f84; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:#d9d4c7; color:#1f2a2d; font-family:'Inter',system-ui,sans-serif; line-height:1.5; }
+  .bar{ background:#1f2a2d; color:#f4efe5; padding:26px 20px; }
+  .in{ max-width:1200px; margin:0 auto; }
+  .bar h1{ font-family:'Fraunces',Georgia,serif; font-weight:400; font-size:26px; margin:0 0 6px; }
+  .bar p{ margin:0 0 8px; max-width:80ch; color:#cfd6d2; font-size:14.5px; }
+  .bar b{ color:#fff; }
+  .bar a{ color:#e6b84a; }
+  main{ max-width:1200px; margin:0 auto; padding:24px 14px 60px; }
+  section.tokoh{ background:var(--paper); border-radius:14px; padding:22px 22px 18px; margin:22px 0; box-shadow:0 12px 30px rgba(40,35,20,.15); }
+  .kepala{ display:flex; gap:18px; align-items:baseline; flex-wrap:wrap; margin-bottom:6px; }
+  .kepala h2{ font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:30px; margin:0; color:var(--ink); }
+  .kepala .desk{ color:var(--muted); font-size:14px; max-width:70ch; }
+  .grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:12px; margin-top:10px; }
+  @media (max-width:900px){ .grid{ grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); } }
+  .fig{ background:#fbf7ef; border:1px solid rgba(0,0,0,.07); border-radius:12px; padding:10px 8px 8px; text-align:center; position:relative; }
+  .fig svg{ width:100%; height:auto; display:block; }
+  .fig .lbl{ font-size:12.5px; font-weight:600; color:var(--ink); margin-top:4px; }
+  .fig .sub{ font-size:11.5px; color:var(--muted); }
+  .fig button{ margin-top:6px; font:inherit; font-size:11.5px; font-weight:600; color:var(--ink); background:transparent; border:1.5px solid rgba(47,71,77,.3); border-radius:999px; padding:4px 10px; cursor:pointer; }
+  .fig button:hover{ background:rgba(47,71,77,.08); }
+  .spec{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; font-size:13.5px; margin-top:12px; }
+  .spec div{ background:rgba(255,255,255,.55); border-radius:10px; padding:10px 12px; }
+  .spec b{ display:block; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--sage); margin-bottom:3px; }
+  .sw{ display:inline-block; width:14px; height:14px; border-radius:4px; vertical-align:-2px; margin-right:4px; border:1px solid rgba(0,0,0,.15); }
+  .catatan{ background:var(--paper); border-radius:14px; padding:22px; margin-top:22px; }
+  .catatan h2{ font-family:'Fraunces',Georgia,serif; font-weight:400; font-size:22px; margin:0 0 8px; }
+  .catatan h3{ font-size:15px; margin:18px 0 6px; }
+  .catatan p, .catatan li{ font-size:14.5px; }
+  pre{ background:#1f2a2d; color:#f4efe5; padding:14px 16px; border-radius:10px; font-size:12.5px; line-height:1.5; white-space:pre-wrap; overflow-x:auto; }
+  .aksi{ display:flex; gap:10px; flex-wrap:wrap; margin-top:8px; }
+  .aksi button{ font:inherit; font-size:13px; font-weight:600; background:var(--ink); color:#f4efe5; border:0; border-radius:999px; padding:9px 16px; cursor:pointer; }
+  .grup{ background:#fbf7ef; border-radius:12px; padding:12px; margin-top:12px; }
+  .grup svg{ width:100%; max-width:760px; height:auto; display:block; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="bar"><div class="in">
+  <h1>Character Sheet — Bayu, Sekar, Langit</h1>
+  <p>Keluarga tokoh booklet <b>Cerita Pulang</b> (Kawa Living). Digambar sebagai <b>vektor SVG</b> dari satu sistem bentuk, jadi proporsi, tebal garis, dan warna dijamin sama di semua pose. Setiap gambar bisa diunduh sebagai SVG dan langsung dipakai desainer atau diserahkan ke ilustrator sebagai acuan. Paket prompt AI untuk variasi raster ada di bawah. Lihat juga <a href="../">mockup booklet</a>.</p>
+  <p>Gaya: garis tunggal teal tua 3 pt, isian blok satu warna tanpa gradasi, latar kosong. Palet A "Washi &amp; Sumi".</p>
+</div></div>
+
+<main id="main"></main>
+
+<script>
+/* ───────────────────────── sistem gambar ───────────────────────── */
+const C = { ink:'#2f474d', skin:'#fbf7ef', sage:'#7f9160', kinari:'#c9a648', slate:'#6b8a99', wood:'#b07a4a', paper:'#f4efe5', white:'#ffffff' };
+const SW = 3; // tebal garis
+
+const TOKOH = {
+  bayu: { nama:'Bayu', usia:36, peran:'Ayah · supervisor tambang, roster 2 minggu kerja 2 minggu pulang',
+    r:26, H:300, W:64, shirt:C.sage, pants:C.slate, shoe:C.ink, shorts:false, glasses:false,
+    hair:'pendek', beard:false, ciri:'kurus tinggi, rambut pendek rapi, kaos polos, koper kabin' },
+  sekar:{ nama:'Sekar', usia:34, peran:'Ibu · dosen di kampus Sedayu, narator utama',
+    r:26, H:282, W:60, shirt:C.kinari, pants:C.ink, shoe:C.ink, shorts:false, glasses:true,
+    hair:'sanggul', ciri:'rambut diikat sanggul, kemeja, kacamata bulat, buku' },
+  langit:{ nama:'Langit', usia:7, peran:'Anak · kelas 1 SD, suka bola dan menggambar',
+    r:30, H:200, W:54, shirt:C.kinari, pants:C.slate, shoe:C.ink, shorts:true, glasses:false,
+    hair:'ikal', ciri:'rambut ikal, kaos bola bergaris, celana pendek, bola atau krayon' },
+};
+
+function cap(x1,y1,x2,y2,w,fill){ // kapsul bergaris tepi
+  return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${C.ink}" stroke-width="${w+SW*2}" stroke-linecap="round"/>`+
+         `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${fill}" stroke-width="${w}" stroke-linecap="round"/>`;
+}
+function circ(cx,cy,r,fill,extra=''){ return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="${C.ink}" stroke-width="${SW}" ${extra}/>`; }
+function rrect(x,y,w,h,rx,fill){ return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}" stroke="${C.ink}" stroke-width="${SW}"/>`; }
+function path(d,fill='none',extra=''){ return `<path d="${d}" fill="${fill}" stroke="${C.ink}" stroke-width="${SW}" stroke-linecap="round" stroke-linejoin="round" ${extra}/>`; }
+
+function hairFront(t, r){
+  if(t.hair==='pendek'){
+    return path(`M${-r} -2 C${-r} ${-r*1.35} ${r} ${-r*1.35} ${r} -2 L${r} ${-r*0.5} Q${r*0.5} ${-r*0.75} ${r*0.1} ${-r*0.55} Q${-r*0.4} ${-r*0.35} ${-r} ${-r*0.5} Z`, C.ink);
+  }
+  if(t.hair==='sanggul'){
+    return circ(-r*0.95, -r*0.55, r*0.36, C.ink) +
+      path(`M${-r} 0 C${-r} ${-r*1.35} ${r} ${-r*1.35} ${r} 0 L${r} ${-r*0.4} Q${r*0.4} ${-r*0.2} ${-r*0.1} ${-r*0.5} Q${-r*0.55} ${-r*0.7} ${-r} ${-r*0.3} Z`, C.ink);
+  }
+  // ikal: rangkaian gelombang
+  const b=[];
+  const n=7, x0=-r-4, x1=r+4, step=(x1-x0)/n;
+  let d=`M${x0} ${r*0.05}`;
+  for(let i=0;i<n;i++){ const xa=x0+i*step, xb=xa+step, xm=(xa+xb)/2; const yy=-r*1.15-(i%2?0:r*0.12); d+=` Q${xm} ${yy} ${xb} ${i===n-1? r*0.05 : -r*0.62}`; }
+  d+=` L${r} ${-r*0.45} Q${r*0.3} ${-r*0.25} 0 ${-r*0.45} Q${-r*0.3} ${-r*0.65} ${-r} ${-r*0.45} Z`;
+  return path(d, C.ink);
+}
+function hairSide(t, r){
+  if(t.hair==='pendek'){
+    return path(`M${-r*1.02} ${r*0.2} C${-r*1.1} ${-r*1.2} ${r*0.6} ${-r*1.4} ${r*0.95} ${-r*0.35} Q${r*0.3} ${-r*0.55} ${-r*0.2} ${-r*0.5} Q${-r*0.6} ${-r*0.4} ${-r*0.75} ${r*0.2} Z`, C.ink);
+  }
+  if(t.hair==='sanggul'){
+    return circ(-r*1.15, -r*0.35, r*0.4, C.ink) +
+      path(`M${-r*1.02} ${r*0.25} C${-r*1.1} ${-r*1.2} ${r*0.6} ${-r*1.4} ${r*0.95} ${-r*0.35} Q${r*0.4} ${-r*0.15} ${-r*0.1} ${-r*0.5} Q${-r*0.5} ${-r*0.5} ${-r*0.72} ${r*0.25} Z`, C.ink);
+  }
+  const n=6; let d=`M${-r*1.1} ${r*0.3}`; const x0=-r*1.1, x1=r*0.95, step=(x1-x0)/n;
+  for(let i=0;i<n;i++){ const xa=x0+i*step, xb=xa+step, xm=(xa+xb)/2; d+=` Q${xm} ${-r*1.2-(i%2?0:r*0.12)} ${xb} ${i===n-1? -r*0.35 : -r*0.7}`; }
+  d+=` Q${r*0.3} ${-r*0.2} ${-r*0.2} ${-r*0.5} Q${-r*0.6} ${-r*0.5} ${-r*0.8} ${r*0.3} Z`;
+  return path(d, C.ink);
+}
+
+function faceFront(t, r, expr){
+  const ex=r*0.38, ey=-r*0.05, by=-r*0.34;
+  let eyes, brows, mouth;
+  if(expr==='tertawa'){
+    eyes = path(`M${-ex-5} ${ey} q5 -6 10 0`) + path(`M${ex-5} ${ey} q5 -6 10 0`);
+  } else {
+    eyes = `<circle cx="${-ex}" cy="${ey}" r="2.8" fill="${C.ink}"/><circle cx="${ex}" cy="${ey}" r="2.8" fill="${C.ink}"/>`;
+  }
+  if(expr==='heran'){ brows = path(`M${-ex-5} ${by-4} q5 -3 10 -1`) + path(`M${ex-5} ${by-1} q5 -2 10 0`); }
+  else if(expr==='serius'){ brows = path(`M${-ex-5} ${by-1} q5 -1 10 2`) + path(`M${ex-5} ${by+1} q5 -3 10 -2`); }
+  else { brows = path(`M${-ex-5} ${by} q5 -3 10 0`) + path(`M${ex-5} ${by} q5 -3 10 0`); }
+  const nose = path(`M0 ${r*0.02} q4 7 -1 10`);
+  const my=r*0.42;
+  if(expr==='tertawa') mouth = path(`M-9 ${my-2} Q0 ${my+13} 9 ${my-2} Z`, C.ink);
+  else if(expr==='heran') mouth = circ(0, my+3, 3.5, C.ink);
+  else if(expr==='serius') mouth = path(`M-7 ${my+2} L7 ${my+2}`);
+  else mouth = path(`M-8 ${my} Q0 ${my+7} 8 ${my}`);
+  let glasses='';
+  if(t.glasses){ const gr=r*0.27; glasses = `<circle cx="${-ex}" cy="${ey+1}" r="${gr}" fill="none" stroke="${C.ink}" stroke-width="2.4"/><circle cx="${ex}" cy="${ey+1}" r="${gr}" fill="none" stroke="${C.ink}" stroke-width="2.4"/><line x1="${-ex+gr}" y1="${ey+1}" x2="${ex-gr}" y2="${ey+1}" stroke="${C.ink}" stroke-width="2.4"/>`; }
+  return eyes+brows+nose+mouth+glasses;
+}
+function faceSide(t, r, expr){
+  const ex=r*0.45, ey=-r*0.05;
+  const eye = expr==='tertawa' ? path(`M${ex-5} ${ey} q5 -6 10 0`) : `<circle cx="${ex}" cy="${ey}" r="2.8" fill="${C.ink}"/>`;
+  const brow = path(`M${ex-6} ${-r*0.34} q6 -3 11 0`);
+  const nose = path(`M${r-1} ${-r*0.08} q10 7 0 15`, C.skin);
+  const my=r*0.45;
+  const mouth = expr==='tertawa' ? path(`M${r*0.45} ${my-2} Q${r*0.7} ${my+10} ${r*0.9} ${my-1} Z`, C.ink) : path(`M${r*0.5} ${my} q6 5 12 -1`);
+  const glasses = t.glasses ? `<circle cx="${ex}" cy="${ey+1}" r="${r*0.27}" fill="none" stroke="${C.ink}" stroke-width="2.4"/><line x1="${ex-r*0.27}" y1="${ey+1}" x2="${-r*0.5}" y2="${ey-2}" stroke="${C.ink}" stroke-width="2.4"/>` : '';
+  return eye+brow+nose+mouth+glasses;
+}
+
+/* pose: {L:'down'|'wave'|'hold'|'hip'|'under', R:...}, prop: 'koper'|'buku'|'bola'|'krayon'|'celemek'|'hp'|'kopi' */
+function figure(t, o){
+  const view=o.view||'front', expr=o.expr||'senyum', pose=o.pose||{}, prop=o.prop||'';
+  const VW=200, VH=340, G=330, cx=100;
+  const r=t.r, H=t.H, W = view==='side' ? t.W*0.58 : t.W;
+  const headCy = G - H + r;
+  const neckTop = headCy + r - 4;
+  const shY = neckTop + 14;
+  const torsoH = t.shorts ? H*0.30 : H*0.33;
+  const hipY = shY + torsoH;
+  const legW = t.W*0.3, legX = view==='side' ? [cx-5, cx+7] : [cx - t.W*0.22, cx + t.W*0.22];
+  const armW = t.W*0.2, handR = t.W*0.14;
+  let out=[];
+
+  // lengan belakang (side view: satu lengan saja, digambar di depan)
+  function arm(side, mode){
+    const sx = cx + side*(W/2-6), sy = shY+10;
+    const slvEnd = [cx + side*(W/2+6), shY+32];
+    let segs=[];
+    if(mode==='wave'){ const e=[cx+side*(W/2+22), shY+26], h=[cx+side*(W/2+34), shY-36]; segs=[[slvEnd,e],[e,h]]; }
+    else if(mode==='hold'){ const h=[cx+side*12, hipY-14]; segs=[[slvEnd,h]]; }
+    else if(mode==='hip'){ const e=[cx+side*(W/2+20), shY+52], h=[cx+side*(W/2-2), hipY-6]; segs=[[slvEnd,e],[e,h]]; }
+    else if(mode==='under'){ const h=[cx+side*(W/2+8), hipY-4]; segs=[[slvEnd,h]]; }
+    else if(mode==='up'){ const e=[cx+side*(W/2+22), shY+14], h=[cx+side*(W/2+40), shY-30]; segs=[[slvEnd,e],[e,h]]; }
+    else { const h=[cx+side*(W/2+12), shY+torsoH*0.95]; segs=[[slvEnd,h]]; }
+    let s = cap(sx,sy,slvEnd[0],slvEnd[1],armW+4,t.shirt); // lengan baju
+    segs.forEach(([a,b])=> s+=cap(a[0],a[1],b[0],b[1],armW,C.skin));
+    const h=segs[segs.length-1][1];
+    s += circ(h[0],h[1],handR,C.skin);
+    return {svg:s, hand:h};
+  }
+
+  // kaki
+  legX.forEach(x=>{
+    if(t.shorts){ out.push(cap(x,hipY-4,x,G-12,legW*0.8,C.skin)); out.push(cap(x,hipY-4,x,hipY+torsoH*0.45,legW,t.pants)); }
+    else out.push(cap(x,hipY-4,x,G-12,legW,t.pants));
+  });
+  // sepatu
+  legX.forEach((x,i)=>{ const dx = view==='side' ? 6 : 0; out.push(`<ellipse cx="${x+dx}" cy="${G-6}" rx="${view==='side'? t.W*0.3 : t.W*0.2}" ry="6.5" fill="${t.shoe}" stroke="${C.ink}" stroke-width="${SW}"/>`); });
+
+  let hands={};
+  if(view==='front'){
+    const L = arm(-1, pose.L||'down'); out.push(L.svg); hands.L=L.hand;
+  }
+  // badan
+  out.push(rrect(cx-W/2, shY, W, torsoH, W*0.22, t.shirt));
+  if(t.hair==='ikal'){ // kaos bola: garis
+    out.push(`<path d="M${cx-W/2+2} ${shY+torsoH*0.42} H${cx+W/2-2} M${cx-W/2+2} ${shY+torsoH*0.62} H${cx+W/2-2}" stroke="${C.ink}" stroke-width="2" opacity=".7"/>`);
+  }
+  if(t.hair==='sanggul'){ // kemeja: kerah + kancing
+    out.push(path(`M${cx-10} ${shY+2} L${cx} ${shY+14} L${cx+10} ${shY+2}`, C.skin));
+    out.push(`<circle cx="${cx}" cy="${shY+torsoH*0.45}" r="1.8" fill="${C.ink}"/><circle cx="${cx}" cy="${shY+torsoH*0.65}" r="1.8" fill="${C.ink}"/>`);
+  }
+  if(prop==='celemek'){
+    out.push(path(`M${cx-W*0.3} ${shY+torsoH*0.35} L${cx-W*0.42} ${hipY+8} L${cx+W*0.42} ${hipY+8} L${cx+W*0.3} ${shY+torsoH*0.35} L${cx+W*0.22} ${shY+8} L${cx-W*0.22} ${shY+8} Z`, C.paper));
+    out.push(path(`M${cx-W*0.22} ${shY+8} Q${cx} ${neckTop-4} ${cx+W*0.22} ${shY+8}`));
+  }
+  // leher
+  out.push(cap(cx, neckTop-6, cx, shY+2, t.W*0.18, C.skin));
+  // lengan depan
+  if(view==='front'){ const R = arm(1, pose.R||'down'); out.push(R.svg); hands.R=R.hand; }
+  else { const R = arm(1, pose.R||'down'); out.push(R.svg); hands.R=R.hand; }
+  // kepala
+  if(view==='front'){
+    out.push(circ(cx-r, headCy+3, r*0.2, C.skin)); out.push(circ(cx+r, headCy+3, r*0.2, C.skin));
+    out.push(circ(cx, headCy, r, C.skin));
+    out.push(`<g transform="translate(${cx} ${headCy})">${hairFront(t,r)}${faceFront(t,r,expr)}</g>`);
+  } else {
+    out.push(circ(cx, headCy, r, C.skin));
+    out.push(`<g transform="translate(${cx} ${headCy})">${hairSide(t,r)}${circ(-r*0.6, 3, r*0.2, C.skin)}${faceSide(t,r,expr)}</g>`);
+  }
+  // properti
+  if(prop==='koper' && hands.L){ const h=hands.L; const kw=30, kx=h[0]-kw/2, ky=h[1]+14; out.push(`<line x1="${h[0]}" y1="${h[1]}" x2="${h[0]}" y2="${ky}" stroke="${C.ink}" stroke-width="${SW}"/>`); out.push(rrect(kx, ky, kw, G-ky-8, 5, C.slate)); out.push(`<line x1="${kx+8}" y1="${ky+8}" x2="${kx+8}" y2="${G-14}" stroke="${C.ink}" stroke-width="2" opacity=".6"/>`); out.push(circ(kx+7, G-6, 4, C.ink)); out.push(circ(kx+kw-7, G-6, 4, C.ink)); }
+  if(prop==='buku' && hands.R){ const bx=cx-16, by=hipY-30; out.push(rrect(bx, by, 32, 24, 3, C.white)); out.push(`<line x1="${bx+16}" y1="${by+3}" x2="${bx+16}" y2="${by+21}" stroke="${C.ink}" stroke-width="2"/>`); }
+  if(prop==='kopi' && hands.R){ const h=hands.R; out.push(rrect(h[0]-8, h[1]-14, 16, 18, 3, C.white)); out.push(path(`M${h[0]+8} ${h[1]-9} q8 0 8 5 q0 6 -8 6`)); }
+  if(prop==='bola' && hands.R){ const h=hands.R; const bx=h[0]+2, by=h[1]+2, br=15; out.push(circ(bx,by,br,C.white)); out.push(path(`M${bx} ${by-6} l6 4 l-2 7 l-8 0 l-2 -7 Z`, C.ink)); out.push(path(`M${bx} ${by-6} l0 -8 M${bx+6} ${by-2} l8 -4 M${bx+4} ${by+5} l5 7 M${bx-4} ${by+5} l-5 7 M${bx-6} ${by-2} l-8 -4`)); }
+  if(prop==='krayon' && hands.R){ const h=hands.R; out.push(`<g transform="translate(${h[0]} ${h[1]}) rotate(-35)">${rrect(-4,-22,8,30,2,C.kinari)}<path d="M-4 -22 L0 -30 L4 -22" fill="${C.kinari}" stroke="${C.ink}" stroke-width="${SW}" stroke-linejoin="round"/></g>`); }
+  if(prop==='hp' && hands.R){ const h=hands.R; out.push(rrect(h[0]-7, h[1]-24, 14, 26, 3, C.ink)); out.push(`<rect x="${h[0]-5}" y="${h[1]-21}" width="10" height="18" rx="1.5" fill="${C.sage}"/>`); }
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VW} ${VH}" width="${VW}" height="${VH}" role="img" aria-label="${t.nama} ${o.lbl||''}">${out.join('')}</svg>`;
+}
+
+/* ───────────────────────── halaman ───────────────────────── */
+const LEMBAR = {
+  bayu: [
+    {lbl:'Tampak depan', sub:'senyum · netral', view:'front', expr:'senyum'},
+    {lbl:'Tampak samping', sub:'profil kanan', view:'side', expr:'senyum'},
+    {lbl:'Tertawa', sub:'ekspresi 2', view:'front', expr:'tertawa'},
+    {lbl:'Serius', sub:'ekspresi 3 · di lokasi kerja', view:'front', expr:'serius', pose:{R:'hip'}},
+    {lbl:'Pulang', sub:'melambai + koper kabin', view:'front', expr:'tertawa', pose:{L:'down', R:'wave'}, prop:'koper'},
+    {lbl:'Memasak', sub:'celemek (hal. 18)', view:'front', expr:'senyum', pose:{L:'hold', R:'hold'}, prop:'celemek'},
+    {lbl:'Di mess', sub:'memegang HP (hal. 33)', view:'front', expr:'senyum', pose:{R:'hold'}, prop:'hp'},
+  ],
+  sekar: [
+    {lbl:'Tampak depan', sub:'senyum · netral', view:'front', expr:'senyum'},
+    {lbl:'Tampak samping', sub:'profil kanan', view:'side', expr:'senyum'},
+    {lbl:'Tertawa', sub:'ekspresi 2', view:'front', expr:'tertawa'},
+    {lbl:'Heran', sub:'ekspresi 3', view:'front', expr:'heran'},
+    {lbl:'Mengajar', sub:'membawa buku', view:'front', expr:'senyum', pose:{L:'hold', R:'hold'}, prop:'buku'},
+    {lbl:'Menyambut', sub:'melambai (hal. 14)', view:'front', expr:'tertawa', pose:{R:'wave'}},
+    {lbl:'Di teras', sub:'cangkir teh', view:'front', expr:'senyum', pose:{R:'hold'}, prop:'kopi'},
+  ],
+  langit: [
+    {lbl:'Tampak depan', sub:'senyum · netral', view:'front', expr:'senyum'},
+    {lbl:'Tampak samping', sub:'profil kanan', view:'side', expr:'senyum'},
+    {lbl:'Tertawa', sub:'ekspresi 2', view:'front', expr:'tertawa'},
+    {lbl:'Heran', sub:'ekspresi 3', view:'front', expr:'heran'},
+    {lbl:'Bola', sub:'bola di tangan (hal. 7)', view:'front', expr:'tertawa', pose:{R:'under'}, prop:'bola'},
+    {lbl:'Menggambar', sub:'krayon (hal. 21)', view:'front', expr:'senyum', pose:{R:'hold'}, prop:'krayon'},
+    {lbl:'Lari', sub:'dua tangan ke atas (hal. 14)', view:'front', expr:'tertawa', pose:{L:'up', R:'up'}},
+  ],
+};
+
+function unduh(nama, svg){ const b=new Blob([svg],{type:'image/svg+xml'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=nama; document.body.appendChild(a); a.click(); a.remove(); }
+
+const main=document.getElementById('main');
+let semua=[];
+Object.entries(TOKOH).forEach(([key,t])=>{
+  const sec=document.createElement('section'); sec.className='tokoh';
+  sec.innerHTML=`<div class="kepala"><h2>${t.nama}, ${t.usia}</h2><span class="desk">${t.peran}. Ciri: ${t.ciri}.</span></div>
+  <div class="spec">
+    <div><b>Proporsi</b>${t.nama==='Langit'?'4 kepala (anak)':'5,5 kepala (dewasa)'} · tinggi relatif ${Math.round(t.H/300*100)}%</div>
+    <div><b>Warna baju</b><span class="sw" style="background:${t.shirt}"></span>${t.shirt} · celana <span class="sw" style="background:${t.pants}"></span>${t.pants}</div>
+    <div><b>Garis & kulit</b><span class="sw" style="background:${C.ink}"></span>${C.ink} 3 pt · kulit <span class="sw" style="background:${C.skin}"></span>${C.skin} (tanpa warna kulit, seperti Tenaya)</div>
+  </div>
+  <div class="grid" id="g-${key}"></div>`;
+  main.appendChild(sec);
+  const g=sec.querySelector('.grid');
+  LEMBAR[key].forEach((o,i)=>{
+    const svg=figure(t,o); semua.push({key,i,o,svg});
+    const d=document.createElement('div'); d.className='fig';
+    d.innerHTML=`${svg}<div class="lbl">${o.lbl}</div><div class="sub">${o.sub}</div><button>Unduh SVG</button>`;
+    d.querySelector('button').addEventListener('click',()=>unduh(`${key}-${i+1}-${o.lbl.toLowerCase().replace(/\s+/g,'-')}.svg`, svg));
+    g.appendChild(d);
+  });
+});
+
+/* adegan bersama: keluarga di depan gerbang (I-01) */
+const grup=document.createElement('section'); grup.className='tokoh';
+const g1=figure(TOKOH.bayu,{view:'front',expr:'senyum',pose:{L:'down',R:'down'},prop:'koper'});
+const g2=figure(TOKOH.langit,{view:'front',expr:'tertawa',pose:{L:'up',R:'up'}});
+const g3=figure(TOKOH.sekar,{view:'front',expr:'senyum',pose:{R:'wave'}});
+const inner = s=>s.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');
+const grupSvg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" width="600" height="340"><line x1="20" y1="330" x2="580" y2="330" stroke="${C.ink}" stroke-width="2" opacity=".35"/><g transform="translate(0 0)">${inner(g1)}</g><g transform="translate(200 0)">${inner(g2)}</g><g transform="translate(400 0)">${inner(g3)}</g></svg>`;
+grup.innerHTML=`<div class="kepala"><h2>Bertiga</h2><span class="desk">Uji skala: Bayu, Langit, Sekar berdampingan. Ini acuan tinggi relatif untuk semua adegan (I-01 sampai I-11).</span></div><div class="grup">${grupSvg}</div><div class="aksi"><button id="u-grup">Unduh SVG adegan</button><button id="u-semua">Unduh semua (1 file SVG lembar)</button></div>`;
+main.appendChild(grup);
+document.getElementById('u-grup').addEventListener('click',()=>unduh('kawa-keluarga-bertiga.svg',grupSvg));
+document.getElementById('u-semua').addEventListener('click',()=>{
+  const cols=7, w=200, h=340; let rows=0; let body='';
+  Object.keys(TOKOH).forEach((key,ri)=>{ LEMBAR[key].forEach((o,ci)=>{ const s=semua.find(x=>x.key===key&&x.i===ci).svg; body+=`<g transform="translate(${ci*w} ${ri*(h+40)+40})">${inner(s)}</g><text x="${ci*w+100}" y="${ri*(h+40)+30}" text-anchor="middle" font-family="Inter,Arial" font-size="13" fill="${C.ink}">${TOKOH[key].nama} · ${o.lbl}</text>`; }); rows++; });
+  unduh('kawa-character-sheet.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${cols*w} ${rows*(h+40)}" width="${cols*w}" height="${rows*(h+40)}"><rect width="100%" height="100%" fill="${C.paper}"/>${body}</svg>`);
+});
+
+/* catatan & prompt */
+const cat=document.createElement('section'); cat.className='catatan';
+cat.innerHTML=`
+<h2>Aturan gaya (untuk ilustrator dan desainer)</h2>
+<ul>
+  <li><b>Garis</b> satu tebal (3 pt pada tinggi figur 340 px), warna teal tua ${C.ink}, ujung membulat. Tidak ada garis tipis-tebal, tidak ada arsir.</li>
+  <li><b>Isian</b> blok satu warna tanpa gradasi dan tanpa bayangan: sage, kinari, slate, dan krem kertas. Kulit dibiarkan krem kertas, bukan warna kulit, supaya semua pembaca bisa memproyeksikan dirinya (cara Tenaya juga begitu).</li>
+  <li><b>Proporsi kunci</b>: Bayu paling tinggi dan paling kurus, Sekar sedikit lebih pendek, Langit 2/3 tinggi Sekar dengan kepala lebih besar. Jangan diubah antar adegan.</li>
+  <li><b>Penanda tetap</b>: Bayu koper kabin atau celemek; Sekar kacamata bulat dan sanggul; Langit rambut ikal dan garis kaos bola. Satu penanda saja sudah cukup untuk dikenali dari jauh.</li>
+  <li><b>Latar</b> kosong. Objek lingkungan (gerbang, meja, tanaman) digambar dengan garis yang sama tanpa isian, atau isian krem, supaya tokoh tetap paling menonjol.</li>
+  <li><b>Jangan</b>: mata besar gaya anime, bibir merah, sepatu bermerek, warna di luar palet, teks di dalam gambar.</li>
+</ul>
+
+<h3>Kalau ingin variasi raster dari generator gambar AI</h3>
+<p>Unduh gambar "Tampak depan" tiap tokoh di atas, lalu pakai sebagai referensi karakter (Midjourney: <code>--cref</code> atau Omni Reference; ChatGPT/Gemini: lampirkan gambar dan tulis "gunakan karakter ini persis"). Prompt dasar:</p>
+<pre>Flat line-art illustration, single continuous dark teal outline (#2f474d), 3pt stroke, flat fills only in sage green (#7f9160), mustard (#c9a648), slate blue (#6b8a99) and cream paper (#f4efe5), no gradients, no shadows, no skin tone (face left cream), empty background, Japanese-Scandinavian picture-book style, minimal facial features (dot eyes, small curved mouth).
+Characters: Bayu, 36, tall thin Indonesian father, short neat hair, plain sage t-shirt, slate trousers, carries a cabin suitcase. Sekar, 34, mother, hair in a bun, round glasses, mustard shirt, dark trousers. Langit, 7, son, curly hair, striped mustard football shirt, slate shorts.
+Scene: [isi adegan, mis. "the family of three standing in front of a housing gate, father with suitcase, son holding both parents' hands"].
+Keep the three characters identical to the reference sheet. --ar 4:3 --style raw</pre>
+<p>Prompt negatif (kalau alatnya punya): <code>photo, 3d, anime, gradient, shading, skin tone, text, watermark, extra fingers, different outfit</code>.</p>
+<p>Uji konsistensi: generate adegan I-01, I-04, dan I-07 berturut-turut. Kalau wajah atau proporsi bergeser di salah satunya, hasil AI hanya dipakai sebagai acuan komposisi dan ilustrator yang menggambar ulang di atas SVG ini.</p>
+
+<h3>Daftar adegan untuk digambar (dari naskah)</h3>
+<ol>
+  <li>I-01 Keluarga bertiga di depan gerbang, Bayu bawa koper, Langit menggandeng (hal. 2)</li>
+  <li>I-02 Langit menendang bola, Bayu jadi kiper (hal. 7)</li>
+  <li>I-03 Sekar dan Langit menyambut Bayu turun dari taksi (hal. 14)</li>
+  <li>I-04 Langit mengerjakan PR di meja makan, Sekar di dapur (hal. 17)</li>
+  <li>I-05 Bayu memasak pakai celemek, Langit jadi juri (hal. 18)</li>
+  <li>I-06 Sekar menyiram tanaman, Langit menggambar di lantai (hal. 21)</li>
+  <li>I-07 Bayu membacakan buku di kamar Langit (hal. 22)</li>
+  <li>I-08 Bayu dan Sekar di tepi tempat tidur, koper terbuka (hal. 25)</li>
+  <li>I-09 Bayu di mess tambang memegang HP (hal. 33)</li>
+  <li>I-10 Tangan menulis di buku catatan (hal. 34)</li>
+  <li>I-11 Keluarga dari belakang masuk pintu rumah (hal. 36)</li>
+</ol>`;
+main.appendChild(cat);
+</script>
+</body>
+</html>
