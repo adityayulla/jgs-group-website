@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Booklet Kawa Living — Cerita Pulang (draf cetak)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@300;500&display=swap">
+<style>
+  :root{ --paper:#f4efe5; --paper2:#e9e1d0; --ink:#2f474d; --accent:#7f9160; --accent2:#c9a648; --wood:#b07a4a; --muted:#6b7f84; }
+  @page{ size:240mm 180mm; margin:0; }
+  *{ box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  html,body{ margin:0; padding:0; background:#bfb9ab; }
+  body{ font-family:'Inter',system-ui,sans-serif; color:var(--ink); }
+  .page{ width:240mm; height:180mm; position:relative; overflow:hidden; background:var(--paper); color:var(--ink); break-after:page; page-break-after:always; margin:0 auto; }
+  @media screen{ .page{ margin:8mm auto; box-shadow:0 6mm 14mm rgba(0,0,0,.25); } }
+  .page.gelap{ background:var(--ink); color:var(--paper); }
+  .page.krem2{ background:var(--paper2); }
+  .pad{ position:absolute; inset:0; padding:16mm 16mm 18mm; }
+  .foto{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .folio{ position:absolute; bottom:8mm; font-size:7pt; color:var(--muted); letter-spacing:.02em; }
+  .folio b{ color:var(--ink); font-weight:600; }
+  .page.gelap .folio, .page.gelap .folio b{ color:var(--paper2); }
+  .folio.kiri{ left:16mm; } .folio.kanan{ right:16mm; }
+  .folio.putih, .folio.putih b{ color:#fff; text-shadow:0 0 3mm rgba(0,0,0,.6); }
+  .motif{ position:absolute; pointer-events:none; color:var(--ink); opacity:.07; }
+  .page.gelap .motif{ color:var(--paper); opacity:.12; }
+  .eyebrow{ font-size:7.5pt; letter-spacing:.18em; text-transform:uppercase; font-weight:600; color:var(--accent); margin:0 0 3mm; }
+  .page.gelap .eyebrow{ color:var(--accent2); }
+  .bab{ font-family:'Fraunces',Georgia,serif; font-weight:300; font-size:30pt; line-height:1; letter-spacing:.04em; margin:0; }
+  .bab b{ font-weight:600; }
+  .bab.kecil{ font-size:22pt; }
+  .kanji{ font-family:'Noto Serif JP',serif; font-weight:300; line-height:1; }
+  .narasi{ font-size:10.5pt; line-height:1.55; margin:0; max-width:120mm; }
+  .narasi + .narasi{ margin-top:3mm; }
+  .narasi em{ font-family:'Fraunces',Georgia,serif; font-style:italic; }
+  .muted{ color:var(--muted); }
+  .page.gelap .muted{ color:var(--paper2); opacity:.85; }
+  .kecil{ font-size:8pt; line-height:1.45; }
+  .ph{ border:.4mm dashed currentColor; border-radius:3mm; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-size:8pt; line-height:1.35; padding:3mm; opacity:.7; }
+  .ph small{ display:block; font-size:7pt; opacity:.8; margin-top:1mm; }
+  .tag{ position:absolute; z-index:3; font-size:6.5pt; font-weight:600; letter-spacing:.04em; padding:1mm 3mm; border-radius:99mm; background:#e6b84a; color:#3a2a05; }
+  .tag.ada{ background:#7fbf8a; color:#0f2a17; } .tag.ukur{ background:#e88a6a; color:#3a1608; }
+  .tag.tl{ top:6mm; left:6mm; } .tag.tr{ top:6mm; right:6mm; } .tag.br{ bottom:6mm; right:6mm; }
+  .tag.inline{ position:static; display:inline-block; }
+  /* sampul */
+  .cover-panel{ position:absolute; top:0; right:0; bottom:0; width:38%; background:var(--paper); padding:14mm 10mm; display:flex; flex-direction:column; align-items:center; text-align:center; }
+  .cover-panel img.logo{ width:60%; margin:12mm 0 8mm; }
+  .cover-title{ font-family:'Fraunces',Georgia,serif; font-weight:300; font-size:22pt; line-height:1.1; margin:0; letter-spacing:.06em; }
+  .cover-title b{ font-weight:600; }
+  .cover-sub{ font-size:8pt; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin:5mm 0 0; }
+  .cover-kanji{ font-size:30pt; color:var(--accent); margin-top:auto; }
+  .cover-kanji small{ display:block; font-family:'Inter',sans-serif; font-size:7pt; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:2mm; }
+  .cover-foto{ width:62%; }
+  /* lokasi */
+  .poi{ display:grid; grid-template-columns:1fr 1fr; gap:5mm 9mm; margin-top:6mm; }
+  .poi h4{ margin:0 0 1.5mm; font-size:7.5pt; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); font-weight:700; }
+  .poi ol{ list-style:none; margin:0; padding:0; font-size:8.5pt; line-height:1.45; }
+  .poi li{ display:flex; justify-content:space-between; gap:3mm; border-bottom:.2mm solid rgba(0,0,0,.08); padding:.8mm 0; }
+  .poi li span:last-child{ font-weight:600; white-space:nowrap; }
+  .poi li.ukur span:last-child{ color:#b3502d; }
+  .peta{ position:absolute; inset:0; width:100%; height:100%; }
+  .peta text{ font-family:'Inter',sans-serif; }
+  /* tipe */
+  .grid-tipe{ display:grid; gap:6mm; margin-top:6mm; }
+  .grid-tipe.dua{ grid-template-columns:1fr 1fr; }
+  .grid-tipe.tiga{ grid-template-columns:1fr 1fr 1fr; margin-top:16mm; }
+  .kartu{ background:rgba(255,255,255,.55); border-radius:3mm; overflow:hidden; border:.2mm solid rgba(0,0,0,.06); }
+  .kartu .thumb{ aspect-ratio:16/9; overflow:hidden; background:var(--paper2); }
+  .kartu .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .kartu .isi{ padding:3mm 4mm 3.5mm; }
+  .kartu .kanji{ font-size:15pt; color:var(--accent); }
+  .kartu h3{ margin:.8mm 0 0; font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:11pt; line-height:1.1; }
+  .kartu .arti{ font-size:7.5pt; color:var(--muted); font-style:italic; margin:.5mm 0 2mm; }
+  .kartu .spek{ font-size:8pt; line-height:1.5; margin:0; }
+  .grid-tipe.tiga .kartu .kanji{ font-size:13pt; } .grid-tipe.tiga .kartu h3{ font-size:10pt; }
+  /* tur */
+  .denah-mini{ position:relative; height:62mm; width:36mm; overflow:hidden; }
+  .denah-mini .w{ position:relative; height:100%; width:110.5mm; margin-left:-11mm; }
+  .denah-mini img{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .denah-mini.l2 .w{ margin-left:-44mm; }
+  .denah-mini .hl{ position:absolute; background:var(--accent); opacity:.55; border-radius:1mm; }
+  .ruang-lbl{ font-size:8.5pt; line-height:1.4; margin:3mm 0 0; }
+  .ruang-lbl b{ display:block; font-weight:700; color:var(--accent); font-size:9.5pt; }
+  .tur{ display:grid; grid-template-columns:36mm 1fr; gap:12mm; align-items:start; margin-top:5mm; }
+  .caption{ position:absolute; right:0; bottom:0; z-index:2; background:var(--paper); color:var(--ink); padding:5mm 6mm; font-size:7.5pt; line-height:1.4; width:26%; }
+  .caption b{ display:block; font-size:9pt; }
+  .figs{ display:flex; gap:5mm; align-items:flex-end; margin-top:5mm; height:42mm; }
+  .figs img{ height:100%; }
+  /* denah & spek */
+  .denah-besar{ position:absolute; left:14mm; right:14mm; top:42mm; bottom:20mm; width:auto; height:auto; max-width:212mm; max-height:118mm; margin:auto; object-fit:contain; }
+  .denah-dua{ position:absolute; left:14mm; right:14mm; top:40mm; bottom:20mm; display:flex; gap:8mm; align-items:center; justify-content:center; }
+  .denah-dua img{ max-height:118mm; max-width:48%; object-fit:contain; }
+  .spek-grid{ display:grid; grid-template-columns:1fr 1fr; gap:.2mm 8mm; font-size:8pt; line-height:1.4; margin-top:4mm; }
+  .spek-grid div{ display:grid; grid-template-columns:32% 1fr; gap:2mm; border-bottom:.2mm solid rgba(0,0,0,.08); padding:1mm 0; }
+  .spek-grid dt{ color:var(--muted); font-weight:500; } .spek-grid dd{ margin:0; }
+  .kt-km{ display:flex; gap:14mm; margin:2mm 0 0; }
+  .kt-km div{ text-align:center; }
+  .kt-km .angka{ font-family:'Fraunces',Georgia,serif; font-size:26pt; line-height:1; font-weight:300; }
+  .kt-km .angka b{ font-weight:600; }
+  .kt-km small{ display:block; font-size:7pt; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:1mm; }
+  .lima{ list-style:none; margin:6mm 0 0; padding:0; display:grid; gap:4mm; }
+  .lima li{ display:grid; grid-template-columns:14mm 1fr; gap:4mm; align-items:start; font-size:9pt; line-height:1.45; }
+  .lima li i{ font-style:normal; font-family:'Fraunces',Georgia,serif; font-size:22pt; line-height:1; color:var(--accent2); font-weight:300; }
+  .lima li b{ display:block; font-weight:700; }
+  .progress-box{ background:rgba(255,255,255,.55); border-radius:4mm; padding:6mm; display:grid; grid-template-columns:1fr 38mm; gap:6mm; align-items:center; margin-top:5mm; }
+  .progress-box p{ margin:0; font-size:9pt; line-height:1.5; }
+  .progress-box .url{ font-family:'Fraunces',Georgia,serif; font-size:12pt; margin-top:3mm; }
+  .qr{ width:38mm; height:38mm; }
+  .garis{ border-bottom:.25mm solid rgba(47,71,77,.5); height:7mm; }
+  .fas{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:4mm; margin-top:5mm; }
+  .fas img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:2mm; display:block; }
+  .fas span{ display:block; font-size:7.5pt; margin-top:1.5mm; color:var(--muted); }
+  .tabel{ width:100%; border-collapse:collapse; font-size:8.5pt; }
+  .tabel td{ padding:1.6mm 0; border-bottom:.2mm solid rgba(0,0,0,.08); vertical-align:top; }
+  .tabel td:first-child{ color:var(--muted); width:32%; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <pattern id="seigaiha" width="60" height="30" patternUnits="userSpaceOnUse"><g fill="none" stroke="currentColor" stroke-width="1.1">
+    <circle cx="30" cy="30" r="28"/><circle cx="30" cy="30" r="21"/><circle cx="30" cy="30" r="14"/><circle cx="30" cy="30" r="7"/>
+    <circle cx="0" cy="15" r="28"/><circle cx="0" cy="15" r="21"/><circle cx="0" cy="15" r="14"/><circle cx="0" cy="15" r="7"/>
+    <circle cx="60" cy="15" r="28"/><circle cx="60" cy="15" r="21"/><circle cx="60" cy="15" r="14"/><circle cx="60" cy="15" r="7"/>
+  </g></pattern>
+</defs></svg>
+
+<!-- ═══ SAMPUL DEPAN ═══ -->
+<section class="page">
+  <img class="foto cover-foto" src="img/tipe-okina-landscape.jpg" alt="">
+  <span class="tag ada tl">render Okina · ganti R-01 (sore) bila sudah ada</span>
+  <div class="cover-panel">
+    <svg class="motif" style="left:0;top:0;width:100%;height:100%"><rect width="100%" height="100%" fill="url(#seigaiha)"/></svg>
+    <p class="kecil muted" style="letter-spacing:.2em;text-transform:uppercase;margin:0">Karya JGS Group</p>
+    <img class="logo" src="img/logo-kawa-living.png" alt="Kawa Living">
+    <h1 class="cover-title">CERITA<br><b>PULANG</b></h1>
+    <p class="cover-sub">Sedayu · Yogyakarta</p>
+    <div class="cover-kanji kanji">ただいま<small>tadaima · “aku pulang”</small></div>
+  </div>
+</section>
+
+<!-- ═══ SAMPUL DALAM DEPAN ═══ -->
+<section class="page krem2">
+  <svg class="motif" style="left:0;top:0;width:100%;height:100%"><rect width="100%" height="100%" fill="url(#seigaiha)"/></svg>
+  <div class="pad"><p class="kecil muted" style="position:absolute;bottom:14mm;left:16mm;right:16mm;margin:0">Draf 1 · September 2026. Semua gambar interior masih render lama atau penanda; foto show unit dan render Okina menyusul. Angka waktu tempuh bertanda “ukur” belum diverifikasi.</p></div>
+</section>
+
+<!-- ═══ 1 · Halaman judul ═══ -->
+<section class="page">
+  <div class="pad" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+    <img src="img/logo-kawa-living.png" alt="" style="width:34mm">
+    <h2 class="bab" style="margin-top:8mm">CERITA <b>PULANG</b></h2>
+    <p class="kecil muted" style="margin:3mm 0 0;letter-spacing:.2em;text-transform:uppercase">Catatan sebuah keluarga di Sedayu</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5mm 14mm;margin-top:12mm;font-size:8.5pt;text-align:left;width:130mm">
+      <span><b class="kanji" style="font-weight:500">ただいま</b> Tadaima · prolog <span class="muted">2</span></span>
+      <span><b class="kanji" style="font-weight:500">庭</b> Niwa · taman <span class="muted">20</span></span>
+      <span><b class="kanji" style="font-weight:500">道</b> Michi · lokasi <span class="muted">4</span></span>
+      <span><b class="kanji" style="font-weight:500">子供部屋</b> Kodomo-beya · kamar anak <span class="muted">22</span></span>
+      <span><b class="kanji" style="font-weight:500">選ぶ</b> Erabu · pilih tipe <span class="muted">8</span></span>
+      <span><b class="kanji" style="font-weight:500">寝室</b> Shinshitsu · kamar utama <span class="muted">24</span></span>
+      <span><b class="kanji" style="font-weight:500">縁側</b> Engawa · teras <span class="muted">14</span></span>
+      <span>Denah &amp; spesifikasi <span class="muted">26</span></span>
+      <span><b class="kanji" style="font-weight:500">居間</b> Ima · ruang keluarga <span class="muted">16</span></span>
+      <span><b class="kanji" style="font-weight:500">約束</b> Yakusoku · janji <span class="muted">32</span></span>
+      <span><b class="kanji" style="font-weight:500">台所</b> Daidokoro · dapur <span class="muted">18</span></span>
+      <span><b class="kanji" style="font-weight:500">おかえり</b> Okaeri · penutup <span class="muted">36</span></span>
+    </div>
+  </div>
+  <div class="folio kanan">Cerita Pulang <b>1</b></div>
+</section>
+
+<!-- ═══ 2 · Prolog ═══ -->
+<section class="page gelap">
+  <svg class="motif" style="right:-20mm;bottom:-20mm;width:120mm;height:80mm"><rect width="100%" height="100%" fill="url(#seigaiha)"/></svg>
+  <div class="pad">
+    <p class="eyebrow">Bab satu · ただいま</p>
+    <h2 class="bab">TADA<b>IMA</b></h2>
+    <div style="display:grid;grid-template-columns:1fr 78mm;gap:8mm;margin-top:6mm;align-items:start">
+      <div>
+        <p class="narasi">Delapan tahun lalu kami wisuda di Jogja, lalu pergi. Bayu ke tambang di Kalimantan, dua minggu kerja dua minggu pulang. Saya mengajar, pindah dari satu kontrakan ke kontrakan lain.</p>
+        <p class="narasi">Waktu Langit masuk SD, kami sepakat: <em>pulang ke Jogja</em>. Bukan ke tengah kota yang sesak. Kami cari yang dekat sekolahnya, dekat bandara supaya Bayu cepat sampai rumah, dan harganya masuk akal untuk gaji dua orang.</p>
+        <p class="narasi">Ketemu Sedayu. Ini cerita rumah kami.</p>
+      </div>
+      <div><img src="/mockup-booklet/karakter/svg/kawa-keluarga-bertiga.svg" alt="" style="width:100%"><span class="tag inline">draf I-01 · vektor</span></div>
+    </div>
+  </div>
+  <div class="folio kiri"><b>2</b> Kawa Living</div>
+</section>
+
+<!-- ═══ 3 · Gerbang ═══ -->
+<section class="page">
+  <img class="foto" src="img/gate.jpg" alt="" style="transform:scale(1.75);transform-origin:right top">
+  <span class="tag ada tl">foto asli · foto ulang tanpa umbul-umbul (F-01)</span>
+  <div class="folio kanan putih">Cerita Pulang <b>3</b></div>
+</section>
+
+<!-- ═══ 4 · Lokasi ═══ -->
+<section class="page">
+  <div class="pad">
+    <p class="eyebrow">Bab dua · 道 michi · jalan</p>
+    <h2 class="bab kecil">Semua dalam <b>hitungan menit</b></h2>
+    <p class="narasi kecil muted" style="margin-top:2mm">Poros Jl. Wates: ke barat bandara, ke timur kota, sekolah pilihan di antaranya.</p>
+    <div class="poi">
+      <div><h4>Pendidikan</h4><ol>
+        <li class="ukur"><span>SD Budi Mulia Dua Sedayu</span><span>ukur</span></li>
+        <li><span>SMP-SMA Kesatuan Bangsa</span><span>5 mnt</span></li>
+        <li><span>Univ. Mercu Buana Yogyakarta</span><span>5 mnt</span></li>
+        <li><span>Univ. Muhammadiyah Yogyakarta</span><span>15 mnt</span></li>
+      </ol></div>
+      <div><h4>Kesehatan</h4><ol>
+        <li><span>RSU PKU Muhammadiyah Gamping</span><span>9 mnt</span></li>
+        <li class="ukur"><span>RSU Mitra Sehat</span><span>ukur</span></li>
+      </ol></div>
+      <div><h4>Akses</h4><ol>
+        <li><span>Jl. Wates (Jl. Nasional III)</span><span>1 mnt</span></li>
+        <li><span>Malioboro</span><span>28 mnt</span></li>
+        <li class="ukur"><span>Bandara YIA</span><span>ukur</span></li>
+        <li class="ukur"><span>Exit tol Jogja–YIA (rencana)</span><span>ukur</span></li>
+      </ol></div>
+      <div><h4>Sehari-hari</h4><ol>
+        <li><span>Indomaret Wates</span><span>3 mnt</span></li>
+        <li><span>SPBU Pertamina</span><span>4 mnt</span></li>
+        <li class="ukur"><span>Pasar Sedayu</span><span>ukur</span></li>
+      </ol></div>
+    </div>
+  </div>
+  <div class="folio kiri"><b>4</b> Kawa Living</div>
+</section>
+
+<!-- ═══ 5 · Peta ═══ -->
+<section class="page krem2">
+  <svg class="peta" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+    <rect width="400" height="300" fill="#e9e1d0"/>
+    <path d="M-10 168 C 60 160, 120 172, 180 165 S 300 150, 410 158" stroke="#f4efe5" stroke-width="10" fill="none"/>
+    <path d="M-10 168 C 60 160, 120 172, 180 165 S 300 150, 410 158" stroke="#2f474d" stroke-width="1.6" fill="none" opacity=".7"/>
+    <path d="M300 -10 C 296 80, 302 200, 296 310" stroke="#f4efe5" stroke-width="8" fill="none"/>
+    <path d="M300 -10 C 296 80, 302 200, 296 310" stroke="#2f474d" stroke-width="1.2" fill="none" opacity=".5"/>
+    <path d="M-10 92 C 80 96, 160 84, 235 90" stroke="#f4efe5" stroke-width="6" fill="none"/>
+    <path d="M-10 92 C 80 96, 160 84, 235 90" stroke="#2f474d" stroke-width="1" fill="none" opacity=".35" stroke-dasharray="4 3"/>
+    <g fill="none" stroke="#7f9160" opacity=".35" stroke-width="1"><path d="M40 230 q30 -20 60 0 t60 0 t60 0"/><path d="M60 250 q30 -20 60 0 t60 0 t60 0"/><path d="M20 40 q30 -18 60 0 t60 0"/></g>
+    <text x="30" y="160" font-size="7" fill="#2f474d" opacity=".7">Jl. Wates · ke YIA ←</text>
+    <text x="330" y="150" font-size="7" fill="#2f474d" opacity=".7">→ Gamping · kota</text>
+    <text x="304" y="40" font-size="7" fill="#2f474d" opacity=".6" transform="rotate(88 304 40)">Ring Road Barat</text>
+    <text x="20" y="86" font-size="6.5" fill="#2f474d" opacity=".55">rencana Tol Jogja–YIA</text>
+    <g font-size="7" fill="#2f474d">
+      <circle cx="150" cy="150" r="5" fill="#2f474d"/><text x="142" y="139" font-weight="700">Kawa Living</text>
+      <circle cx="120" cy="190" r="4" fill="#7f9160"/><text x="80" y="206">Kesatuan Bangsa</text>
+      <circle cx="185" cy="192" r="4" fill="#7f9160"/><text x="172" y="208">Mercu Buana</text>
+      <circle cx="255" cy="125" r="4" fill="#7f9160"/><text x="232" y="118">PKU Gamping</text>
+      <circle cx="330" cy="215" r="4" fill="#7f9160"/><text x="316" y="230">UMY</text>
+      <circle cx="385" cy="120" r="4" fill="#c9a648"/><text x="352" y="112">Malioboro</text>
+      <circle cx="12" cy="200" r="4" fill="#c9a648"/><text x="18" y="216">YIA ± 30 km</text>
+    </g>
+    <g transform="translate(30 262)"><circle r="11" fill="none" stroke="#2f474d" stroke-width="1"/><path d="M0 -9 L4 3 L0 0 L-4 3 Z" fill="#2f474d"/><text x="-3" y="20" font-size="7" fill="#2f474d">U</text></g>
+    <text x="150" y="292" font-size="6" fill="#2f474d" opacity=".6">peta skematis, bukan skala</text>
+  </svg>
+  <span class="tag tl">peta ilustrasi final digambar ulang (I-13)</span>
+  <div class="folio kanan">Cerita Pulang <b>5</b></div>
+</section>
+
+<!-- ═══ 6 · Siteplan ═══ -->
+<section class="page">
+  <div class="pad" style="padding-bottom:0">
+    <p class="eyebrow">Kawasan</p>
+    <h2 class="bab kecil">Satu pintu, <b>74 kavling</b> <span class="tag ukur inline">cek angka</span></h2>
+    <p class="kecil muted" style="margin:1.5mm 0 0">Jalan lingkungan 6 sampai 7 meter · one gate system · masjid · mini soccer · basket</p>
+  </div>
+  <img src="img/siteplan-kawa-living.jpg" alt="" style="position:absolute;left:60mm;right:16mm;top:38mm;bottom:16mm;height:126mm;width:auto;max-width:170mm;object-fit:contain;margin:auto">
+  <span class="tag ada br">siteplan · ada; warna blok per tipe menyusul</span>
+  <div class="folio kiri"><b>6</b> Kawa Living</div>
+</section>
+
+<!-- ═══ 7 · Fasilitas (Langit) ═══ -->
+<section class="page">
+  <div class="pad">
+    <div style="display:grid;grid-template-columns:1fr 60mm;gap:10mm;align-items:start">
+      <div>
+        <p class="eyebrow">Langit bercerita</p>
+        <p class="narasi">Halo, aku Langit. Di sini ada lapangan bola betulan, bukan jalan komplek. Sore-sore aku main sama teman baru, Ayah jadi kiper kalau lagi di rumah.</p>
+        <p class="narasi">Masjidnya dekat, jalan kaki. Satpam di gerbang sudah hafal namaku.</p>
+        <div class="fas">
+          <div><img src="img/masjid.jpg" alt=""><span>Masjid kawasan</span></div>
+          <div><img src="img/mini-soccer.jpg" alt=""><span>Mini soccer</span></div>
+          <div><img src="img/lapangan-bola.jpg" alt=""><span>Lapangan &amp; jogging track <span class="tag ukur inline">status</span></span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:3mm;align-items:flex-end;height:48mm;justify-content:center;margin-top:10mm">
+        <img src="/mockup-booklet/karakter/svg/bayu-5-pulang.svg" alt="" style="height:100%">
+        <img src="/mockup-booklet/karakter/svg/langit-5-bola.svg" alt="" style="height:100%">
+      </div>
+    </div>
+    <p class="kecil" style="position:absolute;left:16mm;right:16mm;bottom:18mm;margin:0;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600">Masjid · Lapangan mini soccer · Lapangan basket · Jogging track · One gate system, jaga 24 jam</p>
+  </div>
+  <span class="tag tr" style="top:auto;bottom:30mm">draf I-02 · pose sementara</span>
+  <div class="folio kanan">Cerita Pulang <b>7</b></div>
+</section>
+
+<!-- ═══ 8–9 · Erabu ═══ -->
+<section class="page">
+  <div class="pad">
+    <p class="eyebrow">Bab tiga · 選ぶ erabu · memilih</p>
+    <h2 class="bab kecil">Pilih ukuran <b>keluargamu</b></h2>
+    <p class="narasi kecil muted" style="margin-top:2mm">Lima tipe, satu bahasa desain: atap pelana, panel kayu, jendela bulat. Nama dari bahasa Jepang, sesuai maknanya.</p>
+    <div class="grid-tipe dua">
+      <div class="kartu"><div class="thumb"><img src="img/tipe-mizu.jpg" alt=""></div><div class="isi"><div class="kanji">水</div><h3>Mizu 36</h3><p class="arti">“air” · mengalir, sederhana</p><p class="spek"><b>1 lantai</b> · 2 KT · 1 KM<br>LB 36 · lebar 6,5 m</p></div></div>
+      <div class="kartu"><div class="thumb"><img src="img/tipe-yuri-pot.jpg" alt=""></div><div class="isi"><div class="kanji">百合</div><h3>Yuri 34,5 &amp; 40</h3><p class="arti">“bunga lili” · bersih, tenang</p><p class="spek"><b>1 lantai</b> · 2 KT · 1 KM<br>LB 34,5 / 40 · lebar 6,2 m</p></div></div>
+    </div>
+  </div>
+  <div class="folio kiri"><b>8</b> Kawa Living</div>
+</section>
+<section class="page">
+  <div class="pad">
+    <div class="grid-tipe tiga">
+      <div class="kartu"><div class="thumb"><img src="img/tipe-hiroi.jpg" alt=""></div><div class="isi"><div class="kanji">広い</div><h3>Hiroi Yuri 37 &amp; 42</h3><p class="arti">“lapang” · Yuri yang lebih luas</p><p class="spek"><b>1 lantai</b> · 2 KT · 1 KM<br>LB 37 / 42 · lebar 6,5 m</p></div></div>
+      <div class="kartu"><div class="thumb"><img src="img/tipe-himawari-landscape.jpg" alt=""></div><div class="isi"><div class="kanji">向日葵</div><h3>Himawari 49</h3><p class="arti">“bunga matahari” · tumbuh ke atas</p><p class="spek"><b>2 lantai</b> · 2 KT · 1 KM<br>LB 49 · lebar 6,5 m</p></div></div>
+      <div class="kartu"><div class="thumb"><img src="img/tipe-okina-landscape.jpg" alt=""></div><div class="isi"><div class="kanji">大きな</div><h3>Okina 61</h3><p class="arti">“besar” · untuk keluarga bertumbuh</p><p class="spek"><b>2 lantai</b> · 3 KT · 2 KM<br>LB 61 · lebar 6,2 m</p></div></div>
+    </div>
+    <p class="kecil muted" style="position:absolute;left:16mm;right:16mm;bottom:20mm;margin:0">Denah lengkap semua tipe di halaman 26 sampai 31. Harga dan ketersediaan kavling ada di lembar terpisah yang diperbarui tiap bulan.</p>
+  </div>
+  <div class="folio kanan">Cerita Pulang <b>9</b></div>
+</section>
+
+<!-- ═══ 10–11 · Satu lantai ═══ -->
+<section class="page">
+  <img class="foto" src="img/tipe-yuri-pot.jpg" alt="" style="object-position:center 58%">
+  <span class="tag ada tl">foto asli Yuri · ganti F-06 (sudah dihuni)</span>
+  <div class="folio kiri putih"><b>10</b> Kawa Living</div>
+</section>
+<section class="page">
+  <div class="pad">
+    <p class="eyebrow">Satu lantai</p>
+    <h2 class="bab kecil">Mizu · Yuri · <b>Hiroi Yuri</b></h2>
+    <p class="narasi" style="margin-top:4mm">Tetangga kami di blok Yuri kebanyakan pasangan muda, rumah pertama setelah bertahun-tahun mengontrak. Satu lantai, dua kamar, halaman kecil di belakang untuk jemuran dan tanaman Sekar.</p>
+    <p class="narasi">Yang membedakan tiga tipe ini hanya lebar dan panjang bangunannya. Wajah rumahnya sama: atap pelana tinggi, kayu di gable, jendela bulat.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:8mm">
+      <div><img src="img/tipe-mizu.jpg" alt="" style="width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:2mm"><span class="kecil muted">Mizu 36 · render</span></div>
+      <div><img src="img/tipe-hiroi.jpg" alt="" style="width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:2mm;object-position:center 30%"><span class="kecil muted">Hiroi Yuri · foto asli</span></div>
+    </div>
+  </div>
+  <div class="folio kanan">Cerita Pulang <b>11</b></div>
+</section>
+
+<!-- ═══ 12–13 · Dua lantai ═══ -->
+<section class="page">
+  <img class="foto" src="img/tipe-okina-landscape.jpg" alt="">
+  <span class="tag tl">ganti render R-01 · Okina sore, lampu teras menyala</span>
+  <div class="folio kiri putih"><b>12</b> Kawa Living</div>
+</section>
+<section class="page">
+  <div class="pad">
+    <p class="eyebrow">Dua lantai</p>
+    <h2 class="bab kecil">Himawari · <b>Okina</b></h2>
+    <p class="narasi" style="margin-top:4mm">Kami pilih Okina. Tiga kamar: satu untuk kami, satu untuk Langit, satu untuk ibu saya kalau menginap dari Kulon Progo. Dua kamar mandi supaya pagi tidak rebutan.</p>
+    <p class="narasi">Himawari adalah adiknya: dua lantai, dua kamar, untuk yang ingin tanah lebih kecil tapi rumah tetap tinggi.</p>
+    <p class="narasi"><em>Mari masuk. Kami tunjukkan ruangan demi ruangan.</em></p>
+    <img src="img/tipe-himawari-landscape.jpg" alt="" style="width:80mm;aspect-ratio:3/2;object-fit:cover;border-radius:2mm;margin-top:6mm"><br><span class="kecil muted">Himawari 49 · render</span>
+  </div>
+  <div class="folio kanan">Cerita Pulang <b>13</b></div>
+</section>
+
+<!-- ═══ 14–15 · Engawa ═══ -->
+<section class="page">
+  <svg class="motif" style="right:-14mm;top:-14mm;width:90mm;height:60mm"><rect width="100%" height="100%" fill="url(#seigaiha)"/></svg>
+  <div class="pad">
+    <p class="eyebrow">Bab empat · 縁側 engawa · teras</p>
+    <div class="tur">
+      <div>
+        <div class="denah-mini"><div class="w"><img src="img/denah-okina.jpg" alt=""><div class="hl" style="left:15%;top:74%;width:14%;height:20%"></div></div></div>
+        <p class="ruang-lbl"><b>Carport &amp; Teras</b>Lantai 1<br>Skala 1:200</p>
+      </div>
+      <div>
+        <p class="narasi">Setiap dua minggu, pemandangan yang sama: taksi dari bandara berhenti di carport, Langit lari duluan. Empat puluh menit dari YIA <span class="tag ukur inline">ukur</span>, Bayu sudah duduk di teras dengan teh.</p>
+        <p class="narasi">Terasnya kecil tapi cukup untuk dua kursi. Sore hari matahari dari barat masuk miring, jadi kami sering duduk di sini sampai magrib.</p>
+        <div class="figs"><img src="/mockup-booklet/karakter/svg/sekar-6-menyambut.svg" alt=""><img src="/mockup-booklet/karakter/svg/langit-7-lari.svg" alt=""><img src="/mockup-booklet/karakter/svg/bayu-5-pulang.svg" alt=""><span class="tag inline" style="align-self:flex-start">draf I-03</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="folio kiri"><b>14</b> Kawa Living</div>
+</section>
+<section class="page">
+  <img class="foto" src="img/tipe-okina.jpg" alt="" style="object-position:center 78%">
+  <span class="tag tl">ganti render R-02 · carport &amp; teras, sore</span>
+  <div class="caption"><b>Carport &amp; Teras</b>Okina 61 · lantai 1</div>
+  <div class="folio kanan putih">Cerita Pulang <b>15</b></div>
+</section>
+
+<!-- ═══ 16–17 · Ima ═══ -->
+<section class="page">
+  <img class="foto" src="img/interior-keluarga-2.jpg" alt="" style="transform:scale(1.6);transform-origin:center top">
+  <span class="tag tl">ganti render R-03 · ruang keluarga + makan, Japandi</span>
+  <div class="caption"><b>Ruang Keluarga</b>Okina 61 · lantai 1<br><span class="muted">render lama, penunjuk arah</span></div>
+  <div class="folio kiri putih"><b>16</b> Kawa Living</div>
+</section>
+<section class="page">
+  <svg class="motif" style="right:-14mm;top:-14mm;width:90mm;height:60mm"><rect width="100%" height="100%" fill="url(#seigaiha)"/></svg>
+  <div class="pad">
+    <p class="eyebrow">Bab lima · 居間 ima · ruang keluarga</p>
+    <div class="tur">
+      <div>
+        <div class="denah-mini"><div class="w"><img src="img/denah-okina.jpg" alt=""><div class="hl" style="left:19.5%;top:47%;width:9.5%;height:19%"></div></div></div>
+        <p class="ruang-lbl"><b>Ruang Keluarga &amp; Makan</b>Lantai 1<br>Skala 1:200</p>
+      </div>
+      <div>
+        <p class="narasi">Ruang keluarga menyatu dengan ruang makan dan dapur, jadi tidak ada yang tertinggal dari obrolan. Jendela besar di belakang menghadap taman kecil, cahaya masuk sampai sore.</p>
+        <p class="narasi">Di meja ini Langit mengerjakan PR sambil saya menyiapkan makan malam. Kalau Bayu sedang di rumah, dia yang duduk paling lama di sini. Katanya, <em>dua minggu di tambang cukup untuk rindu lantai sendiri.</em></p>
+        <div class="figs"><img src="/mockup-booklet/karakter/svg/langit-6-menggambar.svg" alt=""><img src="/mockup-booklet/karakter/svg/sekar-1-tampak-depan.svg" alt=""><span class="tag inline" style="align-self:flex-start">draf I-04</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="folio kanan">Cerita Pulang <b>17</b></div>
+</section>
+
+<!-- ═══ 18–19 · Daidokoro ═══ -->
+<section class="page">
+  <div class="pad">
+    <p class="eyebrow">Bab enam · 台所 daidokoro · dapur</p>
+    <div class="tur">
+      <div>
+        <div class="denah-mini"><div class="w"><img src="img/denah-okina.jpg" alt=""><div class="hl" style="left:25.5%;top:32%;width:5%;height:11%"></div></div></div>
+        <p class="ruang-lbl"><b>Dapur</b>Lantai 1<br>Skala 1:200</p>
+      </div>
+      <div>
+        <p class="narasi">Dapurnya memanjang di sisi taman, jadi asap dan bau masakan keluar lewat pintu belakang, bukan berputar di ruang tamu. Meja granit, kabinet kayu, cahaya dari samping.</p>
+        <p class="narasi">Ini bagian rumah yang paling sering saya foto untuk dikirim ke Bayu: <em>hari ini masak apa</em>. Kalau dia pulang, giliran dia yang masak, dan Langit yang jadi juri.</p>
+        <div class="figs"><img src="/mockup-booklet/karakter/svg/bayu-6-memasak.svg" alt=""><img src="/mockup-booklet/karakter/svg/langit-3-tertawa.svg" alt=""><span class="tag inline" style="align-self:flex-start">draf I-05</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="folio kiri"><b>18</b> Kawa Living</div>
+</section>
+<section class="page">
+  <img class="foto" src="img/interior-dapur.jpg" alt="" style="transform:scale(1.6);transform-origin:center top">
+  <span class="tag tr">ganti render R-04 · dapur</span>
+  <div class="caption"><b>Dapur</b>Okina 61 · lantai 1<br><span class="muted">render lama, penunjuk arah</span></div>
+  <div class="folio kanan putih">Cerita Pulang <b>19</b></div>
+</section>
+
+<!-- ═══ 20–21 · Niwa ═══ -->
+<section class="page krem2">
+  <div class="ph" style="position:absolute;inset:16mm">Render R-05 · taman belakang dari pintu dapur, sore<small>tanaman cabai dan kemangi, satu pohon kecil, lantai teras belakang</small></div>
+  <div class="folio kiri"><b>20</b> Kawa Living</div>
+</section>
+<section class="page">
+  <svg class="motif" style="left:-14mm;bottom:-14mm;width:90mm;height:60mm"><rect width="100%" height="100%" fill="url(#seigaiha)"/></svg>
+  <div class="pad">
+    <p class="eyebrow">Bab tujuh · 庭 niwa · taman</p>
+    <div class="tur">
+      <div>
+        <div class="denah-mini"><div class="w"><img src="img/denah-okina.jpg" alt=""><div class="hl" style="left:9.5%;top:10%;width:21%;height:22%"></div></div></div>
+        <p class="ruang-lbl"><b>Taman Belakang</b>Lantai 1<br>Skala 1:200</p>
+      </div>
+      <div>
+        <p class="narasi">Tamannya tidak luas, lebar rumah kali tiga meter lebih. Tapi ini tanah kami sendiri, bukan pot di balkon kontrakan. Sekarang isinya cabai, kemangi, dan satu pohon jambu yang belum berbuah.</p>
+        <p class="narasi">Langit punya sudutnya sendiri di sini: lantai teras belakang, kapur, dan gambar rumah yang tiap minggu berubah.</p>
+        <div class="figs"><img src="/mockup-booklet/karakter/svg/sekar-7-di-teras.svg" alt=""><img src="/mockup-booklet/karakter/svg/langit-6-menggambar.svg" alt=""><span class="tag inline" style="align-self:flex-start">draf I-06</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="folio kanan">Cerita Pulang <b>21</b></div>
+</section>
+
+<!-- ═══ 22–23 · Kodomo-beya ═══ -->
+<section class="page">
+  <div class="pad">
+    <p class="eyebrow">Bab delapan · 子供部屋 kodomo-beya · kamar anak</p>
+    <div class="tur">
+      <div>
+        <div class="denah-mini l2"><div class="w"><img src="img/denah-okina.jpg" alt=""><div class="hl" style="left:44%;top:33%;width:6%;height:18%"></div></div></div>
+        <p class="ruang-lbl"><b>Kamar Langit</b>Lantai 2<br>Skala 1:200</p>
+      </div>
+      <div>
+        <p class="narasi">Kamar Langit di lantai dua, jendelanya menghadap jalan komplek, jadi dia tahu kalau Ayah pulang sebelum kami. Tempat tidur, meja belajar, rak untuk bola dan buku gambar.</p>
+        <p class="narasi">Waktu masih mengontrak, Langit tidur di kamar kami. Malam pertama di kamarnya sendiri dia minta pintunya dibuka sedikit. Sekarang pintunya ditutup rapat, katanya sudah besar.</p>
+        <div class="figs"><img src="/mockup-booklet/karakter/svg/bayu-1-tampak-depan.svg" alt=""><img src="/mockup-booklet/karakter/svg/langit-1-tampak-depan.svg" alt=""><span class="tag inline" style="align-self:flex-start">draf I-07</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="folio kiri"><b>22</b> Kawa Living</div>
+</section>
+<section class="page">
+  <img class="foto" src="img/interior-kamar-3.jpg" alt="" style="transform:scale(1.6);transform-origin:center top">
+  <span class="tag tl">ganti render R-07 · kamar anak, malam, lampu meja</span>
+  <div class="caption"><b>Kamar Anak</b>Okina 61 · lantai 2<br><span class="muted">render lama, penunjuk arah</span></div>
+  <div class="folio kanan putih">Cerita Pulang <b>23</b></div>
+</section>
+
+<!-- ═══ 24–25 · Shinshitsu ═══ -->
+<section class="page">
+  <img class="foto" src="img/interior-kamar.jpg" alt="" style="transform:scale(1.6);transform-origin:center top">
+  <span class="tag tl">ganti render R-08 · kamar utama, pagi</span>
+  <div class="caption"><b>Kamar Utama</b>Okina 61 · lantai 2<br><span class="muted">render lama, penunjuk arah</span></div>
+  <div class="folio kiri putih"><b>24</b> Kawa Living</div>
+</section>
+<section class="page">
+  <div class="pad">
+    <p class="eyebrow">Bab sembilan · 寝室 shinshitsu · kamar utama</p>
+    <div class="tur">
+      <div>
+        <div class="denah-mini l2"><div class="w"><img src="img/denah-okina.jpg" alt=""><div class="hl" style="left:53%;top:52%;width:10%;height:17%"></div></div></div>
+        <p class="ruang-lbl"><b>Kamar Utama &amp; Kamar Mandi</b>Lantai 2<br>Skala 1:200</p>
+      </div>
+      <div>
+        <p class="narasi">Kamar kami di belakang, jauh dari jalan, tenang. Jendela ke arah taman. Ada ruang untuk lemari dua pintu dan meja kecil tempat saya memeriksa tugas mahasiswa kalau Langit sudah tidur.</p>
+        <p class="narasi">Malam sebelum Bayu berangkat, koper dibuka di kamar ini. Dua minggu lagi dibuka lagi di tempat yang sama. <em>Rumah ini yang menunggu.</em></p>
+        <p class="narasi kecil muted">Kamar mandi dalam: shower, kloset duduk, dinding granit sampai atas.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:4mm;align-items:end">
+          <div class="ph" style="height:34mm">Render R-09<small>kamar mandi utama</small></div>
+          <div class="figs" style="margin:0;height:34mm"><img src="/mockup-booklet/karakter/svg/bayu-5-pulang.svg" alt=""><img src="/mockup-booklet/karakter/svg/sekar-1-tampak-depan.svg" alt=""><span class="tag inline" style="align-self:flex-start">draf I-08</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="folio kanan">Cerita Pulang <b>25</b></div>
+</section>
+
+<!-- ═══ 26–27 · Denah Okina + spesifikasi ═══ -->
+<section class="page">
+  <div class="pad" style="padding-bottom:0">
+    <h2 class="bab kecil">TIPE <b>OKINA</b></h2>
+    <p class="kecil muted" style="margin:1.5mm 0 0">LB 61 m² · LT 70 sampai 126 m² · lebar 6,2 m · 2 lantai · skala 1:150</p>
+  </div>
+  <img class="denah-besar" src="img/denah-okina.jpg" alt="">
+  <span class="tag ada br">denah · minta file resolusi cetak</span>
+  <div class="folio kiri"><b>26</b> Kawa Living</div>
+</section>
+<section class="page krem2">
+  <svg class="motif" style="left:-14mm;bottom:-14mm;width:110mm;height:70mm"><rect width="100%" height="100%" fill="url(#seigaiha)"/></svg>
+  <div class="pad">
+    <p class="eyebrow">Spesifikasi</p>
+    <div class="kt-km">
+      <div><div class="angka">3</div><small>kamar tidur</small></div>
+      <div><div class="angka">2</div><small>kamar mandi</small></div>
+      <div><div class="angka">1</div><small>carport</small></div>
+    </div>
+    <dl class="spek-grid">
+      <div><dt>Pondasi</dt><dd>Pasangan batu kali</dd></div>
+      <div><dt>Lantai</dt><dd>Granit 60×60</dd></div>
+      <div><dt>Struktur</dt><dd>Beton bertulang</dd></div>
+      <div><dt>Kamar mandi</dt><dd>Dinding granit 60×60, lantai keramik 30×30, kloset duduk setara TOTO</dd></div>
+      <div><dt>Dinding</dt><dd>Bata merah, plester aci, cat Propan</dd></div>
+      <div><dt>Dapur</dt><dd>Meja granit 60×60, bak cuci</dd></div>
+      <div><dt>Atap</dt><dd>Rangka baja ringan, genteng beton flat</dd></div>
+      <div><dt>Plafon</dt><dd>Rangka hollow 4/4, gypsum</dd></div>
+      <div><dt>Pintu utama</dt><dd>Kayu jati, cat Mowilex</dd></div>
+      <div><dt>Pintu kamar</dt><dd>Solid engineering</dd></div>
+      <div><dt>Jendela</dt><dd>Kusen aluminium, kaca bening 5 mm</dd></div>
+      <div><dt>Listrik</dt><dd>2.200 W (2 lantai) · 1.300 W (1 lantai) · saklar setara Broco</dd></div>
+      <div><dt>Air</dt><dd>PDAM</dd></div>
+      <div><dt>Kawasan</dt><dd>One gate, masjid, mini soccer, basket</dd></div>
+      <div style="grid-column:1 / -1"><dt>Interior</dt><dd><b>Standar Interior Kawa Living</b>: kitchen set bawah + bar rak, plafon cove LED 3000K, dinding kisi kayu, sofa &amp; karpet. Sudah termasuk, bukan opsi.</dd></div>
+    </dl>
+    <p class="kecil muted" style="margin:4mm 0 0;font-size:6.5pt">Gambar dan denah hanya ilustrasi; ukuran dan material dapat berubah tanpa pemberitahuan. Spesifikasi yang mengikat adalah yang tercantum dalam perjanjian.</p>
+  </div>
+  <div class="folio kanan">Cerita Pulang <b>27</b></div>
+</section>
+
+<!-- ═══ 28–29 · Himawari, Mizu ═══ -->
+<section class="page">
+  <div class="pad" style="padding-bottom:0"><h2 class="bab kecil">TIPE <b>HIMAWARI</b></h2><p class="kecil muted" style="margin:1.5mm 0 0">LB 49 m² · lebar 6,5 m · 2 lantai · 2 KT · 1 KM · spesifikasi sama dengan halaman 27</p></div>
+  <img class="denah-besar" src="img/denah-himawari.jpg" alt="">
+  <div class="folio kiri"><b>28</b> Kawa Living</div>
+</section>
+<section class="page">
+  <div class="pad" style="padding-bottom:0"><h2 class="bab kecil">TIPE <b>MIZU</b></h2><p class="kecil muted" style="margin:1.5mm 0 0">LB 36 m² · lebar 6,5 m · 1 lantai · 2 KT · 1 KM · spesifikasi sama dengan halaman 27</p></div>
+  <img class="denah-besar" src="img/denah-mizu.jpg" alt="">
+  <div class="folio kanan">Cerita Pulang <b>29</b></div>
+</section>
+
+<!-- ═══ 30–31 · Yuri, Hiroi Yuri ═══ -->
+<section class="page">
+  <div class="pad" style="padding-bottom:0"><h2 class="bab kecil">TIPE <b>YURI</b></h2><p class="kecil muted" style="margin:1.5mm 0 0">LB 34,5 &amp; 40 m² · lebar 6,2 m · 1 lantai · 2 KT · 1 KM <span class="tag ukur inline">cek label file denah</span></p></div>
+  <div class="denah-dua"><img src="img/denah-yuri-34.jpg" alt=""><img src="img/denah-yuri-42.jpg" alt=""></div>
+  <div class="folio kiri"><b>30</b> Kawa Living</div>
+</section>
+<section class="page">
+  <div class="pad" style="padding-bottom:0"><h2 class="bab kecil">TIPE <b>HIROI YURI</b></h2><p class="kecil muted" style="margin:1.5mm 0 0">LB 37 &amp; 42 m² · lebar 6,5 m · 1 lantai · 2 KT · 1 KM</p></div>
+  <div class="denah-dua"><img src="img/denah-hiroi-37.jpg" alt=""><img src="img/denah-hiroi-42.jpg" alt=""></div>
+  <div class="folio kanan">Cerita Pulang <b>31</b></div>
+</section>
+
+<!-- ═══ 32–33 · Yakusoku ═══ -->
+<section class="page gelap">
+  <svg class="motif" style="left:-14mm;top:-14mm;width:100mm;height:64mm"><rect width="100%" height="100%" fill="url(#seigaiha)"/></svg>
+  <div class="pad">
+    <p class="eyebrow">Bab sepuluh · 約束 yakusoku · janji</p>
+    <h2 class="bab">KOMITMEN <b>5P</b></h2>
+    <p class="narasi kecil muted" style="margin-top:2mm">Jaminan tertulis JGS Group, berlaku untuk setiap unit.</p>
+    <ol class="lima">
+      <li><i>1</i><span><b>Pasti balik nama sertifikat</b>Sertifikat atas nama Anda, kami urus sampai tuntas.</span></li>
+      <li><i>2</i><span><b>Pasti dibangun</b>Tidak ada unit fiktif. Setiap kavling dibangun sampai serah terima.</span></li>
+      <li><i>3</i><span><b>Pasti tidak diagunkan ke bank</b>Tanah Anda bukan jaminan utang kami.</span></li>
+      <li><i>4</i><span><b>Pasti bisa SHM</b>Dari tanah SHM, bukan tanah kesultanan, negara, atau sewa.</span></li>
+      <li><i>5</i><span><b>Pasti sesuai spesifikasi</b>Spek dan gambar disepakati di awal, kami amanah pada perjanjian.</span></li>
+    </ol>
+    <p class="kecil muted" style="position:absolute;left:16mm;bottom:18mm;margin:0">JGS Group · sejak 2013 · 300+ unit serah terima · 6 bank rekanan</p>
+  </div>
+  <div class="folio kiri"><b>32</b> Kawa Living</div>
+</section>
+<section class="page">
+  <div class="pad">
+    <p class="eyebrow">Bukti, bukan janji</p>
+    <h2 class="bab kecil">Pantau sendiri <b>progress rumahmu</b></h2>
+    <p class="narasi" style="margin-top:3mm">Membeli rumah inden sering bikin cemas: sudah sampai mana pembangunannya? Di JGS, Anda tidak perlu menebak. Foto lapangan asli, diperbarui tiap minggu, bisa dibuka dari HP di mana pun.</p>
+    <div class="progress-box">
+      <div><p>Pindai untuk membuka dashboard progress. Bayu membukanya dari mess di Kalimantan setiap Jumat.</p><div class="url">progress.jogjagrahaselaras.com</div></div>
+      <div class="ph qr">QR<small>dashboard progress</small></div>
+    </div>
+    <div style="display:flex;gap:6mm;align-items:flex-end;margin-top:4mm">
+      <img src="/mockup-booklet/karakter/svg/bayu-7-di-mess.svg" alt="" style="height:34mm"><span class="tag inline">draf I-09</span>
+      <p class="kecil muted" style="margin:0 0 4mm">Siap melihat langsung? Jadwalkan survey gratis, tanpa kewajiban beli. WhatsApp 0896-2817-4151.</p>
+    </div>
+  </div>
+  <div class="folio kanan">Cerita Pulang <b>33</b></div>
+</section>
+
+<!-- ═══ 34 · Orang tua luar kota ═══ -->
+<section class="page">
+  <svg class="motif" style="right:-14mm;top:-14mm;width:90mm;height:60mm"><rect width="100%" height="100%" fill="url(#seigaiha)"/></svg>
+  <div class="pad">
+    <p class="eyebrow">Untuk Bapak dan Ibu di luar kota</p>
+    <h2 class="bab kecil" style="max-width:62%;font-size:20pt">Rumah untuk anak <b>yang di Jogja</b></h2>
+    <p class="narasi" style="font-size:9pt;margin-top:2mm;max-width:62%">Sepertiga pembeli Kawa Living tidak tinggal di sini. Mereka orang tua di Jakarta, Cirebon, Semarang, yang membelikan rumah untuk anak yang kuliah atau bekerja di Jogja. Uang kos empat tahun tidak kembali, rumah SHM kembali.</p>
+    <table class="tabel" style="margin-top:14mm">
+      <tr><td>Aman untuk anak?</td><td>Satu pintu masuk, jaga 24 jam, masjid di dalam kawasan, tetangga keluarga muda.</td></tr>
+      <tr><td>Memantau dari jauh?</td><td>Foto pembangunan tiap minggu di dashboard, dibuka dari HP di kota mana pun. Tidak perlu janjian.</td></tr>
+      <tr><td>Harus bolak-balik?</td><td>Tim kami mendampingi dari jauh; datang cukup untuk survey dan tanda tangan. <span class="tag ukur inline">cek prosedur akad</span></td></tr>
+      <tr><td>Siapa urus perabot?</td><td>Setiap unit diserahkan dengan Standar Interior. Paket Siap Huni Plus menambah tempat tidur, lemari, AC, water heater, wifi.</td></tr>
+      <tr><td>Kalau anak lulus?</td><td>Rumah SHM atas nama Bapak Ibu, bisa disewakan atau dijual.</td></tr>
+    </table>
+    <p class="kecil muted" style="margin-top:3mm">WhatsApp 0896-2817-4151, sebutkan “untuk anak”.</p>
+    <div style="position:absolute;right:16mm;top:10mm;width:46mm"><img src="/mockup-booklet/karakter/svg/kawa-orangtua-videocall.svg" alt="" style="width:100%"><span class="tag inline">draf I-14 · Pak Hendra &amp; Bu Rini</span></div>
+  </div>
+  <div class="folio kiri"><b>34</b> Kawa Living</div>
+</section>
+
+<!-- ═══ 35 · Di balik kami ═══ -->
+<section class="page krem2">
+  <div class="pad">
+    <p class="eyebrow">Di balik kami</p>
+    <h2 class="bab kecil">Yang <b>membangun</b></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8mm;margin-top:8mm">
+      <div><img src="img/logo-jgs-group2.png" alt="" style="height:16mm"><p class="kecil" style="margin:3mm 0 0"><b>Pengembang</b><br>JGS Group, PT Jogja Graha Selaras. Developer Jogja sejak 2013. Kawa Village, Kawa Living, Tentrem Bhumi, Tentrem Jiwo, Royal Mansion. 300+ unit serah terima. Kami pengembang yang berani dilihat angkanya: progress pembangunan terbuka untuk semua pembeli.</p></div>
+      <div><div class="ph" style="height:16mm">logo arsitek</div><p class="kecil" style="margin:3mm 0 0"><b>Arsitek</b><br><span class="tag ukur inline">isi nama studio, sejak tahun, dua kalimat</span></p></div>
+      <div><div class="ph" style="height:16mm">foto tim (F-04)</div><p class="kecil" style="margin:3mm 0 0"><b>Pelaksana</b><br>Dibangun oleh tim JGS sendiri, tanpa kontraktor luar. <span class="tag ukur inline">konfirmasi kalimat</span></p></div>
+    </div>
+    <p class="kecil muted" style="position:absolute;left:16mm;bottom:18mm;margin:0">@jogjagrahaselaras · jogjagrahaselaras.com</p>
+  </div>
+  <div class="folio kanan">Cerita Pulang <b>35</b></div>
+</section>
+
+<!-- ═══ 36 · Okaeri ═══ -->
+<section class="page">
+  <div class="pad">
+    <div style="display:grid;grid-template-columns:1fr 84mm;gap:8mm;align-items:start">
+      <div>
+        <p class="eyebrow">Bab sebelas · おかえり</p>
+        <h2 class="bab">OKA<b>ERI</b></h2>
+        <p class="narasi" style="margin-top:4mm">Kalau <em>tadaima</em> artinya “aku pulang”, <em>okaeri</em> adalah jawabannya: “selamat datang di rumah”.</p>
+        <p class="narasi">Sampai bertemu di Sedayu.</p>
+      </div>
+      <div><img src="/mockup-booklet/karakter/svg/kawa-keluarga-bertiga.svg" alt="" style="width:100%"><span class="tag inline">draf I-11 · final: dari belakang, masuk pintu</span></div>
+    </div>
+    <p class="kecil" style="margin:6mm 0 1mm;font-weight:600;color:var(--accent);letter-spacing:.08em;text-transform:uppercase">Apa alasanmu pulang ke Jogja?</p>
+    <p class="kecil muted" style="margin:0 0 2mm">Tulis di sini, bawa saat survey, kami ingin mendengarnya.</p>
+    <div class="garis"></div><div class="garis"></div><div class="garis"></div><div class="garis"></div>
+  </div>
+  <div class="folio kiri"><b>36</b> Kawa Living</div>
+</section>
+
+<!-- ═══ SAMPUL DALAM BELAKANG ═══ -->
+<section class="page krem2">
+  <svg class="motif" style="left:0;top:0;width:100%;height:100%"><rect width="100%" height="100%" fill="url(#seigaiha)"/></svg>
+</section>
+
+<!-- ═══ SAMPUL BELAKANG ═══ -->
+<section class="page">
+  <svg class="motif" style="left:-20mm;top:-10mm;width:140mm;height:90mm"><rect width="100%" height="100%" fill="url(#seigaiha)"/></svg>
+  <div class="pad" style="display:flex;flex-direction:column">
+    <p class="narasi" style="font-size:9.5pt"><b>Kawa Living</b><br>Dusun Surobayan RT 09, Argomulyo,<br>Sedayu, Bantul, DI Yogyakarta<br><span class="muted">Jl. Wates KM 10</span></p>
+    <p class="narasi" style="font-size:9.5pt;margin-top:6mm"><b>@perumahankawa</b><br>jogjagrahaselaras.com/kawa-living<br>WhatsApp marketing 0896-2817-4151 · Kantor 0274-2840726</p>
+    <div style="display:flex;gap:8mm;margin-top:8mm;align-items:center">
+      <div class="ph qr">QR<small>pricelist &amp; siteplan live</small></div>
+      <p class="kecil muted" style="max-width:70mm;margin:0">Harga tidak dicetak di booklet ini. Pindai untuk daftar harga bulan berjalan dan ketersediaan kavling terkini.</p>
+    </div>
+    <div style="display:flex;gap:6mm;align-items:center;margin-top:auto">
+      <img src="img/logo-jgs-group2.png" alt="" style="height:12mm">
+      <p class="kecil muted" style="margin:0">PT Jogja Graha Selaras · developer Jogja sejak 2013 · 300+ unit serah terima</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

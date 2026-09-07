@@ -70,6 +70,15 @@ const TOKOH = {
   langit:{ nama:'Langit', usia:7, peran:'Anak · kelas 1 SD, suka bola dan menggambar',
     r:30, H:200, W:54, shirt:C.kinari, pants:C.slate, shoe:C.ink, shorts:true, glasses:false,
     hair:'ikal', ciri:'rambut ikal, kaos bola bergaris, celana pendek, bola atau krayon' },
+  bima:  { nama:'Bima', usia:19, peran:'Mahasiswa semester 3 di Jogja · anak dari orang tua di luar kota (pembaca kedua, hal. 34 & iklan orang tua)',
+    r:26, H:292, W:60, shirt:C.slate, pants:C.ink, shoe:C.ink, shorts:false, glasses:false,
+    hair:'belah', ciri:'rambut belah samping agak panjang, kaos polos slate, ransel, laptop' },
+  hendra:{ nama:'Pak Hendra', usia:55, peran:'Ayah Bima · tinggal di Jakarta, membelikan rumah untuk anak (nama sementara)',
+    r:26, H:288, W:68, shirt:C.kinari, pants:C.slate, shoe:C.ink, shorts:false, glasses:true,
+    hair:'pendek', hairFill:'#8a9aa0', ciri:'rambut pendek beruban, kacamata, kemeja batik polos (kinari), perut sedikit' },
+  rini:  { nama:'Bu Rini', usia:52, peran:'Ibu Bima · tinggal di Jakarta (nama sementara)',
+    r:26, H:276, W:62, shirt:C.sage, pants:C.ink, shoe:C.ink, shorts:false, glasses:false,
+    hair:'sanggul', hairFill:'#8a9aa0', ciri:'sanggul beruban, blus sage, kerudung opsional (versi B), ramah' },
 };
 
 function cap(x1,y1,x2,y2,w,fill){ // kapsul bergaris tepi
@@ -81,12 +90,16 @@ function rrect(x,y,w,h,rx,fill){ return `<rect x="${x}" y="${y}" width="${w}" he
 function path(d,fill='none',extra=''){ return `<path d="${d}" fill="${fill}" stroke="${C.ink}" stroke-width="${SW}" stroke-linecap="round" stroke-linejoin="round" ${extra}/>`; }
 
 function hairFront(t, r){
+  const HF = t.hairFill || C.ink;
+  if(t.hair==='belah'){
+    return path(`M${-r} 2 C${-r*1.05} ${-r*1.35} ${r*1.05} ${-r*1.35} ${r} 2 L${r} ${-r*0.35} Q${r*0.55} ${-r*0.55} ${r*0.15} ${-r*0.3} Q${-r*0.25} ${-r*0.1} ${-r*0.6} ${-r*0.45} Q${-r*0.85} ${-r*0.6} ${-r} ${-r*0.2} Z`, HF);
+  }
   if(t.hair==='pendek'){
-    return path(`M${-r} -2 C${-r} ${-r*1.35} ${r} ${-r*1.35} ${r} -2 L${r} ${-r*0.5} Q${r*0.5} ${-r*0.75} ${r*0.1} ${-r*0.55} Q${-r*0.4} ${-r*0.35} ${-r} ${-r*0.5} Z`, C.ink);
+    return path(`M${-r} -2 C${-r} ${-r*1.35} ${r} ${-r*1.35} ${r} -2 L${r} ${-r*0.5} Q${r*0.5} ${-r*0.75} ${r*0.1} ${-r*0.55} Q${-r*0.4} ${-r*0.35} ${-r} ${-r*0.5} Z`, HF);
   }
   if(t.hair==='sanggul'){
-    return circ(-r*0.95, -r*0.55, r*0.36, C.ink) +
-      path(`M${-r} 0 C${-r} ${-r*1.35} ${r} ${-r*1.35} ${r} 0 L${r} ${-r*0.4} Q${r*0.4} ${-r*0.2} ${-r*0.1} ${-r*0.5} Q${-r*0.55} ${-r*0.7} ${-r} ${-r*0.3} Z`, C.ink);
+    return circ(-r*0.95, -r*0.55, r*0.36, HF) +
+      path(`M${-r} 0 C${-r} ${-r*1.35} ${r} ${-r*1.35} ${r} 0 L${r} ${-r*0.4} Q${r*0.4} ${-r*0.2} ${-r*0.1} ${-r*0.5} Q${-r*0.55} ${-r*0.7} ${-r} ${-r*0.3} Z`, HF);
   }
   // ikal: rangkaian gelombang
   const b=[];
@@ -97,12 +110,16 @@ function hairFront(t, r){
   return path(d, C.ink);
 }
 function hairSide(t, r){
+  const HF = t.hairFill || C.ink;
+  if(t.hair==='belah'){
+    return path(`M${-r*1.05} ${r*0.3} C${-r*1.15} ${-r*1.2} ${r*0.6} ${-r*1.45} ${r*1.0} ${-r*0.3} Q${r*0.5} ${-r*0.35} ${r*0.1} ${-r*0.55} Q${-r*0.4} ${-r*0.55} ${-r*0.75} ${r*0.3} Z`, HF);
+  }
   if(t.hair==='pendek'){
-    return path(`M${-r*1.02} ${r*0.2} C${-r*1.1} ${-r*1.2} ${r*0.6} ${-r*1.4} ${r*0.95} ${-r*0.35} Q${r*0.3} ${-r*0.55} ${-r*0.2} ${-r*0.5} Q${-r*0.6} ${-r*0.4} ${-r*0.75} ${r*0.2} Z`, C.ink);
+    return path(`M${-r*1.02} ${r*0.2} C${-r*1.1} ${-r*1.2} ${r*0.6} ${-r*1.4} ${r*0.95} ${-r*0.35} Q${r*0.3} ${-r*0.55} ${-r*0.2} ${-r*0.5} Q${-r*0.6} ${-r*0.4} ${-r*0.75} ${r*0.2} Z`, HF);
   }
   if(t.hair==='sanggul'){
-    return circ(-r*1.15, -r*0.35, r*0.4, C.ink) +
-      path(`M${-r*1.02} ${r*0.25} C${-r*1.1} ${-r*1.2} ${r*0.6} ${-r*1.4} ${r*0.95} ${-r*0.35} Q${r*0.4} ${-r*0.15} ${-r*0.1} ${-r*0.5} Q${-r*0.5} ${-r*0.5} ${-r*0.72} ${r*0.25} Z`, C.ink);
+    return circ(-r*1.15, -r*0.35, r*0.4, HF) +
+      path(`M${-r*1.02} ${r*0.25} C${-r*1.1} ${-r*1.2} ${r*0.6} ${-r*1.4} ${r*0.95} ${-r*0.35} Q${r*0.4} ${-r*0.15} ${-r*0.1} ${-r*0.5} Q${-r*0.5} ${-r*0.5} ${-r*0.72} ${r*0.25} Z`, HF);
   }
   const n=6; let d=`M${-r*1.1} ${r*0.3}`; const x0=-r*1.1, x1=r*0.95, step=(x1-x0)/n;
   for(let i=0;i<n;i++){ const xa=x0+i*step, xb=xa+step, xm=(xa+xb)/2; d+=` Q${xm} ${-r*1.2-(i%2?0:r*0.12)} ${xb} ${i===n-1? -r*0.35 : -r*0.7}`; }
@@ -219,6 +236,8 @@ function figure(t, o){
   if(prop==='kopi' && hands.R){ const h=hands.R; out.push(rrect(h[0]-8, h[1]-14, 16, 18, 3, C.white)); out.push(path(`M${h[0]+8} ${h[1]-9} q8 0 8 5 q0 6 -8 6`)); }
   if(prop==='bola' && hands.R){ const h=hands.R; const bx=h[0]+2, by=h[1]+2, br=15; out.push(circ(bx,by,br,C.white)); out.push(path(`M${bx} ${by-6} l6 4 l-2 7 l-8 0 l-2 -7 Z`, C.ink)); out.push(path(`M${bx} ${by-6} l0 -8 M${bx+6} ${by-2} l8 -4 M${bx+4} ${by+5} l5 7 M${bx-4} ${by+5} l-5 7 M${bx-6} ${by-2} l-8 -4`)); }
   if(prop==='krayon' && hands.R){ const h=hands.R; out.push(`<g transform="translate(${h[0]} ${h[1]}) rotate(-35)">${rrect(-4,-22,8,30,2,C.kinari)}<path d="M-4 -22 L0 -30 L4 -22" fill="${C.kinari}" stroke="${C.ink}" stroke-width="${SW}" stroke-linejoin="round"/></g>`); }
+  if(prop==='ransel'){ out.push(`<path d="M${cx-W*0.3} ${shY+6} q-4 ${torsoH*0.5} 0 ${torsoH*0.7} M${cx+W*0.3} ${shY+6} q4 ${torsoH*0.5} 0 ${torsoH*0.7}" fill="none" stroke="${C.ink}" stroke-width="${SW*2}" stroke-linecap="round"/>`); out.push(rrect(cx+W/2-4, shY+14, 16, torsoH*0.7, 5, C.kinari)); }
+  if(prop==='laptop' && hands.R){ const h=hands.R; out.push(rrect(cx-22, h[1]-4, 44, 6, 2, C.ink)); out.push(rrect(cx-20, h[1]-30, 40, 27, 3, C.slate)); out.push(`<rect x="${cx-17}" y="${h[1]-27}" width="34" height="21" rx="1.5" fill="${C.paper}"/>`); }
   if(prop==='hp' && hands.R){ const h=hands.R; out.push(rrect(h[0]-7, h[1]-24, 14, 26, 3, C.ink)); out.push(`<rect x="${h[0]-5}" y="${h[1]-21}" width="10" height="18" rx="1.5" fill="${C.sage}"/>`); }
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VW} ${VH}" width="${VW}" height="${VH}" role="img" aria-label="${t.nama} ${o.lbl||''}">${out.join('')}</svg>`;
@@ -244,6 +263,29 @@ const LEMBAR = {
     {lbl:'Menyambut', sub:'melambai (hal. 14)', view:'front', expr:'tertawa', pose:{R:'wave'}},
     {lbl:'Di teras', sub:'cangkir teh', view:'front', expr:'senyum', pose:{R:'hold'}, prop:'kopi'},
   ],
+  bima: [
+    {lbl:'Tampak depan', sub:'senyum · netral', view:'front', expr:'senyum'},
+    {lbl:'Tampak samping', sub:'profil kanan', view:'side', expr:'senyum'},
+    {lbl:'Tertawa', sub:'ekspresi 2', view:'front', expr:'tertawa'},
+    {lbl:'Ransel', sub:'berangkat kuliah', view:'front', expr:'senyum', pose:{R:'wave'}, prop:'ransel'},
+    {lbl:'Laptop', sub:'kerja/kuliah dari rumah', view:'front', expr:'serius', pose:{L:'hold', R:'hold'}, prop:'laptop'},
+    {lbl:'Video call', sub:'telepon orang tua (hal. 34)', view:'front', expr:'tertawa', pose:{R:'hold'}, prop:'hp'},
+    {lbl:'Melambai', sub:'menyambut orang tua survey', view:'front', expr:'tertawa', pose:{L:'up', R:'up'}},
+  ],
+  hendra: [
+    {lbl:'Tampak depan', sub:'senyum · netral', view:'front', expr:'senyum'},
+    {lbl:'Tampak samping', sub:'profil kanan', view:'side', expr:'senyum'},
+    {lbl:'Serius', sub:'membaca pricelist', view:'front', expr:'serius', pose:{L:'hold', R:'hold'}, prop:'buku'},
+    {lbl:'Video call', sub:'melihat dashboard (I-14)', view:'front', expr:'tertawa', pose:{R:'hold'}, prop:'hp'},
+    {lbl:'Survey', sub:'datang ke Sedayu, koper', view:'front', expr:'senyum', pose:{L:'down', R:'wave'}, prop:'koper'},
+  ],
+  rini: [
+    {lbl:'Tampak depan', sub:'senyum · netral', view:'front', expr:'senyum'},
+    {lbl:'Tampak samping', sub:'profil kanan', view:'side', expr:'senyum'},
+    {lbl:'Heran', sub:'ekspresi 2', view:'front', expr:'heran'},
+    {lbl:'Video call', sub:'melihat dashboard (I-14)', view:'front', expr:'tertawa', pose:{R:'hold'}, prop:'hp'},
+    {lbl:'Teh', sub:'di teras rumah anak', view:'front', expr:'senyum', pose:{R:'hold'}, prop:'kopi'},
+  ],
   langit: [
     {lbl:'Tampak depan', sub:'senyum · netral', view:'front', expr:'senyum'},
     {lbl:'Tampak samping', sub:'profil kanan', view:'side', expr:'senyum'},
@@ -263,7 +305,7 @@ Object.entries(TOKOH).forEach(([key,t])=>{
   const sec=document.createElement('section'); sec.className='tokoh';
   sec.innerHTML=`<div class="kepala"><h2>${t.nama}, ${t.usia}</h2><span class="desk">${t.peran}. Ciri: ${t.ciri}.</span></div>
   <div class="spec">
-    <div><b>Proporsi</b>${t.nama==='Langit'?'4 kepala (anak)':'5,5 kepala (dewasa)'} · tinggi relatif ${Math.round(t.H/300*100)}%</div>
+    <div><b>Proporsi</b>${t.nama==='Langit'?'4 kepala (anak SD, 7 th)':'5,5 kepala (dewasa)'} · tinggi relatif ${Math.round(t.H/300*100)}%</div>
     <div><b>Warna baju</b><span class="sw" style="background:${t.shirt}"></span>${t.shirt} · celana <span class="sw" style="background:${t.pants}"></span>${t.pants}</div>
     <div><b>Garis & kulit</b><span class="sw" style="background:${C.ink}"></span>${C.ink} 3 pt · kulit <span class="sw" style="background:${C.skin}"></span>${C.skin} (tanpa warna kulit, seperti Tenaya)</div>
   </div>
@@ -289,8 +331,14 @@ const grupSvg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" wid
 grup.innerHTML=`<div class="kepala"><h2>Bertiga</h2><span class="desk">Uji skala: Bayu, Langit, Sekar berdampingan. Ini acuan tinggi relatif untuk semua adegan (I-01 sampai I-11).</span></div><div class="grup">${grupSvg}</div><div class="aksi"><button id="u-grup">Unduh SVG adegan</button><button id="u-semua">Unduh semua (1 file SVG lembar)</button></div>`;
 main.appendChild(grup);
 document.getElementById('u-grup').addEventListener('click',()=>unduh('kawa-keluarga-bertiga.svg',grupSvg));
+const grup2=document.createElement('section'); grup2.className='tokoh';
+const k1=figure(TOKOH.hendra,{view:'front',expr:'senyum',pose:{R:'hold'},prop:'hp'}), k2=figure(TOKOH.rini,{view:'front',expr:'tertawa'}), k3=figure(TOKOH.bima,{view:'front',expr:'tertawa',pose:{R:'wave'},prop:'ransel'}), k4=figure(TOKOH.langit,{view:'front',expr:'senyum',pose:{R:'under'},prop:'bola'});
+const grup2Svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" width="800" height="340"><line x1="20" y1="330" x2="780" y2="330" stroke="${C.ink}" stroke-width="2" opacity=".35"/><g>${inner(k1)}</g><g transform="translate(200 0)">${inner(k2)}</g><g transform="translate(400 0)">${inner(k3)}</g><g transform="translate(600 0)">${inner(k4)}</g></svg>`;
+grup2.innerHTML=`<div class="kepala"><h2>Keluarga Bima + Langit</h2><span class="desk">Pembaca kedua: Pak Hendra dan Bu Rini di Jakarta, Bima mahasiswa di Jogja. Langit disandingkan untuk uji skala: anak SD (7 th) sengaja 2/3 tinggi dewasa, mahasiswa (19 th) setinggi dewasa. Nama Hendra/Rini/Bima sementara.</span></div><div class="grup">${grup2Svg}</div><div class="aksi"><button id="u-grup2">Unduh SVG adegan</button></div>`;
+main.insertBefore(grup2, grup.nextSibling);
+document.getElementById('u-grup2').addEventListener('click',()=>unduh('kawa-keluarga-bima.svg',grup2Svg));
 document.getElementById('u-semua').addEventListener('click',()=>{
-  const cols=7, w=200, h=340; let rows=0; let body='';
+  const cols=7, w=200, h=340; /* 6 tokoh */ let rows=0; let body='';
   Object.keys(TOKOH).forEach((key,ri)=>{ LEMBAR[key].forEach((o,ci)=>{ const s=semua.find(x=>x.key===key&&x.i===ci).svg; body+=`<g transform="translate(${ci*w} ${ri*(h+40)+40})">${inner(s)}</g><text x="${ci*w+100}" y="${ri*(h+40)+30}" text-anchor="middle" font-family="Inter,Arial" font-size="13" fill="${C.ink}">${TOKOH[key].nama} · ${o.lbl}</text>`; }); rows++; });
   unduh('kawa-character-sheet.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${cols*w} ${rows*(h+40)}" width="${cols*w}" height="${rows*(h+40)}"><rect width="100%" height="100%" fill="${C.paper}"/>${body}</svg>`);
 });
