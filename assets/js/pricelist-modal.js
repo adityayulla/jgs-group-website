@@ -20,7 +20,12 @@
   var AGENT = AGENTS[AGENT_KEY] || AGENTS.dwi;
 
   /* ── Config ──────────────────────────────────────────────── */
-  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbznJXL_2a_hhRdYmB7Es44sGH_Dc9E96fcgch40mfrPlq-heaV2ewkSSDmxgVpu7qq6Lg/exec';
+  /* 8 Sep 2026 (Tahap 9.2 dashboard): lead dikirim ke Dashboard Marketing (panel-jgs), yang
+     menyimpannya ke basis data LALU meneruskan kiriman yang sama ke Apps Script lama — jadi
+     sheet "Leads Web" dan email notifikasi tetap jalan. Format kiriman tidak berubah.
+     Kalau perlu kembali ke jalur lama, ganti alamat ini ke APPS_SCRIPT_LAMA. */
+  var APPS_SCRIPT_URL = 'https://panel-jgs.vercel.app/api/lead';
+  var APPS_SCRIPT_LAMA = 'https://script.google.com/macros/s/AKfycbznJXL_2a_hhRdYmB7Es44sGH_Dc9E96fcgch40mfrPlq-heaV2ewkSSDmxgVpu7qq6Lg/exec';
   var REDIRECT_URL    = '/download/';
 
   /* ── Enhanced Conversions for Leads (Google Ads) ──────────────
