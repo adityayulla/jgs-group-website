@@ -307,7 +307,15 @@
     document.body.style.overflow = '';
   };
 
+  /* 9 Sep 2026: kunci pengiriman ganda. Dari 442 lead di sheet, 66 dobel — 34 di antaranya masuk
+     dalam 2 menit dari nomor yang sama: pengunjung menekan "Kirim" lagi karena mengira belum
+     terkirim (tombolnya diam 1,5 detik sebelum halaman berpindah). Sekarang tombol dikunci &
+     bertuliskan "Mengirim…" begitu ditekan, dan pengiriman kedua diabaikan. Server dashboard
+     juga menolak nomor yang sama dalam 60 menit — dua lapis. */
+  var plSedangKirim = false;
+
   window.submitPricelist = function () {
+    if (plSedangKirim) return;
     var nama  = document.getElementById('pl-nama').value.trim();
     var hp    = document.getElementById('pl-hp').value.trim();
 
@@ -315,6 +323,9 @@
       alert('Mohon isi nama dan nomor WhatsApp terlebih dahulu.');
       return;
     }
+    plSedangKirim = true;
+    var tombol = document.getElementById('pl-submit');
+    if (tombol) { tombol.disabled = true; tombol.setAttribute('aria-busy', 'true'); tombol.textContent = 'Mengirim…'; }
 
     var utm = getUtm();
     var payload = {
