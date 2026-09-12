@@ -211,6 +211,7 @@ function halaman(cfg, seksiIsi) {
     cfg.tautanTeks
   )}</a></div>
 
+${cfg.promo ? `
   <div class="promo">
     <div>
       <div class="promo__title">${esc(cfg.promo.judul)}</div>
@@ -222,6 +223,7 @@ function halaman(cfg, seksiIsi) {
       <div class="promo__sub">${esc(cfg.promo.sub)}</div>
     </div>
   </div>
+` : ""}
 
 ${seksiIsi.join("\n\n")}
 
