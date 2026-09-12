@@ -1,0 +1,100 @@
+{
+  "_catatan": [
+    "Peta harga: di mana saja angka 'mulai Rp ...' muncul di web, dan angka proyek mana.",
+    "",
+    "Kolom 'cari' adalah TEKS YANG SEKARANG ADA di halaman — buku besar, bukan pola.",
+    "Setelah build mengganti angkanya, ia menulis ulang berkas ini dengan teks yang baru.",
+    "Karena itu peta ini tidak boleh disunting tangan bersamaan dengan menyunting HTML;",
+    "kalau tidak cocok, build berteriak 'tidak ketemu' — sengaja, supaya ketahuan.",
+    "",
+    "sumber: nama proyek = harga termurah yang MASIH TERSEDIA di proyek itu.",
+    "        'jgs' = termurah di antara ketiga proyek.",
+    "        'jgs-rentang' = 'Rp <termurah> Juta — Rp <termahal> Juta' untuk JSON-LD.",
+    "",
+    "mode 'semua': SELURUH angka Rp di halaman itu milik satu proyek (sudah diperiksa",
+    "12 Sep 2026), jadi disapu sekaligus — halaman landing hanya bicara satu proyek.",
+    "",
+    "SENGAJA TIDAK diikutkan:",
+    "  - index.html 'Rp 450 Juta' & kawa-living 'Rp 479 Jt' — nilai awal slider kalkulator,",
+    "    bukan janji harga.",
+    "  - kawa-living 'Rp 414/479/415/540/614 Juta' — harga per TIPE di kartu tipe. Itu",
+    "    lapis kedua: perlu pemetaan tipe→deret kavling, belum dikerjakan (12 Sep 2026).",
+    "  - blog/harga-rumah-sedayu 'Rp414 juta untuk tipe Mizu' — angka per TIPE, bukan per proyek; ikut lapis kedua yang sama dengan kartu tipe di kawa-living."
+  ],
+  "pembulatan": {
+    "ke": 10,
+    "arah": "bawah"
+  },
+  "berkas": [
+    {
+      "nama": "perumahan-sedayu/index.html",
+      "mode": "semua",
+      "sumber": "kawa-living"
+    },
+    {
+      "nama": "perumahan-dekat-uii/index.html",
+      "mode": "semua",
+      "sumber": "tentrem-bhumi"
+    },
+    {
+      "nama": "index.html",
+      "aturan": [
+        {
+          "cari": "Rp 410 jt",
+          "sumber": "jgs"
+        },
+        {
+          "cari": "Rp 410 Juta — Rp 1,15 Miliar",
+          "sumber": "jgs-rentang"
+        }
+      ]
+    },
+    {
+      "nama": "kawa-living/index.html",
+      "aturan": [
+        {
+          "cari": "Mulai Rp 410 jutaan",
+          "sumber": "kawa-living"
+        }
+      ]
+    },
+    {
+      "nama": "perumahan-jogja/index.html",
+      "aturan": [
+        {
+          "cari": "Mulai Rp 410 Jt",
+          "sumber": "jgs"
+        },
+        {
+          "cari": "Mulai Rp 410 Juta",
+          "sumber": "kawa-living"
+        },
+        {
+          "cari": "Mulai Rp 650 Juta",
+          "sumber": "tentrem-bhumi"
+        },
+        {
+          "cari": "Rp 410 jutaan",
+          "sumber": "jgs"
+        },
+        {
+          "cari": "Rp 650 jutaan",
+          "sumber": "tentrem-bhumi"
+        }
+      ]
+    },
+    {
+      "nama": "blog/perumahan-jogja-panduan-area/index.html",
+      "aturan": [
+        {
+          "cari": "harga mulai Rp 410 jutaan",
+          "sumber": "kawa-living"
+        },
+        {
+          "cari": "mulai Rp 650 jutaan",
+          "sumber": "tentrem-bhumi"
+        }
+      ]
+    }
+  ]
+}

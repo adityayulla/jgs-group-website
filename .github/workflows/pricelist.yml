@@ -35,6 +35,7 @@ on:
     paths:
       - "tools/pricelist/**"
       - "tools/promo/**"
+      - "tools/harga/**"
       - "assets/pdf/pricelist.css"
       - ".github/workflows/pricelist.yml"
 
@@ -78,6 +79,12 @@ jobs:
       # Promo dulu, baru pricelist: dua-duanya menjemput promo dari Panel JGS,
       # jadi kalau Panel sedang mati keduanya gagal bersama — tidak ada keadaan
       # setengah jadi di mana web memasang promo tapi PDF tidak.
+      # Harga "mulai Rp ..." di judul halaman, meta, dan badan teks ikut dashboard.
+      # Judul halaman adalah tulisan yang Google tampilkan, jadi angka basi di sini
+      # tersiar di hasil pencarian — dibaca orang sebelum mereka mengklik apa pun.
+      - name: Samakan harga web dengan dashboard
+        run: node tools/harga/build.mjs
+
       - name: Tempel promo ke halaman web
         run: node tools/promo/build.mjs
 
