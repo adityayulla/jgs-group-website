@@ -21,7 +21,10 @@ name: Pricelist
 
 on:
   repository_dispatch:
-    types: [pricelist]
+    # "promo" (12 Sep 2026): dikirim Panel JGS saat Direktur/Dwi menekan
+    # "Simpan & terbitkan" di tab Promo. Alur yang sama membangun keduanya —
+    # promo muncul di halaman web DAN di blok promo PDF pricelist.
+    types: [pricelist, promo]
   workflow_dispatch:
   schedule:
     # Tiap hari 01:00 UTC (08:00 WIB) — penjaga terakhir, bukan jalur utama.
@@ -31,6 +34,7 @@ on:
     # Ubah template/teksnya → PDF langsung dibangun ulang.
     paths:
       - "tools/pricelist/**"
+      - "tools/promo/**"
       - "assets/pdf/pricelist.css"
       - ".github/workflows/pricelist.yml"
 
@@ -41,7 +45,7 @@ permissions:
 # tiap build membaca keadaan dashboard yang terbaru — jadi yang lama
 # dibatalkan, cukup yang terakhir yang jalan.
 concurrency:
-  group: pricelist
+  group: pricelist-promo
   cancel-in-progress: true
 
 jobs:
@@ -70,6 +74,12 @@ jobs:
 
       - name: Pastikan Chrome ada
         run: google-chrome --version
+
+      # Promo dulu, baru pricelist: dua-duanya menjemput promo dari Panel JGS,
+      # jadi kalau Panel sedang mati keduanya gagal bersama — tidak ada keadaan
+      # setengah jadi di mana web memasang promo tapi PDF tidak.
+      - name: Tempel promo ke halaman web
+        run: node tools/promo/build.mjs
 
       - name: Bangun pricelist
         run: node tools/pricelist/build.mjs

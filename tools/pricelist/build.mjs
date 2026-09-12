@@ -33,6 +33,10 @@ const DIR = dirname(fileURLToPath(import.meta.url));
 const AKAR = resolve(DIR, "../..");
 const DATA = join(DIR, "data");
 const API = "https://progress.jogjagrahaselaras.com/api/public/pricelist";
+// Promo tidak tinggal di dashboard progress (itu milik approver: harga & status jual),
+// melainkan di Panel JGS — tempat Direktur/Dwi mengetiknya di tab "Promo". Satu sumber,
+// dan promo lewat tenggat sudah disaring di sana (jawabannya jadi { promo: null }).
+const API_PROMO = "https://panel-jgs.vercel.app/api/promo-publik";
 
 const argv = process.argv.slice(2);
 const PAKSA = argv.includes("--paksa");
@@ -87,6 +91,27 @@ const nomor = (code) => parseInt(code.match(/(\d+)\s*$/)?.[1] ?? "0", 10);
  * Kavling hook tidak pernah digabung: label "(Hook)" menempel pada satu
  * kavling tertentu, bukan pada sekelompok.
  */
+/**
+ * Promo yang sedang tayang untuk satu proyek, atau null.
+ *
+ * SENGAJA memaafkan kegagalan: Panel JGS mati atau lambat tidak boleh menggagalkan
+ * pembangunan pricelist — yang terbit hanya kehilangan blok promonya, bukan seluruh
+ * daftar harga. Pesannya tetap dicetak supaya tidak hilang diam-diam.
+ */
+async function ambilPromo(namaProyek) {
+  try {
+    const res = await fetch(`${API_PROMO}?t=${Date.now()}`, { signal: AbortSignal.timeout(8000) });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const { promo } = await res.json();
+    if (!promo) return null;
+    if (Array.isArray(promo.proyek) && !promo.proyek.includes(namaProyek)) return null;
+    return promo;
+  } catch (e) {
+    console.warn(`  ! promo tidak terbaca (${e.message}) — pricelist dibangun tanpa blok promo`);
+    return null;
+  }
+}
+
 function gabung(units) {
   const kunci = (u) =>
     u.hook
@@ -215,7 +240,7 @@ ${cfg.promo ? `
   <div class="promo">
     <div>
       <div class="promo__title">${esc(cfg.promo.judul)}</div>
-      <div class="promo__text">${esc(cfg.promo.teks)}</div>
+      <div class="promo__text">${cfg.promo.butir.map(esc).join(" · ")}</div>
     </div>
     <div class="promo__right">
       <div class="promo__cap">${esc(cfg.promo.cap)}</div>
@@ -298,6 +323,8 @@ async function bangun(slug) {
   console.log(`\n▸ ${cfg.judul}`);
 
   const { units } = await ambilUnit(slug);
+  cfg.promo = await ambilPromo(cfg.judul);
+  console.log(cfg.promo ? `  promo: ${cfg.promo.judul}` : "  promo: tidak ada yang tayang");
 
   // Tiap kavling harus punya seksi. Kalau ada deret baru di dashboard
   // yang belum dikenal di sini, berhenti — diam-diam menghilangkan
