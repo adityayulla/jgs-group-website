@@ -81,6 +81,13 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Blog: Kenapa Harga Rumah di Sedayu Bisa Beda Jauh? -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/harga-rumah-sedayu/</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Blog: Sedayu Itu Daerah Mana? -->
   <url>
     <loc>https://jogjagrahaselaras.com/blog/sedayu-daerah-mana/</loc>
