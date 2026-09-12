@@ -18,6 +18,22 @@
   var FEED = 'https://progress.jogjagrahaselaras.com/api/public/serah-terima';
 
   /* ── util ──────────────────────────────────────────────────── */
+
+  /* Pasang thumbnail 400px (~18KB) dari feed, bukan foto 1600px.
+     Kotak ticker cuma 124px (global.css .st-tick__item img) — dulu tiap
+     kunjungan beranda mengunduh 466KB hanya untuk enam perangko itu, dan
+     kuota cached egress Supabase habis (5,77 dari 5 GB, 12 Sep 2026).
+
+     Foto lama yang belum sempat dibuatkan thumbnail otomatis jatuh
+     kembali ke foto penuh, sekali saja supaya tidak jadi lingkaran. */
+  function pasangFoto(img, item) {
+    img.onerror = function () {
+      img.onerror = null;
+      img.src = item.photo;
+    };
+    img.src = item.thumb || item.photo;
+  }
+
   function el(tag, cls, attrs) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -41,11 +57,11 @@
     var stamp = el('span', 'st__stamp');
     stamp.textContent = item.project;
     var img = el('img', null, {
-      src: item.photo,
       alt: 'Serah terima kunci unit ' + label + ' di ' + item.project + ' — JGS Group',
       loading: 'lazy',
       decoding: 'async'
     });
+    pasangFoto(img, item);
     media.appendChild(stamp);
     media.appendChild(img);
 
@@ -69,10 +85,10 @@
         })
       : el('a', 'st-tick__item', { href: opsi.href || '/serah-terima/' });
     var img = el('img', null, {
-      src: item.photo,
       alt: 'Serah terima kunci unit ' + label + ' di ' + item.project + ' — JGS Group',
       loading: 'lazy', decoding: 'async'
     });
+    pasangFoto(img, item);
     var cap = el('span', 'st-tick__cap');
     var b = el('b'); b.textContent = label;
     cap.appendChild(b);

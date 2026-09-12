@@ -1598,7 +1598,7 @@
 
 <!-- Strip serah terima: mengisi #stRail dari feed dashboard, sudah
      tersaring lewat data-project. Juga membawa lightbox + auto-scroll. -->
-<script src="/assets/js/serah-terima.js?v=20260817-4" defer></script>
+<script src="/assets/js/serah-terima.js?v=20260912-1" defer></script>
 
 <!-- ══════════════════════════════════════════
      LIVE — statistik unit dari Progress Dashboard
@@ -1796,12 +1796,19 @@
         var teks = foto.caption || 'Lingkungan kawasan Kawa Living';
 
         var img = document.createElement('img');
-        img.src = foto.url;
+        // Grid pakai thumbnail 400px (~18KB); foto penuh disimpan di
+        // data-full supaya lightbox tetap membuka yang tajam. Foto lama
+        // yang belum punya thumbnail jatuh kembali ke foto penuh.
+        img.onerror = function () { img.onerror = null; img.src = foto.url; };
+        img.src = foto.thumb || foto.url;
+        img.setAttribute('data-full', foto.url);
         img.alt = teks + ' — Kawa Living, JGS Group';
         img.loading = 'lazy';
         img.decoding = 'async';
         img.addEventListener('click', function () {
-          if (typeof window.openLb === 'function') window.openLb(this.src, this.alt);
+          if (typeof window.openLb === 'function') {
+            window.openLb(this.getAttribute('data-full') || this.src, this.alt);
+          }
         });
 
         var cap = document.createElement('figcaption');

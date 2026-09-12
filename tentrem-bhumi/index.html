@@ -2192,7 +2192,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Strip serah terima: mengisi #stRail dari feed dashboard, sudah
      tersaring lewat data-project. Juga membawa lightbox + auto-scroll. -->
-<script src="/assets/js/serah-terima.js?v=20260817-4" defer></script>
+<script src="/assets/js/serah-terima.js?v=20260912-1" defer></script>
 
 <!-- ══════════════════════════════════════════
      LIVE — statistik unit dari Progress Dashboard
@@ -2284,7 +2284,11 @@ document.addEventListener('DOMContentLoaded', function() {
         var teks = p.caption || 'Fasilitas & lingkungan Tentrem Bhumi';
 
         var img = document.createElement('img');
-        img.src = p.url;
+        // Thumbnail 400px dari feed; foto penuh hanya saat lightbox
+        // dibuka lewat href <a>. Foto lama yang belum punya thumbnail
+        // jatuh kembali ke p.url, sekali saja.
+        img.onerror = function () { img.onerror = null; img.src = p.url; };
+        img.src = p.thumb || p.url;
         img.alt = teks + ' — Tentrem Bhumi, JGS Group';
         img.loading = 'lazy';
         img.decoding = 'async';
