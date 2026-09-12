@@ -61,13 +61,6 @@
       position: absolute; inset: 0;
       background: linear-gradient(180deg, rgba(10,16,40,.55) 0%, rgba(10,16,40,.05) 34%, rgba(10,16,40,.12) 58%, rgba(8,12,32,.86) 100%);
     }
-    .hero3__promo {
-      position: absolute; top: 96px; right: max(20px, calc((100% - var(--max-w)) / 2 + 20px)); z-index: 2;
-      background: rgba(219,127,46,.94); color: #fff; border-radius: 999px;
-      padding: 8px 16px; font-size: 13px; font-weight: 700;
-      box-shadow: 0 8px 20px rgba(0,0,0,.3);
-    }
-    .hero3__promo small { display: block; font-size: 9px; font-weight: 600; letter-spacing: .1em; opacity: .92; text-transform: uppercase; }
     .hero3__in {
       position: relative; z-index: 1; width: 100%;
       max-width: var(--max-w); margin: 0 auto;
@@ -233,55 +226,6 @@
     .pcard--small .pcard__shade {
       background: linear-gradient(to bottom, rgba(15,20,48,.25) 0%, rgba(15,20,48,.88) 100%);
     }
-
-    /* ══════════════════════════════════════════════════════════
-       PROMO AKTIF
-    ══════════════════════════════════════════════════════════ */
-    .promo { padding: 60px var(--pad-x); max-width: var(--max-w); margin: 0 auto; }
-    .promo__inner {
-      position: relative; border-radius: var(--r-xl); overflow: hidden;
-      background: linear-gradient(135deg, #141d3e 0%, var(--navy) 55%, #2c3e8c 100%);
-      display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center;
-      padding: 64px 56px;
-    }
-    .promo__glow {
-      position: absolute; right: -100px; top: -100px;
-      width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(219,127,46,.3) 0%, transparent 65%);
-      filter: blur(60px); pointer-events: none;
-    }
-    .promo__label {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em;
-      text-transform: uppercase; color: var(--orange); margin-bottom: 16px;
-    }
-    .promo__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); animation: pulse 2s infinite; }
-    .promo__title {
-      font-family: var(--font-display); font-weight: 400;
-      font-size: clamp(28px, 3.5vw, 48px); line-height: 1.05;
-      letter-spacing: -.02em; color: #fff; margin: 0 0 28px;
-    }
-    .promo__list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; position: relative; }
-    .promo__item { display: flex; align-items: flex-start; gap: 12px; }
-    .promo__check {
-      width: 20px; height: 20px; border-radius: 50%;
-      background: rgba(219,127,46,.2); border: 1px solid rgba(219,127,46,.5);
-      display: grid; place-items: center; flex-shrink: 0; margin-top: 1px;
-      color: var(--orange);
-    }
-    .promo__item-text { font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.5; }
-    .promo__item-text strong { color: #fff; }
-    .promo__right { position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-    .promo__savings {
-      background: rgba(219,127,46,.15); border: 1px solid rgba(219,127,46,.3);
-      border-radius: var(--r-lg); padding: 28px 36px; text-align: center; white-space: nowrap;
-    }
-    .promo__savings-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; color: rgba(255,255,255,.6); text-transform: uppercase; margin-bottom: 8px; }
-    .promo__savings-val   { font-family: var(--font-display); font-size: 42px; font-weight: 500; color: var(--orange); letter-spacing: -.02em; line-height: 1; }
-    .promo__savings-sub   { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 6px; }
-    .promo__cta  { width: 100%; background: var(--orange); color: #fff; justify-content: center; }
-    .promo__cta:hover { background: var(--orange-2); }
-    .promo__fine { font-size: 11px; color: rgba(255,255,255,.4); text-align: center; }
 
     /* ══════════════════════════════════════════════════════════
        KALKULATOR CICILAN
@@ -502,7 +446,6 @@
       .hero3__t1 { font-size: 25px; }
       .hero3__t2 { font-size: clamp(27px, 8.4vw, 34px); }
       .hero3__kpr { font-size: 14.5px; margin-bottom: 14px; }
-      .hero3__promo { top: 86px; right: 14px; font-size: 11.5px; padding: 6px 12px; }
       .hero__ctas { max-width: none; gap: 8px; margin-bottom: 12px; }
       .hero__ctas .btn { padding: 14px 10px; font-size: 14px; }
       .hchip { padding: 7px 12px; font-size: 11.5px; }
@@ -564,28 +507,6 @@
       .pcard--small .pcard__loc   { font-size: 10px; }
       .pcard--small .pcard__body  { padding: 12px; }
       .pcard--small .pcard__top   { padding: 10px 10px 0; }
-
-      /* Promo */
-      .promo { padding: 24px 20px; }
-      .promo__inner {
-        grid-template-columns: 1fr;
-        gap: 28px;
-        padding: 36px 24px;
-        border-radius: var(--r-lg);
-      }
-      .promo__title { font-size: clamp(22px, 7vw, 36px); margin-bottom: 20px; }
-      .promo__list  { gap: 12px; margin-bottom: 24px; }
-      .promo__item-text { font-size: 14px; }
-      .promo__right { align-items: stretch; gap: 14px; }
-      .promo__savings {
-        padding: 20px 24px;
-        white-space: normal;
-        text-align: center;
-      }
-      .promo__savings-label { margin-bottom: 6px; margin-right: 0; }
-      .promo__savings-val   { font-size: 36px; }
-      .promo__savings-sub   { white-space: normal; }
-      .promo__cta   { justify-content: center; }
 
       /* Calculator */
       .calc { padding: 72px 0; }
@@ -684,9 +605,6 @@
       .projects__mini     { grid-template-columns: 1fr; padding: 0 16px; }
       .pcard--featured { aspect-ratio: 3/2; }
       .pcard--small    { aspect-ratio: 16/9; }
-
-      .promo { padding: 20px 16px; }
-      .promo__inner { padding: 28px 20px; }
 
       .calc__inner  { padding: 0 16px; }
       .calc__form   { padding: 20px 18px 0; }
@@ -904,8 +822,6 @@
       .hero__badge { width: 68px; height: 68px; left: 10px; }
       .hero__badge-num { font-size: 20px; }
       .award-section__inner { padding: 0 12px; }
-      .promo__savings { flex-direction: column; text-align: center; gap: 8px; }
-      .promo__savings-label { margin-right: 0; margin-bottom: 4px; }
       .calc__tenor-btn { flex: 1 1 calc(50% - 6px); font-size: 11px; }
       .cta-section { margin: 24px 12px; padding: 52px 20px; }
     }
@@ -1095,7 +1011,6 @@
       >
     </picture>
     <div class="hero3__veil"></div>
-    <div class="hero3__promo">Hemat ±Rp 43 Jt<small>Promo Bulan Ini · S&amp;K</small></div>
     <div class="hero3__in">
       <div class="hero__eyebrow">
         <span class="hero__dot"></span>
@@ -1651,50 +1566,6 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
     </div>
   </section>
 
-  <!-- ══ PROMO AKTIF ════════════════════════════════════════════ -->
-  <div class="promo" id="promo">
-    <div class="promo__inner reveal">
-      <div class="promo__glow"></div>
-      <div>
-        <div class="promo__label">
-          <span class="promo__dot"></span>
-          Promo Aktif · Terbatas
-        </div>
-        <h2 class="promo__title">Hemat lebih banyak<br>dengan promo bulan ini.</h2>
-        <ul class="promo__list">
-          <li class="promo__item">
-            <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
-            <span class="promo__item-text"><strong>Diskon langsung Rp 15 Juta</strong> <em>— all skema pembayaran</em></span>
-          </li>
-          <li class="promo__item">
-            <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
-            <span class="promo__item-text"><strong>Tambahan diskon Rp 5 Juta</strong> jika booking langsung saat survey <em>(worth total Rp 20 Juta)</em></span>
-          </li>
-          <li class="promo__item">
-            <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
-            <span class="promo__item-text"><strong>Free Biaya AJB Balik Nama Notaris</strong> <em>— khusus cash & tempo (senilai Rp 10 Juta)</em></span>
-          </li>
-          <li class="promo__item">
-            <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
-            <span class="promo__item-text"><strong>Free Biaya Provisi &amp; Admin KPR</strong> <em>(senilai ±Rp 7 Juta)</em></span>
-          </li>
-          <li class="promo__item">
-            <div class="promo__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
-            <span class="promo__item-text"><strong>Free Biaya Kenaikan SHM</strong> <em>— khusus cash & tempo (senilai Rp 6 Juta)</em></span>
-          </li>
-        </ul>
-      </div>
-      <div class="promo__right">
-        <div class="promo__savings">
-          <div class="promo__savings-label">Total Hemat</div>
-          <div class="promo__savings-val">±Rp 43 Jt</div>
-          <div class="promo__savings-sub">per unit · s/d akhir bulan</div>
-        </div>
-        <a href="https://wa.me/6289506888328?text=Halo%2C+saya+ingin+tahu+detail+promo+JGS+Group" target="_blank" rel="noopener" class="btn btn--lg promo__cta">Klaim Promo Sekarang</a>
-        <span class="promo__fine">*Syarat & ketentuan berlaku · Terbatas 10 unit</span>
-      </div>
-    </div>
-  </div>
 
   <!-- ══ KALKULATOR CICILAN ═════════════════════════════════════ -->
   <section class="calc" id="kalkulator">
@@ -2027,7 +1898,7 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
           <span class="faq__q">Berapa DP minimal yang dibutuhkan?</span>
           <span class="faq__plus">+</span>
         </div>
-        <div class="faq__a">DP minimal 10% dari harga unit. Untuk Tipe 36 Kawa Living berarti mulai Rp 45 Juta. Program promo saat ini memberikan total hemat hingga ±Rp 43 Juta per unit (diskon langsung + free biaya) yang bisa digunakan untuk menutup sebagian biaya DP.</div>
+        <div class="faq__a">DP minimal 10% dari harga unit. Untuk Tipe 36 Kawa Living berarti mulai Rp 45 Juta. Skema pembayaran bisa disesuaikan — cash, tempo, atau KPR — silakan hubungi kami untuk simulasi sesuai tipe yang dipilih.</div>
       </div>
       <div class="faq__row">
         <div class="faq__qrow">
