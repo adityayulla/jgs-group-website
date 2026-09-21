@@ -386,7 +386,11 @@
     </div>
   </section>
 
-  <!-- ══ YANG MASIH TERSEDIA ══ -->
+  <!-- ══ YANG MASIH TERSEDIA ══
+       ✏️  Foto tiap kartu diatur dari dashboard (Admin → Foto Tipe →
+           Tentrem Jiwo). `data-tipe` harus sama persis dengan nama kartu
+           di jgs-dashboard lib/unit-type-cards.ts. Gambar di bawah hanya
+           cadangan kalau feed gagal. -->
   <section class="section--sm" id="unit">
     <div class="section__head container">
       <span class="eyebrow">→ Yang Masih Tersedia</span>
@@ -396,7 +400,7 @@
     <div class="container">
       <div class="tj-units reveal">
 
-        <article class="tj-unit">
+        <article class="tj-unit" data-tipe="Unit Office">
           <div class="tj-unit__media">
             <img src="img/kawasan-abirama-1.webp" alt="Unit Office (Abirama 1) di Tentrem Jiwo — rumah siap huni yang kini dipakai sebagai kantor pemasaran" width="1050" height="1400" loading="lazy" decoding="async">
           </div>
@@ -415,7 +419,7 @@
           </div>
         </article>
 
-        <article class="tj-unit">
+        <article class="tj-unit" data-tipe="Villa">
           <div class="tj-unit__media">
             <img src="img/hero-pool.jpg" alt="Private pool Villa Tentrem Jiwo saat senja" width="1200" height="900" loading="lazy" decoding="async">
           </div>
@@ -756,6 +760,32 @@
         if (it.caption) bg.alt = it.caption + ' — perumahan Tentrem Jiwo, Kalasan, Sleman';
       };
       pre.src = it.url;
+    })
+    .catch(function () { /* foto statis tetap tampil */ });
+
+  /* ── Foto kartu "Yang Masih Tersedia" dari dashboard ─────────
+     Approver mengganti foto tiap kartu lewat Admin → Foto Tipe →
+     Tentrem Jiwo. Pasangan kartu <-> foto lewat data-tipe pada
+     .tj-unit. Tanpa foto, feed gagal, atau foto gagal dimuat = gambar
+     statis di HTML tetap dipakai. */
+  fetch(BASE + 'unit-types?slug=' + SLUG, { mode: 'cors' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      ((j && j.items) || []).forEach(function (it) {
+        var f = it.photos && it.photos[0];
+        var kartu = document.querySelector('.tj-unit[data-tipe="' + it.type + '"]');
+        var img = kartu && kartu.querySelector('.tj-unit__media img');
+        if (!f || !f.url || !img) return;
+
+        /* Tukar setelah termuat — tanpa kedip. width/height ikut foto
+           baru supaya rasio bawaan browser tidak salah. */
+        var pre = new Image();
+        pre.onload = function () {
+          img.src = f.url;
+          if (f.width && f.height) { img.width = f.width; img.height = f.height; }
+        };
+        pre.src = f.url;
+      });
     })
     .catch(function () { /* foto statis tetap tampil */ });
 
