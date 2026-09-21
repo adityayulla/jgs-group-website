@@ -941,7 +941,11 @@
     </div>
   </section>
 
-  <!-- ══ DETAIL UNIT ════════════════════════════════════════════ -->
+  <!-- ══ DETAIL UNIT ════════════════════════════════════════════
+       ✏️  Foto tiap kartu diatur dari dashboard (Admin → Foto Tipe →
+           Kawa Living). `data-tipe` harus sama persis dengan nama kartu
+           di jgs-dashboard lib/unit-type-cards.ts. Gambar di bawah hanya
+           cadangan kalau feed gagal. -->
   <section class="un section" id="unit">
     <div class="section__head container">
       <span class="eyebrow">Detail Unit</span>
@@ -950,7 +954,7 @@
     <div class="un__list">
 
       <!-- 1. Hiroi Yuri -->
-      <div class="un__row glass reveal">
+      <div class="un__row glass reveal" data-tipe="Hiroi Yuri">
         <div class="un__img">
           <img src="img/tipe/tipe%20yuri.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
@@ -989,7 +993,7 @@
       </div>
 
       <!-- 2. Yuri -->
-      <div class="un__row un__row--alt glass reveal">
+      <div class="un__row un__row--alt glass reveal" data-tipe="Yuri">
         <div class="un__img">
           <img src="img/tipe/tipe-yuri-pot.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
@@ -1027,7 +1031,7 @@
       </div>
 
       <!-- 3. Mizu -->
-      <div class="un__row glass reveal">
+      <div class="un__row glass reveal" data-tipe="Mizu">
         <div class="un__img">
           <img src="img/tipe/tipe%20Mizu.webp" alt="Kawa Living Tipe Mizu" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
@@ -1065,7 +1069,7 @@
       </div>
 
       <!-- 4. Himawari -->
-      <div class="un__row un__row--alt glass reveal">
+      <div class="un__row un__row--alt glass reveal" data-tipe="Himawari">
         <div class="un__img">
           <img src="img/tipe/tipe%20himawari.webp" alt="Kawa Living Tipe Himawari" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
@@ -1104,7 +1108,7 @@
       </div>
 
       <!-- 5. Okina -->
-      <div class="un__row glass reveal">
+      <div class="un__row glass reveal" data-tipe="Okina">
         <div class="un__img">
           <img src="img/tipe/tipe%20Okina%20landscape.webp" alt="Kawa Living Tipe Okina" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#db7f2e33)';this.style.display='block'">
@@ -1719,6 +1723,29 @@
     .catch(function () {
       /* Dashboard tidak terjangkau — angka statis di HTML tetap tampil. */
     });
+
+  /* ── Foto kartu Detail Unit dari dashboard ────────────────────
+     Approver mengganti foto tiap kartu lewat Admin → Foto Tipe → Kawa
+     Living. Pasangan kartu <-> foto lewat data-tipe pada .un__row.
+     Tipe tanpa foto, feed gagal, atau foto gagal dimuat = gambar statis
+     di HTML tetap dipakai, jadi kartu tidak pernah kosong. */
+  fetch('https://progress.jogjagrahaselaras.com/api/public/unit-types?slug=kawa-living', { mode: 'cors' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      ((j && j.items) || []).forEach(function (it) {
+        var f = it.photos && it.photos[0];
+        var row = document.querySelector('.un__row[data-tipe="' + it.type + '"]');
+        var img = row && row.querySelector('.un__img img');
+        if (!f || !f.url || !img) return;
+
+        /* Tukar setelah termuat — tanpa kedip, dan URL bermasalah tidak
+           meninggalkan kartu bolong. */
+        var pre = new Image();
+        pre.onload = function () { img.src = f.url; };
+        pre.src = f.url;
+      });
+    })
+    .catch(function () { /* foto statis tetap tampil */ });
 
   /* ── Foto asli lingkungan kawasan ─────────────────────────────
      Sumber sama dengan galeri "Lingkungan Perumahan" di dashboard —
