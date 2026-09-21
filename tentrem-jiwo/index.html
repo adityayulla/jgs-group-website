@@ -34,20 +34,57 @@
   <link rel="stylesheet" href="/assets/css/global.css?v=20260818-1">
 
   <style>
-    /* ── Hero tanpa masking gelap ──────────────────────────────
-       Beda dari /kawa-village/ & /royal-mansion/ yang memakai
-       .pj-hero versi global: di halaman ini fotonya tampil apa
-       adanya (opacity penuh). Yang tersisa cuma scrim tipis di
-       tepi — secukupnya supaya navbar putih di atas dan judul di
-       bawah tetap terbaca, bukan untuk menggelapkan fotonya. */
-    .pj-hero__bg { opacity: 1; }
-    .pj-hero__veil {
-      background: linear-gradient(0deg,
-        rgba(9,12,30,.68) 0%, rgba(9,12,30,.16) 46%,
-        rgba(9,12,30,.10) 72%, rgba(9,12,30,.34) 100%);
+    /* ── Hero — pola /kawa-living/, versi ringkas ───────────────
+       Teks di kiri, foto berbingkai lengkung 3:4 di kanan, di atas
+       latar halaman yang sama (bukan pita foto gelap) supaya menyatu
+       dengan section di bawahnya. Tanpa badge, statistik, dan scroll
+       cue — yang live cukup pil sisa unit di atas judul. */
+    .tjh { position: relative; padding: 140px 0 72px; }
+    .tjh__grid {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
     }
-    .pj-hero__title,
-    .pj-hero__sub { text-shadow: 0 2px 14px rgba(6,9,24,.55); }
+    .tjh__eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em;
+      color: var(--navy); margin-bottom: 24px; text-transform: uppercase;
+    }
+    .tjh__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 12px var(--orange); animation: pulse 2s infinite; }
+    .tjh__title {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(34px, 4.4vw, 60px); line-height: 1.08;
+      letter-spacing: -.02em; margin: 0 0 26px; color: var(--navy);
+    }
+    .tjh__line { display: block; }
+    .tjh__slab { display: inline-block; background: var(--orange); color: #fff; padding: 2px 16px 8px; font-style: italic; border-radius: 2px; }
+    .tjh__small { font-size: .55em; }
+    .tjh__sub { font-size: 17px; line-height: 1.6; color: var(--muted); max-width: 470px; margin: 0 0 34px; text-wrap: pretty; }
+    .tjh__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .tjh__visual { position: relative; aspect-ratio: 3 / 4; max-width: 460px; width: 100%; margin-left: auto; }
+    .tjh__glow {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+      width: 110%; height: 110%;
+      background: radial-gradient(circle, rgba(255,205,120,.5) 0%, rgba(219,127,46,.22) 25%, rgba(90,130,240,.14) 55%, transparent 72%);
+      filter: blur(40px); z-index: 0;
+    }
+    .tjh__frame {
+      position: relative; width: 100%; height: 100%;
+      border-radius: 240px 240px 24px 24px; overflow: hidden;
+      box-shadow: 0 30px 80px -20px rgba(27,42,100,.35); z-index: 1;
+      background: rgba(27,42,100,.06);
+    }
+    .tjh__img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    @media (max-width: 900px) {
+      .tjh { padding: 104px 0 48px; }
+      .tjh__grid { grid-template-columns: 1fr; gap: 40px; }
+      .tjh__visual { max-width: 380px; margin: 0 auto; }
+    }
+    @media (max-width: 600px) {
+      .tjh__title { font-size: clamp(30px, 9vw, 40px); }
+      .tjh__sub { font-size: 15px; }
+      .tjh__ctas { flex-wrap: nowrap; gap: 8px; }
+      .tjh__ctas .btn { flex: 1 1 0; min-width: 0; padding: 12px 14px; font-size: 13px; white-space: nowrap; }
+    }
 
     /* ── Kartu status live (pola sama dengan /kawa-living/ & /tentrem-bhumi/) ── */
     .dashsec__inner { display: grid; gap: 14px; }
@@ -293,7 +330,7 @@
     }
   </style>
 </head>
-<body class="dark-hero">
+<body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNJW22Z" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Latar sama dengan homepage: wash periwinkle + grid blueprint -->
@@ -312,13 +349,31 @@
 
 <main>
   <!-- ══ HERO ══ -->
-  <section class="pj-hero">
-    <img class="pj-hero__bg" id="tj-hero-bg" src="img/kawasan-jalan.webp" alt="Jalan lingkungan perumahan Tentrem Jiwo, Kalasan, Sleman" width="960" height="1280" fetchpriority="high">
-    <div class="pj-hero__veil"></div>
-    <div class="pj-hero__in container">
-      <span class="pj-pil" id="tj-pil">Sisa 2 unit · Sorogenen, Kalasan</span>
-      <h1 class="pj-hero__title">Tentrem Jiwo</h1>
-      <p class="pj-hero__sub">Setiap rumah, satu babak hidup yang berarti. Kawasan 13 unit di Purwomartani — sebagian besar sudah dihuni, dan yang tersisa tinggal dua.</p>
+  <section class="tjh">
+    <div class="tjh__grid">
+      <div>
+        <div class="tjh__eyebrow">
+          <span class="tjh__dot"></span>
+          <span id="tj-pil">Sisa 2 unit · Sorogenen, Kalasan</span>
+        </div>
+        <h1 class="tjh__title">
+          <span class="tjh__line">Tentrem Jiwo—</span>
+          <span class="tjh__line"><span class="tjh__slab">satu babak hidup</span></span>
+          <span class="tjh__line tjh__small">yang berarti.</span>
+        </h1>
+        <p class="tjh__sub">Kawasan 13 unit di Purwomartani, Kalasan — sebagian besar sudah dihuni, dan yang tersisa tinggal dua.</p>
+        <div class="tjh__ctas">
+          <a class="btn btn--primary btn--lg" href="https://wa.me/6288902929571?text=Halo%20JGS%2C%20saya%20ingin%20tanya%20soal%20Tentrem%20Jiwo.%20(via%20web)" target="_blank" rel="noopener">Chat WhatsApp</a>
+          <a class="btn btn--ghost btn--lg" href="#unit">Lihat unit tersisa</a>
+        </div>
+      </div>
+
+      <div class="tjh__visual">
+        <div class="tjh__glow"></div>
+        <div class="tjh__frame">
+          <img class="tjh__img" id="tj-hero-bg" src="img/kawasan-jalan.webp" alt="Jalan lingkungan perumahan Tentrem Jiwo, Kalasan, Sleman" width="960" height="1280" fetchpriority="high">
+        </div>
+      </div>
     </div>
   </section>
 
@@ -741,8 +796,9 @@
     .catch(function () { /* tiga foto lokal sudah cukup */ });
 
   /* ── 2b. Gambar hero dari dashboard ──────────────────────────
-     Approver bisa menunjuk satu foto lingkungan (horizontal) sebagai
-     hero halaman ini lewat /admin/environment. Slot kosong = foto
+     Approver bisa menunjuk satu foto lingkungan (vertikal — bingkai
+     hero-nya lengkung 3:4) sebagai hero halaman ini lewat
+     /admin/environment. Slot kosong = foto
      statis di HTML yang dipakai. */
   fetch(BASE + 'hero?target=tentrem-jiwo', { mode: 'cors' })
     .then(function (r) { return r.ok ? r.json() : null; })
