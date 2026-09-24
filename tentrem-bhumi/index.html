@@ -1556,6 +1556,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════════════════════════════════════
      TIPE UNIT
 ══════════════════════════════════════════ -->
+<style>#unit { scroll-margin-top: 90px; }</style>
 <div class="section" id="unit">
   <div class="section-tag">Tipe Unit</div>
   <div class="section-title">Pilih yang paling sesuai</div>
@@ -1961,6 +1962,22 @@ function setHtml(id, val) { var el = document.getElementById(id); if (el && val 
     });
     tabsEl.innerHTML = tabsHtml;
     gridEl.innerHTML = cardsHtml;
+    /* 24 Sep 2026: tautan dari kartu Unit Populer halaman utama mendarat di tipe yang dimaksud
+       (#unit-andrawina / #unit-bhama / #unit-cantya): pilih tab-nya (HP) lalu gulir ke section. */
+    (function bukaDariHash() {
+      var m = /^#unit-(andrawina|bhama|cantya)$/.exec(location.hash || '');
+      if (!m) return;
+      var tab = Array.prototype.filter.call(tabsEl.querySelectorAll('.unit-tab'), function (t) {
+        return t.getAttribute('onclick').indexOf("'" + m[1] + "'") >= 0; })[0];
+      if (tab && typeof showUnit === 'function') showUnit(m[1], tab);
+      /* dua kali: foto & angka dashboard dimuat belakangan dan menggeser tata letak */
+      [150, 1400].forEach(function (ms) {
+        setTimeout(function () {
+          var sec = document.getElementById('unit');
+          if (sec) sec.scrollIntoView({ behavior: ms > 200 ? 'auto' : 'smooth', block: 'start' });
+        }, ms);
+      });
+    })();
   }
 
   /* INTERIOR */
