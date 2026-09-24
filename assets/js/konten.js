@@ -94,7 +94,9 @@
   function renderPopularCard(d) {
     const dataBg = d.img ? ` data-bg="${d.img}"` : '';
     const badgeBg = BADGE_COLORS[d.badgeColor] || '#E8872A';
-    return `<div class="pop-card">
+    /* 24 Sep 2026: seluruh kartu adalah tautan. Clarity 30 hari: ±130 dari 341 dead-tap di
+       halaman utama jatuh di kartu ini — pengunjung mengetuk foto/harga, bukan teks "lihat detail". */
+    return `<a class="pop-card" href="${d.href}" aria-label="${d.project} ${d.type} — lihat detail">
   <div class="pop-card__img"${dataBg}></div>
   <div class="pop-card__shade"></div>
   <span class="pop-card__badge" style="background:${badgeBg}">${d.badge}</span>
@@ -116,9 +118,9 @@
     <div class="pop-card__meta">
       <span class="pop-card__meta-item">${SQ}&nbsp;LB ${d.lb} · LT ${d.lt}</span>
     </div>
-    <a href="${d.href}" class="pop-card__cta">lihat detail →</a>
+    <span class="pop-card__cta">lihat detail →</span>
   </div>
-</div>`;
+</a>`;
   }
 
   /* ── Render: award card ─────────────────────────────────── */
@@ -137,6 +139,13 @@
   }
 
   /* ── Init: popular carousel ─────────────────────────────── */
+  /* Foto kartu populer dipakai galeri hero (foto-galeri.js) */
+  window.JGS_GALERI_UNIT = popularCards.map(d => ({
+    src: d.img, alt: d.project + ' ' + d.type, judul: d.project + ' · ' + d.type,
+    sub: 'Rp ' + d.price + ' Juta · ' + d.kt + 'KT ' + d.km + 'KM · LB ' + d.lb + ' · LT ' + d.lt,
+    href: d.href, cta: 'Lihat ' + d.type + ' →'
+  }));
+
   function initPopular() {
     const track  = document.getElementById('popTrack');
     const dotsEl = document.getElementById('popDots');

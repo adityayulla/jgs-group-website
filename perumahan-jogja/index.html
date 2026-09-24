@@ -57,6 +57,8 @@
     .ph-hero__stats { display: flex; flex-wrap: wrap; gap: 14px; }
     .ph-hero__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
     .ph-hero__media { position: relative; }
+    .ph-hero__media img { cursor: pointer; }
+    .ph-hero__galeri { position: absolute; top: 14px; right: 14px; border: 1px solid rgba(255,255,255,.5); background: rgba(10,16,40,.5); color: #fff; border-radius: 999px; padding: 7px 13px; font-size: 12px; cursor: pointer; backdrop-filter: blur(6px); }
     .ph-hero__media img { display: block; width: 100%; height: 440px; object-fit: cover; border-radius: 18px; box-shadow: 0 30px 60px rgba(27,42,100,.18); }
     .ph-hero__badge { position: absolute; left: 18px; bottom: 18px; background: rgba(27,42,100,.92); color: #fff; border-radius: 12px; padding: 12px 18px; }
     .ph-hero__badge b { display: block; font-family: var(--font-display); font-size: 22px; line-height: 1.1; }
@@ -203,7 +205,8 @@
         </div>
       </div>
       <div class="ph-hero__media">
-        <img src="/assets/img/hero-kawa-sedayu.jpg" alt="Rumah Kawa Living di Sedayu — perumahan JGS Group di Yogyakarta" width="1400" height="1066" fetchpriority="high">
+        <img src="/assets/img/hero-kawa-sedayu.jpg" alt="Rumah Kawa Living di Sedayu — perumahan JGS Group di Yogyakarta" width="1400" height="1066" fetchpriority="high" role="button" tabindex="0" onclick="openGaleri(window.JGS_GALERI_PJ,0)">
+        <button class="ph-hero__galeri" type="button" onclick="openGaleri(window.JGS_GALERI_PJ,0)">📷 Lihat foto</button>
         <div class="ph-hero__badge"><b>Mulai Rp 410 Jt</b><span>3 perumahan aktif di Jogja</span></div>
       </div>
     </div>
@@ -459,7 +462,18 @@
 <div id="footer-placeholder"></div>
 
 <script src="/assets/js/main.js?v=20260625"></script>
-<script src="/assets/js/pricelist-modal.js?v=20260723-1" data-agent="dwi"></script>
+<script src="/assets/js/foto-galeri.js?v=20260924-1"></script>
+<script>
+/* 24 Sep 2026: galeri foto hero — Clarity: foto ini 33 dead-tap/bulan (26% dari semua dead-tap halaman) */
+window.JGS_GALERI_PJ = [
+  { src: '/assets/img/hero-kawa-sedayu.jpg', judul: 'Kawa Living · Sedayu', sub: 'Mulai Rp 410 Jt · barat Jogja, Jalan Wates KM 10', href: '/kawa-living/', cta: 'Lihat Kawa Living →' },
+  { src: '/assets/img/unit-unggulan/yuri-12.webp', judul: 'Tipe Yuri · Kawa Living', sub: '2KT 1KM · LB 40 · LT 80', href: '/kawa-living/', cta: 'Lihat Kawa Living →' },
+  { src: '/assets/img/unit-unggulan/okina-10.webp', judul: 'Tipe Okina · Kawa Living', sub: '2 lantai · 3KT 2KM · LB 61 · LT 90', href: '/kawa-living/', cta: 'Lihat Kawa Living →' },
+  { src: '/tentrem-bhumi/photos/andrawina/andrawina%20foto%20depan.webp', judul: 'Tipe Andrawina · Tentrem Bhumi', sub: 'Ngaglik, 7 menit ke UII · 3KT 2KM', href: '/tentrem-bhumi/', cta: 'Lihat Tentrem Bhumi →' },
+  { src: '/tentrem-bhumi/photos/cantya/cantya%20berjejer%20miring%20taman.webp', judul: 'Tipe Cantya · Tentrem Bhumi', sub: 'Ngaglik, 7 menit ke UII · 3KT 1KM', href: '/tentrem-bhumi/', cta: 'Lihat Tentrem Bhumi →' }
+];
+</script>
+<script src="/assets/js/pricelist-modal.js?v=20260924-1" data-agent="dwi"></script>
 
 <script type="application/ld+json">
 {
