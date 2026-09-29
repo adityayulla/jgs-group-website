@@ -19,7 +19,8 @@
     "    bukan janji harga.",
     "  - kawa-living 'Rp 414/479/415/540/614 Juta' — harga per TIPE di kartu tipe. Itu",
     "    lapis kedua: perlu pemetaan tipe→deret kavling, belum dikerjakan (12 Sep 2026).",
-    "  - blog/harga-rumah-sedayu 'Rp414 juta untuk tipe Mizu' — angka per TIPE, bukan per proyek; ikut lapis kedua yang sama dengan kartu tipe di kawa-living."
+    "  - blog/harga-rumah-sedayu 'Rp414 juta untuk tipe Mizu' — angka per TIPE, bukan per proyek; ikut lapis kedua yang sama dengan kartu tipe di kawa-living.",
+    "  - blog/simulasi-kpr-rumah-400-juta 'Mizu ± Rp414 juta cash / ± Rp454 juta KPR' + tabel cicilannya (29 Sep 2026) — sama: angka per TIPE; kalau harga Mizu berubah, tabel cicilan ikut dihitung ulang tangan."
   ],
   "pembulatan": {
     "ke": 10,

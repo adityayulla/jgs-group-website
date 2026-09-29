@@ -205,6 +205,20 @@
 .prose a:hover { border-bottom-color: var(--orange); }
 .prose strong { color: var(--navy); font-weight: 600; }
 
+/* Tabel angka (simulasi KPR, 29 Sep 2026). Dibungkus .tabel supaya bisa digeser di HP
+   tanpa melebarkan halaman. */
+.tabel { overflow-x: auto; margin: 0 0 var(--sp-6); -webkit-overflow-scrolling: touch; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.prose caption { text-align: left; font-weight: 600; color: var(--navy); font-size: 15px; padding-bottom: var(--sp-2); }
+.prose th, .prose td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; color: #28304f; }
+.prose th { font-weight: 600; color: var(--navy); background: rgba(27,42,100,.05); font-size: 14px; }
+.prose td:not(:first-child), .prose th:not(:first-child) { text-align: right; }
+.prose td { white-space: nowrap; }
+@media (max-width: 600px) {
+  .prose table { font-size: 14px; }
+  .prose th, .prose td { padding: 8px 6px; }
+}
+
 /* Callout — used for accuracy / proof notes */
 .callout {
   background: rgba(27,42,100,.05);
