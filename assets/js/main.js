@@ -365,6 +365,75 @@
   window.closeHt = closeHt;
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeHt(); });
 
+  /* ── Kode kampanye di tombol WhatsApp (30 Sep 2026, usul Dimas) ──
+     Pengunjung yang datang dari tautan bertanda kampanye (UTM / id klik iklan) disimpan
+     atribusinya 30 hari di browser. Saat ia mengetuk tombol WA, pesannya diawali kode pendek
+     "[REF-XXXXXX]" dan kliknya dicatat ke dashboard (panel-jgs /api/lead, jenis wa_klik).
+     Tim menempel kode itu saat mencatat chat → chat tersambung ke kampanyenya.
+     Tanpa atribusi = tanpa kode; pesan biasa. Apa pun yang gagal (storage diblokir, beacon
+     gagal) tidak boleh menahan tombol: WhatsApp tetap terbuka. Tak ada data pribadi di sini. */
+  var ATR_KEY = 'jgs_atr', REF_KEY = 'jgs_wa_ref', ATR_HARI = 30;
+  var ATR_PARAM = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+                   'gclid', 'gbraid', 'wbraid', 'fbclid', 'ttclid', 'msclkid'];
+  var PANEL_LEAD = 'https://panel-jgs.vercel.app/api/lead';
+  function simpanAtribusi() {
+    try {
+      var u = new URLSearchParams(location.search), p = {}, ada = false;
+      ATR_PARAM.forEach(function (k) { var v = u.get(k); if (v) { p[k] = v.slice(0, 300); ada = true; } });
+      if (!ada) return;   // halaman tanpa tanda: atribusi lama dipertahankan
+      var ref = '';
+      try { var r = new URL(document.referrer); if (r.host !== location.host) ref = r.origin; } catch (e) {}
+      // Kunjungan bertanda baru MENGGANTI yang lama (sentuhan terakhir), kode lama ikut dibuang.
+      localStorage.setItem(ATR_KEY, JSON.stringify({ p: p, landing: location.pathname, referrer: ref, t: Date.now() }));
+      sessionStorage.removeItem(REF_KEY);
+    } catch (e) {}
+  }
+  function bacaAtribusi() {
+    try {
+      var a = JSON.parse(localStorage.getItem(ATR_KEY) || 'null');
+      if (!a || !a.p || Date.now() - a.t > ATR_HARI * 864e5) return null;
+      return a;
+    } catch (e) { return null; }
+  }
+  function kodeKunjungan() {
+    // Satu kode per kunjungan (tab/sesi): mengetuk dua tombol WA = kode yang sama.
+    try { var k = sessionStorage.getItem(REF_KEY); if (/^REF-[2-9A-HJ-NP-Z]{6}$/.test(k || '')) return k; } catch (e) {}
+    var huruf = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ', b = new Uint8Array(6), s = 'REF-';
+    (window.crypto || window.msCrypto).getRandomValues(b);
+    for (var i = 0; i < 6; i++) s += huruf[b[i] % 32];
+    try { sessionStorage.setItem(REF_KEY, s); } catch (e) {}
+    return s;
+  }
+  function sisipkanKode(el) {
+    try {
+      if (!el || el.tagName !== 'A') return;
+      var a = bacaAtribusi(); if (!a) return;
+      var url = new URL(el.getAttribute('href'), location.href);
+      if (!/(^|\.)wa\.me$|api\.whatsapp\.com$|web\.whatsapp\.com$/i.test(url.hostname)) return;
+      var teks = url.searchParams.get('text') || '';
+      var m = /\[(REF-[2-9A-HJ-NP-Z]{6})\]/.exec(teks);
+      var kode = m ? m[1] : kodeKunjungan();
+      if (!m) {
+        // Disusun tangan dengan encodeURIComponent (%20, %0A) — searchParams.set menulis spasi
+        // sebagai "+", yang tidak dijamin terbaca spasi oleh WhatsApp.
+        var q = url.search.replace(/^\?/, '').split('&').filter(function (x) { return x && !/^text=/.test(x); });
+        q.push('text=' + encodeURIComponent('[' + kode + ']\n' + teks));
+        el.setAttribute('href', url.origin + url.pathname + '?' + q.join('&') + url.hash);
+      }
+      var tujuan = url.pathname.replace(/\D/g, '') || url.searchParams.get('phone') || '';
+      var isi = { jenis: 'wa_klik', ref: kode, halaman: location.pathname, landing: a.landing, referrer: a.referrer,
+                  tujuan: tujuan, label: (el.textContent || '').trim().slice(0, 80),
+                  source: a.p.utm_source, medium: a.p.utm_medium, campaign: a.p.utm_campaign,
+                  content: a.p.utm_content, term: a.p.utm_term, gclid: a.p.gclid, gbraid: a.p.gbraid,
+                  wbraid: a.p.wbraid, fbclid: a.p.fbclid, ttclid: a.p.ttclid, msclkid: a.p.msclkid };
+      var body = JSON.stringify(isi);
+      if (!(navigator.sendBeacon && navigator.sendBeacon(PANEL_LEAD, body))) {
+        fetch(PANEL_LEAD, { method: 'POST', body: body, keepalive: true, mode: 'no-cors' }).catch(function () {});
+      }
+    } catch (e) {}
+  }
+  simpanAtribusi();
+
   /* ── WhatsApp click → dataLayer (GTM conversion) ─────────── */
   // Delegated on document so it also catches WA links inside the
   // navbar/footer injected async, the floating button, and any
@@ -381,6 +450,7 @@
       const oc   = el.getAttribute('onclick') || '';
       const dwa  = el.getAttribute('data-wa') || '';
       if (!(isWA(href) || isWA(oc) || isWA(dwa))) return;
+      sisipkanKode(el);   // sebelum browser membuka tautannya
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event:    'whatsapp_click',
