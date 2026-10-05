@@ -17,7 +17,7 @@
   /* ── Teks headline hero dari Dashboard (lihat headline.js) ── */
   if (!window.__JGS_HEADLINE__ && /^\/(kawa-living|tentrem-bhumi|tentrem-jiwo)?\/?(index\.html)?$/.test(location.pathname)) {
     var sh = document.createElement('script');
-    sh.src = '/assets/js/headline.js?v=20261005';
+    sh.src = '/assets/js/headline.js?v=20261005b';
     document.head.appendChild(sh);
   }
 

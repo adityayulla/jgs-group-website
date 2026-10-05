@@ -26,6 +26,7 @@
   var CACHE_KEY = 'jgs_headline_' + HAL;
   var CACHE_MS = 5 * 60 * 1000;
   var teks = null;
+  var hargaProyek = null;
 
   function q(sel) { return document.querySelector(sel); }
   function esc(s) {
@@ -55,6 +56,18 @@
       /* *teks* → <em>teks</em> (bagian berwarna) */
       if (t.baris2) setHtml(q('#hero .hero3__t2'), esc(t.baris2).replace(/\*([^*]+)\*/g, '<em>$1</em>'));
       setTextNode(q('#hero .hero3__kpr'), t.catatan, 'awal');
+      /* Chip harga per proyek ("410 jt-an") — dari menu Harga di dashboard:
+         unit termurah yang belum laku. Chip tanpa angka ("hubungi kami")
+         dibiarkan. */
+      if (hargaProyek) {
+        var chips = document.querySelectorAll('#hero a.hchip');
+        for (var i = 0; i < chips.length; i++) {
+          var slug = (chips[i].getAttribute('href') || '').replace(/^\/+|\/+$/g, '');
+          var el = chips[i].querySelector('.hchip__price');
+          var n = hargaProyek[slug];
+          if (el && typeof n === 'number' && n > 0 && /jt-an/.test(el.textContent)) setText(el, n + ' jt-an');
+        }
+      }
     },
     'kawa-living': function (t) {
       var baris = document.querySelectorAll('.hero__title .hero__line');
@@ -88,6 +101,7 @@
   function pakai(v) {
     if (!v || !v.teks) return;
     teks = v.teks;
+    hargaProyek = v.hargaProyek || null;
     terapkan();
   }
 
