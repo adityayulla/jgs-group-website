@@ -8,7 +8,9 @@
   /* ============================================================
      UNIT POPULER — 6 cards
      ============================================================ */
-  const popularCards = [
+  /* CADANGAN. Isi sebenarnya dari Dashboard (Konten Web → Unit Unggulan),
+     lihat muatDariDashboard() di bawah. */
+  let popularCards = [
     { badge: 'Terlaris',   badgeColor: 'orange',
       project: 'Tipe Hiroi',   type: 'Kawa Living',
       location: 'Jalan Wates KM 10, Sedayu',
@@ -44,7 +46,8 @@
   /* ============================================================
      PENGHARGAAN — 5 cards
      ============================================================ */
-  const awardCards = [
+  /* CADANGAN. Isi sebenarnya dari Dashboard (Konten Web → Penghargaan). */
+  let awardCards = [
     {
       year: '2021',
       name: '1st Contribution of Mandiri KPR',
@@ -90,8 +93,16 @@
     gold:   '#c8860a',
   };
 
+  /* Isi kartu kini bisa datang dari dashboard — selalu di-escape. */
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
   /* ── Render: popular card (full-image overlay) ──────────── */
-  function renderPopularCard(d) {
+  function renderPopularCard(raw) {
+    const d = {};
+    Object.keys(raw).forEach(k => { d[k] = esc(raw[k]); });
     const dataBg = d.img ? ` data-bg="${d.img}"` : '';
     const badgeBg = BADGE_COLORS[d.badgeColor] || '#E8872A';
     /* 24 Sep 2026: seluruh kartu adalah tautan. Clarity 30 hari: ±130 dari 341 dead-tap di
@@ -124,7 +135,9 @@
   }
 
   /* ── Render: award card ─────────────────────────────────── */
-  function renderAwardCard(d) {
+  function renderAwardCard(raw) {
+    const d = {};
+    Object.keys(raw).forEach(k => { d[k] = esc(raw[k]); });
     return `<div class="aw-card">
     <div class="aw-card__img-wrap">
       <img src="${d.img}" alt="${d.name} ${d.year}"
@@ -140,11 +153,20 @@
 
   /* ── Init: popular carousel ─────────────────────────────── */
   /* Foto kartu populer dipakai galeri hero (foto-galeri.js) */
-  window.JGS_GALERI_UNIT = popularCards.map(d => ({
-    src: d.img, alt: d.project + ' ' + d.type, judul: d.project + ' · ' + d.type,
-    sub: 'Rp ' + d.price + ' Juta · ' + d.kt + 'KT ' + d.km + 'KM · LB ' + d.lb + ' · LT ' + d.lt,
-    href: d.href, cta: 'Lihat ' + d.type + ' →'
-  }));
+  function pasangGaleri() {
+    window.JGS_GALERI_UNIT = popularCards.map(d => ({
+      src: d.img, alt: d.project + ' ' + d.type, judul: d.project + ' · ' + d.type,
+      sub: 'Rp ' + d.price + ' Juta · ' + d.kt + 'KT ' + d.km + 'KM · LB ' + d.lb + ' · LT ' + d.lt,
+      href: d.href, cta: 'Lihat ' + d.type + ' →'
+    }));
+  }
+  pasangGaleri();
+
+  /* Dipegang di luar initPopular supaya carousel bisa digambar ulang saat
+     isi dari dashboard datang, tanpa memasang tombol panah dua kali. */
+  let popCards = [];
+  let popObserver = null;
+  let popPanahTerpasang = false;
 
   function initPopular() {
     const track  = document.getElementById('popTrack');
@@ -167,7 +189,9 @@
     }, { rootMargin: '400px' });
     track.querySelectorAll('[data-bg]').forEach(function(el) { bgObs.observe(el); });
 
-    const cards = Array.from(track.children);
+    const cards = popCards = Array.from(track.children);
+    if (dotsEl) dotsEl.innerHTML = '';
+    if (popObserver) popObserver.disconnect();
 
     const dotBtns = popularCards.map((_, i) => {
       const btn = document.createElement('button');
@@ -188,7 +212,7 @@
     }
 
     // IntersectionObserver — update dots as cards scroll into view
-    const observer = new IntersectionObserver(entries => {
+    const observer = popObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
           const idx = cards.indexOf(entry.target);
@@ -199,9 +223,10 @@
 
     cards.forEach(card => observer.observe(card));
 
-    if (prev && next) {
+    if (prev && next && !popPanahTerpasang) {
+      popPanahTerpasang = true;
       const scroll = dir => {
-        const w = (cards[0] ? cards[0].offsetWidth : 280) + 20;
+        const w = (popCards[0] ? popCards[0].offsetWidth : 280) + 20;
         track.scrollBy({ left: dir * w, behavior: 'smooth' });
       };
       prev.addEventListener('click', () => scroll(-1));
@@ -399,9 +424,95 @@
       .catch(() => { /* pakai cadangan yang sudah tampil */ });
   }
 
+  /* ============================================================
+     ISI DARI DASHBOARD — Konten Web → Unit Unggulan, Video House Tour,
+     Penghargaan (progress.jogjagrahaselaras.com/api/public/web-content).
+     Isi di berkas ini dan di index.html tetap jadi CADANGAN: kalau feed
+     mati atau belum terisi, tidak ada yang berubah. Bagian yang isinya
+     sama dengan cadangan tidak digambar ulang — tanpa kedipan.
+     ============================================================ */
+  const FEED_DAFTAR = 'https://progress.jogjagrahaselaras.com/api/public/web-content?keys=unit-unggulan,house-tour,penghargaan';
+  const CACHE_DAFTAR = 'jgs_daftar_v1';
+
+  function sidik(list, kolom) {
+    return JSON.stringify(list.map(d => kolom.map(k => String(d[k]))));
+  }
+
+  const KOLOM_UNIT = ['badge', 'badgeColor', 'project', 'type', 'location', 'price', 'kt', 'km', 'lb', 'lt', 'href', 'img'];
+  const KOLOM_AWARD = ['year', 'name', 'giver', 'img'];
+  const KOLOM_TUR = ['video', 'judul', 'proyek', 'img'];
+
+  const PLAY = '<span class="ht__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>';
+
+  /* Kartu house tour yang sekarang tertulis di index.html. */
+  function turDiHalaman(grid) {
+    return Array.from(grid.querySelectorAll('.ht__card')).map(c => {
+      const cap = c.querySelector('.ht__cap');
+      const kecil = cap && cap.querySelector('small');
+      const img = c.querySelector('.ht__thumb');
+      return {
+        video: ((c.getAttribute('onclick') || '').match(/openHt\('([^']+)'\)/) || [])[1] || '',
+        judul: cap && cap.firstChild ? cap.firstChild.nodeValue.trim() : '',
+        proyek: kecil ? kecil.textContent.trim() : '',
+        img: img ? img.getAttribute('src') : ''
+      };
+    });
+  }
+
+  function renderTur(raw) {
+    const video = String(raw.video).replace(/[^A-Za-z0-9_-]/g, '');
+    const judul = esc(raw.judul), proyek = esc(raw.proyek);
+    return `<button class="ht__card" type="button" onclick="openHt('${video}')" aria-label="Putar house tour ${judul} — ${proyek}">
+        <img class="ht__thumb" src="${esc(raw.img)}" alt="House tour unit ${judul} — ${proyek}" loading="lazy">
+        ${PLAY}
+        <span class="ht__cap">${judul}<small>${proyek}</small></span>
+      </button>`;
+  }
+
+  function pakaiDashboard(s) {
+    try {
+      const unit = s && s['unit-unggulan'] && s['unit-unggulan'].items;
+      if (Array.isArray(unit) && unit.length && sidik(unit, KOLOM_UNIT) !== sidik(popularCards, KOLOM_UNIT)) {
+        popularCards = unit;
+        pasangGaleri();
+        initPopular();
+      }
+    } catch (e) {}
+    try {
+      const aw = s && s['penghargaan'] && s['penghargaan'].items;
+      if (Array.isArray(aw) && aw.length && sidik(aw, KOLOM_AWARD) !== sidik(awardCards, KOLOM_AWARD)) {
+        awardCards = aw;
+        initAwards();
+      }
+    } catch (e) {}
+    try {
+      const tur = s && s['house-tour'] && s['house-tour'].items;
+      const grid = document.querySelector('#house-tour .ht__grid');
+      if (grid && Array.isArray(tur) && tur.length && sidik(tur, KOLOM_TUR) !== sidik(turDiHalaman(grid), KOLOM_TUR)) {
+        grid.innerHTML = tur.map(renderTur).join('');
+      }
+    } catch (e) {}
+  }
+
+  function muatDariDashboard() {
+    try {
+      const c = JSON.parse(sessionStorage.getItem(CACHE_DAFTAR) || 'null');
+      if (c && Date.now() - c.t < 5 * 60 * 1000) { pakaiDashboard(c.v); return; }
+    } catch (e) {}
+    fetch(FEED_DAFTAR, { mode: 'cors' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(j => {
+        if (!j || !j.sections) return;
+        try { sessionStorage.setItem(CACHE_DAFTAR, JSON.stringify({ t: Date.now(), v: j.sections })); } catch (e) {}
+        pakaiDashboard(j.sections);
+      })
+      .catch(() => { /* pakai cadangan yang sudah tampil */ });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initPopular();
     initAwards();
     initBlog();
+    muatDariDashboard();
   });
 })();
