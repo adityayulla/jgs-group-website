@@ -296,7 +296,7 @@
       var a = k && k.agenModal();
       if (!a) return;
       injectModal();
-      var foto = (AGENTS[a.id] || {}).photo;
+      var foto = a.foto || (AGENTS[a.id] || {}).photo;   // foto unggahan dashboard dulu
       var img = document.getElementById('pl-foto');
       if (img) {
         if (foto) { img.src = foto; img.alt = a.nama + ' — tim marketing JGS Group'; img.style.display = ''; }
