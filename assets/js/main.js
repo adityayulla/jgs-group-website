@@ -217,20 +217,22 @@
 
   /* ── FAQ accordion ───────────────────────────────────────── */
   function initFAQ() {
-    document.querySelectorAll('.faq__row').forEach(row => {
-      row.addEventListener('click', () => {
-        const isOn = row.classList.contains('faq__row--on');
-        // close all
-        document.querySelectorAll('.faq__row--on').forEach(r => r.classList.remove('faq__row--on'));
-        if (!isOn) {
-          row.classList.add('faq__row--on');
-          // toggle plus → minus
-          const plus = row.querySelector('.faq__plus');
-          if (plus) plus.textContent = '−';
-        }
-        // reset all others
-        document.querySelectorAll('.faq__row:not(.faq__row--on) .faq__plus').forEach(p => { p.textContent = '+'; });
-      });
+    /* Satu pendengar di document, bukan per baris: daftar FAQ beranda bisa
+       digambar ulang oleh konten.js (isi dari dashboard) setelah ini jalan. */
+    document.addEventListener('click', e => {
+      const row = e.target.closest && e.target.closest('.faq__row');
+      if (!row) return;
+      const isOn = row.classList.contains('faq__row--on');
+      // close all
+      document.querySelectorAll('.faq__row--on').forEach(r => r.classList.remove('faq__row--on'));
+      if (!isOn) {
+        row.classList.add('faq__row--on');
+        // toggle plus → minus
+        const plus = row.querySelector('.faq__plus');
+        if (plus) plus.textContent = '−';
+      }
+      // reset all others
+      document.querySelectorAll('.faq__row:not(.faq__row--on) .faq__plus').forEach(p => { p.textContent = '+'; });
     });
   }
 

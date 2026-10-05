@@ -177,6 +177,13 @@
 
     track.innerHTML = popularCards.map(renderPopularCard).join('');
 
+    /* Subjudul mengikuti jumlah kartu ("Enam tipe pilihan, …"). */
+    const subjudul = document.querySelector('#popular .popular__subtitle');
+    if (subjudul) {
+      const KATA = ['', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh', 'Sebelas', 'Dua belas'];
+      subjudul.textContent = (KATA[popularCards.length] || popularCards.length) + ' tipe pilihan, satu komitmen terhadap kualitas hunian.';
+    }
+
     // Lazy-load card background images
     var bgObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
@@ -431,8 +438,8 @@
      mati atau belum terisi, tidak ada yang berubah. Bagian yang isinya
      sama dengan cadangan tidak digambar ulang — tanpa kedipan.
      ============================================================ */
-  const FEED_DAFTAR = 'https://progress.jogjagrahaselaras.com/api/public/web-content?keys=unit-unggulan,house-tour,penghargaan';
-  const CACHE_DAFTAR = 'jgs_daftar_v1';
+  const FEED_DAFTAR = 'https://progress.jogjagrahaselaras.com/api/public/web-content?keys=unit-unggulan,house-tour,penghargaan,testimoni,mitra,faq,kpr,kpr-bank';
+  const CACHE_DAFTAR = 'jgs_daftar_v2';
 
   function sidik(list, kolom) {
     return JSON.stringify(list.map(d => kolom.map(k => String(d[k]))));
@@ -469,7 +476,163 @@
       </button>`;
   }
 
+  /* ── Testimoni, Mitra, FAQ: tertulis di index.html, digambar ulang
+     hanya kalau isi dashboard berbeda. Kartu baru langsung diberi
+     reveal--in — pengamat scroll-reveal main.js tidak mengenalnya. ── */
+  const rapi = x => String(x == null ? '' : x).replace(/\s+/g, ' ').trim();
+  const teksDari = (el, sel) => { const n = el.querySelector(sel); return n ? rapi(n.textContent) : ''; };
+  const srcDari = (el, sel) => {
+    const n = el.querySelector(sel); const v = n ? n.getAttribute('src') || '' : '';
+    return v && !/^(\/|https?:)/.test(v) ? '/' + v : v;
+  };
+
+  const KOLOM_TS = ['nama', 'unit', 'body', 'sumber', 'tag', 'img'];
+  function testimoniDiHalaman(grid) {
+    return Array.from(grid.querySelectorAll('.ts__card')).map(c => ({
+      nama: teksDari(c, '.ts__name'), unit: teksDari(c, '.ts__unit'), body: teksDari(c, '.ts__body'),
+      sumber: teksDari(c, '.ts__source').replace(/^G/, ''), tag: teksDari(c, '.ts__media-tag'),
+      img: srcDari(c, '.ts__media img')
+    }));
+  }
+  function renderTestimoni(raw) {
+    const d = {}; Object.keys(raw).forEach(k => { d[k] = esc(raw[k]); });
+    return `<article class="ts__card glass reveal reveal--in">
+        <div class="ts__media">
+          <img src="${d.img}" alt="${d.tag} ${d.nama}" loading="lazy">
+          <span class="ts__media-tag">${d.tag}</span>
+        </div>
+        <div class="ts__content">
+          <div class="ts__quote">"</div>
+          <div>
+            <span class="ts__source"><span class="ts__source-g">G</span>${d.sumber}</span>
+            <div class="ts__stars" aria-label="5 bintang">★★★★★</div>
+            <p class="ts__body">${d.body}</p>
+          </div>
+          <div class="ts__foot">
+            <div class="ts__av">${esc(String(raw.nama).trim().charAt(0).toUpperCase())}</div>
+            <div>
+              <div class="ts__name">${d.nama}</div>
+              <div class="ts__unit">${d.unit}</div>
+            </div>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  const KOLOM_MITRA = ['nama', 'role', 'lembaga', 'tag', 'body', 'foto', 'logo'];
+  function mitraDiHalaman(grid) {
+    return Array.from(grid.querySelectorAll('.mitra__card')).map(c => {
+      const logo = c.querySelector('.mitra__logo img');
+      return {
+        nama: teksDari(c, '.mitra__name'), role: teksDari(c, '.mitra__role'),
+        lembaga: logo ? rapi(logo.getAttribute('alt')) : '', tag: teksDari(c, '.mitra__tag'),
+        body: teksDari(c, '.mitra__body'), foto: srcDari(c, '.mitra__photo img'), logo: srcDari(c, '.mitra__logo img')
+      };
+    });
+  }
+  function renderMitra(raw) {
+    const d = {}; Object.keys(raw).forEach(k => { d[k] = esc(raw[k]); });
+    return `<article class="mitra__card reveal reveal--in">
+        <div class="mitra__photo"><img src="${d.foto}" alt="${d.nama} — ${d.role}" loading="lazy"></div>
+        <div class="mitra__main">
+          <div class="mitra__head">
+            <div class="mitra__logo"><img src="${d.logo}" alt="${d.lembaga}" loading="lazy"></div>
+            <span class="mitra__tag">${d.tag}</span>
+          </div>
+          <p class="mitra__body">${d.body}</p>
+          <div class="mitra__foot">
+            <div class="mitra__name">${d.nama}</div>
+            <div class="mitra__role">${d.role}</div>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  const KOLOM_FAQ = ['q', 'a'];
+  function faqDiHalaman(list) {
+    return Array.from(list.querySelectorAll('.faq__row')).map(r => ({ q: teksDari(r, '.faq__q'), a: teksDari(r, '.faq__a') }));
+  }
+  function renderFaq(raw, i) {
+    return `<div class="faq__row">
+        <div class="faq__qrow">
+          <span class="faq__n">${String(i + 1).padStart(2, '0')}</span>
+          <span class="faq__q">${esc(raw.q)}</span>
+          <span class="faq__plus">+</span>
+        </div>
+        <div class="faq__a">${esc(raw.a)}</div>
+      </div>`;
+  }
+  /* ── Kalkulator KPR: angka awal + logo bank kerja sama ────── */
+  let kalkulatorDisentuh = false;
+  function awasiKalkulator() {
+    const panel = document.querySelector('#kalkulator .calc__panel');
+    if (!panel) return;
+    const tandai = e => { if (e.isTrusted) kalkulatorDisentuh = true; };
+    panel.addEventListener('input', tandai, true);
+    panel.addEventListener('click', tandai, true);
+  }
+  function pasangKpr(v) {
+    /* Pengunjung yang sudah menggeser kalkulator tidak diganggu. */
+    if (!v || kalkulatorDisentuh) return;
+    const setel = (id, nilai) => {
+      const el = document.getElementById(id);
+      if (!el || typeof nilai !== 'number' || parseFloat(el.value) === nilai) return;
+      el.value = String(nilai);
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    };
+    setel('slHarga', v.harga);
+    setel('slDp', v.dp);
+    setel('slBunga', v.bunga);
+    const aktif = document.querySelector('#kalkulator .calc__tenor-btn--on');
+    const tujuan = document.querySelector('#kalkulator .calc__tenor-btn[data-t="' + parseInt(v.tenor, 10) + '"]');
+    if (tujuan && tujuan !== aktif) tujuan.click();
+  }
+  function pasangBank(items) {
+    const panel = document.querySelector('#kalkulator .calc__panel');
+    if (!panel) return;
+    let baris = panel.querySelector('.calc__bank');
+    if (!Array.isArray(items) || items.length === 0) {
+      if (baris) baris.remove();
+      return;
+    }
+    if (!baris) {
+      baris = document.createElement('div');
+      baris.className = 'calc__bank';
+      baris.style.cssText = 'padding:16px 24px 18px;border-top:1px solid var(--line);background:#fff;';
+      panel.appendChild(baris);
+    }
+    baris.innerHTML =
+      '<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Bank kerja sama KPR</div>' +
+      '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;">' +
+      items.map(b => `<img src="${esc(b.logo)}" alt="${esc(b.nama)}" title="${esc(b.nama)}" loading="lazy" style="height:28px;width:auto;max-width:110px;object-fit:contain;">`).join('') +
+      '</div>';
+  }
+
   function pakaiDashboard(s) {
+    try {
+      const ts = s && s['testimoni'] && s['testimoni'].items;
+      const grid = document.querySelector('#testimoni .ts__grid');
+      if (grid && Array.isArray(ts) && ts.length && sidik(ts, KOLOM_TS) !== sidik(testimoniDiHalaman(grid), KOLOM_TS)) {
+        grid.innerHTML = ts.map(renderTestimoni).join('');
+      }
+    } catch (e) {}
+    try {
+      const mt = s && s['mitra'] && s['mitra'].items;
+      const grid = document.querySelector('#mitra .mitra__grid');
+      if (grid && Array.isArray(mt) && mt.length && sidik(mt, KOLOM_MITRA) !== sidik(mitraDiHalaman(grid), KOLOM_MITRA)) {
+        grid.innerHTML = mt.map(renderMitra).join('');
+      }
+    } catch (e) {}
+    try {
+      const fq = s && s['faq'] && s['faq'].items;
+      const list = document.querySelector('#faq .faq__list');
+      if (list && Array.isArray(fq) && fq.length && sidik(fq, KOLOM_FAQ) !== sidik(faqDiHalaman(list), KOLOM_FAQ)) {
+        // Klik buka/tutup ditangani initFAQ() di main.js (pendengar di document).
+        list.innerHTML = fq.map(renderFaq).join('');
+      }
+    } catch (e) {}
+    try { pasangKpr(s && s['kpr']); } catch (e) {}
+    try { pasangBank(s && s['kpr-bank'] && s['kpr-bank'].items); } catch (e) {}
     try {
       const unit = s && s['unit-unggulan'] && s['unit-unggulan'].items;
       if (Array.isArray(unit) && unit.length && sidik(unit, KOLOM_UNIT) !== sidik(popularCards, KOLOM_UNIT)) {
@@ -513,6 +676,7 @@
     initPopular();
     initAwards();
     initBlog();
+    awasiKalkulator();
     muatDariDashboard();
   });
 })();
