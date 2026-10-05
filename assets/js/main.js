@@ -21,6 +21,13 @@
     document.head.appendChild(sh);
   }
 
+  /* ── Angka statistik beranda dari Dashboard (lihat statistik.js) ── */
+  if (!window.__JGS_STATISTIK__ && /^\/(index\.html)?$/.test(location.pathname)) {
+    var ss = document.createElement('script');
+    ss.src = '/assets/js/statistik.js?v=20261005';
+    document.head.appendChild(ss);
+  }
+
   /* ── Component injection ─────────────────────────────────── */
   function getComponentBase() {
     // Works from both root and subdirectories
@@ -189,7 +196,6 @@
         obs.unobserve(e.target);
 
         const el     = e.target;
-        const target = parseInt(el.dataset.count, 10);
         const dur    = 1800;
         const start  = performance.now();
 
@@ -197,8 +203,10 @@
           const p = Math.min((now - start) / dur, 1);
           // easeOutQuart
           const ep = 1 - Math.pow(1 - p, 4);
-          el.textContent = Math.round(ep * target);
+          // Dibaca tiap frame: statistik.js bisa mengganti angkanya di tengah animasi.
+          el.textContent = Math.round(ep * parseInt(el.dataset.count, 10));
           if (p < 1) requestAnimationFrame(step);
+          else el.setAttribute('data-count-selesai', '1');
         }
         requestAnimationFrame(step);
       });
