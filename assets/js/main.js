@@ -21,6 +21,13 @@
     document.head.appendChild(sh);
   }
 
+  /* ── House tour & lencana halaman proyek dari Dashboard (lihat proyek.js) ── */
+  if (!window.__JGS_PROYEK__ && /^\/(kawa-living|tentrem-bhumi)\/?(index\.html)?$/.test(location.pathname)) {
+    var sp = document.createElement('script');
+    sp.src = '/assets/js/proyek.js?v=20261005';
+    document.head.appendChild(sp);
+  }
+
   /* ── Angka statistik beranda dari Dashboard (lihat statistik.js) ── */
   if (!window.__JGS_STATISTIK__ && /^\/(index\.html)?$/.test(location.pathname)) {
     var ss = document.createElement('script');
