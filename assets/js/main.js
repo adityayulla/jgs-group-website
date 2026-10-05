@@ -7,6 +7,13 @@
 (function () {
   'use strict';
 
+  /* ── Nomor WhatsApp marketing dari Dashboard (lihat kontak.js) ── */
+  if (!window.JGSKontak && !document.querySelector('script[src*="/assets/js/kontak.js"]')) {
+    var sk = document.createElement('script');
+    sk.src = '/assets/js/kontak.js?v=20261005';
+    document.head.appendChild(sk);
+  }
+
   /* ── Component injection ─────────────────────────────────── */
   function getComponentBase() {
     // Works from both root and subdirectories
@@ -450,6 +457,7 @@
       const oc   = el.getAttribute('onclick') || '';
       const dwa  = el.getAttribute('data-wa') || '';
       if (!(isWA(href) || isWA(oc) || isWA(dwa))) return;
+      if (window.JGSKontak) window.JGSKontak.terapkan(el);   // nomor dari dashboard dulu, baru dicatat
       sisipkanKode(el);   // sebelum browser membuka tautannya
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -470,6 +478,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     initWaTracking();
     injectAll().then(() => {
+      if (window.JGSKontak) window.JGSKontak.terapkanSemua();   // navbar/footer baru saja disuntik
       initBackground();
       initReveal();
       initWhyCards();
