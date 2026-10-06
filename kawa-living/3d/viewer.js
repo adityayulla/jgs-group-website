@@ -14,10 +14,15 @@
 
    Kalau status gagal dimuat, kavling TIDAK ditandai tersedia — semuanya
    abu-abu "tanya marketing", sama seperti siteplan gambar.
+
+   Navigasi meniru Google Maps + Street View:
+     peta    seret = geser, klik kanan / 2 jari = putar, scroll = zoom
+     jalan   ikon orang diseret ke jalan → kamera setinggi mata;
+             seret = menoleh, ketuk jalan / panah = berjalan
    ============================================================ */
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.186.1/+esm';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/loaders/GLTFLoader.js/+esm';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/controls/OrbitControls.js/+esm';
+import { MapControls } from 'https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/controls/MapControls.js/+esm';
 import { MeshoptDecoder } from 'https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/libs/meshopt_decoder.module.js/+esm';
 
 const DASAR = new URL('./', import.meta.url);
@@ -69,7 +74,7 @@ function pasangCSS() {
 .s3d__btn{position:absolute;font:inherit;font-size:12px;font-weight:600;color:var(--navy,#1b2a64);background:#fff;
   border:1.5px solid var(--navy,#1b2a64);border-radius:999px;padding:7px 13px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .s3d__home{top:12px;right:12px}
-.s3d__howto{position:absolute;left:12px;bottom:10px;right:12px;margin:0;font-size:11px;color:var(--muted,#6a7089);pointer-events:none;
+.s3d__howto{position:absolute;left:12px;bottom:10px;right:66px;margin:0;font-size:11px;color:var(--muted,#6a7089);pointer-events:none;
   text-shadow:0 0 6px #eef0e6}
 .s3d__load{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
   background:#eef0e6;font-size:13px;color:var(--muted,#6a7089);transition:opacity .3s}
@@ -110,6 +115,36 @@ function pasangCSS() {
 .s3d__cta:hover{filter:brightness(1.07)}
 .s3d__link{display:block;text-align:center;margin-top:10px;font-size:13px;font-weight:600;color:var(--orange,#db7f2e)}
 .s3d button:focus-visible,.s3d a:focus-visible{outline:2px solid var(--orange,#db7f2e);outline-offset:2px}
+.s3d__ctrls{position:absolute;right:12px;bottom:12px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.s3d__c{width:40px;height:40px;display:grid;place-items:center;padding:0;font:inherit;color:var(--navy,#1b2a64);background:#fff;
+  border:1px solid var(--line,rgba(27,42,100,.12));border-radius:10px;cursor:pointer;box-shadow:0 1px 4px rgba(15,20,48,.16);-webkit-tap-highlight-color:transparent}
+.s3d__c:hover{background:#f6f4ee}
+.s3d__zoom{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,20,48,.16)}
+.s3d__zoom .s3d__c{border-radius:0;box-shadow:none;border:0}
+.s3d__zoom .s3d__c+.s3d__c{border-top:1px solid var(--line,rgba(27,42,100,.12))}
+.s3d__peg{background:#f5b400;color:#3b2a00;border-color:#e0a400;touch-action:none;cursor:grab}
+.s3d__peg:hover{background:#ffc21a}
+.s3d__ghost{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;opacity:.7;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35));transition:opacity .15s}
+.s3d__ghost.ok{opacity:1}
+body.s3d-seret,body.s3d-seret *{cursor:grabbing!important}
+.s3d__kartu{position:absolute;top:10px;left:12px;display:flex;align-items:center;gap:8px;max-width:calc(100% - 24px);background:#fff;
+  border-radius:12px;padding:5px 12px 5px 5px;box-shadow:0 1px 6px rgba(15,20,48,.2)}
+.s3d__kartu .s3d__c{width:34px;height:34px;box-shadow:none;border:0;background:#f6f4ee}
+.s3d__kartu b{display:block;font-size:13px;font-weight:700;color:var(--navy,#1b2a64);line-height:1.2}
+.s3d__kartu small{display:block;font-size:11.5px;color:var(--muted,#6a7089);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s3d__stage .s3d__mini{position:absolute;left:12px;bottom:12px;width:132px;height:132px;border-radius:12px;border:2px solid #fff;
+  box-shadow:0 1px 6px rgba(15,20,48,.25);cursor:pointer;touch-action:none;background:#d9dfc9}
+.s3d__hint{position:absolute;top:62px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);margin:0;
+  font-size:12px;font-weight:600;color:#fff;background:rgba(15,20,48,.8);border-radius:999px;padding:7px 14px;text-align:center;
+  pointer-events:none;transition:opacity .5s}
+.s3d__hint.mati{opacity:0}
+.s3d__jalan{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:8px;font:inherit;font-size:14px;font-weight:600;
+  color:var(--navy,#1b2a64);background:#fff;border:1.5px solid var(--navy,#1b2a64);border-radius:999px;padding:11px 16px;cursor:pointer}
+.s3d__jalan:hover{background:#f6f4ee}
+.s3d:not(.s3d--jalan) .s3d__sv{display:none!important}
+.s3d--jalan .s3d__home,.s3d--jalan .s3d__howto,.s3d--jalan .s3d__peg{display:none}
+@media (max-width:420px){.s3d__stage .s3d__mini{width:104px;height:104px}}
+@media (prefers-reduced-motion: reduce){.s3d__hint,.s3d__ghost{transition:none}}
 `;
   document.head.appendChild(s);
 }
@@ -195,11 +230,25 @@ export async function mulai(host, { onProgress } = {}) {
   const muat = el('div', 's3d__load', '<span>Memuat siteplan 3D…</span><div class="s3d__bar"><i></i></div>');
   const tombolHome = el('button', 's3d__btn s3d__home', 'Lihat semua');
   tombolHome.type = 'button';
-  const caraPakai = el('p', 's3d__howto', HP ? 'Geser 1 jari memutar · 2 jari menggeser & zoom · ketuk rumah untuk detail'
-                                             : 'Seret untuk memutar · klik kanan + seret untuk menggeser · scroll untuk zoom');
+  const caraPakai = el('p', 's3d__howto', HP ? 'Geser 1 jari = geser peta · 2 jari = zoom & putar · tarik ikon orang kuning ke jalan untuk Mode Jalan'
+                                             : 'Seret = geser peta · klik kanan + seret = putar · scroll = zoom · seret ikon orang kuning ke jalan untuk Mode Jalan');
   const lembar = el('aside', 's3d__sheet');
   lembar.setAttribute('aria-live', 'polite');
-  panggung.append(muat, tombolHome, caraPakai);
+  const ikonOrang = '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="4.6" r="2.6"/><path d="M8.6 9.2c0-1 .8-1.8 1.8-1.8h3.2c1 0 1.8.8 1.8 1.8v5.2h-1.6V22h-3.6v-7.6H8.6z"/></svg>';
+  const kontrol = el('div', 's3d__ctrls',
+    `<button type="button" class="s3d__c s3d__peg" aria-label="Mode Jalan: ketuk, atau seret ke jalan" title="Mode Jalan: klik, atau seret ke jalan">${ikonOrang}</button>` +
+    '<div class="s3d__zoom"><button type="button" class="s3d__c" data-zoom="-1" aria-label="Perbesar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>' +
+    '<button type="button" class="s3d__c" data-zoom="1" aria-label="Perkecil"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button></div>');
+  const kartuJalan = el('div', 's3d__kartu s3d__sv',
+    '<button type="button" class="s3d__c" aria-label="Kembali ke peta" title="Kembali ke peta (Esc)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>' +
+    '<div><b>Mode Jalan</b><small>Kawa Living</small></div>');
+  const petunjuk = el('p', 's3d__hint s3d__sv mati');
+  const petaMini = el('canvas', 's3d__mini s3d__sv');
+  petaMini.setAttribute('aria-label', 'Peta mini, ketuk untuk berpindah');
+  const bayangOrang = el('div', 's3d__ghost', '<svg width="34" height="44" viewBox="0 0 24 31" aria-hidden="true"><ellipse cx="12" cy="29.5" rx="5" ry="1.5" fill="rgba(0,0,0,.35)"/><circle cx="12" cy="4.6" r="3" fill="#f5b400" stroke="#3b2a00" stroke-width=".8"/><path d="M8 9.6c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v6.2h-1.8V28h-4.4V15.8H8z" fill="#f5b400" stroke="#3b2a00" stroke-width=".8"/></svg>');
+  bayangOrang.hidden = true;
+  document.body.appendChild(bayangOrang);
+  panggung.append(muat, tombolHome, caraPakai, kartuJalan, petunjuk, petaMini, kontrol);
   akar.append(panggung, lembar);
   host.appendChild(akar);
 
@@ -260,7 +309,9 @@ export async function mulai(host, { onProgress } = {}) {
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(0xeef0e6, 380, 900);
   const kamera = new THREE.PerspectiveCamera(35, 1, 1, 1500);
-  const kendali = new OrbitControls(kamera, renderer.domElement);
+  kamera.rotation.order = 'YXZ';
+  // MapControls = gaya Google Maps: seret menggeser, klik kanan / dua jari memutar.
+  const kendali = new MapControls(kamera, renderer.domElement);
   kendali.enableDamping = true;
   kendali.dampingFactor = 0.09;
   kendali.maxPolarAngle = 1.3;
@@ -585,14 +636,26 @@ export async function mulai(host, { onProgress } = {}) {
   function lihatSemua(halus = true) {
     const { target, posisi } = posisiRumah();
     if (halus) terbang(target, posisi);
-    else { kendali.target.copy(target); kamera.position.copy(posisi); perluGambar = true; }
+    else { kendali.target.copy(target); kamera.position.copy(posisi); kamera.lookAt(target); perluGambar = true; }
   }
-  function terbangKe(k) {
-    const t = new THREE.Vector3(k.pusat[0], k.tinggi / 2, k.pusat[1]);
+  function poseKavling(k) {
+    const target = new THREE.Vector3(k.pusat[0], k.tinggi / 2, k.pusat[1]);
     // Pandang dari depan rumah, sedikit menyerong & dari atas.
     const depan = new THREE.Vector3(k.arah[0], 0, k.arah[1]).applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.5);
-    const p = t.clone().addScaledVector(depan.multiplyScalar(Math.cos(0.75)).setY(Math.sin(0.75)).normalize(), HP ? 55 : 45);
-    terbang(t, p);
+    const posisi = target.clone().addScaledVector(depan.multiplyScalar(Math.cos(0.75)).setY(Math.sin(0.75)).normalize(), HP ? 55 : 45);
+    return { target, posisi };
+  }
+  function terbangKe(k) {
+    const { target, posisi } = poseKavling(k);
+    terbang(target, posisi);
+  }
+  /* Peta tidak boleh tergeser jauh dari kawasan. */
+  const kotakKawasan = new THREE.Box3().setFromPoints(titikBatas).expandByScalar(25);
+  function jagaDiKawasan() {
+    const t = kendali.target;
+    const x = Math.min(kotakKawasan.max.x, Math.max(kotakKawasan.min.x, t.x));
+    const z = Math.min(kotakKawasan.max.z, Math.max(kotakKawasan.min.z, t.z));
+    if (x !== t.x || z !== t.z) { kamera.position.x += x - t.x; kamera.position.z += z - t.z; t.x = x; t.z = z; }
   }
 
   /* ── ukuran & loop render (hanya menggambar saat ada perubahan) ── */
@@ -602,9 +665,12 @@ export async function mulai(host, { onProgress } = {}) {
     if (!w || !h) return;
     renderer.setSize(w, h, false);
     kamera.aspect = w / h;
+    skalaLabel();
+  }
+  function skalaLabel() {
     kamera.updateProjectionMatrix();
     // Sprite sizeAttenuation:false: tinggi di layar = scale · h / (2·tan(fov/2)).
-    const skala = 2 * Math.tan(THREE.MathUtils.degToRad(kamera.fov / 2)) / h;
+    const skala = 2 * Math.tan(THREE.MathUtils.degToRad(kamera.fov / 2)) / (panggung.clientHeight || 1);
     [...labelFasum, labelPilih].forEach(s => {
       if (!s) return;
       const t = s.userData.tinggiPx * skala;
@@ -622,33 +688,584 @@ export async function mulai(host, { onProgress } = {}) {
     terlihat = e.isIntersecting;
     if (terlihat && !raf) raf = requestAnimationFrame(putar);
   }).observe(panggung);
+  let terakhir = performance.now();
   function putar(now) {
     raf = 0;
     if (!terlihat) return;
-    const gerak = langkahTween(now);
-    const ubah = kendali.update();
-    if (gerak || ubah || perluGambar) {
+    const dt = Math.min(0.1, Math.max(0, (now - terakhir) / 1000));
+    terakhir = now;
+    if (transisi || sv.on) {
+      // Mode jalan & transisinya digambar tiap frame.
+      if (transisi) langkahTransisi(now); else langkahJalan(dt);
+      if (sv.on) gambarPetaMini();
       renderer.render(scene, kamera);
       perluGambar = false;
+    } else {
+      const gerak = langkahTween(now);
+      const ubah = kendali.update();
+      jagaDiKawasan();
+      if (gerak || ubah || perluGambar) {
+        renderer.render(scene, kamera);
+        perluGambar = false;
+      }
     }
     raf = requestAnimationFrame(putar);
   }
   raf = requestAnimationFrame(putar);
   tombolHome.addEventListener('click', () => { pilih(null, false); lihatSemua(); });
 
-  /* ── interaksi: ketuk kavling ─────────────────────────── */
+  /* ── Mode Jalan (seperti Google Street View) ─────────────
+     Kamera setinggi mata berdiri di jalan. Seret = menoleh, ketuk
+     jalan / panah = berjalan, ketuk rumah = menghadap rumahnya.
+     Area yang bisa dilalui = poligon jalan DWG dikurangi lubangnya
+     (+ jalan desa), dirasterkan per 1 m sekali saat pertama dipakai. */
+  const MATA = 1.6, SEL = 1;
+  const batasAntara = (v, a, b) => Math.min(b, Math.max(a, v));
+  const selisihSudut = (a, b) => { let d = (a - b) % (Math.PI * 2); if (d > Math.PI) d -= Math.PI * 2; if (d < -Math.PI) d += Math.PI * 2; return d; };
+  const yawKe = (dx, dz) => Math.atan2(-dx, -dz);
+
+  let grid = null;
+  function siapkanGrid() {
+    if (grid) return;
+    const lubang = peta.jalan.lubang || [];
+    const semua = [...peta.jalan.luar, ...(peta.jalanDesa || [])];
+    const x0 = Math.min(...semua.map(p => p[0])) - 2, z0 = Math.min(...semua.map(p => p[1])) - 2;
+    const nx = Math.ceil((Math.max(...semua.map(p => p[0])) + 2 - x0) / SEL);
+    const nz = Math.ceil((Math.max(...semua.map(p => p[1])) + 2 - z0) / SEL);
+    const mentah = new Uint8Array(nx * nz);
+    for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++) {
+      const p = [x0 + (i + 0.5) * SEL, z0 + (j + 0.5) * SEL];
+      if ((didalam(p, peta.jalan.luar) && !lubang.some(h => didalam(p, h))) || (peta.jalanDesa && didalam(p, peta.jalanDesa))) mentah[j * nx + i] = 1;
+    }
+    // Kikis satu sel dari tepi supaya kamera tidak menempel ke rumah / pagar.
+    const sel = mentah.slice();
+    for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++) {
+      const k = j * nx + i;
+      if (mentah[k] && (i === 0 || j === 0 || i === nx - 1 || j === nz - 1 || !mentah[k - 1] || !mentah[k + 1] || !mentah[k - nx] || !mentah[k + nx])) sel[k] = 0;
+    }
+    grid = { x0, z0, nx, nz, sel };
+  }
+  const indeksSel = (x, z) => {
+    const i = Math.floor((x - grid.x0) / SEL), j = Math.floor((z - grid.z0) / SEL);
+    return i >= 0 && j >= 0 && i < grid.nx && j < grid.nz ? j * grid.nx + i : -1;
+  };
+  const bisaJalan = (x, z) => { const k = indeksSel(x, z); return k >= 0 && grid.sel[k] === 1; };
+  const tengahSel = k => ({ x: grid.x0 + (k % grid.nx + 0.5) * SEL, z: grid.z0 + (Math.floor(k / grid.nx) + 0.5) * SEL });
+  /* Titik jalan terdekat (atau null kalau lebih dari `maks` meter). */
+  function keJalan(x, z, maks = 40) {
+    if (bisaJalan(x, z)) return { x, z, d: 0 };
+    const ci = Math.floor((x - grid.x0) / SEL), cj = Math.floor((z - grid.z0) / SEL);
+    let best = null, bd = Infinity;
+    for (let r = 1; r <= maks / SEL; r++) {
+      for (let dj = -r; dj <= r; dj++) for (let di = -r; di <= r; di++) {
+        if (Math.max(Math.abs(di), Math.abs(dj)) !== r) continue;
+        const i = ci + di, j = cj + dj;
+        if (i < 0 || j < 0 || i >= grid.nx || j >= grid.nz || !grid.sel[j * grid.nx + i]) continue;
+        const c = tengahSel(j * grid.nx + i), d = Math.hypot(c.x - x, c.z - z);
+        if (d < bd) { bd = d; best = c; }
+      }
+      if (best && bd <= r * SEL) break;
+    }
+    return best && bd <= maks ? { ...best, d: bd } : null;
+  }
+  function lurus(a, b) {
+    const n = Math.ceil(Math.hypot(b.x - a.x, b.z - a.z) / 0.4);
+    for (let i = 1; i <= n; i++) if (!bisaJalan(a.x + (b.x - a.x) * i / n, a.z + (b.z - a.z) * i / n)) return false;
+    return true;
+  }
+  /* Rute di jaringan jalan: A* 8 arah di grid, lalu dipangkas jadi
+     potongan-potongan lurus (tidak menembus rumah). */
+  function cariRute(a, b) {
+    if (lurus(a, b)) return [b];
+    const { nx, nz, sel } = grid, N = nx * nz;
+    const ka = indeksSel(a.x, a.z), kb = indeksSel(b.x, b.z);
+    if (ka < 0 || kb < 0 || !sel[ka] || !sel[kb]) return null;
+    const biaya = new Float32Array(N).fill(Infinity), asal = new Int32Array(N).fill(-1), tutup = new Uint8Array(N);
+    const antre = [];
+    const masuk = (f, k) => {
+      antre.push([f, k]);
+      for (let i = antre.length - 1; i > 0;) { const p = (i - 1) >> 1; if (antre[p][0] <= antre[i][0]) break; [antre[p], antre[i]] = [antre[i], antre[p]]; i = p; }
+    };
+    const keluar = () => {
+      const top = antre[0], akhir = antre.pop();
+      if (antre.length) {
+        antre[0] = akhir;
+        for (let i = 0; ;) {
+          const l = 2 * i + 1, r = l + 1; let m = i;
+          if (l < antre.length && antre[l][0] < antre[m][0]) m = l;
+          if (r < antre.length && antre[r][0] < antre[m][0]) m = r;
+          if (m === i) break;
+          [antre[m], antre[i]] = [antre[i], antre[m]]; i = m;
+        }
+      }
+      return top;
+    };
+    const bi = kb % nx, bj = Math.floor(kb / nx);
+    const h = k => Math.hypot(k % nx - bi, Math.floor(k / nx) - bj);
+    const tetangga = [[1, 0, 1], [-1, 0, 1], [0, 1, 1], [0, -1, 1], [1, 1, Math.SQRT2], [1, -1, Math.SQRT2], [-1, 1, Math.SQRT2], [-1, -1, Math.SQRT2]];
+    biaya[ka] = 0; masuk(h(ka), ka);
+    while (antre.length) {
+      const k = keluar()[1];
+      if (k === kb) break;
+      if (tutup[k]) continue;
+      tutup[k] = 1;
+      const i = k % nx, j = Math.floor(k / nx);
+      for (const [di, dj, c] of tetangga) {
+        const ni = i + di, nj = j + dj;
+        if (ni < 0 || nj < 0 || ni >= nx || nj >= nz) continue;
+        const nk = nj * nx + ni;
+        if (!sel[nk] || tutup[nk] || (di && dj && (!sel[j * nx + ni] || !sel[nj * nx + i]))) continue;
+        const nb = biaya[k] + c;
+        if (nb < biaya[nk]) { biaya[nk] = nb; asal[nk] = k; masuk(nb + h(nk), nk); }
+      }
+    }
+    if (asal[kb] < 0) return null;
+    const titik = [];
+    for (let k = asal[kb]; k !== ka && k >= 0; k = asal[k]) titik.push(tengahSel(k));
+    titik.reverse(); titik.push(b);
+    const rute = [];
+    for (let dari = a, i = 0; i < titik.length;) {
+      let j = titik.length - 1;
+      while (j > i && !lurus(dari, titik[j])) j--;
+      rute.push(titik[j]); dari = titik[j]; i = j + 1;
+    }
+    return rute;
+  }
+  /* Arah jalan yang bisa ditempuh dari sebuah titik (untuk panah). */
+  function arahJalan(x, z) {
+    const n = 32, bebas = [];
+    for (let i = 0; i < n; i++) {
+      const a = i / n * Math.PI * 2, dx = Math.sin(a), dz = Math.cos(a);
+      let d = 0;
+      while (d < 30 && bisaJalan(x + dx * (d + 0.5), z + dz * (d + 0.5))) d += 0.5;
+      bebas.push(d);
+    }
+    const puncak = [];
+    bebas.forEach((d, i) => { if (d >= 7 && d >= bebas[(i + n - 1) % n] && d >= bebas[(i + 1) % n]) puncak.push({ i, d }); });
+    puncak.sort((p, q) => q.d - p.d);
+    const hasil = [];
+    puncak.forEach(p => { if (hasil.every(q => Math.min(Math.abs(q.i - p.i), n - Math.abs(q.i - p.i)) > 4)) hasil.push(p); });
+    return hasil.slice(0, 4).map(p => { const a = p.i / n * Math.PI * 2; return { dx: Math.sin(a), dz: Math.cos(a), d: p.d }; });
+  }
+
+  const sv = { on: false, pos: new THREE.Vector3(), yaw: 0, pitch: 0, yawTuju: 0, pitchTuju: 0, fov: 70, fovTuju: 70,
+               rute: [], laju: 10, tiba: null, arah: [], arahDari: null };
+  const tombolTekan = new Set();
+  const langit = (() => {
+    const c = document.createElement('canvas'); c.width = 2; c.height = 256;
+    const g = c.getContext('2d'), gr = g.createLinearGradient(0, 0, 0, 256);
+    gr.addColorStop(0, '#8fbfe6'); gr.addColorStop(0.55, '#d6e7f0'); gr.addColorStop(1, '#e4ece6');
+    g.fillStyle = gr; g.fillRect(0, 0, 2, 256);
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+  })();
+  const kabutPeta = scene.fog, kabutJalan = new THREE.Fog(0xd6e7f0, 80, 320);
+
+  // Panah putih di jalan.
+  const bentukPanah = new THREE.Shape();
+  [[0, 0.75], [0.85, -0.1], [0.85, -0.5], [0, 0.33], [-0.85, -0.5], [-0.85, -0.1]].forEach(([x, y], i) => (i ? bentukPanah.lineTo(x, y) : bentukPanah.moveTo(x, y)));
+  const geoPanah = new THREE.ShapeGeometry(bentukPanah).rotateX(-Math.PI / 2);
+  const panah = [0, 1, 2, 3].map(() => {
+    const m = new THREE.Mesh(geoPanah, new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85, fog: false }));
+    m.visible = false; m.renderOrder = 5; scene.add(m); return m;
+  });
+  // Kursor lingkaran di jalan.
+  const kursor = new THREE.Mesh(new THREE.RingGeometry(0.55, 0.78, 40).rotateX(-Math.PI / 2),
+    new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9, fog: false, depthWrite: false }));
+  kursor.add(new THREE.Mesh(new THREE.CircleGeometry(0.55, 40).rotateX(-Math.PI / 2),
+    new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.25, fog: false, depthWrite: false })));
+  kursor.visible = false; kursor.renderOrder = 5; scene.add(kursor);
+  // Sorotan biru jalan saat ikon orang diseret (seperti garis biru di Google Maps).
+  const sorotJalan = new THREE.Group();
+  {
+    const mat = new THREE.MeshBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.55, depthWrite: false });
+    sorotJalan.add(datar(peta.jalan.luar, 0.1, mat, peta.jalan.lubang || []));
+    if (peta.jalanDesa) sorotJalan.add(datar(peta.jalanDesa, 0.1, mat));
+    sorotJalan.children.forEach(m => (m.receiveShadow = false));
+  }
+  sorotJalan.visible = false; scene.add(sorotJalan);
+
+  /* Transisi kamera antar mode (posisi, arah, fov sekaligus). */
+  let transisi = null;
+  function mulaiTransisi(posisi, quat, fov, selesai) {
+    transisi = { p0: kamera.position.clone(), q0: kamera.quaternion.clone(), f0: kamera.fov,
+                 p1: posisi.clone(), q1: quat.clone(), f1: fov, t0: performance.now(), ms: GERAK_HALUS ? 1100 : 1, selesai };
+  }
+  function langkahTransisi(now) {
+    const T = transisi, t = Math.min(1, (now - T.t0) / T.ms);
+    const e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    kamera.position.lerpVectors(T.p0, T.p1, e);
+    kamera.quaternion.slerpQuaternions(T.q0, T.q1, e);
+    kamera.fov = T.f0 + (T.f1 - T.f0) * e;
+    skalaLabel();
+    if (t >= 1) { transisi = null; T.selesai && T.selesai(); }
+  }
+
+  function arahKamera() {
+    const v = new THREE.Vector3(); kamera.getWorldDirection(v);
+    return { dx: v.x, dz: v.z };
+  }
+  /* Hadap ke arah jalan yang paling dekat dengan arah kamera sekarang. */
+  function yawAwal(x, z) {
+    const { dx, dz } = arahKamera(), yk = yawKe(dx, dz);
+    const opsi = arahJalan(x, z);
+    if (!opsi.length) return yk;
+    opsi.sort((p, q) => Math.abs(selisihSudut(yawKe(p.dx, p.dz), yk)) - Math.abs(selisihSudut(yawKe(q.dx, q.dz), yk)));
+    return yawKe(opsi[0].dx, opsi[0].dz);
+  }
+  function masukJalan(x, z, yaw, pitch = -0.06) {
+    siapkanGrid();
+    sv.on = true; kendali.enabled = false; tween = null; tombolTekan.clear();
+    sv.pos.set(x, MATA, z); sv.rute = []; sv.tiba = null; sv.arahDari = null;
+    sv.yaw = sv.yawTuju = yaw; sv.pitch = sv.pitchTuju = pitch;
+    sv.fov = sv.fovTuju = kamera.aspect < 1 ? 80 : 68;
+    kamera.near = 0.2;
+    scene.background = langit; scene.fog = kabutJalan;
+    labelFasum.forEach(l => (l.visible = false));   // label tembus dinding membingungkan di jalan
+    akar.classList.add('s3d--jalan');
+    mulaiTransisi(sv.pos, new THREE.Quaternion().setFromEuler(new THREE.Euler(pitch, yaw, 0, 'YXZ')), sv.fov);
+    tunjukkanPetunjuk();
+    gambarLembar();
+  }
+  function keluarJalan() {
+    if (!sv.on) return;
+    sv.on = false; tombolTekan.clear(); sv.rute = []; sv.tiba = null;
+    panah.forEach(p => (p.visible = false)); kursor.visible = false;
+    scene.background = null; scene.fog = kabutPeta;
+    labelFasum.forEach(l => (l.visible = true));
+    akar.classList.remove('s3d--jalan');
+    const { target, posisi } = terpilih ? poseKavling(terpilih) : posisiRumah();
+    const q = new THREE.Quaternion().setFromRotationMatrix(new THREE.Matrix4().lookAt(posisi, target, kamera.up));
+    mulaiTransisi(posisi, q, 35, () => {
+      kamera.near = 1; kamera.updateProjectionMatrix();
+      kendali.target.copy(target); kendali.enabled = true; kendali.update();
+      perluGambar = true;
+    });
+    gambarLembar();
+  }
+  function jalanKe(x, z, tiba) {
+    const t = keJalan(x, z);
+    if (!t) return;
+    const rute = cariRute({ x: sv.pos.x, z: sv.pos.z }, t);
+    if (!rute) return;
+    let L = 0, p = sv.pos;
+    rute.forEach(q => { L += Math.hypot(q.x - p.x, q.z - p.z); p = q; });
+    sv.rute = rute; sv.laju = batasAntara(L / 1.6, 8, 45); sv.tiba = tiba || null;
+    sembunyikanPetunjuk();
+  }
+  function hadapKe(x, y, z) {
+    const dx = x - sv.pos.x, dz = z - sv.pos.z;
+    sv.yawTuju = sv.yaw + selisihSudut(yawKe(dx, dz), sv.yaw);
+    sv.pitchTuju = batasAntara(Math.atan2(y - MATA, Math.hypot(dx, dz)), -0.4, 0.4);
+  }
+  const titikDepan = k => keJalan(k.muka[0] + k.arah[0] * 4, k.muka[1] + k.arah[1] * 4);
+  function kunjungi(k) {
+    if (!sv.on) siapkanGrid();
+    const s = titikDepan(k);
+    if (!s) return;
+    const [hx, hy, hz] = [k.pusat[0], k.tinggi * 0.45, k.pusat[1]];
+    if (!sv.on) {
+      const dx = hx - s.x, dz = hz - s.z;
+      masukJalan(s.x, s.z, yawKe(dx, dz), batasAntara(Math.atan2(hy - MATA, Math.hypot(dx, dz)), -0.4, 0.4));
+    } else jalanKe(s.x, s.z, () => hadapKe(hx, hy, hz));
+  }
+  /* Masuk dari gerbang: berdiri di depan gerbang, menghadap ke dalam kawasan. */
+  function masukGerbang() {
+    siapkanGrid();
+    const [a, b] = peta.gerbang;
+    let nx = -(b[1] - a[1]), nz = b[0] - a[0];
+    const L = Math.hypot(nx, nz); nx /= L; nz /= L;
+    if (!didalam([gerbangTengah[0] + nx * 6, gerbangTengah[1] + nz * 6], peta.batas)) { nx = -nx; nz = -nz; }
+    const luar = keJalan(gerbangTengah[0] - nx * 9, gerbangTengah[1] - nz * 9, 4);
+    const s = luar || keJalan(gerbangTengah[0] + nx * 5, gerbangTengah[1] + nz * 5);
+    if (s) masukJalan(s.x, s.z, yawKe(nx, nz));
+  }
+
+  function langkahJalan(dt) {
+    const maju = (tombolTekan.has('arrowup') || tombolTekan.has('w')) - (tombolTekan.has('arrowdown') || tombolTekan.has('s'));
+    const belok = (tombolTekan.has('arrowleft') || tombolTekan.has('a')) - (tombolTekan.has('arrowright') || tombolTekan.has('d'));
+    if (belok) { sv.yaw += belok * 1.7 * dt; sv.yawTuju = sv.yaw; }
+    if (maju) {
+      sv.rute = []; sv.tiba = null;
+      const dx = -Math.sin(sv.yaw) * maju * 9 * dt, dz = -Math.cos(sv.yaw) * maju * 9 * dt;
+      // Menabrak tepi jalan → meluncur sejajar tepi.
+      if (bisaJalan(sv.pos.x + dx, sv.pos.z + dz)) { sv.pos.x += dx; sv.pos.z += dz; }
+      else if (bisaJalan(sv.pos.x + dx, sv.pos.z)) sv.pos.x += dx;
+      else if (bisaJalan(sv.pos.x, sv.pos.z + dz)) sv.pos.z += dz;
+    }
+    if (sv.rute.length) {
+      const t = sv.rute[0], dx = t.x - sv.pos.x, dz = t.z - sv.pos.z, d = Math.hypot(dx, dz), langkah = sv.laju * dt;
+      if (d <= langkah) {
+        sv.pos.x = t.x; sv.pos.z = t.z; sv.rute.shift();
+        if (!sv.rute.length && sv.tiba) { const f = sv.tiba; sv.tiba = null; f(); }
+      } else { sv.pos.x += dx / d * langkah; sv.pos.z += dz / d * langkah; }
+    }
+    const a = 1 - Math.exp(-dt * 7);
+    sv.yaw += selisihSudut(sv.yawTuju, sv.yaw) * a;
+    sv.pitch += (sv.pitchTuju - sv.pitch) * a;
+    sv.fov += (sv.fovTuju - sv.fov) * a;
+    kamera.position.copy(sv.pos);
+    kamera.rotation.set(sv.pitch, sv.yaw, 0, 'YXZ');
+    if (Math.abs(kamera.fov - sv.fov) > 0.01) { kamera.fov = sv.fov; skalaLabel(); }
+
+    // Panah: dihitung ulang tiap pindah ±0,75 m.
+    if (!sv.arahDari || Math.hypot(sv.arahDari.x - sv.pos.x, sv.arahDari.z - sv.pos.z) > 0.75) {
+      sv.arah = arahJalan(sv.pos.x, sv.pos.z);
+      sv.arahDari = { x: sv.pos.x, z: sv.pos.z };
+      perbaruiLokasi();
+    }
+    panah.forEach((m, i) => {
+      const r = sv.arah[i];
+      m.visible = !!r;
+      if (!r) return;
+      m.userData.arah = r;
+      m.position.set(sv.pos.x + r.dx * 3.6, 0.12, sv.pos.z + r.dz * 3.6);
+      m.rotation.y = yawKe(r.dx, r.dz);
+    });
+  }
+
+  const lokasiEl = kartuJalan.querySelector('small');
+  function perbaruiLokasi() {
+    const { x, z } = sv.pos;
+    let teks = peta.jalanDesa && didalam([x, z], peta.jalanDesa) ? 'Jalan desa, depan gerbang' : 'Jalan kawasan';
+    let dekat = null, jd = 9;
+    kavling.forEach(k => { const d = Math.hypot(k.muka[0] - x, k.muka[1] - z); if (d < jd) { jd = d; dekat = k; } });
+    if (terpilih && Math.hypot(terpilih.muka[0] - x, terpilih.muka[1] - z) < 9) dekat = terpilih;   // rumah yang sedang dilihat menang
+    if (dekat) teks += ' · ' + (dekat === terpilih ? 'di depan ' : 'dekat ') + dekat.code;
+    else {
+      let f = null, fd = 30;
+      peta.fasum.forEach(q => { const d = Math.hypot(q.pusat[0] - x, q.pusat[1] - z); if (d < fd) { fd = d; f = q; } });
+      if (f) teks += ' · dekat ' + f.nama;
+    }
+    if (lokasiEl.textContent !== teks) lokasiEl.textContent = teks;
+  }
+
+  let waktuPetunjuk = 0;
+  function tunjukkanPetunjuk() {
+    petunjuk.textContent = HP ? 'Geser untuk melihat sekeliling · ketuk jalan atau panah untuk berjalan'
+                              : 'Seret untuk melihat sekeliling · klik jalan atau panah untuk berjalan · tombol ↑↓←→ juga bisa';
+    petunjuk.classList.remove('mati');
+    clearTimeout(waktuPetunjuk);
+    waktuPetunjuk = setTimeout(sembunyikanPetunjuk, 7000);
+  }
+  function sembunyikanPetunjuk() { petunjuk.classList.add('mati'); }
+
+  /* Peta mini: berpusat di posisi kita, arah pandang = kerucut biru. */
+  const ctxMini = petaMini.getContext('2d');
+  function gambarPetaMini() {
+    const W = petaMini.clientWidth;
+    if (!W) return;
+    const r = Math.min(window.devicePixelRatio || 1, 2);
+    if (petaMini.width !== Math.round(W * r)) petaMini.width = petaMini.height = Math.round(W * r);
+    const S = petaMini.width, JANGKAU = 45, s = S / (2 * JANGKAU), g = ctxMini;
+    g.setTransform(1, 0, 0, 1, 0, 0);
+    g.fillStyle = '#d9dfc9'; g.fillRect(0, 0, S, S);
+    g.setTransform(s, 0, 0, s, S / 2 - kamera.position.x * s, S / 2 - kamera.position.z * s);
+    const poli = t => { t.forEach(([x, z], i) => (i ? g.lineTo(x, z) : g.moveTo(x, z))); g.closePath(); };
+    g.fillStyle = '#e6e1d2'; g.beginPath(); poli(peta.batas); g.fill();
+    g.fillStyle = '#b5d39a'; peta.taman.forEach(t => { g.beginPath(); poli(t); g.fill(); });
+    g.fillStyle = '#ffffff'; g.beginPath(); poli(peta.jalan.luar); (peta.jalan.lubang || []).forEach(poli); g.fill('evenodd');
+    if (peta.jalanDesa) { g.beginPath(); poli(peta.jalanDesa); g.fill(); }
+    g.fillStyle = '#dcd5c3'; peta.fasum.forEach(f => { g.beginPath(); poli(f.poly); g.fill(); });
+    g.lineWidth = 0.3; g.strokeStyle = '#ffffff';
+    kavling.forEach(k => {
+      g.globalAlpha = tampil(k) ? 1 : 0.3;
+      g.fillStyle = STATUS[k.status].css; g.beginPath(); poli(k.poly); g.fill(); g.stroke();
+    });
+    g.globalAlpha = 1;
+    if (terpilih) { g.lineWidth = 1.2; g.strokeStyle = '#f3c64a'; g.beginPath(); poli(terpilih.poly); g.stroke(); }
+    g.setTransform(1, 0, 0, 1, 0, 0);
+    const a = Math.atan2(-Math.cos(sv.yaw), -Math.sin(sv.yaw));
+    const hf = Math.atan(Math.tan(THREE.MathUtils.degToRad(kamera.fov / 2)) * kamera.aspect);
+    g.fillStyle = 'rgba(59,130,246,.32)';
+    g.beginPath(); g.moveTo(S / 2, S / 2); g.arc(S / 2, S / 2, S * 0.26, a - hf, a + hf); g.closePath(); g.fill();
+    g.beginPath(); g.arc(S / 2, S / 2, 5.5 * r, 0, Math.PI * 2);
+    g.fillStyle = '#3b82f6'; g.fill(); g.lineWidth = 2 * r; g.strokeStyle = '#fff'; g.stroke();
+  }
+  petaMini.addEventListener('click', e => {
+    if (!sv.on || transisi) return;
+    const r = petaMini.getBoundingClientRect(), k = 90 / r.width;
+    jalanKe(kamera.position.x + (e.clientX - r.left - r.width / 2) * k, kamera.position.z + (e.clientY - r.top - r.height / 2) * k);
+  });
+
+  /* ── interaksi: ketuk kavling / mode jalan ────────────── */
+  const kanvas = renderer.domElement;
   const ray = new THREE.Raycaster();
   const ndc = new THREE.Vector2();
-  let turun = null;
-  renderer.domElement.addEventListener('pointerdown', e => { turun = [e.clientX, e.clientY]; });
-  renderer.domElement.addEventListener('pointerup', e => {
-    if (!turun || Math.hypot(e.clientX - turun[0], e.clientY - turun[1]) > 6) return;
-    const r = renderer.domElement.getBoundingClientRect();
+  const bidangTanah = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+  function arahkanRay(e) {
+    const r = kanvas.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) return false;
     ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    kamera.updateMatrixWorld();
     ray.setFromCamera(ndc, kamera);
+    return true;
+  }
+  const kenaTanah = e => (arahkanRay(e) ? ray.ray.intersectPlane(bidangTanah, new THREE.Vector3()) : null);
+  function kenaKavling(e) {
+    if (!arahkanRay(e)) return null;
     const hit = ray.intersectObjects(kena.filter(h => tampil(h.userData.k)), false)[0];
-    if (hit) pilih(hit.object.userData.k);
+    return hit ? hit.object.userData.k : null;
+  }
+  // Di mode jalan: panah > rumah > jalan.
+  function kenaJalan(e) {
+    if (!arahkanRay(e)) return null;
+    const p = ray.intersectObjects(panah.filter(m => m.visible), false)[0];
+    if (p) return { jenis: 'panah', obj: p.object };
+    const t = ray.ray.intersectPlane(bidangTanah, new THREE.Vector3());
+    const jt = t ? t.distanceTo(ray.ray.origin) : Infinity;
+    const r = ray.intersectObjects(kena.filter(h => tampil(h.userData.k)), false)[0];
+    if (r && r.distance < jt + 0.3) return { jenis: 'rumah', k: r.object.userData.k };
+    if (t && jt < 120) {
+      const c = keJalan(t.x, t.z, 4);
+      if (c) return { jenis: 'jalan', t, c };
+    }
+    return null;
+  }
+
+  let turun = null, cubit = null;
+  const jari = new Map();
+  kanvas.addEventListener('contextmenu', e => e.preventDefault());
+  kanvas.addEventListener('pointerdown', e => {
+    turun = { x: e.clientX, y: e.clientY, t: performance.now() };
+    if (!sv.on || transisi) return;
+    try { kanvas.setPointerCapture(e.pointerId); } catch (_) { /* pointer sudah lepas */ }
+    jari.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (jari.size === 2) { const [a, b] = [...jari.values()]; cubit = { d: Math.hypot(a.x - b.x, a.y - b.y), fov: sv.fov }; }
+    kursor.visible = false;
+    kanvas.style.cursor = 'grabbing';
   });
+  kanvas.addEventListener('pointermove', e => {
+    if (!sv.on || transisi) {
+      if (e.pointerType === 'mouse' && !e.buttons && !transisi) kanvas.style.cursor = kenaKavling(e) ? 'pointer' : 'grab';
+      return;
+    }
+    const p = jari.get(e.pointerId);
+    if (p) {
+      if (jari.size === 1) {
+        // Seret = "memegang" pemandangan, persis Street View.
+        const k = THREE.MathUtils.degToRad(sv.fov) / kanvas.clientHeight;
+        sv.yaw += (e.clientX - p.x) * k; sv.yawTuju = sv.yaw;
+        sv.pitch = batasAntara(sv.pitch + (e.clientY - p.y) * k, -1.2, 1.2); sv.pitchTuju = sv.pitch;
+        if (turun && Math.hypot(e.clientX - turun.x, e.clientY - turun.y) > 7) sembunyikanPetunjuk();
+      }
+      p.x = e.clientX; p.y = e.clientY;
+      if (jari.size === 2 && cubit) {
+        const [a, b] = [...jari.values()];
+        sv.fov = sv.fovTuju = batasAntara(cubit.fov * cubit.d / Math.max(1, Math.hypot(a.x - b.x, a.y - b.y)), 30, 95);
+      }
+      return;
+    }
+    if (e.pointerType !== 'mouse') return;
+    const h = kenaJalan(e);
+    panah.forEach(m => (m.material.opacity = h && h.obj === m ? 1 : 0.85));
+    kursor.visible = !!h && h.jenis === 'jalan';
+    if (kursor.visible) kursor.position.set(h.t.x, 0.14, h.t.z);
+    kanvas.style.cursor = h ? 'pointer' : 'grab';
+  });
+  function lepasJari(e) {
+    jari.delete(e.pointerId);
+    if (jari.size < 2) cubit = null;
+    if (sv.on) kanvas.style.cursor = 'grab';
+  }
+  kanvas.addEventListener('pointercancel', e => { lepasJari(e); turun = null; });
+  kanvas.addEventListener('pointerleave', () => { kursor.visible = false; });
+  kanvas.addEventListener('pointerup', e => {
+    const banyakJari = jari.size > 1;
+    lepasJari(e);
+    if (!turun) return;
+    const ketuk = Math.hypot(e.clientX - turun.x, e.clientY - turun.y) <= 6 && performance.now() - turun.t < 600;
+    turun = null;
+    if (!ketuk || banyakJari || transisi) return;
+    if (!sv.on) { const k = kenaKavling(e); if (k) pilih(k); return; }
+    const h = kenaJalan(e);
+    if (!h) return;
+    if (h.jenis === 'panah') {
+      const r = h.obj.userData.arah;
+      sv.yawTuju = sv.yaw + selisihSudut(yawKe(r.dx, r.dz), sv.yaw); sv.pitchTuju = -0.06;
+      const L = Math.min(r.d - 1, 12);
+      jalanKe(sv.pos.x + r.dx * L, sv.pos.z + r.dz * L);
+    } else if (h.jenis === 'rumah') {
+      pilih(h.k, false);
+      hadapKe(h.k.pusat[0], h.k.tinggi * 0.45, h.k.pusat[1]);
+    } else jalanKe(h.c.x, h.c.z);
+  });
+  kanvas.addEventListener('wheel', e => {
+    if (!sv.on) return;
+    e.preventDefault();
+    sv.fovTuju = batasAntara(sv.fovTuju + e.deltaY * 0.04, 30, 95);
+  }, { passive: false });
+  // Klik dua kali di jalan (tampilan peta) = langsung masuk Mode Jalan di titik itu.
+  kanvas.addEventListener('dblclick', e => {
+    if (sv.on || transisi) return;
+    const t = kenaTanah(e);
+    if (!t) return;
+    siapkanGrid();
+    const c = keJalan(t.x, t.z, 3);
+    if (c) masukJalan(c.x, c.z, yawAwal(c.x, c.z));
+  });
+  window.addEventListener('keydown', e => {
+    if (!sv.on) return;
+    if (e.key === 'Escape') { keluarJalan(); return; }
+    const k = e.key.toLowerCase();
+    if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'].includes(k) && !(e.target.closest && e.target.closest('input,textarea,select'))) {
+      tombolTekan.add(k); e.preventDefault(); sembunyikanPetunjuk();
+    }
+  });
+  window.addEventListener('keyup', e => tombolTekan.delete(e.key.toLowerCase()));
+  window.addEventListener('blur', () => tombolTekan.clear());
+
+  /* Ikon orang: ketuk untuk masuk, atau seret ke jalan. */
+  const peg = kontrol.querySelector('.s3d__peg');
+  let seretPeg = null;
+  function titikJatuh(e) {
+    const t = kenaTanah(e);
+    return t ? keJalan(t.x, t.z, 3) : null;
+  }
+  const mulaiDariTombol = () => (terpilih ? kunjungi(terpilih) : masukGerbang());
+  peg.addEventListener('pointerenter', e => { if (!sv.on && e.pointerType === 'mouse') { sorotJalan.visible = true; perluGambar = true; } });
+  peg.addEventListener('pointerleave', () => { if (!seretPeg) { sorotJalan.visible = false; perluGambar = true; } });
+  peg.addEventListener('pointerdown', e => {
+    if (sv.on || transisi) return;
+    e.preventDefault();
+    try { peg.setPointerCapture(e.pointerId); } catch (_) { /* pointer sudah lepas */ }
+    seretPeg = { x: e.clientX, y: e.clientY, gerak: false };
+  });
+  peg.addEventListener('pointermove', e => {
+    if (!seretPeg) return;
+    if (!seretPeg.gerak && Math.hypot(e.clientX - seretPeg.x, e.clientY - seretPeg.y) > 6) {
+      seretPeg.gerak = true; siapkanGrid();
+      bayangOrang.hidden = false; sorotJalan.visible = true; document.body.classList.add('s3d-seret');
+    }
+    if (!seretPeg.gerak) return;
+    bayangOrang.style.transform = `translate(${e.clientX - 17}px, ${e.clientY - 42}px)`;
+    const c = titikJatuh(e);
+    bayangOrang.classList.toggle('ok', !!c);
+    kursor.visible = !!c;
+    if (c) kursor.position.set(c.x, 0.14, c.z);
+    perluGambar = true;
+  });
+  function selesaiSeret() {
+    seretPeg = null; bayangOrang.hidden = true; sorotJalan.visible = false; kursor.visible = false;
+    document.body.classList.remove('s3d-seret');
+    perluGambar = true;
+  }
+  peg.addEventListener('pointerup', e => {
+    if (!seretPeg) return;
+    const gerak = seretPeg.gerak, c = gerak ? titikJatuh(e) : null;
+    selesaiSeret();
+    if (!gerak) mulaiDariTombol();
+    else if (c) masukJalan(c.x, c.z, yawAwal(c.x, c.z));
+  });
+  peg.addEventListener('pointercancel', selesaiSeret);
+  peg.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && !sv.on) { e.preventDefault(); mulaiDariTombol(); } });
+  kartuJalan.querySelector('button').addEventListener('click', keluarJalan);
+  kontrol.querySelectorAll('[data-zoom]').forEach(b => b.addEventListener('click', () => {
+    const arah = +b.dataset.zoom;
+    if (sv.on) { sv.fovTuju = batasAntara(sv.fovTuju + arah * 12, 30, 95); return; }
+    const off = kamera.position.clone().sub(kendali.target);
+    off.setLength(batasAntara(off.length() * (arah < 0 ? 0.7 : 1.4), kendali.minDistance, kendali.maxDistance));
+    terbang(kendali.target.clone(), kendali.target.clone().add(off), 400);
+  }));
 
   /* ── panel ─────────────────────────────────────────────── */
   let saring = 'semua', terpilih = null;
@@ -675,8 +1292,9 @@ export async function mulai(host, { onProgress } = {}) {
       labelPilih = label(k.code, { bg: STATUS[k.status].css, fg: '#ffffff', w: 520, ukuran: 58 }, 24);
       labelPilih.position.set(k.pusat[0], k.tinggi + 3, k.pusat[1]);
       scene.add(labelPilih);
-      ukur();
-      if (terbangkan) terbangKe(k);
+      skalaLabel();
+      if (terbangkan) { if (sv.on) kunjungi(k); else terbangKe(k); }
+      sv.arahDari = null;
     }
     gambarLembar();
     perluGambar = true;
@@ -777,6 +1395,10 @@ export async function mulai(host, { onProgress } = {}) {
     wa.target = '_blank';
     wa.rel = 'noopener';
     f.appendChild(wa);
+    const keJalanBtn = el('button', 's3d__jalan', ikonOrang.replace('currentColor', '#e0a400') + (sv.on ? 'Berjalan ke depan rumah ini' : 'Lihat dari jalan'));
+    keJalanBtn.type = 'button';
+    keJalanBtn.addEventListener('click', () => kunjungi(k));
+    f.appendChild(keJalanBtn);
     if (k.unit && k.unit.url) {
       const a = el('a', 's3d__link', 'Lihat progress pembangunan unit ini →');
       a.href = k.unit.url; a.target = '_blank'; a.rel = 'noopener';
@@ -791,7 +1413,7 @@ export async function mulai(host, { onProgress } = {}) {
   setTimeout(() => muat.remove(), 320);
 
   return {
-    jeda() { terlihat = false; },
+    jeda() { terlihat = false; tombolTekan.clear(); },
     lanjut() { terlihat = true; if (!raf) raf = requestAnimationFrame(putar); ukur(); },
   };
 }
