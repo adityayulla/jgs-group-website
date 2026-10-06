@@ -50,7 +50,7 @@ Kunci Sedayu ada pada satu hal: **Jalan Wates**.
 
 Jalan Wates adalah jalan nasional yang menghubungkan pusat Kota Yogyakarta ke arah barat — menuju Wates, dan diteruskan sampai **Bandara YIA (Yogyakarta International Airport)**. Sedayu berada di jalur ini. Artinya, pergerakan ke arah timur (kota) maupun ke arah barat (bandara) sama-sama lewat satu jalur utama yang lebar dan jelas, bukan lewat jalan kampung.
 
-Dari Sedayu, perjalanan ke **Malioboro sekitar 30 menit** lewat Jalan Wates. [CEK: angka ini sudah dipakai di halaman /perumahan-sedayu/ — mohon konfirmasi ulang kondisi terkini, terutama saat jam sibuk pagi]
+Dari Sedayu, perjalanan ke **Malioboro sekitar 30 menit** lewat Jalan Wates. [CEK: angka ini sudah dipakai di halaman /perumahan-sedayu/ — mohon konfirmasi ulang kondisi terkini, terutama saat jam sibuk pagi] sudah ok
 
 Selain itu, akses ke arah **Ringroad Barat** relatif singkat karena Sedayu bersebelahan dengan Gamping, dan jaringan **jalan tol** yang terus dikembangkan di sisi barat Jogja membuat perjalanan jarak jauh — ke arah bandara maupun keluar kota — semakin ringkas.
 
@@ -76,13 +76,13 @@ Kami sengaja tidak mengklaim "sekian menit ke mana-mana" tanpa data. **Silakan u
 [CEK — bagian ini perlu dilengkapi tim lapangan dengan nama-nama yang benar-benar ada dan masih beroperasi. Jangan menyebut fasilitas yang belum dipastikan.]
 
 Kerangka yang perlu diisi:
-- Pasar tradisional terdekat
-- Sekolah (SD/SMP/SMA) dan pesantren di sekitar
-- Fasilitas kesehatan: puskesmas dan rumah sakit rujukan terdekat
-- Kampus yang terjangkau dari Sedayu
-- Minimarket, SPBU, tempat ibadah
+- Pasar tradisional terdekat: 7 menit ke pasar balecatur
+- Sekolah (SD/SMP/SMA) dan pesantren di sekitar: 6 menit ke SD SMP SMA Kesatuan Bangsa School Yogyakarta (Private International School in Yogyakarta)
+- Fasilitas kesehatan: puskesmas dan rumah sakit rujukan terdekat: PKU Muhammadiyah Gamping, rumah sakit Muhammadiyah terbesar di Yogyakarta
+- Kampus yang terjangkau dari Sedayu: 15 menit ke UMY, 16 menit ke UNU
+- Minimarket, SPBU, tempat ibadah: 4 menit ke Indomaret, 5 menit ke SPBU, Masjid ada di dalam komplek perumahan (fasilitas sosial)
 
-Sebagai gambaran karakter kawasan: Sedayu punya dua sentra kerajinan yang cukup dikenal — **kerajinan tanah liat di Argorejo** dan **kerajinan sangkar burung di Bothokan** — serta beberapa situs bersejarah seperti Situs Kapuhan dan Situs Bakal Poh. Ini bukan kawasan yang dibangun dari nol; ada kehidupan kampung yang sudah berjalan lama di sana.
+Sebagai gambaran karakter kawasan: Sedayu punya dua sentra kerajinan yang cukup dikenal — **kerajinan tanah liat di Argorejo** dan **kerajinan sangkar burung di Bothokan** — serta beberapa situs bersejarah seperti Situs Kapuhan dan Situs Bakal Poh. Ini bukan kawasan yang dibangun dari nol; ada kehidupan kampung yang sudah berjalan lama di sana. 
 
 ## Kenapa Sedayu jadi arah incaran rumah pertama
 
