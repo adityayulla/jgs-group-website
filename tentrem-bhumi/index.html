@@ -1625,8 +1625,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="sp-legend" id="sp-legend" hidden>
     <span class="sp-legend__item"><i class="sp-swatch sp-swatch--sold"></i>Terjual <b id="sp-sold">0</b></span>
-    <span class="sp-legend__item" id="sp-ready-item" hidden><i class="sp-swatch sp-swatch--ready"></i>Siap huni <b id="sp-ready">0</b></span>
-    <span class="sp-legend__item"><i class="sp-swatch sp-swatch--free"></i>Tersedia <b id="sp-free">0</b></span>
+    <!-- Tersedia = semua yang belum laku; siap huni & belum dibangun hanya rinciannya. -->
+    <span class="sp-legend__item">Tersedia <b id="sp-tersedia">0</b>:</span>
+    <span class="sp-legend__item" id="sp-ready-item" hidden><i class="sp-swatch sp-swatch--ready"></i>siap huni <b id="sp-ready">0</b></span>
+    <span class="sp-legend__item" id="sp-free-item"><i class="sp-swatch sp-swatch--free"></i>belum dibangun <b id="sp-free">0</b></span>
     <span class="sp-legend__hint">Ketuk kavling untuk melihat progress unitnya</span>
   </div>
 </div>
@@ -2624,6 +2626,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(pasLabel);
 
     set('sp-sold', nSold);
+    set('sp-tersedia', nReady + nFree);
     set('sp-ready', nReady);
     set('sp-free', nFree);
     var itemReady = document.getElementById('sp-ready-item');
