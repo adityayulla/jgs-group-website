@@ -471,9 +471,9 @@ export async function mulai(host, { onProgress } = {}) {
     scene.add(batang, tajuk);
   }
 
-  /* ── kavling: model per tipe di-clone, atap = warna status ─ */
-  const atapMat = Object.fromEntries(Object.entries(STATUS).map(([k, v]) =>
-    [k, new THREE.MeshLambertMaterial({ color: v.hex })]));
+  /* ── kavling: model per tipe di-clone, atap tetap warna asli ─
+     Status hanya ditandai garis tepi kavling, dan unit terjual diberi
+     papan kecil "TERJUAL" di samping nomor rumah. */
   const tepiMat = Object.fromEntries(Object.entries(STATUS).map(([k, v]) =>
     [k, new THREE.MeshBasicMaterial({ color: v.hex })]));
   const hantuMat = new THREE.MeshBasicMaterial({ color: 0xcfd3c4, transparent: true, opacity: 0.55 });
@@ -481,16 +481,20 @@ export async function mulai(host, { onProgress } = {}) {
   const tak = new THREE.MeshBasicMaterial({ visible: false });
   const kena = [];
 
-  /* Atap = penanda status. Di model SketchUp hanya satu sisi atap yang
-     bertekstur genteng; sisi lainnya memakai material bawaan ("material")
-     yang juga dipakai dinding. Maka material bawaan dipecah per segitiga:
-     permukaan menghadap atas di atas 60% tinggi rumah ikut jadi atap.
+  /* Di model SketchUp hanya satu sisi atap yang bertekstur genteng; sisi
+     lainnya memakai material bawaan ("material") yang juga dipakai dinding
+     (putih). Maka material bawaan dipecah per segitiga: permukaan menghadap
+     atas di atas 60% tinggi rumah dianggap atap dan diberi material genteng
+     model itu sendiri, supaya kedua sisi atap sama seperti aslinya.
      Dikerjakan sekali per tipe — clone berbagi hasilnya. */
+  const gentengPolos = new THREE.MeshStandardMaterial({ color: 0x393a41, roughness: 0.9 });  // rata-rata warna tekstur genteng
   function pisahAtap(m) {
     m.updateMatrixWorld(true);
     const tinggi = new THREE.Box3().setFromObject(m).max.y;
     const batasY = tinggi * 0.6;
     const baru = [];
+    let genteng = null;
+    m.traverse(o => { if (o.isMesh && !genteng && /Roofing/i.test(o.material.name)) genteng = o.material; });
     m.traverse(o => {
       if (!o.isMesh) return;
       if (/Roofing/i.test(o.material.name)) { o.userData.atap = true; return; }
@@ -510,7 +514,7 @@ export async function mulai(host, { onProgress } = {}) {
       const gAtap = g.clone();
       gAtap.setIndex(atap);
       g.setIndex(sisa);
-      const mAtap = new THREE.Mesh(gAtap, o.material);
+      const mAtap = new THREE.Mesh(gAtap, genteng && gAtap.attributes.uv ? genteng : gentengPolos);
       mAtap.userData.atap = true;
       baru.push([o, mAtap]);
     });
@@ -523,8 +527,7 @@ export async function mulai(host, { onProgress } = {}) {
       o.castShadow = !HP; o.receiveShadow = !HP;
       // Dinding = material bawaan putih. Tanpa environment map, sisi yang
       // tidak kena matahari jadi abu-abu; sedikit emissive membuatnya tetap
-      // terbaca putih tapi masih ada bayangan halus. Atap memakai material
-      // bawaan yang sama, tapi diganti atapMat per kavling, jadi tidak ikut.
+      // terbaca putih tapi masih ada bayangan halus.
       if (o.material.name === 'material' && !o.userData.atap && o.material.emissive) {
         o.material.emissive.set(0xffffff);
         o.material.emissiveIntensity = 0.32;
@@ -532,6 +535,39 @@ export async function mulai(host, { onProgress } = {}) {
     });
   }
   Object.values(model).forEach(pisahAtap);
+
+  /* Papan nomor rumah: kotak kecil gelap di sisi paling depan model
+     (±0,35 m). Posisinya dicari sekali per tipe; papan "TERJUAL"
+     dipasang tepat di sampingnya, ke arah tengah rumah. */
+  const papanNomor = {};
+  Object.entries(model).forEach(([id, m]) => {
+    m.updateMatrixWorld(true);
+    const depan = new THREE.Box3().setFromObject(m).max.z;
+    const kotak = new THREE.Box3();
+    m.traverse(o => {
+      if (!o.isMesh) return;
+      const b = new THREE.Box3().setFromObject(o), u = b.getSize(new THREE.Vector3());
+      if (b.min.z > depan - 1.6 && u.x < 1.2 && u.y > 0.2 && u.y < 2.5) kotak.union(b);
+    });
+    if (!kotak.isEmpty()) papanNomor[id] = kotak;
+  });
+  const PAPAN = { w: 0.72, h: 0.3, d: 0.04 };
+  const papanGeo = new THREE.BoxGeometry(PAPAN.w, PAPAN.h, PAPAN.d);
+  const papanMerah = new THREE.MeshLambertMaterial({ color: 0xc62828 });
+  const papanTulisan = new THREE.MeshBasicMaterial({
+    map: teksTekstur('TERJUAL', { bg: '#c62828', fg: '#ffffff', w: 256, h: 106, ukuran: 54, radius: 0 }),
+  });
+  const papanMat = [papanMerah, papanMerah, papanMerah, papanMerah, papanTulisan, papanMerah];  // muka +Z = tulisan
+  function papanTerjual(id) {
+    const n = papanNomor[id];
+    if (!n) return null;
+    const c = n.getCenter(new THREE.Vector3()), lebar = n.max.x - n.min.x;
+    const ke = c.x < 0 ? 1 : -1;
+    const p = new THREE.Mesh(papanGeo, papanMat);
+    // Sejajar angka rumah (bagian atas tiang nomor).
+    p.position.set(c.x + ke * (lebar / 2 + 0.06 + PAPAN.w / 2), Math.max(c.y, n.max.y - PAPAN.h / 2 - 0.08), n.max.z - PAPAN.d / 2);
+    return p;
+  }
 
   const kedalaman = {}, tinggiModel = {};
   Object.entries(model).forEach(([id, m]) => {
@@ -548,7 +584,7 @@ export async function mulai(host, { onProgress } = {}) {
     rumah.rotation.y = k.rotY;
     k.pusat = [rumah.position.x, rumah.position.z];
     k.tinggi = tinggiModel[k.model];
-    rumah.traverse(o => { if (o.isMesh && o.userData.atap) o.material = atapMat[k.status]; });
+    if (k.status === 'terjual') { const p = papanTerjual(k.model); if (p) rumah.add(p); }
     g.add(rumah);
 
     // Alas kavling (terlihat saat rumahnya disembunyikan filter) + garis tepi tebal warna status.
