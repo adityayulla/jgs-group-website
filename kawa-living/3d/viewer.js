@@ -518,7 +518,18 @@ export async function mulai(host, { onProgress } = {}) {
       mAtap.position.copy(o.position); mAtap.quaternion.copy(o.quaternion); mAtap.scale.copy(o.scale);
       o.parent.add(mAtap);
     });
-    m.traverse(o => { if (o.isMesh) { o.castShadow = !HP; o.receiveShadow = !HP; } });
+    m.traverse(o => {
+      if (!o.isMesh) return;
+      o.castShadow = !HP; o.receiveShadow = !HP;
+      // Dinding = material bawaan putih. Tanpa environment map, sisi yang
+      // tidak kena matahari jadi abu-abu; sedikit emissive membuatnya tetap
+      // terbaca putih tapi masih ada bayangan halus. Atap memakai material
+      // bawaan yang sama, tapi diganti atapMat per kavling, jadi tidak ikut.
+      if (o.material.name === 'material' && !o.userData.atap && o.material.emissive) {
+        o.material.emissive.set(0xffffff);
+        o.material.emissiveIntensity = 0.32;
+      }
+    });
   }
   Object.values(model).forEach(pisahAtap);
 
