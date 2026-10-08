@@ -91,12 +91,13 @@
       position: absolute; left: -30px; top: 40px;
       background: #fff; border-radius: 50%;
       width: 130px; height: 130px;
-      display: grid; place-items: center;
+      display: grid; place-items: center; align-content: center;
       box-shadow: 0 10px 30px -10px rgba(27,42,100,.35);
       z-index: 2; text-align: center; border: 6px solid var(--bg);
     }
     .hero__badge-num  { font-family: var(--font-display); font-size: 38px; line-height: 1; color: var(--orange); font-weight: 600; }
     .hero__badge-text { font-size: 9px; letter-spacing: .14em; color: var(--navy); margin-top: 4px; text-transform: uppercase; font-weight: 600; }
+    .hero__badge-text--atas { margin: 0 0 4px; }
     .hero__tag {
       position: absolute; right: -10px; bottom: 60px;
       background: var(--navy); color: #fff;
@@ -847,9 +848,12 @@
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)'"
           >
         </div>
-        <div class="hero__badge">
-          <div class="hero__badge-num">Free</div>
-          <div class="hero__badge-text">Biaya KPR</div>
+        <!-- Harga termurah unit yang belum laku (cash), live dari pricelist
+             dashboard — lihat skrip "Badge harga" di bawah. 414 = cadangan. -->
+        <div class="hero__badge" id="kl-hero-harga" aria-label="Harga mulai Rp 414 jutaan">
+          <div class="hero__badge-text hero__badge-text--atas">Mulai</div>
+          <div class="hero__badge-num" id="kl-hero-harga-num">414</div>
+          <div class="hero__badge-text">Jt-an</div>
         </div>
         <!-- Pill di atas foto hero ikut angka live yang sama dengan
              statistik di kiri — jangan sampai dua tempat berbeda. -->
@@ -1857,6 +1861,25 @@
       pre.src = it.url;
     })
     .catch(function () { /* foto statis tetap tampil */ });
+
+  /* ── Badge harga hero ──────────────────────────────────────────
+     Harga cash termurah dari kavling yang belum laku, dibulatkan ke
+     bawah ke juta ("414,9 jt" → "Mulai 414 Jt-an"). Harga kosong
+     (belum diisi approver) diabaikan; feed gagal → angka statis tetap. */
+  fetch('https://progress.jogjagrahaselaras.com/api/public/pricelist?slug=kawa-living', { mode: 'cors' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var harga = ((j && j.units) || [])
+        .filter(function (u) { return !u.sold && u.priceCash > 0; })
+        .map(function (u) { return u.priceCash; });
+      if (!harga.length) return;
+      var jt = Math.floor(Math.min.apply(null, harga) / 1e6);
+      var num = document.getElementById('kl-hero-harga-num');
+      var badge = document.getElementById('kl-hero-harga');
+      if (num) num.textContent = jt;
+      if (badge) badge.setAttribute('aria-label', 'Harga mulai Rp ' + jt + ' jutaan');
+    })
+    .catch(function () { /* angka statis tetap tampil */ });
 
   var API_FOTO = 'https://progress.jogjagrahaselaras.com/api/public/environment-photos?slug=kawa-living';
 
