@@ -2298,15 +2298,31 @@ document.addEventListener('DOMContentLoaded', function() {
       var grid  = document.getElementById('fas-real-grid');
       if (!items.length || !wrap || !grid) return;
 
-      items.forEach(function (p) {
-        if (!p.url) return;
+      items = items.filter(function (p) { return p.url; });
+      items.forEach(function (p, i) {
         var teks = p.caption || 'Fasilitas & lingkungan Tentrem Bhumi';
 
         var img = document.createElement('img');
-        // Thumbnail 400px dari feed; foto penuh hanya saat lightbox
-        // dibuka lewat href <a>. Foto lama yang belum punya thumbnail
-        // jatuh kembali ke p.url, sekali saja.
-        img.onerror = function () { img.onerror = null; img.src = p.url; };
+        // Thumbnail 400px dari feed cuma cukup untuk kartu kecil di HP
+        // layar biasa. Di desktop foto pertama (dan foto terakhir yang
+        // sendirian di barisnya) selebar baris, lainnya sepertiga baris —
+        // srcset membiarkan browser mengambil foto penuh (min. 800px)
+        // supaya tidak buram. Lebar figure harus cocok dengan CSS .fas-shots.
+        var lebar = i === 0 || (i === items.length - 1 && i % 3 === 1);
+        if (p.thumb) {
+          img.srcset = p.thumb + ' 400w, ' + p.url + ' 800w';
+          img.sizes = lebar
+            ? '(min-width: 768px) 100vw, 268px'
+            : '(min-width: 768px) 34vw, 268px';
+        }
+        // Foto lama yang belum punya thumbnail jatuh kembali ke p.url, sekali saja.
+        // Kalau foto penuh pun gagal (file hilang di storage), kartunya dibuang
+        // daripada tampil kosong.
+        img.onerror = function () {
+          img.onerror = function () { fig.remove(); };
+          img.removeAttribute('srcset');
+          img.src = p.url;
+        };
         img.src = p.thumb || p.url;
         img.alt = teks + ' — Tentrem Bhumi, JGS Group';
         img.loading = 'lazy';
