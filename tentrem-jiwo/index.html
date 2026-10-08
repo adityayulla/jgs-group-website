@@ -268,6 +268,19 @@
       min-width: 0;
     }
     .sp-stage .tj-siteplan { max-width: none; }
+    /* Tombol versi 3D. Gaya viewer-nya sendiri disuntik oleh 3d/viewer.js. */
+    .sp3d-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+    .sp3d-toggle {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 18px; border: 0; border-radius: 999px;
+      background: var(--navy); color: #fff;
+      font-family: inherit; font-size: 14px; font-weight: 600;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
+    }
+    .sp3d-toggle:hover { background: var(--navy-2); }
+    .sp3d-toggle:disabled { opacity: .5; cursor: default; }
+    .sp3d-note { font-size: 13px; color: var(--muted); }
+    .sp3d { margin-bottom: 18px; }
     /* Mode "Perbesar": 720px cukup untuk membaca label yang tercetak
        di gambar sekaligus tulisan TERJUAL di kavling Baswara. */
     .sp-scroll.is-zoom .sp-stage { min-width: 720px; }
@@ -598,6 +611,19 @@
       <h2 class="section-title reveal">Tiga belas kavling,<br><em>satu gerbang.</em></h2>
     </div>
     <div class="container">
+      <!-- Versi 3D: hanya tombol di sini. Three.js + model kawasan (±3 MB)
+           baru dimuat setelah tombol ditekan — load awal halaman tidak berubah.
+           Kodenya di 3d/viewer.js, datanya di 3d/kavling.json + 3d/kawasan.glb. -->
+      <div class="sp3d-bar">
+        <button type="button" class="sp3d-toggle" id="sp3d-toggle" aria-controls="sp3d" aria-expanded="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>
+          <span>Lihat versi 3D</span>
+        </button>
+        <span class="sp3d-note" id="sp3d-note">Jelajahi kawasan dari atas atau dari jalan seperti Street View, ketuk rumah untuk harga &amp; status.</span>
+      </div>
+      <div class="sp3d" id="sp3d" hidden></div>
+
+      <div id="sp-gambar">
       <!-- Overlay status jual diisi skrip di bawah: bentuk kavling dari
            siteplan-kavling.json, status laku dari Progress Dashboard.
            Kalau salah satunya gagal, yang tampil siteplan polos. -->
@@ -619,8 +645,65 @@
         <span class="sp-legend__item" id="sp-free-item" hidden><i class="sp-swatch sp-swatch--free"></i>belum dibangun <b id="sp-free">0</b></span>
         <span class="sp-legend__hint">Ketuk kavling untuk melihat progress unitnya</span>
       </div>
+      </div><!-- /#sp-gambar -->
       <p class="st__note">Status jual per kavling bisa dicek kapan saja di <a href="https://progress.jogjagrahaselaras.com/progress/tentrem-jiwo" target="_blank" rel="noopener">Progress Dashboard</a> — sumber angka yang sama dengan halaman ini.</p>
     </div>
+
+    <!-- Tombol "Lihat versi 3D". WebGL dicek saat diklik (bukan saat halaman
+         dimuat); kalau tidak ada atau gagal memuat, siteplan gambar tetap
+         tampil dan pengunjung diberi tahu. Sama dengan /kawa-living/. -->
+    <script>
+    (function () {
+      var tombol = document.getElementById('sp3d-toggle');
+      var wadah  = document.getElementById('sp3d');
+      var gambar = document.getElementById('sp-gambar');
+      var catat  = document.getElementById('sp3d-note');
+      if (!tombol || !wadah || !gambar) return;
+      var label = tombol.querySelector('span');
+      var viewer = null, memuat = false, buka = false;
+
+      function adaWebGL() {
+        try {
+          var c = document.createElement('canvas');
+          return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')));
+        } catch (e) { return false; }
+      }
+      function tampil3D(ya) {
+        buka = ya;
+        wadah.hidden = !ya;
+        gambar.hidden = ya;
+        tombol.setAttribute('aria-expanded', ya ? 'true' : 'false');
+        label.textContent = ya ? 'Kembali ke gambar siteplan' : 'Lihat versi 3D';
+        if (viewer) ya ? viewer.lanjut() : viewer.jeda();
+      }
+
+      tombol.addEventListener('click', function () {
+        if (memuat) return;
+        if (buka) { tampil3D(false); return; }
+        if (viewer) { tampil3D(true); return; }
+        if (!adaWebGL()) {
+          catat.textContent = 'Perangkat/browser ini belum mendukung tampilan 3D — siteplan gambar di bawah tetap lengkap.';
+          tombol.disabled = true;
+          return;
+        }
+        memuat = true;
+        tampil3D(true);
+        label.textContent = 'Memuat 3D…';
+        import('./3d/viewer.js?v=20261008a')
+          .then(function (m) { return m.mulai(wadah); })
+          .then(function (v) {
+            viewer = v; memuat = false;
+            label.textContent = 'Kembali ke gambar siteplan';
+          })
+          .catch(function () {
+            memuat = false;
+            tampil3D(false);
+            wadah.innerHTML = '';
+            catat.textContent = 'Versi 3D gagal dimuat (koneksi atau browser). Siteplan gambar tetap bisa dipakai — coba lagi nanti.';
+          });
+      });
+    })();
+    </script>
 
     <!-- Tombol Perbesar. Bawaannya siteplan dipaskan ke lebar layar; sekali
          ketuk panggungnya dilebarkan ke 720px supaya label yang tercetak di
