@@ -45,9 +45,13 @@ function bulat(rupiah, ke = 10) {
   return Math.floor(rupiah / 1e6 / ke) * ke;
 }
 
-/** Ganti angka 3 digit di dalam sepotong teks dengan angka baru, satuannya dibiarkan. */
+/**
+ * Ganti angka 3 digit di dalam sepotong teks dengan angka baru, satuannya dibiarkan.
+ * Selain "Rp 410", juga `data-count="410"` — angka statistik yang dianimasikan
+ * (kawa-living hero: "Rp <span data-count>…</span> Jt-an").
+ */
 function gantiAngka(teks, angkaBaru) {
-  return teks.replace(/(Rp\s*)\d{3}/g, `$1${angkaBaru}`);
+  return teks.replace(/(Rp\s*|data-count=")\d{3}/g, `$1${angkaBaru}`);
 }
 
 const peta = JSON.parse(readFileSync(PETA, "utf8"));
@@ -80,14 +84,14 @@ function rupiahAtas(rupiah, ke = 10) {
   return `Rp ${(juta / 1000).toFixed(2).replace(/0$/, "").replace(".", ",")} Miliar`;
 }
 
-/** Teks pengganti untuk satu sumber. */
-function tekstBaru(sumber, lama) {
+/** Teks pengganti untuk satu sumber. `ke` = pembulatan aturan itu (bawaan: global). */
+function tekstBaru(sumber, lama, ke = KE) {
   if (sumber === "jgs-rentang") {
     return `Rp ${bulat(nilai.jgs.min, KE)} Juta — ${rupiahAtas(nilai.jgs.max, KE)}`;
   }
   const n = nilai[sumber];
   if (!n) throw new Error(`sumber "${sumber}" tidak dikenal`);
-  return gantiAngka(lama, bulat(n.min, KE));
+  return gantiAngka(lama, bulat(n.min, ke));
 }
 
 let berubah = false;
@@ -112,7 +116,7 @@ for (const b of peta.berkas) {
     if (n) catatan.push(`${n} angka → ${angka}`);
   } else {
     for (const aturan of b.aturan) {
-      const baru = tekstBaru(aturan.sumber, aturan.cari);
+      const baru = tekstBaru(aturan.sumber, aturan.cari, aturan.ke ?? KE);
       if (!s.includes(aturan.cari)) {
         // Kalau nilainya memang sudah sesuai, tidak ada yang salah.
         if (s.includes(baru)) continue;
