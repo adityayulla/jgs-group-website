@@ -54,12 +54,6 @@
       }
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'lead_enhanced_data', lead_phone: ec.phone });
-      /* OpenAI Ads (28 Sep 2026): lead_created di titik yang sama dengan konversi Google — halaman
-         sesudah submit pricelist, sekali per submit (penanda dihapus di bawah, jadi muat ulang tak
-         menghitung dua kali). Nomor HP TIDAK dikirim ke OpenAI. */
-      if (typeof window.oaiq === 'function') {
-        window.oaiq('measure', 'lead_created', { type: 'customer_action' }, { event_id: 'lead-' + (ec.ts || Date.now()) });
-      }
       sessionStorage.removeItem('jgs_lead_ec');
     } catch (e) {}
   })();

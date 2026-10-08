@@ -490,11 +490,6 @@
         wa_label: (el.textContent || '').trim().slice(0, 80),
         wa_href:  href
       });
-      /* OpenAI Ads (28 Sep 2026): event kustom "whatsapp_click" — nama ini yang dipakai di Ads Manager */
-      if (typeof window.oaiq === 'function') {
-        window.oaiq('measure', 'custom', { type: 'custom' },
-          { custom_event_name: 'whatsapp_click', event_id: 'wa-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) });
-      }
     }, true);
   }
 
