@@ -745,9 +745,11 @@
       padding-bottom: 6px;
     }
     .lingk__grid::-webkit-scrollbar { display: none; }
+    /* Lebar figure & tinggi foto diatur JS (aturBaris) mengikuti rasio asli
+       tiap foto — portrait tetap tegak, landscape tetap lebar, tanpa crop. */
     .lingk__grid figure { flex: none; width: 268px; margin: 0; scroll-snap-align: start; }
     .lingk__grid img {
-      width: 100%; height: 190px; object-fit: cover;
+      width: 100%; height: 220px; object-fit: cover; background: #eef0f4;
       border-radius: var(--r-md, 12px); border: 1px solid var(--line);
       cursor: zoom-in; display: block;
     }
@@ -755,20 +757,15 @@
     .lingk__grid figcaption {
       margin-top: 8px; font-size: 12px; color: var(--muted); line-height: 1.45;
     }
-    /* Tiga foto per baris — cukup besar untuk melihat kondisi aslinya.
-       Foto ke-4 dst. jatuh ke baris berikutnya. */
     @media (min-width: 768px) {
       .lingk__grid {
-        display: grid; grid-template-columns: repeat(3, 1fr);
+        flex-wrap: wrap; align-items: flex-start;
         overflow: visible; scroll-snap-type: none; gap: 18px;
       }
-      .lingk__grid figure { width: auto; }
-      .lingk__grid img { height: 300px; }
       .lingk__grid figcaption { font-size: 13px; margin-top: 10px; }
     }
     @media (min-width: 1100px) {
       .lingk__grid { gap: 22px; }
-      .lingk__grid img { height: 360px; }
     }
   </style>
 </head>
@@ -1871,36 +1868,102 @@
       var grid = document.getElementById('kl-lingk-grid');
       if (!items.length || !sec || !grid) return;
 
-      items.forEach(function (foto) {
-        if (!foto.url) return;
-        var teks = foto.caption || 'Lingkungan kawasan Kawa Living';
+      items = items.filter(function (foto) { return foto.url; });
 
-        var img = document.createElement('img');
-        // Grid pakai thumbnail 400px (~18KB); foto penuh disimpan di
-        // data-full supaya lightbox tetap membuka yang tajam. Foto lama
-        // yang belum punya thumbnail jatuh kembali ke foto penuh.
-        img.onerror = function () { img.onerror = null; img.src = foto.url; };
-        img.src = foto.thumb || foto.url;
-        img.setAttribute('data-full', foto.url);
-        img.alt = teks + ' — Kawa Living, JGS Group';
-        img.loading = 'lazy';
-        img.decoding = 'async';
-        img.addEventListener('click', function () {
-          if (typeof window.openLb === 'function') {
-            window.openLb(this.getAttribute('data-full') || this.src, this.alt);
-          }
+      /* Rasio tiap foto dibaca dari thumbnail (kecil, rasionya sama dengan
+         foto penuh) sebelum ditata. Foto yang gagal dimuat dua-duanya
+         (file hilang di storage) dibuang daripada tampil kosong.
+         Urutan = urutan di dashboard (approver mengaturnya dengan ↑ ↓). */
+      function bacaRasio(foto) {
+        return new Promise(function (res) {
+          var t = new Image();
+          t.onload = function () {
+            res({ foto: foto, rasio: t.naturalWidth / t.naturalHeight || 4 / 3, src: t.src });
+          };
+          t.onerror = function () {
+            if (t.src !== foto.url && foto.thumb) t.src = foto.url;
+            else res(null);
+          };
+          t.src = foto.thumb || foto.url;
         });
+      }
 
-        var cap = document.createElement('figcaption');
-        cap.textContent = teks;
+      Promise.all(items.map(bacaRasio)).then(function (hasil) {
+        var daftar = hasil.filter(Boolean).map(function (h) {
+          var foto = h.foto;
+          var teks = foto.caption || 'Lingkungan kawasan Kawa Living';
 
-        var fig = document.createElement('figure');
-        fig.appendChild(img);
-        fig.appendChild(cap);
-        grid.appendChild(fig);
+          var img = document.createElement('img');
+          // Thumbnail 400px cukup untuk kartu kecil; srcset membiarkan browser
+          // mengambil foto penuh (min. 800px) saat kartunya besar / layar
+          // retina. sizes diisi aturBaris(). Lightbox selalu membuka data-full.
+          if (foto.thumb && h.src === foto.thumb) img.srcset = foto.thumb + ' 400w, ' + foto.url + ' 800w';
+          img.src = h.src;
+          img.setAttribute('data-full', foto.url);
+          img.alt = teks + ' — Kawa Living, JGS Group';
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.addEventListener('click', function () {
+            if (typeof window.openLb === 'function') {
+              window.openLb(this.getAttribute('data-full') || this.src, this.alt);
+            }
+          });
+
+          var cap = document.createElement('figcaption');
+          cap.textContent = teks;
+
+          var fig = document.createElement('figure');
+          fig.appendChild(img);
+          fig.appendChild(cap);
+          grid.appendChild(fig);
+          return { fig: fig, img: img, rasio: h.rasio };
+        });
+        if (!daftar.length) return;
+        sec.hidden = false;
+
+        function pasang(f, w, h) {
+          f.fig.style.width = w + 'px';
+          f.img.style.height = h + 'px';
+          f.img.sizes = Math.ceil(w) + 'px';
+        }
+
+        /* Desktop: baris "justified" — foto sebaris sama tinggi dan baris
+           terisi penuh, tiap foto memakai rasio aslinya. Jumlah baris dipilih
+           supaya tinggi baris mendekati TARGET; foto dibagi ke baris menurut
+           akumulasi rasio supaya baris seimbang. HP: carousel geser dengan
+           tinggi tetap, lebar mengikuti rasio. */
+        function aturBaris() {
+          var W = grid.clientWidth;
+          if (window.innerWidth < 768 || !W) {
+            daftar.forEach(function (f) { pasang(f, Math.round(220 * f.rasio), 220); });
+            return;
+          }
+          var GAP = parseFloat(getComputedStyle(grid).columnGap) || 18;
+          var TARGET = 380, MAKS = 520;
+          var total = daftar.reduce(function (n, f) { return n + f.rasio; }, 0);
+          var nBaris = Math.max(1, Math.min(daftar.length, Math.round(total * TARGET / W)));
+          var baris = [[]], acc = 0;
+          daftar.forEach(function (f) {
+            var batas = total * baris.length / nBaris;
+            if (baris[baris.length - 1].length && acc + f.rasio / 2 > batas &&
+                baris.length < nBaris) baris.push([]);
+            baris[baris.length - 1].push(f);
+            acc += f.rasio;
+          });
+          baris.forEach(function (r) {
+            var sumR = r.reduce(function (n, f) { return n + f.rasio; }, 0);
+            var h = Math.min(MAKS, (W - GAP * (r.length - 1)) / sumR);
+            r.forEach(function (f) { pasang(f, Math.floor(h * f.rasio), Math.round(h)); });
+          });
+        }
+
+        aturBaris();
+        var tunda;
+        window.addEventListener('resize', function () {
+          clearTimeout(tunda);
+          tunda = setTimeout(aturBaris, 150);
+        });
       });
-
-      sec.hidden = false;
     })
     .catch(function () {
       /* Feed foto gagal — section tetap tersembunyi, halaman utuh. */
