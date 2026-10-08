@@ -281,6 +281,10 @@
     .sp3d-toggle:disabled { opacity: .5; cursor: default; }
     .sp3d-note { font-size: 13px; color: var(--muted); }
     .sp3d { margin-bottom: 18px; }
+    /* Tempat viewer sebelum model selesai dimuat — ukurannya sama dengan
+       panggung 3D (lihat 3d/viewer.js) supaya halaman tidak meloncat. */
+    .sp3d:empty { height: min(64vh, 560px); min-height: 340px; border-radius: 24px; background: #eef0e6; }
+    @media (min-width: 900px) { .sp3d:empty { height: 620px; } }
     /* Mode "Perbesar": 720px cukup untuk membaca label yang tercetak
        di gambar sekaligus tulisan TERJUAL di kavling Baswara. */
     .sp-scroll.is-zoom .sp-stage { min-width: 720px; }
@@ -611,17 +615,19 @@
       <h2 class="section-title reveal">Tiga belas kavling,<br><em>satu gerbang.</em></h2>
     </div>
     <div class="container">
-      <!-- Versi 3D: hanya tombol di sini. Three.js + model kawasan (±3 MB)
-           baru dimuat setelah tombol ditekan — load awal halaman tidak berubah.
+      <!-- Di halaman ini versi 3D = tampilan BAWAAN; siteplan 2D tampil kalau
+           tombol ditekan (atau kalau 3D tidak didukung / gagal dimuat).
+           Three.js + model kawasan (±3 MB) baru diunduh saat section ini
+           mendekati layar — load awal halaman tidak berubah.
            Kodenya di 3d/viewer.js, datanya di 3d/kavling.json + 3d/kawasan.glb. -->
       <div class="sp3d-bar">
         <button type="button" class="sp3d-toggle" id="sp3d-toggle" aria-controls="sp3d" aria-expanded="false">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>
-          <span>Lihat versi 3D</span>
+          <span>Lihat siteplan 2D</span>
         </button>
-        <span class="sp3d-note" id="sp3d-note">Jelajahi kawasan dari atas atau dari jalan seperti Street View, ketuk rumah untuk harga &amp; status.</span>
+        <span class="sp3d-note" id="sp3d-note">Jelajahi kawasan dari atas atau dari jalan seperti Street View — bahkan masuk ke dalam villa. Ketuk rumah untuk harga &amp; status.</span>
       </div>
-      <div class="sp3d" id="sp3d" hidden></div>
+      <div class="sp3d" id="sp3d"></div>
 
       <div id="sp-gambar">
       <!-- Overlay status jual diisi skrip di bawah: bentuk kavling dari
@@ -649,9 +655,11 @@
       <p class="st__note">Status jual per kavling bisa dicek kapan saja di <a href="https://progress.jogjagrahaselaras.com/progress/tentrem-jiwo" target="_blank" rel="noopener">Progress Dashboard</a> — sumber angka yang sama dengan halaman ini.</p>
     </div>
 
-    <!-- Tombol "Lihat versi 3D". WebGL dicek saat diklik (bukan saat halaman
-         dimuat); kalau tidak ada atau gagal memuat, siteplan gambar tetap
-         tampil dan pengunjung diberi tahu. Sama dengan /kawa-living/. -->
+    <!-- Siteplan 3D sebagai tampilan bawaan. WebGL dicek sekali saat skrip
+         ini jalan; kalau tidak ada, langsung siteplan 2D seperti dulu. Model
+         mulai diunduh saat section siteplan ±1 layar lagi terlihat. Kalau
+         gagal dimuat, 2D yang tampil dan pengunjung diberi tahu. Tombolnya
+         berganti antara "Lihat siteplan 2D" dan "Kembali ke 3D". -->
     <script>
     (function () {
       var tombol = document.getElementById('sp3d-toggle');
@@ -660,7 +668,7 @@
       var catat  = document.getElementById('sp3d-note');
       if (!tombol || !wadah || !gambar) return;
       var label = tombol.querySelector('span');
-      var viewer = null, memuat = false, buka = false;
+      var viewer = null, memuat = false, buka = false, gagal = false;
 
       function adaWebGL() {
         try {
@@ -673,35 +681,50 @@
         wadah.hidden = !ya;
         gambar.hidden = ya;
         tombol.setAttribute('aria-expanded', ya ? 'true' : 'false');
-        label.textContent = ya ? 'Kembali ke gambar siteplan' : 'Lihat versi 3D';
+        label.textContent = ya ? 'Lihat siteplan 2D' : 'Kembali ke 3D';
         if (viewer) ya ? viewer.lanjut() : viewer.jeda();
+        if (ya && !viewer) muat();
+        /* Label TERJUAL di siteplan 2D diukur saat resize — saat halaman dibuka
+           gambarnya tersembunyi, jadi diukur ulang begitu ditampilkan. */
+        if (!ya) window.dispatchEvent(new Event('resize'));
       }
-
-      tombol.addEventListener('click', function () {
-        if (memuat) return;
-        if (buka) { tampil3D(false); return; }
-        if (viewer) { tampil3D(true); return; }
-        if (!adaWebGL()) {
-          catat.textContent = 'Perangkat/browser ini belum mendukung tampilan 3D — siteplan gambar di bawah tetap lengkap.';
-          tombol.disabled = true;
-          return;
-        }
+      function muat() {
+        if (memuat || viewer || gagal) return;
         memuat = true;
-        tampil3D(true);
-        label.textContent = 'Memuat 3D…';
-        import('./3d/viewer.js?v=20261008a')
-          .then(function (m) { return m.mulai(wadah); })
+        import('./3d/viewer.js?v=20261008b')
+          .then(function (m) { wadah.innerHTML = ''; return m.mulai(wadah); })
           .then(function (v) {
             viewer = v; memuat = false;
-            label.textContent = 'Kembali ke gambar siteplan';
+            if (!buka) v.jeda();
           })
           .catch(function () {
-            memuat = false;
-            tampil3D(false);
+            memuat = false; gagal = true;
             wadah.innerHTML = '';
-            catat.textContent = 'Versi 3D gagal dimuat (koneksi atau browser). Siteplan gambar tetap bisa dipakai — coba lagi nanti.';
+            tampil3D(false);
+            tombol.hidden = true;
+            catat.textContent = 'Versi 3D gagal dimuat (koneksi atau browser) — ini siteplan gambarnya.';
           });
-      });
+      }
+
+      if (!adaWebGL()) {
+        wadah.hidden = true;
+        tombol.hidden = true;
+        catat.hidden = true;
+        return;
+      }
+      tombol.setAttribute('aria-controls', 'sp3d sp-gambar');
+      gambar.hidden = true;
+      buka = true;
+      tombol.setAttribute('aria-expanded', 'true');
+      tombol.addEventListener('click', function () { tampil3D(!buka); });
+
+      /* Unduh model saat section mendekati layar, bukan saat halaman dibuka. */
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (e) {
+          if (e[0].isIntersecting) { io.disconnect(); if (buka) muat(); }
+        }, { rootMargin: '100% 0px' });
+        io.observe(wadah);
+      } else muat();
     })();
     </script>
 

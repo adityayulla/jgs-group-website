@@ -257,7 +257,7 @@ export async function mulai(host, { onProgress } = {}) {
   }).then(g => { pModel = 1; hitung(); return g.scene; });
 
   const [peta, status, harga] = await Promise.all([
-    fetch(new URL('kavling.json?v=20261008', DASAR)).then(r => { if (!r.ok) throw new Error('kavling.json ' + r.status); return r.json(); }),
+    fetch(new URL('kavling.json?v=20261008b', DASAR)).then(r => { if (!r.ok) throw new Error('kavling.json ' + r.status); return r.json(); }),
     ambil(API_STATUS),
     ambil(API_HARGA),
   ]);
@@ -286,6 +286,7 @@ export async function mulai(host, { onProgress } = {}) {
     return {
       ...k, status: st, unit: u || null, harga: h, pusat: [cx, cz], dekat,
       keGerbang: Math.hypot(k.muka[0] - gerbangTengah[0], k.muka[1] - gerbangTengah[1]),
+      dalam: (peta.dalam || []).find(d => d.code === k.code) || null,
     };
   }).sort(urut);
 
@@ -595,39 +596,65 @@ export async function mulai(host, { onProgress } = {}) {
   /* ── Mode Jalan (seperti Google Street View) ─────────────
      Kamera setinggi mata berdiri di jalan. Seret = menoleh, ketuk
      jalan / panah = berjalan, ketuk rumah = menghadap rumahnya.
-     Area yang bisa dilalui = poligon jalan DWG dikurangi lubangnya
-     (+ jalan desa), dirasterkan per 1 m sekali saat pertama dipakai. */
-  const MATA = 1.6, SEL = 1;
+     Area yang bisa dilalui = poligon jalan (+ jalan desa), dirasterkan
+     per 25 cm sekali saat pertama dipakai, ditambah area DALAM kavling
+     dari kavling.json `dalam` (lantai bawah Villa: dihitung dari geometri
+     model, dinding menghalangi, celah pintu terbuka). Grid 25 cm — bukan
+     1 m seperti Kawa — supaya pintu ±0,8 m bisa dilewati. Tinggi kamera
+     mengikuti lantai sel itu. */
+  const MATA = 1.6, SEL = 0.25;
   const batasAntara = (v, a, b) => Math.min(b, Math.max(a, v));
   const selisihSudut = (a, b) => { let d = (a - b) % (Math.PI * 2); if (d > Math.PI) d -= Math.PI * 2; if (d < -Math.PI) d += Math.PI * 2; return d; };
   const yawKe = (dx, dz) => Math.atan2(-dx, -dz);
 
+  const dalam = peta.dalam || [];
   let grid = null;
   function siapkanGrid() {
     if (grid) return;
     const lubang = peta.jalan.lubang || [];
     const semua = [...peta.jalan.luar, ...(peta.jalanDesa || [])];
-    const x0 = Math.min(...semua.map(p => p[0])) - 2, z0 = Math.min(...semua.map(p => p[1])) - 2;
-    const nx = Math.ceil((Math.max(...semua.map(p => p[0])) + 2 - x0) / SEL);
-    const nz = Math.ceil((Math.max(...semua.map(p => p[1])) + 2 - z0) / SEL);
+    // Titik nol kelipatan SEL supaya sel `dalam` (juga kelipatan 25 cm) pas menumpuk.
+    const x0 = Math.floor((Math.min(...semua.map(p => p[0]), ...dalam.map(d => d.x0)) - 2) / SEL) * SEL;
+    const z0 = Math.floor((Math.min(...semua.map(p => p[1]), ...dalam.map(d => d.z0)) - 2) / SEL) * SEL;
+    const nx = Math.ceil((Math.max(...semua.map(p => p[0]), ...dalam.map(d => d.x0 + d.nx * d.sel)) + 2 - x0) / SEL);
+    const nz = Math.ceil((Math.max(...semua.map(p => p[1]), ...dalam.map(d => d.z0 + d.nz * d.sel)) + 2 - z0) / SEL);
     const mentah = new Uint8Array(nx * nz);
     for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++) {
       const p = [x0 + (i + 0.5) * SEL, z0 + (j + 0.5) * SEL];
       if ((didalam(p, peta.jalan.luar) && !lubang.some(h => didalam(p, h))) || (peta.jalanDesa && didalam(p, peta.jalanDesa))) mentah[j * nx + i] = 1;
     }
-    // Kikis satu sel dari tepi supaya kamera tidak menempel ke rumah / pagar.
-    const sel = mentah.slice();
+    // Area dalam kavling: 2 = dalam (tidak dikikis — jaraknya ke dinding sudah
+    // diperhitungkan saat dibuat), lantainya disimpan per sel.
+    const lantai = new Float32Array(nx * nz);
+    dalam.forEach(d => {
+      const bytes = Uint8Array.from(atob(d.data), c => c.charCodeAt(0));
+      const di = Math.round((d.x0 - x0) / SEL), dj = Math.round((d.z0 - z0) / SEL);
+      for (let j = 0; j < d.nz; j++) for (let i = 0; i < d.nx; i++) {
+        const v = bytes[j * d.nx + i];
+        if (!v) continue;
+        const k = (j + dj) * nx + i + di;
+        mentah[k] = 2; lantai[k] = (v - 1) / 100;
+      }
+    });
+    // Kikis 50 cm dari tepi jalan supaya kamera tidak menempel ke rumah / pagar
+    // (tepi yang berbatasan dengan area dalam tidak dikikis — itu pintu masuknya).
+    const sel = mentah.slice(), R = 2;
     for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++) {
       const k = j * nx + i;
-      if (mentah[k] && (i === 0 || j === 0 || i === nx - 1 || j === nz - 1 || !mentah[k - 1] || !mentah[k + 1] || !mentah[k - nx] || !mentah[k + nx])) sel[k] = 0;
+      if (mentah[k] !== 1) continue;
+      for (let r = 1; r <= R && sel[k]; r++)
+        if (i - r < 0 || j - r < 0 || i + r >= nx || j + r >= nz || !mentah[k - r] || !mentah[k + r] || !mentah[k - r * nx] || !mentah[k + r * nx]) sel[k] = 0;
     }
-    grid = { x0, z0, nx, nz, sel };
+    for (let k = 0; k < sel.length; k++) if (sel[k]) sel[k] = 1;
+    grid = { x0, z0, nx, nz, sel, lantai, jenis: mentah };
   }
   const indeksSel = (x, z) => {
     const i = Math.floor((x - grid.x0) / SEL), j = Math.floor((z - grid.z0) / SEL);
     return i >= 0 && j >= 0 && i < grid.nx && j < grid.nz ? j * grid.nx + i : -1;
   };
   const bisaJalan = (x, z) => { const k = indeksSel(x, z); return k >= 0 && grid.sel[k] === 1; };
+  const lantaiDi = (x, z) => { const k = grid ? indeksSel(x, z) : -1; return k >= 0 ? grid.lantai[k] : 0; };
+  const diDalam = (x, z) => { const k = grid ? indeksSel(x, z) : -1; return k >= 0 && grid.jenis[k] === 2; };
   const tengahSel = k => ({ x: grid.x0 + (k % grid.nx + 0.5) * SEL, z: grid.z0 + (Math.floor(k / grid.nx) + 0.5) * SEL });
   /* Titik jalan terdekat (atau null kalau lebih dari `maks` meter). */
   function keJalan(x, z, maks = 40) {
@@ -647,7 +674,7 @@ export async function mulai(host, { onProgress } = {}) {
     return best && bd <= maks ? { ...best, d: bd } : null;
   }
   function lurus(a, b) {
-    const n = Math.ceil(Math.hypot(b.x - a.x, b.z - a.z) / 0.4);
+    const n = Math.ceil(Math.hypot(b.x - a.x, b.z - a.z) / 0.1);   // dinding dalam hanya ±25 cm
     for (let i = 1; i <= n; i++) if (!bisaJalan(a.x + (b.x - a.x) * i / n, a.z + (b.z - a.z) * i / n)) return false;
     return true;
   }
@@ -715,11 +742,13 @@ export async function mulai(host, { onProgress } = {}) {
     for (let i = 0; i < n; i++) {
       const a = i / n * Math.PI * 2, dx = Math.sin(a), dz = Math.cos(a);
       let d = 0;
-      while (d < 30 && bisaJalan(x + dx * (d + 0.5), z + dz * (d + 0.5))) d += 0.5;
+      while (d < 30 && bisaJalan(x + dx * (d + 0.25), z + dz * (d + 0.25))) d += 0.25;
       bebas.push(d);
     }
     const puncak = [];
-    bebas.forEach((d, i) => { if (d >= 7 && d >= bebas[(i + n - 1) % n] && d >= bebas[(i + 1) % n]) puncak.push({ i, d }); });
+    // Di dalam rumah ruangnya pendek: panah cukup ke arah yang bebas ≥ 2,5 m.
+    const minimal = diDalam(x, z) ? 2.5 : 7;
+    bebas.forEach((d, i) => { if (d >= minimal && d >= bebas[(i + n - 1) % n] && d >= bebas[(i + 1) % n]) puncak.push({ i, d }); });
     puncak.sort((p, q) => q.d - p.d);
     const hasil = [];
     puncak.forEach(p => { if (hasil.every(q => Math.min(Math.abs(q.i - p.i), n - Math.abs(q.i - p.i)) > 4)) hasil.push(p); });
@@ -727,7 +756,7 @@ export async function mulai(host, { onProgress } = {}) {
   }
 
   const sv = { on: false, pos: new THREE.Vector3(), yaw: 0, pitch: 0, yawTuju: 0, pitchTuju: 0, fov: 70, fovTuju: 70,
-               rute: [], laju: 10, tiba: null, arah: [], arahDari: null };
+               rute: [], laju: 10, tiba: null, arah: [], arahDari: null, lantai: 0 };
   const tombolTekan = new Set();
   const langit = (() => {
     const c = document.createElement('canvas'); c.width = 2; c.height = 256;
@@ -793,7 +822,9 @@ export async function mulai(host, { onProgress } = {}) {
   function masukJalan(x, z, yaw, pitch = -0.06) {
     siapkanGrid();
     sv.on = true; kendali.enabled = false; tween = null; tombolTekan.clear();
-    sv.pos.set(x, MATA, z); sv.rute = []; sv.tiba = null; sv.arahDari = null;
+    sv.lantai = lantaiDi(x, z);
+    pilihMat.depthTest = true; pilihMat.needsUpdate = true;   // di jalan garis kuning tidak tembus dinding
+    sv.pos.set(x, MATA + sv.lantai, z); sv.rute = []; sv.tiba = null; sv.arahDari = null;
     sv.yaw = sv.yawTuju = yaw; sv.pitch = sv.pitchTuju = pitch;
     sv.fov = sv.fovTuju = kamera.aspect < 1 ? 80 : 68;
     kamera.near = 0.2;
@@ -807,6 +838,7 @@ export async function mulai(host, { onProgress } = {}) {
   function keluarJalan() {
     if (!sv.on) return;
     sv.on = false; tombolTekan.clear(); sv.rute = []; sv.tiba = null;
+    pilihMat.depthTest = false; pilihMat.needsUpdate = true;
     panah.forEach(p => (p.visible = false)); kursor.visible = false;
     scene.background = null; scene.fog = kabutPeta;
     labelFasum.forEach(l => (l.visible = true));
@@ -833,7 +865,7 @@ export async function mulai(host, { onProgress } = {}) {
   function hadapKe(x, y, z) {
     const dx = x - sv.pos.x, dz = z - sv.pos.z;
     sv.yawTuju = sv.yaw + selisihSudut(yawKe(dx, dz), sv.yaw);
-    sv.pitchTuju = batasAntara(Math.atan2(y - MATA, Math.hypot(dx, dz)), -0.4, 0.4);
+    sv.pitchTuju = batasAntara(Math.atan2(y - MATA - sv.lantai, Math.hypot(dx, dz)), -0.4, 0.4);
   }
   const titikDepan = k => keJalan(k.muka[0] + k.arah[0] * 4, k.muka[1] + k.arah[1] * 4);
   function kunjungi(k) {
@@ -845,6 +877,18 @@ export async function mulai(host, { onProgress } = {}) {
       const dx = hx - s.x, dz = hz - s.z;
       masukJalan(s.x, s.z, yawKe(dx, dz), batasAntara(Math.atan2(hy - MATA, Math.hypot(dx, dz)), -0.4, 0.4));
     } else jalanKe(s.x, s.z, () => hadapKe(hx, hy, hz));
+  }
+  /* Masuk ke rumah yang punya area `dalam`: mulai di depan rumah, lalu
+     berjalan sendiri lewat carport ke titik `masuk` dan menoleh ke `lihat`. */
+  function masukRumah(k) {
+    const d = k.dalam;
+    if (!sv.on) {
+      siapkanGrid();
+      const s = titikDepan(k);
+      if (!s) return;
+      masukJalan(s.x, s.z, yawKe(d.masuk[0] - s.x, d.masuk[1] - s.z));
+    }
+    jalanKe(d.masuk[0], d.masuk[1], () => hadapKe(d.lihat[0], d.lihat[1], d.lihat[2]));
   }
   /* Masuk dari gerbang: berdiri di depan gerbang, menghadap ke dalam kawasan. */
   function masukGerbang() {
@@ -881,7 +925,8 @@ export async function mulai(host, { onProgress } = {}) {
     sv.yaw += selisihSudut(sv.yawTuju, sv.yaw) * a;
     sv.pitch += (sv.pitchTuju - sv.pitch) * a;
     sv.fov += (sv.fovTuju - sv.fov) * a;
-    kamera.position.copy(sv.pos);
+    sv.lantai += (lantaiDi(sv.pos.x, sv.pos.z) - sv.lantai) * (1 - Math.exp(-dt * 10));
+    kamera.position.set(sv.pos.x, MATA + sv.lantai, sv.pos.z);
     kamera.rotation.set(sv.pitch, sv.yaw, 0, 'YXZ');
     if (Math.abs(kamera.fov - sv.fov) > 0.01) { kamera.fov = sv.fov; skalaLabel(); }
 
@@ -905,6 +950,10 @@ export async function mulai(host, { onProgress } = {}) {
   function perbaruiLokasi() {
     const { x, z } = sv.pos;
     let teks = peta.jalanDesa && didalam([x, z], peta.jalanDesa) ? 'Jalan desa, depan gerbang' : 'Jalan kawasan';
+    if (diDalam(x, z)) {
+      const k = kavling.find(q => q.dalam && didalam([x, z], q.poly));
+      if (k) { teks = 'Di dalam ' + k.code; if (lokasiEl.textContent !== teks) lokasiEl.textContent = teks; return; }
+    }
     let dekat = null, jd = 9;
     kavling.forEach(k => { const d = Math.hypot(k.muka[0] - x, k.muka[1] - z); if (d < jd) { jd = d; dekat = k; } });
     if (terpilih && Math.hypot(terpilih.muka[0] - x, terpilih.muka[1] - z) < 9) dekat = terpilih;   // rumah yang sedang dilihat menang
@@ -989,10 +1038,15 @@ export async function mulai(host, { onProgress } = {}) {
     if (!arahkanRay(e)) return null;
     const p = ray.intersectObjects(panah.filter(m => m.visible), false)[0];
     if (p) return { jenis: 'panah', obj: p.object };
+    // Bidang "tanah" setinggi lantai tempat kita berdiri (di dalam villa ±0,6 m).
+    bidangTanah.constant = -sv.lantai;
     const t = ray.ray.intersectPlane(bidangTanah, new THREE.Vector3());
+    bidangTanah.constant = 0;
     const jt = t ? t.distanceTo(ray.ray.origin) : Infinity;
     const r = ray.intersectObjects(kena.filter(h => tampil(h.userData.k)), false)[0];
-    if (r && r.distance < jt + 0.3) return { jenis: 'rumah', k: r.object.userData.k };
+    // Rumah yang bisa dimasuki: klik di lantainya = berjalan ke sana, bukan memilih rumah.
+    const masukSini = r && r.object.userData.k.dalam && t && diDalam(t.x, t.z);
+    if (r && r.distance < jt + 0.3 && !masukSini) return { jenis: 'rumah', k: r.object.userData.k };
     if (t && jt < 120) {
       const c = keJalan(t.x, t.z, 4);
       if (c) return { jenis: 'jalan', t, c };
@@ -1037,7 +1091,7 @@ export async function mulai(host, { onProgress } = {}) {
     const h = kenaJalan(e);
     panah.forEach(m => (m.material.opacity = h && h.obj === m ? 1 : 0.85));
     kursor.visible = !!h && h.jenis === 'jalan';
-    if (kursor.visible) kursor.position.set(h.t.x, 0.14, h.t.z);
+    if (kursor.visible) kursor.position.set(h.t.x, sv.lantai + 0.14, h.t.z);
     kanvas.style.cursor = h ? 'pointer' : 'grab';
   });
   function lepasJari(e) {
@@ -1279,6 +1333,12 @@ export async function mulai(host, { onProgress } = {}) {
     keJalanBtn.type = 'button';
     keJalanBtn.addEventListener('click', () => kunjungi(k));
     f.appendChild(keJalanBtn);
+    if (k.dalam) {
+      const masukBtn = el('button', 's3d__jalan', ikonOrang.replace('currentColor', '#e0a400') + 'Masuk &amp; jelajahi ' + esc(k.deret.toLowerCase() === 'villa' ? 'villa' : 'rumah'));
+      masukBtn.type = 'button';
+      masukBtn.addEventListener('click', () => masukRumah(k));
+      f.appendChild(masukBtn);
+    }
     if (k.unit && k.unit.url) {
       const a = el('a', 's3d__link', 'Lihat progress pembangunan unit ini →');
       a.href = k.unit.url; a.target = '_blank'; a.rel = 'noopener';

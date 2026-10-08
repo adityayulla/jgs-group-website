@@ -55,7 +55,9 @@ const KAVLING = [
   { code: 'Baswara 2', poly: kotak(15.6, 23.1, -18.6, -6.4), arah: [0, -1] },
   { code: 'Baswara 3', poly: kotak(23.1, 30.6, -18.6, -6.4), arah: [0, -1] },
   { code: 'Baswara 4', poly: kotak(30.6, 38.1, -18.6, -6.4), arah: [0, -1] },
-  { code: 'Villa Tentrem Jiwo', poly: [[38.1, -18.6], [52.2, -18.6], [52.2, -21.3], [62.9, -21.3], [62.9, -6.4], [38.1, -6.4]], arah: [0, -1] },
+  // Villa: bagian timurnya menjorok ke utara (z -21,3) tapi itu dinding belakang
+  // wing timur — muka yang menghadap jalan adalah carport (z -18,6).
+  { code: 'Villa Tentrem Jiwo', poly: [[38.1, -18.6], [52.2, -18.6], [52.2, -21.3], [62.9, -21.3], [62.9, -6.4], [38.1, -6.4]], arah: [0, -1], muka: [45.15, -18.6] },
 ];
 const PETA = {
   batas: [[8.2, -55.7], [22.3, -54.5], [45.2, -52.9], [44.0, -29.9], [52.1, -29.9], [52.1, -21.3], [62.9, -21.3], [62.9, -6.4], [8.2, -6.4]],
@@ -86,6 +88,7 @@ function didalam([x, z], t) {
 }
 /* Titik tengah sisi depan = titik poligon paling jauh ke arah jalan, dirata-rata. */
 function muka(k) {
+  if (k.muka) return k.muka;
   const d = k.poly.map(([x, z]) => x * k.arah[0] + z * k.arah[1]), maks = Math.max(...d);
   const depan = k.poly.filter((_, i) => d[i] > maks - 0.6);
   return pusat(depan);
