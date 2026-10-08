@@ -220,11 +220,13 @@ img { display: block; }
   padding-bottom: 6px; margin-top: 12px;
 }
 .fas-shots::-webkit-scrollbar { display: none; }
+/* Lebar figure & tinggi foto diatur JS (aturBaris) mengikuti rasio asli
+   tiap foto — portrait tetap tegak, landscape tetap lebar, tanpa crop. */
 .fas-shots figure { flex: none; width: 268px; margin: 0; scroll-snap-align: start; }
 .fas-shots img {
-  width: 100%; height: 180px; object-fit: cover;
+  display: block; width: 100%; height: 220px; object-fit: cover;
   border-radius: 12px; border: 1px solid rgba(0,0,0,.06);
-  cursor: zoom-in;
+  background: #eef0f4; cursor: zoom-in;
 }
 .fas-shots a { display: block; text-decoration: none; }
 .fas-shots a:hover img { outline: 2px solid #e07a2f; outline-offset: 2px; }
@@ -233,23 +235,9 @@ img { display: block; }
 }
 @media (min-width: 768px) {
   .fas-shots {
-    display: grid; grid-template-columns: repeat(3, 1fr);
+    flex-wrap: wrap; align-items: flex-start;
     overflow: visible; scroll-snap-type: none; gap: 12px; margin-top: 14px;
   }
-  .fas-shots figure { width: auto; }
-  .fas-shots img { height: 240px; }
-  /* Foto pertama (gerbang bernama perumahan) jadi pembuka selebar baris,
-     sisanya tiga per baris. Kalau foto terakhir tersisa sendirian di
-     barisnya, ikut dilebarkan supaya tidak menggantung sebagai kartu kecil. */
-  .fas-shots figure:first-child,
-  .fas-shots figure:nth-child(3n+2):last-child { grid-column: 1 / -1; }
-  .fas-shots figure:first-child img,
-  .fas-shots figure:nth-child(3n+2):last-child img { height: 300px; }
-}
-@media (min-width: 1024px) {
-  .fas-shots img { height: 300px; }
-  .fas-shots figure:first-child img,
-  .fas-shots figure:nth-child(3n+2):last-child img { height: 420px; }
 }
 
 /* ─────────────────────────────────────────
@@ -2299,51 +2287,99 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!items.length || !wrap || !grid) return;
 
       items = items.filter(function (p) { return p.url; });
-      items.forEach(function (p, i) {
-        var teks = p.caption || 'Fasilitas & lingkungan Tentrem Bhumi';
 
-        var img = document.createElement('img');
-        // Thumbnail 400px dari feed cuma cukup untuk kartu kecil di HP
-        // layar biasa. Di desktop foto pertama (dan foto terakhir yang
-        // sendirian di barisnya) selebar baris, lainnya sepertiga baris —
-        // srcset membiarkan browser mengambil foto penuh (min. 800px)
-        // supaya tidak buram. Lebar figure harus cocok dengan CSS .fas-shots.
-        var lebar = i === 0 || (i === items.length - 1 && i % 3 === 1);
-        if (p.thumb) {
-          img.srcset = p.thumb + ' 400w, ' + p.url + ' 800w';
-          img.sizes = lebar
-            ? '(min-width: 768px) 100vw, 268px'
-            : '(min-width: 768px) 34vw, 268px';
+      /* Rasio tiap foto dibaca dari thumbnail (kecil, rasionya sama dengan
+         foto penuh) sebelum ditata. Foto yang gagal dimuat dua-duanya
+         (file hilang di storage) dibuang daripada tampil kosong. */
+      function bacaRasio(p) {
+        return new Promise(function (res) {
+          var t = new Image();
+          t.onload = function () {
+            res({ p: p, rasio: t.naturalWidth / t.naturalHeight || 4 / 3, src: t.src });
+          };
+          t.onerror = function () {
+            if (t.src !== p.url && p.thumb) t.src = p.url;
+            else res(null);
+          };
+          t.src = p.thumb || p.url;
+        });
+      }
+
+      Promise.all(items.map(bacaRasio)).then(function (hasil) {
+        var foto = hasil.filter(Boolean).map(function (h) {
+          var p = h.p;
+          var teks = p.caption || 'Fasilitas & lingkungan Tentrem Bhumi';
+
+          var img = document.createElement('img');
+          // Thumbnail 400px cukup untuk kartu kecil; srcset membiarkan browser
+          // mengambil foto penuh (min. 800px) saat kartunya besar / layar retina.
+          // sizes diisi aturBaris() sesuai lebar sebenarnya.
+          if (p.thumb && h.src === p.thumb) img.srcset = p.thumb + ' 400w, ' + p.url + ' 800w';
+          img.src = h.src;
+          img.alt = teks + ' — Tentrem Bhumi, JGS Group';
+          img.loading = 'lazy';
+          img.decoding = 'async';
+
+          var a = document.createElement('a');
+          a.href = p.url;
+          a.setAttribute('data-st-lb', '');
+          a.setAttribute('data-cap', teks);
+          a.appendChild(img);
+
+          var cap = document.createElement('figcaption');
+          cap.textContent = teks;
+
+          var fig = document.createElement('figure');
+          fig.appendChild(a);
+          fig.appendChild(cap);
+          grid.appendChild(fig);
+          return { fig: fig, img: img, rasio: h.rasio };
+        });
+        if (!foto.length) return;
+        wrap.hidden = false;
+
+        function pasang(f, w, h) {
+          f.fig.style.width = w + 'px';
+          f.img.style.height = h + 'px';
+          f.img.sizes = Math.ceil(w) + 'px';
         }
-        // Foto lama yang belum punya thumbnail jatuh kembali ke p.url, sekali saja.
-        // Kalau foto penuh pun gagal (file hilang di storage), kartunya dibuang
-        // daripada tampil kosong.
-        img.onerror = function () {
-          img.onerror = function () { fig.remove(); };
-          img.removeAttribute('srcset');
-          img.src = p.url;
-        };
-        img.src = p.thumb || p.url;
-        img.alt = teks + ' — Tentrem Bhumi, JGS Group';
-        img.loading = 'lazy';
-        img.decoding = 'async';
 
-        var a = document.createElement('a');
-        a.href = p.url;
-        a.setAttribute('data-st-lb', '');
-        a.setAttribute('data-cap', teks);
-        a.appendChild(img);
+        /* Desktop: baris "justified" — foto sebaris sama tinggi dan baris
+           terisi penuh, tiap foto memakai rasio aslinya. Jumlah baris dipilih
+           supaya tinggi baris mendekati TARGET; foto dibagi ke baris menurut
+           akumulasi rasio supaya baris seimbang. HP: carousel geser dengan
+           tinggi tetap, lebar mengikuti rasio. */
+        function aturBaris() {
+          var W = grid.clientWidth;
+          if (window.innerWidth < 768 || !W) {
+            foto.forEach(function (f) { pasang(f, Math.round(220 * f.rasio), 220); });
+            return;
+          }
+          var GAP = 12, TARGET = 380, MAKS = 520;
+          var total = foto.reduce(function (n, f) { return n + f.rasio; }, 0);
+          var nBaris = Math.max(1, Math.min(foto.length, Math.round(total * TARGET / W)));
+          var baris = [[]], acc = 0;
+          foto.forEach(function (f, i) {
+            var batas = total * baris.length / nBaris;
+            if (baris[baris.length - 1].length && acc + f.rasio / 2 > batas &&
+                baris.length < nBaris) baris.push([]);
+            baris[baris.length - 1].push(f);
+            acc += f.rasio;
+          });
+          baris.forEach(function (r) {
+            var sumR = r.reduce(function (n, f) { return n + f.rasio; }, 0);
+            var h = Math.min(MAKS, (W - GAP * (r.length - 1)) / sumR);
+            r.forEach(function (f) { pasang(f, Math.floor(h * f.rasio), Math.round(h)); });
+          });
+        }
 
-        var cap = document.createElement('figcaption');
-        cap.textContent = teks;
-
-        var fig = document.createElement('figure');
-        fig.appendChild(a);
-        fig.appendChild(cap);
-        grid.appendChild(fig);
+        aturBaris();
+        var tunda;
+        window.addEventListener('resize', function () {
+          clearTimeout(tunda);
+          tunda = setTimeout(aturBaris, 150);
+        });
       });
-
-      wrap.hidden = false;
     })
     .catch(function () {
       /* Feed foto gagal — bagian ini tetap tersembunyi, render 3D tampil. */
