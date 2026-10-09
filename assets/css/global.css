@@ -140,8 +140,9 @@ em { font-style: italic; font-family: var(--font-display); font-weight: 400; }
 .btn:hover { transform: translateY(-1px); }
 .btn--primary { background: var(--navy); color: #fff; }
 .btn--primary:hover { background: var(--navy-2); }
-.btn--orange { background: var(--orange); color: #fff; }
-.btn--orange:hover { background: var(--orange-2); }
+/* Oranye tombol digelapkan agar teks putih ≥4,5:1 (#db7f2e hanya 2,96:1; #bf5510 = 4,64:1) */
+.btn--orange { background: #bf5510; color: #fff; }
+.btn--orange:hover { background: #a84a0d; }
 .btn--ghost { background: transparent; color: var(--ink); border: 1px solid rgba(27,42,100,.20); }
 .btn--ghost:hover { background: rgba(27,42,100,.05); }
 .btn--outline-white { border: 1px solid rgba(255,255,255,.5); color: #fff; }
@@ -540,9 +541,10 @@ main > section { position: relative; z-index: 1; }
 .footer__tag   { font-size: 13px; margin-top: 6px; }
 .footer__cols  { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 40px; }
 .footer__colh  { font-size: 12px; letter-spacing: .1em; color: var(--navy); font-weight: 600; text-transform: uppercase; margin-bottom: 12px; }
-.footer__coll  { font-size: 14px; padding: 3px 0; display: flex; align-items: flex-start; gap: 7px; }
+.footer__coll  { font-size: 14px; padding: 5px 0; min-height: 24px; display: flex; align-items: flex-start; gap: 7px; } /* target sentuh ≥24px */
 .footer__coll:hover { color: var(--navy); }
 .footer__bot   { display: flex; justify-content: space-between; margin-top: 20px; font-size: 12px; font-family: var(--font-mono); color: var(--muted); letter-spacing: .04em; }
+.footer__bot a { display: inline-block; padding: 5px 0; }
 
 .footer__status {
   font-size: 10px; font-family: var(--font-mono); font-weight: 700;
@@ -637,7 +639,7 @@ main > section { position: relative; z-index: 1; }
   .footer__top { grid-template-columns: 1fr; gap: 22px; padding-bottom: 26px; }
   .footer__brand { font-size: 22px; }
   .footer__cols { grid-template-columns: 1fr 1fr; gap: 18px 22px; }
-  .footer__coll { padding: 2px 0; }
+  .footer__coll { padding: 5px 0; }
   .footer__bot  { flex-direction: column; gap: 8px; margin-top: 16px; }
   .cta-section  { margin: 40px 16px; padding: 70px 28px; border-radius: var(--r-lg); }
   .cta-section__ctas { flex-direction: column; align-items: stretch; }

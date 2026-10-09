@@ -37,7 +37,8 @@
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/assets/css/global.css?v=20260818-1">
+  <link rel="stylesheet" href="/assets/css/global.css?v=20261009">
+  <link rel="preload" as="image" type="image/webp" href="/assets/img/hero-kawa-sedayu-800.webp" imagesrcset="/assets/img/hero-kawa-sedayu-800.webp 800w, /assets/img/hero-kawa-sedayu-1400.webp 1400w" imagesizes="(max-width: 900px) 100vw, 45vw" fetchpriority="high">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 
@@ -161,6 +162,25 @@
       .ph-hero__media { order: -1; }
       .ph-hero__media img { height: 260px; }
     }
+
+    /* Tabel ringkas rumah dijual (H2 "Rumah dijual di Jogja") */
+    .ph-tabel__wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; background: #fff; border: 1px solid var(--line); border-radius: 14px; margin: 22px 0 18px; }
+    .ph-tabel { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px; }
+    .ph-tabel th, .ph-tabel td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.5; }
+    .ph-tabel th { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); background: var(--bg); }
+    .ph-tabel tr:last-child td { border-bottom: 0; }
+    .ph-tabel td b { color: var(--navy); }
+
+    /* HP: tombol WA/pricelist langsung di bawah H1, subjudul lebih ringkas (CTA ±800px dari atas → lebih dekat) */
+    @media (max-width: 640px) {
+      .ph-hero__grid > div:first-child { display: flex; flex-direction: column; }
+      .ph-hero__eyebrow { order: 0; align-self: flex-start; margin-bottom: 14px; }
+      .ph-hero h1 { order: 1; margin-bottom: 16px; }
+      .ph-hero__ctas { order: 2; margin-bottom: 16px; }
+      .ph-hero__sub { order: 3; font-size: 15px; line-height: 1.55; margin: 0 0 16px; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+      .ph-hero__stats { order: 4; }
+      .ph-hero__media img { height: 210px; }
+    }
   </style>
 </head>
 <body>
@@ -188,7 +208,7 @@
 
 <!-- HERO -->
 <header class="ph-hero">
-  <div class="container reveal">
+  <div class="container">
     <div class="ph-hero__grid">
       <div>
         <span class="ph-hero__eyebrow"><span class="ph-hero__dot"></span> Perumahan · Yogyakarta</span>
@@ -205,7 +225,10 @@
         </div>
       </div>
       <div class="ph-hero__media">
-        <img src="/assets/img/hero-kawa-sedayu.jpg" alt="Rumah Kawa Living di Sedayu — perumahan JGS Group di Yogyakarta" width="1400" height="1066" fetchpriority="high" role="button" tabindex="0" onclick="openGaleri(window.JGS_GALERI_PJ,0)">
+        <picture>
+          <source type="image/webp" srcset="/assets/img/hero-kawa-sedayu-800.webp 800w, /assets/img/hero-kawa-sedayu-1400.webp 1400w" sizes="(max-width: 900px) 100vw, 45vw">
+          <img src="/assets/img/hero-kawa-sedayu.jpg" alt="Rumah Kawa Living di Sedayu — perumahan JGS Group di Yogyakarta" width="1400" height="933" fetchpriority="high" decoding="async" role="button" tabindex="0" onclick="openGaleri(window.JGS_GALERI_PJ,0)">
+        </picture>
         <button class="ph-hero__galeri" type="button" onclick="openGaleri(window.JGS_GALERI_PJ,0)">📷 Lihat foto</button>
         <div class="ph-hero__badge"><b>Mulai Rp 410 Jt</b><span>3 perumahan aktif di Jogja</span></div>
       </div>
@@ -261,6 +284,28 @@
       </article>
 
     </div>
+  </div>
+</section>
+
+<!-- RUMAH DIJUAL: TIPE, HARGA, ANGSURAN -->
+<section class="ph-sec">
+  <div class="container reveal">
+    <p class="ph-tag">Rumah Dijual</p>
+    <h2 class="ph-h2">Rumah dijual di Jogja: tipe, harga, dan angsuran</h2>
+    <p class="ph-lead">Ringkasan rumah dijual dari tiga perumahan JGS Group — dua di Sleman, satu di Bantul. Harga adalah harga mulai dan dapat berubah sesuai tipe serta ketersediaan unit.</p>
+    <div class="ph-tabel__wrap">
+      <table class="ph-tabel">
+        <thead>
+          <tr><th>Perumahan</th><th>Lokasi</th><th>Tipe</th><th>Harga mulai</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Kawa Living</b></td><td>Sedayu, Bantul</td><td>Yuri, Himawari, Okina — rumah tapak 1 &amp; 2 lantai</td><td><b>Rp 410 jutaan</b></td></tr>
+          <tr><td><b>Tentrem Bhumi</b></td><td>Ngaglik, Sleman</td><td>Andrawina, Bhama, Cantya — rumah tapak</td><td><b>Rp 650–660 jutaan</b></td></tr>
+          <tr><td><b>Tentrem Jiwo</b></td><td>Kalasan, Sleman</td><td>Villa 6 kamar, private pool — sisa 1 unit</td><td><b>Rp 3,5 M</b> · SHM</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ph-lead">Ingin <strong>beli rumah di Jogja</strong> dengan KPR? Semua rumah dijual di atas bisa dibeli secara KPR bank maupun skema syariah, dengan angsuran mulai sekitar Rp 3 jutaan per bulan (tergantung tipe, DP, dan tenor). Pilih Bantul jika Anda mencari harga paling terjangkau di barat Jogja, atau Sleman jika ingin dekat kampus dan pusat aktivitas di utara serta timur kota. Tim kami membantu simulasi KPR sampai akad.</p>
   </div>
 </section>
 
@@ -461,7 +506,7 @@
 
 <div id="footer-placeholder"></div>
 
-<script src="/assets/js/main.js?v=20260625"></script>
+<script src="/assets/js/main.js?v=20261009"></script>
 <script src="/assets/js/foto-galeri.js?v=20260924-1"></script>
 <script>
 /* 24 Sep 2026: galeri foto hero — Clarity: foto ini 33 dead-tap/bulan (26% dari semua dead-tap halaman) */
@@ -473,7 +518,7 @@ window.JGS_GALERI_PJ = [
   { src: '/tentrem-bhumi/photos/cantya/cantya%20berjejer%20miring%20taman.webp', judul: 'Tipe Cantya · Tentrem Bhumi', sub: 'Ngaglik, 7 menit ke UII · 3KT 1KM', href: '/tentrem-bhumi/', cta: 'Lihat Tentrem Bhumi →' }
 ];
 </script>
-<script src="/assets/js/pricelist-modal.js?v=20260924-1" data-agent="dwi"></script>
+<script src="/assets/js/pricelist-modal.js?v=20261009" data-agent="dwi"></script>
 
 <script type="application/ld+json">
 {

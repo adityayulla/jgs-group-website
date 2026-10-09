@@ -244,7 +244,7 @@
         '<button id="pricelist-close" onclick="window.closePricelistModal()">✕</button>' +
         '<div id="pricelist-modal-body">' +
           '<div class="pm-head">' +
-            '<img class="pm-avatar" id="pl-foto" src="' + AGENT.photo + '" alt="' + AGENT.name + ' — tim marketing JGS Group" width="54" height="54">' +
+            '<img class="pm-avatar" id="pl-foto" src="' + AGENT.photo + '" alt="' + AGENT.name + ' — tim marketing JGS Group" width="54" height="54" loading="lazy" decoding="async">' +
             '<div class="pm-head-txt">' +
               '<h3 class="pm-title">Download Pricelist</h3>' +
               '<p class="pm-agent">Dibalas langsung oleh <b id="pl-nama-agen">' + AGENT.name + '</b>, tim kami 👋</p>' +

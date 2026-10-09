@@ -37,7 +37,8 @@
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/assets/css/global.css?v=20260818-1">
+  <link rel="stylesheet" href="/assets/css/global.css?v=20261009">
+  <link rel="preload" as="image" type="image/webp" href="/assets/img/hero-kawa-sedayu-800.webp" imagesrcset="/assets/img/hero-kawa-sedayu-800.webp 800w, /assets/img/hero-kawa-sedayu-1400.webp 1400w" imagesizes="(max-width: 900px) 100vw, 45vw" fetchpriority="high">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 
@@ -151,7 +152,7 @@
 
 <!-- HERO -->
 <header class="ph-hero">
-  <div class="container reveal">
+  <div class="container">
     <div class="ph-hero__grid">
       <div>
         <span class="ph-hero__eyebrow"><span class="ph-hero__dot"></span> Perumahan di Sedayu · Bantul, Yogyakarta</span>
@@ -168,7 +169,10 @@
         </div>
       </div>
       <div class="ph-hero__media">
-        <img src="/assets/img/hero-kawa-sedayu.jpg" alt="Rumah tipe Yuri &amp; Himawari di Kawa Living, Sedayu, Bantul, Yogyakarta" width="1400" height="1066" fetchpriority="high">
+        <picture>
+          <source type="image/webp" srcset="/assets/img/hero-kawa-sedayu-800.webp 800w, /assets/img/hero-kawa-sedayu-1400.webp 1400w" sizes="(max-width: 900px) 100vw, 45vw">
+          <img src="/assets/img/hero-kawa-sedayu.jpg" alt="Rumah tipe Yuri &amp; Himawari di Kawa Living, Sedayu, Bantul, Yogyakarta" width="1400" height="933" fetchpriority="high" decoding="async">
+        </picture>
         <div class="ph-hero__badge"><b>Mulai Rp 410 Jt-an</b><span>Kawa Living · Sedayu, Bantul</span></div>
       </div>
     </div>
@@ -208,7 +212,10 @@
     <p class="ph-lead">Desain Japandi yang menarik dan tidak membosankan, dengan pilihan tipe 1 dan 2 lantai. Bisa lihat house tour tiap tipe langsung di situs kami.</p>
     <div class="kl-card">
       <div class="kl-card__media">
-        <img src="/assets/img/hero-kawa-sedayu.jpg" alt="Tipe Yuri &amp; Himawari Kawa Living Sedayu" width="1400" height="1066" loading="lazy">
+        <picture>
+          <source type="image/webp" srcset="/assets/img/hero-kawa-sedayu-800.webp 800w, /assets/img/hero-kawa-sedayu-1400.webp 1400w" sizes="(max-width: 900px) 100vw, 50vw">
+          <img src="/assets/img/hero-kawa-sedayu.jpg" alt="Tipe Yuri &amp; Himawari Kawa Living Sedayu" width="1400" height="933" loading="lazy" decoding="async">
+        </picture>
       </div>
       <div class="kl-card__body">
         <div class="kl-card__area">◉ Surobayan, Argomulyo · Sedayu, Bantul</div>
@@ -295,8 +302,8 @@
 
 <div id="footer-placeholder"></div>
 
-<script src="/assets/js/main.js?v=20260625"></script>
-<script src="/assets/js/pricelist-modal.js?v=20260924-1" data-agent="dwi"></script>
+<script src="/assets/js/main.js?v=20261009"></script>
+<script src="/assets/js/pricelist-modal.js?v=20261009" data-agent="dwi"></script>
 
 <script type="application/ld+json">
 {

@@ -43,11 +43,16 @@
     return prefix + 'components/';
   }
 
+  /* URL komponen TANPA .html: cleanUrls Vercel mengalihkan /components/navbar.html → /components/navbar/
+     lewat 308, jadi ambil langsung bentuk akhirnya (200). Fallback ke .html untuk server statis lokal
+     (python -m http.server, npx serve tanpa cleanUrls). */
   async function injectComponent(selector, file) {
     const el = document.querySelector(selector);
     if (!el) return;
     try {
-      const res = await fetch(getComponentBase() + file);
+      const dasar = getComponentBase() + file.replace(/\.html$/, '');
+      let res = await fetch(dasar + '/');
+      if (!res.ok) res = await fetch(dasar + '.html');
       if (!res.ok) throw new Error(res.status);
       el.innerHTML = await res.text();
       el.firstElementChild && el.replaceWith(...el.children);
@@ -159,20 +164,25 @@
   }
 
   /* ── Scroll-reveal (IntersectionObserver) ───────────────── */
+  /* Boleh dipanggil berulang: elemen yang sudah diamati ditandai data-reveal, jadi bisa dijalankan
+     segera saat DOM siap (tanpa menunggu fetch navbar/footer) lalu diulang setelah komponen disuntik. */
+  let revealObs = null;
   function initReveal() {
-    const els = document.querySelectorAll('.reveal');
+    const els = document.querySelectorAll('.reveal:not([data-reveal])');
     if (!els.length) return;
 
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('reveal--in');
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
+    if (!revealObs) {
+      revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('reveal--in');
+            revealObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+    }
 
-    els.forEach(el => obs.observe(el));
+    els.forEach(el => { el.dataset.reveal = '1'; revealObs.observe(el); });
   }
 
   /* ── Why cards — staggered fade-in ───────────────────────── */
@@ -496,10 +506,11 @@
   /* ── Init ────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
     initWaTracking();
+    initReveal();   // konten di atas lipatan tak boleh menunggu fetch navbar/footer
     injectAll().then(() => {
       if (window.JGSKontak) window.JGSKontak.terapkanSemua();   // navbar/footer baru saja disuntik
       initBackground();
-      initReveal();
+      initReveal();   // elemen .reveal yang baru disuntik (kalau ada)
       initWhyCards();
       initCounters();
       initFAQ();
