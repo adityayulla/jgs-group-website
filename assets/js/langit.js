@@ -147,7 +147,9 @@
     }
     // bulan naik dari kanan saat malam
     if (ml > 0) {
-      var bx = W * 0.82, by = H * (0.6 - ml * 0.42), rB = Math.min(W, H) * 0.05;
+      // busur yang sama dengan matahari: terbit dari kiri saat magrib, mencapai puncak di ujung halaman
+      var uM = Math.min(1, (p - 0.78) / 0.22) * 0.5, tM = Math.sin(uM * Math.PI);
+      var bx = W * (0.05 + uM * 0.9), by = H * (0.86 - tM * 0.7), rB = Math.min(W, H) * 0.05;
       ctx.save(); ctx.globalAlpha = ml;
       var cahaya = ctx.createRadialGradient(bx, by, rB * 0.8, bx, by, rB * 4); cahaya.addColorStop(0, 'rgba(255,244,214,.35)'); cahaya.addColorStop(1, 'rgba(255,244,214,0)');
       ctx.fillStyle = cahaya; ctx.fillRect(bx - rB * 4, by - rB * 4, rB * 8, rB * 8);
