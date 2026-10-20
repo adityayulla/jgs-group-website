@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uji latar langit — JGS Group</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96">
+  <meta name="theme-color" content="#1b2a64">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Manrope:wght@400;500;600;700&display=swap">
+  <style>
+    /* Halaman uji: latar langit satu hari penuh mengikuti guliran, dari pagi di
+       atas sampai malam di bawah. Isinya contoh seksi supaya ada yang digulir. */
+    :root{--ink:#15203b;--ink-2:#4a5470;--muted:#858ca3;--line:#e2dfd6;--navy:#1b2a64;--merah:#e0213f;color-scheme:light}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:#1b2a64;color:var(--ink);font-family:"Manrope",system-ui,sans-serif;font-size:16px;line-height:1.55}
+    #langit{position:fixed;inset:0;z-index:0;width:100%;height:100%;display:block}
+    h1,h2{font-family:"Fraunces",Georgia,serif;font-weight:500;line-height:1.08;margin:0;letter-spacing:-.012em;text-wrap:balance}
+    h1{font-size:clamp(38px,6vw,78px)}
+    h2{font-size:clamp(26px,3.2vw,42px)}
+    p{margin:0}
+    .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--merah);font-weight:700}
+    .lede{font-size:clamp(16px,1.3vw,19px);color:var(--ink-2);max-width:62ch}
+    .seksi{position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:72px 16px 56px}
+    .seksi>*{width:100%;max-width:1100px;margin-inline:auto}
+    .panel{background:rgba(247,246,242,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.7);border-radius:22px;padding:34px 36px;display:flex;flex-direction:column;gap:18px;box-shadow:0 30px 60px -30px rgba(15,23,51,.45)}
+    @media (max-width:860px){.panel{padding:22px 18px;border-radius:16px}}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    @media (max-width:860px){.grid{grid-template-columns:1fr}}
+    .kartu{background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+    .kartu b{display:block;font-family:"Fraunces",serif;font-size:30px;font-weight:500}
+    .kartu span{font-size:13px;color:var(--ink-2)}
+    .terang{color:#fff;text-shadow:0 6px 30px rgba(20,10,40,.45);align-items:center;text-align:center}
+    .terang .eyebrow{color:#ffd1d9}
+    .terang .lede{color:rgba(255,255,255,.88)}
+    .terang>*{display:flex;flex-direction:column;align-items:center;gap:16px}
+    .logo{height:72px;width:auto;background:rgba(255,255,255,.94);padding:10px 14px;border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.25)}
+    .tombol{display:inline-block;background:var(--merah);color:#fff;font-weight:700;padding:12px 22px;border-radius:999px;text-decoration:none}
+    .petunjuk{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:2;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);background:rgba(15,23,51,.35);padding:6px 12px;border-radius:999px;backdrop-filter:blur(6px)}
+    .catatan{font-size:13px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <canvas id="langit" aria-hidden="true"></canvas>
+  <div class="petunjuk">Halaman uji · gulir dari pagi sampai malam</div>
+
+  <section class="seksi terang">
+    <div>
+      <img class="logo" src="/assets/img/Logo-JGS-Group2.webp" alt="Jogja Graha Selaras">
+      <span class="eyebrow">Jogja Graha Selaras</span>
+      <h1>Setiap rumah, satu babak hidup yang berarti</h1>
+      <p class="lede">Developer perumahan di Yogyakarta sejak 2013. Lebih dari 300 keluarga sudah menempati rumahnya di Kawa Village, Royal Mansion, Kawa Living, Tentrem Bhumi, dan Tentrem Jiwo.</p>
+      <a class="tombol" href="https://wa.me/6289506888328">Hubungi marketing</a>
+    </div>
+  </section>
+
+  <section class="seksi">
+    <div class="panel">
+      <span class="eyebrow">Perumahan kami</span>
+      <h2>Tiga perumahan aktif, dua yang sudah habis terjual</h2>
+      <p class="lede">Rumah di deretan bawah layar ini adalah siluet tipe sungguhan kami: Okina dari Kawa Living, Bhama dan Andrawina dari Tentrem Bhumi, Abirama dari Tentrem Jiwo.</p>
+      <div class="grid">
+        <div class="kartu"><b>Kawa Living</b><span>Sedayu · mulai Rp 414 jt-an · 74 kavling</span></div>
+        <div class="kartu"><b>Tentrem Bhumi</b><span>Dekat UII · Rp 656 jt – 1,8 M · 33 kavling</span></div>
+        <div class="kartu"><b>Tentrem Jiwo</b><span>Kalasan · 11 rumah, 1 kantor, 1 villa</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksi">
+    <div class="panel">
+      <span class="eyebrow">Kenapa memilih JGS</span>
+      <h2>Lingkungan yang sudah jadi, bukan sekadar janji di brosur</h2>
+      <p class="lede">Jalan, gerbang, pos satpam, taman, dan rumah contoh dibangun lebih dulu. Progres tiap kavling bisa dilihat pembeli kapan saja di Progress Dashboard.</p>
+      <div class="grid">
+        <div class="kartu"><b>300+</b><span>unit serah terima</span></div>
+        <div class="kartu"><b>6</b><span>bank rekanan KPR</span></div>
+        <div class="kartu"><b>13 tahun</b><span>membangun di Jogja</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksi">
+    <div class="panel">
+      <span class="eyebrow">Sore hari</span>
+      <h2>Pulang ke rumah yang tenang</h2>
+      <p class="lede">Seksi ini hanya pengisi supaya ada yang digulir. Perhatikan matahari turun di kanan dan warna langit berubah keemasan.</p>
+      <p class="catatan">Di halaman sungguhan, bagian ini bisa jadi testimoni pembeli atau galeri serah terima.</p>
+    </div>
+  </section>
+
+  <section class="seksi terang">
+    <div>
+      <span class="eyebrow">Malam di perumahan JGS</span>
+      <h1>Lampu-lampu rumah menyala, burung hantu lewat</h1>
+      <p class="lede">Ujung halaman. Jendela tiap rumah menyala, papan nama gerbang dan lampu jalan ikut terang.</p>
+      <a class="tombol" href="https://wa.me/6289506888328">Jadwalkan survei</a>
+    </div>
+  </section>
+
+  <script src="/assets/js/langit.js" defer></script>
+</body>
+</html>
