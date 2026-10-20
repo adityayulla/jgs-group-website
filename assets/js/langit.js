@@ -34,21 +34,22 @@
   // Warna langit per fase: [p, atas, cakrawala]. p=0 pagi, p=1 malam.
   var fase = [
     [0.00, [60, 70, 140], [255, 170, 100]],   // fajar, matahari baru muncul
-    [0.12, [100, 150, 220], [255, 205, 140]], // pagi
-    [0.30, [110, 172, 235], [222, 238, 246]], // siang
-    [0.50, [112, 168, 228], [238, 232, 210]], // siang menjelang sore
-    [0.64, [150, 140, 190], [255, 180, 110]], // sore keemasan
-    [0.76, [70, 60, 130], [240, 120, 90]],    // senja
-    [0.86, [20, 32, 78], [60, 60, 120]],      // magrib
-    [1.00, [11, 20, 48], [24, 38, 88]]        // malam
+    [0.08, [100, 150, 220], [255, 205, 140]], // pagi
+    [0.22, [110, 172, 235], [222, 238, 246]], // siang
+    [0.36, [112, 168, 228], [238, 232, 210]], // siang menjelang sore
+    [0.46, [150, 140, 190], [255, 180, 110]], // sore keemasan
+    [0.54, [70, 60, 130], [240, 120, 90]],    // senja
+    [0.62, [20, 32, 78], [60, 60, 120]],      // magrib
+    [0.80, [11, 20, 48], [24, 38, 88]],       // tengah malam
+    [1.00, [30, 42, 90], [90, 80, 120]]       // menjelang subuh
   ];
   function warnaLangit(p) {
     for (var i = 1; i < fase.length; i++) if (p <= fase[i][0]) { var u = (p - fase[i - 1][0]) / (fase[i][0] - fase[i - 1][0]); return [camp(fase[i - 1][1], fase[i][1], u), camp(fase[i - 1][2], fase[i][2], u)]; }
     return [fase[fase.length - 1][1], fase[fase.length - 1][2]];
   }
   // Terang hari: 0 malam, 1 siang.
-  function terang(p) { return halus((p - 0.02) / 0.22) * (1 - halus((p - 0.62) / 0.22)); }
-  function malam(p) { return halus((p - 0.78) / 0.14); }
+  function terang(p) { return halus((p - 0.02) / 0.16) * (1 - halus((p - 0.42) / 0.16)); }
+  function malam(p) { return halus((p - 0.56) / 0.1) * (1 - 0.25 * halus((p - 0.94) / 0.06)); }
 
   // ---------------------------------------------------------------- rumah
   // Tiap rumah digambar dalam kotak satuan: lebar 1, tinggi menurut tipenya,
@@ -137,10 +138,10 @@
     if (ml > 0) bintang.forEach(function (b) { var kerlip = 0.6 + 0.4 * Math.sin(t * 0.002 * (1 + b.k) + b.k * 10); ctx.fillStyle = 'rgba(255,255,255,' + (ml * kerlip * 0.9) + ')'; ctx.beginPath(); ctx.arc(b.x * W, b.y * H, b.r, 0, 6.283); ctx.fill(); });
 
     // matahari: terbit kiri (p=0), puncak (p≈0.4), terbenam kanan (p≈0.8)
-    var uL = Math.min(1, p / 0.82), tinggi = Math.sin(uL * Math.PI);
+    var uL = Math.min(1, p / 0.58), tinggi = Math.sin(uL * Math.PI);
     var sx = W * (0.05 + uL * 0.9), sy = H * (0.86 - tinggi * 0.7), rS = Math.min(W, H) * 0.07;
-    if (p < 0.86) {
-      var aS = 1 - halus((p - 0.8) / 0.06), merah = 1 - tinggi, ws = [255, 200 + (1 - merah) * 45, 90 + (1 - merah) * 110];
+    if (p < 0.62) {
+      var aS = 1 - halus((p - 0.56) / 0.06), merah = 1 - tinggi, ws = [255, 200 + (1 - merah) * 45, 90 + (1 - merah) * 110];
       var sinar = ctx.createRadialGradient(sx, sy, rS * 0.6, sx, sy, rS * 6); sinar.addColorStop(0, rgb(ws, 0.5 * aS)); sinar.addColorStop(1, rgb(ws, 0));
       ctx.fillStyle = sinar; ctx.fillRect(sx - rS * 6, sy - rS * 6, rS * 12, rS * 12);
       ctx.fillStyle = rgb(ws, aS); ctx.beginPath(); ctx.arc(sx, sy, rS, 0, 6.283); ctx.fill();
@@ -148,7 +149,8 @@
     // bulan naik dari kanan saat malam
     if (ml > 0) {
       // busur yang sama dengan matahari: terbit dari kiri saat magrib, mencapai puncak di ujung halaman
-      var uM = Math.min(1, (p - 0.78) / 0.22) * 0.5, tM = Math.sin(uM * Math.PI);
+      // busur penuh: terbit dari kiri saat magrib, puncak tengah malam, tenggelam di kanan menjelang subuh
+      var uM = Math.min(1, Math.max(0, (p - 0.58) / 0.42)), tM = Math.sin(uM * Math.PI);
       var bx = W * (0.05 + uM * 0.9), by = H * (0.86 - tM * 0.7), rB = Math.min(W, H) * 0.05;
       ctx.save(); ctx.globalAlpha = ml;
       var cahaya = ctx.createRadialGradient(bx, by, rB * 0.8, bx, by, rB * 4); cahaya.addColorStop(0, 'rgba(255,244,214,.35)'); cahaya.addColorStop(1, 'rgba(255,244,214,0)');
@@ -160,7 +162,7 @@
     // awan tipis di siang
     if (tr > 0.05) awan.forEach(function (a) { var ax = ((a.x + t * a.v * 0.00002) % 1.3 - 0.15) * W, ay = a.y * H, as = a.s * W; ctx.fillStyle = 'rgba(255,255,255,' + (0.55 * tr) + ')'; ctx.beginPath(); ctx.ellipse(ax, ay, as, as * 0.32, 0, 0, 6.283); ctx.ellipse(ax - as * 0.45, ay + as * 0.08, as * 0.55, as * 0.25, 0, 0, 6.283); ctx.ellipse(ax + as * 0.5, ay + as * 0.1, as * 0.5, as * 0.22, 0, 0, 6.283); ctx.fill(); });
     // burung pagi dan sore (bukan hantu): huruf v kecil
-    var aBr = Math.max(halus((p - 0.02) / 0.1) * (1 - halus((p - 0.2) / 0.1)), halus((p - 0.58) / 0.08) * (1 - halus((p - 0.74) / 0.08)));
+    var aBr = Math.max(halus((p - 0.02) / 0.08) * (1 - halus((p - 0.14) / 0.08)), halus((p - 0.42) / 0.06) * (1 - halus((p - 0.54) / 0.06)));
     if (aBr > 0.02) burung.forEach(function (b) { var bx2 = ((b.x + t * b.v * 0.00004) % 1.3 - 0.15) * W, by2 = (b.y + Math.sin(t * 0.001 * b.v + b.f) * 0.02) * H, s = Math.min(W, H) * 0.012, kp = Math.sin(t * 0.01 * b.v + b.f) * 0.6; ctx.strokeStyle = 'rgba(20,25,50,' + (0.8 * aBr) + ')'; ctx.lineWidth = 1.6; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(bx2 - s, by2 - s * kp); ctx.quadraticCurveTo(bx2 - s * 0.5, by2 + s * 0.3, bx2, by2); ctx.quadraticCurveTo(bx2 + s * 0.5, by2 + s * 0.3, bx2 + s, by2 - s * kp); ctx.stroke(); });
     // burung hantu di malam
     if (ml > 0.02) hantu.forEach(function (h) {
