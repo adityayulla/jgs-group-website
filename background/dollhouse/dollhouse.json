@@ -32,7 +32,7 @@
    ],
    "titik": [
     { "x": -2.0, "z": 0.3, "kamera": { "x": -1.4, "y": 2.0, "z": 2.4 }, "lihat": { "x": -1.7, "y": 1.4, "z": -1.0 }, "gambar": "img/03.webp", "judul": "Ruang keluarga ke arah ruang makan" },
-    { "x": -0.9, "z": 2.0, "lihat": { "x": -2.4, "z": 0.2 }, "gambar": "/kawa-living/img/interior keluarga 2.webp", "judul": "Ruang keluarga ke arah tangga" }
+    { "x": -0.9, "z": 2.0, "kamera": { "x": -2.4, "y": 2.0, "z": 1.9 }, "lihat": { "x": 0.9, "y": 1.5, "z": 0.6 }, "gambar": "/kawa-living/img/interior keluarga 2.webp", "judul": "Ruang keluarga, dinding TV dan tangga" }
    ]
   },
   {
