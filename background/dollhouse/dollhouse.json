@@ -1,0 +1,398 @@
+{
+ "_catatan": [
+  "Satuan meter. Model berpusat di x/z = 0, depan rumah (carport) di +z, carport di sisi +x (model cermin dari gambar denah).",
+  "lantai: y = tinggi permukaan lantai, potong = tinggi dinding yang disisakan di tampilan dollhouse.",
+  "ruang[].titik: dua titik per ruangan; y boleh dikosongkan (otomatis 1,1 m di atas lantai). gambar = render statis.",
+  "ruang[].perabot: perabot sederhana yang digambar Three.js. jenis: bed, bedsmall, nightstand, wardrobe, sofa, coffee, tv, rug, dining, kitchen, fridge, toilet, sink, shower, table, desk, car, motor, plant. rot dalam derajat.",
+  "Gambar saat ini masih foto contoh dari /kawa-living/img; ganti dengan render ChatGPT per ruangan."
+ ],
+ "model": "okina-61.glb",
+ "lantai": [
+  {
+   "nomor": 1,
+   "y": 0.6,
+   "potong": 2.2
+  },
+  {
+   "nomor": 2,
+   "y": 4.0,
+   "potong": 2.2
+  }
+ ],
+ "ruang": [
+  {
+   "nama": "Teras & Ruang Tamu",
+   "lantai": 1,
+   "perabot": [
+    {
+     "jenis": "table",
+     "x": -1.9,
+     "z": 3.3,
+     "rot": 90
+    },
+    {
+     "jenis": "plant",
+     "x": -2.7,
+     "z": 3.7
+    },
+    {
+     "jenis": "plant",
+     "x": -0.6,
+     "z": 3.7
+    }
+   ],
+   "titik": [
+    {
+     "x": -1.6,
+     "z": 3.3,
+     "gambar": "/kawa-living/img/interior keluarga 2.webp",
+     "judul": "Teras depan"
+    },
+    {
+     "x": -0.8,
+     "z": 2.9,
+     "gambar": "/kawa-living/img/tipe/tipe Okina landscape.webp",
+     "judul": "Tampak dari ruang tamu"
+    }
+   ]
+  },
+  {
+   "nama": "Ruang Keluarga",
+   "lantai": 1,
+   "perabot": [
+    {
+     "jenis": "rug",
+     "x": -1.6,
+     "z": 1.1
+    },
+    {
+     "jenis": "sofa",
+     "x": -2.5,
+     "z": 1.1,
+     "rot": 90
+    },
+    {
+     "jenis": "coffee",
+     "x": -1.6,
+     "z": 1.1,
+     "rot": 90
+    },
+    {
+     "jenis": "tv",
+     "x": -0.5,
+     "z": 1.1,
+     "rot": -90
+    },
+    {
+     "jenis": "plant",
+     "x": -2.7,
+     "z": -0.2
+    }
+   ],
+   "titik": [
+    {
+     "x": -2.0,
+     "z": 0.3,
+     "gambar": "/kawa-living/img/interior keluarga 2.webp",
+     "judul": "Ruang keluarga, sudut sofa"
+    },
+    {
+     "x": -0.9,
+     "z": 2.0,
+     "gambar": "/kawa-living/img/interior keluarga 2.webp",
+     "judul": "Ruang keluarga ke arah tangga"
+    }
+   ]
+  },
+  {
+   "nama": "Dapur & Ruang Makan",
+   "lantai": 1,
+   "perabot": [
+    {
+     "jenis": "kitchen",
+     "x": -2.7,
+     "z": -1.6,
+     "rot": 90
+    },
+    {
+     "jenis": "fridge",
+     "x": -2.6,
+     "z": -3.0
+    },
+    {
+     "jenis": "dining",
+     "x": -1.1,
+     "z": -1.7,
+     "rot": 90
+    },
+    {
+     "jenis": "plant",
+     "x": -0.5,
+     "z": -3.1
+    }
+   ],
+   "titik": [
+    {
+     "x": -2.2,
+     "z": -1.2,
+     "gambar": "/kawa-living/img/interior dapur.webp",
+     "judul": "Dapur"
+    },
+    {
+     "x": -1.0,
+     "z": -2.7,
+     "gambar": "/kawa-living/img/interior dapur.webp",
+     "judul": "Ruang makan"
+    }
+   ]
+  },
+  {
+   "nama": "Kamar Tidur 1",
+   "lantai": 1,
+   "perabot": [
+    {
+     "jenis": "bed",
+     "x": 1.8,
+     "z": -2.2
+    },
+    {
+     "jenis": "nightstand",
+     "x": 0.6,
+     "z": -3.1
+    },
+    {
+     "jenis": "wardrobe",
+     "x": 2.75,
+     "z": -0.9,
+     "rot": -90
+    }
+   ],
+   "titik": [
+    {
+     "x": 1.0,
+     "z": -1.3,
+     "gambar": "/kawa-living/img/interior kamar.webp",
+     "judul": "Kamar tidur 1"
+    },
+    {
+     "x": 2.3,
+     "z": -2.9,
+     "gambar": "/kawa-living/img/interior kamar 2.webp",
+     "judul": "Kamar tidur 1, sisi jendela"
+    }
+   ]
+  },
+  {
+   "nama": "Carport",
+   "lantai": 1,
+   "perabot": [
+    {
+     "jenis": "plant",
+     "x": -2.2,
+     "z": 5.3
+    }
+   ],
+   "titik": [
+    {
+     "x": 1.0,
+     "z": 4.6,
+     "gambar": "/kawa-living/img/tipe/tipe Okina landscape.webp",
+     "judul": "Carport"
+    },
+    {
+     "x": 2.4,
+     "z": 2.9,
+     "gambar": "/kawa-living/img/tipe/tipe okina.webp",
+     "judul": "Tampak depan"
+    }
+   ]
+  },
+  {
+   "nama": "Taman Belakang",
+   "lantai": 1,
+   "perabot": [
+    {
+     "jenis": "plant",
+     "x": -2.3,
+     "z": -5.4,
+     "y": 0.35
+    },
+    {
+     "jenis": "plant",
+     "x": 2.3,
+     "z": -5.6,
+     "y": 0.35
+    }
+   ],
+   "titik": [
+    {
+     "x": 0.0,
+     "z": -5.0,
+     "y": 1.3,
+     "gambar": "/kawa-living/img/Lapangan bola.webp",
+     "judul": "Taman belakang"
+    },
+    {
+     "x": -2.0,
+     "z": -4.4,
+     "y": 1.3,
+     "gambar": "/kawa-living/img/Lapangan bola.webp",
+     "judul": "Taman belakang dari dapur"
+    }
+   ]
+  },
+  {
+   "nama": "Kamar Tidur Utama",
+   "lantai": 2,
+   "perabot": [
+    {
+     "jenis": "bed",
+     "x": -1.5,
+     "z": 0.8
+    },
+    {
+     "jenis": "nightstand",
+     "x": -2.6,
+     "z": -0.1
+    },
+    {
+     "jenis": "nightstand",
+     "x": -0.4,
+     "z": -0.1
+    },
+    {
+     "jenis": "wardrobe",
+     "x": -2.75,
+     "z": 2.3,
+     "rot": 90
+    },
+    {
+     "jenis": "plant",
+     "x": -0.5,
+     "z": 2.7
+    }
+   ],
+   "titik": [
+    {
+     "x": -2.2,
+     "z": 0.5,
+     "gambar": "/kawa-living/img/interior kamar.webp",
+     "judul": "Kamar tidur utama"
+    },
+    {
+     "x": -0.8,
+     "z": 2.4,
+     "gambar": "/kawa-living/img/interior kamar 3.webp",
+     "judul": "Kamar tidur utama, sisi lemari"
+    }
+   ]
+  },
+  {
+   "nama": "Kamar Tidur 2",
+   "lantai": 2,
+   "perabot": [
+    {
+     "jenis": "bedsmall",
+     "x": 2.2,
+     "z": -2.3
+    },
+    {
+     "jenis": "nightstand",
+     "x": 1.3,
+     "z": -3.1
+    },
+    {
+     "jenis": "desk",
+     "x": 0.5,
+     "z": -1.3,
+     "rot": 90
+    }
+   ],
+   "titik": [
+    {
+     "x": 0.9,
+     "z": -1.2,
+     "gambar": "/kawa-living/img/interior kamar 2.webp",
+     "judul": "Kamar tidur 2"
+    },
+    {
+     "x": 2.3,
+     "z": -3.0,
+     "gambar": "/kawa-living/img/interior kamar 3.webp",
+     "judul": "Kamar tidur 2, sisi jendela"
+    }
+   ]
+  },
+  {
+   "nama": "Kamar Mandi Lantai 2",
+   "lantai": 2,
+   "perabot": [
+    {
+     "jenis": "toilet",
+     "x": 0.4,
+     "z": 2.6,
+     "rot": 180
+    },
+    {
+     "jenis": "sink",
+     "x": 0.45,
+     "z": 1.1
+    }
+   ],
+   "titik": [
+    {
+     "x": 0.4,
+     "z": 1.9,
+     "gambar": "/kawa-living/img/interior kamar 3.webp",
+     "judul": "Kamar mandi"
+    },
+    {
+     "x": 0.6,
+     "z": 1.2,
+     "gambar": "/kawa-living/img/interior kamar 3.webp",
+     "judul": "Area wastafel"
+    }
+   ]
+  },
+  {
+   "nama": "Rooftop",
+   "lantai": 2,
+   "perabot": [
+    {
+     "jenis": "plant",
+     "x": -2.6,
+     "z": -1.0,
+     "y": 3.42
+    },
+    {
+     "jenis": "plant",
+     "x": -2.6,
+     "z": -3.0,
+     "y": 3.42
+    },
+    {
+     "jenis": "table",
+     "x": -1.2,
+     "z": -2.0,
+     "y": 3.42
+    }
+   ],
+   "titik": [
+    {
+     "x": -1.5,
+     "z": -2.0,
+     "y": 4.5,
+     "gambar": "/kawa-living/img/tipe/tipe Okina landscape.webp",
+     "judul": "Rooftop"
+    },
+    {
+     "x": -0.6,
+     "z": -1.0,
+     "y": 4.5,
+     "gambar": "/kawa-living/img/tipe/tipe okina.webp",
+     "judul": "Rooftop ke arah taman"
+    }
+   ]
+  }
+ ]
+}
