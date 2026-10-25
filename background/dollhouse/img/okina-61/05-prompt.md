@@ -1,8 +1,8 @@
-# Titik 10 — Tampak depan (Okina 61)
+# Titik 05 — Tampak depan (Okina 61)
 
-Gambar acuan: `10-acuan.png` (dari `/background/dollhouse/?kamera=10`, kamera di jalan depan agak ke kanan x 4,5 / z 11,0 setinggi 2,6 m, memandang seluruh fasad dua lantai).
+Gambar acuan: `05-acuan.png` (dari `/background/dollhouse/?tipe=okina-61&kamera=5`, kamera di jalan depan agak ke kanan x 4,5 / z 11,0 setinggi 2,6 m, memandang seluruh fasad dua lantai).
 
-**Jalur output:** `/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/10.webp` (lanskap 3:2, lebar 1600 px). ChatGPT menulis langsung ke jalur ini. Setelah ada, ganti `gambar` titik 10 di `dollhouse.json` menjadi `img/10.webp`.
+**Jalur output:** `/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/okina-61/05.webp` (lanskap 3:2, lebar 1600 px). ChatGPT menulis langsung ke jalur ini. Setelah ada, ganti `gambar` titik 5 di `okina-61.json` menjadi `img/okina-61/05.webp`.
 
 ## Prompt untuk ChatGPT (unggah gambar acuan, lalu tempel teks ini)
 
@@ -18,5 +18,5 @@ Scene: a 6.2 m wide house. Ground floor: on the left a raised porch with a slim 
 Lighting: bright late-morning tropical daylight, soft shadows under the canopy, gentle warm tone. Clean, calm, uncluttered.
 
 Output: one image, 3:2 landscape, 1600x1067 px, WebP format. Save it directly to this path on my Mac:
-/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/10.webp
+/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/okina-61/05.webp
 ```

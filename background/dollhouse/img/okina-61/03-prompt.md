@@ -1,8 +1,8 @@
 # Titik 5 — Dapur (Okina 61)
 
-Gambar acuan: `05-acuan.png` (dari `/background/dollhouse/?kamera=5`, kamera di ambang partisi ruang makan x -1,0 / z -0,85 setinggi 2,0 m, memandang kitchen set di dinding kiri belakang, kulkas, dan bukaan ke taman belakang di kanan).
+Gambar acuan: `03-acuan.png` (dari `/background/dollhouse/?tipe=okina-61&kamera=3`, kamera di ambang partisi ruang makan x -1,0 / z -0,85 setinggi 2,0 m, memandang kitchen set di dinding kiri belakang, kulkas, dan bukaan ke taman belakang di kanan).
 
-**Jalur output:** `/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/05.webp` (lanskap 3:2, lebar 1600 px). ChatGPT menulis langsung ke jalur ini. Setelah ada, ganti `gambar` titik 5 di `dollhouse.json` menjadi `img/05.webp`.
+**Jalur output:** `/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/okina-61/03.webp` (lanskap 3:2, lebar 1600 px). ChatGPT menulis langsung ke jalur ini. Setelah ada, ganti `gambar` titik 3 di `okina-61.json` menjadi `img/okina-61/03.webp`.
 
 ## Prompt untuk ChatGPT (unggah gambar acuan, lalu tempel teks ini)
 
@@ -18,5 +18,5 @@ Scene: a kitchen about 2.4 m long along the left wall: matte white lower cabinet
 Lighting: daylight from the garden opening on the right, soft shadows across the counter, warm bounce. Clean, calm, uncluttered.
 
 Output: one image, 3:2 landscape, 1600x1067 px, WebP format. Save it directly to this path on my Mac:
-/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/05.webp
+/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/okina-61/03.webp
 ```

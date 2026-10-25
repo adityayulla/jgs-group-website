@@ -1,8 +1,8 @@
-# Titik 13 — Kamar tidur utama (Okina 61)
+# Titik 07 — Kamar tidur utama (Okina 61)
 
-Gambar acuan: `13-acuan.png` (dari `/background/dollhouse/?kamera=13`, kamera di sudut depan kanan kamar x -0,4 / z 2,2 setinggi 1,6 m dari lantai 2, memandang tempat tidur; lemari besar di dinding kiri, dua nakas di sisi headboard).
+Gambar acuan: `07-acuan.png` (dari `/background/dollhouse/?tipe=okina-61&kamera=7`, kamera di sudut depan kanan kamar x -0,4 / z 2,2 setinggi 1,6 m dari lantai 2, memandang tempat tidur; lemari besar di dinding kiri, dua nakas di sisi headboard).
 
-**Jalur output:** `/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/13.webp` (lanskap 3:2, lebar 1600 px). ChatGPT menulis langsung ke jalur ini. Setelah ada, ganti `gambar` titik 13 di `dollhouse.json` menjadi `img/13.webp`.
+**Jalur output:** `/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/okina-61/07.webp` (lanskap 3:2, lebar 1600 px). ChatGPT menulis langsung ke jalur ini. Setelah ada, ganti `gambar` titik 7 di `okina-61.json` menjadi `img/okina-61/07.webp`.
 
 ## Prompt untuk ChatGPT (unggah gambar acuan, lalu tempel teks ini)
 
@@ -18,5 +18,5 @@ Scene: a bedroom about 2.8 m by 3.1 m. Center: a queen bed with a light oak plat
 Lighting: soft daylight from a window behind the camera, gentle shadows, warm bedside lamp glow. Clean, calm, uncluttered.
 
 Output: one image, 3:2 landscape, 1600x1067 px, WebP format. Save it directly to this path on my Mac:
-/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/13.webp
+/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/okina-61/07.webp
 ```

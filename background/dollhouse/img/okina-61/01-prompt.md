@@ -1,8 +1,8 @@
 # Titik 2 — Ruang tamu ke arah teras (Okina 61)
 
-Gambar acuan: `02-acuan.png` (dari `/background/dollhouse/?kamera=2`, kamera di dalam ruang tamu x -1,0 / z 0,2 setinggi 2,1 m, memandang pintu depan dan dinding kaca ke teras).
+Gambar acuan: `01-acuan.png` (dari `/background/dollhouse/?tipe=okina-61&kamera=1`, kamera di dalam ruang tamu x -1,0 / z 0,2 setinggi 2,1 m, memandang pintu depan dan dinding kaca ke teras).
 
-**Jalur output:** `/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/02.webp` (lanskap 3:2, lebar 1600 px). ChatGPT menulis langsung ke jalur ini. Setelah ada, ganti `gambar` titik 2 di `dollhouse.json` menjadi `img/02.webp`.
+**Jalur output:** `/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/okina-61/01.webp` (lanskap 3:2, lebar 1600 px). ChatGPT menulis langsung ke jalur ini. Setelah ada, ganti `gambar` titik 1 di `okina-61.json` menjadi `img/okina-61/01.webp`.
 
 ## Prompt untuk ChatGPT (unggah gambar acuan, lalu tempel teks ini)
 
@@ -18,5 +18,5 @@ Scene: a living room about 3 m wide. The front wall is mostly glass: a solid dar
 Lighting: bright daylight coming through the glass front, soft shadows on the floor, warm bounce. Clean, calm, uncluttered.
 
 Output: one image, 3:2 landscape, 1600x1067 px, WebP format. Save it directly to this path on my Mac:
-/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/02.webp
+/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/okina-61/01.webp
 ```

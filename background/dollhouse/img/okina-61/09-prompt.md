@@ -1,8 +1,8 @@
-# Titik 17 — Kamar mandi lantai 2 (Okina 61)
+# Titik 09 — Kamar mandi lantai 2 (Okina 61)
 
-Gambar acuan: `17-acuan.png` (dari `/background/dollhouse/?kamera=17`, kamera di ujung depan kamar mandi x 0,4 / z 2,2 setinggi 1,5 m dari lantai 2, memandang ke dalam: ruang sempit ±0,9 × 2 m, wastafel di sisi kanan, dinding ujung).
+Gambar acuan: `09-acuan.png` (dari `/background/dollhouse/?tipe=okina-61&kamera=9`, kamera di ujung depan kamar mandi x 0,4 / z 2,2 setinggi 1,5 m dari lantai 2, memandang ke dalam: ruang sempit ±0,9 × 2 m, wastafel di sisi kanan, dinding ujung).
 
-**Jalur output:** `/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/17.webp` (lanskap 3:2, lebar 1600 px). ChatGPT menulis langsung ke jalur ini. Setelah ada, ganti `gambar` titik 17 di `dollhouse.json` menjadi `img/17.webp`.
+**Jalur output:** `/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/okina-61/09.webp` (lanskap 3:2, lebar 1600 px). ChatGPT menulis langsung ke jalur ini. Setelah ada, ganti `gambar` titik 9 di `okina-61.json` menjadi `img/okina-61/09.webp`.
 
 Catatan: model kamar mandinya hanya kotak berubin tanpa sanitair kecuali wastafel, jadi prompt meminta ChatGPT melengkapi toilet dan shower pada bentuk ruang yang sama.
 
@@ -20,5 +20,5 @@ Scene: a compact bathroom with large-format light grey matte porcelain tiles on 
 Lighting: soft daylight from a small window behind the camera, warm recessed light, subtle reflections on the tiles. Clean, calm, uncluttered.
 
 Output: one image, 3:2 landscape, 1600x1067 px, WebP format. Save it directly to this path on my Mac:
-/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/17.webp
+/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/okina-61/09.webp
 ```
