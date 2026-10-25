@@ -60,6 +60,9 @@
     .editor textarea{width:100%;flex:1;min-height:120px;font:11px/1.4 ui-monospace,Menlo,monospace;border:1px solid var(--line);border-radius:8px;padding:8px;resize:vertical}
     .editor .baris{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
     .editor button{font:inherit;font-weight:600;border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 9px;cursor:pointer}
+    /* mode kamera (?kamera=N): bingkai 3:2 di tengah, tanpa UI, untuk gambar acuan render */
+    body.kamera .judul,body.kamera .lantai,body.kamera .petunjuk,body.kamera #titik,body.kamera .editor{display:none}
+    body.kamera #panggung{inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100vw,150vh);height:auto;aspect-ratio:3/2;background:#dfe6ef}
   </style>
 </head>
 <body>
@@ -95,6 +98,6 @@
 
   <div class="muat" id="muat"><div><i></i></div></div>
 
-  <script type="module" src="dollhouse.js?v=20261025f"></script>
+  <script type="module" src="dollhouse.js?v=20261025g"></script>
 </body>
 </html>

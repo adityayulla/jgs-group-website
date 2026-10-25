@@ -7,7 +7,9 @@ import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.186.1/exampl
 import { MeshoptDecoder } from 'https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/libs/meshopt_decoder.module.js/+esm';
 
 const DASAR = new URL('./', import.meta.url);
-const EDIT = new URLSearchParams(location.search).has('edit');
+const PARAM = new URLSearchParams(location.search);
+const EDIT = PARAM.has('edit');
+const KAMERA = Number(PARAM.get('kamera') || 0); // mode kamera: pandangan dari titik ke-N setinggi mata (gambar acuan render)
 const $ = s => document.querySelector(s);
 const panggung = $('#panggung'), lapisTitik = $('#titik'), muat = $('#muat'), bar = muat.querySelector('i');
 
@@ -172,6 +174,16 @@ const lebar = bb.max.x - bb.min.x, dalam = bb.max.z - bb.min.z;
 kamera.position.set(bb.max.x + lebar * 0.9, 9.5, bb.max.z + dalam * 0.55);
 setLantai(1, false);
 kontrol.update();
+if (KAMERA > 0 && pins[KAMERA - 1]) {
+  const p = pins[KAMERA - 1], t = p.ruang.titik[p.idx], y0 = tinggiLantai(p.ruang.lantai);
+  document.body.classList.add('kamera');
+  setLantai(0, false); setTembus(false); lantaiAktif = -1; // rumah utuh, solid, tanpa pin
+  kamera.fov = 62; kamera.updateProjectionMatrix();
+  // titik.kamera (opsional) menggeser posisi kamera dari posisi titik, misalnya mundur ke halaman untuk memotret teras.
+  const k = t.kamera || {}, lihat = t.lihat || { x: t.x, z: t.z - 1 };
+  kamera.position.set(k.x ?? t.x, k.y ?? y0 + 1.5, k.z ?? t.z);
+  kontrol.target.set(lihat.x, lihat.y ?? y0 + 1.3, lihat.z); kontrol.minDistance = 0.2; kontrol.update();
+}
 
 /* ── lightbox ────────────────────────────────────────────── */
 const kotakEl = $('#kotak'), img = kotakEl.querySelector('img'), judul = kotakEl.querySelector('figcaption b'), ket = kotakEl.querySelector('figcaption span');
