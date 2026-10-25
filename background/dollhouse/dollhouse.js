@@ -15,7 +15,7 @@ const panggung = $('#panggung'), lapisTitik = $('#titik'), muat = $('#muat'), ba
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 0.95;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.localClippingEnabled = true;
 panggung.appendChild(renderer.domElement);
@@ -27,13 +27,13 @@ kontrol.enableDamping = true; kontrol.dampingFactor = 0.08;
 kontrol.maxPolarAngle = Math.PI * 0.47; kontrol.minDistance = 4; kontrol.maxDistance = 40;
 kontrol.enablePan = true; kontrol.screenSpacePanning = false;
 
-scene.add(new THREE.HemisphereLight(0xf4f1ea, 0x8f98a6, 0.9));
-const matahari = new THREE.DirectionalLight(0xfff1dc, 3.1);
+scene.add(new THREE.HemisphereLight(0xfdfbf5, 0xb9c3cf, 1.35));
+const matahari = new THREE.DirectionalLight(0xfff4e0, 2.2);
 matahari.position.set(9, 14, 7); matahari.castShadow = true;
 matahari.shadow.mapSize.set(2048, 2048); matahari.shadow.bias = -0.0004; matahari.shadow.normalBias = 0.02;
 Object.assign(matahari.shadow.camera, { left: -12, right: 12, top: 12, bottom: -12, near: 1, far: 50 });
 scene.add(matahari);
-const isi = new THREE.DirectionalLight(0xdfe9ff, 0.35); isi.position.set(-8, 6, -6); scene.add(isi);
+const isi = new THREE.DirectionalLight(0xdfe9ff, 0.5); isi.position.set(-8, 6, -6); scene.add(isi);
 
 // Alas lembut penangkap bayangan.
 const alas = new THREE.Mesh(new THREE.CircleGeometry(16, 64), new THREE.ShadowMaterial({ opacity: 0.18 }));
@@ -94,8 +94,8 @@ gltf.scene.traverse(o => {
   ms.forEach(m => {
     m.side = THREE.DoubleSide; bahanKlip.push(m);
     if (m.transparent && m.opacity < 1) { m.depthWrite = false; return; } // kaca
-    // Dinding: material polos dan tekstur beton abu-abu → putih bersih tanpa tekstur.
-    if (!m.map || /concrete/i.test(m.name)) { m.map = null; m.color.set(0xf4f1ea); m.roughness = 0.95; m.flatShading = true; /* normal hasil weld terlalu halus, sudut hilang */ m.needsUpdate = true; bahanDinding.push(m); }
+    // Dinding = material polos (tanpa tekstur) dan tekstur beton; warna/tekstur dibiarkan asli.
+    if (!m.map || /concrete/i.test(m.name)) { m.flatShading = true; m.needsUpdate = true; bahanDinding.push(m); }
   });
 });
 /* Tampilan rumah utuh: hanya DINDING SAMPING (bidang yang menghadap ±x) di sisi dekat kamera yang tembus pandang.
