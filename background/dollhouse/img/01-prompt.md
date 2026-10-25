@@ -2,7 +2,7 @@
 
 Gambar acuan: `01-acuan.png` (dari `/background/dollhouse/?kamera=1`, kamera di halaman depan x -0,3 / z 6,0 setinggi 2,2 m, memandang pintu masuk).
 
-**Simpan hasil ChatGPT ke:** `/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/01.webp` (lanskap 3:2, lebar 1600 px). Sudah terpasang di `dollhouse.json` titik 1.
+**Jalur output:** `/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/01.webp` (lanskap 3:2, lebar 1600 px). ChatGPT menulis langsung ke jalur ini. Sudah terpasang di `dollhouse.json` titik 1.
 
 ## Prompt untuk ChatGPT (unggah gambar acuan, lalu tempel teks ini)
 
@@ -17,5 +17,6 @@ Scene: a small raised porch about 3 m wide and 1.2 m deep with light grey granit
 
 Lighting: bright late-morning tropical daylight, soft shadows, slight warm bounce from the floor. Clean, calm, uncluttered.
 
-Output: one image, 3:2 landscape, 1600x1067 px, file name 01.webp (WebP). I will save it to /Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/01.webp
+Output: one image, 3:2 landscape, 1600x1067 px, WebP format. Save it directly to this path on my Mac:
+/Users/adityasamawi/Projects/JGS-Group/background/dollhouse/img/01.webp
 ```
