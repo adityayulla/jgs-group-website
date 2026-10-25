@@ -5,7 +5,7 @@
   "ruang[].titik: dua titik per ruangan; y boleh dikosongkan (otomatis 1,1 m di atas lantai). gambar = render statis.",
   "ruang[].titik[].lihat: titik (x,z) yang dipandang kamera pada mode kamera ?kamera=N (N = nomor titik urut), dipakai untuk gambar acuan render.",
   "ruang[].perabot: perabot sederhana yang digambar Three.js. jenis: bed, bedsmall, nightstand, wardrobe, sofa, coffee, tv, rug, dining, kitchen, fridge, toilet, sink, shower, table, desk, car, motor, plant. rot dalam derajat.",
-  "Gambar saat ini masih foto contoh dari /kawa-living/img; ganti dengan render ChatGPT per ruangan."
+  "Render per titik disimpan di img/NN.webp (NN = nomor titik, 1600 px, 3:2). Gambar acuan img/NN-acuan.png dan prompt img/NN-prompt.md. Titik yang belum dirender masih memakai foto contoh dari /kawa-living/img."
  ],
  "model": "okina-61.glb",
  "lantai": [
@@ -17,7 +17,7 @@
    "nama": "Teras & Ruang Tamu", "lantai": 1,
    "perabot": [],
    "titik": [
-    { "x": -1.6, "z": 3.3, "kamera": { "x": -0.3, "y": 2.2, "z": 6.0 }, "lihat": { "x": -1.5, "y": 1.8, "z": 2.8 }, "gambar": "/kawa-living/img/interior keluarga 2.webp", "judul": "Teras depan" },
+    { "x": -1.6, "z": 3.3, "kamera": { "x": -0.3, "y": 2.2, "z": 6.0 }, "lihat": { "x": -1.5, "y": 1.8, "z": 2.8 }, "gambar": "img/01.webp", "judul": "Teras depan" },
     { "x": -0.8, "z": 2.9, "lihat": { "x": -2.6, "z": 4.8 }, "gambar": "/kawa-living/img/tipe/tipe Okina landscape.webp", "judul": "Tampak dari ruang tamu" }
    ]
   },
