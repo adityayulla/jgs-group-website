@@ -18,7 +18,7 @@
    "perabot": [],
    "titik": [
     { "x": -1.6, "z": 3.3, "kamera": { "x": -0.3, "y": 2.2, "z": 6.0 }, "lihat": { "x": -1.5, "y": 1.8, "z": 2.8 }, "gambar": "img/01.webp", "judul": "Teras depan" },
-    { "x": -0.8, "z": 2.9, "lihat": { "x": -2.6, "z": 4.8 }, "gambar": "/kawa-living/img/tipe/tipe Okina landscape.webp", "judul": "Tampak dari ruang tamu" }
+    { "x": -0.8, "z": 2.9, "kamera": { "x": -1.0, "y": 2.1, "z": 0.2 }, "lihat": { "x": -1.6, "y": 1.7, "z": 3.2 }, "gambar": "/kawa-living/img/tipe/tipe Okina landscape.webp", "judul": "Ruang tamu ke arah teras" }
    ]
   },
   {
