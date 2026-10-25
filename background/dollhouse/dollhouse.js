@@ -80,7 +80,7 @@ function buatPerabot(p) {
 const rumah = new THREE.Group(); scene.add(rumah);
 const perabotGrup = new THREE.Group(); scene.add(perabotGrup);
 const bahanKlip = []; // semua material yang dipotong per lantai
-const bahanTembus = []; // dinding & atap yang jadi tembus pandang di tampilan utuh
+const bahanDinding = []; // material dinding (putih)
 let bb;
 
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
@@ -94,27 +94,41 @@ gltf.scene.traverse(o => {
   ms.forEach(m => {
     m.side = THREE.DoubleSide; bahanKlip.push(m);
     if (m.transparent && m.opacity < 1) { m.depthWrite = false; return; } // kaca
-    // Dinding polos (tanpa tekstur) → putih bersih; bersama atap ikut dibelah tembus pandang di tampilan utuh.
-    if (!m.map) { m.color.set(0xffffff); m.roughness = 0.92; }
-    if (!m.map || /roof/i.test(m.name)) bahanTembus.push(m);
+    // Dinding: material polos dan tekstur beton abu-abu → putih bersih tanpa tekstur.
+    if (!m.map || /concrete/i.test(m.name)) { m.map = null; m.color.set(0xffffff); m.roughness = 0.92; m.needsUpdate = true; bahanDinding.push(m); }
   });
 });
-// Salinan rumah untuk separuh yang tembus pandang (tampilan utuh): hanya mesh berdinding/atap, material dikloning.
-const rumahTembus = gltf.scene.clone(true); rumahTembus.visible = false; scene.add(rumahTembus);
-const bidangDekat = new THREE.Plane(new THREE.Vector3(1, 0, 1).normalize(), 0); // sisi dekat kamera (tembus)
-const bidangJauh = new THREE.Plane(new THREE.Vector3(-1, 0, -1).normalize(), 0); // sisi jauh (solid)
-rumahTembus.traverse(o => {
-  if (!o.isMesh) return;
-  const ms = Array.isArray(o.material) ? o.material : [o.material];
-  if (!ms.some(m => bahanTembus.includes(m))) { o.visible = false; return; }
-  o.castShadow = false;
-  o.material = ms.map(m => { const t = m.clone(); t.transparent = true; t.opacity = 0.2; t.depthWrite = false; t.clippingPlanes = [bidangDekat]; return t; });
-  if (o.material.length === 1) o.material = o.material[0];
-});
-function setTembus(aktif) {
-  rumahTembus.visible = aktif;
-  bahanTembus.forEach(m => { m.clippingPlanes = aktif ? [bidang, bidangJauh] : [bidang]; m.needsUpdate = true; });
+/* Tampilan rumah utuh: hanya DINDING SAMPING (bidang yang menghadap ±x) di sisi dekat kamera yang tembus pandang.
+   Tiap mesh berdinding dipecah jadi tiga: sisa (normal), samping-solid (sisi jauh), samping-tembus (sisi dekat). */
+const bidang = new THREE.Plane(new THREE.Vector3(0, -1, 0), 1e9); // potong horizontal per lantai
+const bidangDekat = new THREE.Plane(new THREE.Vector3(1, 0, 0), 0);
+const bidangJauh = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 1e9);
+const tembusGrup = new THREE.Group(); tembusGrup.visible = false; scene.add(tembusGrup);
+const meshDinding = []; gltf.scene.traverse(o => { if (o.isMesh && bahanDinding.includes(o.material)) meshDinding.push(o); });
+const nm = new THREE.Matrix3(), pa = new THREE.Vector3(), pb = new THREE.Vector3(), pc = new THREE.Vector3(), nrm = new THREE.Vector3();
+for (const o of meshDinding) {
+  o.updateWorldMatrix(true, false); nm.getNormalMatrix(o.matrixWorld);
+  const g = o.geometry, pos = g.attributes.position, idx = g.index;
+  const n = idx ? idx.count : pos.count, ambil = i => idx ? idx.getX(i) : i;
+  const samping = [], sisa = [];
+  for (let i = 0; i < n; i += 3) {
+    const ia = ambil(i), ib = ambil(i + 1), ic = ambil(i + 2);
+    pa.fromBufferAttribute(pos, ia); pb.fromBufferAttribute(pos, ib); pc.fromBufferAttribute(pos, ic);
+    nrm.copy(pb).sub(pa).cross(pc.clone().sub(pa)).applyMatrix3(nm).normalize();
+    (Math.abs(nrm.x) > 0.7 ? samping : sisa).push(ia, ib, ic);
+  }
+  if (!samping.length) continue;
+  g.setIndex(sisa); // mesh asli tinggal bidang non-samping
+  const gs = g.clone(); gs.setIndex(samping);
+  const solid = new THREE.Mesh(gs, o.material.clone()); solid.material.clippingPlanes = [bidang, bidangJauh]; solid.material.clipShadows = true;
+  solid.castShadow = solid.receiveShadow = true; bahanKlip.push(solid.material);
+  const tembus = new THREE.Mesh(gs, o.material.clone()); Object.assign(tembus.material, { transparent: true, opacity: 0.18, depthWrite: false, clippingPlanes: [bidangDekat] });
+  [solid, tembus].forEach(m => { m.position.copy(o.position); m.quaternion.copy(o.quaternion); m.scale.copy(o.scale); });
+  o.parent.add(solid); tembusGrup.add(tembus);
+  // tembus mengikuti transformasi dunia mesh asli
+  tembus.matrixAutoUpdate = false; o.updateWorldMatrix(true, false); tembus.matrix.copy(o.matrixWorld);
 }
+function setTembus(aktif) { tembusGrup.visible = aktif; if (!aktif) bidangJauh.constant = 1e9; }
 bb = new THREE.Box3().setFromObject(rumah);
 
 // Perabot & titik
@@ -133,14 +147,13 @@ pins.forEach((p, n) => {
 function tinggiLantai(n) { const l = (data.lantai || []).find(l => l.nomor === n); return l ? l.y : 0; }
 
 /* ── lantai aktif & pemotongan ───────────────────────────── */
-const bidang = new THREE.Plane(new THREE.Vector3(0, -1, 0), 1e9);
 let lantaiAktif = 1;
 function setLantai(n, animasi = true) {
   lantaiAktif = n;
   const l = (data.lantai || []).find(l => l.nomor === n);
   const tinggi = l ? l.y + l.potong : Infinity;
   bidang.constant = isFinite(tinggi) ? tinggi : 1e9;
-  bahanKlip.forEach(m => { m.clippingPlanes = [bidang]; m.clipShadows = true; m.needsUpdate = true; });
+  bahanKlip.forEach(m => { if (!m.clippingPlanes || m.clippingPlanes.length < 2) m.clippingPlanes = [bidang]; m.clipShadows = true; m.needsUpdate = true; });
   perabotGrup.children.forEach(g => { g.visible = n === 0 || g.userData.lantai === n; });
   setTembus(n === 0);
   document.querySelectorAll('.lantai button').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.lantai === n)));
@@ -200,10 +213,9 @@ function gambar() {
   if (anim) { anim.t = Math.min(1, anim.t + 0.05); const e = 1 - Math.pow(1 - anim.t, 3); kontrol.target.lerpVectors(anim.dari, anim.ke, e); kamera.position.lerpVectors(anim.posDari, anim.posKe, e); if (anim.t >= 1) anim = null; }
   kontrol.update();
   if (lantaiAktif === 0) {
-    const pusat = new THREE.Vector3((bb.min.x + bb.max.x) / 2, 0, (bb.min.z + bb.max.z) / 2);
-    const arah = kamera.position.clone().sub(pusat); arah.y = 0; arah.normalize();
-    bidangDekat.setFromNormalAndCoplanarPoint(arah, pusat);          // sisa: dekat kamera
-    bidangJauh.setFromNormalAndCoplanarPoint(arah.clone().negate(), pusat); // sisa: jauh dari kamera
+    const cx = (bb.min.x + bb.max.x) / 2, sisi = kamera.position.x >= cx ? 1 : -1;
+    bidangDekat.normal.set(sisi, 0, 0); bidangDekat.constant = -sisi * cx;  // sisa: dinding samping dekat kamera (tembus)
+    bidangJauh.normal.set(-sisi, 0, 0); bidangJauh.constant = sisi * cx;    // sisa: dinding samping jauh (solid)
   }
   renderer.render(scene, kamera);
   const w = innerWidth, h = innerHeight;
