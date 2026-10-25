@@ -80,6 +80,7 @@ function buatPerabot(p) {
 const rumah = new THREE.Group(); scene.add(rumah);
 const perabotGrup = new THREE.Group(); scene.add(perabotGrup);
 const bahanKlip = []; // semua material yang dipotong per lantai
+const bahanTembus = []; // dinding & atap yang jadi tembus pandang di tampilan utuh
 let bb;
 
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
@@ -90,8 +91,16 @@ gltf.scene.traverse(o => {
   if (!o.isMesh) return;
   o.castShadow = o.receiveShadow = true;
   const ms = Array.isArray(o.material) ? o.material : [o.material];
-  ms.forEach(m => { m.side = THREE.DoubleSide; if (m.transparent && m.opacity < 1) { m.depthWrite = false; } bahanKlip.push(m); });
+  ms.forEach(m => {
+    m.side = THREE.DoubleSide; bahanKlip.push(m);
+    if (m.transparent && m.opacity < 1) { m.depthWrite = false; return; } // kaca
+    // Dinding polos (tanpa tekstur) dan atap dibuat tembus pandang pada tampilan rumah utuh.
+    if (!m.map || /roof/i.test(m.name)) bahanTembus.push(m);
+  });
 });
+function setTembus(aktif) {
+  bahanTembus.forEach(m => { m.transparent = aktif; m.opacity = aktif ? 0.22 : 1; m.depthWrite = !aktif; m.needsUpdate = true; });
+}
 bb = new THREE.Box3().setFromObject(rumah);
 
 // Perabot & titik
@@ -119,6 +128,7 @@ function setLantai(n, animasi = true) {
   bidang.constant = isFinite(tinggi) ? tinggi : 1e9;
   bahanKlip.forEach(m => { m.clippingPlanes = [bidang]; m.clipShadows = true; m.needsUpdate = true; });
   perabotGrup.children.forEach(g => { g.visible = n === 0 || g.userData.lantai === n; });
+  setTembus(n === 0);
   document.querySelectorAll('.lantai button').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.lantai === n)));
   const pusatY = l ? l.y + 1.0 : (bb.min.y + bb.max.y) / 2;
   const target = new THREE.Vector3((bb.min.x + bb.max.x) / 2, pusatY, (bb.min.z + bb.max.z) / 2);
