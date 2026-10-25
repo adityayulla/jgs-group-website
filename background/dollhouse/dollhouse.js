@@ -9,6 +9,7 @@ import { MeshoptDecoder } from 'https://cdn.jsdelivr.net/npm/three@0.186.1/examp
 const DASAR = new URL('./', import.meta.url);
 const PARAM = new URLSearchParams(location.search);
 const EDIT = PARAM.has('edit');
+const TIPE = (PARAM.get('tipe') || '').replace(/[^a-z0-9-]/g, ''); // ?tipe=hiroi-yuri-42 → memuat hiroi-yuri-42.json; kosong = dollhouse.json (Okina 61)
 const KAMERA = Number(PARAM.get('kamera') || 0); // mode kamera: pandangan dari titik ke-N setinggi mata (gambar acuan render)
 const $ = s => document.querySelector(s);
 const panggung = $('#panggung'), lapisTitik = $('#titik'), muat = $('#muat'), bar = muat.querySelector('i');
@@ -86,7 +87,10 @@ const bahanDinding = []; // material dinding (putih)
 let bb;
 
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
-const data = await fetch(new URL('dollhouse.json', DASAR)).then(r => { if (!r.ok) throw new Error('dollhouse.json ' + r.status); return r.json(); });
+const JSON_TIPE = TIPE ? TIPE + '.json' : 'dollhouse.json';
+const data = await fetch(new URL(JSON_TIPE, DASAR)).then(r => { if (!r.ok) throw new Error(JSON_TIPE + ' ' + r.status); return r.json(); });
+document.querySelectorAll('[data-lantai]').forEach(b => { const n = +b.dataset.lantai; if (n > 0 && !data.lantai.some(l => l.nomor === n)) b.remove(); }); /* tipe satu lantai: tanpa tombol Lantai 2 */
+if (data.nama) { const h = document.querySelector('.judul h1'); if (h) h.textContent = data.nama + ' — jelajah 3D'; document.title = data.nama + ' — jelajah 3D'; }
 const gltf = await loader.loadAsync(new URL(data.model, DASAR).href, e => { if (e.total) bar.style.width = Math.round(e.loaded / e.total * 90) + '%'; });
 rumah.add(gltf.scene);
 gltf.scene.traverse(o => {
