@@ -94,12 +94,26 @@ gltf.scene.traverse(o => {
   ms.forEach(m => {
     m.side = THREE.DoubleSide; bahanKlip.push(m);
     if (m.transparent && m.opacity < 1) { m.depthWrite = false; return; } // kaca
-    // Dinding polos (tanpa tekstur) dan atap dibuat tembus pandang pada tampilan rumah utuh.
+    // Dinding polos (tanpa tekstur) → putih bersih; bersama atap ikut dibelah tembus pandang di tampilan utuh.
+    if (!m.map) { m.color.set(0xffffff); m.roughness = 0.92; }
     if (!m.map || /roof/i.test(m.name)) bahanTembus.push(m);
   });
 });
+// Salinan rumah untuk separuh yang tembus pandang (tampilan utuh): hanya mesh berdinding/atap, material dikloning.
+const rumahTembus = gltf.scene.clone(true); rumahTembus.visible = false; scene.add(rumahTembus);
+const bidangDekat = new THREE.Plane(new THREE.Vector3(1, 0, 1).normalize(), 0); // sisi dekat kamera (tembus)
+const bidangJauh = new THREE.Plane(new THREE.Vector3(-1, 0, -1).normalize(), 0); // sisi jauh (solid)
+rumahTembus.traverse(o => {
+  if (!o.isMesh) return;
+  const ms = Array.isArray(o.material) ? o.material : [o.material];
+  if (!ms.some(m => bahanTembus.includes(m))) { o.visible = false; return; }
+  o.castShadow = false;
+  o.material = ms.map(m => { const t = m.clone(); t.transparent = true; t.opacity = 0.2; t.depthWrite = false; t.clippingPlanes = [bidangDekat]; return t; });
+  if (o.material.length === 1) o.material = o.material[0];
+});
 function setTembus(aktif) {
-  bahanTembus.forEach(m => { m.transparent = aktif; m.opacity = aktif ? 0.22 : 1; m.depthWrite = !aktif; m.needsUpdate = true; });
+  rumahTembus.visible = aktif;
+  bahanTembus.forEach(m => { m.clippingPlanes = aktif ? [bidang, bidangJauh] : [bidang]; m.needsUpdate = true; });
 }
 bb = new THREE.Box3().setFromObject(rumah);
 
@@ -185,6 +199,12 @@ function gambar() {
   requestAnimationFrame(gambar);
   if (anim) { anim.t = Math.min(1, anim.t + 0.05); const e = 1 - Math.pow(1 - anim.t, 3); kontrol.target.lerpVectors(anim.dari, anim.ke, e); kamera.position.lerpVectors(anim.posDari, anim.posKe, e); if (anim.t >= 1) anim = null; }
   kontrol.update();
+  if (lantaiAktif === 0) {
+    const pusat = new THREE.Vector3((bb.min.x + bb.max.x) / 2, 0, (bb.min.z + bb.max.z) / 2);
+    const arah = kamera.position.clone().sub(pusat); arah.y = 0; arah.normalize();
+    bidangDekat.setFromNormalAndCoplanarPoint(arah, pusat);          // sisa: dekat kamera
+    bidangJauh.setFromNormalAndCoplanarPoint(arah.clone().negate(), pusat); // sisa: jauh dari kamera
+  }
   renderer.render(scene, kamera);
   const w = innerWidth, h = innerHeight;
   for (const p of pins) {
