@@ -90,8 +90,8 @@
     { "jenis": "wardrobe", "x": -2.65, "z": 1.6, "rot": 90 }
    ],
    "titik": [
-    { "x": -2.2, "z": 0.5, "kamera": { "x": -0.4, "y": 5.6, "z": 2.2 }, "lihat": { "x": -2.3, "y": 5.0, "z": -0.2 }, "gambar": "/kawa-living/img/interior kamar.webp", "judul": "Kamar tidur utama" },
-    { "x": -0.8, "z": 2.4, "kamera": { "x": -1.2, "y": 5.6, "z": -0.5 }, "lihat": { "x": -2.0, "y": 5.0, "z": 2.4 }, "gambar": "/kawa-living/img/interior kamar 3.webp", "judul": "Kamar tidur utama, sisi jendela dan lemari" }
+    { "x": -2.2, "z": 0.5, "kamera": { "x": -0.4, "y": 5.6, "z": 2.2 }, "lihat": { "x": -2.3, "y": 5.0, "z": -0.2 }, "gambar": "img/13.webp", "judul": "Kamar tidur utama" },
+    { "x": -0.8, "z": 2.4, "kamera": { "x": -1.2, "y": 5.6, "z": -0.5 }, "lihat": { "x": -2.0, "y": 5.0, "z": 2.4 }, "gambar": "img/14.webp", "judul": "Kamar tidur utama, sisi jendela dan lemari" }
    ]
   },
   {
@@ -102,8 +102,8 @@
     { "jenis": "desk", "x": 0.5, "z": -1.3, "rot": 90 }
    ],
    "titik": [
-    { "x": 0.9, "z": -1.2, "kamera": { "x": 0.3, "y": 5.6, "z": -0.9 }, "lihat": { "x": 2.2, "y": 5.0, "z": -2.9 }, "gambar": "/kawa-living/img/interior kamar 2.webp", "judul": "Kamar tidur 2" },
-    { "x": 2.3, "z": -3.0, "kamera": { "x": 2.6, "y": 5.6, "z": -0.9 }, "lihat": { "x": 0.4, "y": 5.0, "z": -3.0 }, "gambar": "/kawa-living/img/interior kamar 3.webp", "judul": "Kamar tidur 2, meja belajar" }
+    { "x": 0.9, "z": -1.2, "kamera": { "x": 0.3, "y": 5.6, "z": -0.9 }, "lihat": { "x": 2.2, "y": 5.0, "z": -2.9 }, "gambar": "img/15.webp", "judul": "Kamar tidur 2" },
+    { "x": 2.3, "z": -3.0, "kamera": { "x": 2.6, "y": 5.6, "z": -0.9 }, "lihat": { "x": 0.4, "y": 5.0, "z": -3.0 }, "gambar": "img/16.webp", "judul": "Kamar tidur 2, meja belajar" }
    ]
   },
   {
@@ -112,8 +112,8 @@
     { "jenis": "sink", "x": 0.45, "z": 1.1 }
    ],
    "titik": [
-    { "x": 0.4, "z": 1.9, "kamera": { "x": 0.4, "y": 5.5, "z": 2.2 }, "lihat": { "x": 0.4, "y": 5.05, "z": 0.3 }, "gambar": "/kawa-living/img/interior kamar 3.webp", "judul": "Kamar mandi" },
-    { "x": 0.6, "z": 1.2, "kamera": { "x": 0.42, "y": 5.5, "z": 0.95 }, "lihat": { "x": 0.45, "y": 5.2, "z": 2.5 }, "gambar": "/kawa-living/img/interior kamar 3.webp", "judul": "Kamar mandi ke arah jendela" }
+    { "x": 0.4, "z": 1.9, "kamera": { "x": 0.4, "y": 5.5, "z": 2.2 }, "lihat": { "x": 0.4, "y": 5.05, "z": 0.3 }, "gambar": "img/17.webp", "judul": "Kamar mandi" },
+    { "x": 0.6, "z": 1.2, "kamera": { "x": 0.42, "y": 5.5, "z": 0.95 }, "lihat": { "x": 0.45, "y": 5.2, "z": 2.5 }, "gambar": "img/18.webp", "judul": "Kamar mandi ke arah jendela" }
    ]
   }
  ]
