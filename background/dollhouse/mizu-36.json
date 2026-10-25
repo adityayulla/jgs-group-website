@@ -1,0 +1,287 @@
+{
+ "_catatan": [
+  "Mizu 36: satu lantai. Satuan meter, model berpusat x/z=0, depan rumah (carport) di +z, carport di sisi -x, taman depan di +x.",
+  "Lantai dalam y=0,55; carport y=0,2; taman depan y=0,35. Dinding luar x -3,1..3,1; depan bangunan z 0,65 (teras niche sampai 0,9); belakang z -5,35.",
+  "Ruang: teras niche x -3,1..-1,6 z -0,5..0,65 (pintu utama di z -0,5, x -2,4..-2,0); KM x -1,6..0,2 z -0,5..0,65; ruang keluarga+dapur x -3,1..0,2 z -3,85..-0,5 (meja dapur bawaan model di dinding belakang x -3..-1, pintu ke taman belakang x -0,6..-0,2); KT1 x 0,3..3,1 z -2,2..0,65 (pintu di x 0,25 z -1,7, jendela ke taman depan); KT2 x 0,3..3,1 z -5,35..-2,35 (pintu di x 0,25 z -2,85); taman belakang x -3,1..0,2 z -5,35..-3,85.",
+  "Satu titik per ruang. Render di img/mizu-36/NN.webp, acuan NN-acuan.png, prompt NN-prompt.md. Garis tepi SketchUp (edge_color) ikut kena raycast: saring hanya mesh."
+ ],
+ "nama": "Mizu 36",
+ "model": "mizu-36.glb",
+ "lantai": [
+  {
+   "nomor": 1,
+   "y": 0.55,
+   "potong": 2.2
+  }
+ ],
+ "ruang": [
+  {
+   "nama": "Carport",
+   "lantai": 1,
+   "perabot": [
+    {
+     "jenis": "car",
+     "x": -2.0,
+     "z": 3.3,
+     "y": 0.2
+    },
+    {
+     "jenis": "motor",
+     "x": -0.6,
+     "z": 2.6,
+     "y": 0.2
+    }
+   ],
+   "titik": [
+    {
+     "x": -1.6,
+     "z": 3.2,
+     "kamera": {
+      "x": 2.8,
+      "y": 2.3,
+      "z": 9.0
+     },
+     "lihat": {
+      "x": -0.3,
+      "y": 2.5,
+      "z": 1.5
+     },
+     "gambar": "/kawa-living/img/interior kamar 3.webp",
+     "judul": "Tampak depan"
+    }
+   ]
+  },
+  {
+   "nama": "Teras & Ruang Tamu",
+   "lantai": 1,
+   "perabot": [],
+   "titik": [
+    {
+     "x": -2.3,
+     "z": 0.1,
+     "kamera": {
+      "x": -2.4,
+      "y": 1.8,
+      "z": 2.4
+     },
+     "lihat": {
+      "x": -2.2,
+      "y": 1.4,
+      "z": -0.5
+     },
+     "gambar": "/kawa-living/img/interior kamar 3.webp",
+     "judul": "Teras dan pintu utama"
+    }
+   ]
+  },
+  {
+   "nama": "Ruang Keluarga",
+   "lantai": 1,
+   "perabot": [
+    {
+     "jenis": "sofa",
+     "x": -0.8,
+     "z": -0.95,
+     "rot": 180
+    },
+    {
+     "jenis": "coffee",
+     "x": -0.8,
+     "z": -1.65
+    },
+    {
+     "jenis": "tv",
+     "x": -2.9,
+     "z": -1.3,
+     "rot": 90
+    },
+    {
+     "jenis": "dining",
+     "x": -1.5,
+     "z": -2.45,
+     "rot": 90
+    }
+   ],
+   "titik": [
+    {
+     "x": -1.2,
+     "z": -1.3,
+     "kamera": {
+      "x": -0.1,
+      "y": 1.85,
+      "z": -3.3
+     },
+     "lihat": {
+      "x": -1.5,
+      "y": 1.15,
+      "z": -0.5
+     },
+     "gambar": "/kawa-living/img/interior kamar 3.webp",
+     "judul": "Ruang keluarga dan pintu utama"
+    }
+   ]
+  },
+  {
+   "nama": "Dapur & Ruang Makan",
+   "lantai": 1,
+   "perabot": [],
+   "titik": [
+    {
+     "x": -1.5,
+     "z": -3.0,
+     "kamera": {
+      "x": -2.3,
+      "y": 1.8,
+      "z": -0.9
+     },
+     "lihat": {
+      "x": -1.4,
+      "y": 1.1,
+      "z": -3.7
+     },
+     "gambar": "/kawa-living/img/interior kamar 3.webp",
+     "judul": "Dapur dan ruang makan"
+    }
+   ]
+  },
+  {
+   "nama": "Kamar Tidur 1",
+   "lantai": 1,
+   "perabot": [
+    {
+     "jenis": "bed",
+     "x": 2.05,
+     "z": -0.9,
+     "rot": -90
+    },
+    {
+     "jenis": "nightstand",
+     "x": 2.8,
+     "z": 0.2
+    },
+    {
+     "jenis": "wardrobe",
+     "x": 2.3,
+     "z": -1.9
+    }
+   ],
+   "titik": [
+    {
+     "x": 1.5,
+     "z": -0.8,
+     "kamera": {
+      "x": 0.4,
+      "y": 1.8,
+      "z": -1.6
+     },
+     "lihat": {
+      "x": 2.5,
+      "y": 1.2,
+      "z": 0.3
+     },
+     "gambar": "/kawa-living/img/interior kamar 3.webp",
+     "judul": "Kamar tidur 1"
+    }
+   ]
+  },
+  {
+   "nama": "Kamar Tidur 2",
+   "lantai": 1,
+   "perabot": [
+    {
+     "jenis": "bedsmall",
+     "x": 2.1,
+     "z": -3.8,
+     "rot": -90
+    },
+    {
+     "jenis": "nightstand",
+     "x": 2.8,
+     "z": -2.85
+    },
+    {
+     "jenis": "desk",
+     "x": 0.9,
+     "z": -5.0
+    }
+   ],
+   "titik": [
+    {
+     "x": 1.5,
+     "z": -3.5,
+     "kamera": {
+      "x": 0.5,
+      "y": 1.9,
+      "z": -2.6
+     },
+     "lihat": {
+      "x": 2.5,
+      "y": 1.1,
+      "z": -5.0
+     },
+     "gambar": "/kawa-living/img/interior kamar 3.webp",
+     "judul": "Kamar tidur 2"
+    }
+   ]
+  },
+  {
+   "nama": "Kamar Mandi",
+   "lantai": 1,
+   "perabot": [
+    {
+     "jenis": "toilet",
+     "x": -0.1,
+     "z": -0.2,
+     "rot": -90
+    },
+    {
+     "jenis": "sink",
+     "x": -0.2,
+     "z": 0.4,
+     "rot": 180
+    }
+   ],
+   "titik": [
+    {
+     "x": -0.8,
+     "z": 0.1,
+     "kamera": {
+      "x": -1.42,
+      "y": 1.7,
+      "z": 0.1
+     },
+     "lihat": {
+      "x": 0.2,
+      "y": 1.0,
+      "z": 0.1
+     },
+     "gambar": "/kawa-living/img/interior kamar 3.webp",
+     "judul": "Kamar mandi"
+    }
+   ]
+  },
+  {
+   "nama": "Taman Belakang",
+   "lantai": 1,
+   "perabot": [],
+   "titik": [
+    {
+     "x": -1.5,
+     "z": -4.6,
+     "kamera": {
+      "x": -2.8,
+      "y": 1.8,
+      "z": -5.1
+     },
+     "lihat": {
+      "x": -0.3,
+      "y": 1.2,
+      "z": -3.9
+     },
+     "gambar": "/kawa-living/img/interior kamar 3.webp",
+     "judul": "Taman belakang ke arah dapur"
+    }
+   ]
+  }
+ ]
+}
