@@ -31,7 +31,7 @@
     { "jenis": "plant", "x": -2.7, "z": -0.2 }
    ],
    "titik": [
-    { "x": -2.0, "z": 0.3, "kamera": { "x": -1.4, "y": 2.0, "z": 2.4 }, "lihat": { "x": -1.7, "y": 1.4, "z": -1.0 }, "gambar": "/kawa-living/img/interior keluarga 2.webp", "judul": "Ruang keluarga ke arah ruang makan" },
+    { "x": -2.0, "z": 0.3, "kamera": { "x": -1.4, "y": 2.0, "z": 2.4 }, "lihat": { "x": -1.7, "y": 1.4, "z": -1.0 }, "gambar": "img/03.webp", "judul": "Ruang keluarga ke arah ruang makan" },
     { "x": -0.9, "z": 2.0, "lihat": { "x": -2.4, "z": 0.2 }, "gambar": "/kawa-living/img/interior keluarga 2.webp", "judul": "Ruang keluarga ke arah tangga" }
    ]
   },
