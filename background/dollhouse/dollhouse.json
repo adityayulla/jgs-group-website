@@ -44,8 +44,8 @@
     { "jenis": "plant", "x": -0.5, "z": -3.1 }
    ],
    "titik": [
-    { "x": -2.2, "z": -1.2, "kamera": { "x": -1.0, "y": 2.0, "z": -0.85 }, "lihat": { "x": -2.7, "y": 1.3, "z": -2.7 }, "gambar": "/kawa-living/img/interior dapur.webp", "judul": "Dapur" },
-    { "x": -1.0, "z": -2.7, "kamera": { "x": -2.5, "y": 2.0, "z": -3.1 }, "lihat": { "x": -0.5, "y": 1.4, "z": -0.4 }, "gambar": "/kawa-living/img/interior dapur.webp", "judul": "Ruang makan ke arah ruang keluarga" }
+    { "x": -2.2, "z": -1.2, "kamera": { "x": -1.0, "y": 2.0, "z": -0.85 }, "lihat": { "x": -2.7, "y": 1.3, "z": -2.7 }, "gambar": "img/05.webp", "judul": "Dapur" },
+    { "x": -1.0, "z": -2.7, "kamera": { "x": -2.5, "y": 2.0, "z": -3.1 }, "lihat": { "x": -0.5, "y": 1.4, "z": -0.4 }, "gambar": "img/06.webp", "judul": "Ruang makan ke arah ruang keluarga" }
    ]
   },
   {
