@@ -148,7 +148,7 @@ export async function mulai(wadah, tipe, opsi = {}) {
   const panggung = el('div', 'dh__panggung');
   panggung.setAttribute('role', 'application'); panggung.setAttribute('aria-label', 'Model 3D rumah. Seret untuk memutar, ketuk titik untuk melihat ruangan.');
   const lapisTitik = el('div', 'dh__titik'); lapisTitik.setAttribute('aria-live', 'polite');
-  const petunjuk = el('div', 'dh__petunjuk', SENTUH ? 'Seret = putar · Cubit = zoom · Ketuk titik' : 'Seret = putar · Klik lalu scroll = zoom · Klik titik');
+  const petunjuk = el('div', 'dh__petunjuk', SENTUH ? 'Dua jari = putar & zoom · Ketuk titik' : 'Seret = putar · Klik lalu scroll = zoom · Klik titik');
   const lantaiEl = el('div', 'dh__lantai'); lantaiEl.setAttribute('role', 'group'); lantaiEl.setAttribute('aria-label', 'Pilih lantai');
   const muat = el('div', 'dh__muat', '<div><i></i></div>'); const bar = muat.querySelector('i');
   akar.append(panggung, lapisTitik, petunjuk, lantaiEl, muat);
@@ -175,6 +175,8 @@ export async function mulai(wadah, tipe, opsi = {}) {
     renderer.domElement.addEventListener('pointerdown', () => { kontrol.enableZoom = true; });
     renderer.domElement.addEventListener('pointerleave', () => { kontrol.enableZoom = false; });
   }
+  // Layar sentuh: satu jari tetap menggulir halaman (viewer tampil otomatis di kartu), dua jari memutar + zoom.
+  if (SENTUH && !EDIT) { kontrol.touches.ONE = -1; kontrol.touches.TWO = THREE.TOUCH.DOLLY_ROTATE; renderer.domElement.style.touchAction = 'pan-y'; }
 
   scene.add(new THREE.HemisphereLight(0xfdfbf5, 0xb9c3cf, 1.35));
   const matahari = new THREE.DirectionalLight(0xfff4e0, 2.2);
@@ -320,7 +322,7 @@ export async function mulai(wadah, tipe, opsi = {}) {
     });
     ed.querySelector('.salin').addEventListener('click', () => navigator.clipboard.writeText(log.value));
     ed.querySelector('.hapus').addEventListener('click', () => { log.value = ''; });
-    window.DH = { scene, kamera, kontrol, rumah, bb, data, setLantai, THREE, bidang, renderer };
+    window.DH = { scene, kamera, kontrol, rumah, bb, data, setLantai, THREE, bidang, renderer, pins, bufDalam: () => bufDalam };
   }
 
   /* ukuran & loop; berhenti menggambar saat tidak terlihat di layar */
@@ -333,6 +335,65 @@ export async function mulai(wadah, tipe, opsi = {}) {
   const io = new IntersectionObserver(([e]) => { terlihat = e.isIntersecting; if (terlihat && hidup && !raf) raf = requestAnimationFrame(gambar); }, { threshold: 0 });
   io.observe(wadah);
   const v = new THREE.Vector3();
+  /* Rumah utuh: titik yang terhalang dinding atau atap dari arah kamera disembunyikan (tampilan per lantai tidak
+     diuji, semua titik lantai itu tampil). Uji lewat GPU: rumah digambar sekali lagi ke target kecil 256x256 dengan
+     shader jarak pandang, lalu jarak permukaan di posisi tiap titik dibandingkan dengan jarak titik ke kamera.
+     Kaca, perabot, dinding samping tembus pandang dan salinan dinding samping tidak ikut digambar. Raycast CPU terlalu
+     berat (model ratusan ribu segitiga). Dihitung ulang hanya saat kamera bergeser > 1 cm, tiap 4 frame. */
+  const TW = 256, TH = 256, JAUH = 60;
+  const targetDalam = new THREE.WebGLRenderTarget(TW, TH, { minFilter: THREE.NearestFilter, magFilter: THREE.NearestFilter });
+  // Jarak pandang (view-space) dikemas ke R,G (16 bit, ±1 mm); A = 1 menandai ada permukaan.
+  const bahanDalam = new THREE.ShaderMaterial({
+    side: THREE.DoubleSide, clipping: true, clippingPlanes: [bidang], // potongan lantai ikut; tanpa menyentuh renderer.clippingPlanes (itu memicu compile ulang semua material)
+    vertexShader: `#include <common>
+#include <clipping_planes_pars_vertex>
+varying float vZ;
+void main() {
+#include <begin_vertex>
+#include <project_vertex>
+#include <clipping_planes_vertex>
+  vZ = -mvPosition.z;
+}`,
+    fragmentShader: `#include <common>
+#include <clipping_planes_pars_fragment>
+varying float vZ;
+void main() {
+#include <clipping_planes_fragment>
+  float d = floor(clamp(vZ / ${JAUH.toFixed(1)}, 0.0, 1.0) * 65535.0);
+  float r = floor(d / 256.0);
+  gl_FragColor = vec4(r / 255.0, (d - r * 256.0) / 255.0, 0.0, 1.0);
+}`,
+  });
+  const bufDalam = new Uint8Array(TW * TH * 4);
+  const meshKaca = []; gltf.scene.traverse(o => { if (o.isMesh && o.material.transparent && o.material.opacity < 1) meshKaca.push(o); });
+  const meshSolid = []; rumah.traverse(o => { if (o.isMesh && o.material.clippingPlanes && o.material.clippingPlanes.length === 2) meshSolid.push(o); });
+  const kameraLalu = new THREE.Vector3(); let frameKe = 0, lantaiLalu = NaN;
+  const warnaBersih = new THREE.Color(); const vv = new THREE.Vector3();
+  function ukurHalangan() {
+    const sembunyi = [...meshKaca, ...meshSolid];
+    sembunyi.forEach(o => { o.visible = false; });
+    const tampakPerabot = perabotGrup.visible, tampakTembus = tembusGrup.visible, tampakAlas = alas.visible;
+    perabotGrup.visible = tembusGrup.visible = alas.visible = false;
+    renderer.getClearColor(warnaBersih); const alfaBersih = renderer.getClearAlpha();
+    renderer.setClearColor(0x000000, 0);
+    scene.overrideMaterial = bahanDalam;
+    renderer.setRenderTarget(targetDalam); renderer.clear(); renderer.render(scene, kamera);
+    renderer.readRenderTargetPixels(targetDalam, 0, 0, TW, TH, bufDalam);
+    renderer.setRenderTarget(null); scene.overrideMaterial = null;
+    renderer.setClearColor(warnaBersih, alfaBersih);
+    sembunyi.forEach(o => { o.visible = true; });
+    perabotGrup.visible = tampakPerabot; tembusGrup.visible = tampakTembus; alas.visible = tampakAlas;
+    kamera.updateMatrixWorld();
+    for (const p of pins) {
+      v.copy(p.pos).project(kamera);
+      const px = Math.min(TW - 1, Math.max(0, Math.round((v.x + 1) / 2 * (TW - 1)))), py = Math.min(TH - 1, Math.max(0, Math.round((v.y + 1) / 2 * (TH - 1))));
+      const i = (py * TW + px) * 4;
+      if (bufDalam[i + 3] < 128) { p.halang = false; continue; }
+      const dPermukaan = (bufDalam[i] * 256 + bufDalam[i + 1]) / 65535 * JAUH;
+      const dTitik = -vv.copy(p.pos).applyMatrix4(kamera.matrixWorldInverse).z;
+      p.halang = dPermukaan < dTitik - 0.3; p.dP = dPermukaan; p.dT = dTitik; p.px = [px, py];
+    }
+  }
   function gambar() {
     raf = 0; if (!hidup) return;
     if (!terlihat) return; // IntersectionObserver menghidupkan lagi
@@ -345,11 +406,15 @@ export async function mulai(wadah, tipe, opsi = {}) {
       bidangJauh.normal.set(-sisi, 0, 0); bidangJauh.constant = sisi * cx;
     }
     renderer.render(scene, kamera);
+    // Damping membuat posisi kamera bergeser sangat kecil tanpa henti: pakai ambang 1 cm, bukan kesamaan persis.
+    // Hanya di Rumah utuh; tampilan per lantai (potongan 2,2 m) selalu menampilkan semua titik lantai itu.
+    if (lantaiAktif !== 0) { if (lantaiLalu === 0) pins.forEach(p => { p.halang = false; }); lantaiLalu = lantaiAktif; }
+    else if (frameKe++ % 4 === 0 && (lantaiLalu !== 0 || anim || kameraLalu.distanceToSquared(kamera.position) > 1e-4)) { kameraLalu.copy(kamera.position); lantaiLalu = 0; ukurHalangan(); }
     for (const p of pins) {
       // Rumah utuh (0): semua titik tampil; per lantai: hanya titik lantai itu; mode kamera (-1): tanpa titik.
       if (lantaiAktif !== 0 && p.ruang.lantai !== lantaiAktif) { p.el.classList.remove('tampak'); continue; }
       v.copy(p.pos).project(kamera);
-      if (v.z > 1) { p.el.classList.remove('tampak'); continue; }
+      if (v.z > 1 || p.halang) { p.el.classList.remove('tampak'); continue; }
       p.el.style.transform = `translate(${((v.x + 1) / 2 * lebarPx).toFixed(1)}px, ${((1 - v.y) / 2 * tinggiPx).toFixed(1)}px) translate(-50%,-50%)`;
       p.el.classList.add('tampak');
     }
@@ -359,7 +424,7 @@ export async function mulai(wadah, tipe, opsi = {}) {
 
   function hancur() {
     hidup = false; if (raf) cancelAnimationFrame(raf); raf = 0;
-    ro.disconnect(); io.disconnect(); kontrol.dispose();
+    ro.disconnect(); io.disconnect(); kontrol.dispose(); targetDalam.dispose(); bahanDalam.dispose();
     scene.traverse(o => { if (o.geometry) o.geometry.dispose(); const ms = o.material ? (Array.isArray(o.material) ? o.material : [o.material]) : []; ms.forEach(m => { for (const k in m) if (m[k] && m[k].isTexture) m[k].dispose(); m.dispose(); }); });
     renderer.dispose(); renderer.forceContextLoss();
     akar.remove(); if (window.DH && window.DH.renderer === renderer) delete window.DH;

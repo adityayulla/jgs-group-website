@@ -343,8 +343,8 @@
     .un__denah-imgs img { flex: 1; border-radius: 8px; border: 1px solid var(--line); object-fit: contain; background: #f5f5f7; max-height: 130px; }
     /* Kartu dengan dollhouse 3D (.un__row--3d): grid 2x2 — baris atas foto asli | panel 3D (sama-sama 3:2),
        baris bawah teks (nama, deskripsi, spesifikasi) | harga, tombol, denah. Viewer-nya
-       (3d/dollhouse/dollhouse.js, Three.js) baru diunduh saat tombol "Jelajah 3D" ditekan; sebelum itu hanya
-       poster webp kecil. Hanya satu viewer hidup sekaligus. Kartu Yuri (tanpa 3D) tetap tata letak lama. */
+       (3d/dollhouse/dollhouse.js, Three.js) baru diunduh saat kartu masuk layar dan langsung tampil Rumah utuh;
+       sebelum itu hanya poster webp kecil. Hanya satu viewer hidup sekaligus. Kartu Yuri (tanpa 3D) tetap tata letak lama. */
     .un__row--3d { grid-template-columns: 1fr 1fr; align-items: start; row-gap: 28px; column-gap: 28px; }
     .un__row--3d .un__img { aspect-ratio: 3/2; }
     .un__row--3d .un__copy { padding: 0 8px 0 4px; }
@@ -354,16 +354,10 @@
     .un__row--3d .un__denah { margin-top: 0; padding-top: 14px; }
     .un__dh { position: relative; aspect-ratio: 3/2; border-radius: var(--r-md); overflow: hidden; background: #dfe6ef; }
     .un__dh-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .un__dh-lbl { position: absolute; left: 12px; top: 12px; z-index: 1; font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: rgba(15,23,51,.55); padding: 4px 9px; border-radius: var(--r-pill); pointer-events: none; }
-    .un__dh-btn { position: absolute; inset: 0; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 0; padding: 16px; background: linear-gradient(to top, rgba(15,23,51,.6), rgba(15,23,51,.08) 55%); color: #fff; cursor: pointer; font: inherit; text-align: center; }
-    .un__dh-btn b { display: inline-flex; align-items: center; gap: 8px; background: var(--navy); padding: 12px 20px; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; box-shadow: 0 14px 30px -12px rgba(15,23,51,.7); transition: transform .3s var(--ease), background .3s; }
-    .un__dh-btn:hover b { transform: translateY(-2px); background: var(--orange); }
-    .un__dh-btn small { font-size: 12px; opacity: .9; text-wrap: balance; }
-    .un__dh-wadah { position: absolute; inset: 0; display: none; }
-    .un__dh-tutup { position: absolute; right: 10px; top: 10px; z-index: 6; display: none; width: 34px; height: 34px; border-radius: 50%; border: 0; background: rgba(255,255,255,.88); color: var(--navy); font-size: 20px; line-height: 1; cursor: pointer; box-shadow: 0 6px 16px -8px rgba(15,23,51,.6); }
-    .un__dh.buka .un__dh-wadah { display: block; }
-    .un__dh.buka .un__dh-tutup { display: grid; place-items: center; }
-    .un__dh.buka .un__dh-btn, .un__dh.buka .un__dh-poster, .un__dh.buka .un__dh-lbl { display: none; }
+    .un__dh-wadah { position: absolute; inset: 0; opacity: 0; transition: opacity .4s; }
+    .un__dh.siap .un__dh-wadah { opacity: 1; }
+    .un__dh.siap .un__dh-poster { visibility: hidden; }
+    .un__dh-catat { position: absolute; left: 12px; right: 12px; bottom: 12px; margin: 0; font-size: 12px; color: var(--muted); text-align: center; }
     @media (max-width: 900px) { .un__dh { aspect-ratio: 4/3; } } /* di HP panel 3D lebih tinggi supaya titik tidak berdesakan */
 
     /* FAQ */
@@ -1000,11 +994,8 @@
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
         </div>
         <div class="un__dh" data-dollhouse="hiroi-yuri-42">
-          <span class="un__dh-lbl">3D interaktif</span>
           <img class="un__dh-poster" src="3d/dollhouse/img/hiroi-yuri-42/poster.webp" alt="Pratinjau 3D Hiroi Yuri 42" loading="lazy" width="900" height="600">
-          <button type="button" class="un__dh-btn"><b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Jelajah 3D</b><small>Putar rumahnya, ketuk ruangan untuk melihat isinya</small></button>
           <div class="un__dh-wadah"></div>
-          <button type="button" class="un__dh-tutup" aria-label="Tutup 3D">×</button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1086,11 +1077,8 @@
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
         </div>
         <div class="un__dh" data-dollhouse="mizu-36">
-          <span class="un__dh-lbl">3D interaktif</span>
           <img class="un__dh-poster" src="3d/dollhouse/img/mizu-36/poster.webp" alt="Pratinjau 3D Mizu 36" loading="lazy" width="900" height="600">
-          <button type="button" class="un__dh-btn"><b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Jelajah 3D</b><small>Putar rumahnya, ketuk ruangan untuk melihat isinya</small></button>
           <div class="un__dh-wadah"></div>
-          <button type="button" class="un__dh-tutup" aria-label="Tutup 3D">×</button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1133,11 +1121,8 @@
             onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
         </div>
         <div class="un__dh" data-dollhouse="himawari-51">
-          <span class="un__dh-lbl">3D interaktif</span>
           <img class="un__dh-poster" src="3d/dollhouse/img/himawari-51/poster.webp" alt="Pratinjau 3D Himawari 51" loading="lazy" width="900" height="600">
-          <button type="button" class="un__dh-btn"><b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Jelajah 3D</b><small>Putar rumahnya, ketuk ruangan untuk melihat isinya</small></button>
           <div class="un__dh-wadah"></div>
-          <button type="button" class="un__dh-tutup" aria-label="Tutup 3D">×</button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1181,11 +1166,8 @@
             onerror="this.style.background='linear-gradient(135deg,#1b2a64,#db7f2e33)';this.style.display='block'">
         </div>
         <div class="un__dh" data-dollhouse="okina-61">
-          <span class="un__dh-lbl">3D interaktif</span>
           <img class="un__dh-poster" src="3d/dollhouse/img/okina-61/poster.webp" alt="Pratinjau 3D Okina 61" loading="lazy" width="900" height="600">
-          <button type="button" class="un__dh-btn"><b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Jelajah 3D</b><small>Putar rumahnya, ketuk ruangan untuk melihat isinya</small></button>
           <div class="un__dh-wadah"></div>
-          <button type="button" class="un__dh-tutup" aria-label="Tutup 3D">×</button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1226,38 +1208,41 @@
   </section>
 
   <!-- Dollhouse 3D di kartu Detail Unit: modul 3d/dollhouse/dollhouse.js (Three.js) dan model GLB
-       tipe itu baru diunduh saat "Jelajah 3D" ditekan. Hanya satu viewer hidup sekaligus supaya
-       ringan di HP; membuka tipe lain mematikan yang sebelumnya. -->
+       tipe itu baru diunduh saat kartunya masuk layar, lalu langsung tampil Rumah utuh. Sebelum itu
+       hanya poster webp. Hanya satu viewer hidup sekaligus supaya ringan di HP: kartu berikutnya
+       yang masuk layar mematikan viewer sebelumnya (posternya tampil lagi). -->
   <script>
   (function () {
-    var aktif = null, modul = null;
+    var panel = [].slice.call(document.querySelectorAll('.un__dh[data-dollhouse]'));
+    if (!panel.length) return;
+    var aktif = null, modul = null, giliran = 0;
     function adaWebGL() { try { var c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; } }
+    if (!adaWebGL() || !('IntersectionObserver' in window)) return; // poster saja
     function matikan() {
       if (!aktif) return;
       try { aktif.viewer.hancur(); } catch (e) {}
-      aktif.panel.classList.remove('buka'); aktif.wadah.innerHTML = ''; aktif = null;
+      aktif.panel.classList.remove('siap'); aktif.panel.querySelector('.un__dh-wadah').innerHTML = ''; aktif = null;
     }
-    document.querySelectorAll('.un__dh[data-dollhouse]').forEach(function (panel) {
-      var tombol = panel.querySelector('.un__dh-btn'), wadah = panel.querySelector('.un__dh-wadah');
-      var ket = tombol.querySelector('small'), teksAwal = ket.textContent, memuat = false;
-      panel.querySelector('.un__dh-tutup').addEventListener('click', function () { if (aktif && aktif.panel === panel) matikan(); });
-      tombol.addEventListener('click', function () {
-        if (memuat) return;
-        if (!adaWebGL()) { ket.textContent = 'Browser ini belum mendukung tampilan 3D.'; tombol.disabled = true; return; }
-        matikan(); memuat = true; ket.textContent = 'Memuat 3D…'; panel.classList.add('buka');
-        (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261026c')))
-          .then(function (m) { return m.mulai(wadah, panel.dataset.dollhouse); })
-          .then(function (v) {
-            memuat = false; ket.textContent = teksAwal;
-            if (!panel.classList.contains('buka')) { v.hancur(); wadah.innerHTML = ''; return; } // ditutup saat masih memuat
-            aktif = { panel: panel, wadah: wadah, viewer: v };
-          })
-          .catch(function () {
-            memuat = false; modul = null; panel.classList.remove('buka'); wadah.innerHTML = '';
-            ket.textContent = 'Tampilan 3D gagal dimuat (koneksi atau browser). Coba lagi nanti.';
-          });
-      });
-    });
+    function nyalakan(p) {
+      if (aktif && aktif.panel === p) return;
+      var nomor = ++giliran, wadah = p.querySelector('.un__dh-wadah');
+      matikan();
+      (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261026e')))
+        .then(function (m) { if (nomor !== giliran) return null; return m.mulai(wadah, p.dataset.dollhouse); })
+        .then(function (v) {
+          if (!v) return;
+          if (nomor !== giliran) { v.hancur(); return; } // kartu lain keburu masuk layar
+          aktif = { panel: p, viewer: v }; p.classList.add('siap');
+        })
+        .catch(function () {
+          modul = null; wadah.innerHTML = '';
+          if (!p.querySelector('.un__dh-catat')) { var c = document.createElement('p'); c.className = 'un__dh-catat'; c.textContent = 'Tampilan 3D gagal dimuat. Muat ulang halaman untuk mencoba lagi.'; p.appendChild(c); }
+        });
+    }
+    var io = new IntersectionObserver(function (entri) {
+      entri.forEach(function (e) { if (e.isIntersecting) nyalakan(e.target); });
+    }, { rootMargin: '0px 0px -25% 0px', threshold: 0.35 });
+    panel.forEach(function (p) { io.observe(p); });
   })();
   </script>
 
