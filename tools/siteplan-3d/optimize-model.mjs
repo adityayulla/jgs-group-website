@@ -18,8 +18,8 @@ import { getBounds, dedup, weld, prune, flatten, join, textureCompress, simplify
 import { MeshoptEncoder, MeshoptSimplifier } from 'meshoptimizer';
 import sharp from 'sharp';
 await MeshoptEncoder.ready; await MeshoptSimplifier.ready;
-const [,, inp, out, texArg, simpArg] = process.argv;
-const TEX = Number(texArg || 512), RATIO = Number(simpArg || 0.5);
+const [,, inp, out, texArg, simpArg, errArg] = process.argv;
+const TEX = Number(texArg || 512), RATIO = Number(simpArg || 0.5), ERR = Number(errArg || 0.002); // error: batas penyimpangan relatif simplify (Yuri 1 berperabot detail memakai 0.01)
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'meshopt.encoder': MeshoptEncoder });
 const doc = await io.read(inp);
 const scene = doc.getRoot().getDefaultScene();
@@ -49,7 +49,7 @@ for (const n of meshNodes) {
   const b = ownBounds(n);
   const ext = Math.max(b.max[0] - b.min[0], b.max[1] - b.min[1], b.max[2] - b.min[2]);
   const far = Math.abs((b.min[0] + b.max[0]) / 2 - median) > 30;
-  const tinyHeavy = ext < 0.6 && ownTris(n) > 300;
+  const tinyHeavy = !process.env.SIMPAN_KECIL && ext < 0.6 && ownTris(n) > 300; // SIMPAN_KECIL=1: model berperabot asli (Yuri 1), kursi/lampu jangan dibuang
   if (far || tinyHeavy) { n.setMesh(null); dibuang++; }
 }
 // 2) Material: buang garis tepi SketchUp, transparansi kaca tetap.
@@ -62,7 +62,7 @@ for (const n of scene.listChildren()) {
   const t = n.getTranslation(); n.setTranslation([t[0] + off[0], t[1] + off[1], t[2] + off[2]]);
 }
 await doc.transform(
-  join(), weld(), simplify({ simplifier: MeshoptSimplifier, ratio: RATIO, error: 0.002 }),
+  join(), weld(), simplify({ simplifier: MeshoptSimplifier, ratio: RATIO, error: ERR }),
   dedup(), prune(),
   textureCompress({ encoder: sharp, targetFormat: 'webp', resize: [TEX, TEX], quality: 70 }),
   reorder({ encoder: MeshoptEncoder }), quantize(), meshopt({ encoder: MeshoptEncoder, level: 'medium' }),
