@@ -255,7 +255,7 @@ export async function mulai(wadah, tipe, opsi = {}) {
 
   /* lantai aktif & pemotongan */
   const daftarLantai = (data.lantai || []).map(l => l.nomor).sort();
-  [...daftarLantai.map(n => [n, 'Lantai ' + n]), [0, 'Rumah utuh']].forEach(([n, teks]) => {
+  [[0, 'Rumah utuh'], ...daftarLantai.map(n => [n, 'Lantai ' + n])].forEach(([n, teks]) => {
     const b = el('button', null, teks); b.type = 'button'; b.dataset.lantai = n; b.setAttribute('aria-pressed', 'false');
     b.addEventListener('click', () => setLantai(n)); lantaiEl.appendChild(b);
   });
@@ -277,13 +277,14 @@ export async function mulai(wadah, tipe, opsi = {}) {
   }
 
   /* kamera awal */
-  // Arah pandang dari depan-kanan atas; jaraknya dipaskan supaya seluruh denah (lantai 1 terpotong 2,2 m) masuk bingkai,
+  // Tampilan awal: rumah utuh (atap terpasang, dinding samping dekat kamera tembus pandang) dengan semua titik.
+  // Arah pandang dari depan-kanan atas; jaraknya dipaskan supaya seluruh rumah masuk bingkai,
   // termasuk saat wadahnya kecil/tegak (kartu Detail Unit di HP).
-  const lebar = bb.max.x - bb.min.x, dalam = bb.max.z - bb.min.z;
-  setLantai(1, false);
+  const lebar = bb.max.x - bb.min.x, dalam = bb.max.z - bb.min.z, tinggi = bb.max.y - bb.min.y;
+  setLantai(0, false);
   {
     const asp = Math.max(0.5, (wadah.clientWidth || 3) / (wadah.clientHeight || 2));
-    const r = 0.5 * Math.hypot(lebar, dalam, 3.5);
+    const r = 0.5 * Math.hypot(lebar, dalam, tinggi);
     const jarak = Math.min(kontrol.maxDistance, r / Math.sin(THREE.MathUtils.degToRad(kamera.fov / 2)) / Math.min(1, asp) * 0.96);
     const arah = new THREE.Vector3(lebar * 0.9, 8.5, dalam * 0.55).normalize();
     kamera.position.copy(kontrol.target).addScaledVector(arah, jarak);
@@ -345,7 +346,8 @@ export async function mulai(wadah, tipe, opsi = {}) {
     }
     renderer.render(scene, kamera);
     for (const p of pins) {
-      if (p.ruang.lantai !== lantaiAktif) { p.el.classList.remove('tampak'); continue; }
+      // Rumah utuh (0): semua titik tampil; per lantai: hanya titik lantai itu; mode kamera (-1): tanpa titik.
+      if (lantaiAktif !== 0 && p.ruang.lantai !== lantaiAktif) { p.el.classList.remove('tampak'); continue; }
       v.copy(p.pos).project(kamera);
       if (v.z > 1) { p.el.classList.remove('tampak'); continue; }
       p.el.style.transform = `translate(${((v.x + 1) / 2 * lebarPx).toFixed(1)}px, ${((1 - v.y) / 2 * tinggiPx).toFixed(1)}px) translate(-50%,-50%)`;

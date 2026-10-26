@@ -1245,7 +1245,7 @@
         if (memuat) return;
         if (!adaWebGL()) { ket.textContent = 'Browser ini belum mendukung tampilan 3D.'; tombol.disabled = true; return; }
         matikan(); memuat = true; ket.textContent = 'Memuat 3D…'; panel.classList.add('buka');
-        (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261026b')))
+        (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261026c')))
           .then(function (m) { return m.mulai(wadah, panel.dataset.dollhouse); })
           .then(function (v) {
             memuat = false; ket.textContent = teksAwal;
