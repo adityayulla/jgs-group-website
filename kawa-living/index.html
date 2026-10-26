@@ -1227,7 +1227,7 @@
       if (aktif && aktif.panel === p) return;
       var nomor = ++giliran, wadah = p.querySelector('.un__dh-wadah');
       matikan();
-      (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261026e')))
+      (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261026f')))
         .then(function (m) { if (nomor !== giliran) return null; return m.mulai(wadah, p.dataset.dollhouse); })
         .then(function (v) {
           if (!v) return;
