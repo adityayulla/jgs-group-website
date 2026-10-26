@@ -341,11 +341,17 @@
     .un__denah-lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 8px; }
     .un__denah-imgs { display: flex; gap: 10px; }
     .un__denah-imgs img { flex: 1; border-radius: 8px; border: 1px solid var(--line); object-fit: contain; background: #f5f5f7; max-height: 130px; }
-    /* Kartu dengan dollhouse 3D: kolom media jadi dua tumpuk — foto (agak mengecil ke 3:2) + panel 3D 3:2
-       di bawahnya. Viewer-nya (3d/dollhouse/dollhouse.js, Three.js) baru diunduh saat tombol
-       "Jelajah 3D" ditekan; sebelum itu hanya poster webp kecil. Hanya satu viewer hidup sekaligus. */
-    .un__media { display: flex; flex-direction: column; gap: 14px; }
-    .un__media .un__img { aspect-ratio: 3/2; }
+    /* Kartu dengan dollhouse 3D (.un__row--3d): grid 2x2 — baris atas foto asli | panel 3D (sama-sama 3:2),
+       baris bawah teks (nama, deskripsi, spesifikasi) | harga, tombol, denah. Viewer-nya
+       (3d/dollhouse/dollhouse.js, Three.js) baru diunduh saat tombol "Jelajah 3D" ditekan; sebelum itu hanya
+       poster webp kecil. Hanya satu viewer hidup sekaligus. Kartu Yuri (tanpa 3D) tetap tata letak lama. */
+    .un__row--3d { grid-template-columns: 1fr 1fr; align-items: start; row-gap: 28px; column-gap: 28px; }
+    .un__row--3d .un__img { aspect-ratio: 3/2; }
+    .un__row--3d .un__copy { padding: 0 8px 0 4px; }
+    .un__row--3d .un__specs { margin-bottom: 0; }
+    .un__row--3d .un__side { padding: 0 4px 0 8px; display: flex; flex-direction: column; gap: 18px; }
+    .un__row--3d .un__footer { padding-top: 8px; }
+    .un__row--3d .un__denah { margin-top: 0; padding-top: 14px; }
     .un__dh { position: relative; aspect-ratio: 3/2; border-radius: var(--r-md); overflow: hidden; background: #dfe6ef; }
     .un__dh-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .un__dh-lbl { position: absolute; left: 12px; top: 12px; z-index: 1; font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: rgba(15,23,51,.55); padding: 4px 9px; border-radius: var(--r-pill); pointer-events: none; }
@@ -988,19 +994,17 @@
     <div class="un__list">
 
       <!-- 1. Hiroi Yuri -->
-      <div class="un__row glass reveal" id="tipe-hiroi-yuri" data-tipe="Hiroi Yuri">
-        <div class="un__media">
-          <div class="un__img">
-            <img src="img/tipe/tipe%20yuri.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
-              onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
-          </div>
-          <div class="un__dh" data-dollhouse="hiroi-yuri-42">
-            <span class="un__dh-lbl">3D interaktif</span>
-            <img class="un__dh-poster" src="3d/dollhouse/img/hiroi-yuri-42/poster.webp" alt="Pratinjau 3D Hiroi Yuri 42" loading="lazy" width="900" height="600">
-            <button type="button" class="un__dh-btn"><b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Jelajah 3D</b><small>Putar rumahnya, ketuk ruangan untuk melihat isinya</small></button>
-            <div class="un__dh-wadah"></div>
-            <button type="button" class="un__dh-tutup" aria-label="Tutup 3D">×</button>
-          </div>
+      <div class="un__row un__row--3d glass reveal" id="tipe-hiroi-yuri" data-tipe="Hiroi Yuri">
+        <div class="un__img">
+          <img src="img/tipe/tipe%20yuri.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
+            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
+        </div>
+        <div class="un__dh" data-dollhouse="hiroi-yuri-42">
+          <span class="un__dh-lbl">3D interaktif</span>
+          <img class="un__dh-poster" src="3d/dollhouse/img/hiroi-yuri-42/poster.webp" alt="Pratinjau 3D Hiroi Yuri 42" loading="lazy" width="900" height="600">
+          <button type="button" class="un__dh-btn"><b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Jelajah 3D</b><small>Putar rumahnya, ketuk ruangan untuk melihat isinya</small></button>
+          <div class="un__dh-wadah"></div>
+          <button type="button" class="un__dh-tutup" aria-label="Tutup 3D">×</button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1018,6 +1022,8 @@
             <div>🚿 1 Kamar Mandi</div>
             <div>🏠 LB 37–42 m²</div>
           </div>
+        </div>
+        <div class="un__side">
           <div class="un__footer">
             <div class="un__price">
               <span>Mulai dari</span>
@@ -1074,19 +1080,17 @@
       </div>
 
       <!-- 3. Mizu -->
-      <div class="un__row glass reveal" id="tipe-mizu" data-tipe="Mizu">
-        <div class="un__media">
-          <div class="un__img">
-            <img src="img/tipe/tipe%20Mizu.webp" alt="Kawa Living Tipe Mizu" loading="lazy"
-              onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
-          </div>
-          <div class="un__dh" data-dollhouse="mizu-36">
-            <span class="un__dh-lbl">3D interaktif</span>
-            <img class="un__dh-poster" src="3d/dollhouse/img/mizu-36/poster.webp" alt="Pratinjau 3D Mizu 36" loading="lazy" width="900" height="600">
-            <button type="button" class="un__dh-btn"><b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Jelajah 3D</b><small>Putar rumahnya, ketuk ruangan untuk melihat isinya</small></button>
-            <div class="un__dh-wadah"></div>
-            <button type="button" class="un__dh-tutup" aria-label="Tutup 3D">×</button>
-          </div>
+      <div class="un__row un__row--3d glass reveal" id="tipe-mizu" data-tipe="Mizu">
+        <div class="un__img">
+          <img src="img/tipe/tipe%20Mizu.webp" alt="Kawa Living Tipe Mizu" loading="lazy"
+            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
+        </div>
+        <div class="un__dh" data-dollhouse="mizu-36">
+          <span class="un__dh-lbl">3D interaktif</span>
+          <img class="un__dh-poster" src="3d/dollhouse/img/mizu-36/poster.webp" alt="Pratinjau 3D Mizu 36" loading="lazy" width="900" height="600">
+          <button type="button" class="un__dh-btn"><b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Jelajah 3D</b><small>Putar rumahnya, ketuk ruangan untuk melihat isinya</small></button>
+          <div class="un__dh-wadah"></div>
+          <button type="button" class="un__dh-tutup" aria-label="Tutup 3D">×</button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1104,6 +1108,8 @@
             <div>📐 LT 72 m²</div>
             <div>🏠 LB 36 m²</div>
           </div>
+        </div>
+        <div class="un__side">
           <div class="un__footer">
             <div class="un__price">
               <span>Mulai dari</span>
@@ -1121,19 +1127,17 @@
       </div>
 
       <!-- 4. Himawari -->
-      <div class="un__row un__row--alt glass reveal" id="tipe-himawari" data-tipe="Himawari">
-        <div class="un__media">
-          <div class="un__img">
-            <img src="img/tipe/tipe%20himawari.webp" alt="Kawa Living Tipe Himawari" loading="lazy"
-              onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
-          </div>
-          <div class="un__dh" data-dollhouse="himawari-51">
-            <span class="un__dh-lbl">3D interaktif</span>
-            <img class="un__dh-poster" src="3d/dollhouse/img/himawari-51/poster.webp" alt="Pratinjau 3D Himawari 51" loading="lazy" width="900" height="600">
-            <button type="button" class="un__dh-btn"><b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Jelajah 3D</b><small>Putar rumahnya, ketuk ruangan untuk melihat isinya</small></button>
-            <div class="un__dh-wadah"></div>
-            <button type="button" class="un__dh-tutup" aria-label="Tutup 3D">×</button>
-          </div>
+      <div class="un__row un__row--3d glass reveal" id="tipe-himawari" data-tipe="Himawari">
+        <div class="un__img">
+          <img src="img/tipe/tipe%20himawari.webp" alt="Kawa Living Tipe Himawari" loading="lazy"
+            onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
+        </div>
+        <div class="un__dh" data-dollhouse="himawari-51">
+          <span class="un__dh-lbl">3D interaktif</span>
+          <img class="un__dh-poster" src="3d/dollhouse/img/himawari-51/poster.webp" alt="Pratinjau 3D Himawari 51" loading="lazy" width="900" height="600">
+          <button type="button" class="un__dh-btn"><b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Jelajah 3D</b><small>Putar rumahnya, ketuk ruangan untuk melihat isinya</small></button>
+          <div class="un__dh-wadah"></div>
+          <button type="button" class="un__dh-tutup" aria-label="Tutup 3D">×</button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1152,6 +1156,8 @@
             <div>📐 LT 72 m²</div>
             <div>🏠 LB 51 m²</div>
           </div>
+        </div>
+        <div class="un__side">
           <div class="un__footer">
             <div class="un__price">
               <span>Mulai dari</span>
@@ -1169,19 +1175,17 @@
       </div>
 
       <!-- 5. Okina -->
-      <div class="un__row glass reveal" id="tipe-okina" data-tipe="Okina">
-        <div class="un__media">
-          <div class="un__img">
-            <img src="img/tipe/tipe%20Okina%20landscape.webp" alt="Kawa Living Tipe Okina" loading="lazy"
-              onerror="this.style.background='linear-gradient(135deg,#1b2a64,#db7f2e33)';this.style.display='block'">
-          </div>
-          <div class="un__dh" data-dollhouse="okina-61">
-            <span class="un__dh-lbl">3D interaktif</span>
-            <img class="un__dh-poster" src="3d/dollhouse/img/okina-61/poster.webp" alt="Pratinjau 3D Okina 61" loading="lazy" width="900" height="600">
-            <button type="button" class="un__dh-btn"><b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Jelajah 3D</b><small>Putar rumahnya, ketuk ruangan untuk melihat isinya</small></button>
-            <div class="un__dh-wadah"></div>
-            <button type="button" class="un__dh-tutup" aria-label="Tutup 3D">×</button>
-          </div>
+      <div class="un__row un__row--3d glass reveal" id="tipe-okina" data-tipe="Okina">
+        <div class="un__img">
+          <img src="img/tipe/tipe%20Okina%20landscape.webp" alt="Kawa Living Tipe Okina" loading="lazy"
+            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#db7f2e33)';this.style.display='block'">
+        </div>
+        <div class="un__dh" data-dollhouse="okina-61">
+          <span class="un__dh-lbl">3D interaktif</span>
+          <img class="un__dh-poster" src="3d/dollhouse/img/okina-61/poster.webp" alt="Pratinjau 3D Okina 61" loading="lazy" width="900" height="600">
+          <button type="button" class="un__dh-btn"><b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Jelajah 3D</b><small>Putar rumahnya, ketuk ruangan untuk melihat isinya</small></button>
+          <div class="un__dh-wadah"></div>
+          <button type="button" class="un__dh-tutup" aria-label="Tutup 3D">×</button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1200,6 +1204,8 @@
             <div>📐 LT 82 m²</div>
             <div>🏠 LB 61 m²</div>
           </div>
+        </div>
+        <div class="un__side">
           <div class="un__footer">
             <div class="un__price">
               <span>Mulai dari</span>
