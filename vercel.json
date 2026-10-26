@@ -3,6 +3,16 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/background/dollhouse",
+      "destination": "/kawa-living/3d/dollhouse/",
+      "permanent": false
+    },
+    {
+      "source": "/background/dollhouse/(.*)",
+      "destination": "/kawa-living/3d/dollhouse/$1",
+      "permanent": false
+    },
+    {
       "source": "/(.*)",
       "has": [
         {

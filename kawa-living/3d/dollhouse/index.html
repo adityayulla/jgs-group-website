@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Uji dollhouse 3D — Kawa Living</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96">
+  <meta name="theme-color" content="#1b2a64">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Manrope:wght@400;500;600;700&display=swap">
+  <style>
+    /* Halaman uji dollhouse (layar penuh). Viewer yang sama ditanam di kartu Detail Unit kawa-living/.
+       ?tipe=<slug>  memuat <slug>.json (bawaan okina-61)
+       ?edit=1       mode editor: klik lantai → koordinat, window.DH terbuka
+       ?kamera=N     pandangan dari titik ke-N dalam bingkai 3:2 tanpa UI, untuk gambar acuan render */
+    :root{--ink:#15203b;--ink-2:#4a5470;--merah:#e0213f;color-scheme:light}
+    html,body{margin:0;height:100%;background:#e9eef4;color:var(--ink);font-family:"Manrope",system-ui,sans-serif;overflow:hidden;overscroll-behavior:none}
+    #wadah{position:fixed;inset:0}
+    body.kamera #wadah{inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100vw,150vh);height:auto;aspect-ratio:3/2;background:#dfe6ef}
+    .judul{position:fixed;left:16px;top:calc(14px + env(safe-area-inset-top));z-index:3;display:flex;flex-direction:column;gap:2px;pointer-events:none}
+    .judul .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--merah);font-weight:700}
+    .judul h1{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:clamp(22px,3vw,34px);margin:0;line-height:1.05;letter-spacing:-.012em}
+    .judul p{margin:0;font-size:13px;color:var(--ink-2)}
+    body.kamera .judul{display:none}
+    #wadah .dh__petunjuk{left:auto;right:16px;top:16px}
+    #wadah .dh__lantai{bottom:calc(18px + env(safe-area-inset-bottom))}
+    #wadah .dh__editor{bottom:calc(80px + env(safe-area-inset-bottom));left:16px}
+  </style>
+</head>
+<body>
+  <div id="wadah"></div>
+  <div class="judul">
+    <span class="eyebrow">Kawa Living · Halaman uji</span>
+    <h1>Jelajah 3D</h1>
+    <p>Putar dengan seret, cubit untuk zoom, ketuk titik untuk melihat ruangan.</p>
+  </div>
+  <script type="module">
+    import { mulai } from './dollhouse.js?v=20261026b';
+    const q = new URLSearchParams(location.search);
+    const kamera = Number(q.get('kamera') || 0);
+    if (kamera > 0) document.body.classList.add('kamera');
+    const v = await mulai(document.getElementById('wadah'), q.get('tipe') || 'okina-61', { edit: q.has('edit'), kamera });
+    if (v.data.nama) { document.querySelector('.judul h1').textContent = v.data.nama + ' — jelajah 3D'; document.title = v.data.nama + ' — jelajah 3D'; }
+  </script>
+</body>
+</html>
