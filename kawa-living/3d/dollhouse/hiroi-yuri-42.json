@@ -1,298 +1,299 @@
 {
- "_catatan": [
-  "Hiroi Yuri tipe 42: satu lantai (level 4,85 m di model adalah bidang atap). Orientasi sama dengan denah pemasaran: kamar tidur di -x, carport di -x depan, depan rumah +z.",
-  "Satu titik per ruangan (8 titik). Render di img/hiroi-yuri-42/NN.webp, acuan NN-acuan.png, prompt NN-prompt.md.",
-  "Ukuran model: 6,5 x 11 m. Lantai dalam y=1,0; carport y=0,4. KT x -2,85..0; ruang keluarga x 0,15..2,9 z -1,4..1,7; dapur x 0,13..1,93 z -3,07..-1,83; KM x 2,07..2,9 z -3,22..-1,98; taman belakang z -5,35..-3,7."
- ],
- "nama": "Hiroi Yuri 42",
- "model": "hiroi-yuri-42.glb",
- "lantai": [
-  {
-   "nomor": 1,
-   "y": 1.0,
-   "potong": 2.2
-  }
- ],
- "ruang": [
-  {
-   "nama": "Carport",
-   "lantai": 1,
-   "perabot": [
+  "_catatan": [
+    "Hiroi Yuri tipe 42: satu lantai (level 4,85 m di model adalah bidang atap). Orientasi sama dengan denah pemasaran: kamar tidur di -x, carport di -x depan, depan rumah +z.",
+    "Satu titik per ruangan (8 titik). Render di img/hiroi-yuri-42/NN.webp, acuan NN-acuan.png, prompt NN-prompt.md.",
+    "Ukuran model: 6,5 x 11 m. Lantai dalam y=1,0; carport y=0,4. KT x -2,85..0; ruang keluarga x 0,15..2,9 z -1,4..1,7; dapur x 0,13..1,93 z -3,07..-1,83; KM x 2,07..2,9 z -3,22..-1,98; taman belakang z -5,35..-3,7."
+  ],
+  "nama": "Hiroi Yuri 42",
+  "model": "hiroi-yuri-42.glb",
+  "titikTampil": false,
+  "lantai": [
     {
-     "jenis": "car",
-     "x": -1.9,
-     "z": 3.3,
-     "y": 0.4
+      "nomor": 1,
+      "y": 1.0,
+      "potong": 2.2
+    }
+  ],
+  "ruang": [
+    {
+      "nama": "Carport",
+      "lantai": 1,
+      "perabot": [
+        {
+          "jenis": "car",
+          "x": -1.9,
+          "z": 3.3,
+          "y": 0.4
+        },
+        {
+          "jenis": "motor",
+          "x": 0.3,
+          "z": 4.2,
+          "y": 0.4
+        }
+      ],
+      "titik": [
+        {
+          "x": -1.2,
+          "z": 2.0,
+          "kamera": {
+            "x": 3.2,
+            "y": 2.4,
+            "z": 8.8
+          },
+          "lihat": {
+            "x": -0.2,
+            "y": 2.7,
+            "z": 1.5
+          },
+          "gambar": "img/hiroi-yuri-42/01.webp",
+          "judul": "Tampak depan"
+        }
+      ]
     },
     {
-     "jenis": "motor",
-     "x": 0.3,
-     "z": 4.2,
-     "y": 0.4
-    }
-   ],
-   "titik": [
-    {
-     "x": -1.2,
-     "z": 2.0,
-     "kamera": {
-      "x": 3.2,
-      "y": 2.4,
-      "z": 8.8
-     },
-     "lihat": {
-      "x": -0.2,
-      "y": 2.7,
-      "z": 1.5
-     },
-     "gambar": "img/hiroi-yuri-42/01.webp",
-     "judul": "Tampak depan"
-    }
-   ]
-  },
-  {
-   "nama": "Teras & Ruang Tamu",
-   "lantai": 1,
-   "perabot": [],
-   "titik": [
-    {
-     "x": 1.5,
-     "z": 2.5,
-     "kamera": {
-      "x": 2.4,
-      "y": 1.9,
-      "z": 5.0
-     },
-     "lihat": {
-      "x": 1.0,
-      "y": 2.3,
-      "z": 1.9
-     },
-     "gambar": "img/hiroi-yuri-42/02.webp",
-     "judul": "Teras dan ruang tamu"
-    }
-   ]
-  },
-  {
-   "nama": "Ruang Keluarga",
-   "lantai": 1,
-   "perabot": [
-    {
-     "jenis": "rug",
-     "x": 1.7,
-     "z": -0.2
+      "nama": "Teras & Ruang Tamu",
+      "lantai": 1,
+      "perabot": [],
+      "titik": [
+        {
+          "x": 1.5,
+          "z": 2.5,
+          "kamera": {
+            "x": 2.4,
+            "y": 1.9,
+            "z": 5.0
+          },
+          "lihat": {
+            "x": 1.0,
+            "y": 2.3,
+            "z": 1.9
+          },
+          "gambar": "img/hiroi-yuri-42/02.webp",
+          "judul": "Teras dan ruang tamu"
+        }
+      ]
     },
     {
-     "jenis": "sofa",
-     "x": 2.5,
-     "z": -0.2,
-     "rot": -90
+      "nama": "Ruang Keluarga",
+      "lantai": 1,
+      "perabot": [
+        {
+          "jenis": "rug",
+          "x": 1.7,
+          "z": -0.2
+        },
+        {
+          "jenis": "sofa",
+          "x": 2.5,
+          "z": -0.2,
+          "rot": -90
+        },
+        {
+          "jenis": "coffee",
+          "x": 1.5,
+          "z": -0.2,
+          "rot": 90
+        },
+        {
+          "jenis": "tv",
+          "x": 0.5,
+          "z": -0.2,
+          "rot": 90
+        },
+        {
+          "jenis": "plant",
+          "x": 2.6,
+          "z": 1.3
+        }
+      ],
+      "titik": [
+        {
+          "x": 1.5,
+          "z": 0.5,
+          "kamera": {
+            "x": 0.5,
+            "y": 2.5,
+            "z": 1.4
+          },
+          "lihat": {
+            "x": 2.0,
+            "y": 2.0,
+            "z": -1.8
+          },
+          "gambar": "img/hiroi-yuri-42/03.webp",
+          "judul": "Ruang keluarga"
+        }
+      ]
     },
     {
-     "jenis": "coffee",
-     "x": 1.5,
-     "z": -0.2,
-     "rot": 90
+      "nama": "Dapur",
+      "lantai": 1,
+      "perabot": [
+        {
+          "jenis": "kitchen",
+          "x": 1.63,
+          "z": -2.45,
+          "rot": -90
+        }
+      ],
+      "titik": [
+        {
+          "x": 0.7,
+          "z": -2.3,
+          "kamera": {
+            "x": 0.6,
+            "y": 2.3,
+            "z": -0.5
+          },
+          "lihat": {
+            "x": 1.0,
+            "y": 1.7,
+            "z": -3.4
+          },
+          "gambar": "img/hiroi-yuri-42/04.webp",
+          "judul": "Dapur"
+        }
+      ]
     },
     {
-     "jenis": "tv",
-     "x": 0.5,
-     "z": -0.2,
-     "rot": 90
+      "nama": "Kamar Mandi",
+      "lantai": 1,
+      "perabot": [
+        {
+          "jenis": "toilet",
+          "x": 2.5,
+          "z": -3.0
+        },
+        {
+          "jenis": "sink",
+          "x": 2.27,
+          "z": -2.35,
+          "rot": 90
+        }
+      ],
+      "titik": [
+        {
+          "x": 2.5,
+          "z": -2.5,
+          "kamera": {
+            "x": 2.5,
+            "y": 2.35,
+            "z": -2.05
+          },
+          "lihat": {
+            "x": 2.45,
+            "y": 1.6,
+            "z": -3.2
+          },
+          "gambar": "img/hiroi-yuri-42/05.webp",
+          "judul": "Kamar mandi"
+        }
+      ]
     },
     {
-     "jenis": "plant",
-     "x": 2.6,
-     "z": 1.3
-    }
-   ],
-   "titik": [
-    {
-     "x": 1.5,
-     "z": 0.5,
-     "kamera": {
-      "x": 0.5,
-      "y": 2.5,
-      "z": 1.4
-     },
-     "lihat": {
-      "x": 2.0,
-      "y": 2.0,
-      "z": -1.8
-     },
-     "gambar": "img/hiroi-yuri-42/03.webp",
-     "judul": "Ruang keluarga"
-    }
-   ]
-  },
-  {
-   "nama": "Dapur",
-   "lantai": 1,
-   "perabot": [
-    {
-     "jenis": "kitchen",
-     "x": 1.63,
-     "z": -2.45,
-     "rot": -90
-    }
-   ],
-   "titik": [
-    {
-     "x": 0.7,
-     "z": -2.3,
-     "kamera": {
-      "x": 0.6,
-      "y": 2.3,
-      "z": -0.5
-     },
-     "lihat": {
-      "x": 1.0,
-      "y": 1.7,
-      "z": -3.4
-     },
-     "gambar": "img/hiroi-yuri-42/04.webp",
-     "judul": "Dapur"
-    }
-   ]
-  },
-  {
-   "nama": "Kamar Mandi",
-   "lantai": 1,
-   "perabot": [
-    {
-     "jenis": "toilet",
-     "x": 2.5,
-     "z": -3.0
+      "nama": "Kamar Tidur 1",
+      "lantai": 1,
+      "perabot": [
+        {
+          "jenis": "bed",
+          "x": -1.9,
+          "z": -0.7,
+          "rot": 90
+        },
+        {
+          "jenis": "nightstand",
+          "x": -2.6,
+          "z": 0.3
+        },
+        {
+          "jenis": "wardrobe",
+          "x": -0.3,
+          "z": 0.1,
+          "rot": 90
+        }
+      ],
+      "titik": [
+        {
+          "x": -1.2,
+          "z": -1.2,
+          "kamera": {
+            "x": -0.6,
+            "y": 2.4,
+            "z": -1.9
+          },
+          "lihat": {
+            "x": -2.3,
+            "y": 1.9,
+            "z": 0.2
+          },
+          "gambar": "img/hiroi-yuri-42/06.webp",
+          "judul": "Kamar tidur 1"
+        }
+      ]
     },
     {
-     "jenis": "sink",
-     "x": 2.27,
-     "z": -2.35,
-     "rot": 90
-    }
-   ],
-   "titik": [
-    {
-     "x": 2.5,
-     "z": -2.5,
-     "kamera": {
-      "x": 2.5,
-      "y": 2.35,
-      "z": -2.05
-     },
-     "lihat": {
-      "x": 2.45,
-      "y": 1.6,
-      "z": -3.2
-     },
-     "gambar": "img/hiroi-yuri-42/05.webp",
-     "judul": "Kamar mandi"
-    }
-   ]
-  },
-  {
-   "nama": "Kamar Tidur 1",
-   "lantai": 1,
-   "perabot": [
-    {
-     "jenis": "bed",
-     "x": -1.9,
-     "z": -0.7,
-     "rot": 90
+      "nama": "Kamar Tidur 2",
+      "lantai": 1,
+      "perabot": [
+        {
+          "jenis": "bedsmall",
+          "x": -1.85,
+          "z": -4.2,
+          "rot": 90
+        },
+        {
+          "jenis": "nightstand",
+          "x": -0.55,
+          "z": -4.45
+        },
+        {
+          "jenis": "desk",
+          "x": -2.3,
+          "z": -2.8
+        }
+      ],
+      "titik": [
+        {
+          "x": -1.2,
+          "z": -3.3,
+          "kamera": {
+            "x": -0.2,
+            "y": 2.4,
+            "z": -2.6
+          },
+          "lihat": {
+            "x": -2.2,
+            "y": 1.7,
+            "z": -4.2
+          },
+          "gambar": "img/hiroi-yuri-42/07.webp",
+          "judul": "Kamar tidur 2"
+        }
+      ]
     },
     {
-     "jenis": "nightstand",
-     "x": -2.6,
-     "z": 0.3
-    },
-    {
-     "jenis": "wardrobe",
-     "x": -0.3,
-     "z": 0.1,
-     "rot": 90
+      "nama": "Taman Belakang",
+      "lantai": 1,
+      "perabot": [],
+      "titik": [
+        {
+          "x": 1.5,
+          "z": -4.5,
+          "kamera": {
+            "x": 2.75,
+            "y": 2.3,
+            "z": -5.0
+          },
+          "lihat": {
+            "x": 0.4,
+            "y": 1.5,
+            "z": -3.7
+          },
+          "gambar": "img/hiroi-yuri-42/08.webp",
+          "judul": "Taman belakang"
+        }
+      ]
     }
-   ],
-   "titik": [
-    {
-     "x": -1.2,
-     "z": -1.2,
-     "kamera": {
-      "x": -0.6,
-      "y": 2.4,
-      "z": -1.9
-     },
-     "lihat": {
-      "x": -2.3,
-      "y": 1.9,
-      "z": 0.2
-     },
-     "gambar": "img/hiroi-yuri-42/06.webp",
-     "judul": "Kamar tidur 1"
-    }
-   ]
-  },
-  {
-   "nama": "Kamar Tidur 2",
-   "lantai": 1,
-   "perabot": [
-    {
-     "jenis": "bedsmall",
-     "x": -1.85,
-     "z": -4.2,
-     "rot": 90
-    },
-    {
-     "jenis": "nightstand",
-     "x": -0.55,
-     "z": -4.45
-    },
-    {
-     "jenis": "desk",
-     "x": -2.3,
-     "z": -2.8
-    }
-   ],
-   "titik": [
-    {
-     "x": -1.2,
-     "z": -3.3,
-     "kamera": {
-      "x": -0.2,
-      "y": 2.4,
-      "z": -2.6
-     },
-     "lihat": {
-      "x": -2.2,
-      "y": 1.7,
-      "z": -4.2
-     },
-     "gambar": "img/hiroi-yuri-42/07.webp",
-     "judul": "Kamar tidur 2"
-    }
-   ]
-  },
-  {
-   "nama": "Taman Belakang",
-   "lantai": 1,
-   "perabot": [],
-   "titik": [
-    {
-     "x": 1.5,
-     "z": -4.5,
-     "kamera": {
-      "x": 2.75,
-      "y": 2.3,
-      "z": -5.0
-     },
-     "lihat": {
-      "x": 0.4,
-      "y": 1.5,
-      "z": -3.7
-     },
-     "gambar": "img/hiroi-yuri-42/08.webp",
-     "judul": "Taman belakang"
-    }
-   ]
-  }
- ]
+  ]
 }

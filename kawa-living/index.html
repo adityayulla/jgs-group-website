@@ -1278,7 +1278,7 @@
       modal.querySelector('.dh-modal__tutup').focus();
       if (!adaWebGL()) { catat('Browser ini belum mendukung tampilan 3D.'); return; }
       catat('Memuat 3D…');
-      (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261027d')))
+      (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261027f')))
         .then(function (m) { if (nomor !== giliran) return null; wadah.innerHTML = ''; return m.mulai(wadah, tombol.dataset.dollhouse); })
         .then(function (v) { if (!v) return; if (nomor !== giliran) { v.hancur(); return; } viewer = v; })
         .catch(function () { modul = null; if (nomor === giliran) catat('Tampilan 3D gagal dimuat (koneksi atau browser). Coba lagi nanti.'); });
@@ -1292,7 +1292,7 @@
       var nyalakan = function (p) {
         if (aktif && aktif.p === p) return;
         var nomor = ++gil, w = p.querySelector('.un__dh-wadah'); matikan();
-        (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261027d')))
+        (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261027f')))
           .then(function (m) { return nomor === gil ? m.mulai(w, p.dataset.dollhouse, { sisip: true }) : null; })
           .then(function (v) { if (!v) return; if (nomor !== gil) { v.hancur(); return; } aktif = { p: p, v: v }; p.classList.add('siap'); })
           .catch(function () { modul = null; w.innerHTML = ''; });

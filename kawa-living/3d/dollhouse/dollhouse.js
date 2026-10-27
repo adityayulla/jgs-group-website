@@ -194,7 +194,7 @@ export async function mulai(wadah, tipe, opsi = {}) {
   const perabotGrup = new THREE.Group(); scene.add(perabotGrup);
   const bahanKlip = [], bahanDinding = [];
   const JSON_TIPE = slug + '.json';
-  const data = await fetch(new URL(JSON_TIPE, DASAR)).then(r => { if (!r.ok) throw new Error(JSON_TIPE + ' ' + r.status); return r.json(); });
+  const data = await fetch(new URL(JSON_TIPE, DASAR), { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error(JSON_TIPE + ' ' + r.status); return r.json(); });
   const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
   const gltf = await loader.loadAsync(new URL(data.model, DASAR).href, e => { if (e.total) bar.style.width = Math.round(e.loaded / e.total * 90) + '%'; });
   rumah.add(gltf.scene);
@@ -250,7 +250,10 @@ export async function mulai(wadah, tipe, opsi = {}) {
     (r.titik || []).forEach((t, i) => pins.push({ ruang: r, idx: i, pos: new THREE.Vector3(t.x, t.y ?? tinggiLantai(r.lantai) + 1.1, t.z), el: null }));
   }
   perabotGrup.traverse(o => { if (o.isMesh) bahanKlip.push(o.material); });
-  pins.forEach((p, n) => {
+  // "titikTampil": false di <tipe>.json = nomor ruangan (pembuka render) disembunyikan di web; editor & mode kamera tetap memakai titiknya.
+  const TITIK_TAMPIL = data.titikTampil !== false || EDIT || KAMERA > 0;
+  if (!TITIK_TAMPIL) petunjuk.textContent = petunjuk.textContent.replace(/ · (Ketuk|Klik) nomor$/, '');
+  if (TITIK_TAMPIL) pins.forEach((p, n) => {
     const b = el('button', 'dh__pin', `<b>${n + 1}</b><span>${p.ruang.nama}</span>`); b.type = 'button';
     b.setAttribute('aria-label', 'Lihat ' + p.ruang.nama);
     b.addEventListener('click', () => kotakBersama.buka(p.ruang, p.idx));
@@ -350,7 +353,7 @@ export async function mulai(wadah, tipe, opsi = {}) {
     }
     renderer.render(scene, kamera);
     // Damping membuat posisi kamera bergeser sangat kecil tanpa henti: pakai ambang 1 cm, bukan kesamaan persis.
-    for (const p of pins) {
+    if (TITIK_TAMPIL) for (const p of pins) {
       // Titik hanya tampil di tampilan per lantai (potongan 2,2 m), untuk lantai itu saja. Rumah utuh (0) dan mode kamera (-1): tanpa titik.
       if (p.ruang.lantai !== lantaiAktif) { p.el.classList.remove('tampak'); continue; }
       v.copy(p.pos).project(kamera);
