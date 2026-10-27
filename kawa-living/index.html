@@ -1033,10 +1033,14 @@
       </div>
 
       <!-- 2. Yuri -->
-      <div class="un__row un__row--alt glass reveal" id="tipe-yuri" data-tipe="Yuri">
+      <div class="un__row un__row--3d glass reveal" id="tipe-yuri" data-tipe="Yuri">
         <div class="un__img">
           <img src="img/tipe/tipe-yuri-pot.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
             onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
+        </div>
+        <div class="un__dh" data-dollhouse="yuri-1">
+          <img class="un__dh-poster" src="3d/dollhouse/img/yuri-1/poster.webp" alt="Pratinjau 3D Yuri 1" loading="lazy" width="900" height="600">
+          <div class="un__dh-wadah"></div>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1054,6 +1058,8 @@
             <div>🚿 1 Kamar Mandi</div>
             <div>🏠 LB 34,5–40 m²</div>
           </div>
+        </div>
+        <div class="un__side">
           <div class="un__footer">
             <div class="un__price">
               <span>Mulai dari</span>
@@ -1227,7 +1233,7 @@
       if (aktif && aktif.panel === p) return;
       var nomor = ++giliran, wadah = p.querySelector('.un__dh-wadah');
       matikan();
-      (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261026f')))
+      (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261027a')))
         .then(function (m) { if (nomor !== giliran) return null; return m.mulai(wadah, p.dataset.dollhouse); })
         .then(function (v) {
           if (!v) return;

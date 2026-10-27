@@ -197,9 +197,10 @@ export async function mulai(wadah, tipe, opsi = {}) {
   const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
   const gltf = await loader.loadAsync(new URL(data.model, DASAR).href, e => { if (e.total) bar.style.width = Math.round(e.loaded / e.total * 90) + '%'; });
   rumah.add(gltf.scene);
+  // Opsi per tipe di <tipe>.json: "bayangan": false = model tidak menebar bayangan (Yuri 1: model desainer menutupi fasad dengan bayangan pekat).
   gltf.scene.traverse(o => {
     if (!o.isMesh) return;
-    o.castShadow = o.receiveShadow = true;
+    o.castShadow = data.bayangan !== false; o.receiveShadow = true;
     const ms = Array.isArray(o.material) ? o.material : [o.material];
     ms.forEach(m => {
       m.side = THREE.DoubleSide; bahanKlip.push(m);
@@ -286,7 +287,7 @@ export async function mulai(wadah, tipe, opsi = {}) {
   {
     const asp = Math.max(0.5, (wadah.clientWidth || 3) / (wadah.clientHeight || 2));
     const r = 0.5 * Math.hypot(lebar, dalam, tinggi);
-    const jarak = Math.min(kontrol.maxDistance, r / Math.sin(THREE.MathUtils.degToRad(kamera.fov / 2)) / Math.min(1, asp) * 1.0);
+    const jarak = Math.min(kontrol.maxDistance, r / Math.sin(THREE.MathUtils.degToRad(kamera.fov / 2)) / Math.min(1, asp) * (data.jarakAwal || 1.0)); // "jarakAwal" < 1 = rumah lebih besar di bingkai awal (Yuri 1: kavling dalam, halaman belakang luas)
     const arah = new THREE.Vector3(0.32, 0.36, 1).normalize();
     kontrol.target.y = bb.min.y + tinggi * 0.4; // fokus agak bawah: halaman depan & carport ikut masuk, ada ruang untuk tombol lantai
     kamera.position.copy(kontrol.target).addScaledVector(arah, jarak);

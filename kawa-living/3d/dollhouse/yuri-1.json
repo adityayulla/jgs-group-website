@@ -1,6 +1,8 @@
 {
   "nama": "Yuri 1",
   "model": "yuri-1.glb",
+  "bayangan": false,
+  "jarakAwal": 0.78,
   "catatan": "Model dari desainer (GLB SketchUp berperabot lengkap), jadi tanpa perabot prosedural. Lantai dalam y 0,5. Dinding luar x -2,8/3,0, sekat tengah x 0,1, fasad kiri z 1,25, kamar depan z 2,25..-0,75, KM x 1,4..2,9 z -0,75..-2,0, dinding belakang ruang keluarga (pintu kaca) z -2,0. Dapur basah (bak cuci, meja beton, kabinet atas) ada di balik pintu kaca belakang, z -2,0..-3,6, langsung ke taman belakang. Pohon kamboja taman depan dibuang dari model (berat ±1 MB).",
   "lantai": [
     {
@@ -19,7 +21,7 @@
           "y": 1.0,
           "z": 5.0,
           "judul": "Tampak depan",
-          "gambar": "img/yuri-1/01-acuan.png",
+          "gambar": "img/yuri-1/01.webp",
           "kamera": {
             "x": 2.6,
             "y": 2.4,
@@ -41,7 +43,7 @@
           "x": -1.4,
           "z": 2.0,
           "judul": "Teras",
-          "gambar": "img/yuri-1/02-acuan.png",
+          "gambar": "img/yuri-1/02.webp",
           "kamera": {
             "x": 1.0,
             "y": 2.1,
@@ -63,7 +65,7 @@
           "x": -1.4,
           "z": 0.2,
           "judul": "Ruang keluarga ke arah depan",
-          "gambar": "img/yuri-1/03-acuan.png",
+          "gambar": "img/yuri-1/03.webp",
           "kamera": {
             "x": -0.9,
             "y": 2.0,
@@ -85,7 +87,7 @@
           "x": -1.6,
           "z": -1.3,
           "judul": "Pantry, meja bar dan pintu kaca ke dapur",
-          "gambar": "img/yuri-1/04-acuan.png",
+          "gambar": "img/yuri-1/04.webp",
           "kamera": {
             "x": -0.4,
             "y": 2.0,
@@ -107,7 +109,7 @@
           "x": 1.8,
           "z": 0.6,
           "judul": "Kamar tidur depan",
-          "gambar": "img/yuri-1/05-acuan.png",
+          "gambar": "img/yuri-1/05.webp",
           "kamera": {
             "x": 0.7,
             "y": 2.0,
@@ -129,7 +131,7 @@
           "x": 2.2,
           "z": -1.4,
           "judul": "Kamar mandi, memandang kloset dan pintu",
-          "gambar": "img/yuri-1/06-acuan.png",
+          "gambar": "img/yuri-1/06.webp",
           "kamera": {
             "x": 2.85,
             "y": 1.95,
@@ -151,7 +153,7 @@
           "x": 1.8,
           "z": -3.2,
           "judul": "Kamar tidur belakang",
-          "gambar": "img/yuri-1/07-acuan.png",
+          "gambar": "img/yuri-1/07.webp",
           "kamera": {
             "x": 0.7,
             "y": 2.0,
@@ -173,7 +175,7 @@
           "x": -1.4,
           "z": -3.0,
           "judul": "Dapur basah di belakang, memandang pintu kaca ke ruang keluarga",
-          "gambar": "img/yuri-1/08-acuan.png",
+          "gambar": "img/yuri-1/08.webp",
           "kamera": {
             "x": -0.6,
             "y": 1.75,
