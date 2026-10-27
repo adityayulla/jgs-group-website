@@ -8,7 +8,8 @@
    mulai(wadah, tipe, opsi) → Promise<{ data, hancur() }>
      wadah : elemen kosong (position: relative) yang diisi canvas + UI
      tipe  : slug, mis. "hiroi-yuri-42" → memuat hiroi-yuri-42.json
-     opsi  : { edit: true } mode editor (window.DH), { kamera: N } pandangan dari titik ke-N tanpa UI */
+     opsi  : { edit: true } mode editor (window.DH), { kamera: N } pandangan dari titik ke-N tanpa UI,
+             { sisip: true } viewer di dalam kartu halaman (zoom scroll setelah klik) */
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.186.1/+esm';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/loaders/GLTFLoader.js/+esm';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/controls/OrbitControls.js/+esm';
@@ -148,7 +149,7 @@ export async function mulai(wadah, tipe, opsi = {}) {
   const panggung = el('div', 'dh__panggung');
   panggung.setAttribute('role', 'application'); panggung.setAttribute('aria-label', 'Model 3D rumah. Seret untuk memutar, ketuk titik untuk melihat ruangan.');
   const lapisTitik = el('div', 'dh__titik'); lapisTitik.setAttribute('aria-live', 'polite');
-  const petunjuk = el('div', 'dh__petunjuk', SENTUH ? '1 jari = putar · 2 jari = zoom · Ketuk nomor' : 'Seret = putar · Scroll = zoom · Klik nomor');
+  const petunjuk = el('div', 'dh__petunjuk', SENTUH ? '1 jari = putar · 2 jari = zoom · Ketuk nomor' : opsi.sisip ? 'Seret = putar · Klik lalu scroll = zoom · Klik nomor' : 'Seret = putar · Scroll = zoom · Klik nomor');
   const lantaiEl = el('div', 'dh__lantai'); lantaiEl.setAttribute('role', 'group'); lantaiEl.setAttribute('aria-label', 'Pilih lantai');
   const muat = el('div', 'dh__muat', '<div><i></i></div>'); const bar = muat.querySelector('i');
   akar.append(panggung, lapisTitik, petunjuk, lantaiEl, muat);
@@ -171,6 +172,12 @@ export async function mulai(wadah, tipe, opsi = {}) {
   kontrol.enablePan = true; kontrol.screenSpacePanning = false;
   // Viewer tampil di lightbox / layar penuh: 1 jari atau seret = putar, 2 jari (cubit) = zoom + geser, scroll = zoom.
   kontrol.touches.ONE = THREE.TOUCH.ROTATE; kontrol.touches.TWO = THREE.TOUCH.DOLLY_PAN;
+  // opsi.sisip: viewer di dalam kartu halaman (desktop). Scroll baru men-zoom setelah kanvas diklik, supaya gulir halaman tidak tersangkut.
+  if (opsi.sisip) {
+    kontrol.enableZoom = false;
+    renderer.domElement.addEventListener('pointerdown', () => { kontrol.enableZoom = true; });
+    renderer.domElement.addEventListener('pointerleave', () => { kontrol.enableZoom = false; });
+  }
 
   scene.add(new THREE.HemisphereLight(0xfdfbf5, 0xb9c3cf, 1.35));
   const matahari = new THREE.DirectionalLight(0xfff4e0, 2.2);
