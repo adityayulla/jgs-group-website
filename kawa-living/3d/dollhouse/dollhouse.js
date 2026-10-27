@@ -1,6 +1,6 @@
 /* Dollhouse 3D unit Kawa Living — modul viewer.
-   Dipakai dua tempat: (1) kartu Detail Unit di kawa-living/index.html lewat import() saat tombol
-   "Jelajah 3D" ditekan, (2) halaman uji kawa-living/3d/dollhouse/ (mode editor ?edit=1 dan mode
+   Dipakai dua tempat: (1) lightbox 3D kawa-living/index.html lewat import() saat poster 3D di kartu Detail Unit
+   diklik/di-tap, (2) halaman uji kawa-living/3d/dollhouse/ (mode editor ?edit=1 dan mode
    kamera ?kamera=N untuk gambar acuan render).
    Model <tipe>.glb (dari DAE SketchUp, dibangun tools/siteplan-3d/optimize-model.mjs 1024 1.0),
    data ruangan/titik/perabot <tipe>.json, render per titik img/<tipe>/NN.webp — semua di folder ini.
@@ -46,7 +46,7 @@ const CSS = `
 .dh__editor .baris{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .dh__editor button{font:inherit;font-weight:600;border:1px solid #e2dfd6;background:#fff;border-radius:8px;padding:5px 9px;cursor:pointer}
 /* lightbox render ruangan: satu untuk seluruh halaman, menempel di body */
-.dh-kotak{position:fixed;inset:0;z-index:10000;background:rgba(10,16,38,.88);display:none;align-items:center;justify-content:center;padding:16px;font-family:inherit}
+.dh-kotak{position:fixed;inset:0;z-index:2147483100;background:rgba(10,16,38,.88);display:none;align-items:center;justify-content:center;padding:16px;font-family:inherit}
 .dh-kotak.buka{display:flex}
 .dh-kotak figure{margin:0;max-width:min(1100px,100%);width:100%;display:flex;flex-direction:column;gap:12px;align-items:center}
 .dh-kotak img{max-width:100%;max-height:72vh;border-radius:14px;box-shadow:0 40px 80px -30px rgba(0,0,0,.8);background:#223}
@@ -148,7 +148,7 @@ export async function mulai(wadah, tipe, opsi = {}) {
   const panggung = el('div', 'dh__panggung');
   panggung.setAttribute('role', 'application'); panggung.setAttribute('aria-label', 'Model 3D rumah. Seret untuk memutar, ketuk titik untuk melihat ruangan.');
   const lapisTitik = el('div', 'dh__titik'); lapisTitik.setAttribute('aria-live', 'polite');
-  const petunjuk = el('div', 'dh__petunjuk', SENTUH ? 'Dua jari = putar & zoom · Ketuk titik' : 'Seret = putar · Klik lalu scroll = zoom · Klik titik');
+  const petunjuk = el('div', 'dh__petunjuk', SENTUH ? '1 jari = putar · 2 jari = zoom · Ketuk nomor' : 'Seret = putar · Scroll = zoom · Klik nomor');
   const lantaiEl = el('div', 'dh__lantai'); lantaiEl.setAttribute('role', 'group'); lantaiEl.setAttribute('aria-label', 'Pilih lantai');
   const muat = el('div', 'dh__muat', '<div><i></i></div>'); const bar = muat.querySelector('i');
   akar.append(panggung, lapisTitik, petunjuk, lantaiEl, muat);
@@ -169,14 +169,8 @@ export async function mulai(wadah, tipe, opsi = {}) {
   kontrol.enableDamping = true; kontrol.dampingFactor = 0.08;
   kontrol.maxPolarAngle = Math.PI * 0.47; kontrol.minDistance = 4; kontrol.maxDistance = 40;
   kontrol.enablePan = true; kontrol.screenSpacePanning = false;
-  // Mouse: scroll di atas kanvas baru men-zoom setelah pengunjung mengklik kanvas, supaya scroll halaman tidak tersangkut.
-  if (!SENTUH && !EDIT && KAMERA === 0) {
-    kontrol.enableZoom = false;
-    renderer.domElement.addEventListener('pointerdown', () => { kontrol.enableZoom = true; });
-    renderer.domElement.addEventListener('pointerleave', () => { kontrol.enableZoom = false; });
-  }
-  // Layar sentuh: satu jari tetap menggulir halaman (viewer tampil otomatis di kartu), dua jari memutar + zoom.
-  if (SENTUH && !EDIT) { kontrol.touches.ONE = -1; kontrol.touches.TWO = THREE.TOUCH.DOLLY_ROTATE; renderer.domElement.style.touchAction = 'pan-y'; }
+  // Viewer tampil di lightbox / layar penuh: 1 jari atau seret = putar, 2 jari (cubit) = zoom + geser, scroll = zoom.
+  kontrol.touches.ONE = THREE.TOUCH.ROTATE; kontrol.touches.TWO = THREE.TOUCH.DOLLY_PAN;
 
   scene.add(new THREE.HemisphereLight(0xfdfbf5, 0xb9c3cf, 1.35));
   const matahari = new THREE.DirectionalLight(0xfff4e0, 2.2);

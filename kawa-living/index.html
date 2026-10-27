@@ -341,24 +341,41 @@
     .un__denah-lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 8px; }
     .un__denah-imgs { display: flex; gap: 10px; }
     .un__denah-imgs img { flex: 1; border-radius: 8px; border: 1px solid var(--line); object-fit: contain; background: #f5f5f7; max-height: 130px; }
-    /* Kartu dengan dollhouse 3D (.un__row--3d): grid 2x2 — baris atas foto asli | panel 3D (sama-sama 3:2),
-       baris bawah teks (nama, deskripsi, spesifikasi) | harga, tombol, denah. Viewer-nya
-       (3d/dollhouse/dollhouse.js, Three.js) baru diunduh saat kartu masuk layar dan langsung tampil Rumah utuh;
-       sebelum itu hanya poster webp kecil. Hanya satu viewer hidup sekaligus. Kartu Yuri (tanpa 3D) tetap tata letak lama. */
+    /* Kartu dengan dollhouse 3D (.un__row--3d): baris atas .un__media = foto asli UTUH (tidak dipotong:
+       tinggi baris tetap, lebar foto mengikuti proporsinya sendiri, potret jadi kolom sempit) + gambar 3D
+       yang mengisi sisa lebar. Baris bawah: teks | harga, tombol, denah. Gambar 3D hanya poster webp;
+       klik/tap membuka lightbox .dh-modal berisi viewer interaktif (3d/dollhouse/dollhouse.js, Three.js,
+       dimuat saat itu juga). */
     .un__row--3d { grid-template-columns: 1fr 1fr; align-items: start; row-gap: 28px; column-gap: 28px; }
-    .un__row--3d .un__img { aspect-ratio: 3/2; }
+    .un__row--3d .un__media { grid-column: 1 / -1; display: flex; gap: 20px; height: clamp(360px, 36vw, 480px); }
+    .un__row--3d .un__img { aspect-ratio: auto; flex: 0 1 auto; height: 100%; max-width: 62%; background: #eef0f4; }
+    .un__row--3d .un__img img { position: static; display: block; height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+    .un__row--3d:hover .un__img img { transform: none; }
     .un__row--3d .un__copy { padding: 0 8px 0 4px; }
     .un__row--3d .un__specs { margin-bottom: 0; }
     .un__row--3d .un__side { padding: 0 4px 0 8px; display: flex; flex-direction: column; gap: 18px; }
     .un__row--3d .un__footer { padding-top: 8px; }
     .un__row--3d .un__denah { margin-top: 0; padding-top: 14px; }
-    .un__dh { position: relative; aspect-ratio: 3/2; border-radius: var(--r-md); overflow: hidden; background: #dfe6ef; }
-    .un__dh-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .un__dh-wadah { position: absolute; inset: 0; opacity: 0; transition: opacity .4s; }
-    .un__dh.siap .un__dh-wadah { opacity: 1; }
-    .un__dh.siap .un__dh-poster { visibility: hidden; }
-    .un__dh-catat { position: absolute; left: 12px; right: 12px; bottom: 12px; margin: 0; font-size: 12px; color: var(--muted); text-align: center; }
-    @media (max-width: 900px) { .un__dh { aspect-ratio: 4/3; } } /* di HP panel 3D lebih tinggi supaya titik tidak berdesakan */
+    .un__dh { position: relative; flex: 1 1 0; min-width: 0; border: 0; padding: 0; margin: 0; border-radius: var(--r-md); overflow: hidden; background: #dfe6ef; cursor: zoom-in; font: inherit; }
+    .un__dh-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+    .un__dh:hover .un__dh-poster { transform: scale(1.03); }
+    .un__dh-ikon { position: absolute; right: 12px; top: 12px; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.85); color: var(--navy); box-shadow: 0 6px 16px -8px rgba(15,23,51,.6); }
+    .un__dh:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+    @media (max-width: 900px) {
+      .un__row--3d .un__media { flex-direction: column; height: auto; }
+      .un__row--3d .un__img { max-width: none; width: 100%; height: auto; }
+      .un__row--3d .un__img img { width: 100%; height: auto; }
+      .un__dh { flex: none; aspect-ratio: 4/3; width: 100%; }
+    }
+    /* Lightbox 3D: viewer interaktif layar (hampir) penuh. Render ruangan dari titik (.dh-kotak, z 2147483100) tampil di atasnya. */
+    .dh-modal { position: fixed; inset: 0; z-index: 2147483000; display: none; background: rgba(10,16,38,.82); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 20px; }
+    .dh-modal.buka { display: flex; flex-direction: column; gap: 10px; }
+    .dh-modal__kepala { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #fff; }
+    .dh-modal__kepala b { font-family: var(--font-display); font-weight: 500; font-size: 22px; letter-spacing: -.01em; }
+    .dh-modal__tutup { width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 26px; line-height: 1; cursor: pointer; display: grid; place-items: center; }
+    .dh-modal__wadah { position: relative; flex: 1; min-height: 0; border-radius: var(--r-md); overflow: hidden; background: #e9eef4; }
+    .dh-modal__catat { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; padding: 24px; text-align: center; color: var(--muted); font-size: 14px; }
+    @media (max-width: 600px) { .dh-modal { padding: 0; gap: 0; } .dh-modal__kepala { padding: 8px 8px 8px 16px; } .dh-modal__wadah { border-radius: 0; } }
 
     /* FAQ */
     .faq { padding: 80px 0; }
@@ -989,13 +1006,15 @@
 
       <!-- 1. Hiroi Yuri -->
       <div class="un__row un__row--3d glass reveal" id="tipe-hiroi-yuri" data-tipe="Hiroi Yuri">
-        <div class="un__img">
-          <img src="img/tipe/tipe%20yuri.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
-            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
-        </div>
-        <div class="un__dh" data-dollhouse="hiroi-yuri-42">
-          <img class="un__dh-poster" src="3d/dollhouse/img/hiroi-yuri-42/poster.webp" alt="Pratinjau 3D Hiroi Yuri 42" loading="lazy" width="900" height="600">
-          <div class="un__dh-wadah"></div>
+        <div class="un__media">
+          <div class="un__img">
+            <img src="img/tipe/tipe%20yuri.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
+              onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
+          </div>
+          <button type="button" class="un__dh" data-dollhouse="hiroi-yuri-42" data-nama="Hiroi Yuri 42" aria-label="Buka 3D interaktif Hiroi Yuri 42">
+            <img class="un__dh-poster" src="3d/dollhouse/img/hiroi-yuri-42/poster.webp" alt="Pratinjau 3D Hiroi Yuri 42" loading="lazy" width="900" height="600">
+            <span class="un__dh-ikon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></span>
+          </button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1034,13 +1053,15 @@
 
       <!-- 2. Yuri -->
       <div class="un__row un__row--3d glass reveal" id="tipe-yuri" data-tipe="Yuri">
-        <div class="un__img">
-          <img src="img/tipe/tipe-yuri-pot.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
-            onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
-        </div>
-        <div class="un__dh" data-dollhouse="yuri-1">
-          <img class="un__dh-poster" src="3d/dollhouse/img/yuri-1/poster.webp" alt="Pratinjau 3D Yuri 1" loading="lazy" width="900" height="600">
-          <div class="un__dh-wadah"></div>
+        <div class="un__media">
+          <div class="un__img">
+            <img src="img/tipe/tipe-yuri-pot.webp" alt="Kawa Living Tipe Yuri" loading="lazy"
+              onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
+          </div>
+          <button type="button" class="un__dh" data-dollhouse="yuri-1" data-nama="Yuri 1" aria-label="Buka 3D interaktif Yuri 1">
+            <img class="un__dh-poster" src="3d/dollhouse/img/yuri-1/poster.webp" alt="Pratinjau 3D Yuri 1" loading="lazy" width="900" height="600">
+            <span class="un__dh-ikon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></span>
+          </button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1078,13 +1099,15 @@
 
       <!-- 3. Mizu -->
       <div class="un__row un__row--3d glass reveal" id="tipe-mizu" data-tipe="Mizu">
-        <div class="un__img">
-          <img src="img/tipe/tipe%20Mizu.webp" alt="Kawa Living Tipe Mizu" loading="lazy"
-            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
-        </div>
-        <div class="un__dh" data-dollhouse="mizu-36">
-          <img class="un__dh-poster" src="3d/dollhouse/img/mizu-36/poster.webp" alt="Pratinjau 3D Mizu 36" loading="lazy" width="900" height="600">
-          <div class="un__dh-wadah"></div>
+        <div class="un__media">
+          <div class="un__img">
+            <img src="img/tipe/tipe%20Mizu.webp" alt="Kawa Living Tipe Mizu" loading="lazy"
+              onerror="this.style.background='linear-gradient(135deg,#1b2a64,#2c3e8c)';this.style.display='block'">
+          </div>
+          <button type="button" class="un__dh" data-dollhouse="mizu-36" data-nama="Mizu 36" aria-label="Buka 3D interaktif Mizu 36">
+            <img class="un__dh-poster" src="3d/dollhouse/img/mizu-36/poster.webp" alt="Pratinjau 3D Mizu 36" loading="lazy" width="900" height="600">
+            <span class="un__dh-ikon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></span>
+          </button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1122,13 +1145,15 @@
 
       <!-- 4. Himawari -->
       <div class="un__row un__row--3d glass reveal" id="tipe-himawari" data-tipe="Himawari">
-        <div class="un__img">
-          <img src="img/tipe/tipe%20himawari.webp" alt="Kawa Living Tipe Himawari" loading="lazy"
-            onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
-        </div>
-        <div class="un__dh" data-dollhouse="himawari-51">
-          <img class="un__dh-poster" src="3d/dollhouse/img/himawari-51/poster.webp" alt="Pratinjau 3D Himawari 51" loading="lazy" width="900" height="600">
-          <div class="un__dh-wadah"></div>
+        <div class="un__media">
+          <div class="un__img">
+            <img src="img/tipe/tipe%20himawari.webp" alt="Kawa Living Tipe Himawari" loading="lazy"
+              onerror="this.style.background='linear-gradient(135deg,#2c3e8c,#0f1430)';this.style.display='block'">
+          </div>
+          <button type="button" class="un__dh" data-dollhouse="himawari-51" data-nama="Himawari 51" aria-label="Buka 3D interaktif Himawari 51">
+            <img class="un__dh-poster" src="3d/dollhouse/img/himawari-51/poster.webp" alt="Pratinjau 3D Himawari 51" loading="lazy" width="900" height="600">
+            <span class="un__dh-ikon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></span>
+          </button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1167,13 +1192,15 @@
 
       <!-- 5. Okina -->
       <div class="un__row un__row--3d glass reveal" id="tipe-okina" data-tipe="Okina">
-        <div class="un__img">
-          <img src="img/tipe/tipe%20Okina%20landscape.webp" alt="Kawa Living Tipe Okina" loading="lazy"
-            onerror="this.style.background='linear-gradient(135deg,#1b2a64,#db7f2e33)';this.style.display='block'">
-        </div>
-        <div class="un__dh" data-dollhouse="okina-61">
-          <img class="un__dh-poster" src="3d/dollhouse/img/okina-61/poster.webp" alt="Pratinjau 3D Okina 61" loading="lazy" width="900" height="600">
-          <div class="un__dh-wadah"></div>
+        <div class="un__media">
+          <div class="un__img">
+            <img src="img/tipe/tipe%20Okina%20landscape.webp" alt="Kawa Living Tipe Okina" loading="lazy"
+              onerror="this.style.background='linear-gradient(135deg,#1b2a64,#db7f2e33)';this.style.display='block'">
+          </div>
+          <button type="button" class="un__dh" data-dollhouse="okina-61" data-nama="Okina 61" aria-label="Buka 3D interaktif Okina 61">
+            <img class="un__dh-poster" src="3d/dollhouse/img/okina-61/poster.webp" alt="Pratinjau 3D Okina 61" loading="lazy" width="900" height="600">
+            <span class="un__dh-ikon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></span>
+          </button>
         </div>
         <div class="un__copy">
           <div class="un__tagrow">
@@ -1213,42 +1240,48 @@
     </div>
   </section>
 
-  <!-- Dollhouse 3D di kartu Detail Unit: modul 3d/dollhouse/dollhouse.js (Three.js) dan model GLB
-       tipe itu baru diunduh saat kartunya masuk layar, lalu langsung tampil Rumah utuh. Sebelum itu
-       hanya poster webp. Hanya satu viewer hidup sekaligus supaya ringan di HP: kartu berikutnya
-       yang masuk layar mematikan viewer sebelumnya (posternya tampil lagi). -->
+  <!-- Dollhouse 3D: kartu Detail Unit hanya menampilkan poster rumah utuh. Klik/tap membuka lightbox
+       ini; modul 3d/dollhouse/dollhouse.js (Three.js) + model GLB tipe itu baru diunduh saat itu, dan
+       viewer dimatikan lagi saat lightbox ditutup. Kontrol: 1 jari/seret = putar, 2 jari/scroll = zoom. -->
+  <div class="dh-modal" id="dh-modal" role="dialog" aria-modal="true" aria-label="3D interaktif">
+    <div class="dh-modal__kepala"><b></b><button type="button" class="dh-modal__tutup" aria-label="Tutup">×</button></div>
+    <div class="dh-modal__wadah"></div>
+  </div>
   <script>
   (function () {
-    var panel = [].slice.call(document.querySelectorAll('.un__dh[data-dollhouse]'));
-    if (!panel.length) return;
-    var aktif = null, modul = null, giliran = 0;
+    var modal = document.getElementById('dh-modal');
+    document.body.appendChild(modal); // keluar dari stacking context section supaya di atas header & tombol WA
+    var wadah = modal.querySelector('.dh-modal__wadah'), judul = modal.querySelector('.dh-modal__kepala b');
+    var modul = null, viewer = null, giliran = 0, pemicu = null;
     function adaWebGL() { try { var c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; } }
-    if (!adaWebGL() || !('IntersectionObserver' in window)) return; // poster saja
-    function matikan() {
-      if (!aktif) return;
-      try { aktif.viewer.hancur(); } catch (e) {}
-      aktif.panel.classList.remove('siap'); aktif.panel.querySelector('.un__dh-wadah').innerHTML = ''; aktif = null;
+    function catat(t) { wadah.innerHTML = ''; var p = document.createElement('p'); p.className = 'dh-modal__catat'; p.textContent = t; wadah.appendChild(p); }
+    function tutup() {
+      if (!modal.classList.contains('buka')) return;
+      giliran++;
+      if (viewer) { try { viewer.hancur(); } catch (e) {} viewer = null; }
+      wadah.innerHTML = ''; modal.classList.remove('buka'); document.documentElement.style.overflow = '';
+      if (pemicu) pemicu.focus();
     }
-    function nyalakan(p) {
-      if (aktif && aktif.panel === p) return;
-      var nomor = ++giliran, wadah = p.querySelector('.un__dh-wadah');
-      matikan();
-      (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261027a')))
-        .then(function (m) { if (nomor !== giliran) return null; return m.mulai(wadah, p.dataset.dollhouse); })
-        .then(function (v) {
-          if (!v) return;
-          if (nomor !== giliran) { v.hancur(); return; } // kartu lain keburu masuk layar
-          aktif = { panel: p, viewer: v }; p.classList.add('siap');
-        })
-        .catch(function () {
-          modul = null; wadah.innerHTML = '';
-          if (!p.querySelector('.un__dh-catat')) { var c = document.createElement('p'); c.className = 'un__dh-catat'; c.textContent = 'Tampilan 3D gagal dimuat. Muat ulang halaman untuk mencoba lagi.'; p.appendChild(c); }
-        });
+    function buka(tombol) {
+      pemicu = tombol; var nomor = ++giliran;
+      judul.textContent = tombol.dataset.nama || '3D';
+      modal.classList.add('buka'); document.documentElement.style.overflow = 'hidden';
+      modal.querySelector('.dh-modal__tutup').focus();
+      if (!adaWebGL()) { catat('Browser ini belum mendukung tampilan 3D.'); return; }
+      catat('Memuat 3D…');
+      (modul || (modul = import('./3d/dollhouse/dollhouse.js?v=20261027c')))
+        .then(function (m) { if (nomor !== giliran) return null; wadah.innerHTML = ''; return m.mulai(wadah, tombol.dataset.dollhouse); })
+        .then(function (v) { if (!v) return; if (nomor !== giliran) { v.hancur(); return; } viewer = v; })
+        .catch(function () { modul = null; if (nomor === giliran) catat('Tampilan 3D gagal dimuat (koneksi atau browser). Coba lagi nanti.'); });
     }
-    var io = new IntersectionObserver(function (entri) {
-      entri.forEach(function (e) { if (e.isIntersecting) nyalakan(e.target); });
-    }, { rootMargin: '0px 0px -25% 0px', threshold: 0.35 });
-    panel.forEach(function (p) { io.observe(p); });
+    document.querySelectorAll('.un__dh[data-dollhouse]').forEach(function (t) { t.addEventListener('click', function () { buka(t); }); });
+    modal.querySelector('.dh-modal__tutup').addEventListener('click', tutup);
+    modal.addEventListener('click', function (e) { if (e.target === modal) tutup(); });
+    addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || !modal.classList.contains('buka')) return;
+      var kotak = document.querySelector('.dh-kotak.buka'); if (kotak) return; // Esc pertama menutup render ruangan dulu
+      tutup();
+    });
   })();
   </script>
 
