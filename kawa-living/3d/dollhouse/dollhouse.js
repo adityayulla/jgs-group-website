@@ -209,27 +209,43 @@ export async function mulai(wadah, tipe, opsi = {}) {
       if (!m.map || /concrete/i.test(m.name)) { m.flatShading = true; m.needsUpdate = true; bahanDinding.push(m); }
     });
   });
-  /* Rumah utuh: hanya dinding samping (bidang ±x) di sisi dekat kamera yang tembus pandang.
-     Tiap mesh berdinding dipecah: sisa (normal), samping-solid (sisi jauh), samping-tembus (sisi dekat). */
+  /* Rumah utuh: dinding samping (bidang ±x) di sisi dekat kamera tembus pandang; dinding belakang (bidang ±z di
+     separuh belakang) ikut tembus saat kamera di belakang rumah. Fasad depan selalu solid.
+     Tiap mesh berdinding dipecah: sisa (normal), samping-solid (sisi jauh), samping-tembus (sisi dekat),
+     belakang-solid / belakang-tembus (ditukar menurut posisi kamera). */
   const bidang = new THREE.Plane(new THREE.Vector3(0, -1, 0), 1e9);
   const bidangDekat = new THREE.Plane(new THREE.Vector3(1, 0, 0), 0);
   const bidangJauh = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 1e9);
   const tembusGrup = new THREE.Group(); tembusGrup.visible = false; scene.add(tembusGrup);
+  const belakangTembus = new THREE.Group(); belakangTembus.visible = false; scene.add(belakangTembus);
+  const belakangSolid = [];
+  const czRumah = (b => (b.min.z + b.max.z) / 2)(new THREE.Box3().setFromObject(gltf.scene));
   const meshDinding = []; gltf.scene.traverse(o => { if (o.isMesh && bahanDinding.includes(o.material)) meshDinding.push(o); });
   const nm = new THREE.Matrix3(), pa = new THREE.Vector3(), pb = new THREE.Vector3(), pc = new THREE.Vector3(), nrm = new THREE.Vector3(), ab = new THREE.Vector3();
   for (const o of meshDinding) {
     o.updateWorldMatrix(true, false); nm.getNormalMatrix(o.matrixWorld);
     const g = o.geometry, pos = g.attributes.position, idx = g.index;
     const n = idx ? idx.count : pos.count, ambil = i => idx ? idx.getX(i) : i;
-    const samping = [], sisa = [];
+    const samping = [], belakang = [], sisa = [];
     for (let i = 0; i < n; i += 3) {
       const ia = ambil(i), ib = ambil(i + 1), ic = ambil(i + 2);
       pa.fromBufferAttribute(pos, ia); pb.fromBufferAttribute(pos, ib); pc.fromBufferAttribute(pos, ic);
       nrm.copy(pb).sub(pa).cross(ab.copy(pc).sub(pa)).applyMatrix3(nm).normalize();
-      (Math.abs(nrm.x) > 0.7 ? samping : sisa).push(ia, ib, ic);
+      if (Math.abs(nrm.x) > 0.7) samping.push(ia, ib, ic);
+      else if (Math.abs(nrm.z) > 0.7 && pa.add(pb).add(pc).divideScalar(3).applyMatrix4(o.matrixWorld).z < czRumah) belakang.push(ia, ib, ic);
+      else sisa.push(ia, ib, ic);
+    }
+    if (!samping.length && !belakang.length) continue;
+    g.setIndex(sisa);
+    if (belakang.length) {
+      const gb = g.clone(); gb.setIndex(belakang);
+      const solid = new THREE.Mesh(gb, o.material); solid.castShadow = solid.receiveShadow = true;
+      const tembus = new THREE.Mesh(gb, o.material.clone()); Object.assign(tembus.material, { transparent: true, opacity: 0.18, depthWrite: false });
+      solid.position.copy(o.position); solid.quaternion.copy(o.quaternion); solid.scale.copy(o.scale);
+      o.parent.add(solid); belakangSolid.push(solid); belakangTembus.add(tembus); bahanKlip.push(tembus.material);
+      tembus.matrixAutoUpdate = false; tembus.matrix.copy(o.matrixWorld);
     }
     if (!samping.length) continue;
-    g.setIndex(sisa);
     const gs = g.clone(); gs.setIndex(samping);
     const solid = new THREE.Mesh(gs, o.material.clone()); solid.material.clippingPlanes = [bidang, bidangJauh]; solid.material.clipShadows = true;
     solid.castShadow = solid.receiveShadow = true; bahanKlip.push(solid.material);
@@ -238,7 +254,8 @@ export async function mulai(wadah, tipe, opsi = {}) {
     o.parent.add(solid); tembusGrup.add(tembus);
     tembus.matrixAutoUpdate = false; o.updateWorldMatrix(true, false); tembus.matrix.copy(o.matrixWorld);
   }
-  const setTembus = aktif => { tembusGrup.visible = aktif; if (!aktif) bidangJauh.constant = 1e9; };
+  const setBelakang = aktif => { belakangTembus.visible = aktif; belakangSolid.forEach(m => { m.visible = !aktif; }); };
+  const setTembus = aktif => { tembusGrup.visible = aktif; if (!aktif) { bidangJauh.constant = 1e9; setBelakang(false); } };
   const bb = new THREE.Box3().setFromObject(rumah);
 
   /* perabot & titik */
@@ -350,6 +367,8 @@ export async function mulai(wadah, tipe, opsi = {}) {
       const cx = (bb.min.x + bb.max.x) / 2, sisi = kamera.position.x >= cx ? 1 : -1;
       bidangDekat.normal.set(sisi, 0, 0); bidangDekat.constant = -sisi * cx;
       bidangJauh.normal.set(-sisi, 0, 0); bidangJauh.constant = sisi * cx;
+      const diBelakang = kamera.position.z < czRumah;
+      if (diBelakang !== belakangTembus.visible) setBelakang(diBelakang);
     }
     renderer.render(scene, kamera);
     // Damping membuat posisi kamera bergeser sangat kecil tanpa henti: pakai ambang 1 cm, bukan kesamaan persis.
