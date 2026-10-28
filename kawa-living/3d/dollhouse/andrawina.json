@@ -1,0 +1,19 @@
+{
+  "nama": "Andrawina",
+  "model": "andrawina.glb",
+  "titikTampil": false,
+  "catatan": "Model OBJ dari desainer (Drive Tentrem Bhumi/3D), dirampingkan dengan tools/siteplan-3d/rampingkan-glb.mjs: vegetasi & garis tepi dibuang, genteng 3D/sofa/gorden disederhanakan tanpa tekstur. Belum ada render ruangan: titikTampil false.",
+  "lantai": [
+    {
+      "nomor": 1,
+      "y": 0.55,
+      "potong": 2.2
+    },
+    {
+      "nomor": 2,
+      "y": 3.95,
+      "potong": 2.2
+    }
+  ],
+  "ruang": []
+}

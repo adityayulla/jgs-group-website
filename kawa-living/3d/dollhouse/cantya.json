@@ -1,0 +1,15 @@
+{
+  "nama": "Cantya",
+  "model": "cantya.glb",
+  "titikTampil": false,
+  "jarakAwal": 0.9,
+  "catatan": "Model OBJ dari desainer (Drive Tentrem Bhumi/3D), dirampingkan dengan tools/siteplan-3d/rampingkan-glb.mjs: vegetasi & garis tepi dibuang, genteng 3D/sofa/gorden disederhanakan tanpa tekstur. Belum ada render ruangan: titikTampil false.",
+  "lantai": [
+    {
+      "nomor": 1,
+      "y": 0.5,
+      "potong": 2.2
+    }
+  ],
+  "ruang": []
+}
