@@ -1,12 +1,11 @@
 {
   "_catatan": [
     "Hiroi Yuri tipe 42: satu lantai (level 4,85 m di model adalah bidang atap). Orientasi sama dengan denah pemasaran: kamar tidur di -x, carport di -x depan, depan rumah +z.",
-    "Satu titik per ruangan (8 titik). Render di img/hiroi-yuri-42/NN.webp, acuan NN-acuan.png, prompt NN-prompt.md.",
+    "Render dari desainer (28 Okt 2026, RAR WA \"Render Hiroi\"): 10 gambar. Satu titik per ruangan, kecuali Ruang Keluarga (03 + 09 backdrop TV) dan Dapur (04 + 10). Acuan/prompt ChatGPT lama tinggal arsip.",
     "Ukuran model: 6,5 x 11 m. Lantai dalam y=1,0; carport y=0,4. KT x -2,85..0; ruang keluarga x 0,15..2,9 z -1,4..1,7; dapur x 0,13..1,93 z -3,07..-1,83; KM x 2,07..2,9 z -3,22..-1,98; taman belakang z -5,35..-3,7."
   ],
   "nama": "Hiroi Yuri 42",
   "model": "hiroi-yuri-42.glb",
-  "titikTampil": false,
   "lantai": [
     {
       "nomor": 1,
@@ -16,7 +15,7 @@
   ],
   "ruang": [
     {
-      "nama": "Carport",
+      "nama": "Fasad & Carport",
       "lantai": 1,
       "perabot": [
         {
@@ -123,6 +122,12 @@
           },
           "gambar": "img/hiroi-yuri-42/03.webp",
           "judul": "Ruang keluarga"
+        },
+        {
+          "x": 2.4,
+          "z": 1.2,
+          "judul": "Backdrop TV ruang keluarga",
+          "gambar": "img/hiroi-yuri-42/09.webp"
         }
       ]
     },
@@ -153,6 +158,12 @@
           },
           "gambar": "img/hiroi-yuri-42/04.webp",
           "judul": "Dapur"
+        },
+        {
+          "x": 1.6,
+          "z": -2.6,
+          "judul": "Dapur dan pintu ke taman belakang",
+          "gambar": "img/hiroi-yuri-42/10.webp"
         }
       ]
     },
@@ -192,7 +203,7 @@
       ]
     },
     {
-      "nama": "Kamar Tidur 1",
+      "nama": "Kamar Utama",
       "lantai": 1,
       "perabot": [
         {
@@ -228,12 +239,12 @@
             "z": 0.2
           },
           "gambar": "img/hiroi-yuri-42/06.webp",
-          "judul": "Kamar tidur 1"
+          "judul": "Kamar utama"
         }
       ]
     },
     {
-      "nama": "Kamar Tidur 2",
+      "nama": "Kamar Anak",
       "lantai": 1,
       "perabot": [
         {
@@ -268,7 +279,7 @@
             "z": -4.2
           },
           "gambar": "img/hiroi-yuri-42/07.webp",
-          "judul": "Kamar tidur 2"
+          "judul": "Kamar anak"
         }
       ]
     },
