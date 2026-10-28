@@ -13,14 +13,14 @@
   ],
   "ruang": [
     {
-      "nama": "Carport",
+      "nama": "Fasad & Carport",
       "lantai": 1,
       "titik": [
         {
           "x": 1.6,
           "y": 1.0,
           "z": 5.0,
-          "judul": "Tampak depan",
+          "judul": "Fasad depan dan carport",
           "gambar": "img/yuri-1/01.webp",
           "kamera": {
             "x": 2.6,
@@ -168,7 +168,7 @@
       ]
     },
     {
-      "nama": "Dapur & Taman Belakang",
+      "nama": "Dapur",
       "lantai": 1,
       "titik": [
         {
@@ -185,6 +185,28 @@
             "x": -1.9,
             "y": 1.1,
             "z": -2.1
+          }
+        }
+      ]
+    },
+    {
+      "nama": "Taman Belakang",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": 0.8,
+          "z": -5.5,
+          "judul": "Taman belakang di samping dapur",
+          "gambar": "img/yuri-1/09.webp",
+          "kamera": {
+            "x": -1.6,
+            "y": 1.6,
+            "z": -3.6
+          },
+          "lihat": {
+            "x": 1.2,
+            "y": 1.0,
+            "z": -6.2
           }
         }
       ]
