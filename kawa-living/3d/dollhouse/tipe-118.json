@@ -1,0 +1,273 @@
+{
+  "nama": "Tipe 118",
+  "model": "tipe-118.glb",
+  "titikTampil": false,
+  "jarakAwal": 0.9,
+  "catatan": "Tipe 118 (rumah 7,5 x 16 m, luas bangunan 118 m2) — dibangun dari denah di ~/Projects/Fasad (denah A rev 4, massa v19 = fasad-14) lewat 3d/rumah-final.py. Koordinat viewer: x = x_denah - 3,75; z = 8 - y_denah (depan +z). Lantai 1 y 0, lantai 2 y 3,5. Titik per ruang dari label denah; belum ada render (gambar null, titikTampil false). Halaman: /background/tipe-118/ (noindex).",
+  "lantai": [
+    {
+      "nomor": 1,
+      "y": 0.0,
+      "potong": 2.2
+    },
+    {
+      "nomor": 2,
+      "y": 3.5,
+      "potong": 2.2
+    }
+  ],
+  "ruang": [
+    {
+      "nama": "KM Tamu",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": -0.6,
+          "z": 1.0,
+          "judul": "KM Tamu",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Kamar ART",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": 1.15,
+          "z": 0.9,
+          "judul": "Kamar ART",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Laundry + Dapur Kotor",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": 2.7,
+          "z": -1.05,
+          "judul": "Laundry + Dapur Kotor",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Tangga",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": 0.4,
+          "z": -0.5,
+          "judul": "Tangga",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Taman Depan",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": -2.5,
+          "z": 6.8,
+          "judul": "Taman Depan",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Teras",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": -2.5,
+          "z": 3.5,
+          "judul": "Teras",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Carport 2 Mobil",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": 1.25,
+          "z": 5.0,
+          "judul": "Carport 2 Mobil",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Taman Dalam",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": -3.1,
+          "z": 0.2,
+          "judul": "Taman Dalam",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Foyer",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": -1.9,
+          "z": -0.4,
+          "judul": "Foyer",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Dapur + Makan + Keluarga",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": 0.15,
+          "z": -5.2,
+          "judul": "Dapur + Makan + Keluarga",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Deck",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": -2.5,
+          "z": -6.9,
+          "judul": "Deck",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Taman Belakang",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": 1.25,
+          "z": -6.9,
+          "judul": "Taman Belakang",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Kamar Utama",
+      "lantai": 2,
+      "titik": [
+        {
+          "x": 0.4,
+          "z": 2.1,
+          "judul": "Kamar Utama",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "R. Kerja Semi Outdoor",
+      "lantai": 2,
+      "titik": [
+        {
+          "x": 2.95,
+          "z": 2.5,
+          "judul": "R. Kerja Semi Outdoor",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "KM Utama",
+      "lantai": 2,
+      "titik": [
+        {
+          "x": 2.5,
+          "z": 0.35,
+          "judul": "KM Utama",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Koridor",
+      "lantai": 2,
+      "titik": [
+        {
+          "x": -1.9,
+          "z": 0.3,
+          "judul": "Koridor",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "KM 2",
+      "lantai": 2,
+      "titik": [
+        {
+          "x": 0.0,
+          "z": -3.8,
+          "judul": "KM 2",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Hall",
+      "lantai": 2,
+      "titik": [
+        {
+          "x": -0.45,
+          "z": -2.0,
+          "judul": "Hall",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Kamar 2",
+      "lantai": 2,
+      "titik": [
+        {
+          "x": -1.75,
+          "z": -3.15,
+          "judul": "Kamar 2",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Kamar 3",
+      "lantai": 2,
+      "titik": [
+        {
+          "x": 1.15,
+          "z": -3.15,
+          "judul": "Kamar 3",
+          "gambar": null
+        }
+      ]
+    },
+    {
+      "nama": "Tangga",
+      "lantai": 2,
+      "titik": [
+        {
+          "x": 0.4,
+          "z": -0.5,
+          "judul": "Tangga",
+          "gambar": null
+        }
+      ]
+    }
+  ]
+}
