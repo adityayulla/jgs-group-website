@@ -3,11 +3,11 @@
     "Mizu 36: satu lantai. Satuan meter, model berpusat x/z=0, depan rumah (carport) di +z, carport di sisi -x, taman depan di +x.",
     "Lantai dalam y=0,55; carport y=0,2; taman depan y=0,35. Dinding luar x -3,1..3,1; depan bangunan z 0,65 (teras niche sampai 0,9); belakang z -5,35.",
     "Ruang: teras niche x -3,1..-1,6 z -0,5..0,65 (pintu utama di z -0,5, x -2,4..-2,0); KM x -1,6..0,2 z -0,5..0,65; ruang keluarga+dapur x -3,1..0,2 z -3,85..-0,5 (meja dapur bawaan model di dinding belakang x -3..-1, pintu ke taman belakang x -0,6..-0,2); KT1 x 0,3..3,1 z -2,2..0,65 (pintu di x 0,25 z -1,7, jendela ke taman depan); KT2 x 0,3..3,1 z -5,35..-2,35 (pintu di x 0,25 z -2,85); taman belakang x -3,1..0,2 z -5,35..-3,85.",
-    "Satu titik per ruang. Render di img/mizu-36/NN.webp, acuan NN-acuan.png, prompt NN-prompt.md. Garis tepi SketchUp (edge_color) ikut kena raycast: saring hanya mesh."
+    "Satu titik per ruang. Render di img/mizu-36/NN.webp, acuan NN-acuan.png, prompt NN-prompt.md. Garis tepi SketchUp (edge_color) ikut kena raycast: saring hanya mesh.",
+    "Render dari desainer (29 Okt 2026, RAR WA \"Render Mizu\"): 8 gambar, satu per titik; nama ruang mengikuti nama file desainer. Acuan/prompt ChatGPT lama tinggal arsip."
   ],
   "nama": "Mizu 36",
   "model": "mizu-36.glb",
-  "titikTampil": false,
   "lantai": [
     {
       "nomor": 1,
@@ -17,7 +17,7 @@
   ],
   "ruang": [
     {
-      "nama": "Carport",
+      "nama": "Fasad & Carport",
       "lantai": 1,
       "perabot": [
         {
@@ -48,7 +48,7 @@
             "z": 1.5
           },
           "gambar": "img/mizu-36/01.webp",
-          "judul": "Tampak depan"
+          "judul": "Fasad depan dan carport"
         }
       ]
     },
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "nama": "Ruang Keluarga",
+      "nama": "Ruang Tamu & Ruang Makan",
       "lantai": 1,
       "perabot": [
         {
@@ -118,12 +118,12 @@
             "z": -0.5
           },
           "gambar": "img/mizu-36/03.webp",
-          "judul": "Ruang keluarga dan pintu utama"
+          "judul": "Ruang tamu dan ruang makan"
         }
       ]
     },
     {
-      "nama": "Dapur & Ruang Makan",
+      "nama": "Dapur",
       "lantai": 1,
       "perabot": [],
       "titik": [
@@ -141,12 +141,12 @@
             "z": -3.7
           },
           "gambar": "img/mizu-36/04.webp",
-          "judul": "Dapur dan ruang makan"
+          "judul": "Dapur"
         }
       ]
     },
     {
-      "nama": "Kamar Tidur 1",
+      "nama": "Kamar Utama",
       "lantai": 1,
       "perabot": [
         {
@@ -181,12 +181,12 @@
             "z": 0.3
           },
           "gambar": "img/mizu-36/05.webp",
-          "judul": "Kamar tidur 1"
+          "judul": "Kamar utama"
         }
       ]
     },
     {
-      "nama": "Kamar Tidur 2",
+      "nama": "Kamar Anak",
       "lantai": 1,
       "perabot": [
         {
@@ -221,7 +221,7 @@
             "z": -5.0
           },
           "gambar": "img/mizu-36/06.webp",
-          "judul": "Kamar tidur 2"
+          "judul": "Kamar anak"
         }
       ]
     },
@@ -280,7 +280,7 @@
             "z": -3.9
           },
           "gambar": "img/mizu-36/08.webp",
-          "judul": "Taman belakang ke arah dapur"
+          "judul": "Halaman belakang"
         }
       ]
     }
