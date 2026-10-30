@@ -76,11 +76,18 @@
   <!-- Blog: daftar artikel -->
   <url>
     <loc>https://jogjagrahaselaras.com/blog/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
+  <!-- Blog: Perumahan di Bantul Mulai 400 Jutaan -->
+  <url>
+    <loc>https://jogjagrahaselaras.com/blog/perumahan-bantul-400-jutaan/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Blog: Simulasi KPR Rumah Rp400 Jutaan di Jogja -->
   <url>
     <loc>https://jogjagrahaselaras.com/blog/simulasi-kpr-rumah-400-juta/</loc>
