@@ -1,49 +1,42 @@
 {
   "_catatan": [
-    "Himawari 51 (lebar 6,5): dua lantai, denah sama dengan Himawari 49 lebih lebar 0,3 m. Satuan meter, model berpusat x/z=0, depan rumah di +z, carport di sisi +x, teras di -x.",
-    "Lantai 1 y=0,6; lantai 2 y=4,0; plafon lantai 1 ±3,4. Denah = Himawari 49 digeser z -0,25 (sekat z -1,6; KT1 z -4,35..-1,6; depan kiri z 1,65; KM lt2 x 0,1..1,3 z -1,35..0,1; KT utama x -3,1..-0,3 z -1,35..1,65).",
-    "Satu titik per ruang. Render di img/himawari-51/NN.webp, acuan NN-acuan.png, prompt NN-prompt.md."
+    "Himawari 51: dua lantai. Satuan meter, model berpusat x/z=0, depan rumah di +z. Carport di sisi -x (kiri dilihat dari depan), teras + pintu utama di +x.",
+    "Model sejak 5 Nov 2026 = OBJ berperabot dari desainer Ayu (RAR WA \"HIMAWARI\", sumber ~/Projects/source-3d/kawa-living/himawari-51/, satuan cm, kavling 6,2 x 13 m), dirampingkan dengan tools/siteplan-3d/rampingkan-glb.mjs (perabot berat lewat BERAT_NODE, kamboja frangipani dibuang, jalan Mesh297 Group77 dibuang). Tanpa perabot prosedural. Model DAE lama tercermin kiri-kanan; titik ditata ulang.",
+    "lantai: y = tinggi permukaan lantai (L1 0,75; L2 4,15), potong = tinggi dinding yang disisakan di tampilan dollhouse.",
+    "Ruang L1: carport x -3..0 z 1,6..6; teras x 0,2..3 z 3..3,6; ruang tamu x 0,5..3 z 0,5..2,8; minibar ±(2,1, -0,2); tangga x -3..-1,5 z 0,3..1,5; KM bawah tangga ±(-2,5, -0,1); KT1 x -3..-0,3 z -3,6..-1; dapur x 0,5..3 z -3,6..-1,5; taman belakang z -3,8..-6,5. L2: KT belakang-kanan ±(1,8, 0,2), kamar depan ±(1, 2,5) tanpa render.",
+    "Render desainer di img/himawari-51/NN.webp (5 Nov 2026, RAR WA \"Render Himawari\", 9 gambar, lebar maks 1600 tanpa potong). 02, 06, 07 identik dengan render Okina 02, 08, 07 (dipakai ulang desainer). Render ChatGPT lama hanya di riwayat git."
   ],
   "nama": "Himawari 51",
   "model": "himawari-51.glb",
-  "titikTampil": false,
   "lantai": [
     {
       "nomor": 1,
-      "y": 1.0,
+      "y": 0.75,
       "potong": 2.2
     },
     {
       "nomor": 2,
-      "y": 4.4,
+      "y": 4.15,
       "potong": 2.2
     }
   ],
   "ruang": [
     {
-      "nama": "Carport",
+      "nama": "Fasad & Carport",
       "lantai": 1,
-      "perabot": [
-        {
-          "jenis": "car",
-          "x": 1.9,
-          "z": 2.9,
-          "y": 0.25
-        }
-      ],
       "titik": [
         {
-          "x": 1.9,
-          "z": 1.35,
+          "x": -1.5,
+          "z": 4.0,
           "kamera": {
-            "x": 3.5,
-            "y": 2.4,
-            "z": 10.5
+            "x": 0.5,
+            "y": 2.0,
+            "z": 14.0
           },
           "lihat": {
-            "x": -0.3,
-            "y": 3.1,
-            "z": 1.25
+            "x": 0.0,
+            "y": 4.0,
+            "z": 2.0
           },
           "gambar": "img/himawari-51/01.webp",
           "judul": "Tampak depan"
@@ -51,22 +44,21 @@
       ]
     },
     {
-      "nama": "Teras & Ruang Tamu",
+      "nama": "Teras",
       "lantai": 1,
-      "perabot": [],
       "titik": [
         {
-          "x": -1.4,
-          "z": 2.25,
+          "x": 1.2,
+          "z": 3.1,
           "kamera": {
-            "x": 1.2,
-            "y": 1.5,
-            "z": 3.95
+            "x": -1.5,
+            "y": 1.7,
+            "z": 6.5
           },
           "lihat": {
-            "x": -1.2,
-            "y": 1.5,
-            "z": 1.75
+            "x": 1.2,
+            "y": 1.6,
+            "z": 2.8
           },
           "gambar": "img/himawari-51/02.webp",
           "judul": "Teras dan pintu utama"
@@ -74,218 +66,156 @@
       ]
     },
     {
-      "nama": "Ruang Keluarga",
+      "nama": "Ruang Tamu",
       "lantai": 1,
-      "perabot": [
-        {
-          "jenis": "rug",
-          "x": -1.2,
-          "z": -0.05
-        },
-        {
-          "jenis": "sofa",
-          "x": -1.2,
-          "z": 0.75,
-          "rot": 180
-        },
-        {
-          "jenis": "coffee",
-          "x": -1.2,
-          "z": -0.15
-        },
-        {
-          "jenis": "tv",
-          "x": -1.2,
-          "z": -1.15
-        },
-        {
-          "jenis": "plant",
-          "x": 0.9,
-          "z": -0.15
-        }
-      ],
       "titik": [
         {
-          "x": -1.2,
-          "z": 0.25,
+          "x": 1.8,
+          "z": 1.4,
           "kamera": {
-            "x": -2.6,
-            "y": 2.3,
-            "z": 1.35
+            "x": 0.2,
+            "y": 2.4,
+            "z": 2.8
           },
           "lihat": {
-            "x": 1.2,
+            "x": 1.0,
             "y": 1.6,
-            "z": -1.05
+            "z": -3.5
           },
           "gambar": "img/himawari-51/03.webp",
-          "judul": "Ruang keluarga dan tangga"
+          "judul": "Ruang tamu ke arah taman belakang"
+        }
+      ]
+    },
+    {
+      "nama": "Ruang Makan & Minibar",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": 1.0,
+          "z": -0.6,
+          "kamera": {
+            "x": 2.3,
+            "y": 2.4,
+            "z": 1.8
+          },
+          "lihat": {
+            "x": -2.0,
+            "y": 1.6,
+            "z": -1.5
+          },
+          "gambar": "img/himawari-51/04.webp",
+          "judul": "Ruang makan, minibar dan tangga"
         }
       ]
     },
     {
       "nama": "Dapur",
       "lantai": 1,
-      "perabot": [],
       "titik": [
         {
-          "x": -1.6,
-          "z": -2.05,
+          "x": 2.2,
+          "z": -2.6,
           "kamera": {
-            "x": -2.4,
-            "y": 2.0,
-            "z": -4.25
+            "x": 2.6,
+            "y": 2.4,
+            "z": -3.3
           },
           "lihat": {
-            "x": -0.8,
-            "y": 1.3,
-            "z": -1.75
+            "x": 0.0,
+            "y": 1.6,
+            "z": 2.5
           },
-          "gambar": "img/himawari-51/04.webp",
-          "judul": "Dapur dari taman belakang"
+          "gambar": "img/himawari-51/05.webp",
+          "judul": "Dapur"
+        }
+      ]
+    },
+    {
+      "nama": "Kamar Mandi Bawah Tangga",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": -2.5,
+          "z": -0.1,
+          "kamera": {
+            "x": -2.2,
+            "y": 2.3,
+            "z": 0.3
+          },
+          "lihat": {
+            "x": -2.8,
+            "y": 1.2,
+            "z": -0.4
+          },
+          "gambar": "img/himawari-51/06.webp",
+          "judul": "Kamar mandi bawah tangga"
+        }
+      ]
+    },
+    {
+      "nama": "Kamar Tidur Lantai 1",
+      "lantai": 1,
+      "titik": [
+        {
+          "x": -1.7,
+          "z": -2.3,
+          "kamera": {
+            "x": -0.6,
+            "y": 2.3,
+            "z": -0.9
+          },
+          "lihat": {
+            "x": -2.6,
+            "y": 1.4,
+            "z": -3.2
+          },
+          "gambar": "img/himawari-51/07.webp",
+          "judul": "Kamar tidur lantai 1"
         }
       ]
     },
     {
       "nama": "Taman Belakang",
       "lantai": 1,
-      "perabot": [],
       "titik": [
         {
-          "x": -1.5,
-          "z": -3.55,
-          "y": 1.4,
+          "x": -0.3,
+          "z": -5.2,
           "kamera": {
-            "x": -1.0,
-            "y": 1.9,
-            "z": -1.95
+            "x": -2.5,
+            "y": 2.2,
+            "z": -6.2
           },
           "lihat": {
-            "x": -2.2,
-            "y": 1.1,
-            "z": -4.25
-          },
-          "gambar": "img/himawari-51/05.webp",
-          "judul": "Taman belakang dari dapur"
-        }
-      ]
-    },
-    {
-      "nama": "Kamar Tidur 1",
-      "lantai": 1,
-      "perabot": [
-        {
-          "jenis": "bed",
-          "x": 1.75,
-          "z": -2.8,
-          "rot": -90
-        },
-        {
-          "jenis": "nightstand",
-          "x": 2.5,
-          "z": -1.7
-        },
-        {
-          "jenis": "wardrobe",
-          "x": 2.0,
-          "z": -4.0
-        }
-      ],
-      "titik": [
-        {
-          "x": 1.4,
-          "z": -2.75,
-          "kamera": {
-            "x": 0.4,
-            "y": 2.3,
-            "z": -1.55
-          },
-          "lihat": {
-            "x": 2.2,
-            "y": 1.4,
-            "z": -3.85
-          },
-          "gambar": "img/himawari-51/06.webp",
-          "judul": "Kamar tidur 1"
-        }
-      ]
-    },
-    {
-      "nama": "Kamar Tidur Utama",
-      "lantai": 2,
-      "perabot": [
-        {
-          "jenis": "bed",
-          "x": -1.6,
-          "z": -0.3
-        },
-        {
-          "jenis": "nightstand",
-          "x": -2.8,
-          "z": -1.05
-        },
-        {
-          "jenis": "nightstand",
-          "x": -0.4,
-          "z": -1.05
-        },
-        {
-          "jenis": "wardrobe",
-          "x": -2.8,
-          "z": 0.95,
-          "rot": 90
-        }
-      ],
-      "titik": [
-        {
-          "x": -1.6,
-          "z": 0.95,
-          "kamera": {
-            "x": -0.4,
-            "y": 5.6,
-            "z": -1.15
-          },
-          "lihat": {
-            "x": -2.4,
-            "y": 4.9,
-            "z": 1.55
-          },
-          "gambar": "img/himawari-51/07.webp",
-          "judul": "Kamar tidur utama"
-        }
-      ]
-    },
-    {
-      "nama": "Kamar Mandi",
-      "lantai": 2,
-      "perabot": [
-        {
-          "jenis": "toilet",
-          "x": 1.1,
-          "z": -1.1
-        },
-        {
-          "jenis": "sink",
-          "x": 0.4,
-          "z": -1.1
-        }
-      ],
-      "titik": [
-        {
-          "x": 0.7,
-          "z": -0.55,
-          "kamera": {
-            "x": 0.7,
-            "y": 5.55,
-            "z": 0.05
-          },
-          "lihat": {
-            "x": 0.7,
-            "y": 4.7,
-            "z": -1.35
+            "x": 1.0,
+            "y": 1.6,
+            "z": -3.8
           },
           "gambar": "img/himawari-51/08.webp",
-          "judul": "Kamar mandi"
+          "judul": "Taman belakang"
+        }
+      ]
+    },
+    {
+      "nama": "Kamar Tidur Lantai 2",
+      "lantai": 2,
+      "titik": [
+        {
+          "x": 1.8,
+          "z": 0.2,
+          "kamera": {
+            "x": 0.8,
+            "y": 5.7,
+            "z": 1.3
+          },
+          "lihat": {
+            "x": 2.6,
+            "y": 5.0,
+            "z": -0.5
+          },
+          "gambar": "img/himawari-51/09.webp",
+          "judul": "Kamar tidur lantai 2"
         }
       ]
     }
