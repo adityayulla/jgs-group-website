@@ -16,7 +16,7 @@ j = json.loads(b[20:20+n]); sisa = b[20+n:]
 hasil = []
 for m in j.get('materials', []):
     a = d.get(m.get('name', '').removesuffix('_ramping'))
-    if a is None or a >= 1 or a <= 0: continue  # d 0 membuat benda hilang total
+    if a is None or a >= 0.95 or a <= 0: continue  # d 0 membuat benda hilang total; d mendekati 1 = padat (logam Andrawina 0,99)
     pb = m.setdefault('pbrMetallicRoughness', {})
     c = pb.get('baseColorFactor', [1, 1, 1, 1]); c[3] = a; pb['baseColorFactor'] = c
     m['alphaMode'] = 'BLEND'; m.pop('alphaCutoff', None)

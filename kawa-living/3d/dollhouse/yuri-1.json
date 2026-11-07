@@ -1,9 +1,8 @@
 {
   "nama": "Yuri 1",
   "model": "yuri-1.glb",
-  "bayangan": false,
   "jarakAwal": 0.78,
-  "catatan": "Model dari desainer (GLB SketchUp berperabot lengkap), jadi tanpa perabot prosedural. Lantai dalam y 0,5. Dinding luar x -2,8/3,0, sekat tengah x 0,1, fasad kiri z 1,25, kamar depan z 2,25..-0,75, KM x 1,4..2,9 z -0,75..-2,0, dinding belakang ruang keluarga (pintu kaca) z -2,0. Dapur basah (bak cuci, meja beton, kabinet atas) ada di balik pintu kaca belakang, z -2,0..-3,6, langsung ke taman belakang. Pohon kamboja taman depan dibuang dari model (berat ±1 MB).",
+  "catatan": "Model dari desainer (GLB SketchUp berperabot lengkap), jadi tanpa perabot prosedural. Lantai dalam y 0,5. Dinding luar x -2,8/3,0, sekat tengah x 0,1, fasad kiri z 1,25, kamar depan z 2,25..-0,75, KM x 1,4..2,9 z -0,75..-2,0, dinding belakang ruang keluarga (pintu kaca) z -2,0. Dapur basah (bak cuci, meja beton, kabinet atas) ada di balik pintu kaca belakang, z -2,0..-3,6, langsung ke taman belakang. Pohon kamboja taman depan dibuang dari model (berat ±1 MB). 7 Nov 2026: material diseragamkan dengan tools/siteplan-3d/seragamkan-material-glb.py (non-logam, faktor warna tekstur putih, Color L02 abu) sehingga atap, kayu, dan dinding sama dengan tipe lain; opsi bayangan false dilepas.",
   "lantai": [
     {
       "nomor": 1,
