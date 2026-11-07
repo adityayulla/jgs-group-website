@@ -3,7 +3,8 @@
     "Hiroi Yuri tipe 42: satu lantai (level 4,85 m di model adalah bidang atap). Orientasi sama dengan denah pemasaran: kamar tidur di -x, carport di -x depan, depan rumah +z.",
     "Render dari desainer (28 Okt 2026, RAR WA \"Render Hiroi\"): 10 gambar. Satu titik per ruangan, kecuali Ruang Keluarga (03 + 09 backdrop TV) dan Dapur (04 + 10). Acuan/prompt ChatGPT lama tinggal arsip.",
     "Ukuran model: 6,5 x 11 m. Lantai dalam y=1,0; carport y=0,4. KT x -2,85..0; ruang keluarga x 0,15..2,9 z -1,4..1,7; dapur x 0,13..1,93 z -3,07..-1,83; KM x 2,07..2,9 z -3,22..-1,98; taman belakang z -5,35..-3,7.",
-    "Model sejak 29 Okt 2026 = OBJ berperabot dari desainer Ayu (RAR WA \"HIROI YURI\", sumber ~/Projects/source-3d/kawa-living/hiroi-yuri-42/), dirampingkan dengan tools/siteplan-3d/rampingkan-glb.mjs (perabot berat disederhanakan, pohon kamboja & paving jalan di luar kavling dibuang). Posisinya sama persis dengan model DAE lama, jadi titik tidak berubah. Tanpa perabot prosedural."
+    "Model sejak 29 Okt 2026 = OBJ berperabot dari desainer Ayu (RAR WA \"HIROI YURI\", sumber ~/Projects/source-3d/kawa-living/hiroi-yuri-42/), dirampingkan dengan tools/siteplan-3d/rampingkan-glb.mjs (perabot berat disederhanakan, pohon kamboja & paving jalan di luar kavling dibuang). Posisinya sama persis dengan model DAE lama, jadi titik tidak berubah. Tanpa perabot prosedural.",
+    "7 Nov 2026: dibangun ulang dari RAR WA \"HIROI YURI exp 2\" (geometri rumah sama dengan kiriman 29 Okt) dengan ERROR=0.001 di rampingkan-glb dan error 0.001 di optimize-model, karena pengaturan lama merusak jendela bulat fasad. Titik tidak berubah."
   ],
   "nama": "Hiroi Yuri 42",
   "model": "hiroi-yuri-42.glb",
