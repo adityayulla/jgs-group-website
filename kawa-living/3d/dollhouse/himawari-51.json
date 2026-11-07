@@ -4,7 +4,8 @@
     "Model sejak 5 Nov 2026 = OBJ berperabot dari desainer Ayu (RAR WA \"HIMAWARI\", sumber ~/Projects/source-3d/kawa-living/himawari-51/, satuan cm, kavling 6,2 x 13 m), dirampingkan dengan tools/siteplan-3d/rampingkan-glb.mjs (perabot berat lewat BERAT_NODE, kamboja frangipani dibuang, jalan Mesh297 Group77 dibuang). Tanpa perabot prosedural. Model DAE lama tercermin kiri-kanan; titik ditata ulang.",
     "lantai: y = tinggi permukaan lantai (L1 0,75; L2 4,15), potong = tinggi dinding yang disisakan di tampilan dollhouse.",
     "Ruang L1: carport x -3..0 z 1,6..6; teras x 0,2..3 z 3..3,6; ruang tamu x 0,5..3 z 0,5..2,8; minibar ±(2,1, -0,2); tangga x -3..-1,5 z 0,3..1,5; KM bawah tangga ±(-2,5, -0,1); KT1 x -3..-0,3 z -3,6..-1; dapur x 0,5..3 z -3,6..-1,5; taman belakang z -3,8..-6,5. L2: KT belakang-kanan ±(1,8, 0,2), kamar depan ±(1, 2,5) tanpa render.",
-    "Render desainer di img/himawari-51/NN.webp (5 Nov 2026, RAR WA \"Render Himawari\", 9 gambar, lebar maks 1600 tanpa potong). 02, 06, 07 identik dengan render Okina 02, 08, 07 (dipakai ulang desainer). Render ChatGPT lama hanya di riwayat git."
+    "Render desainer di img/himawari-51/NN.webp (5 Nov 2026, RAR WA \"Render Himawari\", 9 gambar, lebar maks 1600 tanpa potong). 02, 06, 07 identik dengan render Okina 02, 08, 07 (dipakai ulang desainer). Render ChatGPT lama hanya di riwayat git.",
+    "7 Nov 2026: dibangun ulang dengan ERROR=0.001 ERROR_NODE=0.03 di rampingkan-glb dan error 0.001 di optimize-model (jendela bulat rusak & bilah diagonal di atap hilang), alpha kaca dipulihkan dengan pulihkan-alpha-glb.py. Titik tidak berubah."
   ],
   "nama": "Himawari 51",
   "model": "himawari-51.glb",

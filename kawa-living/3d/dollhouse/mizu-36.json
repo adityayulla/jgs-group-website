@@ -4,7 +4,8 @@
     "Model sejak 29 Okt 2026 = OBJ berperabot dari desainer Ayu (RAR WA \"MIZU\", sumber ~/Projects/source-3d/kawa-living/mizu-36/), dirampingkan dengan tools/siteplan-3d/rampingkan-glb.mjs (BERAT_NODE perabot berat, pohon kamboja & tanaman gantung dibuang, jalan + kanstin di luar kavling dibuang). Tanpa perabot prosedural.",
     "Model DAE lama tercermin kiri-kanan dari desain sebenarnya; semua koordinat x titik/kamera dicerminkan (x -> -x) agar cocok dengan model desainer dan render-nya.",
     "Ruang (koordinat model baru): teras niche x 1,6..3,1 (pintu utama x 2,0..2,4); KM x -0,2..1,6 depan; ruang keluarga+dapur x -0,2..3,1 z -3,85..-0,5; KT1 x -3,1..-0,3 z -2,2..0,65; KT2 x -3,1..-0,3 z -5,35..-2,35; taman belakang x -0,2..3,1 z -5,35..-3,85.",
-    "Satu titik per ruang. Render desainer di img/mizu-36/NN.webp (29 Okt 2026, RAR WA \"Render Mizu\")."
+    "Satu titik per ruang. Render desainer di img/mizu-36/NN.webp (29 Okt 2026, RAR WA \"Render Mizu\").",
+    "7 Nov 2026: alpha kaca dipulihkan dari MTL dengan tools/siteplan-3d/pulihkan-alpha-glb.py; geometri tidak berubah."
   ],
   "nama": "Mizu 36",
   "model": "mizu-36.glb",

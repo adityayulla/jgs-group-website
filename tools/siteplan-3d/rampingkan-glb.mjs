@@ -21,6 +21,8 @@ const BERAT = new RegExp(process.env.BERAT || '^(_14|swedese|curtain|CONFORT|Fro
 const BUANG_NODE = new RegExp(process.env.BUANG_NODE || '(A_Leave|\\bflower\\d|\\bFLOW\\d|Kebun_3D|Solobium)', 'i');
 const BERAT_NODE = process.env.BERAT_NODE ? new RegExp(process.env.BERAT_NODE, 'i') : null;
 const RASIO = Number(process.env.RASIO || 0.1), ERROR = Number(process.env.ERROR || 0.03);
+// ERROR_NODE: batas khusus perabot BERAT_NODE, supaya ERROR kecil (bangunan berbentuk lengkung) tidak ikut menahan perabot berat.
+const ERROR_NODE = Number(process.env.ERROR_NODE || ERROR);
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS);
 const doc = await io.read(inp);
 const tri = p => (p.getIndices()?.getCount() ?? p.getAttribute('POSITION').getCount()) / 3;
@@ -33,10 +35,11 @@ for (const m of doc.getRoot().listMeshes()) for (const p of m.listPrimitives()) 
 // SketchUp mengabaikan warna Kd bila material bertekstur, tapi OBJ→glTF mengalikannya (Kd 0 = hitam pekat): jadikan putih.
 for (const mat of doc.getRoot().listMaterials()) if (mat.getBaseColorTexture()) { const f = mat.getBaseColorFactor(); mat.setBaseColorFactor([1, 1, 1, f[3]]); }
 const beratMat = doc.getRoot().listMaterials().filter(m => BERAT.test(m.getName()));
-const salinan = new Map(), beratPrim = new Set();
+const salinan = new Map(), beratPrim = new Set(), perabotPrim = new Set();
 if (BERAT_NODE) for (const n of doc.getRoot().listNodes()) {
   const m = n.getMesh(); if (!m || !BERAT_NODE.test(n.getName())) continue;
   for (const p of m.listPrimitives()) {
+    perabotPrim.add(p);
     const asal = p.getMaterial(); if (!asal || beratMat.includes(asal)) continue;
     if (!salinan.has(asal)) salinan.set(asal, asal.clone().setName(asal.getName() + '_ramping'));
     p.setMaterial(salinan.get(asal)); beratPrim.add(p);
@@ -63,7 +66,7 @@ for (const n of doc.getRoot().listNodes()) {
 await doc.transform(weld());
 for (const m of doc.getRoot().listMeshes()) for (const p of m.listPrimitives()) {
   if (!(beratMat.includes(p.getMaterial()) || beratPrim.has(p)) || tri(p) < 200) continue;
-  sebelum += tri(p); simplifyPrimitive(p, { simplifier: MeshoptSimplifier, ratio: RASIO, error: ERROR }); sesudah += tri(p);
+  sebelum += tri(p); simplifyPrimitive(p, { simplifier: MeshoptSimplifier, ratio: RASIO, error: perabotPrim.has(p) ? ERROR_NODE : ERROR }); sesudah += tri(p);
 }
 await doc.transform(prune());
 await io.write(out, doc);
