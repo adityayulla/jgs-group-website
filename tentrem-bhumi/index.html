@@ -49,7 +49,11 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'"/>
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"/></noscript>
 <!-- ✏️ SEMUA KONTEN (teks, gambar, harga, WA) ada di file konten.js -->
-<script src="konten.js"></script>
+<!-- konten.js dimuat di bawah (tepat sebelum skrip pemakainya) supaya tidak menahan
+     tampilan pertama; di sini hanya diminta unduh lebih awal (17 Nov 2026).
+     PENTING: teks hero di HTML di bawah harus sama dengan hero di konten.js — kalau
+     konten.js diubah, teks lama tampil sekejap sebelum diganti. -->
+<link rel="preload" as="script" href="konten.js"/>
 <style>
 /* ─────────────────────────────────────────
    RESET & BASE
@@ -464,7 +468,7 @@ img { display: block; }
 /* ─────────────────────────────────────────
    SITEPLAN
 ───────────────────────────────────────── */
-.siteplan-img { width: 100%; border-radius: 11px; border: 1px solid #eee; display: block; }
+.siteplan-img { width: 100%; height: auto; border-radius: 11px; border: 1px solid #eee; display: block; }
 
 /* ─────────────────────────────────────────
    SITEPLAN — overlay status jual
@@ -1430,13 +1434,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-head">
     <div class="hero-est">
       <span class="hero-est-dot"></span>
-      <span id="k-hero-est">EST. 2013 · SLEMAN, YOGYAKARTA</span>
+      <span id="k-hero-est">Jl. Kaliurang · 10 menit ke UII · Aktif</span>
     </div>
-    <h1 class="hero-h1" id="k-hero-h1">
-      Hunian Tentrem<br>
-      di <em>Sleman</em>, Untuk<br>
-      <span class="hero-hl" id="k-hero-hl">Generasi<br>Berikutnya</span>
-    </h1>
+    <h1 class="hero-h1" id="k-hero-h1">Saatnya Menetap<br><span class="hero-hl" id="k-hero-hl">dengan Tentram.</span></h1>
   </div>
 
   <!-- ── Gambar (tampil 2nd, di antara headline dan deskripsi) ── -->
@@ -1450,22 +1450,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            src="gate-tentrem-bhumi-720.webp"
            srcset="gate-tentrem-bhumi-720.webp 720w, gate-tentrem-bhumi-1200.webp 1200w"
            sizes="(min-width: 768px) 45vw, 88vw"
-           width="720" height="648" fetchpriority="high"
+           fetchpriority="high"
            alt="Tentrem Bhumi — Perumahan Yogyakarta"/>
     </div>
     <div class="hero-trust-badge">
-      <div class="htb-num" id="k-trust-num">12+</div>
+      <div class="htb-num" id="k-trust-num">13+</div>
       <div class="htb-label" id="k-trust-label">TAHUN<br>TERPERCAYA</div>
     </div>
     <div class="hero-hot-pill">
       <span class="hhp-dot"></span>
-      <span id="k-hero-hot">Hot Deals — Tentrem Bhumi</span>
+      <span id="k-hero-hot">Stok Terbatas · 16 dari 33 Unit Terjual</span>
     </div>
   </div>
 
   <!-- ── Body: Deskripsi + Tombol (tampil 3rd, di bawah gambar) ── -->
   <div class="hero-body">
-    <p class="hero-desc" id="k-hero-desc">Kawasan perumahan eksklusif bergaya kontemporer — dirancang untuk keluarga yang menghargai ketenangan, nilai, dan waktu.</p>
+    <p class="hero-desc" id="k-hero-desc">Keamanan 24 jam. Lingkungan eksklusif yang terjaga, bukan tempat sembarang orang lalu-lalang. Udara sejuk Jogja Utara. Tentrem Bhumi dirancang bukan hanya sebagai rumah—tapi sebagai tempat ketentraman hidup Anda, setiap hari.</p>
     <div class="hero-btns">
       <a class="btn-hero-primary" href="https://wa.me/6289506888328?text=Halo%20JGS%2C%20saya%20tertarik%20dengan%20Tentrem%20Bhumi%20dan%20ingin%20tanya-tanya.%20(via%20web)" target="_blank" rel="noopener">Chat WhatsApp</a>
       <button class="btn-hero-outline" onclick="openPricelistModal()" id="k-hero-btn2">Download Pricelist</button>
@@ -1629,7 +1629,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
        Kalau salah satunya gagal, yang tampil siteplan polos. -->
   <div class="siteplan-scroll" id="siteplan-scroll">
     <div class="siteplan-stage" id="siteplan-stage">
-      <img class="siteplan-img" id="k-siteplan" src="photos/kawasan/siteplan-tentrem-bhumi-2026-08.webp" alt="Siteplan Tentrem Bhumi"/>
+      <img class="siteplan-img" id="k-siteplan" src="photos/kawasan/siteplan-tentrem-bhumi-2026-08.webp" alt="Siteplan Tentrem Bhumi" width="1160" height="2080" loading="lazy" decoding="async"/>
       <div class="sp-overlay" id="sp-overlay"></div>
     </div>
   </div>
@@ -1889,6 +1889,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
+<script src="konten.js"></script>
 <script>
 /* Semua konten dimuat dari konten.js — lihat file tersebut untuk edit */
 
@@ -2047,7 +2048,7 @@ function setHtml(id, val) { var el = document.getElementById(id); if (el && val 
 
   /* SITEPLAN */
   var spImg = document.getElementById('k-siteplan');
-  if (spImg) { spImg.src = K.siteplan.gambar; spImg.alt = K.siteplan.alt; }
+  if (spImg) { if (spImg.getAttribute('src') !== K.siteplan.gambar) spImg.src = K.siteplan.gambar; spImg.alt = K.siteplan.alt; }
 
   /* SOCIAL PROOF */
   setText('k-unit-terjual',  K.sosial.unitTerjual);
