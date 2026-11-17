@@ -2,7 +2,12 @@
 <html lang="id">
 <head>
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PNJW22Z');</script>
+  <script>/* GTM ditunda sampai halaman selesai tampil (17 Nov 2026): dimuat saat window load, saat sentuhan/guliran pertama, atau paling lambat 5 detik. Event dataLayer sebelum itu tetap antre. */
+(function(w,d,l,i){w[l]=w[l]||[];var sudah=0;function muat(){if(sudah)return;sudah=1;w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;d.head.appendChild(j);}
+function nanti(){(w.requestIdleCallback||function(f){setTimeout(f,200);})(muat,{timeout:1500});}
+if(d.readyState==='complete')nanti();else w.addEventListener('load',nanti);
+['pointerdown','touchstart','keydown','scroll'].forEach(function(e){w.addEventListener(e,muat,{once:true,passive:true});});
+setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
   <!-- End Google Tag Manager -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
