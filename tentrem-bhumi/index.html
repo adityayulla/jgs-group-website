@@ -39,6 +39,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <!-- Feed statistik unit + serah terima (Progress Dashboard) -->
 <link rel="preconnect" href="https://progress.jogjagrahaselaras.com"/>
+<link rel="preload" as="image" type="image/webp" imagesrcset="gate-tentrem-bhumi-720.webp 720w, gate-tentrem-bhumi-1200.webp 1200w" imagesizes="(min-width: 768px) 45vw, 88vw" fetchpriority="high"/>
 <link rel="stylesheet" href="../assets/css/global.css?v=20261009"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'"/>
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"/></noscript>
@@ -1437,9 +1438,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-right">
     <div class="hero-img-bg"></div>
     <div class="hero-arch-wrap">
+      <!-- Foto hero ditulis langsung di sini (bukan dipasang JS) supaya browser
+           mengunduhnya sejak awal; versi ringan 720/1200 px (17 Nov 2026).
+           Mengganti foto: ubah archImage di konten.js — JS di bawah akan memakainya. -->
       <img class="hero-arch-img" id="k-hero-arch-img"
-           src="photos/cantya/cantya%20berjejer%202.webp"
-           alt="Tentrem Bhumi — Perumahan Sleman"/>
+           src="gate-tentrem-bhumi-720.webp"
+           srcset="gate-tentrem-bhumi-720.webp 720w, gate-tentrem-bhumi-1200.webp 1200w"
+           sizes="(min-width: 768px) 45vw, 88vw"
+           width="720" height="648" fetchpriority="high"
+           alt="Tentrem Bhumi — Perumahan Yogyakarta"/>
     </div>
     <div class="hero-trust-badge">
       <div class="htb-num" id="k-trust-num">12+</div>
@@ -1911,7 +1918,14 @@ function setHtml(id, val) { var el = document.getElementById(id); if (el && val 
   if (trustLabelEl) trustLabelEl.innerHTML = K.hero.trustLabel.replace(/\n/g,'<br>');
   setText('k-hero-hot',    K.hero.hotDeals);
   var archImg = document.getElementById('k-hero-arch-img');
-  if (archImg) { archImg.src = K.hero.archImage; archImg.alt = K.hero.archAlt; }
+  if (archImg) {
+    /* Foto bawaan sudah ada di HTML. Hanya ditukar kalau konten.js menunjuk foto lain. */
+    if (K.hero.archImage && archImg.getAttribute('src') !== K.hero.archImage) {
+      archImg.removeAttribute('srcset'); archImg.removeAttribute('sizes');
+      archImg.src = K.hero.archImage;
+    }
+    archImg.alt = K.hero.archAlt;
+  }
   var btn1 = document.getElementById('k-hero-btn1');
   if (btn1) btn1.textContent = K.hero.btn1Label;
   var btn2 = document.getElementById('k-hero-btn2');
@@ -2297,6 +2311,7 @@ document.addEventListener('DOMContentLoaded', function() {
          bermasalah foto lama tetap di tempatnya. */
       var pre = new Image();
       pre.onload = function () {
+        img.removeAttribute('srcset'); img.removeAttribute('sizes');   // kalau tidak, srcset bawaan menang atas src
         img.src = it.url;
         if (it.caption) img.alt = it.caption + ' — Tentrem Bhumi, Perumahan Sleman';
       };

@@ -73,7 +73,7 @@ var KONTEN = {
     btn2Label:  'Download Pricelist',
 
     /* ── Gambar arch (kanan) — ganti src sesuai foto terbaik ── */
-    archImage:  'gate%20Tentrem%20Bhumi(2).webp',
+    archImage:  'gate-tentrem-bhumi-720.webp',   /* versi ringan; aslinya gate Tentrem Bhumi(2).webp */
     archAlt:    'Tentrem Bhumi — Perumahan Yogyakarta',
 
     /* ── Badge lingkaran "13 TAHUN TERPERCAYA" ── */
