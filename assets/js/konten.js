@@ -408,6 +408,28 @@
     }
     grid.innerHTML = html;
     gambarKartu(grid);
+    munculkanKartu(grid);
+  }
+
+  /* Kartu blog digambar ulang SETELAH pengamat scroll-reveal main.js berjalan
+     (cadangan → daftar terbaru dari /blog/), jadi tak pernah diberi reveal--in
+     dan tersembunyi selamanya (opacity 0) — section terlihat kosong
+     (ditemukan 19 Nov 2026). Kartu dimunculkan sendiri di sini. */
+  function munculkanKartu(grid) {
+    const kartu = grid.querySelectorAll('.reveal:not(.reveal--in)');
+    kartu.forEach((el) => { el.dataset.reveal = '1'; });
+    if (!('IntersectionObserver' in window)) {
+      kartu.forEach((el) => el.classList.add('reveal--in'));
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('reveal--in');
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.12 });
+    kartu.forEach((el) => obs.observe(el));
   }
 
   function initBlog() {
