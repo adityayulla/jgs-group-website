@@ -14,8 +14,8 @@
 (function () {
   var NAMA = ['pendek', 'sedang', 'panjang', 'sangat'];
   var JENIS = [
-    { kartu: '.ts__card',    teks: '.ts__body',    batas: [140, 380, 650], baris: 9 },
-    { kartu: '.ts-card',     teks: '.ts-text',     batas: [140, 380, 650], baris: 9 },
+    { kartu: '.ts__card',    teks: '.ts__body',    batas: [140, 380, 650], baris: 9, foto: '.ts__media' },
+    { kartu: '.ts-card',     teks: '.ts-text',     batas: [140, 380, 650], baris: 9, foto: '.ts-photo' },
     { kartu: '.mitra__card', teks: '.mitra__body', batas: [180, 300, 600], baris: 12 }
   ];
 
@@ -62,6 +62,31 @@
     });
   }
 
+  /* Foto utuh (19 Nov 2026): rasio asli foto → --ts-rasio di kartu (CSS memakai
+     ini untuk lebar kolom foto di desktop & tinggi bingkai di HP), dan
+     --ts-latar di bingkai = foto yang sama sebagai latar buram pengisi sisa
+     ruang. Foto sendiri object-fit: contain → tak ada bagian yang terpotong.
+     Rasio dibaca dari atribut width/height kalau ada (tanpa menunggu foto
+     termuat), kalau tidak dari naturalWidth setelah foto termuat. */
+  function fotoUtuh(k, bingkai) {
+    var img = bingkai && bingkai.querySelector('img');
+    if (!img) return;
+    var src = img.currentSrc || img.getAttribute('src');
+    if (src) bingkai.style.setProperty('--ts-latar', 'url("' + src.replace(/"/g, '%22') + '")');
+    function pasang(w, h) {
+      if (!w || !h) return;
+      var r = Math.max(0.5, Math.min(1.5, w / h));
+      k.style.setProperty('--ts-rasio', r.toFixed(3));
+      k.style.setProperty('--ts-rasio-hp', Math.max(r, 0.8).toFixed(3));
+      k.classList.add('foto-utuh');
+    }
+    var aw = +img.getAttribute('width'), ah = +img.getAttribute('height');
+    if (aw && ah) pasang(aw, ah);
+    else if (img.complete && img.naturalWidth) pasang(img.naturalWidth, img.naturalHeight);
+    else img.addEventListener('load', function () { pasang(img.naturalWidth, img.naturalHeight); }, { once: true });
+    k.classList.add('foto-utuh');
+  }
+
   function rapikan() {
     JENIS.forEach(function (j) {
       document.querySelectorAll(j.kartu).forEach(function (k) {
@@ -72,6 +97,7 @@
         while (i < 3 && n >= j.batas[i]) i++;
         k.setAttribute('data-panjang', NAMA[i]);
         if (i === 3) lipat(p, j.baris);
+        if (j.foto) fotoUtuh(k, k.querySelector(j.foto));
       });
     });
     document.querySelectorAll('.mitra__grid').forEach(function (g) {

@@ -1291,6 +1291,17 @@ img { display: block; }
 .ts-photo img {
   width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
 }
+/* Foto utuh (19 Nov 2026): testimoni-rapi.js memberi .foto-utuh, --ts-rasio
+   (rasio asli foto) & --ts-latar. Foto tampil UTUH (contain); sisa ruang diisi
+   foto yang sama versi buram. Di desktop lebar kolom foto = rasio × 420px. */
+.ts-card.foto-utuh .ts-photo { aspect-ratio: var(--ts-rasio-hp, .8); isolation: isolate; }
+.ts-card.foto-utuh .ts-photo::before {
+  content: ""; position: absolute; inset: -30px;
+  background: var(--ts-latar) center / cover no-repeat;
+  filter: blur(24px) saturate(1.1) brightness(.92); opacity: .9;
+}
+.ts-card.foto-utuh .ts-photo img { position: relative; z-index: 1; object-fit: contain; }
+.ts-tag { z-index: 2; }
 .ts-tag {
   position: absolute; left: 12px; bottom: 12px;
   display: inline-flex; align-items: center; gap: 6px;
@@ -1363,6 +1374,12 @@ img { display: block; }
   .ts-card:nth-child(even) .ts-body  { order: 1; }
   .ts-photo { aspect-ratio: auto; min-height: 380px; }
   .ts-photo img { position: absolute; inset: 0; object-position: center 35%; }
+  .ts-card.foto-utuh,
+  .ts-card.foto-utuh[data-panjang] {
+    --ts-foto: clamp(220px, calc(var(--ts-rasio, .75) * 420px), 50%); --ts-teks: 1fr;
+  }
+  .ts-card.foto-utuh .ts-photo { aspect-ratio: auto; min-height: 420px; }
+  .ts-card.foto-utuh .ts-photo img { position: absolute; inset: 0; }
   .ts-body  { padding: 28px 32px 26px; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
   .ts-text  { font-size: 16px; line-height: 1.6; }
   .ts-card[data-panjang="pendek"] .ts-text { font-size: 21px; line-height: 1.45; }
@@ -1743,7 +1760,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="ts-cards">
     <article class="ts-card">
       <div class="ts-photo">
-        <img src="/assets/img/testimoni/andrawina-6-foto.webp" alt="Serah terima kunci Anung Sita — Tentrem Bhumi Andrawina 6" loading="lazy">
+        <img src="/assets/img/testimoni/andrawina-6-foto.webp" alt="Serah terima kunci Anung Sita — Tentrem Bhumi Andrawina 6" width="720" height="1280" loading="lazy">
         <span class="ts-tag">Serah Terima Kunci</span>
       </div>
       <div class="ts-body">
@@ -1762,7 +1779,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <article class="ts-card">
       <div class="ts-photo">
-        <img src="/assets/img/testimoni/cantya-5-foto.webp" alt="Serah terima kunci keluarga akhmad siddik — Tentrem Bhumi Cantya 5" loading="lazy">
+        <img src="/assets/img/testimoni/cantya-5-foto.webp" alt="Serah terima kunci keluarga akhmad siddik — Tentrem Bhumi Cantya 5" width="960" height="1280" loading="lazy">
         <span class="ts-tag">Serah Terima Kunci</span>
       </div>
       <div class="ts-body">
@@ -2244,7 +2261,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
 <script src="../assets/js/main.js?v=20261009"></script>
-<script src="/assets/js/testimoni-rapi.js?v=20261119" defer></script>
+<script src="/assets/js/testimoni-rapi.js?v=20261119b" defer></script>
 <script src="/assets/js/pricelist-modal.js?v=20261009" data-agent="fira"></script>
 
 <!-- Strip serah terima: mengisi #stRail dari feed dashboard, sudah

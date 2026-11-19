@@ -224,6 +224,24 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
     .ts__card[data-panjang="pendek"] .ts__body { font-size: 22px; line-height: 1.45; }
     .ts__card[data-panjang="panjang"] .ts__body,
     .ts__card[data-panjang="sangat"] .ts__body { font-size: 16px; line-height: 1.62; }
+    /* Foto utuh (19 Nov 2026): testimoni-rapi.js memberi .foto-utuh + --ts-rasio
+       (rasio asli foto) + --ts-latar. Lebar kolom foto = rasio × 440px, jadi
+       foto tegak dapat kolom sempit & foto lebar dapat kolom lebar; foto tampil
+       UTUH (contain) dan sisa ruang (kalau teks lebih tinggi) diisi foto yang
+       sama versi buram — tidak ada bagian foto yang terpotong. */
+    .ts__card.foto-utuh,
+    .ts__card.foto-utuh[data-panjang] {
+      --ts-foto: clamp(240px, calc(var(--ts-rasio, .75) * 440px), 50%); --ts-teks: 1fr;
+    }
+    .ts__card.foto-utuh .ts__media { min-height: 440px; isolation: isolate; }
+    .ts__card.foto-utuh .ts__media::before {
+      content: ""; position: absolute; inset: -30px;
+      background: var(--ts-latar) center / cover no-repeat;
+      filter: blur(24px) saturate(1.1) brightness(.92); opacity: .9;
+    }
+    .ts__card.foto-utuh .ts__media img { object-fit: contain; object-position: center; z-index: 1; }
+    .ts__card.foto-utuh:hover .ts__media img { transform: scale(1.02); }
+    .ts__media-tag { z-index: 2; }
     .ts__card:hover .ts__media img { transform: scale(1.04); }
     .ts__media-tag {
       position: absolute; left: 16px; bottom: 16px;
@@ -457,6 +475,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
       .ts__body,
       .ts__card[data-panjang] .ts__body { font-size: 15.5px; line-height: 1.55; margin-bottom: 18px; }
       .ts__card[data-panjang="pendek"] .ts__body { font-size: 18px; line-height: 1.5; }
+      .ts__card.foto-utuh .ts__media { min-height: 0; aspect-ratio: var(--ts-rasio-hp, .8); }
       .ts__quote { font-size: 64px; right: 18px; top: 12px; }
       .ts__card:nth-child(even) .ts__quote { left: 18px; }
       .ts__footer { margin: 36px 20px 0; padding: 22px 22px; flex-direction: column; align-items: flex-start; gap: 18px; }
@@ -1594,7 +1613,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
     <div class="ts__grid">
       <article class="ts__card glass reveal">
         <div class="ts__media">
-          <img src="/assets/img/testimoni/Yuri-12-foto.webp" alt="Serah terima kunci Vincentius Adven Brilian — Kawa Living Yuri 12" loading="lazy">
+          <img src="/assets/img/testimoni/Yuri-12-foto.webp" alt="Serah terima kunci Vincentius Adven Brilian — Kawa Living Yuri 12" width="899" height="771" loading="lazy">
           <span class="ts__media-tag">Serah Terima Kunci</span>
         </div>
         <div class="ts__content">
@@ -1616,7 +1635,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
 
       <article class="ts__card glass reveal">
         <div class="ts__media">
-          <img src="/assets/img/testimoni/Himawari-11-foto.webp" alt="Serah terima kunci keluarga Regy Kurniawan — Kawa Living Himawari 11" loading="lazy">
+          <img src="/assets/img/testimoni/Himawari-11-foto.webp" alt="Serah terima kunci keluarga Regy Kurniawan — Kawa Living Himawari 11" width="1200" height="1600" loading="lazy">
           <span class="ts__media-tag">Serah Terima Kunci</span>
         </div>
         <div class="ts__content">
@@ -1839,7 +1858,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
 <div id="footer-placeholder"></div>
 
 <script src="../assets/js/main.js?v=20261009"></script>
-<script src="/assets/js/testimoni-rapi.js?v=20261119" defer></script>
+<script src="/assets/js/testimoni-rapi.js?v=20261119b" defer></script>
 <script src="/assets/js/pricelist-modal.js?v=20261009" data-agent="dwi"></script>
 
 <!-- Strip serah terima: mengisi #stRail dari feed dashboard, sudah
