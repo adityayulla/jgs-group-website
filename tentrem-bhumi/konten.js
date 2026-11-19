@@ -110,17 +110,6 @@ var KONTEN = {
     { ikon: '🔐', nama: 'One Gate System'                          },
   ],
 
-  /* Foto-foto kawasan (photo scroll di bawah fasilitas)
-     ── Tambah/hapus/ganti src foto ──
-     Nama file dengan spasi → ganti spasi dengan %20 */
-  fotoFasilitas: [
-    { src: 'photos/kawasan/tentrem%20pool.webp',                              alt: 'Kolam Renang Tentrem Bhumi'  },
-    { src: 'photos/kawasan/tentrem%20pool%20dalam.webp',                      alt: 'Kolam Renang dalam'           },
-    { src: 'photos/kawasan/tentrem%20pool%20n%20jalan.webp',                  alt: 'Pool dan jalan kawasan'       },
-    { src: 'photos/kawasan/Lapangan%20Baseket%20Render%20Baru%201%20Ai.webp', alt: 'Basket Court'                 },
-    { src: 'photos/kawasan/Lapangan%20Baseket%20Render%20Baru%202%20Ai.webp', alt: 'Basket Court view 2'          },
-    { src: 'photos/kawasan/taman%20bermain%20.webp',                          alt: 'Taman Bermain Anak'           },
-  ],
 
 
   /* ══════════════════════════════════════════════════════════════════════
@@ -202,8 +191,8 @@ var KONTEN = {
     /* ── UNIT: CANTYA ────────────────────────────────────────────── */
     {
       id:   'cantya',
-      nama: 'Cantya 32.5 & 48',
-      tipeDashboard: 'Cantya 32.5 & 48',
+      nama: 'Cantya 48',
+      tipeDashboard: 'Cantya 32.5 & 48',   /* nama tipe di dashboard — jangan diubah selama dashboard belum diganti */
       dollhouse: 'cantya',
       foto: [
         { src: '/assets/img/Proyek-Kami/Tentrem-Bhumi/tipe-cantya.webp',   alt: 'Cantya tampak depan' },
@@ -212,18 +201,13 @@ var KONTEN = {
         { src: 'photos/cantya/cantya%20berjejer%20miring%20sore.webp',  alt: 'Cantya sore'     },
         { src: 'photos/cantya/cantya%20berjejer%20miring%20taman.webp', alt: 'Cantya taman'    },
       ],
-      spek: ['1 Lantai', '2 KT', '1 KM', 'LB 32–48m²', 'Lebar 6m'],
-      hargaJenis: 'Tipe 32.5 — Cash Keras mulai',
-      hargaPokok: 'Rp 630.900.000',
-      hargaKPR:   'Tipe 48 mulai Rp 695.900.000',
+      spek: ['1 Lantai', '2 KT', '1 KM', 'LB 48m²', 'Lebar 6m'],
+      hargaJenis: 'Cash Keras mulai',
+      hargaPokok: 'Rp 803.200.000',
+      hargaKPR:   'KPR mulai Rp 878.200.000',
       terjual:    '',
       pesanWA:    'Halo Fira, saya tertarik unit Cantya di Tentrem Bhumi',
       denah: [
-        {
-          label: 'Denah Tipe 32.5',
-          src:   'Denah%20Rumah/webp/Photoshop%20type%2032.5_1.webp',
-          alt:   'Denah Cantya 32.5',
-        },
         {
           label: 'Denah Tipe 48 — Lebar 6m',
           src:   'Denah%20Rumah/webp/DENAH%201%20LANTAI%20LEBAR%206%20M%20TYPE%2048.webp',

@@ -318,17 +318,30 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
     }
     .ts__card {
       position: relative; overflow: hidden;
-      display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      display: grid; grid-template-columns: minmax(0, var(--ts-foto)) minmax(0, var(--ts-teks));
       gap: 0; padding: 0; border-radius: var(--r-md);
+      --ts-foto: .95fr; --ts-teks: 1.05fr;
     }
+    /* Aturan rapi (19 Nov 2026, testimoni-rapi.js memberi data-panjang):
+       foto TIDAK memakai aspect-ratio di desktop — dulu kartu yang teksnya
+       panjang membuat foto ikut melebar dan menutupi kolom teks. Sekarang
+       foto mengisi penuh tinggi kartu (object-fit: cover) di kolomnya sendiri,
+       makin panjang ulasan → kolom foto makin sempit & huruf makin kecil. */
+    .ts__card[data-panjang="panjang"] { --ts-foto: .8fr;  --ts-teks: 1.2fr; }
+    .ts__card[data-panjang="sangat"]  { --ts-foto: .7fr;  --ts-teks: 1.3fr; }
     .ts__media {
-      position: relative; min-height: 100%; aspect-ratio: 4/3;
+      position: relative; width: 100%; min-height: 400px;
       background: var(--cream-2); overflow: hidden;
     }
     .ts__media img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block;
       transition: transform .8s var(--ease);
     }
+    .ts__content > div { min-width: 0; }
+    .ts__card[data-panjang="pendek"] .ts__body { font-size: 22px; line-height: 1.45; }
+    .ts__card[data-panjang="panjang"] .ts__body,
+    .ts__card[data-panjang="sangat"] .ts__body { font-size: 16px; line-height: 1.62; }
     .ts__card:hover .ts__media img { transform: scale(1.04); }
     .ts__media-tag {
       position: absolute; left: 16px; bottom: 16px;
@@ -382,7 +395,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
       color: var(--orange); opacity: .08; font-style: italic; font-weight: 600;
       pointer-events: none;
     }
-    .ts__card:nth-child(even) { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
+    .ts__card:nth-child(even) { grid-template-columns: minmax(0, var(--ts-teks)) minmax(0, var(--ts-foto)); }
     .ts__card:nth-child(even) .ts__media { order: 2; }
     .ts__card:nth-child(even) .ts__content { order: 1; }
     .ts__card:nth-child(even) .ts__quote { right: auto; left: 28px; }
@@ -409,15 +422,18 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
     .mitra { padding: 40px 0 90px; }
     .mitra__grid {
       max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;
     }
+    /* testimoni-rapi.js: 4 kartu → 2×2 (tak ada kartu yatim di baris bawah) */
+    .mitra__grid[data-kolom="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 1120px; }
+    .mitra__grid[data-kolom="1"] { grid-template-columns: minmax(0, 1fr); max-width: 680px; }
     .mitra__card {
       position: relative; display: grid; grid-template-columns: 40% 60%;
       border-radius: var(--r-md); overflow: hidden;
       border: 1px solid var(--line); background: var(--card);
     }
-    .mitra__photo { position: relative; overflow: hidden; background: #ecebe7; }
-    .mitra__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .mitra__photo { position: relative; overflow: hidden; background: #ecebe7; min-height: 280px; }
+    .mitra__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
     .mitra__main { display: flex; flex-direction: column; padding: 26px 26px 26px; min-width: 0; }
     .mitra__head { display: flex; flex-direction: column; align-items: flex-start; gap: 11px; }
     .mitra__logo { height: 54px; display: flex; align-items: center; }
@@ -438,8 +454,11 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
     .mitra__foot { border-top: 1px solid var(--line); padding-top: 16px; margin-top: auto; }
     .mitra__name { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--navy); letter-spacing: -.01em; }
     .mitra__role { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
-    @media (max-width: 1024px) { .mitra__grid { grid-template-columns: 1fr; max-width: 640px; } }
-    @media (max-width: 460px)  { .mitra__card { grid-template-columns: 36% 64%; } .mitra__main { padding: 20px 20px; } }
+    .mitra__card[data-panjang="pendek"] .mitra__body { font-size: 17px; line-height: 1.55; }
+    .mitra__card[data-panjang="panjang"] .mitra__body,
+    .mitra__card[data-panjang="sangat"] .mitra__body { font-size: 14.5px; line-height: 1.6; }
+    @media (max-width: 1024px) { .mitra__grid, .mitra__grid[data-kolom] { grid-template-columns: minmax(0, 1fr); max-width: 640px; } }
+    @media (max-width: 460px)  { .mitra__card { grid-template-columns: 36% 64%; } .mitra__main { padding: 20px 20px; } .mitra__card[data-panjang] .mitra__body { font-size: 14.5px; } }
 
     /* ══════════════════════════════════════════════════════════
        FAQ
@@ -572,9 +591,11 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
       .ts__card:nth-child(even) { grid-template-columns: 1fr; }
       .ts__card:nth-child(even) .ts__media { order: 0; }
       .ts__card:nth-child(even) .ts__content { order: 0; }
-      .ts__media { aspect-ratio: 16/10; }
+      .ts__media { min-height: 0; aspect-ratio: 4/3; }
       .ts__content { padding: 28px 24px 26px; gap: 18px; }
-      .ts__body  { font-size: 15.5px; line-height: 1.55; margin-bottom: 18px; }
+      .ts__body,
+      .ts__card[data-panjang] .ts__body { font-size: 15.5px; line-height: 1.55; margin-bottom: 18px; }
+      .ts__card[data-panjang="pendek"] .ts__body { font-size: 18px; line-height: 1.5; }
       .ts__quote { font-size: 64px; right: 18px; top: 12px; }
       .ts__card:nth-child(even) .ts__quote { left: 18px; }
 
@@ -2013,6 +2034,7 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
 
 <script src="assets/js/main.js?v=20261009" defer></script>
 <script src="assets/js/konten.js?v=20261005b" defer></script>
+<script src="/assets/js/testimoni-rapi.js?v=20261119" defer></script>
 <script src="/assets/js/foto-galeri.js?v=20260924-1" defer></script>
 <script src="/assets/js/serah-terima.js?v=20260912-1" defer></script>
 <script>

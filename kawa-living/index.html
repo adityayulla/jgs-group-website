@@ -201,19 +201,29 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
     }
     .ts__card {
       position: relative; overflow: hidden;
-      display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+      display: grid; grid-template-columns: minmax(0, var(--ts-foto)) minmax(0, var(--ts-teks));
       gap: 0; padding: 0; border-radius: var(--r-md);
-      align-items: start;
+      --ts-foto: .85fr; --ts-teks: 1.15fr;
     }
+    /* Aturan rapi (19 Nov 2026, testimoni-rapi.js memberi data-panjang):
+       foto mengisi penuh tinggi kartu di kolomnya (tanpa aspect-ratio di
+       desktop, jadi tak ada ruang kosong di atas/bawah foto saat ulasan
+       panjang). Ulasan makin panjang → kolom foto lebih sempit & huruf lebih
+       kecil; ulasan sangat panjang dilipat + tombol "Baca selengkapnya". */
+    .ts__card[data-panjang="panjang"] { --ts-foto: .75fr; --ts-teks: 1.25fr; }
+    .ts__card[data-panjang="sangat"]  { --ts-foto: .7fr;  --ts-teks: 1.3fr; }
     .ts__media {
-      position: relative; width: 100%; aspect-ratio: 3/4;
+      position: relative; width: 100%; min-height: 420px;
       background: var(--bg); overflow: hidden;
-      align-self: center;
     }
     .ts__media img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block;
       transition: transform .8s var(--ease);
     }
+    .ts__card[data-panjang="pendek"] .ts__body { font-size: 22px; line-height: 1.45; }
+    .ts__card[data-panjang="panjang"] .ts__body,
+    .ts__card[data-panjang="sangat"] .ts__body { font-size: 16px; line-height: 1.62; }
     .ts__card:hover .ts__media img { transform: scale(1.04); }
     .ts__media-tag {
       position: absolute; left: 16px; bottom: 16px;
@@ -269,7 +279,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
       color: var(--orange); opacity: .08; font-style: italic; font-weight: 600;
       pointer-events: none;
     }
-    .ts__card:nth-child(even) { grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); }
+    .ts__card:nth-child(even) { grid-template-columns: minmax(0, var(--ts-teks)) minmax(0, var(--ts-foto)); }
     .ts__card:nth-child(even) .ts__media { order: 2; }
     .ts__card:nth-child(even) .ts__content { order: 1; }
     .ts__card:nth-child(even) .ts__quote { right: auto; left: 28px; }
@@ -442,9 +452,11 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
       .ts__card:nth-child(even) { grid-template-columns: 1fr; }
       .ts__card:nth-child(even) .ts__media { order: 0; }
       .ts__card:nth-child(even) .ts__content { order: 0; }
-      .ts__media { aspect-ratio: 3/4; align-self: start; }
+      .ts__media { min-height: 0; aspect-ratio: 4/5; }
       .ts__content { padding: 28px 24px 26px; gap: 18px; }
-      .ts__body  { font-size: 15.5px; line-height: 1.55; margin-bottom: 18px; }
+      .ts__body,
+      .ts__card[data-panjang] .ts__body { font-size: 15.5px; line-height: 1.55; margin-bottom: 18px; }
+      .ts__card[data-panjang="pendek"] .ts__body { font-size: 18px; line-height: 1.5; }
       .ts__quote { font-size: 64px; right: 18px; top: 12px; }
       .ts__card:nth-child(even) .ts__quote { left: 18px; }
       .ts__footer { margin: 36px 20px 0; padding: 22px 22px; flex-direction: column; align-items: flex-start; gap: 18px; }
@@ -757,6 +769,24 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
       .greet__body { padding: 34px 26px; min-width: 0; }
       .greet__quote { font-size: 19px; }
     }
+
+    /* ══ House Tour: satu baris, geser ke kanan (19 Nov 2026) ═══
+       Menimpa .ht__grid global (flex-wrap) khusus halaman ini. Kartu
+       tetap di tengah kalau semuanya muat (margin auto di ujung), dan
+       rata kiri + bisa digeser kalau tidak muat. */
+    #house-tour .ht__grid {
+      flex-wrap: nowrap; justify-content: flex-start; gap: 18px;
+      overflow-x: auto; overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      padding-bottom: 14px; scrollbar-width: thin;
+      scrollbar-color: rgba(27,42,100,.25) transparent;
+    }
+    #house-tour .ht__grid::-webkit-scrollbar { height: 6px; }
+    #house-tour .ht__grid::-webkit-scrollbar-thumb { background: rgba(27,42,100,.22); border-radius: 99px; }
+    #house-tour .ht__card { flex: 0 0 232px; max-width: none; scroll-snap-align: start; }
+    #house-tour .ht__card:first-child { margin-left: auto; }
+    #house-tour .ht__card:last-child  { margin-right: auto; }
+    @media (max-width: 560px) { #house-tour .ht__card { flex-basis: 58vw; } }
 
     /* ══ Lingkungan Kawasan ═════════════════════════════════════
        Foto asli lapangan, live dari Progress Dashboard (galeri
@@ -1809,6 +1839,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
 <div id="footer-placeholder"></div>
 
 <script src="../assets/js/main.js?v=20261009"></script>
+<script src="/assets/js/testimoni-rapi.js?v=20261119" defer></script>
 <script src="/assets/js/pricelist-modal.js?v=20261009" data-agent="dwi"></script>
 
 <!-- Strip serah terima: mengisi #stRail dari feed dashboard, sudah
@@ -2119,7 +2150,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
             return;
           }
           var GAP = parseFloat(getComputedStyle(grid).columnGap) || 18;
-          var TARGET = 380, MAKS = 520;
+          var TARGET = 290, MAKS = 340;   /* 19 Nov 2026: dulu 380/520 → 2 foto raksasa per baris */
           var total = daftar.reduce(function (n, f) { return n + f.rasio; }, 0);
           var nBaris = Math.max(1, Math.min(daftar.length, Math.round(total * TARGET / W)));
           var baris = [[]], acc = 0;
