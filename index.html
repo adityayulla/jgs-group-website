@@ -983,13 +983,38 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
       padding: 0 var(--pad-x);
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
     }
+    .ig__grid[hidden] { display: none; }
+    /* Desktop: satu baris 6 kotak (strip ringkas); ≤900px: 3×2. */
+    @media (min-width: 901px) { .ig__grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; } }
+    /* Kotak 4:5 = rasio grid profil Instagram sekarang (19 Nov 2026). */
     .ig__tile {
       position: relative; display: block;
-      aspect-ratio: 1/1;
+      aspect-ratio: 4/5;
       background: #1b2a64;
       border-radius: 12px; overflow: hidden;
       color: rgba(255,255,255,.55);
     }
+    .ig__tile img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; display: block; transition: transform .6s var(--ease);
+    }
+    .ig__tile:hover img { transform: scale(1.04); }
+    .ig__jenis {
+      position: absolute; top: 10px; right: 10px; z-index: 2;
+      width: 26px; height: 26px; display: grid; place-items: center;
+      color: #fff; filter: drop-shadow(0 1px 3px rgba(0,0,0,.5));
+    }
+    .ig__jenis svg { width: 20px; height: 20px; }
+    .ig__cap {
+      position: absolute; inset: auto 0 0 0; z-index: 1;
+      padding: 40px 14px 14px; color: #fff;
+      font-size: 13px; line-height: 1.45;
+      background: linear-gradient(180deg, rgba(15,20,48,0) 0%, rgba(15,20,48,.85) 100%);
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden;
+      opacity: 0; transform: translateY(6px); transition: opacity .25s ease, transform .25s ease;
+    }
+    .ig__tile:hover .ig__cap, .ig__tile:focus-visible .ig__cap { opacity: 1; transform: none; }
+    @media (hover: none) { .ig__cap { display: none; } }
     .ig__tile-icon {
       position: absolute; inset: 0;
       display: grid; place-items: center;
@@ -2023,6 +2048,9 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
       <h2 class="section-title reveal">Ikuti Kami di <em>Instagram</em></h2>
       <a class="ig__user reveal reveal--delay-1" href="https://www.instagram.com/jogjagrahaselaras" target="_blank" rel="noopener">@jogjagrahaselaras</a>
     </div>
+    <!-- Diisi konten.js dari dashboard (/api/public/instagram). Tetap hidden
+         kalau feed kosong/gagal — yang tampil cuma tombol di bawah. -->
+    <div class="ig__grid" id="igGrid" hidden></div>
     <div class="ig__cta reveal">
       <a href="https://www.instagram.com/jogjagrahaselaras" target="_blank" rel="noopener" class="btn btn--ghost btn--lg">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
@@ -2052,7 +2080,7 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
 <div id="footer-placeholder"></div>
 
 <script src="assets/js/main.js?v=20261009" defer></script>
-<script src="assets/js/konten.js?v=20261119" defer></script>
+<script src="assets/js/konten.js?v=20261119b" defer></script>
 <script src="/assets/js/testimoni-rapi.js?v=20261119b" defer></script>
 <script src="/assets/js/foto-galeri.js?v=20260924-1" defer></script>
 <script src="/assets/js/serah-terima.js?v=20260912-1" defer></script>

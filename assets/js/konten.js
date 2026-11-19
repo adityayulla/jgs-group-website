@@ -694,10 +694,64 @@
       .catch(() => { /* pakai cadangan yang sudah tampil */ });
   }
 
+  /* ============================================================
+     INSTAGRAM (19 Nov 2026) — postingan terbaru @jogjagrahaselaras dari
+     dashboard (/api/public/instagram; token & perpanjangannya di sana,
+     tidak pernah sampai ke browser). Grid baru dimuat saat section hampir
+     terlihat. Feed kosong/gagal → grid tetap tersembunyi, yang tampil
+     hanya tombol "Lihat Feed Lengkap" — tidak pernah kotak kosong.
+     ============================================================ */
+  const FEED_IG = 'https://progress.jogjagrahaselaras.com/api/public/instagram?limit=6';
+  const IKON_IG = {
+    VIDEO: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
+    CAROUSEL_ALBUM: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="7" width="13" height="13" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>'
+  };
+
+  function renderIg(p) {
+    const cap = rapi(p.caption);
+    const ikon = IKON_IG[p.type] ? `<span class="ig__jenis">${IKON_IG[p.type]}</span>` : '';
+    return `<a class="ig__tile reveal" href="${esc(p.link)}" target="_blank" rel="noopener"
+        aria-label="Buka postingan Instagram${cap ? ': ' + esc(cap.slice(0, 80)) : ''}">
+        <img src="${esc(p.img)}" alt="${esc(cap.slice(0, 120) || 'Postingan Instagram @jogjagrahaselaras')}" loading="lazy" decoding="async">
+        ${ikon}
+        ${cap ? `<span class="ig__cap">${esc(cap)}</span>` : ''}
+      </a>`;
+  }
+
+  function initInstagram() {
+    const grid = document.getElementById('igGrid');
+    if (!grid) return;
+    const muat = () => fetch(FEED_IG, { mode: 'cors' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        const items = ((j && j.items) || []).filter((p) => p && p.img && p.link).slice(0, 6);
+        if (!items.length) return;
+        grid.innerHTML = items.map(renderIg).join('');
+        // Foto Instagram yang gagal dimuat (URL CDN kedaluwarsa) dibuang;
+        // kalau semuanya gagal, grid disembunyikan lagi.
+        grid.querySelectorAll('img').forEach((img) => img.addEventListener('error', () => {
+          img.closest('.ig__tile').remove();
+          if (!grid.children.length) grid.hidden = true;
+        }));
+        grid.hidden = false;
+        munculkanKartu(grid);
+      })
+      .catch(() => { /* grid tetap tersembunyi */ });
+
+    if (!('IntersectionObserver' in window)) { muat(); return; }
+    const obs = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      obs.disconnect();
+      muat();
+    }, { rootMargin: '800px' });
+    obs.observe(grid.closest('section') || grid);
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initPopular();
     initAwards();
     initBlog();
+    initInstagram();
     awasiKalkulator();
     muatDariDashboard();
   });
