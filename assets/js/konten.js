@@ -460,7 +460,7 @@
      mati atau belum terisi, tidak ada yang berubah. Bagian yang isinya
      sama dengan cadangan tidak digambar ulang — tanpa kedipan.
      ============================================================ */
-  const FEED_DAFTAR = 'https://progress.jogjagrahaselaras.com/api/public/web-content?keys=unit-unggulan,house-tour,penghargaan,testimoni,mitra,faq,kpr,kpr-bank';
+  const FEED_DAFTAR = 'https://progress.jogjagrahaselaras.com/api/public/web-content?keys=unit-unggulan,house-tour,penghargaan,testimoni,mitra,faq,kpr,kpr-bank,kartu-proyek';
   const CACHE_DAFTAR = 'jgs_daftar_v2';
 
   function sidik(list, kolom) {
@@ -630,6 +630,32 @@
       '</div>';
   }
 
+  /* Foto kartu "Kawasan perumahan kami" (Konten Web → Kartu Proyek, 20 Nov
+     2026). Kartu dicocokkan lewat href-nya. Foto baru dimuat dulu baru
+     dipasang, jadi kartu tidak sempat kosong; foto yang sama tidak disentuh. */
+  function pasangKartuProyek(v) {
+    const foto = v && v.foto;
+    if (!foto) return;
+    Object.keys(foto).forEach(function (slug) {
+      const f = foto[slug];
+      const el = document.querySelector('#produk a.pcard[href="/' + slug + '/"] .pcard__img');
+      if (!el || !f || typeof f.img !== 'string') return;
+      const posisi = 'center ' + Math.max(0, Math.min(100, parseInt(f.posisi, 10) || 0)) + '%';
+      const baru = new URL(f.img, location.href).href;
+      const m = (el.style.backgroundImage || '').match(/url\(["']?(.*?)["']?\)/);
+      if (m && new URL(m[1], location.href).href === baru) {
+        el.style.backgroundPosition = posisi;
+        return;
+      }
+      const img = new Image();
+      img.onload = function () {
+        el.style.backgroundImage = 'url("' + baru + '")';
+        el.style.backgroundPosition = posisi;
+      };
+      img.src = baru;
+    });
+  }
+
   function pakaiDashboard(s) {
     try {
       const ts = s && s['testimoni'] && s['testimoni'].items;
@@ -654,6 +680,7 @@
       }
     } catch (e) {}
     try { pasangKpr(s && s['kpr']); } catch (e) {}
+    try { pasangKartuProyek(s && s['kartu-proyek']); } catch (e) {}
     try { pasangBank(s && s['kpr-bank'] && s['kpr-bank'].items); } catch (e) {}
     try {
       const unit = s && s['unit-unggulan'] && s['unit-unggulan'].items;
