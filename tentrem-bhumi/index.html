@@ -2335,6 +2335,8 @@ document.addEventListener('DOMContentLoaded', function() {
       pre.onload = function () {
         img.removeAttribute('srcset'); img.removeAttribute('sizes');   // kalau tidak, srcset bawaan menang atas src
         img.src = it.url;
+        /* Fokus potongan dari menu Foto Hero; kosong = CSS bawaan. */
+        if (typeof it.posisi === 'number') img.style.objectPosition = it.posisi + '% ' + it.posisi + '%';
         if (it.caption) img.alt = it.caption + ' — Tentrem Bhumi, Perumahan Sleman';
       };
       pre.src = it.url;

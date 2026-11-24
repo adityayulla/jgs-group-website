@@ -2063,6 +2063,8 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
       var pre = new Image();
       pre.onload = function () {
         img.src = it.url;
+        /* Fokus potongan dari menu Foto Hero; kosong = CSS bawaan. */
+        if (typeof it.posisi === 'number') img.style.objectPosition = it.posisi + '% ' + it.posisi + '%';
         if (it.caption) img.alt = it.caption + ' — Kawa Living, JGS Group';
       };
       pre.src = it.url;

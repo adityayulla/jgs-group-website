@@ -2281,14 +2281,20 @@ Syarat SHM mengikuti aturan di DIY - Khusus unit KPR, proses mengikuti ketentuan
 
         items.forEach(function (it) {
           if (!it.url) return;
+          /* posisi = "Geser fokus foto" di menu Foto Hero (0–100). Kosong =
+             object-position bawaan CSS (.hero3__pic img). */
+          function fokus() {
+            if (img && typeof it.posisi === 'number') img.style.objectPosition = it.posisi + '% ' + it.posisi + '%';
+          }
           if (it.target === 'mainweb-desktop' && img && !pakaiMobile) {
             pasang(it.url, function (u) {
               img.src = u;
+              fokus();
               if (it.caption) img.alt = it.caption + ' — perumahan JGS Group Yogyakarta';
             });
           }
           if (it.target === 'mainweb-mobile' && src && pakaiMobile) {
-            pasang(it.url, function (u) { src.srcset = u; });
+            pasang(it.url, function (u) { src.srcset = u; fokus(); });
           }
         });
       })
