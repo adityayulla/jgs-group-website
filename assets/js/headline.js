@@ -16,7 +16,7 @@
   window.__JGS_HEADLINE__ = true;
 
   var seg = location.pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
-  if (seg.length > 1) return;                       // sub-halaman (mis. /tentrem-jiwo/villa/) punya hero sendiri
+  if (seg.length > 1) return;                       // sub-halaman (mis. /kawa-living/3d/dollhouse/) punya hero sendiri
   var slug = (seg[0] || '').replace(/\.html$/, '');
   var HAL = { '': 'beranda', 'index': 'beranda', 'kawa-living': 'kawa-living',
               'tentrem-bhumi': 'tentrem-bhumi', 'tentrem-jiwo': 'tentrem-jiwo' }[slug];

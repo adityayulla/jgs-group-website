@@ -1,5 +1,5 @@
 // jalan-dalam-tentrem-jiwo.mjs — area di DALAM kavling yang bisa dijelajahi
-// di Mode Jalan (saat ini: Villa Tentrem Jiwo, lantai bawah).
+// di Mode Jalan (saat ini: Baswara 5 — dulu Villa Tentrem Jiwo — lantai bawah).
 //
 //   node jalan-dalam-tentrem-jiwo.mjs        (setelah build-tentrem-jiwo.mjs)
 //
@@ -28,7 +28,7 @@ const AKAR = path.resolve(SINI, '../..');
 const DIR = path.join(AKAR, 'tentrem-jiwo', '3d');
 // masuk = titik tujuan tombol "Masuk & jelajahi" (lorong di sisi barat kolam),
 // lihat = arah pandang setibanya (melintasi kolam ke wing timur).
-const KAVLING_DALAM = [{ code: 'Villa Tentrem Jiwo', masuk: [47.0, -11.0], lihat: [56, 1.4, -11] }];
+const KAVLING_DALAM = [{ code: 'Baswara 5', masuk: [47.0, -11.0], lihat: [56, 1.4, -11] }];
 const SEL = 0.25, LANTAI_MAKS = 0.8, BEBAS_BAWAH = 0.3, BEBAS_ATAS = 1.9, TEBAL_DINDING = 0.1;
 
 await MeshoptDecoder.ready;

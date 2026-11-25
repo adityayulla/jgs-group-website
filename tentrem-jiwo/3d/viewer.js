@@ -50,7 +50,7 @@ const GERAK_HALUS = !window.matchMedia('(prefers-reduced-motion: reduce)').match
 /* ── util ─────────────────────────────────────────────────── */
 const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-// "Villa Tentrem Jiwo" tidak bernomor → nomornya dianggap 0.
+// Kode tanpa nomor (dulu "Villa Tentrem Jiwo") → nomornya dianggap 0.
 const urut = (a, b) => {
   const [da, na] = [a.code.replace(/ \d+$/, ''), +(a.code.match(/\d+$/) || [0])[0]];
   const [db, nb] = [b.code.replace(/ \d+$/, ''), +(b.code.match(/\d+$/) || [0])[0]];
@@ -257,7 +257,7 @@ export async function mulai(host, { onProgress } = {}) {
   }).then(g => { pModel = 1; hitung(); return g.scene; });
 
   const [peta, status, harga] = await Promise.all([
-    fetch(new URL('kavling.json?v=20261008b', DASAR)).then(r => { if (!r.ok) throw new Error('kavling.json ' + r.status); return r.json(); }),
+    fetch(new URL('kavling.json?v=20261125', DASAR)).then(r => { if (!r.ok) throw new Error('kavling.json ' + r.status); return r.json(); }),
     ambil(API_STATUS),
     ambil(API_HARGA),
   ]);
@@ -598,7 +598,7 @@ export async function mulai(host, { onProgress } = {}) {
      jalan / panah = berjalan, ketuk rumah = menghadap rumahnya.
      Area yang bisa dilalui = poligon jalan (+ jalan desa), dirasterkan
      per 25 cm sekali saat pertama dipakai, ditambah area DALAM kavling
-     dari kavling.json `dalam` (lantai bawah Villa: dihitung dari geometri
+     dari kavling.json `dalam` (lantai bawah Baswara 5: dihitung dari geometri
      model, dinding menghalangi, celah pintu terbuka). Grid 25 cm — bukan
      1 m seperti Kawa — supaya pintu ±0,8 m bisa dilewati. Tinggi kamera
      mengikuti lantai sel itu. */

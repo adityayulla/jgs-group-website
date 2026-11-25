@@ -12,7 +12,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tentrem Jiwo — Perumahan JGS di Kalasan, Sleman</title>
-  <meta name="description" content="Tentrem Jiwo, perumahan JGS Group di Sorogenen, Purwomartani, Kalasan, Sleman. 13 unit, 11 sudah terjual. Sisa Unit Office siap huni dan Villa Tentrem Jiwo.">
+  <meta name="description" content="Tentrem Jiwo, perumahan JGS Group di Sorogenen, Purwomartani, Kalasan, Sleman. 13 unit, 11 sudah terjual. Sisa dua rumah: Abirama 1 (Tipe 100, siap huni) dan Baswara 5 (6 kamar tidur, private pool).">
   <link rel="canonical" href="https://jogjagrahaselaras.com/tentrem-jiwo/">
 
   <meta property="og:type" content="website">
@@ -20,11 +20,11 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
   <meta property="og:locale" content="id_ID">
   <meta property="og:url" content="https://jogjagrahaselaras.com/tentrem-jiwo/">
   <meta property="og:title" content="Tentrem Jiwo — Perumahan JGS di Kalasan, Sleman">
-  <meta property="og:description" content="13 unit di Sorogenen, Purwomartani, Kalasan. 11 sudah terjual — sisa Unit Office siap huni dan Villa Tentrem Jiwo.">
+  <meta property="og:description" content="13 unit di Sorogenen, Purwomartani, Kalasan. 11 sudah terjual — sisa Abirama 1 siap huni dan Baswara 5 dengan private pool.">
   <meta property="og:image" content="https://jogjagrahaselaras.com/tentrem-jiwo/img/kawasan-signage.webp">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Tentrem Jiwo — Perumahan JGS di Kalasan, Sleman">
-  <meta name="twitter:description" content="13 unit di Sorogenen, Purwomartani, Kalasan. 11 sudah terjual — sisa Unit Office siap huni dan Villa Tentrem Jiwo.">
+  <meta name="twitter:description" content="13 unit di Sorogenen, Purwomartani, Kalasan. 11 sudah terjual — sisa Abirama 1 siap huni dan Baswara 5 dengan private pool.">
   <meta name="twitter:image" content="https://jogjagrahaselaras.com/tentrem-jiwo/img/kawasan-signage.webp">
 
   <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96">
@@ -383,10 +383,10 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
           <span class="tjh__line"><span class="tjh__slab">satu babak hidup</span></span>
           <span class="tjh__line tjh__small">yang berarti.</span>
         </h1>
-        <p class="tjh__sub">Kawasan 13 unit di Purwomartani, Kalasan — sebagian besar sudah dihuni, dan yang tersisa tinggal dua.</p>
+        <p class="tjh__sub">Kawasan 13 rumah di Purwomartani, Kalasan — sebagian besar sudah dihuni. Yang tersisa tinggal dua: Abirama 1 dan Baswara 5.</p>
         <div class="tjh__ctas">
           <a class="btn btn--primary btn--lg" href="https://wa.me/6288902929571?text=Halo%20JGS%2C%20saya%20ingin%20tanya%20soal%20Tentrem%20Jiwo.%20(via%20web)" target="_blank" rel="noopener">Chat WhatsApp</a>
-          <a class="btn btn--ghost btn--lg" href="#unit">Lihat unit tersisa</a>
+          <button type="button" onclick="openPricelistModal()" class="btn btn--ghost btn--lg">Download Pricelist</button>
         </div>
       </div>
 
@@ -408,14 +408,14 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
   <section class="section--sm" id="progress">
     <div class="section__head container">
       <span class="eyebrow">→ Status Kawasan</span>
-      <h2 class="section-title reveal">Dua yang tersisa:<br><em>Unit Office dan Villa.</em></h2>
+      <h2 class="section-title reveal">Dua yang tersisa:<br><em>Abirama 1 dan Baswara 5.</em></h2>
     </div>
     <div class="container">
       <div class="dashsec__inner reveal">
         <div class="prog-callout" id="prog-callout">
           <div class="prog-callout__row">
             <span class="prog-callout__big" id="pc-terjual">11</span>
-            <span class="prog-callout__text" id="pc-label">unit terjual dari 13 unit. Yang tersisa tinggal dua — Unit Office (Abirama 1) dan Villa Tentrem Jiwo.</span>
+            <span class="prog-callout__text" id="pc-label">unit terjual dari 13 unit. Yang tersisa tinggal dua — Abirama 1 dan Baswara 5.</span>
           </div>
           <div class="prog-callout__track">
             <div class="prog-callout__bar" id="pc-bar"></div>
@@ -464,55 +464,66 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
   </section>
 
   <!-- ══ YANG MASIH TERSEDIA ══
+       Sejak 25 Nov 2026 dua unit ini dijual seperti rumah biasa di
+       Kawa Living & Tentrem Bhumi: "Unit Office" kembali jadi Abirama 1,
+       "Villa Tentrem Jiwo" jadi Baswara 5 (kode unit di dashboard ikut
+       diganti).
        ✏️  Foto tiap kartu diatur dari dashboard (Admin → Foto Tipe →
            Tentrem Jiwo). `data-tipe` harus sama persis dengan nama kartu
-           di jgs-dashboard lib/unit-type-cards.ts. Gambar di bawah hanya
-           cadangan kalau feed gagal. -->
+           di jgs-dashboard lib/unit-type-cards.ts. `data-kode` = kode unit
+           di dashboard — harga, LT, dan LB diisi dari pricelist live
+           (skrip "Harga & spesifikasi" di bawah). Angka di HTML cadangan. -->
   <section class="section--sm" id="unit">
     <div class="section__head container">
       <span class="eyebrow">→ Yang Masih Tersedia</span>
-      <h2 class="section-title reveal">Dua unit,<br>dua cara <em>memilikinya.</em></h2>
-      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Sebelas unit lain sudah terjual dan diserahterimakan. Yang tersisa: Unit Office yang siap huni, dan satu villa.</p>
+      <h2 class="section-title reveal">Dua rumah terakhir<br>di <em>Tentrem Jiwo.</em></h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Sebelas rumah lain sudah terjual dan diserahterimakan. Yang tersisa: Abirama 1 yang sudah siap huni, dan Baswara 5 — rumah terbesar di kawasan, lengkap dengan private pool.</p>
     </div>
     <div class="container">
       <div class="tj-units reveal">
 
-        <article class="tj-unit" data-tipe="Unit Office">
+        <article class="tj-unit" data-tipe="Abirama 1" data-kode="Abirama 1">
           <div class="tj-unit__media">
-            <img src="img/kawasan-abirama-1.webp" alt="Unit Office (Abirama 1) di Tentrem Jiwo — rumah siap huni yang kini dipakai sebagai kantor pemasaran" width="1050" height="1400" loading="lazy" decoding="async">
+            <img src="img/kawasan-abirama-1.webp" alt="Abirama 1 di Tentrem Jiwo, Kalasan — rumah dua lantai yang sudah selesai dibangun" width="1050" height="1400" loading="lazy" decoding="async">
           </div>
           <div class="tj-unit__body">
-            <span class="tj-unit__pil">Siap huni · Progres 100%</span>
-            <h3 class="tj-unit__name">Unit Office <small style="font-weight:400;opacity:.6">· Abirama 1</small></h3>
-            <p class="tj-unit__desc">Rumah dua lantai yang sudah berdiri utuh dan selesai dibangun. Saat ini dipakai sebagai <strong>kantor pemasaran</strong> Tentrem Jiwo — itulah kenapa kami menyebutnya Unit Office — jadi Anda bisa datang dan melihat langsung isi rumahnya kapan saja, tanpa janji khusus.</p>
-            <div class="tj-unit__spec" id="tj-spec-abirama" hidden>
-              <div>Luas Tanah<b id="tj-abirama-lt">—</b></div>
-              <div>Luas Bangunan<b id="tj-abirama-lb">—</b></div>
+            <span class="tj-unit__pil" data-pil>Siap huni · Progres 100%</span>
+            <h3 class="tj-unit__name">Abirama 1 <small style="font-weight:400;opacity:.6">· Tipe 100</small></h3>
+            <p class="tj-unit__desc">Rumah dua lantai di kavling terluas deret Abirama, dan sudah selesai dibangun. Tidak perlu menunggu pembangunan — datang dan lihat langsung isi rumahnya, karena yang Anda lihat itulah yang Anda beli.</p>
+            <div class="tj-unit__spec">
+              <div>Luas Tanah<b data-lt>± 152 m²</b></div>
+              <div>Luas Bangunan<b data-lb>100 m²</b></div>
+              <div>Legalitas<b>SHM</b></div>
+              <div>Harga<b data-harga>Rp 2,5 M</b></div>
             </div>
             <div class="tj-unit__btns">
-              <a class="btn btn--primary" href="https://wa.me/6288902929571?text=Halo%20JGS%2C%20saya%20ingin%20tanya%20soal%20Unit%20Office%20(Abirama%201)%20di%20Tentrem%20Jiwo.%20(via%20web)" target="_blank" rel="noopener"><span>Tanya Unit Office</span></a>
+              <button type="button" onclick="openPricelistModal()" class="btn btn--primary"><span>Download Pricelist</span></button>
+              <a class="btn pj-btn-alt" href="https://wa.me/6288902929571?text=Halo%20JGS%2C%20saya%20ingin%20tanya%20soal%20Abirama%201%20di%20Tentrem%20Jiwo.%20(via%20web)" target="_blank" rel="noopener"><span>Tanya Abirama 1</span></a>
               <a class="btn pj-btn-alt" href="https://progress.jogjagrahaselaras.com/progress/tentrem-jiwo/abirama-1" target="_blank" rel="noopener"><span>Lihat progres unit</span></a>
             </div>
           </div>
         </article>
 
-        <article class="tj-unit" data-tipe="Villa">
+        <article class="tj-unit" data-tipe="Baswara 5" data-kode="Baswara 5">
           <div class="tj-unit__media">
-            <img src="img/hero-pool.jpg" alt="Private pool Villa Tentrem Jiwo saat senja" width="1200" height="900" loading="lazy" decoding="async">
+            <img src="img/hero-pool.jpg" alt="Private pool Baswara 5 di Tentrem Jiwo saat senja" width="1200" height="900" loading="lazy" decoding="async">
           </div>
           <div class="tj-unit__body">
-            <span class="tj-unit__pil">Villa · Splittable 2 wing</span>
-            <h3 class="tj-unit__name">Villa Tentrem Jiwo</h3>
-            <p class="tj-unit__desc">Villa 6 kamar ensuite dengan private pool 8×3 m di kavling ujung. Dua wing yang bisa disewakan utuh atau terpisah — dirancang untuk dipakai sendiri sekaligus menghasilkan saat ditinggalkan.</p>
+            <span class="tj-unit__pil" data-pil>Dalam pembangunan</span>
+            <h3 class="tj-unit__name">Baswara 5 <small style="font-weight:400;opacity:.6">· Tipe 225</small></h3>
+            <p class="tj-unit__desc">Rumah terbesar di Tentrem Jiwo: enam kamar tidur yang masing-masing punya kamar mandi sendiri, dan private pool 8×3 m di kavling ujung. Ruang lapang untuk keluarga besar — progres pembangunannya bisa dipantau langsung di dashboard.</p>
             <div class="tj-unit__spec">
-              <div>Luas Tanah<b>± 311 m²</b></div>
-              <div>Luas Bangunan<b>225 m²</b></div>
+              <div>Luas Tanah<b data-lt>± 311 m²</b></div>
+              <div>Luas Bangunan<b data-lb>225 m²</b></div>
               <div>Kamar Tidur<b>6 KT ensuite</b></div>
+              <div>Kolam Renang<b>Private 8×3 m</b></div>
               <div>Legalitas<b>SHM</b></div>
+              <div>Harga<b data-harga>Rp 3,5 M</b></div>
             </div>
             <div class="tj-unit__btns">
-              <a class="btn btn--primary" href="villa/"><span>Lihat detail villa</span></a>
-              <a class="btn pj-btn-alt" href="https://wa.me/6288902929571?text=Halo%20JGS%2C%20saya%20tertarik%20dengan%20Villa%20Tentrem%20Jiwo%20dan%20ingin%20diskusi%20%26%20simulasi%20cashflow.%20(via%20web)" target="_blank" rel="noopener"><span>Diskusi cashflow</span></a>
+              <button type="button" onclick="openPricelistModal()" class="btn btn--primary"><span>Download Pricelist</span></button>
+              <a class="btn pj-btn-alt" href="https://wa.me/6288902929571?text=Halo%20JGS%2C%20saya%20ingin%20tanya%20soal%20Baswara%205%20di%20Tentrem%20Jiwo.%20(via%20web)" target="_blank" rel="noopener"><span>Tanya Baswara 5</span></a>
+              <a class="btn pj-btn-alt" href="https://progress.jogjagrahaselaras.com/progress/tentrem-jiwo/baswara-5" target="_blank" rel="noopener"><span>Lihat progres unit</span></a>
             </div>
           </div>
         </article>
@@ -521,48 +532,48 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
     </div>
   </section>
 
-  <!-- ══ ISI UNIT OFFICE ══ -->
-  <section class="section--sm" id="isi-office">
+  <!-- ══ ISI ABIRAMA 1 ══ -->
+  <section class="section--sm" id="isi-abirama">
     <div class="section__head container">
-      <span class="eyebrow">→ Di Dalam Unit Office</span>
-      <h2 class="section-title reveal">Rumahnya sudah jadi<br>— dan <em>sudah dipakai.</em></h2>
-      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Foto-foto ini diambil Agustus 2026 di dalam Abirama 1, saat rumah ini dipakai sebagai kantor pemasaran kami. Apa adanya, bukan render dan bukan unit contoh — yang Anda lihat di sini persis yang bisa Anda datangi.</p>
+      <span class="eyebrow">→ Di Dalam Abirama 1</span>
+      <h2 class="section-title reveal">Rumahnya sudah jadi<br>— <em>lihat sendiri.</em></h2>
+      <p class="section-lead reveal reveal--delay-1" style="margin-top:14px;">Foto-foto ini diambil Agustus 2026 di dalam Abirama 1. Apa adanya, bukan render dan bukan unit contoh — yang Anda lihat di sini persis rumah yang bisa Anda datangi.</p>
     </div>
     <div class="container">
-      <div class="tj-gal reveal" id="tj-office">
+      <div class="tj-gal reveal" id="tj-abirama">
         <figure>
-          <a data-st-lb href="img/office-ruang-tamu.webp" data-cap="Ruang tamu di muka Unit Office — tempat tamu diterima.">
-            <img src="img/office-ruang-tamu.webp" alt="Ruang tamu di dalam Unit Office (Abirama 1) Tentrem Jiwo" width="720" height="1280" loading="lazy" decoding="async">
+          <a data-st-lb href="img/office-ruang-tamu.webp" data-cap="Ruang tamu di muka rumah Abirama 1.">
+            <img src="img/office-ruang-tamu.webp" alt="Ruang tamu di dalam rumah Abirama 1 Tentrem Jiwo" width="720" height="1280" loading="lazy" decoding="async">
           </a>
-          <figcaption>Ruang tamu di muka rumah, tempat tamu diterima.</figcaption>
+          <figcaption>Ruang tamu di muka rumah.</figcaption>
         </figure>
         <figure>
-          <a data-st-lb href="img/office-ruang-kerja.webp" data-cap="Ruang utama lantai bawah Unit Office, dengan tangga ke lantai dua.">
-            <img src="img/office-ruang-kerja.webp" alt="Ruang utama lantai bawah Unit Office Abirama 1 dengan tangga ke lantai dua" width="720" height="1280" loading="lazy" decoding="async">
+          <a data-st-lb href="img/office-ruang-kerja.webp" data-cap="Ruang utama lantai bawah Abirama 1, dengan tangga ke lantai dua.">
+            <img src="img/office-ruang-kerja.webp" alt="Ruang utama lantai bawah Abirama 1 dengan tangga ke lantai dua" width="720" height="1280" loading="lazy" decoding="async">
           </a>
-          <figcaption>Ruang utama lantai bawah — kini dipakai sebagai ruang kerja. Tangga ke lantai dua di ujungnya.</figcaption>
+          <figcaption>Ruang utama lantai bawah, tangga ke lantai dua di ujungnya.</figcaption>
         </figure>
         <figure>
-          <a data-st-lb href="img/office-ruang-kerja-tim.webp" data-cap="Ruang kerja dengan jendela tinggi di dua sisi.">
-            <img src="img/office-ruang-kerja-tim.webp" alt="Ruang kerja dengan jendela tinggi di Unit Office Tentrem Jiwo" width="720" height="1280" loading="lazy" decoding="async">
+          <a data-st-lb href="img/office-ruang-kerja-tim.webp" data-cap="Ruang dengan jendela tinggi di dua sisi.">
+            <img src="img/office-ruang-kerja-tim.webp" alt="Ruang dengan jendela tinggi di rumah Abirama 1 Tentrem Jiwo" width="720" height="1280" loading="lazy" decoding="async">
           </a>
-          <figcaption>Ruang kerja tim, jendela tinggi di dua sisi.</figcaption>
+          <figcaption>Jendela tinggi di dua sisi — ruangnya terang sepanjang hari.</figcaption>
         </figure>
         <figure>
-          <a data-st-lb href="img/office-pantry.webp" data-cap="Pantry Unit Office, memanfaatkan ruang di bawah tangga.">
-            <img src="img/office-pantry.webp" alt="Pantry dengan kitchen set di bawah tangga Unit Office Abirama 1" width="720" height="1280" loading="lazy" decoding="async">
+          <a data-st-lb href="img/office-pantry.webp" data-cap="Pantry Abirama 1, memanfaatkan ruang di bawah tangga.">
+            <img src="img/office-pantry.webp" alt="Pantry dengan kitchen set di bawah tangga rumah Abirama 1" width="720" height="1280" loading="lazy" decoding="async">
           </a>
           <figcaption>Pantry dengan kitchen set, memanfaatkan ruang di bawah tangga.</figcaption>
         </figure>
         <figure>
-          <a data-st-lb href="img/office-ruang-santai.webp" data-cap="Sudut santai Unit Office dengan sofa dan televisi.">
-            <img src="img/office-ruang-santai.webp" alt="Sudut santai dengan sofa dan televisi di Unit Office Abirama 1 Tentrem Jiwo" width="720" height="1280" loading="lazy" decoding="async">
+          <a data-st-lb href="img/office-ruang-santai.webp" data-cap="Sudut santai Abirama 1 dengan plafon bertingkat.">
+            <img src="img/office-ruang-santai.webp" alt="Sudut santai di rumah Abirama 1 Tentrem Jiwo" width="720" height="1280" loading="lazy" decoding="async">
           </a>
           <figcaption>Sudut santai di ujung ruang — sofa, televisi, plafon bertingkat.</figcaption>
         </figure>
         <figure>
-          <a data-st-lb href="img/office-kamar-mandi.webp" data-cap="Kamar mandi Unit Office, dinding motif marmer.">
-            <img src="img/office-kamar-mandi.webp" alt="Kamar mandi dengan dinding motif marmer di Unit Office Abirama 1" width="720" height="1280" loading="lazy" decoding="async">
+          <a data-st-lb href="img/office-kamar-mandi.webp" data-cap="Kamar mandi Abirama 1, dinding motif marmer.">
+            <img src="img/office-kamar-mandi.webp" alt="Kamar mandi dengan dinding motif marmer di rumah Abirama 1" width="720" height="1280" loading="lazy" decoding="async">
           </a>
           <figcaption>Kamar mandi dengan dinding motif marmer dan shower.</figcaption>
         </figure>
@@ -619,7 +630,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>
           <span>Lihat siteplan 2D</span>
         </button>
-        <span class="sp3d-note" id="sp3d-note">Jelajahi kawasan dari atas atau dari jalan seperti Street View — bahkan masuk ke dalam villa. Ketuk rumah untuk harga &amp; status.</span>
+        <span class="sp3d-note" id="sp3d-note">Jelajahi kawasan dari atas atau dari jalan seperti Street View — bahkan masuk ke dalam Baswara 5. Ketuk rumah untuk harga &amp; status.</span>
       </div>
       <div class="sp3d" id="sp3d"></div>
 
@@ -629,7 +640,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
            Kalau salah satunya gagal, yang tampil siteplan polos. -->
       <div class="sp-scroll reveal" id="sp-scroll">
         <div class="sp-stage" id="sp-stage">
-          <img class="tj-siteplan" id="tj-siteplan" src="img/siteplan.jpg" alt="Siteplan kawasan Tentrem Jiwo — posisi kavling Abirama, Baswara, dan villa" width="2172" height="2038" loading="lazy" decoding="async">
+          <img class="tj-siteplan" id="tj-siteplan" src="img/siteplan.jpg" alt="Siteplan kawasan Tentrem Jiwo — posisi kavling Abirama dan Baswara" width="2172" height="2038" loading="lazy" decoding="async">
           <div class="sp-overlay" id="sp-overlay"></div>
         </div>
       </div>
@@ -685,7 +696,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
       function muat() {
         if (memuat || viewer || gagal) return;
         memuat = true;
-        import('./3d/viewer.js?v=20261008b')
+        import('./3d/viewer.js?v=20261125')
           .then(function (m) { wadah.innerHTML = ''; return m.mulai(wadah); })
           .then(function (v) {
             viewer = v; memuat = false;
@@ -777,9 +788,10 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
   <div class="cta-section" id="kontak">
     <div class="container">
       <h2>Tinggal dua unit.</h2>
-      <p>Datang langsung ke Unit Office — rumah itu sekaligus kantor pemasaran kami di lokasi.</p>
+      <p>Datang dan lihat Abirama 1 langsung di lokasi — rumahnya sudah jadi. Pricelist lengkap kedua unit bisa diunduh sekarang.</p>
       <div class="pj-ajak__btn" style="justify-content:center;">
         <a class="btn btn--primary btn--lg" href="https://wa.me/6288902929571?text=Halo%20JGS%2C%20saya%20ingin%20tanya%20soal%20Tentrem%20Jiwo.%20(via%20web)" target="_blank" rel="noopener"><span>Hubungi via WhatsApp</span></a>
+        <button type="button" onclick="openPricelistModal()" class="btn pj-btn-alt"><span>Download Pricelist</span></button>
         <a class="btn pj-btn-alt" href="/perumahan-jogja/"><span>Semua proyek</span></a>
       </div>
     </div>
@@ -841,7 +853,7 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
       set('pc-terjual', terjual);
       set('pc-label', 'unit terjual dari ' + total + ' unit. Yang tersisa tinggal ' +
                       (tersedia === 2 ? 'dua' : tersedia) +
-                      ' — Unit Office (Abirama 1) dan Villa Tentrem Jiwo.');
+                      ' — Abirama 1 dan Baswara 5.');
       /* Rinciannya (berapa siap huni) datang dari section 4 siteplan. */
       metaSisa = tersedia + ' unit tersisa';
       tulisMeta();
@@ -955,32 +967,35 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
     })
     .catch(function () { /* foto statis tetap tampil */ });
 
-  /* ── 3. Spesifikasi tipe Abirama ─────────────────────────────
-     Diisi dari dashboard supaya tidak perlu diketik ulang di sini:
-     begitu admin melengkapi luas tanah/bangunan unit Abirama di
-     dashboard, baris ini muncul sendiri. Selama kosong, baris
-     spesifikasi tetap tersembunyi — lebih baik tidak ada angka
-     daripada angka karangan. */
-  fetch(BASE + 'unit-types?slug=' + SLUG, { mode: 'cors' })
+  /* ── 3. Harga & spesifikasi kartu unit ─────────────────────
+     Dari pricelist dashboard (/admin/harga) — sumber yang sama dengan
+     PDF pricelist. Kartu dicocokkan lewat data-kode = kode unit.
+     LB diambil dari nama tipe ("Tipe 225" → 225 m²). Harga kosong
+     ditulis "Hubungi Marketing", bukan angka lama. Unit yang ternyata
+     sudah laku diberi pil "Terjual". Feed gagal = angka di HTML. */
+  function rupiahPendek(n) {
+    if (n >= 1e9) return 'Rp ' + (Math.floor(n / 1e7) / 100).toString().replace('.', ',') + ' M';
+    return 'Rp ' + Math.floor(n / 1e6) + ' Jt';
+  }
+  fetch(BASE + 'pricelist?slug=' + SLUG, { mode: 'cors' })
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (j) {
-      var items = (j && j.items) || [];
-      var abirama = null;
-      items.forEach(function (it) {
-        if (/abirama/i.test(it.type || '')) abirama = it;
+      var units = (j && j.units) || [];
+      if (!units.length) return;
+      var perKode = {};
+      units.forEach(function (u) { perKode[String(u.code).toLowerCase()] = u; });
+      document.querySelectorAll('.tj-unit[data-kode]').forEach(function (kartu) {
+        var u = perKode[kartu.getAttribute('data-kode').toLowerCase()];
+        if (!u) return;
+        var isi = function (sel, val) { var el = kartu.querySelector(sel); if (el && val) el.textContent = val; };
+        isi('[data-harga]', u.priceCash ? rupiahPendek(u.priceCash) : 'Hubungi Marketing');
+        if (u.landArea) isi('[data-lt]', '± ' + u.landArea + ' m²');
+        var lb = /(\d+)/.exec(u.type || '');
+        if (lb) isi('[data-lb]', lb[1] + ' m²');
+        if (u.sold) isi('[data-pil]', 'Terjual');
       });
-      if (!abirama || (!abirama.landArea && !abirama.buildingArea)) return;
-
-      var m2 = function (n, varies) {
-        return n ? (varies ? '± ' : '') + n + ' m²' : '—';
-      };
-      set('tj-abirama-lt', m2(abirama.landArea, abirama.landAreaVaries));
-      set('tj-abirama-lb', m2(abirama.buildingArea, abirama.buildingAreaVaries));
-
-      var box = document.getElementById('tj-spec-abirama');
-      if (box) box.hidden = false;
     })
-    .catch(function () { /* baris spesifikasi tetap tersembunyi */ });
+    .catch(function () { /* angka di HTML tetap tampil */ });
 
   /* ── 4. Siteplan: status jual per kavling ────────────────────
      Bentuk kavling dari siteplan-kavling.json (persen, ikut ukuran
@@ -1009,6 +1024,16 @@ setTimeout(muat,5000);})(window,document,'dataLayer','GTM-PNJW22Z');</script>
     /* Satu baris per unit, lengkap dengan progres dan tautan ke halaman
        progress unitnya (null bila unit belum dibangun). */
     (status.units || []).forEach(function (u) { detail[String(u.code).toLowerCase()] = u; });
+
+    /* Pil kartu unit ikut progres dashboard: 100% = siap huni, di bawah
+       itu "Dibangun · Progres N%" (bukan janji siap ditempati). */
+    document.querySelectorAll('.tj-unit[data-kode]').forEach(function (kartu) {
+      var u = detail[kartu.getAttribute('data-kode').toLowerCase()];
+      var pil = kartu.querySelector('[data-pil]');
+      if (!u || !pil || u.sold || !u.built) return;
+      pil.textContent = u.progress >= 100 ? 'Siap huni · Progres 100%'
+                                          : 'Dibangun · Progres ' + u.progress + '%';
+    });
 
     var nSold = 0, nReady = 0, nFree = 0;
 

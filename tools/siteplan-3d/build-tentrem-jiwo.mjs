@@ -55,9 +55,9 @@ const KAVLING = [
   { code: 'Baswara 2', poly: kotak(15.6, 23.1, -18.6, -6.4), arah: [0, -1] },
   { code: 'Baswara 3', poly: kotak(23.1, 30.6, -18.6, -6.4), arah: [0, -1] },
   { code: 'Baswara 4', poly: kotak(30.6, 38.1, -18.6, -6.4), arah: [0, -1] },
-  // Villa: bagian timurnya menjorok ke utara (z -21,3) tapi itu dinding belakang
+  // Baswara 5 (dulu "Villa Tentrem Jiwo"): bagian timurnya menjorok ke utara (z -21,3) tapi itu dinding belakang
   // wing timur — muka yang menghadap jalan adalah carport (z -18,6).
-  { code: 'Villa Tentrem Jiwo', poly: [[38.1, -18.6], [52.2, -18.6], [52.2, -21.3], [62.9, -21.3], [62.9, -6.4], [38.1, -6.4]], arah: [0, -1], muka: [45.15, -18.6] },
+  { code: 'Baswara 5', poly: [[38.1, -18.6], [52.2, -18.6], [52.2, -21.3], [62.9, -21.3], [62.9, -6.4], [38.1, -6.4]], arah: [0, -1], muka: [45.15, -18.6] },
 ];
 const PETA = {
   batas: [[8.2, -55.7], [22.3, -54.5], [45.2, -52.9], [44.0, -29.9], [52.1, -29.9], [52.1, -21.3], [62.9, -21.3], [62.9, -6.4], [8.2, -6.4]],

@@ -24,6 +24,16 @@
       "permanent": true
     },
     {
+      "source": "/tentrem-jiwo/villa",
+      "destination": "/tentrem-jiwo/#unit",
+      "permanent": true
+    },
+    {
+      "source": "/tentrem-jiwo/villa/(.*)",
+      "destination": "/tentrem-jiwo/#unit",
+      "permanent": true
+    },
+    {
       "source": "/tentremjiwo",
       "destination": "/tentrem-jiwo/",
       "permanent": true

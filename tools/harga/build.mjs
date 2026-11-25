@@ -66,7 +66,7 @@ for (const slug of SLUG) {
   );
 }
 // Rentang harga untuk JSON-LD SENGAJA tidak memasukkan Tentrem Jiwo: yang tersisa di
-// sana cuma Unit Office dan satu Villa (Rp 2,5–3,5 M) yang harganya bersifat khusus.
+// sana cuma Abirama 1 dan Baswara 5 (Rp 2,5–3,5 M), jauh di atas rumah tapak lainnya.
 // Rentang asli yang ditulis tangan (419–965 jt) juga tidak memasukkannya. Kalau ikut,
 // cuplikan Google akan memasang "Rp 410 Juta — Rp 3,5 Miliar" dan menakuti pembaca
 // yang sedang mencari rumah tapak.
